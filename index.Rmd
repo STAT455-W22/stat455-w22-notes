@@ -4,5 +4,8 @@ date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 ---
 
-# Down the rabbit-hole
+# Preface  {-}
 
+These notes are written to accompany the text [Beyond Multiple Linear Regression](https://bookdown.org/roback/bookdown-BeyondMLR/) by Roback and Legler. Much of the text is either directly from the book, or lightly modified/summarized. Most of the code originates from the book's [Github repository](https://github.com/proback/BeyondMLR).  
+
+These notes will guide our lectures and class discussion, but they are not sufficient as a stand-alone reference. It is important to complete the reading assignments from the full text by Roback and Legler in addition to studying these notes. 
