@@ -1,8 +1,8 @@
-book_filename: "bookdownproj"
+book_filename: "Stat 455 Notes"
 output_dir: docs
 delete_merged_file: true
-edit: https://github.com/YOUR GITHUB USERNAME/YOUR REPO NAME/edit/master/%s
-view: https://github.com/YOUR GITHUB USERNAME/YOUR REPO NAME/blob/master/%s
+edit: https://github.com/STAT455-W22/stat455-w22-notes/edit/master/%s
+view: https://github.com/STAT455-W22/stat455-w22-notes/blob/master/%s
 language:
   ui:
     chapter_name: "Chapter "
