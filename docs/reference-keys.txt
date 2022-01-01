@@ -40,5 +40,3 @@ goodness-of-fit-tests
 anova-f-statistic
 final-model-residual-plots
 overall-conclusions
-the-pool-of-tears
-a-caucus-race-and-a-long-tale
