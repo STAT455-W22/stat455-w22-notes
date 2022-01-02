@@ -138,9 +138,9 @@ cat(" R squared = ", summary(model2)$r.squared, "\n",
 
 ### Checking Model Assumptions
 
-```{r resid2, fig.align = "center", out.width = "90%", fig.cap = 'Residual plots for Model 2.', echo=TRUE, warning=FALSE}
+```{r resid2, fig.align = "center", out.width = "90%", fig.cap = 'Residual plots for Model 2.', echo=TRUE, warning=FALSE, fig.height=10, fig.width=10}
 # Residual diagnostics for Model 2
-par(mar=c(1,1,1,1))
+par(mar=c(4,4,4,4))
 par(mfrow=c(2,2))
 plot(model2)
 par(mfrow=c(1,1))
@@ -197,9 +197,9 @@ ggplot(derby.df, aes(x = year, y = speed)) +
 
 ### Quadratic Model Residual Plots
 
-```{r resid2q, fig.align = "center", out.width = "90%", fig.cap = 'Residual plots for Model 2Q.', echo=TRUE, warning=FALSE}
+```{r resid2q, fig.align = "center", out.width = "90%", fig.cap = 'Residual plots for Model 2Q.', echo=TRUE, warning=FALSE, fig.height=10, fig.width=10}
 # Residual diagnostics for Model 2
-par(mar=c(1,1,1,1))
+par(mar=c(4,4,4,4))
 par(mfrow=c(2,2))
 plot(model2q)
 par(mfrow=c(1,1))
@@ -529,9 +529,9 @@ We'll go with model B.
 
 We use residual plots to check model assumptions. 
 
-```{r , fig.align = "center", out.width = "90%", fig.cap = 'Residual plots for Model 0B.', echo=TRUE, warning=FALSE}
+```{r , fig.align = "center", out.width = "90%", fig.cap = 'Residual plots for Model 0B.', echo=TRUE, warning=FALSE, fig.height=10, fig.width=10}
 # Residual diagnostics for Model B
-par(mar=c(1,1,1,1))
+par(mar=c(4,4,4,4))
 par(mfrow=c(2,2))
 plot(model0B)
 par(mfrow=c(1,1))
