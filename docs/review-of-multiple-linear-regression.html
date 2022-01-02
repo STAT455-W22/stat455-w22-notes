@@ -23,7 +23,7 @@
 
 
 
-<meta name="date" content="2022-01-01" />
+<meta name="date" content="2022-01-02" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -190,12 +190,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </li>
 <li>winning horse (<code>winner</code>),<br />
 </li>
-<li><code>condition</code> of the track,<br />
+<li><code>condition</code> of the track (fast, good, slow) ,<br />
 </li>
 <li>average <code>speed</code> (in feet per second) of the winner,<br />
 </li>
 <li>number of <code>starters</code> (horses who raced)</li>
-<li>track <code>condition</code> (fast, good, slow)</li>
 </ul>
 <p>We would like to use least squares linear regression techniques to model the speed of the winning horse as a function of track condition, field size, and trends over time.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">derby.df &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;https://raw.githubusercontent.com/proback/BeyondMLR/master/data/derbyplus.csv&quot;</span>)
@@ -577,9 +576,6 @@ Figure 1.1: Histograms of key continuous variables. Plot (a) shows winning speed
 <p>The <code>ggpairs</code> function creates a scatterplot matrix displaying relationships between all pairs of variables.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gg &lt;-<span class="st"> </span><span class="kw">ggpairs</span>(<span class="dt">data =</span> derby.df, 
               <span class="dt">columns =</span> <span class="kw">c</span>(<span class="st">&quot;condition&quot;</span>, <span class="st">&quot;year&quot;</span>, <span class="st">&quot;starters&quot;</span>, <span class="st">&quot;speed&quot;</span>))
-gg[<span class="dv">4</span>,<span class="dv">1</span>] &lt;-<span class="st"> </span>gg[<span class="dv">4</span>,<span class="dv">1</span>] <span class="op">+</span><span class="st"> </span><span class="kw">geom_histogram</span>( <span class="dt">binwidth =</span> <span class="fl">0.75</span>)
-gg[<span class="dv">2</span>,<span class="dv">1</span>] &lt;-<span class="st"> </span>gg[<span class="dv">2</span>,<span class="dv">1</span>] <span class="op">+</span><span class="st"> </span><span class="kw">geom_histogram</span>( <span class="dt">binwidth =</span> <span class="dv">20</span>)
-gg[<span class="dv">3</span>,<span class="dv">1</span>] &lt;-<span class="st"> </span>gg[<span class="dv">3</span>,<span class="dv">1</span>] <span class="op">+</span><span class="st"> </span><span class="kw">geom_histogram</span>( <span class="dt">binwidth =</span> <span class="dv">3</span>)
 gg</code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:bivariate"></span>
 <img src="Stat-455-Notes_files/figure-html/bivariate-1.png" alt="Relationships between pairs of variables in the Kentucky Derby data set." width="90%" />
@@ -1077,9 +1073,6 @@ Figure 1.8: Residual plots for Model 0B.
 <p>Notice this last conclusion appears contradictory to our exploratory data analysis, which showed a positive relationship between starters and speed.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gg &lt;-<span class="st"> </span><span class="kw">ggpairs</span>(<span class="dt">data =</span> derby.df, 
               <span class="dt">columns =</span> <span class="kw">c</span>(<span class="st">&quot;condition&quot;</span>, <span class="st">&quot;year&quot;</span>, <span class="st">&quot;starters&quot;</span>, <span class="st">&quot;speed&quot;</span>))
-gg[<span class="dv">4</span>,<span class="dv">1</span>] &lt;-<span class="st"> </span>gg[<span class="dv">4</span>,<span class="dv">1</span>] <span class="op">+</span><span class="st"> </span><span class="kw">geom_histogram</span>( <span class="dt">binwidth =</span> <span class="fl">0.75</span>)
-gg[<span class="dv">2</span>,<span class="dv">1</span>] &lt;-<span class="st"> </span>gg[<span class="dv">2</span>,<span class="dv">1</span>] <span class="op">+</span><span class="st"> </span><span class="kw">geom_histogram</span>( <span class="dt">binwidth =</span> <span class="dv">20</span>)
-gg[<span class="dv">3</span>,<span class="dv">1</span>] &lt;-<span class="st"> </span>gg[<span class="dv">3</span>,<span class="dv">1</span>] <span class="op">+</span><span class="st"> </span><span class="kw">geom_histogram</span>( <span class="dt">binwidth =</span> <span class="dv">3</span>)
 gg</code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-17"></span>
 <img src="Stat-455-Notes_files/figure-html/unnamed-chunk-17-1.png" alt="Relationships between pairs of variables in the Kentucky Derby data set." width="90%" />
