@@ -389,8 +389,7 @@ Model A:
 $$
 \begin{equation}
 \begin{split}
- Y_{i}&=\beta_{0}+\beta_{1}\textrm{Yearnew}_{i}+\beta_{2}\textrm{Yearnew}^2_{i}+\beta_{3}\textrm{Fast}_{i}\\
-      &{}+\beta_{4}\textrm{Good}_{i}+\beta_{5}\textrm{Starters}_{i}+\epsilon_{i}\quad 
+ Y_{i}&=\beta_{0}+\beta_{1}\textrm{Yearnew}_{i}+\beta_{2}\textrm{Yearnew}^2_{i}+\epsilon_{i}\quad 
       \textrm{where}\quad \epsilon_{i}\sim \textrm{N}(0,\sigma^2)
 \end{split}
 \end{equation}
@@ -432,9 +431,11 @@ $$
 We fit each model in R. 
 
 ```{r model0, comment=NA}
-model0A <- lm(speed ~ yearnew + yearnew2 + starters, data = derby.df)
+model0A <- lm(speed ~ yearnew + yearnew2 , data = derby.df)
 model0B <- lm(speed ~ yearnew + yearnew2 + fast + good + starters, data = derby.df)
-model0C <- lm(speed ~ yearnew + yearnew2 + fast + good + starters + yearnew:fast + yearnew:good + yearnew2:fast + yearnew2:good, data = derby.df)
+model0C <- lm(speed ~ yearnew + yearnew2 + fast + good + starters + 
+                yearnew:fast + yearnew:good + yearnew2:fast + 
+                yearnew2:good, data = derby.df)
 ```
 
 ```{r, echo=FALSE}
@@ -516,7 +517,7 @@ There is evidence of interaction between year and track conditions.
 
 Observations:
 
-* There is strong evidence that model B is better than model A. Condition of track seems to be an important factor in predicting winning speed.    
+* There is strong evidence that model B is better than model A. Accounting for condition of track and numnber of starters helps explain variability in winning speeds.    
 
 * Models B and C both seem like reasonable fits. Asjusted R^2, AIC, and the F-test all favor model C over model B. Model C is, however, much harder to interpret. The p-values on any single interaction term were large, even though the model testing for significance of interactions collectively was small. When in doubt, it's better to go with the simpler model, unless there is clear reason to choose the more complex one. 
 

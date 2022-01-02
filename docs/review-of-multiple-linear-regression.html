@@ -882,8 +882,7 @@ model5 &lt;-<span class="st"> </span><span class="kw">lm</span>(speed <span clas
 <p><span class="math display">\[
 \begin{equation}
 \begin{split}
- Y_{i}&amp;=\beta_{0}+\beta_{1}\textrm{Yearnew}_{i}+\beta_{2}\textrm{Yearnew}^2_{i}+\beta_{3}\textrm{Fast}_{i}\\
-      &amp;{}+\beta_{4}\textrm{Good}_{i}+\beta_{5}\textrm{Starters}_{i}+\epsilon_{i}\quad 
+ Y_{i}&amp;=\beta_{0}+\beta_{1}\textrm{Yearnew}_{i}+\beta_{2}\textrm{Yearnew}^2_{i}+\epsilon_{i}\quad 
       \textrm{where}\quad \epsilon_{i}\sim \textrm{N}(0,\sigma^2)
 \end{split}
 \end{equation}
@@ -916,26 +915,27 @@ model5 &lt;-<span class="st"> </span><span class="kw">lm</span>(speed <span clas
 <div id="mlr-models-fit-in-r" class="section level3">
 <h3><span class="header-section-number">1.4.4</span> MLR Models Fit in R</h3>
 <p>We fit each model in R.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model0A &lt;-<span class="st"> </span><span class="kw">lm</span>(speed <span class="op">~</span><span class="st"> </span>yearnew <span class="op">+</span><span class="st"> </span>yearnew2 <span class="op">+</span><span class="st"> </span>starters, <span class="dt">data =</span> derby.df)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model0A &lt;-<span class="st"> </span><span class="kw">lm</span>(speed <span class="op">~</span><span class="st"> </span>yearnew <span class="op">+</span><span class="st"> </span>yearnew2 , <span class="dt">data =</span> derby.df)
 model0B &lt;-<span class="st"> </span><span class="kw">lm</span>(speed <span class="op">~</span><span class="st"> </span>yearnew <span class="op">+</span><span class="st"> </span>yearnew2 <span class="op">+</span><span class="st"> </span>fast <span class="op">+</span><span class="st"> </span>good <span class="op">+</span><span class="st"> </span>starters, <span class="dt">data =</span> derby.df)
-model0C &lt;-<span class="st"> </span><span class="kw">lm</span>(speed <span class="op">~</span><span class="st"> </span>yearnew <span class="op">+</span><span class="st"> </span>yearnew2 <span class="op">+</span><span class="st"> </span>fast <span class="op">+</span><span class="st"> </span>good <span class="op">+</span><span class="st"> </span>starters <span class="op">+</span><span class="st"> </span>yearnew<span class="op">:</span>fast <span class="op">+</span><span class="st"> </span>yearnew<span class="op">:</span>good <span class="op">+</span><span class="st"> </span>yearnew2<span class="op">:</span>fast <span class="op">+</span><span class="st"> </span>yearnew2<span class="op">:</span>good, <span class="dt">data =</span> derby.df)</code></pre></div>
+model0C &lt;-<span class="st"> </span><span class="kw">lm</span>(speed <span class="op">~</span><span class="st"> </span>yearnew <span class="op">+</span><span class="st"> </span>yearnew2 <span class="op">+</span><span class="st"> </span>fast <span class="op">+</span><span class="st"> </span>good <span class="op">+</span><span class="st"> </span>starters <span class="op">+</span><span class="st"> </span>
+<span class="st">                </span>yearnew<span class="op">:</span>fast <span class="op">+</span><span class="st"> </span>yearnew<span class="op">:</span>good <span class="op">+</span><span class="st"> </span>yearnew2<span class="op">:</span>fast <span class="op">+</span><span class="st"> </span>
+<span class="st">                </span>yearnew2<span class="op">:</span>good, <span class="dt">data =</span> derby.df)</code></pre></div>
 </div>
 <div id="model-0a-output" class="section level3">
 <h3><span class="header-section-number">1.4.5</span> Model 0A Output</h3>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">coef</span>(<span class="kw">summary</span>(model0A)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">round</span>(<span class="dv">6</span>)</code></pre></div>
 <pre><code>##              Estimate Std. Error    t value Pr(&gt;|t|)
-## (Intercept) 50.891181   0.245297 207.467371 0.000000
-## yearnew      0.083040   0.008394   9.892436 0.000000
-## yearnew2    -0.000439   0.000064  -6.905397 0.000000
-## starters    -0.042392   0.018862  -2.247496 0.026467</code></pre>
+## (Intercept) 50.587457   0.208171 243.009695        0
+## yearnew      0.076173   0.007950   9.580989        0
+## yearnew2    -0.000414   0.000064  -6.504628        0</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cat</span>(<span class="st">&quot; R squared = &quot;</span>, <span class="kw">summary</span>(model0A)<span class="op">$</span>r.squared, <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>, 
     <span class="st">&quot; Adjusted R squared = &quot;</span>, <span class="kw">summary</span>(model0A)<span class="op">$</span>adj.r.squared, <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>,
     <span class="st">&quot;Residual standard error = &quot;</span>, <span class="kw">summary</span>(model0A)<span class="op">$</span>sigma, <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>,
 <span class="st">&quot;AIC = &quot;</span>, <span class="kw">AIC</span>(model0A))</code></pre></div>
-<pre><code>##  R squared =  0.6557468 
-##   Adjusted R squared =  0.6469946 
-##  Residual standard error =  0.7661069 
-##  AIC =  287.1442</code></pre>
+<pre><code>##  R squared =  0.6410103 
+##   Adjusted R squared =  0.6349769 
+##  Residual standard error =  0.7790385 
+##  AIC =  290.258</code></pre>
 </div>
 <div id="model-0b-output" class="section level3">
 <h3><span class="header-section-number">1.4.6</span> Model 0B Output</h3>
@@ -1002,11 +1002,11 @@ F = \frac{\frac{\text{SSR}_{\text{Reduced}}-\text{SSR}_{\text{Full}}}{p-q}}{\fra
 <span class="kw">anova</span>(model0A, model0B, <span class="dt">test =</span> <span class="st">&quot;F&quot;</span>)</code></pre></div>
 <pre><code>Analysis of Variance Table
 
-Model 1: speed ~ yearnew + yearnew2 + starters
+Model 1: speed ~ yearnew + yearnew2
 Model 2: speed ~ yearnew + yearnew2 + fast + good + starters
   Res.Df    RSS Df Sum of Sq      F                Pr(&gt;F)    
-1    118 69.257                                              
-2    116 34.870  2    34.386 57.196 &lt; 0.00000000000000022 ***
+1    119 72.221                                              
+2    116 34.870  3    37.351 41.418 &lt; 0.00000000000000022 ***
 ---
 Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <p>There is very strong evidence that track condition helps explain variability in winning speed.</p>
@@ -1025,7 +1025,7 @@ Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&
 <p>There is evidence of interaction between year and track conditions.</p>
 <p>Observations:</p>
 <ul>
-<li><p>There is strong evidence that model B is better than model A. Condition of track seems to be an important factor in predicting winning speed.</p></li>
+<li><p>There is strong evidence that model B is better than model A. Accounting for condition of track and numnber of starters helps explain variability in winning speeds.</p></li>
 <li><p>Models B and C both seem like reasonable fits. Asjusted R^2, AIC, and the F-test all favor model C over model B. Model C is, however, much harder to interpret. The p-values on any single interaction term were large, even though the model testing for significance of interactions collectively was small. When in doubt, it's better to go with the simpler model, unless there is clear reason to choose the more complex one.</p></li>
 </ul>
 <p><strong>It is important to consider intuition, domain area knowledge, and interpretability when choosing a model. Do not choose a model based on statistical tests alone!</strong></p>
