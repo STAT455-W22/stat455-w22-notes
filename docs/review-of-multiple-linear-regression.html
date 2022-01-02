@@ -1009,7 +1009,7 @@ Model 2: speed ~ yearnew + yearnew2 + fast + good + starters
 2    116 34.870  3    37.351 41.418 &lt; 0.00000000000000022 ***
 ---
 Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
-<p>There is very strong evidence that track condition helps explain variability in winning speed.</p>
+<p>There is very strong evidence that track condition and number of starters help explain variability in winning speed.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Compare model0A and model0B</span>
 <span class="kw">anova</span>(model0B, model0C, <span class="dt">test =</span> <span class="st">&quot;F&quot;</span>)</code></pre></div>
 <pre><code>Analysis of Variance Table
@@ -1025,8 +1025,8 @@ Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&
 <p>There is evidence of interaction between year and track conditions.</p>
 <p>Observations:</p>
 <ul>
-<li><p>There is strong evidence that model B is better than model A. Accounting for condition of track and numnber of starters helps explain variability in winning speeds.</p></li>
-<li><p>Models B and C both seem like reasonable fits. Asjusted R^2, AIC, and the F-test all favor model C over model B. Model C is, however, much harder to interpret. The p-values on any single interaction term were large, even though the model testing for significance of interactions collectively was small. When in doubt, it's better to go with the simpler model, unless there is clear reason to choose the more complex one.</p></li>
+<li><p>There is strong evidence that model B is better than model A. Accounting for condition of track and number of starters helps explain variability in winning speeds.</p></li>
+<li><p>Models B and C both seem like reasonable fits. Adjusted R^2, AIC, and the F-test all favor model C over model B. Model C is, however, much harder to interpret. The p-values on any single interaction term were large, even though the model testing for significance of interactions collectively was small. When in doubt, it's better to go with the simpler model, unless there is clear reason to choose the more complex one.</p></li>
 </ul>
 <p><strong>It is important to consider intuition, domain area knowledge, and interpretability when choosing a model. Do not choose a model based on statistical tests alone!</strong></p>
 </div>

@@ -506,7 +506,7 @@ When the null hypothesis is true, this statistic follows an F-distribution with 
 anova(model0A, model0B, test = "F")
 ```
 
-There is very strong evidence that track condition helps explain variability in winning speed.   
+There is very strong evidence that track condition and number of starters help explain variability in winning speed.   
 
 ```{r comment=NA, message=FALSE}
 # Compare model0A and model0B
@@ -517,9 +517,9 @@ There is evidence of interaction between year and track conditions.
 
 Observations:
 
-* There is strong evidence that model B is better than model A. Accounting for condition of track and numnber of starters helps explain variability in winning speeds.    
+* There is strong evidence that model B is better than model A. Accounting for condition of track and number of starters helps explain variability in winning speeds.    
 
-* Models B and C both seem like reasonable fits. Asjusted R^2, AIC, and the F-test all favor model C over model B. Model C is, however, much harder to interpret. The p-values on any single interaction term were large, even though the model testing for significance of interactions collectively was small. When in doubt, it's better to go with the simpler model, unless there is clear reason to choose the more complex one. 
+* Models B and C both seem like reasonable fits. Adjusted R^2, AIC, and the F-test all favor model C over model B. Model C is, however, much harder to interpret. The p-values on any single interaction term were large, even though the model testing for significance of interactions collectively was small. When in doubt, it's better to go with the simpler model, unless there is clear reason to choose the more complex one. 
 
 
 **It is important to consider intuition, domain area knowledge, and interpretability when choosing a model. Do not choose a model based on statistical tests alone!**
