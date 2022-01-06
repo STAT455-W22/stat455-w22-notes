@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 2 Introduction to Correlated Data | Stat 455: Advanced Statistical Modeling Notes</title>
+  <meta name="description" content="Chapter 2 Introduction to Correlated Data | Stat 455: Advanced Statistical Modeling Notes" />
+  <meta name="generator" content="bookdown 0.23 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 2 Introduction to Correlated Data | Stat 455: Advanced Statistical Modeling Notes" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 2 Introduction to Correlated Data | Stat 455: Advanced Statistical Modeling Notes" />
+  
+  
+  
+
+
+
+<meta name="date" content="2022-01-06" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="review-of-multiple-linear-regression.html"/>
+
+<script src="libs/jquery-3.5.1/jquery-3.5.1.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Stat 455 Notes</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html"><i class="fa fa-check"></i><b>1</b> Review of Multiple Linear Regression</a><ul>
+<li class="chapter" data-level="1.1" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#exploratory-data-analysis"><i class="fa fa-check"></i><b>1.1</b> Exploratory Data Analysis</a><ul>
+<li class="chapter" data-level="1.1.1" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#kentucky-derby-data"><i class="fa fa-check"></i><b>1.1.1</b> Kentucky Derby Data</a></li>
+<li class="chapter" data-level="1.1.2" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#some-data-wrangling"><i class="fa fa-check"></i><b>1.1.2</b> Some Data Wrangling</a></li>
+<li class="chapter" data-level="1.1.3" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#univariate-graphical-summaries"><i class="fa fa-check"></i><b>1.1.3</b> Univariate Graphical Summaries</a></li>
+<li class="chapter" data-level="1.1.4" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#bivariate-graphical-summaries"><i class="fa fa-check"></i><b>1.1.4</b> Bivariate Graphical Summaries</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#simple-linear-regression-model"><i class="fa fa-check"></i><b>1.2</b> Simple Linear Regression Model</a><ul>
+<li class="chapter" data-level="1.2.1" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#model-for-winning-time-and-year"><i class="fa fa-check"></i><b>1.2.1</b> Model for Winning Time and Year</a></li>
+<li class="chapter" data-level="1.2.2" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#first-model-r-output"><i class="fa fa-check"></i><b>1.2.2</b> First Model R Output</a></li>
+<li class="chapter" data-level="1.2.3" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#checking-model-assumptions"><i class="fa fa-check"></i><b>1.2.3</b> Checking Model Assumptions</a></li>
+<li class="chapter" data-level="1.2.4" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#quadratic-term-for-year"><i class="fa fa-check"></i><b>1.2.4</b> Quadratic Term for Year</a></li>
+<li class="chapter" data-level="1.2.5" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#quadratic-model-in-r"><i class="fa fa-check"></i><b>1.2.5</b> Quadratic Model in R</a></li>
+<li class="chapter" data-level="1.2.6" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#quadratic-model-residual-plots"><i class="fa fa-check"></i><b>1.2.6</b> Quadratic Model Residual Plots</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#multiple-linear-regression-with-two-predictors"><i class="fa fa-check"></i><b>1.3</b> Multiple Linear Regression with Two Predictors</a><ul>
+<li class="chapter" data-level="1.3.1" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#model-with-year-and-fast-track"><i class="fa fa-check"></i><b>1.3.1</b> Model with Year and Fast Track</a></li>
+<li class="chapter" data-level="1.3.2" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#multiple-regression-model-in-r"><i class="fa fa-check"></i><b>1.3.2</b> Multiple Regression Model in R</a></li>
+<li class="chapter" data-level="1.3.3" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#confidence-intervals-from-mlr-model"><i class="fa fa-check"></i><b>1.3.3</b> Confidence Intervals from MLR Model</a></li>
+<li class="chapter" data-level="1.3.4" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#slopes-for-fast-non-fast-tracks"><i class="fa fa-check"></i><b>1.3.4</b> Slopes for Fast, non-Fast Tracks</a></li>
+<li class="chapter" data-level="1.3.5" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#mlr-model-with-interaction"><i class="fa fa-check"></i><b>1.3.5</b> MLR Model with Interaction</a></li>
+<li class="chapter" data-level="1.3.6" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#model-equations-for-fast-non-fast-tracks"><i class="fa fa-check"></i><b>1.3.6</b> Model Equations for Fast, Non-Fast Tracks</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#building-a-multiple-linear-regression-model"><i class="fa fa-check"></i><b>1.4</b> Building a Multiple Linear Regression Model</a><ul>
+<li class="chapter" data-level="1.4.1" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#model-building-considerations"><i class="fa fa-check"></i><b>1.4.1</b> Model Building Considerations</a></li>
+<li class="chapter" data-level="1.4.2" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#model-diagnostics"><i class="fa fa-check"></i><b>1.4.2</b> Model Diagnostics</a></li>
+<li class="chapter" data-level="1.4.3" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#three-possible-models"><i class="fa fa-check"></i><b>1.4.3</b> Three Possible Models</a></li>
+<li class="chapter" data-level="1.4.4" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#mlr-models-fit-in-r"><i class="fa fa-check"></i><b>1.4.4</b> MLR Models Fit in R</a></li>
+<li class="chapter" data-level="1.4.5" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#model-0a-output"><i class="fa fa-check"></i><b>1.4.5</b> Model 0A Output</a></li>
+<li class="chapter" data-level="1.4.6" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#model-0b-output"><i class="fa fa-check"></i><b>1.4.6</b> Model 0B Output</a></li>
+<li class="chapter" data-level="1.4.7" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#model-0c-output"><i class="fa fa-check"></i><b>1.4.7</b> Model 0C Output</a></li>
+<li class="chapter" data-level="1.4.8" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#goodness-of-fit-tests"><i class="fa fa-check"></i><b>1.4.8</b> Goodness of Fit Tests</a></li>
+<li class="chapter" data-level="1.4.9" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#anova-f-statistic"><i class="fa fa-check"></i><b>1.4.9</b> ANOVA F-Statistic</a></li>
+<li class="chapter" data-level="1.4.10" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#final-model-residual-plots"><i class="fa fa-check"></i><b>1.4.10</b> Final Model Residual Plots</a></li>
+<li class="chapter" data-level="1.4.11" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#overall-conclusions"><i class="fa fa-check"></i><b>1.4.11</b> Overall Conclusions</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html"><i class="fa fa-check"></i><b>2</b> Introduction to Correlated Data</a><ul>
+<li class="chapter" data-level="2.1" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#introduction-to-correlated-data-1"><i class="fa fa-check"></i><b>2.1</b> Introduction to Correlated Data</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#weight-gain-in-mice-experiment-design-1"><i class="fa fa-check"></i><b>2.1.1</b> Weight Gain in Mice: Experiment Design #1</a></li>
+<li class="chapter" data-level="2.1.2" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#mice-experiment-1-data"><i class="fa fa-check"></i><b>2.1.2</b> Mice Experiment 1 Data</a></li>
+<li class="chapter" data-level="2.1.3" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#a-naive-graphical-analysis"><i class="fa fa-check"></i><b>2.1.3</b> A Naive Graphical Analysis</a></li>
+<li class="chapter" data-level="2.1.4" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#a-more-informed-graphical-analysis"><i class="fa fa-check"></i><b>2.1.4</b> A More Informed Graphical Analysis</a></li>
+<li class="chapter" data-level="2.1.5" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#assessing-evidence-of-differences"><i class="fa fa-check"></i><b>2.1.5</b> Assessing Evidence of Differences</a></li>
+<li class="chapter" data-level="2.1.6" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#table-of-mean-weight-by-diet-and-litter"><i class="fa fa-check"></i><b>2.1.6</b> Table of Mean Weight By Diet and Litter</a></li>
+<li class="chapter" data-level="2.1.7" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#table-of-mean-weight-by-diet"><i class="fa fa-check"></i><b>2.1.7</b> Table of Mean Weight By Diet</a></li>
+<li class="chapter" data-level="2.1.8" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#an-improper-statistical-analysis"><i class="fa fa-check"></i><b>2.1.8</b> An Improper Statistical Analysis</a></li>
+<li class="chapter" data-level="2.1.9" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#a-more-appropriate-statistical-analysis"><i class="fa fa-check"></i><b>2.1.9</b> A More Appropriate Statistical Analysis</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#llsr-model-for-mice-experiment"><i class="fa fa-check"></i><b>2.2</b> LLSR Model for Mice Experiment</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#model-formulation"><i class="fa fa-check"></i><b>2.2.1</b> Model Formulation</a></li>
+<li class="chapter" data-level="2.2.2" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#model-accounting-for-correlation"><i class="fa fa-check"></i><b>2.2.2</b> Model Accounting For Correlation</a></li>
+<li class="chapter" data-level="2.2.3" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#questions-of-interest"><i class="fa fa-check"></i><b>2.2.3</b> Questions of Interest</a></li>
+<li class="chapter" data-level="2.2.4" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#fixed-and-random-effects"><i class="fa fa-check"></i><b>2.2.4</b> Fixed and Random Effects</a></li>
+<li class="chapter" data-level="2.2.5" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#fitting-the-model-in-r"><i class="fa fa-check"></i><b>2.2.5</b> Fitting the Model in R</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#a-second-mice-experiment"><i class="fa fa-check"></i><b>2.3</b> A Second Mice Experiment</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#weight-gain-in-mice-experiment-2"><i class="fa fa-check"></i><b>2.3.1</b> Weight Gain in Mice: Experiment 2</a></li>
+<li class="chapter" data-level="2.3.2" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#mice-experiment-2-data"><i class="fa fa-check"></i><b>2.3.2</b> Mice Experiment 2 Data</a></li>
+<li class="chapter" data-level="2.3.3" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#experiment-2-a-naive-graphical-analysis"><i class="fa fa-check"></i><b>2.3.3</b> Experiment 2: A Naive Graphical Analysis</a></li>
+<li class="chapter" data-level="2.3.4" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#experiment-2-a-more-informed-graphical-analysis"><i class="fa fa-check"></i><b>2.3.4</b> Experiment 2: A More Informed Graphical Analysis</a></li>
+<li class="chapter" data-level="2.3.5" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#experiment-2-table-of-mean-weight-by-diet"><i class="fa fa-check"></i><b>2.3.5</b> Experiment 2: Table of Mean Weight By Diet</a></li>
+<li class="chapter" data-level="2.3.6" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#experiment-2-table-comparing-litters-means-by-diet"><i class="fa fa-check"></i><b>2.3.6</b> Experiment 2: Table Comparing Litters Means by Diet</a></li>
+<li class="chapter" data-level="2.3.7" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#an-inappropriate-model-for-the-second-design"><i class="fa fa-check"></i><b>2.3.7</b> An Inappropriate Model for the Second Design</a></li>
+<li class="chapter" data-level="2.3.8" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#a-more-appropriate-model-for-experiment-2"><i class="fa fa-check"></i><b>2.3.8</b> A More Appropriate Model for Experiment 2</a></li>
+<li class="chapter" data-level="2.3.9" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#model-for-litter-means"><i class="fa fa-check"></i><b>2.3.9</b> Model for Litter Means</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#more-on-linear-mixed-effects-models"><i class="fa fa-check"></i><b>2.4</b> More on Linear Mixed Effects Models</a><ul>
+<li class="chapter" data-level="2.4.1" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#why-not-fixed-effect-for-litter"><i class="fa fa-check"></i><b>2.4.1</b> Why Not Fixed Effect for Litter?</a></li>
+<li class="chapter" data-level="2.4.2" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#fixed-effect-for-litter-in-experiment-2"><i class="fa fa-check"></i><b>2.4.2</b> Fixed Effect for Litter in Experiment 2</a></li>
+<li class="chapter" data-level="2.4.3" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#experiment-2-illustration"><i class="fa fa-check"></i><b>2.4.3</b> Experiment 2 Illustration</a></li>
+<li class="chapter" data-level="2.4.4" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#a-look-ahead-to-multilevel-models"><i class="fa fa-check"></i><b>2.4.4</b> A Look Ahead to Multilevel Models</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Stat 455: Advanced Statistical Modeling Notes</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="introduction-to-correlated-data" class="section level1">
+<h1><span class="header-section-number">Chapter 2</span> Introduction to Correlated Data</h1>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
+<span class="kw">library</span>(lme4)
+<span class="kw">library</span>(lmerTest)
+<span class="kw">library</span>(knitr)</code></pre></div>
+<div id="introduction-to-correlated-data-1" class="section level2">
+<h2><span class="header-section-number">2.1</span> Introduction to Correlated Data</h2>
+<div id="weight-gain-in-mice-experiment-design-1" class="section level3">
+<h3><span class="header-section-number">2.1.1</span> Weight Gain in Mice: Experiment Design #1</h3>
+<p>Consider an experiment designed to assess the impact of three different diets on weight gain in mice. We observe six different litters of mice, with six mice in each litter. Within each litter, two mice are randomly assigned to each of the three diets. Researchers recorded the mean weight gain in each mouse over a four-week period.</p>
+<p>Experimental Design 1:</p>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-19"></span>
+<img src="Mice1.png" alt="Mouse Experiment Version 1" width="45%" />
+<p class="caption">
+Figure 2.1: Mouse Experiment Version 1
+</p>
+</div>
+</div>
+<div id="mice-experiment-1-data" class="section level3">
+<h3><span class="header-section-number">2.1.2</span> Mice Experiment 1 Data</h3>
+<p>The first 10 rows of the dataset look like this:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(mice,<span class="dv">10</span>)</code></pre></div>
+<pre><code>##    litter diet weight_gain
+## 1       1    A -0.03526041
+## 2       1    B -0.06841666
+## 3       1    C -0.06351305
+## 4       1    A -0.05171452
+## 5       1    B -0.06917391
+## 6       1    C -0.05951775
+## 7       2    A  0.07584083
+## 8       2    B  0.04913527
+## 9       2    C  0.07958384
+## 10      2    A  0.07278071</code></pre>
+</div>
+<div id="a-naive-graphical-analysis" class="section level3">
+<h3><span class="header-section-number">2.1.3</span> A Naive Graphical Analysis</h3>
+<p>Let's temporarily ignore the fact that some mice came from the same litter, and treat all observations as independent.</p>
+<p>The plot below shows the weight gain (or loss) for each of the mice, by diet. The red dots and connecting lines show the mean weight gain for each diet.</p>
+<p>The ensuing table shows the mean and standard deviation in weight gain for each of the three diets.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data=</span>mice, <span class="kw">aes</span>(<span class="dt">x=</span><span class="kw">factor</span>(diet), <span class="dt">y=</span>weight_gain))  <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>()  <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">stat_summary</span>(<span class="dt">fun=</span><span class="st">&quot;mean&quot;</span>, <span class="dt">geom=</span><span class="st">&quot;line&quot;</span>, <span class="kw">aes</span>(<span class="dt">group=</span><span class="kw">factor</span>(<span class="dv">1</span>)))  <span class="op">+</span>
+<span class="st">  </span><span class="kw">stat_summary</span>(<span class="dt">fun=</span><span class="st">&quot;mean&quot;</span>, <span class="dt">geom=</span><span class="st">&quot;point&quot;</span>, <span class="dt">color=</span><span class="st">&quot;red&quot;</span>, <span class="dt">size=</span><span class="dv">2</span>)</code></pre></div>
+<p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-22-1.png" width="576" /></p>
+<p><strong>Question:</strong></p>
+<p>Based on this graph, do you think there is evidence of diets have an effect on weight gain in mice? Why or why not?</p>
+</div>
+<div id="a-more-informed-graphical-analysis" class="section level3">
+<h3><span class="header-section-number">2.1.4</span> A More Informed Graphical Analysis</h3>
+<p>So far, we've ignored the fact that some of the mice came from the same litter. Now, let's take litter into account. The figure below colors the mice by litter.</p>
+<p>The lines represent the average weight gain (or loss) in each litter.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data=</span>mice, <span class="kw">aes</span>(<span class="dt">x=</span><span class="kw">factor</span>(diet), <span class="dt">y=</span>weight_gain, <span class="dt">color=</span><span class="kw">factor</span>(litter))) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st">  </span><span class="kw">stat_summary</span>(<span class="dt">fun=</span><span class="st">&quot;mean&quot;</span>, <span class="dt">geom=</span><span class="st">&quot;line&quot;</span>, <span class="kw">aes</span>(<span class="dt">group=</span><span class="kw">factor</span>(litter)))</code></pre></div>
+<p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-23-1.png" width="576" /></p>
+<p>It may be helpful to examine each litter individually.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data=</span>mice, <span class="kw">aes</span>(<span class="dt">x=</span><span class="kw">factor</span>(diet), <span class="dt">y=</span>weight_gain, <span class="dt">color=</span><span class="kw">factor</span>(litter))) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_point</span>()  <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">facet_grid</span>(.<span class="op">~</span>litter, <span class="dt">scales =</span> <span class="st">&quot;free&quot;</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">stat_summary</span>(<span class="dt">fun=</span><span class="st">&quot;mean&quot;</span>, <span class="dt">geom=</span><span class="st">&quot;line&quot;</span>, <span class="kw">aes</span>(<span class="dt">group=</span><span class="kw">factor</span>(litter)))</code></pre></div>
+<p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-24-1.png" width="576" /></p>
+<p><strong>Question:</strong></p>
+<p>Based on the information about litters, do your thoughts about whether diets have an effect on weight gain in mice change? Does there appear to be stronger evidence of differences between groups? Weaker? Same?</p>
+</div>
+<div id="assessing-evidence-of-differences" class="section level3">
+<h3><span class="header-section-number">2.1.5</span> Assessing Evidence of Differences</h3>
+<p>Conceptually, we can assess whether there is evidence of differences between the diets by considering differences in mean weights, relative to the amount of unexplained variability between mice in the same litter and on the same diet.</p>
+<p>Recall that when testing for a difference between two groups, a t-statistic is calculated using the formula</p>
+<p><span class="math display">\[
+t= \frac{\bar{x}_1-\bar{x}_2}{\sqrt{\frac{s_1^2}{n_1}+\frac{s_1^2}{n_1}}}
+\]</span></p>
+<p>The numerator measures the size of the differences between the groups, and the denominator measures the amount of unexplained variability between individuals in the same group.</p>
+</div>
+<div id="table-of-mean-weight-by-diet-and-litter" class="section level3">
+<h3><span class="header-section-number">2.1.6</span> Table of Mean Weight By Diet and Litter</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mouse_groups &lt;-<span class="st"> </span>mice <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(diet, litter)<span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">summarize</span>(<span class="dt">Mean_Weight=</span><span class="kw">mean</span>(weight_gain), <span class="dt">SD_Weight =</span> <span class="kw">sd</span>(weight_gain), <span class="dt">N=</span><span class="kw">n</span>())
+mouse_groups</code></pre></div>
+<pre><code>## # A tibble: 18 x 5
+## # Groups:   diet [3]
+##    diet  litter Mean_Weight SD_Weight     N
+##    &lt;fct&gt;  &lt;int&gt;       &lt;dbl&gt;     &lt;dbl&gt; &lt;int&gt;
+##  1 A          1   -0.0435    0.0116       2
+##  2 A          2    0.0743    0.00216      2
+##  3 A          3    0.0192    0.00282      2
+##  4 A          4    0.104     0.00487      2
+##  5 A          5    0.110     0.00145      2
+##  6 A          6    0.0833    0.00721      2
+##  7 B          1   -0.0688    0.000535     2
+##  8 B          2    0.0554    0.00881      2
+##  9 B          3   -0.0108    0.00781      2
+## 10 B          4    0.0731    0.00482      2
+## 11 B          5    0.0873    0.00890      2
+## 12 B          6    0.0682    0.00430      2
+## 13 C          1   -0.0615    0.00283      2
+## 14 C          2    0.0746    0.00711      2
+## 15 C          3    0.000839  0.00489      2
+## 16 C          4    0.0918    0.00638      2
+## 17 C          5    0.0979    0.0214       2
+## 18 C          6    0.0792    0.00310      2</code></pre>
+<p>Since each mouse in a litter received a different treatment, we can use the standard deviations between mice in the same litter to assess the amount of unexplained variability after accounting for litter and diet.</p>
+</div>
+<div id="table-of-mean-weight-by-diet" class="section level3">
+<h3><span class="header-section-number">2.1.7</span> Table of Mean Weight By Diet</h3>
+<p>What if we fail to account for litter?</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mouse_groups &lt;-<span class="st"> </span>mice <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(diet)<span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">summarize</span>(<span class="dt">Mean_Weight=</span><span class="kw">mean</span>(weight_gain), <span class="dt">SD_Weight =</span> <span class="kw">sd</span>(weight_gain), <span class="dt">N=</span><span class="kw">n</span>())
+mouse_groups</code></pre></div>
+<pre><code>## # A tibble: 3 x 4
+##   diet  Mean_Weight SD_Weight     N
+##   &lt;fct&gt;       &lt;dbl&gt;     &lt;dbl&gt; &lt;int&gt;
+## 1 A          0.0580    0.0567    12
+## 2 B          0.0340    0.0583    12
+## 3 C          0.0471    0.0612    12</code></pre>
+<p>Notice standard deviations are much larger! This is because we're now comparing mice from different litters to one another.</p>
+<p>When we fail to account for litter, variability thqt can be explained by differences between litters becomes conflated with unexplained variability.</p>
+<p>This causes us to overestimate unexplained variability and makes differences between groups look less meaningful than they really are.</p>
+</div>
+<div id="an-improper-statistical-analysis" class="section level3">
+<h3><span class="header-section-number">2.1.8</span> An Improper Statistical Analysis</h3>
+<p>We've seen graphically, and in table form, how accounting for litter impacts our ability to discern differences between diets. Now, let's look at how this happens in a statistical model.</p>
+<p>If we ignore the fact that some mice are from the same litter, and wrongly treat them as independent, we might use an ordinary linear least squares regression model.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">M1 &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data=</span>mice, weight_gain<span class="op">~</span><span class="kw">factor</span>(diet))
+<span class="kw">summary</span>(M1)<span class="op">$</span>coefficients</code></pre></div>
+<pre><code>##                  Estimate Std. Error    t value    Pr(&gt;|t|)
+## (Intercept)    0.05798494 0.01696450  3.4180166 0.001693572
+## factor(diet)B -0.02394185 0.02399142 -0.9979334 0.325573272
+## factor(diet)C -0.01085590 0.02399142 -0.4524907 0.653876252</code></pre>
+<p>The p-values on line 2 is large, indicating that there is not evidence of differences in weight gain between mice on diet 2, and the baseline diet (diet 1).</p>
+<p>The same is true for a comparison of diets 3 and 1, as seen on the third line.</p>
+</div>
+<div id="a-more-appropriate-statistical-analysis" class="section level3">
+<h3><span class="header-section-number">2.1.9</span> A More Appropriate Statistical Analysis</h3>
+<p>The following command fits a linear mixed effects model (or multilevel model) that accounts for correlation between mice in the same litter.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">M2 &lt;-<span class="st"> </span><span class="kw">lmer</span>(<span class="dt">data=</span>mice, weight_gain<span class="op">~</span><span class="kw">factor</span>(diet) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span><span class="kw">factor</span>(litter)))
+<span class="kw">summary</span>(M2)<span class="op">$</span>coeff</code></pre></div>
+<pre><code>##                  Estimate  Std. Error        df   t value          Pr(&gt;|t|)
+## (Intercept)    0.05798494 0.025057548  5.046907  2.314071 0.068074358859032
+## factor(diet)B -0.02394185 0.002962717 28.000000 -8.081043 0.000000008464652
+## factor(diet)C -0.01085590 0.002962717 28.000000 -3.664169 0.001025965687040</code></pre>
+<ul>
+<li>Estimates are unchanged, but standard errors decrease by a factor of almost 10.<br />
+</li>
+<li>t-statistics are now high, and p-values low, indicating differences between the diets</li>
+</ul>
+<p>Just as we saw graphically, and in tables, accounting for differences between litters allows us to accurately quantify unexplained variability, and assess whether there is evidence of differences in weight gain between the diets.</p>
+</div>
+</div>
+<div id="llsr-model-for-mice-experiment" class="section level2">
+<h2><span class="header-section-number">2.2</span> LLSR Model for Mice Experiment</h2>
+<div id="model-formulation" class="section level3">
+<h3><span class="header-section-number">2.2.1</span> Model Formulation</h3>
+<p>Let <span class="math inline">\(Y_{ij}\)</span> denote the weight gain of mouse <span class="math inline">\(j\)</span> in litter <span class="math inline">\(i\)</span>. <span class="math inline">\(j=1,2,\ldots, 6\)</span>, <span class="math inline">\(j=1,2,\ldots, 6\)</span>.</p>
+<p>In an ordinary linear least squares regression model, we assume that:</p>
+<ul>
+<li>each diet has an expected (or average) weight gain<br />
+</li>
+<li>individual mice vary from their expected weights randomly, according to normal distributions with constant variance <span class="math inline">\(\sigma^2\)</span><br />
+</li>
+<li>no two mice are any more or less alike than any others, except for diet (which is not true in this context)</li>
+</ul>
+<p>A model would have the form:</p>
+<p><span class="math display">\[
+Y_{ij}  = \beta_{0}+\beta_{1}\textrm{DietB}_{ij} +\beta_{2}\textrm{DietC}_{ij} + \epsilon_{ij},
+\]</span></p>
+<p>Examples:</p>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th align="left">Diet</th>
+<th align="left">Expected Weight</th>
+<th align="left">Random Deviation</th>
+<th align="left"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Litter 1, Mouse 1</td>
+<td align="left">A</td>
+<td align="left"><span class="math inline">\(\beta_0\)</span></td>
+<td align="left"><span class="math inline">\(\epsilon_{11}\)</span></td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td>Litter 1, Mouse 3</td>
+<td align="left">B</td>
+<td align="left"><span class="math inline">\(\beta_0 + \beta_1\)</span></td>
+<td align="left"><span class="math inline">\(\epsilon_{13}\)</span></td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td>Litter 1, Mouse 5</td>
+<td align="left">C</td>
+<td align="left"><span class="math inline">\(\beta_0 + \beta_2\)</span></td>
+<td align="left"><span class="math inline">\(\epsilon_{15}\)</span></td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td>Litter 2, Mouse 1</td>
+<td align="left">A</td>
+<td align="left"><span class="math inline">\(\beta_0\)</span></td>
+<td align="left"><span class="math inline">\(\epsilon_{21}\)</span></td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td>Litter 2, Mouse 3</td>
+<td align="left">B</td>
+<td align="left"><span class="math inline">\(\beta_0 + \beta_1\)</span></td>
+<td align="left"><span class="math inline">\(\epsilon_{23}\)</span></td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td>Litter 2, Mouse 5</td>
+<td align="left">C</td>
+<td align="left"><span class="math inline">\(\beta_0 + \beta_2\)</span></td>
+<td align="left"><span class="math inline">\(\epsilon_{25}\)</span></td>
+<td align="left"></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="model-accounting-for-correlation" class="section level3">
+<h3><span class="header-section-number">2.2.2</span> Model Accounting For Correlation</h3>
+<p>Let <span class="math inline">\(Y_{ij}\)</span> denote the weight gain of mouse <span class="math inline">\(j\)</span> in litter <span class="math inline">\(i\)</span>. <span class="math inline">\(j=1,2,\ldots, 6\)</span>, <span class="math inline">\(j=1,2,\ldots, 6\)</span>.</p>
+<p>We assume that:</p>
+<ul>
+<li>expected (or average) weight gain differs between diets<br />
+</li>
+<li>individual litters vary from their expected weight randomly, according to normal distributions with constant variance <span class="math inline">\(\sigma^2_l\)</span><br />
+</li>
+<li>within each litter, individual mice vary from their expected weights randomly, according to normal distributions with constant variance <span class="math inline">\(\sigma^2\)</span></li>
+</ul>
+<p>A model would have the form:</p>
+<p><span class="math display">\[
+Y_{ij}  = \beta_{0}+\beta_{1}\textrm{DietB}_{ij} +\beta_{2}\textrm{DietC}_{ij} + l_{i} + \epsilon_{ij},
+\]</span></p>
+<p>where <span class="math inline">\(l_i\sim\mathcal{N}(0, \sigma^2_l)\)</span>, and <span class="math inline">\(\epsilon_{ij} \sim\mathcal{N}(0, \sigma^2)\)</span>.</p>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th align="left">Diet</th>
+<th align="left">Expected Weight</th>
+<th align="left">Random Deviation</th>
+<th align="left"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Litter 1, Mouse 1</td>
+<td align="left">A</td>
+<td align="left"><span class="math inline">\(\beta_0\)</span></td>
+<td align="left"><span class="math inline">\(l_1 + \epsilon_{11}\)</span></td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td>Litter 1, Mouse 3</td>
+<td align="left">B</td>
+<td align="left"><span class="math inline">\(\beta_0 + \beta_1\)</span></td>
+<td align="left"><span class="math inline">\(l_1 + \epsilon_{13}\)</span></td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td>Litter 1, Mouse 5</td>
+<td align="left">C</td>
+<td align="left"><span class="math inline">\(\beta_0 + \beta_2\)</span></td>
+<td align="left"><span class="math inline">\(l_1 + \epsilon_{15}\)</span></td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td>Litter 2, Mouse 1</td>
+<td align="left">A</td>
+<td align="left"><span class="math inline">\(\beta_0\)</span></td>
+<td align="left"><span class="math inline">\(l_2 + \epsilon_{21}\)</span></td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td>Litter 2, Mouse 3</td>
+<td align="left">B</td>
+<td align="left"><span class="math inline">\(\beta_0 + \beta_1\)</span></td>
+<td align="left"><span class="math inline">\(l_2 + \epsilon_{23}\)</span></td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td>Litter 2, Mouse 5</td>
+<td align="left">C</td>
+<td align="left"><span class="math inline">\(\beta_0 + \beta_2\)</span></td>
+<td align="left"><span class="math inline">\(l_2 + \epsilon_{25}\)</span></td>
+<td align="left"></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="questions-of-interest" class="section level3">
+<h3><span class="header-section-number">2.2.3</span> Questions of Interest</h3>
+<p>The model</p>
+<p><span class="math display">\[
+Y_{ij}  = \beta_{0}+\beta_{1}\textrm{DietB}_{ij} +\beta_{2}\textrm{DietC}_{ij} + l_{i} + \epsilon_{ij},
+\]</span></p>
+<p>where <span class="math inline">\(l_i\sim\mathcal{N}(0, \sigma^2_l)\)</span>, and <span class="math inline">\(\epsilon_{ij} \sim\mathcal{N}(0, \sigma^2)\)</span></p>
+<p>has 5 parameters:</p>
+<ul>
+<li><span class="math inline">\(\beta_0\)</span> - average weight gain for mice on diet A.<br />
+</li>
+<li><span class="math inline">\(\beta_1\)</span> - difference in average weight gain for mice on diet B, compared to to diet A<br />
+</li>
+<li><span class="math inline">\(\beta_2\)</span> - difference in average weight gain for mice on diet C, compared to to diet A<br />
+</li>
+<li><span class="math inline">\(\sigma_L\)</span> - standard deviation in the distribution of differences between litters (i.e. variability explained by litter)<br />
+</li>
+<li><span class="math inline">\(\sigma\)</span> - standard deviation in the distribution of differences between individual mice in the same litter (i.e. unexplained variability)</li>
+</ul>
+<p>Thus, for a mouse in litter 1, the expected weight gain follows a normal distribution with mean <span class="math inline">\(\beta_0\)</span> and variance <span class="math inline">\(\sigma^2_l + \sigma^2\)</span>.</p>
+<p>For a mouse in litter 2, the expected weight gain follows a normal distribution with mean <span class="math inline">\(\beta_0 + \beta_2\)</span> and variance <span class="math inline">\(\sigma^2_l + \sigma^2\)</span></p>
+<p>This is based on the fact that the sum of two independent normal random variables is normal, with mean equal to the sum of the means and variance equal to the sum of the variances.</p>
+</div>
+<div id="fixed-and-random-effects" class="section level3">
+<h3><span class="header-section-number">2.2.4</span> Fixed and Random Effects</h3>
+<p>In this case, we want to test for whether there are differences in weight gain between the diets.</p>
+<p>There is no reason to test for differences in weight gain between the litters. Differences between these specific litters of mice are not important to us. We're not interested in drawing conclusions about these specific mice. They're just a sample of participants, being used to investigate the diets. It's likely that we'll never acually see these specific litters of mice beyond this study.</p>
+<p>We still need to account for litter, though, because it helps explain, or account for, variability that would otherwise go unexplained.</p>
+<ul>
+<li>Variables for which we want to investigate differences or relationships are called <strong>fixed effects</strong>. We should build these into the &quot;expectation structure&quot; of the model, using <span class="math inline">\(\beta_j\)</span>'s.<br />
+</li>
+<li>Variables that we are not interested in testing for differences or relationships between, but that we still want to include in our model in order to account for correlation and explain variability are called <strong>random effects.</strong> We should add these to the model as normally distributed error terms.<br />
+</li>
+<li>Accounting for random effects allows us to accurately calculate standard errors associated with fixed effects.<br />
+</li>
+<li>A model that involves both fixed and random effects is called a <strong>linear mixed effects model</strong>.</li>
+</ul>
+</div>
+<div id="fitting-the-model-in-r" class="section level3">
+<h3><span class="header-section-number">2.2.5</span> Fitting the Model in R</h3>
+<p>To fit a linear mixed effects model in R, we use the <code>lmer()</code> command that is part of the <code>lme4</code> package. It is also helpful to load the <code>lmerTest</code> package, in order to obtain p-values in the output.</p>
+<p>To add a random effect for a variable add <code>(1 | variable_name)</code> in the model.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">M2 &lt;-<span class="st"> </span><span class="kw">lmer</span>(<span class="dt">data=</span>mice, weight_gain<span class="op">~</span><span class="kw">factor</span>(diet) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span><span class="kw">factor</span>(litter)))
+<span class="kw">summary</span>(M2)</code></pre></div>
+<pre><code>## Linear mixed model fit by REML. t-tests use Satterthwaite&#39;s method [
+## lmerModLmerTest]
+## Formula: weight_gain ~ factor(diet) + (1 | factor(litter))
+##    Data: mice
+## 
+## REML criterion at convergence: -193.7
+## 
+## Scaled residuals: 
+##     Min      1Q  Median      3Q     Max 
+## -2.2468 -0.7088  0.0247  0.6028  1.9280 
+## 
+## Random effects:
+##  Groups         Name        Variance   Std.Dev.
+##  factor(litter) (Intercept) 0.00374095 0.061163
+##  Residual                   0.00005267 0.007257
+## Number of obs: 36, groups:  factor(litter), 6
+## 
+## Fixed effects:
+##                Estimate Std. Error        df t value      Pr(&gt;|t|)    
+## (Intercept)    0.057985   0.025058  5.046907   2.314       0.06807 .  
+## factor(diet)B -0.023942   0.002963 28.000000  -8.081 0.00000000846 ***
+## factor(diet)C -0.010856   0.002963 28.000000  -3.664       0.00103 ** 
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Correlation of Fixed Effects:
+##             (Intr) fct()B
+## factor(dt)B -0.059       
+## factor(dt)C -0.059  0.500</code></pre>
+<p><strong>Estimates and Interpretations</strong></p>
+<ul>
+<li><span class="math inline">\(\beta_0 = 0.058\)</span>: We estimate that average weight gain for Diet A is 0.058 g.<br />
+</li>
+<li><span class="math inline">\(\beta_1 = -0.024\)</span>: We estimate that mice on diet B gain 0.024 g. less than mice on diet A, on average.<br />
+</li>
+<li><span class="math inline">\(\beta_2 = -0.011\)</span>: We estimate that mice on diet C gain 0.011 g. less than mice on diet A, on average.</li>
+</ul>
+<p>The &quot;Random effects&quot; table gives estimates of <span class="math inline">\(\sigma^2_l\)</span> (litters) and <span class="math inline">\(\sigma^2\)</span> (Residual).</p>
+<ul>
+<li><span class="math inline">\(\sigma_l = 0.061\)</span>: We estimate that the standard deviation in differences in weights between litters, after accounting for diet, is 0.061 g.<br />
+</li>
+<li><span class="math inline">\(\sigma = 0.007\)</span>: We estimate that the standard deviation in differences in weights between mice within a litter, after accounting for diet, is 0.007 g.</li>
+</ul>
+<p>There is evidence of differences between the diets.<br />
+There is more variability in weight between different litters than between mice in the same litter, after accounting for diet.</p>
+</div>
+</div>
+<div id="a-second-mice-experiment" class="section level2">
+<h2><span class="header-section-number">2.3</span> A Second Mice Experiment</h2>
+<div id="weight-gain-in-mice-experiment-2" class="section level3">
+<h3><span class="header-section-number">2.3.1</span> Weight Gain in Mice: Experiment 2</h3>
+<p>Now consider a different structure of the mouse experiment.</p>
+<p>In this version of the experiment, the three diets were randomly assigned to six pregnant mice, so that two mice were assigned to each diet. Each of the six mice (dams), gave birth to six pups, creating six litters of six, as seen before. Researchers the observed the mean weight gain of the pups over a four week period.</p>
+<p>Now, each pup in a litter has necessarily been assigned to the same diet, since diets were assigned to the dams, before the pups were born.</p>
+<p>Experimental Design 2:</p>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-30"></span>
+<img src="Mice2.png" alt="Mouse Experiment Version 2" width="75%" />
+<p class="caption">
+Figure 2.2: Mouse Experiment Version 2
+</p>
+</div>
+</div>
+<div id="mice-experiment-2-data" class="section level3">
+<h3><span class="header-section-number">2.3.2</span> Mice Experiment 2 Data</h3>
+<p>The first 15 rows of the dataset look like this:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(mice2,<span class="dv">15</span>)</code></pre></div>
+<pre><code>##    litter diet   weight_gain
+## 1       1    A -0.0352604099
+## 2       1    A -0.0474166604
+## 3       1    A -0.0545130532
+## 4       1    A -0.0517145212
+## 5       1    A -0.0481739132
+## 6       1    A -0.0505177486
+## 7       2    A  0.0758408263
+## 8       2    A  0.0701352749
+## 9       2    A  0.0885838352
+## 10      2    A  0.0727807107
+## 11      2    A  0.0826007925
+## 12      2    A  0.0785294998
+## 13      3    B  0.0002306143
+## 14      3    B -0.0163362762
+## 15      3    B -0.0146213462</code></pre>
+</div>
+<div id="experiment-2-a-naive-graphical-analysis" class="section level3">
+<h3><span class="header-section-number">2.3.3</span> Experiment 2: A Naive Graphical Analysis</h3>
+<p>Again, we'll temporarily ignore the fact that mice come from the same litter and treat all observations as independent.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data=</span>mice2, <span class="kw">aes</span>(<span class="dt">x=</span><span class="kw">factor</span>(diet), <span class="dt">y=</span>weight_gain))  <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>()  <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">stat_summary</span>(<span class="dt">fun=</span><span class="st">&quot;mean&quot;</span>, <span class="dt">geom=</span><span class="st">&quot;line&quot;</span>, <span class="kw">aes</span>(<span class="dt">group=</span><span class="kw">factor</span>(<span class="dv">1</span>)))<span class="op">+</span><span class="st">  </span>
+<span class="st">  </span><span class="kw">stat_summary</span>(<span class="dt">fun=</span><span class="st">&quot;mean&quot;</span>, <span class="dt">geom=</span><span class="st">&quot;point&quot;</span>, <span class="dt">color=</span><span class="st">&quot;red&quot;</span>, <span class="dt">size=</span><span class="dv">2</span>)</code></pre></div>
+<p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-33-1.png" width="576" /></p>
+</div>
+<div id="experiment-2-a-more-informed-graphical-analysis" class="section level3">
+<h3><span class="header-section-number">2.3.4</span> Experiment 2: A More Informed Graphical Analysis</h3>
+<p>Now, we'll account for the fact that mice in the same litter got the same diets. The plot below adds color to show litter.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data=</span>mice2, <span class="kw">aes</span>(<span class="dt">x=</span><span class="kw">factor</span>(diet), <span class="dt">y=</span>weight_gain, <span class="dt">color=</span><span class="kw">factor</span>(litter))) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() </code></pre></div>
+<p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-34-1.png" width="576" /></p>
+<p>Since diets were assigned to litters, not individual mice, it is the litters we should be comparing. In fact, our sample size here is really not the 36 individual mice, but rather the 6 litters.</p>
+<p>Thus, the best graphical analysis would come from the following plot, which displays average weight for each litter:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Litters &lt;-<span class="st"> </span>mice2 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(diet, litter)<span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">summarize</span>(<span class="dt">weight_gain=</span><span class="kw">mean</span>(weight_gain), <span class="dt">N=</span><span class="kw">n</span>())</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data=</span>Litters, <span class="kw">aes</span>(<span class="dt">x=</span><span class="kw">factor</span>(diet), <span class="dt">y=</span>weight_gain, <span class="dt">color=</span><span class="kw">factor</span>(litter))) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() </code></pre></div>
+<p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-36-1.png" width="576" /></p>
+</div>
+<div id="experiment-2-table-of-mean-weight-by-diet" class="section level3">
+<h3><span class="header-section-number">2.3.5</span> Experiment 2: Table of Mean Weight By Diet</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mouse_groups &lt;-<span class="st"> </span>mice2 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(diet)<span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">summarize</span>(<span class="dt">Mean_Weight=</span><span class="kw">mean</span>(weight_gain), <span class="dt">SD_Weight =</span> <span class="kw">sd</span>(weight_gain), <span class="dt">N=</span><span class="kw">n</span>())
+mouse_groups</code></pre></div>
+<pre><code>## # A tibble: 3 x 4
+##   diet  Mean_Weight SD_Weight     N
+##   &lt;fct&gt;       &lt;dbl&gt;     &lt;dbl&gt; &lt;int&gt;
+## 1 A          0.0151    0.0661    12
+## 2 B          0.0354    0.0457    12
+## 3 C          0.0887    0.0137    12</code></pre>
+<p>This standard deviations in this table pertain to variability between the 12 mice that got each diet (6 from one litter and 6 from another).</p>
+<p>These are not useful here, since diets were assigned to litters, not individual mice.</p>
+</div>
+<div id="experiment-2-table-comparing-litters-means-by-diet" class="section level3">
+<h3><span class="header-section-number">2.3.6</span> Experiment 2: Table Comparing Litters Means by Diet</h3>
+<p>We now look at means and standard deviations between litter means, using the average rate in each litter as the response variable.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">litter_groups &lt;-<span class="st"> </span>Litters <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(diet)<span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">summarize</span>(<span class="dt">Mean_Weight=</span><span class="kw">mean</span>(weight_gain), <span class="dt">SD_Weight =</span> <span class="kw">sd</span>(weight_gain), <span class="dt">N=</span><span class="kw">n</span>())
+litter_groups</code></pre></div>
+<pre><code>## # A tibble: 3 x 4
+##   diet  Mean_Weight SD_Weight     N
+##   &lt;fct&gt;       &lt;dbl&gt;     &lt;dbl&gt; &lt;int&gt;
+## 1 A          0.0151    0.0891     2
+## 2 B          0.0354    0.0613     2
+## 3 C          0.0887    0.0152     2</code></pre>
+</div>
+<div id="an-inappropriate-model-for-the-second-design" class="section level3">
+<h3><span class="header-section-number">2.3.7</span> An Inappropriate Model for the Second Design</h3>
+<p>An ordinarly linear least squares regression model fails to account for the fact that treatments were assigned to litters, not mice. It is based on the assumption that we have 36 independent mice (which is incorret).</p>
+<p>Output for such a model is shown below.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">M1 &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data=</span>mice2, weight_gain<span class="op">~</span><span class="kw">factor</span>(diet))
+<span class="kw">summary</span>(M1)</code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = weight_gain ~ factor(diet), data = mice2)
+## 
+## Residuals:
+##       Min        1Q    Median        3Q       Max 
+## -0.069586 -0.041328 -0.005675  0.041915  0.073511 
+## 
+## Coefficients:
+##               Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)    0.01507    0.01359   1.109 0.275297    
+## factor(diet)B  0.02036    0.01922   1.060 0.297007    
+## factor(diet)C  0.07358    0.01922   3.829 0.000545 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.04707 on 33 degrees of freedom
+## Multiple R-squared:  0.3215, Adjusted R-squared:  0.2804 
+## F-statistic: 7.819 on 2 and 33 DF,  p-value: 0.001662</code></pre>
+</div>
+<div id="a-more-appropriate-model-for-experiment-2" class="section level3">
+<h3><span class="header-section-number">2.3.8</span> A More Appropriate Model for Experiment 2</h3>
+<p>A linear mixed effects model with a random term for litter accounts for the fact that treatments were applied to litters, not individual mice.</p>
+<p>Output for a model that accounts for correlation between mice in the same litter is shown.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">M2 &lt;-<span class="st"> </span><span class="kw">lmer</span>(<span class="dt">data=</span>mice2, weight_gain<span class="op">~</span><span class="kw">factor</span>(diet) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span><span class="kw">factor</span>(litter)))
+<span class="kw">summary</span>(M2)</code></pre></div>
+<pre><code>## Linear mixed model fit by REML. t-tests use Satterthwaite&#39;s method [
+## lmerModLmerTest]
+## Formula: weight_gain ~ factor(diet) + (1 | factor(litter))
+##    Data: mice2
+## 
+## REML criterion at convergence: -206.7
+## 
+## Scaled residuals: 
+##      Min       1Q   Median       3Q      Max 
+## -2.33470 -0.59248  0.03505  0.59073  1.91089 
+## 
+## Random effects:
+##  Groups         Name        Variance   Std.Dev.
+##  factor(litter) (Intercept) 0.00396804 0.062992
+##  Residual                   0.00005093 0.007136
+## Number of obs: 36, groups:  factor(litter), 6
+## 
+## Fixed effects:
+##               Estimate Std. Error      df t value Pr(&gt;|t|)
+## (Intercept)    0.01507    0.04459 3.00000   0.338    0.758
+## factor(diet)B  0.02036    0.06306 3.00000   0.323    0.768
+## factor(diet)C  0.07358    0.06306 3.00000   1.167    0.328
+## 
+## Correlation of Fixed Effects:
+##             (Intr) fct()B
+## factor(dt)B -0.707       
+## factor(dt)C -0.707  0.500</code></pre>
+<ul>
+<li>Estimates are the same<br />
+</li>
+<li>Standard errors are larger, due mostly to the fact that our sample size is 6, instead of 36</li>
+</ul>
+</div>
+<div id="model-for-litter-means" class="section level3">
+<h3><span class="header-section-number">2.3.9</span> Model for Litter Means</h3>
+<p>Alternatively, we could fit a model, using the 6 litters as our observations, with the mean weight in each litter as the response variable.</p>
+<p>Since it is reasonable to assume that litters are independent, we could use an ordinary LLSR model in this context.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">M3 &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data=</span>Litters, weight_gain<span class="op">~</span><span class="kw">factor</span>(diet))
+<span class="kw">summary</span>(M3)</code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = weight_gain ~ factor(diet), data = Litters)
+## 
+## Residuals:
+##        1        2        3        4        5        6 
+## -0.06301  0.06301 -0.04335  0.04335  0.01078 -0.01078 
+## 
+## Coefficients:
+##               Estimate Std. Error t value Pr(&gt;|t|)
+## (Intercept)    0.01507    0.04459   0.338    0.758
+## factor(diet)B  0.02036    0.06306   0.323    0.768
+## factor(diet)C  0.07358    0.06306   1.167    0.328
+## 
+## Residual standard error: 0.06306 on 3 degrees of freedom
+## Multiple R-squared:  0.3261, Adjusted R-squared:  -0.1231 
+## F-statistic: 0.7259 on 2 and 3 DF,  p-value: 0.5532</code></pre>
+<ul>
+<li>Estimates, standard errors, and p-values are identical to the ones seen in the mixed-effects model.</li>
+</ul>
+</div>
+</div>
+<div id="more-on-linear-mixed-effects-models" class="section level2">
+<h2><span class="header-section-number">2.4</span> More on Linear Mixed Effects Models</h2>
+<div id="why-not-fixed-effect-for-litter" class="section level3">
+<h3><span class="header-section-number">2.4.1</span> Why Not Fixed Effect for Litter?</h3>
+<p>Why would a model like the following, which uses litter as an expanatory variable in Example 1, not be very useful?</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">M3 &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data=</span>mice, weight_gain<span class="op">~</span><span class="st"> </span><span class="kw">factor</span>(diet) <span class="op">+</span><span class="st"> </span><span class="kw">factor</span>(litter))
+<span class="kw">summary</span>(M3)</code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = weight_gain ~ factor(diet) + factor(litter), data = mice)
+## 
+## Residuals:
+##        Min         1Q     Median         3Q        Max 
+## -0.0164273 -0.0051744  0.0001942  0.0044281  0.0138701 
+## 
+## Coefficients:
+##                  Estimate Std. Error t value             Pr(&gt;|t|)    
+## (Intercept)     -0.046333   0.003421 -13.544   0.0000000000000815 ***
+## factor(diet)B   -0.023942   0.002963  -8.081   0.0000000084646521 ***
+## factor(diet)C   -0.010856   0.002963  -3.664              0.00103 ** 
+## factor(litter)2  0.126011   0.004190  30.075 &lt; 0.0000000000000002 ***
+## factor(litter)3  0.061021   0.004190  14.564   0.0000000000000136 ***
+## factor(litter)4  0.147712   0.004190  35.254 &lt; 0.0000000000000002 ***
+## factor(litter)5  0.156366   0.004190  37.320 &lt; 0.0000000000000002 ***
+## factor(litter)6  0.134801   0.004190  32.173 &lt; 0.0000000000000002 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.007257 on 28 degrees of freedom
+## Multiple R-squared:  0.9874, Adjusted R-squared:  0.9843 
+## F-statistic: 314.5 on 7 and 28 DF,  p-value: &lt; 0.00000000000000022</code></pre>
+<p>We're now estimating 8 <span class="math inline">\(\beta&#39;s\)</span> instead of 3.</p>
+<p>Each time we estimate an additional parameter, we lose a degree of freedom, making estimates and predictions less precise.</p>
+<p>We don't care about differences between the litters, so <span class="math inline">\(\beta_3, \beta_4, \ldots, \beta_7\)</span> are not useful.</p>
+<p>Imagine if we had many more litters. Things would get really messy, and unnecessarily so.</p>
+<p>If, for some reason, we really wanted to test for differences in weight gain between these specific litters of mice, then we would treat them as fixed effects, but it's hard to see why we would want to do that.</p>
+</div>
+<div id="fixed-effect-for-litter-in-experiment-2" class="section level3">
+<h3><span class="header-section-number">2.4.2</span> Fixed Effect for Litter in Experiment 2</h3>
+<p>In fact, if we apply this model to Experiment 2, we cannot even estimate all of the parameters.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">M3 &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data=</span>mice2, weight_gain<span class="op">~</span><span class="st"> </span><span class="kw">factor</span>(diet) <span class="op">+</span><span class="st"> </span><span class="kw">factor</span>(litter))
+<span class="kw">summary</span>(M3)</code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = weight_gain ~ factor(diet) + factor(litter), data = mice2)
+## 
+## Residuals:
+##        Min         1Q     Median         3Q        Max 
+## -0.0166840 -0.0041608  0.0003311  0.0042513  0.0136135 
+## 
+## Coefficients: (2 not defined because of singularities)
+##                  Estimate Std. Error t value             Pr(&gt;|t|)    
+## (Intercept)     -0.047933   0.002913 -16.453 &lt; 0.0000000000000002 ***
+## factor(diet)B    0.126712   0.004120  30.755 &lt; 0.0000000000000002 ***
+## factor(diet)C    0.125801   0.004120  30.533 &lt; 0.0000000000000002 ***
+## factor(litter)2  0.126011   0.004120  30.585 &lt; 0.0000000000000002 ***
+## factor(litter)3 -0.086691   0.004120 -21.041 &lt; 0.0000000000000002 ***
+## factor(litter)4        NA         NA      NA                   NA    
+## factor(litter)5  0.021565   0.004120   5.234             0.000012 ***
+## factor(litter)6        NA         NA      NA                   NA    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.007136 on 30 degrees of freedom
+## Multiple R-squared:  0.9858, Adjusted R-squared:  0.9835 
+## F-statistic: 417.2 on 5 and 30 DF,  p-value: &lt; 0.00000000000000022</code></pre>
+</div>
+<div id="experiment-2-illustration" class="section level3">
+<h3><span class="header-section-number">2.4.3</span> Experiment 2 Illustration</h3>
+<p>In example 2, we saw that treatments (diets) were assigned to litters (dams), but measurements were taken on the individual mice (pups).</p>
+<p><img src="Multi.png" width="60%" /></p>
+</div>
+<div id="a-look-ahead-to-multilevel-models" class="section level3">
+<h3><span class="header-section-number">2.4.4</span> A Look Ahead to Multilevel Models</h3>
+<p>Now imagine the following alteration to experiment 2</p>
+<ul>
+<li>diets are still assigned to dams, prior to the birth of the pups, so all mice in the same litter get the same diet<br />
+</li>
+<li>within each litter three mice are given nutritional supplements after their birth and the other three are not</li>
+</ul>
+<p>We want to study the effect of diet and supplement on weight gain.</p>
+<p><img src="Mice3.png" width="60%" /></p>
+<p>One treatment (diet) is assigned to litters, while the other (supplement) is assigned to individual mice.</p>
+<p><img src="Multi2.png" width="60%" /></p>
+<p>We'll learn about how to use multilevel statistical models to assess differences between diets and supplements.</p>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="review-of-multiple-linear-regression.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/STAT455-W22/stat455-w22-notes/edit/master/02-Correlated_Data.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": "https://github.com/STAT455-W22/stat455-w22-notes/blob/master/02-Correlated_Data.Rmd",
+"text": null
+},
+"download": null,
+"search": {
+"engine": "lunr",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

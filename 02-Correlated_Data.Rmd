@@ -100,7 +100,7 @@ Conceptually, we can assess whether there is evidence of differences between the
 Recall that when testing for a difference between two groups, a t-statistic is calculated using the formula
 
 \[
-\frac{\bar{x}_1-\bar{x}_2}{\sqrt{\frac{s_1^2}{n_1}+\frac{s_1^2}{n_1}}}
+t= \frac{\bar{x}_1-\bar{x}_2}{\sqrt{\frac{s_1^2}{n_1}+\frac{s_1^2}{n_1}}}
 \]
 
 The numerator measures the size of the differences between the groups, and the denominator measures the amount of unexplained variability between individuals in the same group. 
@@ -182,11 +182,17 @@ A model would have the form:
 Y_{ij}  = \beta_{0}+\beta_{1}\textrm{DietB}_{ij} +\beta_{2}\textrm{DietC}_{ij} + \epsilon_{ij},
 \]
 
-| Diet | Expected Weight | Random Deviation | 
-|:------|:---------------|:--------------|
-| A | $\beta_0$ | $\epsilon_{ij}$|   
-| B | $\beta_0 + \beta_1$ |  $\epsilon_{ij}$ |
-| C | $\beta_0 + \beta_2$ | $\epsilon_{ij}$ |
+
+Examples: 
+
+| | Diet|  Expected Weight | Random Deviation | 
+|------------------------------|:----|:------|:---------------|:--------------|
+| Litter 1, Mouse 1 | A | $\beta_0$ | $\epsilon_{11}$|   
+| Litter 1, Mouse 3 | B | $\beta_0 + \beta_1$ |  $\epsilon_{13}$ |
+| Litter 1, Mouse 5 | C | $\beta_0 + \beta_2$ | $\epsilon_{15}$ |
+| Litter 2, Mouse 1 | A | $\beta_0$ | $\epsilon_{21}$|   
+| Litter 2, Mouse 3 | B | $\beta_0 + \beta_1$ |  $\epsilon_{23}$ |
+| Litter 2, Mouse 5 | C | $\beta_0 + \beta_2$ | $\epsilon_{25}$ |
 
 
 ### Model Accounting For Correlation 
@@ -210,18 +216,14 @@ where $l_i\sim\mathcal{N}(0, \sigma^2_l)$, and $\epsilon_{ij} \sim\mathcal{N}(0,
 
 
 
-Litter| Diet|  Expected Weight | Random Deviation | 
-|:----|:------|:---------------|:--------------|
-| 1 | A |  $\beta_0$ | $l_1 + \epsilon_{1j}$|   
-| 1 | B |  $\beta_0 + \beta_1$ | $l_1 + \epsilon_{1j}$|   
-| 1 | C |  $\beta_0 + \beta_2$ | $l_1 + \epsilon_{ij}$|   
-| 2 | A |  $\beta_0$ | $l_2 + \epsilon_{2j}$|   
-| 2 | B |  $\beta_0 + \beta_1$ | $l_2 + \epsilon_{2j}$|   
-| 2 | C |  $\beta_0 + \beta_2$ | $l_2 + \epsilon_{2j}$|   
-| 3 | A |  $\beta_0$ | $l_3 + \epsilon_{1j}$|   
-| 3 | B |  $\beta_0 + \beta_1$ | $l_3 + \epsilon_{3j}$|   
-| 3 | C |  $\beta_0 + \beta_2$ | $l_3 + \epsilon_{3j}$|   
-
+| | Diet|  Expected Weight | Random Deviation | 
+|------------------------------|:----|:------|:---------------|:--------------|
+|Litter 1, Mouse 1 | A |  $\beta_0$ | $l_1 + \epsilon_{11}$|   
+|Litter 1, Mouse 3 | B |  $\beta_0 + \beta_1$ | $l_1 + \epsilon_{13}$|   
+|Litter 1, Mouse 5  | C |  $\beta_0 + \beta_2$ | $l_1 + \epsilon_{15}$|   
+|Litter 2, Mouse 1  | A |  $\beta_0$ | $l_2 + \epsilon_{21}$|   
+|Litter 2, Mouse 3  | B |  $\beta_0 + \beta_1$ | $l_2 + \epsilon_{23}$|   
+|Litter 2, Mouse 5  | C |  $\beta_0 + \beta_2$ | $l_2 + \epsilon_{25}$|   
 
 
 ### Questions of Interest
@@ -254,11 +256,11 @@ This is based on the fact that the sum of two independent normal random variable
 
 In this case, we want to test for whether there are differences in weight gain between the diets. 
 
-There is no reason to test for differences in weight gain between the litters. Differences between these specific litters of mice are not important to us. Afterall, we are never going to see these very litters of mice!    
+There is no reason to test for differences in weight gain between the litters. Differences between these specific litters of mice are not important to us. We're not interested in drawing conclusions about these specific mice. They're just a sample of participants, being used to investigate the diets. It's likely that we'll never acually see these specific litters of mice beyond this study.   
 
 We still need to account for litter, though, because it helps explain, or account for, variability that would otherwise go unexplained.    
 
-* Variables that we want to test for differences or relationships between are called **fixed effects**. We should build these into the "expectation structure" of the model, using $\beta_j$'s.   
+* Variables for which we want to investigate differences or relationships are called **fixed effects**. We should build these into the "expectation structure" of the model, using $\beta_j$'s.   
 * Variables that we are not interested in testing for differences or relationships between, but that we still want to include in our model in order to account for correlation and explain variability are called **random effects.** We should add these to the model as normally distributed error terms.    
 * Accounting for random effects allows us to accurately calculate standard errors associated with fixed effects.    
 * A model that involves both fixed and random effects is called a **linear mixed effects model**.    
