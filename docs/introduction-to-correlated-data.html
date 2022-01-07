@@ -516,7 +516,7 @@ Y_{ij}  = \beta_{0}+\beta_{1}\textrm{DietB}_{ij} +\beta_{2}\textrm{DietC}_{ij} +
 </li>
 <li><span class="math inline">\(\beta_2\)</span> - difference in average weight gain for mice on diet C, compared to to diet A<br />
 </li>
-<li><span class="math inline">\(\sigma_L\)</span> - standard deviation in the distribution of differences between litters (i.e. variability explained by litter)<br />
+<li><span class="math inline">\(\sigma_l\)</span> - standard deviation in the distribution of differences between litters (i.e. variability explained by litter)<br />
 </li>
 <li><span class="math inline">\(\sigma\)</span> - standard deviation in the distribution of differences between individual mice in the same litter (i.e. unexplained variability)</li>
 </ul>
@@ -702,14 +702,14 @@ mouse_groups</code></pre></div>
 <h3><span class="header-section-number">2.3.6</span> Table Comparing Litters Means by Diet for Experiment 2</h3>
 <p>We now look at means and standard deviations between litter means, using the average rate in each litter as the response variable.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">litter_groups &lt;-<span class="st"> </span>Litters <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(diet)<span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">summarize</span>(<span class="dt">Mean_Weight=</span><span class="kw">mean</span>(weight_gain), <span class="dt">SD_Weight =</span> <span class="kw">sd</span>(weight_gain), <span class="dt">N=</span><span class="kw">n</span>())
+<span class="st">  </span><span class="kw">summarize</span>(<span class="dt">Mean_Weight=</span><span class="kw">mean</span>(mean_weight_gain), <span class="dt">SD_Weight =</span> <span class="kw">sd</span>(mean_weight_gain), <span class="dt">N=</span><span class="kw">n</span>())
 litter_groups</code></pre></div>
 <pre><code>## # A tibble: 3 x 4
 ##   diet  Mean_Weight SD_Weight     N
 ##   &lt;fct&gt;       &lt;dbl&gt;     &lt;dbl&gt; &lt;int&gt;
-## 1 A          0.0464    0.0555     2
-## 2 B          0.0464    0.0555     2
-## 3 C          0.0464    0.0555     2</code></pre>
+## 1 A          0.0151    0.0891     2
+## 2 B          0.0354    0.0613     2
+## 3 C          0.0887    0.0152     2</code></pre>
 </div>
 <div id="an-inappropriate-model-for-the-second-design" class="section level3">
 <h3><span class="header-section-number">2.3.7</span> An Inappropriate Model for the Second Design</h3>

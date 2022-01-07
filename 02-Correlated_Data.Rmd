@@ -244,7 +244,7 @@ has 5 parameters:
 * $\beta_0$ - average weight gain for mice on diet A.    
 * $\beta_1$ - difference in average weight gain for mice on diet B, compared to to diet A    
 * $\beta_2$ - difference in average weight gain for mice on diet C, compared to to diet A    
-* $\sigma_L$ - standard deviation in the distribution of differences between litters (i.e. variability explained by litter)     
+* $\sigma_l$ - standard deviation in the distribution of differences between litters (i.e. variability explained by litter)     
 * $\sigma$ - standard deviation in the distribution of differences between individual mice in the same litter (i.e. unexplained variability)      
 
 
@@ -409,7 +409,7 @@ We now look at means and standard deviations between litter means, using the ave
 
 ```{r}
 litter_groups <- Litters %>% group_by(diet)%>% 
-  summarize(Mean_Weight=mean(weight_gain), SD_Weight = sd(weight_gain), N=n())
+  summarize(Mean_Weight=mean(mean_weight_gain), SD_Weight = sd(mean_weight_gain), N=n())
 litter_groups
 ```
 
