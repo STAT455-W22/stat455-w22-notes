@@ -53,8 +53,8 @@ table-of-mean-weight-by-diet-and-litter
 assessing-evidence-of-differences
 an-improper-statistical-analysis
 a-more-appropriate-statistical-analysis
+linear-mixed-effects-models
 llsr-model-for-mice-experiment
-model-formulation
 model-accounting-for-correlation
 questions-of-interest
 fixed-and-random-effects

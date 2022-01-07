@@ -165,9 +165,10 @@ summary(M_LME)$coeff
 
 Just as we saw graphically, and in tables, accounting for differences between litters allows us to accurately quantify unexplained variability, and assess whether there is evidence of differences in weight gain between the diets.   
 
-## LLSR Model for Mice Experiment
+## Linear Mixed Effects Models
 
-### Model Formulation
+### LLSR Model for Mice Experiment
+
 
 Let $Y_{ij}$ denote the weight gain of mouse $j$ in litter $i$. $j=1,2,\ldots, 6$, $j=1,2,\ldots, 6$.  
 
