@@ -93,17 +93,6 @@ ggplot(data=mice, aes(x=factor(diet), y=weight_gain, color=factor(litter))) +
 Based on the information about litters, do your thoughts about whether diets have an effect on weight gain in mice change? Does there appear to be stronger evidence of differences between groups? Weaker? Same?   
 
 
-### Assessing Evidence of Differences
-
-Conceptually, we can assess whether there is evidence of differences between the diets by considering differences in mean weights, relative to the amount of unexplained variability between mice in the same litter and on the same diet.  
-
-Recall that when testing for a difference between two groups, a t-statistic is calculated using the formula
-
-\[
-t= \frac{\bar{x}_1-\bar{x}_2}{\sqrt{\frac{s_1^2}{n_1}+\frac{s_1^2}{n_1}}}
-\]
-
-The numerator measures the size of the differences between the groups, and the denominator measures the amount of unexplained variability between individuals in the same group. 
 
 ### Table of Mean Weight By Diet and Litter
 
@@ -132,6 +121,17 @@ When we fail to account for litter, variability thqt can be explained by differe
 
 This causes us to overestimate unexplained variability and makes differences between groups look less meaningful than they really are.   
 
+### Assessing Evidence of Differences
+
+Conceptually, we can assess whether there is evidence of differences between the diets by considering differences in mean weights, relative to the amount of unexplained variability between mice in the same litter and on the same diet.  
+
+Recall that when testing for a difference between two groups, a t-statistic is calculated using the formula
+
+\[
+t= \frac{\bar{x}_1-\bar{x}_2}{\textrm{SE}(\bar{x}_1-\bar{x}_2)}=\frac{\bar{x}_1-\bar{x}_2}{\sqrt{\frac{s_1^2}{n_1}+\frac{s_2^2}{n_2}}}
+\]
+
+The numerator measures the size of the differences between the groups, and the denominator measures the amount of unexplained variability between individuals in the same group. 
 
 
 ### An Improper Statistical Analysis
