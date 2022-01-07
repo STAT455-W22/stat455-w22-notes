@@ -142,8 +142,8 @@ We've seen graphically, and in table form, how accounting for litter impacts our
 If we ignore the fact that some mice are from the same litter, and wrongly treat them as independent, we might use an ordinary linear least squares regression model. 
 
 ```{r}
-M1 <- lm(data=mice, weight_gain~factor(diet))
-summary(M1)$coefficients
+M_LLSR <- lm(data=mice, weight_gain~factor(diet))
+summary(M_LLSR)$coefficients
 ```
 
 The p-values on line 2 is large, indicating that there is not evidence of differences in weight gain between mice on diet 2, and the baseline diet (diet 1).  
@@ -155,8 +155,8 @@ The same is true for a comparison of diets 3 and 1, as seen on the third line.
 The following command fits a linear mixed effects model (or multilevel model) that accounts for correlation between mice in the same litter. 
 
 ```{r}
-M2 <- lmer(data=mice, weight_gain~factor(diet) + (1 | factor(litter)))
-summary(M2)$coeff
+M_LME <- lmer(data=mice, weight_gain~factor(diet) + (1 | factor(litter)))
+summary(M_LME)$coeff
 ```
 
 * Estimates are unchanged, but standard errors decrease by a factor of almost 10.   
@@ -274,8 +274,8 @@ To fit a linear mixed effects model in R, we use the `lmer()` command that is pa
 To add a random effect for a variable add `(1 | variable_name)` in the model.   
 
 ```{r}
-M2 <- lmer(data=mice, weight_gain~factor(diet) + (1 | factor(litter)))
-summary(M2)
+M_LME <- lmer(data=mice, weight_gain~factor(diet) + (1 | factor(litter)))
+summary(M_LME)
 ```
 
 **Estimates and Interpretations**    
@@ -298,8 +298,8 @@ There is more variability in weight between different litters than between mice 
 Why would a model like the following, which uses litter as an expanatory variable in Example 1, not be very useful?
 
 ```{r}
-M3 <- lm(data=mice, weight_gain~ factor(diet) + factor(litter))
-summary(M3)
+M_fixed_litter <- lm(data=mice, weight_gain~ factor(diet) + factor(litter))
+summary(M_fixed_litter)
 ```
 
 We're now estimating 8 $\beta's$ instead of 3. 
@@ -380,12 +380,12 @@ Thus, the best graphical analysis would come from the following plot, which disp
 
 ```{r}
 Litters <- mice2 %>% group_by(diet, litter)%>% 
-  summarize(weight_gain=mean(weight_gain), N=n())
+  summarize(mean_weight_gain=mean(weight_gain), N=n())
 ```
 
 
 ```{r}
-ggplot(data=Litters, aes(x=factor(diet), y=weight_gain, color=factor(litter))) + geom_point() 
+ggplot(data=Litters, aes(x=factor(diet), y=mean_weight_gain, color=factor(litter))) + geom_point() 
 ```
 
 ###  Table of Mean Weight By Diet for Experiment 2
@@ -426,8 +426,8 @@ Output for such a model is shown below.
 
 
 ```{r}
-M1 <- lm(data=mice2, weight_gain~factor(diet))
-summary(M1)
+M2_LLSR <- lm(data=mice2, weight_gain~factor(diet))
+summary(M2_LLSR)
 ```
 
 
@@ -445,8 +445,8 @@ where $l_i\sim\mathcal{N}(0, \sigma^2_l)$, and $\epsilon_{ij} \sim\mathcal{N}(0,
 Output for a model that accounts for correlation between mice in the same litter is shown.   
 
 ```{r}
-M2 <- lmer(data=mice2, weight_gain~factor(diet) + (1 | factor(litter)))
-summary(M2)
+M2_LME <- lmer(data=mice2, weight_gain~factor(diet) + (1 | factor(litter)))
+summary(M2_LME)
 ```
 
 * Estimates are the same     
@@ -469,8 +469,8 @@ where  $\epsilon_{i} \sim\mathcal{N}(0, \sigma^2)$
 Since it is reasonable to assume that litters are independent, we could use an ordinary LLSR model in this context. 
 
 ```{r}
-M3 <- lm(data=Litters, weight_gain~factor(diet))
-summary(M3)
+M2_Means <- lm(data=Litters, mean_weight_gain~factor(diet))
+summary(M2_Means)
 ```
 
 * Estimates, standard errors, and p-values are identical to the ones seen in the mixed-effects model.    
@@ -481,8 +481,8 @@ summary(M3)
 If we try to treat litter as a fixed effect in Experiment 2, we would not even be able to estimate all of the parameters.  
 
 ```{r}
-M3 <- lm(data=mice2, weight_gain~ factor(diet) + factor(litter))
-summary(M3)
+M2_fixed_litter <- lm(data=mice2, weight_gain~ factor(diet) + factor(litter))
+summary(M2_fixed_litter)
 ```
 
 ## A Multilevel Experiment
@@ -511,12 +511,20 @@ knitr::include_graphics("Mice3.png")
 
 One treatment (diet) is assigned to litters, while the other (supplement) is assigned to individual mice.   
 
+
 ```{r, echo=FALSE, out.width = '60%'}
 knitr::include_graphics("Multi2.png")
 ```
 
 * For the purpose of comparing diets, our observational units are 6 independent litters.   
 * For the purpose of comparing supplements, our observational units are 36 individual mice (who are not independent)
+
+An experiment where treatments are assigned at different levels is called a **multilevel experiment**     
+
+* level 1 observational units are litters, and level 1 treatment is diets    
+* level 2 observational units are mice, and level 2 treatment is supplement   
+
+
 
 ### Experiment 3 Data
 
@@ -568,8 +576,8 @@ Output for such a model is shown below.
 
 
 ```{r}
-M3 <- lm(data=mice3, weight_gain~supplement + factor(diet))
-summary(M3)
+M3_LLSR <- lm(data=mice3, weight_gain~supplement + factor(diet))
+summary(M3_LLSR)
 ```
 
 
@@ -593,8 +601,8 @@ where $l_i\sim\mathcal{N}(0, \sigma^2_l)$, and $\epsilon_{ij} \sim\mathcal{N}(0,
 Output for a model that accounts for correlation between mice in the same litter is shown.   
 
 ```{r}
-M3 <- lmer(data=mice3, weight_gain ~ supplement + factor(diet) + (1 | factor(litter)))
-summary(M3)
+M3_LME <- lmer(data=mice3, weight_gain ~ supplement + factor(diet) + (1 | factor(litter)))
+summary(M3_LME)
 ```
 
 **Interpretations**     
