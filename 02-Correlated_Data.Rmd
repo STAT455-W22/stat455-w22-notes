@@ -292,6 +292,28 @@ The "Random effects" table gives estimates of $\sigma^2_l$ (litters) and $\sigma
 There is evidence of differences between the diets.  
 There is more variability in weight between different litters than between mice in the same litter, after accounting for diet.   
 
+
+### Why Not Fixed Effect for Litter?
+
+Why would a model like the following, which uses litter as an expanatory variable in Example 1, not be very useful?
+
+```{r}
+M3 <- lm(data=mice, weight_gain~ factor(diet) + factor(litter))
+summary(M3)
+```
+
+We're now estimating 8 $\beta's$ instead of 3. 
+
+Each time we estimate an additional parameter, we lose a degree of freedom, making estimates and predictions less precise. 
+
+We don't care about differences between the litters, so $\beta_3, \beta_4, \ldots, \beta_7$ are not useful.  
+
+Imagine if we had many more litters. Things would get really messy, and unnecessarily so.   
+
+If, for some reason, we really wanted to test for differences in weight gain between these specific litters of mice, then we would treat them as fixed effects, but it's hard to see why we would want to do that.   
+
+
+
 ## A Second Mice Experiment 
 
 ### Weight Gain in Mice: Experiment 2
@@ -330,7 +352,7 @@ The first 15 rows of the dataset look like this:
 head(mice2,15)
 ```
 
-### Experiment 2: A Naive Graphical Analysis
+### A Naive Graphical Analysis for Experiment 2
 
 Again, we'll temporarily ignore the fact that mice come from the same litter and treat all observations as independent. 
 
@@ -342,7 +364,7 @@ ggplot(data=mice2, aes(x=factor(diet), y=weight_gain))  + geom_point()  +
 ```
 
 
-### Experiment 2: A More Informed Graphical Analysis
+###  A More Informed Graphical Analysis for Experiment 2
 
 Now, we'll account for the fact that mice in the same litter got the same diets. The plot below adds color to show litter.  
 
@@ -350,7 +372,9 @@ Now, we'll account for the fact that mice in the same litter got the same diets.
 ggplot(data=mice2, aes(x=factor(diet), y=weight_gain, color=factor(litter))) + geom_point() 
 ```
 
-Since diets were assigned to litters, not individual mice, it is the litters we should be comparing. In fact, our sample size here is really not the 36 individual mice, but rather the 6 litters. 
+Since diets were assigned to litters, not individual mice, it is the litters we should be comparing. 
+
+When comparing diets, our observational units are litters, not individual mice. Since there are only 6 litters, our sample size is 6, rather than 36.   
 
 Thus, the best graphical analysis would come from the following plot, which displays average weight for each litter:
 
@@ -364,7 +388,7 @@ Litters <- mice2 %>% group_by(diet, litter)%>%
 ggplot(data=Litters, aes(x=factor(diet), y=weight_gain, color=factor(litter))) + geom_point() 
 ```
 
-### Experiment 2: Table of Mean Weight By Diet 
+###  Table of Mean Weight By Diet for Experiment 2
 
 ```{r}
 mouse_groups <- mice2 %>% group_by(diet)%>% 
@@ -376,7 +400,7 @@ This standard deviations in this table pertain to variability between the 12 mic
 
 These are not useful here, since diets were assigned to litters, not individual mice.  
 
-### Experiment 2: Table Comparing Litters Means by Diet   
+### Table Comparing Litters Means by Diet for Experiment 2   
 
 We now look at means and standard deviations between litter means, using the average rate in each litter as the response variable.  
 
@@ -391,6 +415,12 @@ litter_groups
 
 An ordinarly linear least squares regression model fails to account for the fact that treatments were assigned to litters, not mice. It is based on the assumption that we have 36 independent mice (which is incorret).    
 
+Such a model would have the form
+
+\[
+Y_{ij}  = \beta_{0}+\beta_{1}\textrm{DietB}_{ij} +\beta_{2}\textrm{DietC}_{ij} + \epsilon_{ij},
+\]
+
 
 Output for such a model is shown below.   
 
@@ -403,7 +433,14 @@ summary(M1)
 
 ### A More Appropriate Model for Experiment 2
 
-A linear mixed effects model with a random term for litter accounts for the fact that treatments were applied to litters, not individual mice.  
+A linear mixed effects model with a random term for litter accounts for the fact that treatments were applied to litters, not individual mice. This model has the form:   
+
+\[
+Y_{ij}  = \beta_{0}+\beta_{1}\textrm{DietB}_{ij} +\beta_{2}\textrm{DietC}_{ij} + l_{i} + \epsilon_{ij},
+\]
+
+where $l_i\sim\mathcal{N}(0, \sigma^2_l)$, and $\epsilon_{ij} \sim\mathcal{N}(0, \sigma^2)$
+
 
 Output for a model that accounts for correlation between mice in the same litter is shown.   
 
@@ -415,10 +452,19 @@ summary(M2)
 * Estimates are the same     
 * Standard errors are larger, due mostly to the fact that our sample size is 6, instead of 36    
 
+* after accounting for diet, standard deviation in weights between litters is estimated to be 0.0629 g. (estimate of $\sigma_l$)     
+* after accounting for diet, standard deviation in weights between mice in the same litter is estimated to be 0.0071 g. (estimate of $\sigma$)     
+
 
 ### Model for Litter Means
 
-Alternatively, we could fit a model, using the 6 litters as our observations, with the mean weight in each litter as the response variable.   
+Alternatively, we could fit a model, using the 6 litters as our observations, with the mean weight in each litter as the response variable. If we now let $Y_i$ represent the mean weight in litter i, our model has the form:   
+
+\[
+Y_{i}  = \beta_{0}+\beta_{1}\textrm{DietB}_{i} +\beta_{2}\textrm{DietC}_{i} + \epsilon_{i},
+\]
+
+where  $\epsilon_{i} \sim\mathcal{N}(0, \sigma^2)$
 
 Since it is reasonable to assume that litters are independent, we could use an ordinary LLSR model in this context. 
 
@@ -430,36 +476,16 @@ summary(M3)
 * Estimates, standard errors, and p-values are identical to the ones seen in the mixed-effects model.    
 
 
-## More on Linear Mixed Effects Models     
-
-### Why Not Fixed Effect for Litter?
-
-Why would a model like the following, which uses litter as an expanatory variable in Example 1, not be very useful?
-
-```{r}
-M3 <- lm(data=mice, weight_gain~ factor(diet) + factor(litter))
-summary(M3)
-```
-
-We're now estimating 8 $\beta's$ instead of 3. 
-
-Each time we estimate an additional parameter, we lose a degree of freedom, making estimates and predictions less precise. 
-
-We don't care about differences between the litters, so $\beta_3, \beta_4, \ldots, \beta_7$ are not useful.  
-
-Imagine if we had many more litters. Things would get really messy, and unnecessarily so.   
-
-If, for some reason, we really wanted to test for differences in weight gain between these specific litters of mice, then we would treat them as fixed effects, but it's hard to see why we would want to do that.   
-
 ### Fixed Effect for Litter in Experiment 2
 
-In fact, if we apply this model to Experiment 2, we cannot even estimate all of the parameters. 
+If we try to treat litter as a fixed effect in Experiment 2, we would not even be able to estimate all of the parameters.  
 
 ```{r}
 M3 <- lm(data=mice2, weight_gain~ factor(diet) + factor(litter))
 summary(M3)
 ```
 
+## A Multilevel Experiment
 
 ### Experiment 2 Illustration
 
@@ -469,9 +495,9 @@ In example 2, we saw that treatments (diets) were assigned to litters (dams), bu
 knitr::include_graphics("Multi.png")
 ```
 
-### A Look Ahead to Multilevel Models   
+### Experiment with Variables Assigned at Different Levels   
 
-Now imagine the following alteration to experiment 2     
+Now imagine qn experimemt with the following setup     
 
 * diets are still assigned to dams, prior to the birth of the pups, so all mice in the same litter get the same diet      
 * within each litter three mice are given nutritional supplements after their birth and the other three are not    
@@ -489,5 +515,112 @@ One treatment (diet) is assigned to litters, while the other (supplement) is ass
 knitr::include_graphics("Multi2.png")
 ```
 
-We'll learn about how to use multilevel statistical models to assess differences between diets and supplements.   
+* For the purpose of comparing diets, our observational units are 6 independent litters.   
+* For the purpose of comparing supplements, our observational units are 36 individual mice (who are not independent)
+
+### Experiment 3 Data
+
+```{r, echo=FALSE}
+set.seed(02032021)
+nlitters <- 6
+ndiets <- 3
+nreps <- 2
+litter <- rep(1:nlitters, each=ndiets*nreps)
+litter_mean <- rnorm(nlitters, 0.05, 0.05)
+mouse_weight <- rep(litter_mean, each=ndiets*nreps)
+diet <- rep(c("A", "B", "C"), each = nlitters*nreps)
+diet_effect <- 0.009*(diet=="A") - 0.012*(diet=="B") 
+supplement <- rep(c(1,0),18)
+supplement_effect <- 0.002*supplement
+weight_gain <- rnorm(nlitters*ndiets*nreps, mouse_weight + diet_effect+supplement_effect, 0.01)
+mice3 <- data.frame(litter, diet, supplement, weight_gain) 
+```
+
+```{r}
+head(mice3,15)
+```
+
+
+###  Graphical Analysis for Experiment 3
+
+We use color to represent litter, and shape to represent supplement. We'll use the argument `position=position_jitterdodge()` to stagger litters and supplement levels, which avoids overlap and makes the graph easier to read.  
+
+```{r}
+ggplot(data=mice3, aes(x=factor(diet), y=weight_gain, color=factor(litter), 
+       shape=factor(supplement))) + geom_point(position=position_jitterdodge())
+```
+
+
+### An Inappropriate Model for the 3rd Design
+
+An ordinarly linear least squares regression model fails to account for the fact that treatments were assigned to litters, not mice. It is based on the assumption that we have 36 independent mice (which is incorret).    
+
+The model has the form
+
+\[
+Y_{ij}  = \beta_{0} + \alpha\textrm{Supplement}_i + \beta_{1}\textrm{DietB}_{ij} +\beta_{2}\textrm{DietC}_{ij}  + \epsilon_{ij},
+\]
+
+where $\epsilon_{ij} \sim\mathcal{N}(0, \sigma^2)$
+
+
+Output for such a model is shown below.   
+
+
+```{r}
+M3 <- lm(data=mice3, weight_gain~supplement + factor(diet))
+summary(M3)
+```
+
+
+### A More Appropriate Model for Experiment 3
+
+We instead fit a linear mixed effects model. 
+
+Since we want to study the effects of diet and supplement, we treat supplement and diet as fixed effects.   
+
+Since we want to account for correlation due to mice being in the same litter, we treat litter as a random effect. 
+
+Our model has the form
+
+\[
+Y_{ij}  = \beta_{0} + \alpha\textrm{Supplement}_i + \beta_{1}\textrm{DietB}_{ij} +\beta_{2}\textrm{DietC}_{ij} + l_{i} + \epsilon_{ij},
+\]
+
+where $l_i\sim\mathcal{N}(0, \sigma^2_l)$, and $\epsilon_{ij} \sim\mathcal{N}(0, \sigma^2)$
+
+
+Output for a model that accounts for correlation between mice in the same litter is shown.   
+
+```{r}
+M3 <- lmer(data=mice3, weight_gain ~ supplement + factor(diet) + (1 | factor(litter)))
+summary(M3)
+```
+
+**Interpretations**     
+
+Interpretations for fixed effects are the same as in LLSR.
+
+* We expect mice on the supplement to gain 0.008 g. more than mice not on the supplement, assuming they get the same diet.    
+* We expect mice in diet B to gain 0.02 g. more than mice on diet A, assuming supplement is held constant.    
+* We expect mice in diet C to gain 0.07 g. more than mice on diet A, assuming supplement is held constant
+
+* After accounting for differences in diet and supplement, the standard deviation in weights between litters is estimated to be 0.063 g. (an estimate of $\sigma_l$). 
+* After accounting for differences in diet and supplement, the standard deviation in weights between mice in the same litter is estimated to be 0.00638 g. (an estimate of $\sigma$). 
+
+
+### Comparison of LLSR and LME Models   
+
+Compared to the incorrect LLSR model, when we use the linear mixed effects model:     
+
+* estimates for fixed effects supplement and diet do not change     
+* standard error for supplement is smaller - we get a more precise comparison for supplements because the model has accounted for variability due to differences in litters     
+* standard error for diet is larger - since diets were assigned to litters, our sample size is 6, not 36, so standard errors are higher       
+
+The mixed effects model suggests evidence of differences due to supplement, but not evidence of differences due to diet. This is the opposite of the incorrect LLSR model.   
+
+
+
+
+
 
