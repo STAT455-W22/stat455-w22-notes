@@ -680,7 +680,18 @@ Figure 2.2: Mouse Experiment Version 2
 <p>When comparing diets, our observational units are litters, not individual mice. Since there are only 6 litters, our sample size is 6, rather than 36.</p>
 <p>Thus, the best graphical analysis would come from the following plot, which displays average weight for each litter:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Litters &lt;-<span class="st"> </span>mice2 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(diet, litter)<span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">summarize</span>(<span class="dt">mean_weight_gain=</span><span class="kw">mean</span>(weight_gain), <span class="dt">N=</span><span class="kw">n</span>())</code></pre></div>
+<span class="st">  </span><span class="kw">summarize</span>(<span class="dt">mean_weight_gain=</span><span class="kw">mean</span>(weight_gain), <span class="dt">N=</span><span class="kw">n</span>())
+<span class="kw">head</span>(Litters)</code></pre></div>
+<pre><code>## # A tibble: 6 x 4
+## # Groups:   diet [3]
+##   diet  litter mean_weight_gain     N
+##   &lt;fct&gt;  &lt;int&gt;            &lt;dbl&gt; &lt;int&gt;
+## 1 A          1         -0.0479      6
+## 2 A          2          0.0781      6
+## 3 B          3         -0.00791     6
+## 4 B          4          0.0788      6
+## 5 C          5          0.0994      6
+## 6 C          6          0.0779      6</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data=</span>Litters, <span class="kw">aes</span>(<span class="dt">x=</span><span class="kw">factor</span>(diet), <span class="dt">y=</span>mean_weight_gain, <span class="dt">color=</span><span class="kw">factor</span>(litter))) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() </code></pre></div>
 <p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-37-1.png" width="576" /></p>
 </div>
