@@ -48,9 +48,9 @@ weight-gain-in-mice-experiment-design-1
 mice-experiment-1-data
 a-naive-graphical-analysis
 a-more-informed-graphical-analysis
-assessing-evidence-of-differences
 table-of-mean-weight-by-diet-and-litter
 table-of-mean-weight-by-diet
+assessing-evidence-of-differences
 an-improper-statistical-analysis
 a-more-appropriate-statistical-analysis
 llsr-model-for-mice-experiment
