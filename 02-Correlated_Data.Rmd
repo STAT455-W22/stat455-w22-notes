@@ -384,6 +384,7 @@ Thus, the best graphical analysis would come from the following plot, which disp
 ```{r}
 Litters <- mice2 %>% group_by(diet, litter)%>% 
   summarize(mean_weight_gain=mean(weight_gain), N=n())
+head(Litters)
 ```
 
 
