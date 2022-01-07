@@ -153,8 +153,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="2.1.2" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#mice-experiment-1-data"><i class="fa fa-check"></i><b>2.1.2</b> Mice Experiment 1 Data</a></li>
 <li class="chapter" data-level="2.1.3" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#a-naive-graphical-analysis"><i class="fa fa-check"></i><b>2.1.3</b> A Naive Graphical Analysis</a></li>
 <li class="chapter" data-level="2.1.4" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#a-more-informed-graphical-analysis"><i class="fa fa-check"></i><b>2.1.4</b> A More Informed Graphical Analysis</a></li>
-<li class="chapter" data-level="2.1.5" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#table-of-mean-weight-by-diet-and-litter"><i class="fa fa-check"></i><b>2.1.5</b> Table of Mean Weight By Diet and Litter</a></li>
-<li class="chapter" data-level="2.1.6" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#table-of-mean-weight-by-diet"><i class="fa fa-check"></i><b>2.1.6</b> Table of Mean Weight By Diet</a></li>
+<li class="chapter" data-level="2.1.5" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#table-of-mean-weight-by-diet"><i class="fa fa-check"></i><b>2.1.5</b> Table of Mean Weight By Diet</a></li>
+<li class="chapter" data-level="2.1.6" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#table-of-mean-weight-by-diet-and-litter"><i class="fa fa-check"></i><b>2.1.6</b> Table of Mean Weight By Diet and Litter</a></li>
 <li class="chapter" data-level="2.1.7" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#assessing-evidence-of-differences"><i class="fa fa-check"></i><b>2.1.7</b> Assessing Evidence of Differences</a></li>
 <li class="chapter" data-level="2.1.8" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#an-improper-statistical-analysis"><i class="fa fa-check"></i><b>2.1.8</b> An Improper Statistical Analysis</a></li>
 <li class="chapter" data-level="2.1.9" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#a-more-appropriate-statistical-analysis"><i class="fa fa-check"></i><b>2.1.9</b> A More Appropriate Statistical Analysis</a></li>
@@ -271,8 +271,20 @@ Figure 2.1: Mouse Experiment Version 1
 <p><strong>Question:</strong></p>
 <p>Based on the information about litters, do your thoughts about whether diets have an effect on weight gain in mice change? Does there appear to be stronger evidence of differences between groups? Weaker? Same?</p>
 </div>
+<div id="table-of-mean-weight-by-diet" class="section level3">
+<h3><span class="header-section-number">2.1.5</span> Table of Mean Weight By Diet</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mouse_groups &lt;-<span class="st"> </span>mice <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(diet)<span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">summarize</span>(<span class="dt">Mean_Weight=</span><span class="kw">mean</span>(weight_gain), <span class="dt">SD_Weight =</span> <span class="kw">sd</span>(weight_gain), <span class="dt">N=</span><span class="kw">n</span>())
+mouse_groups</code></pre></div>
+<pre><code>## # A tibble: 3 x 4
+##   diet  Mean_Weight SD_Weight     N
+##   &lt;fct&gt;       &lt;dbl&gt;     &lt;dbl&gt; &lt;int&gt;
+## 1 A          0.0580    0.0567    12
+## 2 B          0.0340    0.0583    12
+## 3 C          0.0471    0.0612    12</code></pre>
+</div>
 <div id="table-of-mean-weight-by-diet-and-litter" class="section level3">
-<h3><span class="header-section-number">2.1.5</span> Table of Mean Weight By Diet and Litter</h3>
+<h3><span class="header-section-number">2.1.6</span> Table of Mean Weight By Diet and Litter</h3>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mouse_groups &lt;-<span class="st"> </span>mice <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(diet, litter)<span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">summarize</span>(<span class="dt">Mean_Weight=</span><span class="kw">mean</span>(weight_gain), <span class="dt">SD_Weight =</span> <span class="kw">sd</span>(weight_gain), <span class="dt">N=</span><span class="kw">n</span>())
 mouse_groups</code></pre></div>
@@ -299,20 +311,7 @@ mouse_groups</code></pre></div>
 ## 17 C          5    0.0979    0.0214       2
 ## 18 C          6    0.0792    0.00310      2</code></pre>
 <p>Since each mouse in a litter received a different treatment, we can use the standard deviations between mice in the same litter to assess the amount of unexplained variability after accounting for litter and diet.</p>
-</div>
-<div id="table-of-mean-weight-by-diet" class="section level3">
-<h3><span class="header-section-number">2.1.6</span> Table of Mean Weight By Diet</h3>
-<p>What if we fail to account for litter?</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mouse_groups &lt;-<span class="st"> </span>mice <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(diet)<span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">summarize</span>(<span class="dt">Mean_Weight=</span><span class="kw">mean</span>(weight_gain), <span class="dt">SD_Weight =</span> <span class="kw">sd</span>(weight_gain), <span class="dt">N=</span><span class="kw">n</span>())
-mouse_groups</code></pre></div>
-<pre><code>## # A tibble: 3 x 4
-##   diet  Mean_Weight SD_Weight     N
-##   &lt;fct&gt;       &lt;dbl&gt;     &lt;dbl&gt; &lt;int&gt;
-## 1 A          0.0580    0.0567    12
-## 2 B          0.0340    0.0583    12
-## 3 C          0.0471    0.0612    12</code></pre>
-<p>Notice standard deviations are much larger! This is because we're now comparing mice from different litters to one another.</p>
+<p>Notice standard deviations are much smaller when we account for litter. Most of the unexplained variability in the first table is explained when we account for litter.</p>
 <p>When we fail to account for litter, variability thqt can be explained by differences between litters becomes conflated with unexplained variability.</p>
 <p>This causes us to overestimate unexplained variability and makes differences between groups look less meaningful than they really are.</p>
 </div>
