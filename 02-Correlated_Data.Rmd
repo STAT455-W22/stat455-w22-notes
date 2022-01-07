@@ -94,6 +94,18 @@ Based on the information about litters, do your thoughts about whether diets hav
 
 
 
+
+### Table of Mean Weight By Diet
+
+
+```{r}
+mouse_groups <- mice %>% group_by(diet)%>% 
+  summarize(Mean_Weight=mean(weight_gain), SD_Weight = sd(weight_gain), N=n())
+mouse_groups
+```
+
+
+
 ### Table of Mean Weight By Diet and Litter
 
 ```{r}
@@ -104,22 +116,11 @@ mouse_groups
 
 Since each mouse in a litter received a different treatment, we can use the standard deviations between mice in the same litter to assess the amount of unexplained variability after accounting for litter and diet. 
 
-
-### Table of Mean Weight By Diet
-
-What if we fail to account for litter?
-
-```{r}
-mouse_groups <- mice %>% group_by(diet)%>% 
-  summarize(Mean_Weight=mean(weight_gain), SD_Weight = sd(weight_gain), N=n())
-mouse_groups
-```
-
-Notice standard deviations are much larger! This is because we're now comparing mice from different litters to one another.    
+Notice standard deviations are much smaller when we account for litter. Most of the unexplained variability in the first table is explained when we account for litter.  
 
 When we fail to account for litter, variability thqt can be explained by differences between litters becomes conflated with unexplained variability. 
 
-This causes us to overestimate unexplained variability and makes differences between groups look less meaningful than they really are.   
+This causes us to overestimate unexplained variability and makes differences between groups look less meaningful than they really are. 
 
 ### Assessing Evidence of Differences
 
