@@ -438,7 +438,7 @@ model1 <- lmer(data=music, na ~ orch + large + orch:large + (1 | id))
 summary(model1)
 ```
 
-**Interpretations**
+### Mixed Effects Model Interpretations
 
 For `orch=0`, the prediction equation is: 
 
@@ -465,11 +465,16 @@ For `orch=1`, the prediction equation is:
 * The interaction term is not statistically significany, indicating it is plausible that the effect of playing in a large ensemble, compared to a solo or with a small ensemble is the same for orchestral and non-orchestral musicians.   
 
 
-* After accounting for performance type and instrument type, and their interaction, there the standard deviation in negative affect scores between different musicians is estimated to be  $\hat{\sigma}_u=2.265$.    
+* After accounting for performance type and instrument type, and their interaction, the standard deviation in negative affect scores between different musicians is estimated to be  $\hat{\sigma}_u=2.265$.    
 
-* After accounting for performance type, instrument type, and their interaction, there the standard deviation in negative affect scores between different performances by the same musician is estimated to be  $\hat{\sigma}_u=4.68$.    
+* After accounting for performance type, instrument type, and their interaction, the standard deviation in negative affect scores between different performances by the same musician is estimated to be  $\hat{\sigma}_u=4.68$.    
 
 There is more variability in negative affect between different performances by the same musician than between performances by different musicians, after accounting for performance type, instrument type, and their interaction.   
+
+
+* Standard errors on level 1 variable `orch` goes up considerably, which is expected since the mixed effects model understands that the appropriate sampel size is the 37 musicians not the 497 performances.   
+
+* Standard errors on level 2 variable `large` and the interaction go up slightly as well. This is different than what we've seen before. Since there is more variability between individual performances, than between musicians ($\sigma>\sigma_l$), accounting for variability explained by performers does not improve precision of estimates.     
 
 
 ### Mixed Effects Model Without Interaction
@@ -490,7 +495,7 @@ model1b <- lmer(data=music, na ~ orch + large  + (1 | id))
 summary(model1b)
 ```
 
-**Interpretations**
+### Interpretations for Model without Interaction
 
 * we estimate that the average negative affect score for performers with non-orchestral instruments when playing a solo or with a small ensemble is $\hat{\alpha}_0 = 16.09$.    
 
@@ -700,6 +705,9 @@ ggplot() +
 
 * $\rho_{uv}=-0.59$ is indicated by lines with bigger negative affects on left having steeper negative slopes.
 
+**Thought Question:** Why would it not make sense to add a random slope for instrument type?   
+
+
 ### Model Comparisons
 
 We can compare the models using AIC and BIC. 
@@ -798,6 +806,7 @@ Y_{ij} & = [\alpha_{0}+\alpha_{1}\textrm{Orch}_{i}+\beta_{0}\textrm{LargeEns}_{i
 \end{align*}
 $$
 
+Thus, we can think of a multilevel model as a model where the slope and intercept at level one are themselves linear functions of a variable at level 2.   
 
 
 ## Unconditional Means Model
@@ -851,7 +860,7 @@ Thus, 18.2\% of the total variability in performance anxiety scores are attribut
 In this particular model, we can also say that the average correlation for any pair of responses from the same individual is a moderately low .182. 
 
 
-## Building A MultiLevel Model
+## Building A Multilevel Model
 
 We now return to the multi-level model from section 8.5 that included `orch` and `Large` as explanatory variables, as well as random effects for the intercept and effect of playing in a large ensemble for each musician.   
 
@@ -898,34 +907,24 @@ Notice that only the intercept changes, since this is the only interpretation th
 - $\hat{\alpha}_{0} = 16.34$. The estimated mean performance anxiety for solos and small ensembles (`large=0`) is 16.34 for keyboard players and vocalists (`orch=0`) with an average level of negative emotionality at baseline (`mpqnem=31.63`).
 
 
+### A Possible Final Model
 
+We'll add information about the following level 1 variables, pertaining to individual performances: 
+* number of previous performances,     
+* whether the audience is made up of students,     
+* whether the performance is juried,     
+* whether it is public,     
+* whether it is a solo
 
+We'll also consider the following level 2 variables, pertaining to musicians:   
+* mpqpem (positive emotion)    
+* mpqab (absorption)     
+* orch (orchestral instument)     
+* mpqnem (negative emotion)
 
+We consider three potential final models:
 
-
-
-
-
-
-
-
-
-### Model Comparisons
-
-Since model C is a nested version of model D, we use a **likelihood ratio test** \index{likelihood ratio test (LRT)} (drop in deviance test), to compare the models. 
-
-When using mixed effects models, the test statistic follows a $\chi^2$ distribution, rather than an F-distribution, so we use `test = "Chisq"`. 
-
-```{r comment=NA, message=FALSE}
-# anova() automatically uses ML for LRT tests
-drop_in_dev <- anova(model3, model1b, test = "Chisq")
-drop_in_dev
-```
-
-There is evidence that adding negative emotionality helps better explain variability in anxiety, as measured by negative affect. 
-
-
-### A Potential Final Model
+**Model A**: A two-level model with random slopes and an interaction between solo and mpqnem.   
 
 $$
 \begin{equation*}
@@ -945,7 +944,26 @@ f_{i} & = \zeta_{0}+\zeta_{1}\textrm{mpqnem}_{i}+z_{i},
 \end{align*}
 $$
 
-where `previous` is the number of previous diary entries filled out by that individual (`diary-1`); `students`, `juried`, and `public` are indicator variables created from the `audience` categorical variable (so that "Instructor" is the reference level in this model); and, `solo` is 1 if the performance was a solo and 0 if the performance was either a small or large ensemble.  
+After substitution, this can be written in the form
+
+$$
+\begin{align*}
+Y_{ij} & = \alpha_{0}+\alpha_{1}\textrm{mpqpem}_{i} + \alpha_{2}\textrm{mpqab}_{i}  + \alpha_{3}\textrm{orch}_{i}+\alpha_{4}\textrm{mpqnem}_{i} +  u_{i} \\ 
+& +\beta_{0}\textrm{previous}_{ij}  + v_{i}\textrm{previous}_{ij} + \gamma_{0}\textrm{students}+w_{i}\textrm{students}_{ij} + \delta_{0}\textrm{juried}_{ij}+x_{i}\textrm{juried}_{ij} \\
+& +  \varepsilon_{0}\textrm{public}+y_{i}\textrm{public}_{ij}+ \zeta_{0}\textrm{solo}_{ij}+\zeta_{1}\textrm{mpqnem}_{i}\textrm{solo}_{ij}  \\ & +    z_{i}\textrm{solo}_{ij}+\epsilon_{ij} 
+\end{align*}
+$$
+Grouping fixed and random effects, we get
+
+$$
+\begin{align*}
+Y_{ij} & = [\alpha_{0}+\alpha_{1}\textrm{mpqpem}_{i} + \alpha_{2}\textrm{mpqab}_{i}  + \alpha_{3}\textrm{orch}_{i}+\alpha_{4}\textrm{mpqnem}_{i}  \\ 
+& +\beta_{0}\textrm{previous}_{ij}  + \gamma_{0}\textrm{students} + \delta_{0}\textrm{juried}_{ij} +  \varepsilon_{0}\textrm{public} + \zeta_{0}\textrm{solo}_{ij} +\zeta_{1}\textrm{mpqnem}_{i}\textrm{solo}_{ij}] \\ &  +  [u_{i} + v_{i}\textrm{previous}_{ij} +w_{i}\textrm{students}_{ij} +x_{i}\textrm{juried}_{ij} 
+ +y_{i}\textrm{public}_{ij}  \\ & +    z_{i}\textrm{solo}_{ij}+\epsilon_{ij} ]
+\end{align*}
+$$
+
+This model accounts for random differences in performance anxiety between musicians, and also allows for the way anxiety changes with respect to changes in level one variables (previous, students, juried, public, solo, mpqnem) to vary randomly between performers.
 
 In addition, we assume the following variance-covariance structure at Level Two:
 
@@ -967,6 +985,8 @@ In addition, we assume the following variance-covariance structure at Level Two:
 
 Being able to write out these mammoth variance-covariance matrices is less important than recognizing the number of variance components that must be estimated by our intended model. 
 
+### More Data Wrangling
+
 ```{r}
 # Add new indicators to music data set
 music <- music %>%
@@ -979,19 +999,115 @@ music <- music %>%
          vocal = ifelse(instrument=="voice",1,0) )
 ```
 
+### Fitting Model A
+
 ```{r, comment=NA, warning=FALSE}
-# Model F (One - of many - reasonable final models)
-model.f <- lmer(na ~ previous + students + juried + 
+modelA <- lmer(na ~ previous + students + juried + 
     public + solo + mpqpem + mpqab + orch + mpqnem + 
     mpqnem:solo + (previous + students + juried + 
     public + solo | id), REML = T, data = music)
-summary(model.f)
+summary(modelA)
 ```
 
-From the signs of fixed effects estimates in the R output below, we see that performance anxiety is higher when a musician is performing in front of students, a jury, or the general public rather than their instructor, and it is lower for each additional diary the musician previously filled out. In addition, musicians with lower levels of positive emotionality and higher levels of absorption tend to experience greater performance anxiety, and those who play orchestral instruments experience more performance anxiety than those who play keyboards or sing. Addressing the researchers' primary hypothesis, after controlling for all these factors, we have significant evidence that musicians with higher levels of negative emotionality experience higher levels of performance anxiety, and that this association is even more pronounced when musicians are performing solos rather than as part of an ensemble group.
+
+### A Model Without Random Slopes
+
+We consider eliminating the random slope terms, resulting in a model of the form: 
+
+
+$$
+\begin{align*}
+Y_{ij} & = [\alpha_{0}+\alpha_{1}\textrm{mpqpem}_{i} + \alpha_{2}\textrm{mpqab}_{i}  + \alpha_{3}\textrm{orch}_{i}+\alpha_{4}\textrm{mpqnem}_{i}  \\ 
+& +\beta_{0}\textrm{previous}_{ij}  + \gamma_{0}\textrm{students} + \delta_{0}\textrm{juried}_{ij} +  \varepsilon_{0}\textrm{public} + \zeta_{0}\textrm{solo}_{ij} +\zeta_{1}\textrm{mpqnem}_{i}\textrm{solo}_{ij}] \\ &  +  [u_{i} +\epsilon_{ij} ]
+\end{align*}
+$$
+
+This model accounts for random differences in performance anxiety between musicians, but assumes that the way anxiety changes with respect to changes in level one variables (previous, students, juried, public, solo, mpqnem) is the same for all performers.
+
+### Fitting Model B in R
+
+```{r, comment=NA, warning=FALSE}
+modelB <- lmer(na ~ previous + students + juried + 
+    public + solo + mpqpem + mpqab + orch + mpqnem + 
+    mpqnem:solo + (1 | id), REML = T, data = music)
+summary(modelB)
+```
+
+
+```{r }
+AIC(modelA, modelB)
+BIC(modelA, modelB)
+```
+
+Both AIC and BIC favor Model B.
+
+
+### One More Possible Model
+
+Finally, we consider a simpler model that accounts for only positive and negative emotions at level two. 
+
+$$
+\begin{align*}
+Y_{ij} & = [\alpha_{0}+\alpha_{1}\textrm{mpqpem}_{i} + \alpha_{2}\textrm{mpqnem}_{i}  \\ 
+& +\beta_{0}\textrm{previous}_{ij}  + \gamma_{0}\textrm{students} + \delta_{0}\textrm{juried}_{ij} +  \varepsilon_{0}\textrm{public} + \zeta_{0}\textrm{solo}_{ij} +\zeta_{1}\textrm{mpqnem}_{i}\textrm{solo}_{ij}] \\ &  +  [u_{i} +\epsilon_{ij} ]
+\end{align*}
+$$
+
+```{r, comment=NA, warning=FALSE}
+modelC <- lmer(na ~ previous + students + juried + 
+    public + solo + mpqpem + mpqnem + 
+    mpqnem:solo + (1 | id), REML = T, data = music)
+summary(modelC)
+```
+
+### AIC and BIC Comparisons for Models B and C
+
+```{r }
+AIC(modelB, modelC)
+BIC(modelB, modelC)
+```
+
+AIC favors model B, while BIC favors model C.  
+
+### Likelihood Ratio Test
+
+Since all of the fixed effects in Model C also appear in Model B, (Model C is a nested version of Model B), we can use a **likelihood ratio test** \index{likelihood ratio test (LRT)} (drop in deviance test), which is similar to the ANOVA F-Test, to compare the models.   
+
+When using mixed effects models, the test statistic for this goodness of fit test follows a $\chi^2$ distribution, rather than an F-distribution, so we use `test = "Chisq"`. 
+
+```{r comment=NA, message=FALSE}
+# anova() automatically uses ML for LRT tests
+drop_in_dev <- anova(modelB, modelC, test = "Chisq")
+drop_in_dev
+```
+
+The small p-value provides evidence against the null hypothesis that model C is sufficient, suggesting that accounting for absorption and whether the musician plays an orchestral instrument does indeed help explain variability in performance anxiety. 
+
+We'll go with Model B as our final model.  
+
+### Final Conclusions   
+
+```{r}
+summary(modelB)
+```
+
+**Key Findings:**      
+
+After controlling for other factors we have evidence that: 
+
+* performance anxiety is higher when a musician is performing in front of students, a jury, or the general public rather than their instructor 
+* performance anxiety is is lower for each additional diary the musician previously filled out 
+* musicians with lower levels of positive emotionality and higher levels of absorption tend to experience greater performance anxiety   
+* those who play orchestral instruments experience more performance anxiety than those who play keyboards or sing. 
+* musicians with higher levels of negative emotionality experience higher levels of performance anxiety, and that this association is even more pronounced when musicians are performing solos rather than as part of an ensemble group.
 
 **Interpretations of key fixed effects:**
 
-- $\hat{\alpha}_{4} = 0.11$. A one-point increase in baseline level of negative emotionality is associated with an estimated 0.11 mean increase in performance anxiety for musicians performing in an ensemble group (`solo=0`), after controlling for previous diary entries, audience, positive emotionality, absorption, and instrument.
-- $\hat{\zeta}_{1} = 0.08$. When musicians play solos, a one-point increase in baseline level of negative emotionality is associated with an estimated 0.19 mean increase in performance anxiety, 0.08 points (73\%) higher than musicians playing in ensemble groups, controlling for the effects of previous diary entries, audience, positive emotionality, absorption, and instrument.
+- A one-point increase in baseline level of negative emotionality is associated with an estimated 0.11 mean increase in performance anxiety for musicians performing in an ensemble group (`solo=0`), after controlling for previous diary entries, audience, positive emotionality, absorption, and instrument.
+- When musicians play solos, a one-point increase in baseline level of negative emotionality is associated with an estimated $0.10568+0.10640=0.21208$ mean increase in performance anxiety, approximately twice as high st musicians playing in ensemble groups (0.10568), controlling for the effects of previous diary entries, audience, positive emotionality, absorption, and instrument.
 
+**Interpretations of random effects:**
+
+ - After accounting for the effects of previous diary entries, audience, positive emotionality, absorption, and instrument, there is more variability in performance anxiety between performances by the same musician ($\sigma=4.39$), than in variability between performance anxiety of different musicians ($\sigma=1.36$)   
+ 
+ 

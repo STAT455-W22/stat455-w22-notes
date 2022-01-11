@@ -106,7 +106,9 @@ llsr-model-output
 random-vs.-fixed-effects
 an-initial-linear-mixed-effect-model
 initial-mixed-effects-model-in-r
+mixed-effects-model-interpretations
 mixed-effects-model-without-interaction
+interpretations-for-model-without-interaction
 assumptions-in-first-mixed-effects-model
 random-slopes-model
 differences-in-large-vs-smallsolo
@@ -125,5 +127,12 @@ unconditional-means-model-in-r
 unconditional-means-model-interpretations
 building-a-multilevel-model
 centering-covariates
-model-comparisons-1
-a-potential-final-model
+a-possible-final-model
+more-data-wrangling-1
+fitting-model-a
+a-model-without-random-slopes
+fitting-model-b-in-r
+one-more-possible-model
+aic-and-bic-comparisons-for-models-b-and-c
+likelihood-ratio-test
+final-conclusions
