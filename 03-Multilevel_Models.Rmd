@@ -480,7 +480,7 @@ We fit the model using the `lmer()` function in the `lme4` package. If the the `
 
 
 ```{r, comment=NA}
-model1 <- lmer(data=music, na ~ orch + large + orch:large + (1 | id))
+model1 <- lmer(data=music, na ~ orch + large + orch:large + (1 | id), REML=TRUE)
 summary(model1)
 ```
 
@@ -537,7 +537,7 @@ where $u_i \sim\mathcal{N}(0,\sigma^2)$, and $\epsilon_{ij} \sim\mathcal{N}(0,\s
 
 
 ```{r, comment=NA}
-model1b <- lmer(data=music, na ~ orch + large  + (1 | id))
+model1b <- lmer(data=music, na ~ orch + large  + (1 | id), REML=TRUE)
 summary(model1b)
 ```
 
@@ -691,7 +691,7 @@ $$
 To fit the random slopes model in R, we write `(large | id)`, instead of `(1 | id)`.  
 
 ```{r, comment=NA}
-model2b <- lmer(data=music, na ~ orch + large  + (large | id))
+model2b <- lmer(data=music, na ~ orch + large  + (large | id), REML=TRUE)
 summary(model2b)
 ```
 
@@ -726,7 +726,7 @@ Each line represents one of the 37 musicians. The thick black line represents av
 
 ```{r,echo=FALSE, warning=FALSE}
 
-model2c <- lmer(data=music, na ~ large + orch  + (large | id))
+model2c <- lmer(data=music, na ~ large + orch  + (large | id), REML=TRUE)
 
 
 # Plot random intercepts and slopes model
@@ -809,7 +809,7 @@ $$
 
 
 ```{r, comment=NA}
-model2 <- lmer(data=music, na ~ orch + large + orch:large + (large | id))
+model2 <- lmer(data=music, na ~ orch + large + orch:large + (large | id), REML=TRUE)
 summary(model2)
 ```
 
@@ -882,7 +882,7 @@ where $u_i\sim N(0, \sigma^2_u)$ and $\epsilon_{ij}\sim N(0, \sigma^2)$.
 
 ```{r, comment=NA}
 #Model A (Unconditional means model)
-model.a <- lmer(na ~ 1 + (1 | id), REML = T, data = music)
+model.a <- lmer(na ~ 1 + (1 | id), REML = TRUE, data = music)
 summary(model.a)
 ```
 
@@ -924,7 +924,7 @@ where error terms are defined as before.
 
 ```{r, comment=NA}
 #Add negative emotionality as second L2 covariate
-model3 <- lmer(na ~ orch + mpqnem + large  + (1 | id), data = music)
+model3 <- lmer(na ~ orch + mpqnem + large  + (1 | id), data = music, REML=TRUE)
 summary(model3)
 ```
 
@@ -942,7 +942,7 @@ music <- music %>%
 
 ```{r, comment=NA}
 # Model E (Center baseline NEM in Model D)
-model3c <- lmer(na ~ orch + cmpqnem + large +  (1 | id), REML = T, data = music)
+model3c <- lmer(na ~ orch + cmpqnem + large +  (1 | id), REML = T, data = music, REML=TRUE)
 summary(model3c)
 ```
 
@@ -1051,7 +1051,7 @@ music <- music %>%
 modelA <- lmer(na ~ previous + students + juried + 
     public + solo + mpqpem + mpqab + orch + mpqnem + 
     mpqnem:solo + (previous + students + juried + 
-    public + solo | id), REML = T, data = music)
+    public + solo | id), REML = T, data = music, REML=TRUE)
 summary(modelA)
 ```
 
@@ -1075,7 +1075,7 @@ This model accounts for random differences in performance anxiety between musici
 ```{r, comment=NA, warning=FALSE}
 modelB <- lmer(na ~ previous + students + juried + 
     public + solo + mpqpem + mpqab + orch + mpqnem + 
-    mpqnem:solo + (1 | id), REML = T, data = music)
+    mpqnem:solo + (1 | id), REML = T, data = music, REML=TRUE)
 summary(modelB)
 ```
 
@@ -1102,7 +1102,7 @@ $$
 ```{r, comment=NA, warning=FALSE}
 modelC <- lmer(na ~ previous + students + juried + 
     public + solo + mpqpem + mpqnem + 
-    mpqnem:solo + (1 | id), REML = T, data = music)
+    mpqnem:solo + (1 | id), REML = T, data = music, REML=TRUE)
 summary(modelC)
 ```
 
