@@ -323,7 +323,8 @@ music.lev2 <- music.lev2 %>%
 # Lattice plot for NA vs. Performance Type
 ggplot(music,aes(x=large,y=na))  + 
   geom_point() + geom_smooth(method="lm",color="black") + 
-  facet_wrap(~id,ncol=5)  +
+  facet_wrap(~id,ncol=5)  +   
+  theme(strip.text.x=element_blank()) + 
   labs(x="Large Ensemble Performance",y="Negative Affect") 
 ```
 
