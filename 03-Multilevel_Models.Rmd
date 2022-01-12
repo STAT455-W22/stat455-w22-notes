@@ -89,6 +89,22 @@ Note that we have multiple observations on the same musicians Since observations
               - instrument used and number of previous years spent studying that instrument
               - baseline personality assessment (MPQ measures of positive emotionality, negative emotionality, constraint, stress reaction, and absorption)
 
+### Questions of Interest     
+
+* Do musicians playing orchestral instruments experience different levels or performance anxiety than those playing keyboard instruments or vocalists?     
+
+* Does playing in a large ensemble (as opposed to a small group or solo performance) have an impact on performance anxiety? 
+
+
+* Does the type of audience impact performance anxiety?   
+
+* Does performance anxiety decrease with experience?      
+
+* Are measures of the musician's attitude/personality, such as positive emotions, negative emotions, and absorption associated with performance anxiety?   
+
+* For a single musician, is the amount of performance anxiety consistent across performances, or does it vary from one performance to the next?  
+
+
 ### Number of Performances by Musician
 
 When creating graphical summaries of level one covariates (variables) it is helpful to plot both 1) the 497 observations individually, and 2) averages for each of the 37 individuals, averaging across performances. 
@@ -112,9 +128,6 @@ We summarize level one covariates, ignoring the fact that there are multiple obs
 music %>% count(perform_type) 
 ```
 
-```{r}
-music %>% count(memory)
-```
 
 ```{r}
 music %>% count(audience) 
@@ -173,12 +186,8 @@ na.mean
 
 ### Distribution of Level Two Covariates
 
-We examine the  distribution of level 2 covariates (obtained from first performance by each musician, since these will be the same for all performances). 
+We examine the  distribution of level 2 covariate instrument type (obtained from first performance by each musician, since these will be the same for all performances). 
 
-```{r}
-# Summarize Level 2 covariates using data set with one observation per subject,
-music.lev2 %>% ungroup(id) %>% count(gender)
-```
 
 ```{r}
 music.lev2 %>% ungroup(id) %>% count(instrument)
@@ -262,7 +271,7 @@ ggplot(music,aes(x=factor(audience),y=na)) + theme.1 +
   labs(x="Audience",y="Negative Affect")
 ```
 
-### Lattice Plot for Previous Performances vs Nagative Affect
+### Lattice Plot for Previous Performances vs Negative Affect
 
 We plot of previous performances vs. negative affect, with separate scatterplots with fitted lines by musician 
 
@@ -293,6 +302,55 @@ instr.mean <- ggplot(data=music.lev2,
   xlab("") + labs(title="(b)") + ylim(10,35)
 grid.arrange(instr.all, instr.mean, ncol = 1)
 ```
+
+
+### More Data Wrangling
+
+We create variables for whether or not musician played an orchestral instrument (as opposed to playing piano or being a vocalist), and for whether performance was part of a large ensemble (as opposed to a small ensemble or solo). 
+
+```{r verb1, echo=FALSE, comment=NA}
+music <- music %>%
+  mutate(orch = ifelse(instrument=="orchestral instrument",1,0),
+         large = ifelse(perform_type=="Large Ensemble",1,0) )
+
+music.lev2 <- music.lev2 %>%
+  mutate(orch = ifelse(instrument=="orchestral instrument",1,0) )
+```
+
+### Lattice Plot for Large Ensemble Effect 
+
+```{r, fig.height=4, fig.width=8}
+# Lattice plot for NA vs. Performance Type
+ggplot(music,aes(x=large,y=na))  + 
+  geom_point() + geom_smooth(method="lm",color="black") + 
+  facet_wrap(~id,ncol=5)  +
+  labs(x="Large Ensemble Performance",y="Negative Affect") 
+```
+
+
+### Boxplots for Orchestral Instrument Effect
+
+
+```{r}
+# Look at relationships among Level 2 covariates and 
+# negative affect (again ignoring correlation)
+instr.all <- ggplot(data=music,aes(factor(orch),na)) +
+  geom_boxplot() + 
+  coord_flip() + theme.1 + ylab("Negative Affect") + 
+  xlab("Orchestral Instrument") + labs(title="(a)") + ylim(10,35)
+instr.mean <- ggplot(data=music.lev2,
+                     aes(factor(orch),meanbysubj)) + 
+  geom_boxplot() + coord_flip() + 
+  theme.1 + ylab("Mean Negative Affect") + 
+  xlab("Orchestral Instrument") + labs(title="(b)") + ylim(10,35)
+grid.arrange(instr.all, instr.mean, ncol = 1)
+```
+
+
+
+
+
+
 
 ### Negative Affect by PEM, NEM, Absorption
 
@@ -353,21 +411,8 @@ head(music)
 
 For example $Y_{15}=10$. 
 
-### More Data Wrangling
-
 We'll investigate the relationship between negative affect and playing an orchestral instrument (level 2), and playing in a large ensemble (level 1), as well as a possible interaction between these explanatory variables. 
 
-We create variables for these characteristics. 
-
-```{r verb1, echo=FALSE, comment=NA}
-# Try using multiple linear regression to analyze data even
-# though many assumptions are violated.
-# First generate indicator variables for two covariates 
-# used in Section 3
-music <- music %>%
-  mutate(orch = ifelse(instrument=="orchestral instrument",1,0),
-         large = ifelse(perform_type=="Large Ensemble",1,0) )
-```
 
 
 ### LLSR Model (Clearly inappropriate)
