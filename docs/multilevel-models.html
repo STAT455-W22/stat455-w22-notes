@@ -777,7 +777,7 @@ Y_{ij} &amp; = \alpha_{0}+\alpha_{1}\textrm{Orch}_{i}+\beta_{0}\textrm{LargeEns}
 <div id="initial-mixed-effects-model-in-r" class="section level3">
 <h3><span class="header-section-number">3.2.6</span> Initial Mixed Effects Model in R</h3>
 <p>We fit the model using the <code>lmer()</code> function in the <code>lme4</code> package. If the the <code>lmerTest</code> package is loaded, approximate p-values are returned. These are approximate, because the exact distribution of the t-statistics is unknown. Satterthwaite showed that these t-statistics approximately follow t-distributions, with non-integer degrees of freedom.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model1 &lt;-<span class="st"> </span><span class="kw">lmer</span>(<span class="dt">data=</span>music, na <span class="op">~</span><span class="st"> </span>orch <span class="op">+</span><span class="st"> </span>large <span class="op">+</span><span class="st"> </span>orch<span class="op">:</span>large <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>id))
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model1 &lt;-<span class="st"> </span><span class="kw">lmer</span>(<span class="dt">data=</span>music, na <span class="op">~</span><span class="st"> </span>orch <span class="op">+</span><span class="st"> </span>large <span class="op">+</span><span class="st"> </span>orch<span class="op">:</span>large <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>id), <span class="dt">REML=</span><span class="ot">TRUE</span>)
 <span class="kw">summary</span>(model1)</code></pre></div>
 <pre><code>Linear mixed model fit by REML. t-tests use Satterthwaite&#39;s method [
 lmerModLmerTest]
@@ -848,7 +848,7 @@ Y_{ij} &amp; = \alpha_{0}+\alpha\textrm{Orch}_{i}+\beta\textrm{LargeEns}_{ij} + 
 \end{align*}
 \]</span></p>
 <p>where <span class="math inline">\(u_i \sim\mathcal{N}(0,\sigma^2)\)</span>, and <span class="math inline">\(\epsilon_{ij} \sim\mathcal{N}(0,\sigma^2)\)</span>. We assume <span class="math inline">\(u_i\)</span> and <span class="math inline">\(\epsilon_{ij}\)</span> are independent.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model1b &lt;-<span class="st"> </span><span class="kw">lmer</span>(<span class="dt">data=</span>music, na <span class="op">~</span><span class="st"> </span>orch <span class="op">+</span><span class="st"> </span>large  <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>id))
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model1b &lt;-<span class="st"> </span><span class="kw">lmer</span>(<span class="dt">data=</span>music, na <span class="op">~</span><span class="st"> </span>orch <span class="op">+</span><span class="st"> </span>large  <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>id), <span class="dt">REML=</span><span class="ot">TRUE</span>)
 <span class="kw">summary</span>(model1b)</code></pre></div>
 <pre><code>Linear mixed model fit by REML. t-tests use Satterthwaite&#39;s method [
 lmerModLmerTest]
@@ -991,7 +991,7 @@ Y_{ij} &amp; = [\alpha_{0}+\alpha\textrm{Orch}_{i}+\beta\textrm{LargeEns}_{ij}]
 <div id="random-slopes-model-in-r" class="section level3">
 <h3><span class="header-section-number">3.3.5</span> Random Slopes Model in R</h3>
 <p>To fit the random slopes model in R, we write <code>(large | id)</code>, instead of <code>(1 | id)</code>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model2b &lt;-<span class="st"> </span><span class="kw">lmer</span>(<span class="dt">data=</span>music, na <span class="op">~</span><span class="st"> </span>orch <span class="op">+</span><span class="st"> </span>large  <span class="op">+</span><span class="st"> </span>(large <span class="op">|</span><span class="st"> </span>id))
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model2b &lt;-<span class="st"> </span><span class="kw">lmer</span>(<span class="dt">data=</span>music, na <span class="op">~</span><span class="st"> </span>orch <span class="op">+</span><span class="st"> </span>large  <span class="op">+</span><span class="st"> </span>(large <span class="op">|</span><span class="st"> </span>id), <span class="dt">REML=</span><span class="ot">TRUE</span>)
 <span class="kw">summary</span>(model2b)</code></pre></div>
 <pre><code>Linear mixed model fit by REML. t-tests use Satterthwaite&#39;s method [
 lmerModLmerTest]
@@ -1095,7 +1095,7 @@ Y_{ij} &amp; = [\alpha_{0}+\alpha_1\textrm{Orch}_{i}+\beta_0\textrm{LargeEns}_{i
 </div>
 <div id="random-slopes-model-with-interaction-in-r" class="section level3">
 <h3><span class="header-section-number">3.3.9</span> Random Slopes Model with Interaction in R</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model2 &lt;-<span class="st"> </span><span class="kw">lmer</span>(<span class="dt">data=</span>music, na <span class="op">~</span><span class="st"> </span>orch <span class="op">+</span><span class="st"> </span>large <span class="op">+</span><span class="st"> </span>orch<span class="op">:</span>large <span class="op">+</span><span class="st"> </span>(large <span class="op">|</span><span class="st"> </span>id))
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model2 &lt;-<span class="st"> </span><span class="kw">lmer</span>(<span class="dt">data=</span>music, na <span class="op">~</span><span class="st"> </span>orch <span class="op">+</span><span class="st"> </span>large <span class="op">+</span><span class="st"> </span>orch<span class="op">:</span>large <span class="op">+</span><span class="st"> </span>(large <span class="op">|</span><span class="st"> </span>id), <span class="dt">REML=</span><span class="ot">TRUE</span>)
 <span class="kw">summary</span>(model2)</code></pre></div>
 <pre><code>Linear mixed model fit by REML. t-tests use Satterthwaite&#39;s method [
 lmerModLmerTest]
@@ -1187,7 +1187,7 @@ Y_{ij}=\alpha_{0}+u_{i}+\epsilon_{ij}
 <div id="unconditional-means-model-in-r" class="section level3">
 <h3><span class="header-section-number">3.4.2</span> Unconditional Means Model in R</h3>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#Model A (Unconditional means model)</span>
-model.a &lt;-<span class="st"> </span><span class="kw">lmer</span>(na <span class="op">~</span><span class="st"> </span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>id), <span class="dt">REML =</span> T, <span class="dt">data =</span> music)
+model.a &lt;-<span class="st"> </span><span class="kw">lmer</span>(na <span class="op">~</span><span class="st"> </span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>id), <span class="dt">REML =</span> <span class="ot">TRUE</span>, <span class="dt">data =</span> music)
 <span class="kw">summary</span>(model.a)</code></pre></div>
 <pre><code>Linear mixed model fit by REML. t-tests use Satterthwaite&#39;s method [
 lmerModLmerTest]
@@ -1241,7 +1241,7 @@ Y_{ij} &amp; = [\alpha_{0}+\alpha_{1}\textrm{Orch}_{i}+\alpha_{2}\textrm{MPQnem}
 \end{align*}
 \]</span> where error terms are defined as before.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#Add negative emotionality as second L2 covariate</span>
-model3 &lt;-<span class="st"> </span><span class="kw">lmer</span>(na <span class="op">~</span><span class="st"> </span>orch <span class="op">+</span><span class="st"> </span>mpqnem <span class="op">+</span><span class="st"> </span>large  <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>id), <span class="dt">data =</span> music)
+model3 &lt;-<span class="st"> </span><span class="kw">lmer</span>(na <span class="op">~</span><span class="st"> </span>orch <span class="op">+</span><span class="st"> </span>mpqnem <span class="op">+</span><span class="st"> </span>large  <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>id), <span class="dt">data =</span> music, <span class="dt">REML=</span><span class="ot">TRUE</span>)
 <span class="kw">summary</span>(model3)</code></pre></div>
 <pre><code>Linear mixed model fit by REML. t-tests use Satterthwaite&#39;s method [
 lmerModLmerTest]
@@ -1280,7 +1280,7 @@ large  -0.031 -0.079 -0.073</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">music &lt;-<span class="st"> </span>music <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">mutate</span>(<span class="dt">cmpqnem =</span> mpqnem <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(mpqnem))</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Model E (Center baseline NEM in Model D)</span>
-model3c &lt;-<span class="st"> </span><span class="kw">lmer</span>(na <span class="op">~</span><span class="st"> </span>orch <span class="op">+</span><span class="st"> </span>cmpqnem <span class="op">+</span><span class="st"> </span>large <span class="op">+</span><span class="st">  </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>id), <span class="dt">REML =</span> T, <span class="dt">data =</span> music)
+model3c &lt;-<span class="st"> </span><span class="kw">lmer</span>(na <span class="op">~</span><span class="st"> </span>orch <span class="op">+</span><span class="st"> </span>cmpqnem <span class="op">+</span><span class="st"> </span>large <span class="op">+</span><span class="st">  </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>id),  <span class="dt">data =</span> music, <span class="dt">REML=</span><span class="ot">TRUE</span>)
 <span class="kw">summary</span>(model3c)</code></pre></div>
 <pre><code>Linear mixed model fit by REML. t-tests use Satterthwaite&#39;s method [
 lmerModLmerTest]
@@ -1398,7 +1398,7 @@ music &lt;-<span class="st"> </span>music <span class="op">%&gt;%</span>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">modelA &lt;-<span class="st"> </span><span class="kw">lmer</span>(na <span class="op">~</span><span class="st"> </span>previous <span class="op">+</span><span class="st"> </span>students <span class="op">+</span><span class="st"> </span>juried <span class="op">+</span><span class="st"> </span>
 <span class="st">    </span>public <span class="op">+</span><span class="st"> </span>solo <span class="op">+</span><span class="st"> </span>mpqpem <span class="op">+</span><span class="st"> </span>mpqab <span class="op">+</span><span class="st"> </span>orch <span class="op">+</span><span class="st"> </span>mpqnem <span class="op">+</span><span class="st"> </span>
 <span class="st">    </span>mpqnem<span class="op">:</span>solo <span class="op">+</span><span class="st"> </span>(previous <span class="op">+</span><span class="st"> </span>students <span class="op">+</span><span class="st"> </span>juried <span class="op">+</span><span class="st"> </span>
-<span class="st">    </span>public <span class="op">+</span><span class="st"> </span>solo <span class="op">|</span><span class="st"> </span>id), <span class="dt">REML =</span> T, <span class="dt">data =</span> music)
+<span class="st">    </span>public <span class="op">+</span><span class="st"> </span>solo <span class="op">|</span><span class="st"> </span>id), <span class="dt">data =</span> music, <span class="dt">REML=</span><span class="ot">TRUE</span>)
 <span class="kw">summary</span>(modelA)</code></pre></div>
 <pre><code>Linear mixed model fit by REML. t-tests use Satterthwaite&#39;s method [
 lmerModLmerTest]
@@ -1481,7 +1481,7 @@ Y_{ij} &amp; = [\alpha_{0}+\alpha_{1}\textrm{mpqpem}_{i} + \alpha_{2}\textrm{mpq
 <h3><span class="header-section-number">3.5.6</span> Fitting Model B in R</h3>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">modelB &lt;-<span class="st"> </span><span class="kw">lmer</span>(na <span class="op">~</span><span class="st"> </span>previous <span class="op">+</span><span class="st"> </span>students <span class="op">+</span><span class="st"> </span>juried <span class="op">+</span><span class="st"> </span>
 <span class="st">    </span>public <span class="op">+</span><span class="st"> </span>solo <span class="op">+</span><span class="st"> </span>mpqpem <span class="op">+</span><span class="st"> </span>mpqab <span class="op">+</span><span class="st"> </span>orch <span class="op">+</span><span class="st"> </span>mpqnem <span class="op">+</span><span class="st"> </span>
-<span class="st">    </span>mpqnem<span class="op">:</span>solo <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>id), <span class="dt">REML =</span> T, <span class="dt">data =</span> music)
+<span class="st">    </span>mpqnem<span class="op">:</span>solo <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>id), <span class="dt">data =</span> music, <span class="dt">REML=</span><span class="ot">TRUE</span>)
 <span class="kw">summary</span>(modelB)</code></pre></div>
 <pre><code>Linear mixed model fit by REML. t-tests use Satterthwaite&#39;s method [
 lmerModLmerTest]
@@ -1561,7 +1561,7 @@ Y_{ij} &amp; = [\alpha_{0}+\alpha_{1}\textrm{mpqpem}_{i} + \alpha_{2}\textrm{mpq
 \]</span></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">modelC &lt;-<span class="st"> </span><span class="kw">lmer</span>(na <span class="op">~</span><span class="st"> </span>previous <span class="op">+</span><span class="st"> </span>students <span class="op">+</span><span class="st"> </span>juried <span class="op">+</span><span class="st"> </span>
 <span class="st">    </span>public <span class="op">+</span><span class="st"> </span>solo <span class="op">+</span><span class="st"> </span>mpqpem <span class="op">+</span><span class="st"> </span>mpqnem <span class="op">+</span><span class="st"> </span>
-<span class="st">    </span>mpqnem<span class="op">:</span>solo <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>id), <span class="dt">REML =</span> T, <span class="dt">data =</span> music)
+<span class="st">    </span>mpqnem<span class="op">:</span>solo <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>id), <span class="dt">data =</span> music, <span class="dt">REML=</span><span class="ot">TRUE</span>)
 <span class="kw">summary</span>(modelC)</code></pre></div>
 <pre><code>Linear mixed model fit by REML. t-tests use Satterthwaite&#39;s method [
 lmerModLmerTest]

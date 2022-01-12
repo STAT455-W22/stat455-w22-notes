@@ -942,7 +942,7 @@ music <- music %>%
 
 ```{r, comment=NA}
 # Model E (Center baseline NEM in Model D)
-model3c <- lmer(na ~ orch + cmpqnem + large +  (1 | id), REML = T, data = music, REML=TRUE)
+model3c <- lmer(na ~ orch + cmpqnem + large +  (1 | id),  data = music, REML=TRUE)
 summary(model3c)
 ```
 
@@ -1051,7 +1051,7 @@ music <- music %>%
 modelA <- lmer(na ~ previous + students + juried + 
     public + solo + mpqpem + mpqab + orch + mpqnem + 
     mpqnem:solo + (previous + students + juried + 
-    public + solo | id), REML = T, data = music, REML=TRUE)
+    public + solo | id), data = music, REML=TRUE)
 summary(modelA)
 ```
 
@@ -1075,7 +1075,7 @@ This model accounts for random differences in performance anxiety between musici
 ```{r, comment=NA, warning=FALSE}
 modelB <- lmer(na ~ previous + students + juried + 
     public + solo + mpqpem + mpqab + orch + mpqnem + 
-    mpqnem:solo + (1 | id), REML = T, data = music, REML=TRUE)
+    mpqnem:solo + (1 | id), data = music, REML=TRUE)
 summary(modelB)
 ```
 
@@ -1102,7 +1102,7 @@ $$
 ```{r, comment=NA, warning=FALSE}
 modelC <- lmer(na ~ previous + students + juried + 
     public + solo + mpqpem + mpqnem + 
-    mpqnem:solo + (1 | id), REML = T, data = music, REML=TRUE)
+    mpqnem:solo + (1 | id), data = music, REML=TRUE)
 summary(modelC)
 ```
 
