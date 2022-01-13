@@ -526,8 +526,8 @@ knitr::include_graphics("Multi2.png")
 
 An experiment where treatments are assigned at different levels is called a **multilevel experiment**     
 
-* level 1 observational units are litters, and level 1 treatment is diets    
-* level 2 observational units are mice, and level 2 treatment is supplement   
+* level 1 observational units are mice, and level 1 treatment is supplement    
+* level 2 observational units are litters, and level 2 treatment is diet   
 
 
 
