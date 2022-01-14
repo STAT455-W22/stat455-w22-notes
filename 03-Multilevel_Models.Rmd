@@ -469,7 +469,7 @@ Y_{ij} & = \alpha_{0}+\alpha_{1}\textrm{Orch}_{i}+\beta_{0}\textrm{LargeEns}_{ij
 \end{align*}
 $$
 
-where $u_i \sim\mathcal{N}(0,\sigma^2)$, and $\epsilon_{ij} \sim\mathcal{N}(0,\sigma^2)$. We assume $u_i$ and $\epsilon_{ij}$ are independent. 
+where $u_i \sim\mathcal{N}(0,\sigma^2_u)$, and $\epsilon_{ij} \sim\mathcal{N}(0,\sigma^2)$. We assume $u_i$ and $\epsilon_{ij}$ are independent. 
 
 $u_i$ is a random effect corresponding to musician `id`. 
 
