@@ -23,7 +23,7 @@
 
 
 
-<meta name="date" content="2022-01-12" />
+<meta name="date" content="2022-01-14" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -910,11 +910,11 @@ large -0.182 -0.077</code></pre>
 <p>Alternatively, we might want to build a model that allows differences in negative affect between solos/small ensemble performances and large ensemble performances to vary randomly between performers.</p>
 <p>Recall the lattice plot:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Lattice plot for NA vs. Performance Type</span>
-<span class="kw">ggplot</span>(music,<span class="kw">aes</span>(<span class="dt">x=</span><span class="kw">factor</span>(perform_type),<span class="dt">y=</span>na)) <span class="op">+</span><span class="st"> </span>theme.<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">geom_dotplot</span>(<span class="dt">binaxis=</span><span class="st">&quot;y&quot;</span>,<span class="dt">stackdir=</span><span class="st">&quot;center&quot;</span>,<span class="dt">binwidth=</span><span class="dv">25</span><span class="op">/</span><span class="dv">30</span>) <span class="op">+</span><span class="st"> </span>
+<span class="kw">ggplot</span>(music,<span class="kw">aes</span>(<span class="dt">x=</span>large,<span class="dt">y=</span>na)) <span class="op">+</span><span class="st"> </span>theme.<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">geom_smooth</span>(<span class="dt">method=</span><span class="st">&quot;lm&quot;</span>,<span class="dt">color=</span><span class="st">&quot;black&quot;</span>) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>id,<span class="dt">ncol=</span><span class="dv">5</span>) <span class="op">+</span><span class="st">   </span>
-<span class="st">  </span><span class="kw">theme</span>(<span class="dt">strip.text.x=</span><span class="kw">element_blank</span>()) <span class="op">+</span><span class="st"> </span><span class="kw">coord_flip</span>() <span class="op">+</span>
-<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x=</span><span class="st">&quot;Performance Type&quot;</span>,<span class="dt">y=</span><span class="st">&quot;Negative Affect&quot;</span>)</code></pre></div>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">strip.text.x=</span><span class="kw">element_blank</span>()) <span class="op">+</span><span class="st"> </span><span class="kw">ylim</span>(<span class="dv">10</span>,<span class="dv">35</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x=</span><span class="st">&quot;Large Ensemble Performance&quot;</span>,<span class="dt">y=</span><span class="st">&quot;Negative Affect&quot;</span>) </code></pre></div>
 <p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-77-1.png" width="768" /></p>
 </div>
 <div id="random-slopes-model-1" class="section level3">
