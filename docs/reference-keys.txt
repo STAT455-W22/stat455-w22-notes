@@ -115,6 +115,8 @@ interpretations-for-model-without-interaction
 assumptions-in-first-mixed-effects-model
 random-slopes-model
 differences-in-large-vs-smallsolo
+illustration-of-previous-model
+illustration-of-new-random-slopes-model
 random-slopes-model-1
 specifying-distribution-of-random-effects
 random-slopes-model-with-error-term-distributions
@@ -123,7 +125,7 @@ more-on-interpreting-parameters
 model-comparisons
 random-slopes-model-with-interaction
 random-slopes-model-with-interaction-in-r
-formulation-of-random-slopes-model-with-interaction
+random-slope-vs-interaction-term
 unconditional-means-model
 unconditional-means-model-formulation
 unconditional-means-model-in-r

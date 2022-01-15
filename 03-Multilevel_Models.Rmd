@@ -533,7 +533,7 @@ Y_{ij} & = \alpha_{0}+\alpha\textrm{Orch}_{i}+\beta\textrm{LargeEns}_{ij} + u_{i
 \end{align*}
 $$
 
-where $u_i \sim\mathcal{N}(0,\sigma^2)$, and $\epsilon_{ij} \sim\mathcal{N}(0,\sigma^2)$. We assume $u_i$ and $\epsilon_{ij}$ are independent. 
+where $u_i \sim\mathcal{N}(0,\sigma_u^2)$, and $\epsilon_{ij} \sim\mathcal{N}(0,\sigma^2)$. We assume $u_i$ and $\epsilon_{ij}$ are independent. 
 
 
 ```{r, comment=NA}
@@ -561,7 +561,7 @@ There is more variability in negative affect between different performances by t
 
 This model assumes that:     
 
-* Expected negative affect differs between instrument types and performance types, and the effect of performing in a large ensemble is allowed to differ between instrumental and non-instrumental musicians.     
+* Expected negative affect differs between instrument types and performance types, and, in the case of the model with interaction, the effect of performing in a large ensemble is allowed to differ between musicians playing orchestral instruments and those playing and non-orchestral instruments .     
 
 * Negative affect scores for different musicians deviate from one another according to a normal distribution with mean 0 and standard deviation $\sigma_u$ (introducing correlation in error terms between performances by the same musician).   
 
@@ -591,9 +591,78 @@ ggplot(music,aes(x=large,y=na)) + theme.1 +
 
 
 
+### Illustration of Previous Model
+ 
+model1 allows base performance anxiety to vary between musicians, after accounting for fixed effects, but assumes that the effect of playing in a large ensemble is the same across musicians 
+
+This is shown in the following illustration, which includes effects for the 20 musicians playing non-orchestral instruments.
+
+The thick black line shows the expected performance anxiety, given by $\hat{Y} = 16.09 - 1.77\textrm{LargeEns}_{ij}$
+
+Deviations from the line are due to performer effect $u_i$.   
+
+
+```{r,echo=FALSE, warning=FALSE}
+
+model2c <- lmer(data=music, na ~ large + orch  + (large | id), REML=TRUE)
+
+
+# Plot random intercepts and slopes model
+ints.b = fixef(model2c)[1] + ranef(model2c)[[1]][1]
+slopes.b = fixef(model2c)[2] 
+modelb.plot = data.frame(id = music.lev2$id,
+                         ints.b = ints.b[[1]],
+                         slopes.b = slopes.b[[1]])
+modelb.plot <- modelb.plot[music.lev2$orch==0, ]
+ggplot() +  
+  geom_abline(data = modelb.plot, 
+              aes(intercept = ints.b, slope = slopes.b),
+              color="dark gray") +
+  geom_abline(aes(intercept = fixef(model2c)[1],
+                  slope = fixef(model2c)[2]), size = 1) +
+  theme.1 +
+  scale_x_continuous(name = "Large Ensemble indicator",
+                     limits = c(0,1), breaks = c(0,1)) +
+  scale_y_continuous(name="Negative Affect", limits=c(10,25))  
+```
+
+
+### Illustration of New (Random Slopes) Model
+
+An alternative model would allow not only base performance anxiety to vary between musicians, after accounting for fixed effects, but also allow the effect of playing in a large ensemble to vary between musicians. 
+
+This is illustrated in the graphic below. 
+
+```{r,echo=FALSE, warning=FALSE}
+
+model2c <- lmer(data=music, na ~ large + orch  + (large | id), REML=TRUE)
+
+
+# Plot random intercepts and slopes model
+ints.b = fixef(model2c)[1] + ranef(model2c)[[1]][1]
+slopes.b = fixef(model2c)[2] + ranef(model2c)[[1]][2]
+modelb.plot = data.frame(id = music.lev2$id,
+                         ints.b = ints.b[[1]],
+                         slopes.b = slopes.b[[1]])
+modelb.plot <- modelb.plot[music.lev2$orch==0, ]
+ggplot() +  
+  geom_abline(data = modelb.plot, 
+              aes(intercept = ints.b, slope = slopes.b),
+              color="dark gray") +
+  geom_abline(aes(intercept = fixef(model2c)[1],
+                  slope = fixef(model2c)[2]), size = 1) +
+  theme.1 +
+  scale_x_continuous(name = "Large Ensemble indicator",
+                     limits = c(0,1), breaks = c(0,1)) +
+  scale_y_continuous(name="Negative Affect", limits=c(10,25))  
+```
+
+Notice the lines are no longer parallel, and that musicians with larger negative affect scores to begin with tend to see bigger decreases when playing in a large ensemble.   
+
+
 ### Random Slopes Model
 
-To do this, we add a random effect for the slope (or in this case difference) between performance types for each performer.  
+We allow for differences in the effect of playing in a large ensemble, between musicians, by adding a random effect for the slope (or in this case difference) between performance types for each performer.  
 
 Model:   
 
@@ -712,17 +781,17 @@ summary(model2b)
 ### More on Interpreting Parameters
 
 
-Both $\beta=-1.74$ and $\rho_{uv}=-0.59$ seem to suggest negative relationships involving performance anxiety associated with playing in a large ensemble.
+Both $\beta=-1.75$ and $\rho_{uv}=-0.59$ seem to suggest negative relationships involving performance anxiety associated with playing in a large ensemble.
 
 Let's think carefully about what each of these tells us, and how they're different.    
 
-* $\beta=-1.74$ tells us that on average, a musicians's negative affect score for performance anxiety is expected to decrease by 1.74 points when playing in a large ensemble, compared to a solo or small ensemble performance.    
+* $\beta=-1.75$ tells us that on average, a musicians's negative affect score for performance anxiety is expected to decrease by 1.74 points when playing in a large ensemble, compared to a solo or small ensemble performance.    
 
-* $rho_uv = -0.59$ tells us that musicians who have higher performance anxiety than expected when playing a solo or small ensemble tend to see a bigger decrease in anxiety when playing in a large ensemble than those who have less anxiety playing in a solo or small ensemble.  
+* $\rho_{uv} = -0.59$ tells us that musicians who have higher performance anxiety than expected when playing a solo or small ensemble tend to see a bigger decrease in anxiety when playing in a large ensemble than those who have less anxiety playing in a solo or small ensemble.  
 
 **Illustration:**
 
-Each line represents one of the 37 musicians. The thick black line represents average change.   
+Each line represents one of the 20 musicians who play nonorchestral instruments. The thick black line represents the expectation function $\hat{Y} = 16.17 - 1.75\textrm{LargeEns}_{ij}$. 
 
 ```{r,echo=FALSE, warning=FALSE}
 
@@ -735,6 +804,7 @@ slopes.b = fixef(model2c)[2] + ranef(model2c)[[1]][2]
 modelb.plot = data.frame(id = music.lev2$id,
                          ints.b = ints.b[[1]],
                          slopes.b = slopes.b[[1]])
+modelb.plot <- modelb.plot[music.lev2$orch==0, ]
 ggplot() +  
   geom_abline(data = modelb.plot, 
               aes(intercept = ints.b, slope = slopes.b),
@@ -814,45 +884,46 @@ summary(model2)
 ```
 
 
-### Formulation of Random Slopes Model with Interaction
 
-Two level model for performance anxiety, using large ensemble and playing an orchestral instrument as explanatory variables. 
+### Random Slope vs Interaction Term
 
-- Level One:
+At first glance, a random slopes model might seem similar to a model with interaction. These are however, different things. 
 
-$$
-\begin{equation*}
-Y_{ij} = a_{i}+b_{i}\textrm{LargeEns}_{ij}+\epsilon_{ij}
-\end{equation*}
-$$
+An interaction model allows the **average** effect of an explanatory variable on the response to differ, depending on **values of other explanatory variables.**     
 
-- Level Two:
+A random slopes model allows the effect of an explanatory variable **on a single individual** to differ **from one individual to another**. 
 
-$$
-\begin{align*}
-a_{i} & = \alpha_{0}+\alpha_{1}\textrm{Orch}_{i}+u_{i} \\
-b_{i} & = \beta_{0}+\beta_{1}\textrm{Orch}_{i}+v_{i},
-\end{align*}
-$$
+Illustration: 
+```{r,echo=FALSE, warning=FALSE}
 
-**Parameters to Estimate:**
+model2d <- lmer(data=music, na ~ large + orch +large:orch + (large | id), REML=TRUE)
+orch<- music.lev2$orch
 
-**4 fixed effects:** $\alpha_{0}$, $\alpha_{1}$, $\beta_{0}$ and $\beta_{1}$. 
+# Plot random intercepts and slopes model
+ints.b = fixef(model2d)[1]+ fixef(model2d)[3]*orch + ranef(model2d)[[1]][1]
+slopes.b = fixef(model2d)[2] + fixef(model2d)[4]*orch + ranef(model2d)[[1]][2]
+modelb.plot = data.frame(id = music.lev2$id,
+                         ints.b = ints.b[[1]],
+                         slopes.b = slopes.b[[1]])
+#modelb.plot <- modelb.plot[music.lev2$orch==0, ]
+ggplot() +  
+  geom_abline(data = modelb.plot, 
+              aes(intercept = ints.b, slope = slopes.b, color=factor(orch)), alpha=0.5) +
+  geom_abline(aes(intercept = fixef(model2d)[1],
+                  slope = fixef(model2d)[2]), size = 3, color="red") +
+  geom_abline(aes(intercept = fixef(model2d)[1] + fixef(model2d)[3],
+                  slope = fixef(model2d)[2] + fixef(model2d)[4]), size = 3, color="turquoise") + 
+  theme.1 +
+  scale_x_continuous(name = "Large Ensemble indicator",
+                     limits = c(0,1), breaks = c(0,1)) +
+  scale_y_continuous(name="Negative Affect", limits=c(10,25))  
+```
 
-* Fixed effects are the fixed but unknown population effects associated with certain covariates. 
+* Interaction is illustrated by the fact that the thick blue line is steeper than the thick red line, indicating that on average, musician playing orchestral instruments experience larger decreases in performance anxiety than vocalists or keyboard instrumentalists. 
 
-* The intercepts and slopes for each subject from Level One, $a_{i}$ and $b_{i}$, don't need to be formally estimated. They serve to conceptually connect Level One with Level Two. 
+* The random effect for slope is illustrated by the fact that the thinner lines, representing individual musicians, have different slopes. Some musicians see greater decreases in performance anxiety than others when playing in a large ensemble. Often those with highest performance anxieties when playing solos or in small ensembles see the greatest decreses in anxiety when playing in a large ensemble.    
 
-Substituting the two Level Two equations into the Level One equation gives: 
 
-$$
-\begin{align*}
-Y_{ij} & = [\alpha_{0}+\alpha_{1}\textrm{Orch}_{i}+\beta_{0}\textrm{LargeEns}_{ij}+\beta_{1}\textrm{Orch}_{i}\textrm{LargeEns}_{ij}] \\
- & \textrm{} + [u_{i}+v_{i}\textrm{LargeEns}_{ij}+\epsilon_{ij}]
-\end{align*}
-$$
-
-Thus, we can think of a multilevel model as a model where the slope and intercept at level one are themselves linear functions of a variable at level 2.   
 
 
 ## Unconditional Means Model
