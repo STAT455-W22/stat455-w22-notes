@@ -1228,3 +1228,70 @@ After controlling for other factors we have evidence that:
  - After accounting for the effects of previous diary entries, audience, positive emotionality, absorption, and instrument, there is more variability in performance anxiety between performances by the same musician ($\sigma=4.39$), than in variability between performance anxiety of different musicians ($\sigma=1.36$)   
  
  
+ 
+ 
+## Conceptual Questions
+
+We create a variable to indicate the number of years older than 18 a performer is. 
+
+```{r}
+music <- music %>% mutate(ageover18 = age-18)
+```
+
+
+We now model performance anxiety, measured by `na` using the following model:
+
+$$
+\begin{align*}
+Y_{ij} & = [\alpha_{0}+\alpha_{1}\textrm{Ageover18}_{i}+\beta_{0}\textrm{Juried}_{ij}+\beta_{1}\textrm{Ageover18}_{i}\textrm{Juried}_{ij}] \\
+ & \textrm{} + [u_{i}+v_{i}\textrm{Juried}_{ij}+\epsilon_{ij}]
+\end{align*}
+$$
+
+where 
+$\epsilon_{ij}\sim N(0,\sigma^2)$, and 
+
+$$
+\begin{equation*} 
+\left[ \begin{array}{c}
+            u_{i} \\ v_{i}
+          \end{array}  \right] \sim N \left( \left[
+          \begin{array}{c}
+            0 \\ 0
+          \end{array} \right], \left[
+          \begin{array}{cc}
+            \sigma_{u}^{2} & \rho_{uv}\sigma_{u}\sigma_v \\
+            \rho_{uv}\sigma_{u}\sigma_v & \sigma_{v}^{2}
+          \end{array} \right] \right) 
+\end{equation*}
+$$
+ 
+
+R output for the model is shown below. 
+
+```{r}
+summary(lmer(data=music, na ~ ageover18 + juried + juried:ageover18 
+             + (public|id)), REML=TRUE)
+```
+
+1. Explain in words what we should conclude from each of the following facts:
+
+a. $\hat{\beta_0}$ is positive and the associated p-value is small.    
+b. $\hat{\beta_1}$ is negative and the associated p-value is small.    
+c. $\hat{\sigma} > \hat{\sigma_u}$     
+d. $\hat{\sigma_u}$ is about the same as  $\hat{\sigma_v}$    
+e. $\hat{\rho}_{uv}$ is negative     
+
+ 
+2. Explain in words what it would mean if the model parameter was equal to zero.    
+
+a. $\alpha_0$     
+b. $\alpha_1$      
+c. $\beta_0$     
+d. $\beta_1$     
+e. $\sigma_u$    
+f. $\sigma_v$      
+g. $\sigma$     
+h. $\rho_{uv}$      
+
+
