@@ -113,7 +113,8 @@ head(chart.long)
 
 We have a total of 1733 observation on 618 schools, observed over 3 years. Thus, we can analyze the data at two different levels. 
 
-**Levels**
+**Levels**      
+
 Level 2 - observations that pertain to a school and stay constant over time  (charter or non-charter, urban or rural, percent free and reduced lunch, percent special education)      
 
 Level 1 - observations that change over time (year and average math scores)    

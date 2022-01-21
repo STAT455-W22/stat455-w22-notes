@@ -1271,7 +1271,7 @@ R output for the model is shown below.
 
 ```{r}
 summary(lmer(data=music, na ~ ageover18 + juried + juried:ageover18 
-             + (public|id)), REML=TRUE)
+             + (juried|id)), REML=TRUE)
 ```
 
 1. Explain in words what we should conclude from each of the following facts:
@@ -1282,6 +1282,19 @@ c. $\hat{\sigma} > \hat{\sigma_u}$
 d. $\hat{\sigma_u}$ is about the same as  $\hat{\sigma_v}$    
 e. $\hat{\rho}_{uv}$ is negative     
 
+**Answers from 1-21 class**
+
+a)	Expected performance anxiety for 18 year olds is higher for juried performances than for nonjuried ones.  
+
+b)	The gap in perf. Anxiety between juried and nonjuried performances decreases as the performers get older.    
+
+c)	There is more variability between performances by the same musician than between nonjuried performances by different musicians, after accounting for age and type of performance.    
+
+d)	Variation in neg affect for nonjuried performances is similar to variation in change in neg. affect between juried and nonjuried performances.     
+
+e)	People who experience more p.a. for nonjuried performances have less increase in anxiety (maybe even decrease) when playing in a juried performance. 
+
+ 
  
 2. Explain in words what it would mean if the model parameter was equal to zero.    
 
