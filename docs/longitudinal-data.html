@@ -1,0 +1,1403 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 4 Longitudinal Data | Stat 455: Advanced Statistical Modeling Notes</title>
+  <meta name="description" content="Chapter 4 Longitudinal Data | Stat 455: Advanced Statistical Modeling Notes" />
+  <meta name="generator" content="bookdown 0.23 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 4 Longitudinal Data | Stat 455: Advanced Statistical Modeling Notes" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 4 Longitudinal Data | Stat 455: Advanced Statistical Modeling Notes" />
+  
+  
+  
+
+
+
+<meta name="date" content="2022-01-21" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="multilevel-models.html"/>
+
+<script src="libs/jquery-3.5.1/jquery-3.5.1.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Stat 455 Notes</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html"><i class="fa fa-check"></i><b>1</b> Review of Multiple Linear Regression</a><ul>
+<li class="chapter" data-level="1.1" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#exploratory-data-analysis"><i class="fa fa-check"></i><b>1.1</b> Exploratory Data Analysis</a><ul>
+<li class="chapter" data-level="1.1.1" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#kentucky-derby-data"><i class="fa fa-check"></i><b>1.1.1</b> Kentucky Derby Data</a></li>
+<li class="chapter" data-level="1.1.2" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#some-data-wrangling"><i class="fa fa-check"></i><b>1.1.2</b> Some Data Wrangling</a></li>
+<li class="chapter" data-level="1.1.3" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#univariate-graphical-summaries"><i class="fa fa-check"></i><b>1.1.3</b> Univariate Graphical Summaries</a></li>
+<li class="chapter" data-level="1.1.4" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#bivariate-graphical-summaries"><i class="fa fa-check"></i><b>1.1.4</b> Bivariate Graphical Summaries</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#simple-linear-regression-model"><i class="fa fa-check"></i><b>1.2</b> Simple Linear Regression Model</a><ul>
+<li class="chapter" data-level="1.2.1" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#model-for-winning-time-and-year"><i class="fa fa-check"></i><b>1.2.1</b> Model for Winning Time and Year</a></li>
+<li class="chapter" data-level="1.2.2" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#first-model-r-output"><i class="fa fa-check"></i><b>1.2.2</b> First Model R Output</a></li>
+<li class="chapter" data-level="1.2.3" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#checking-model-assumptions"><i class="fa fa-check"></i><b>1.2.3</b> Checking Model Assumptions</a></li>
+<li class="chapter" data-level="1.2.4" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#quadratic-term-for-year"><i class="fa fa-check"></i><b>1.2.4</b> Quadratic Term for Year</a></li>
+<li class="chapter" data-level="1.2.5" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#quadratic-model-in-r"><i class="fa fa-check"></i><b>1.2.5</b> Quadratic Model in R</a></li>
+<li class="chapter" data-level="1.2.6" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#quadratic-model-residual-plots"><i class="fa fa-check"></i><b>1.2.6</b> Quadratic Model Residual Plots</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#multiple-linear-regression-with-two-predictors"><i class="fa fa-check"></i><b>1.3</b> Multiple Linear Regression with Two Predictors</a><ul>
+<li class="chapter" data-level="1.3.1" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#model-with-year-and-fast-track"><i class="fa fa-check"></i><b>1.3.1</b> Model with Year and Fast Track</a></li>
+<li class="chapter" data-level="1.3.2" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#multiple-regression-model-in-r"><i class="fa fa-check"></i><b>1.3.2</b> Multiple Regression Model in R</a></li>
+<li class="chapter" data-level="1.3.3" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#confidence-intervals-from-mlr-model"><i class="fa fa-check"></i><b>1.3.3</b> Confidence Intervals from MLR Model</a></li>
+<li class="chapter" data-level="1.3.4" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#slopes-for-fast-non-fast-tracks"><i class="fa fa-check"></i><b>1.3.4</b> Slopes for Fast, non-Fast Tracks</a></li>
+<li class="chapter" data-level="1.3.5" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#mlr-model-with-interaction"><i class="fa fa-check"></i><b>1.3.5</b> MLR Model with Interaction</a></li>
+<li class="chapter" data-level="1.3.6" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#model-equations-for-fast-non-fast-tracks"><i class="fa fa-check"></i><b>1.3.6</b> Model Equations for Fast, Non-Fast Tracks</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#building-a-multiple-linear-regression-model"><i class="fa fa-check"></i><b>1.4</b> Building a Multiple Linear Regression Model</a><ul>
+<li class="chapter" data-level="1.4.1" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#model-building-considerations"><i class="fa fa-check"></i><b>1.4.1</b> Model Building Considerations</a></li>
+<li class="chapter" data-level="1.4.2" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#model-diagnostics"><i class="fa fa-check"></i><b>1.4.2</b> Model Diagnostics</a></li>
+<li class="chapter" data-level="1.4.3" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#three-possible-models"><i class="fa fa-check"></i><b>1.4.3</b> Three Possible Models</a></li>
+<li class="chapter" data-level="1.4.4" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#mlr-models-fit-in-r"><i class="fa fa-check"></i><b>1.4.4</b> MLR Models Fit in R</a></li>
+<li class="chapter" data-level="1.4.5" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#model-0a-output"><i class="fa fa-check"></i><b>1.4.5</b> Model 0A Output</a></li>
+<li class="chapter" data-level="1.4.6" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#model-0b-output"><i class="fa fa-check"></i><b>1.4.6</b> Model 0B Output</a></li>
+<li class="chapter" data-level="1.4.7" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#model-0c-output"><i class="fa fa-check"></i><b>1.4.7</b> Model 0C Output</a></li>
+<li class="chapter" data-level="1.4.8" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#goodness-of-fit-tests"><i class="fa fa-check"></i><b>1.4.8</b> Goodness of Fit Tests</a></li>
+<li class="chapter" data-level="1.4.9" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#anova-f-statistic"><i class="fa fa-check"></i><b>1.4.9</b> ANOVA F-Statistic</a></li>
+<li class="chapter" data-level="1.4.10" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#final-model-residual-plots"><i class="fa fa-check"></i><b>1.4.10</b> Final Model Residual Plots</a></li>
+<li class="chapter" data-level="1.4.11" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#overall-conclusions"><i class="fa fa-check"></i><b>1.4.11</b> Overall Conclusions</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html"><i class="fa fa-check"></i><b>2</b> Introduction to Correlated Data</a><ul>
+<li class="chapter" data-level="2.1" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#introduction-to-correlated-data-1"><i class="fa fa-check"></i><b>2.1</b> Introduction to Correlated Data</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#weight-gain-in-mice-experiment-design-1"><i class="fa fa-check"></i><b>2.1.1</b> Weight Gain in Mice: Experiment Design #1</a></li>
+<li class="chapter" data-level="2.1.2" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#mice-experiment-1-data"><i class="fa fa-check"></i><b>2.1.2</b> Mice Experiment 1 Data</a></li>
+<li class="chapter" data-level="2.1.3" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#a-naive-graphical-analysis"><i class="fa fa-check"></i><b>2.1.3</b> A Naive Graphical Analysis</a></li>
+<li class="chapter" data-level="2.1.4" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#a-more-informed-graphical-analysis"><i class="fa fa-check"></i><b>2.1.4</b> A More Informed Graphical Analysis</a></li>
+<li class="chapter" data-level="2.1.5" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#table-of-mean-weight-by-diet"><i class="fa fa-check"></i><b>2.1.5</b> Table of Mean Weight By Diet</a></li>
+<li class="chapter" data-level="2.1.6" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#table-of-mean-weight-by-diet-and-litter"><i class="fa fa-check"></i><b>2.1.6</b> Table of Mean Weight By Diet and Litter</a></li>
+<li class="chapter" data-level="2.1.7" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#assessing-evidence-of-differences"><i class="fa fa-check"></i><b>2.1.7</b> Assessing Evidence of Differences</a></li>
+<li class="chapter" data-level="2.1.8" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#an-improper-statistical-analysis"><i class="fa fa-check"></i><b>2.1.8</b> An Improper Statistical Analysis</a></li>
+<li class="chapter" data-level="2.1.9" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#a-more-appropriate-statistical-analysis"><i class="fa fa-check"></i><b>2.1.9</b> A More Appropriate Statistical Analysis</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#linear-mixed-effects-models"><i class="fa fa-check"></i><b>2.2</b> Linear Mixed Effects Models</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#llsr-model-for-mice-experiment"><i class="fa fa-check"></i><b>2.2.1</b> LLSR Model for Mice Experiment</a></li>
+<li class="chapter" data-level="2.2.2" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#model-accounting-for-correlation"><i class="fa fa-check"></i><b>2.2.2</b> Model Accounting For Correlation</a></li>
+<li class="chapter" data-level="2.2.3" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#questions-of-interest"><i class="fa fa-check"></i><b>2.2.3</b> Questions of Interest</a></li>
+<li class="chapter" data-level="2.2.4" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#fixed-and-random-effects"><i class="fa fa-check"></i><b>2.2.4</b> Fixed and Random Effects</a></li>
+<li class="chapter" data-level="2.2.5" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#fitting-the-model-in-r"><i class="fa fa-check"></i><b>2.2.5</b> Fitting the Model in R</a></li>
+<li class="chapter" data-level="2.2.6" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#why-not-fixed-effect-for-litter"><i class="fa fa-check"></i><b>2.2.6</b> Why Not Fixed Effect for Litter?</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#a-second-mice-experiment"><i class="fa fa-check"></i><b>2.3</b> A Second Mice Experiment</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#weight-gain-in-mice-experiment-2"><i class="fa fa-check"></i><b>2.3.1</b> Weight Gain in Mice: Experiment 2</a></li>
+<li class="chapter" data-level="2.3.2" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#mice-experiment-2-data"><i class="fa fa-check"></i><b>2.3.2</b> Mice Experiment 2 Data</a></li>
+<li class="chapter" data-level="2.3.3" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#a-naive-graphical-analysis-for-experiment-2"><i class="fa fa-check"></i><b>2.3.3</b> A Naive Graphical Analysis for Experiment 2</a></li>
+<li class="chapter" data-level="2.3.4" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#a-more-informed-graphical-analysis-for-experiment-2"><i class="fa fa-check"></i><b>2.3.4</b> A More Informed Graphical Analysis for Experiment 2</a></li>
+<li class="chapter" data-level="2.3.5" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#table-of-mean-weight-by-diet-for-experiment-2"><i class="fa fa-check"></i><b>2.3.5</b> Table of Mean Weight By Diet for Experiment 2</a></li>
+<li class="chapter" data-level="2.3.6" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#table-comparing-litters-means-by-diet-for-experiment-2"><i class="fa fa-check"></i><b>2.3.6</b> Table Comparing Litters Means by Diet for Experiment 2</a></li>
+<li class="chapter" data-level="2.3.7" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#an-inappropriate-model-for-the-second-design"><i class="fa fa-check"></i><b>2.3.7</b> An Inappropriate Model for the Second Design</a></li>
+<li class="chapter" data-level="2.3.8" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#a-more-appropriate-model-for-experiment-2"><i class="fa fa-check"></i><b>2.3.8</b> A More Appropriate Model for Experiment 2</a></li>
+<li class="chapter" data-level="2.3.9" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#model-for-litter-means"><i class="fa fa-check"></i><b>2.3.9</b> Model for Litter Means</a></li>
+<li class="chapter" data-level="2.3.10" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#fixed-effect-for-litter-in-experiment-2"><i class="fa fa-check"></i><b>2.3.10</b> Fixed Effect for Litter in Experiment 2</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#a-multilevel-experiment"><i class="fa fa-check"></i><b>2.4</b> A Multilevel Experiment</a><ul>
+<li class="chapter" data-level="2.4.1" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#experiment-2-illustration"><i class="fa fa-check"></i><b>2.4.1</b> Experiment 2 Illustration</a></li>
+<li class="chapter" data-level="2.4.2" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#experiment-with-variables-assigned-at-different-levels"><i class="fa fa-check"></i><b>2.4.2</b> Experiment with Variables Assigned at Different Levels</a></li>
+<li class="chapter" data-level="2.4.3" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#experiment-3-data"><i class="fa fa-check"></i><b>2.4.3</b> Experiment 3 Data</a></li>
+<li class="chapter" data-level="2.4.4" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#graphical-analysis-for-experiment-3"><i class="fa fa-check"></i><b>2.4.4</b> Graphical Analysis for Experiment 3</a></li>
+<li class="chapter" data-level="2.4.5" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#an-inappropriate-model-for-the-3rd-design"><i class="fa fa-check"></i><b>2.4.5</b> An Inappropriate Model for the 3rd Design</a></li>
+<li class="chapter" data-level="2.4.6" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#a-more-appropriate-model-for-experiment-3"><i class="fa fa-check"></i><b>2.4.6</b> A More Appropriate Model for Experiment 3</a></li>
+<li class="chapter" data-level="2.4.7" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#comparison-of-llsr-and-lme-models"><i class="fa fa-check"></i><b>2.4.7</b> Comparison of LLSR and LME Models</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="multilevel-models.html"><a href="multilevel-models.html"><i class="fa fa-check"></i><b>3</b> Multilevel Models</a><ul>
+<li class="chapter" data-level="3.1" data-path="multilevel-models.html"><a href="multilevel-models.html#music-performance-anxiety-study-data-and-exploratory-analysis"><i class="fa fa-check"></i><b>3.1</b> Music Performance Anxiety Study: Data and Exploratory Analysis</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="multilevel-models.html"><a href="multilevel-models.html#description-of-the-study"><i class="fa fa-check"></i><b>3.1.1</b> Description of the Study</a></li>
+<li class="chapter" data-level="3.1.2" data-path="multilevel-models.html"><a href="multilevel-models.html#variables"><i class="fa fa-check"></i><b>3.1.2</b> Variables</a></li>
+<li class="chapter" data-level="3.1.3" data-path="multilevel-models.html"><a href="multilevel-models.html#the-data"><i class="fa fa-check"></i><b>3.1.3</b> The Data</a></li>
+<li class="chapter" data-level="3.1.4" data-path="multilevel-models.html"><a href="multilevel-models.html#some-data-wrangling-1"><i class="fa fa-check"></i><b>3.1.4</b> Some Data Wrangling</a></li>
+<li class="chapter" data-level="3.1.5" data-path="multilevel-models.html"><a href="multilevel-models.html#multilevel-structure"><i class="fa fa-check"></i><b>3.1.5</b> Multilevel Structure</a></li>
+<li class="chapter" data-level="3.1.6" data-path="multilevel-models.html"><a href="multilevel-models.html#questions-of-interest-1"><i class="fa fa-check"></i><b>3.1.6</b> Questions of Interest</a></li>
+<li class="chapter" data-level="3.1.7" data-path="multilevel-models.html"><a href="multilevel-models.html#number-of-performances-by-musician"><i class="fa fa-check"></i><b>3.1.7</b> Number of Performances by Musician</a></li>
+<li class="chapter" data-level="3.1.8" data-path="multilevel-models.html"><a href="multilevel-models.html#number-of-performances-of-each-type"><i class="fa fa-check"></i><b>3.1.8</b> Number of Performances of Each Type</a></li>
+<li class="chapter" data-level="3.1.9" data-path="multilevel-models.html"><a href="multilevel-models.html#distribution-of-negative-affect-for-all-performances"><i class="fa fa-check"></i><b>3.1.9</b> Distribution of Negative Affect for All Performances</a></li>
+<li class="chapter" data-level="3.1.10" data-path="multilevel-models.html"><a href="multilevel-models.html#distribution-of-average-negative-affect-for-each-musician"><i class="fa fa-check"></i><b>3.1.10</b> Distribution of Average Negative Affect for each Musician</a></li>
+<li class="chapter" data-level="3.1.11" data-path="multilevel-models.html"><a href="multilevel-models.html#distribution-of-level-two-covariates"><i class="fa fa-check"></i><b>3.1.11</b> Distribution of Level Two Covariates</a></li>
+<li class="chapter" data-level="3.1.12" data-path="multilevel-models.html"><a href="multilevel-models.html#distributions-of-nem-pem-absorption"><i class="fa fa-check"></i><b>3.1.12</b> Distributions of NEM, PEM, Absorption</a></li>
+<li class="chapter" data-level="3.1.13" data-path="multilevel-models.html"><a href="multilevel-models.html#negative-affect-by-performance-type-audience-type-and-previous-performances"><i class="fa fa-check"></i><b>3.1.13</b> Negative Affect by Performance Type, Audience Type, and Previous Performances</a></li>
+<li class="chapter" data-level="3.1.14" data-path="multilevel-models.html"><a href="multilevel-models.html#lattice-plot-for-negative-affect-by-performance-type"><i class="fa fa-check"></i><b>3.1.14</b> Lattice Plot for Negative Affect by Performance Type</a></li>
+<li class="chapter" data-level="3.1.15" data-path="multilevel-models.html"><a href="multilevel-models.html#lattice-plot-for-negative-affect-by-audience-type"><i class="fa fa-check"></i><b>3.1.15</b> Lattice Plot for Negative Affect by Audience Type</a></li>
+<li class="chapter" data-level="3.1.16" data-path="multilevel-models.html"><a href="multilevel-models.html#lattice-plot-for-previous-performances-vs-negative-affect"><i class="fa fa-check"></i><b>3.1.16</b> Lattice Plot for Previous Performances vs Negative Affect</a></li>
+<li class="chapter" data-level="3.1.17" data-path="multilevel-models.html"><a href="multilevel-models.html#negative-affect-by-instrument-type"><i class="fa fa-check"></i><b>3.1.17</b> Negative Affect by Instrument Type</a></li>
+<li class="chapter" data-level="3.1.18" data-path="multilevel-models.html"><a href="multilevel-models.html#more-data-wrangling"><i class="fa fa-check"></i><b>3.1.18</b> More Data Wrangling</a></li>
+<li class="chapter" data-level="3.1.19" data-path="multilevel-models.html"><a href="multilevel-models.html#lattice-plot-for-large-ensemble-effect"><i class="fa fa-check"></i><b>3.1.19</b> Lattice Plot for Large Ensemble Effect</a></li>
+<li class="chapter" data-level="3.1.20" data-path="multilevel-models.html"><a href="multilevel-models.html#boxplots-for-orchestral-instrument-effect"><i class="fa fa-check"></i><b>3.1.20</b> Boxplots for Orchestral Instrument Effect</a></li>
+<li class="chapter" data-level="3.1.21" data-path="multilevel-models.html"><a href="multilevel-models.html#negative-affect-by-pem-nem-absorption"><i class="fa fa-check"></i><b>3.1.21</b> Negative Affect by PEM, NEM, Absorption</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="multilevel-models.html"><a href="multilevel-models.html#modeling-the-musician-data"><i class="fa fa-check"></i><b>3.2</b> Modeling the Musician Data</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="multilevel-models.html"><a href="multilevel-models.html#model-notation"><i class="fa fa-check"></i><b>3.2.1</b> Model Notation</a></li>
+<li class="chapter" data-level="3.2.2" data-path="multilevel-models.html"><a href="multilevel-models.html#llsr-model-clearly-inappropriate"><i class="fa fa-check"></i><b>3.2.2</b> LLSR Model (Clearly inappropriate)</a></li>
+<li class="chapter" data-level="3.2.3" data-path="multilevel-models.html"><a href="multilevel-models.html#llsr-model-output"><i class="fa fa-check"></i><b>3.2.3</b> LLSR Model Output</a></li>
+<li class="chapter" data-level="3.2.4" data-path="multilevel-models.html"><a href="multilevel-models.html#random-vs.-fixed-effects"><i class="fa fa-check"></i><b>3.2.4</b> Random vs. Fixed Effects</a></li>
+<li class="chapter" data-level="3.2.5" data-path="multilevel-models.html"><a href="multilevel-models.html#an-initial-linear-mixed-effect-model"><i class="fa fa-check"></i><b>3.2.5</b> An Initial Linear Mixed Effect Model</a></li>
+<li class="chapter" data-level="3.2.6" data-path="multilevel-models.html"><a href="multilevel-models.html#initial-mixed-effects-model-in-r"><i class="fa fa-check"></i><b>3.2.6</b> Initial Mixed Effects Model in R</a></li>
+<li class="chapter" data-level="3.2.7" data-path="multilevel-models.html"><a href="multilevel-models.html#mixed-effects-model-interpretations"><i class="fa fa-check"></i><b>3.2.7</b> Mixed Effects Model Interpretations</a></li>
+<li class="chapter" data-level="3.2.8" data-path="multilevel-models.html"><a href="multilevel-models.html#mixed-effects-model-without-interaction"><i class="fa fa-check"></i><b>3.2.8</b> Mixed Effects Model Without Interaction</a></li>
+<li class="chapter" data-level="3.2.9" data-path="multilevel-models.html"><a href="multilevel-models.html#interpretations-for-model-without-interaction"><i class="fa fa-check"></i><b>3.2.9</b> Interpretations for Model without Interaction</a></li>
+<li class="chapter" data-level="3.2.10" data-path="multilevel-models.html"><a href="multilevel-models.html#assumptions-in-first-mixed-effects-model"><i class="fa fa-check"></i><b>3.2.10</b> Assumptions in First Mixed Effects Model</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="multilevel-models.html"><a href="multilevel-models.html#random-slopes-model"><i class="fa fa-check"></i><b>3.3</b> Random Slopes Model</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="multilevel-models.html"><a href="multilevel-models.html#differences-in-large-vs-smallsolo"><i class="fa fa-check"></i><b>3.3.1</b> Differences in Large vs Small/Solo</a></li>
+<li class="chapter" data-level="3.3.2" data-path="multilevel-models.html"><a href="multilevel-models.html#illustration-of-previous-model"><i class="fa fa-check"></i><b>3.3.2</b> Illustration of Previous Model</a></li>
+<li class="chapter" data-level="3.3.3" data-path="multilevel-models.html"><a href="multilevel-models.html#illustration-of-new-random-slopes-model"><i class="fa fa-check"></i><b>3.3.3</b> Illustration of New (Random Slopes) Model</a></li>
+<li class="chapter" data-level="3.3.4" data-path="multilevel-models.html"><a href="multilevel-models.html#random-slopes-model-1"><i class="fa fa-check"></i><b>3.3.4</b> Random Slopes Model</a></li>
+<li class="chapter" data-level="3.3.5" data-path="multilevel-models.html"><a href="multilevel-models.html#specifying-distribution-of-random-effects"><i class="fa fa-check"></i><b>3.3.5</b> Specifying Distribution of Random Effects</a></li>
+<li class="chapter" data-level="3.3.6" data-path="multilevel-models.html"><a href="multilevel-models.html#random-slopes-model-with-error-term-distributions"><i class="fa fa-check"></i><b>3.3.6</b> Random Slopes Model with Error Term Distributions</a></li>
+<li class="chapter" data-level="3.3.7" data-path="multilevel-models.html"><a href="multilevel-models.html#random-slopes-model-in-r"><i class="fa fa-check"></i><b>3.3.7</b> Random Slopes Model in R</a></li>
+<li class="chapter" data-level="3.3.8" data-path="multilevel-models.html"><a href="multilevel-models.html#more-on-interpreting-parameters"><i class="fa fa-check"></i><b>3.3.8</b> More on Interpreting Parameters</a></li>
+<li class="chapter" data-level="3.3.9" data-path="multilevel-models.html"><a href="multilevel-models.html#model-comparisons"><i class="fa fa-check"></i><b>3.3.9</b> Model Comparisons</a></li>
+<li class="chapter" data-level="3.3.10" data-path="multilevel-models.html"><a href="multilevel-models.html#random-slopes-model-with-interaction"><i class="fa fa-check"></i><b>3.3.10</b> Random Slopes Model with Interaction</a></li>
+<li class="chapter" data-level="3.3.11" data-path="multilevel-models.html"><a href="multilevel-models.html#random-slopes-model-with-interaction-in-r"><i class="fa fa-check"></i><b>3.3.11</b> Random Slopes Model with Interaction in R</a></li>
+<li class="chapter" data-level="3.3.12" data-path="multilevel-models.html"><a href="multilevel-models.html#random-slope-vs-interaction-term"><i class="fa fa-check"></i><b>3.3.12</b> Random Slope vs Interaction Term</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="multilevel-models.html"><a href="multilevel-models.html#unconditional-means-model"><i class="fa fa-check"></i><b>3.4</b> Unconditional Means Model</a><ul>
+<li class="chapter" data-level="3.4.1" data-path="multilevel-models.html"><a href="multilevel-models.html#unconditional-means-model-formulation"><i class="fa fa-check"></i><b>3.4.1</b> Unconditional Means Model Formulation</a></li>
+<li class="chapter" data-level="3.4.2" data-path="multilevel-models.html"><a href="multilevel-models.html#unconditional-means-model-in-r"><i class="fa fa-check"></i><b>3.4.2</b> Unconditional Means Model in R</a></li>
+<li class="chapter" data-level="3.4.3" data-path="multilevel-models.html"><a href="multilevel-models.html#unconditional-means-model-interpretations"><i class="fa fa-check"></i><b>3.4.3</b> Unconditional Means Model Interpretations</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="multilevel-models.html"><a href="multilevel-models.html#building-a-multilevel-model"><i class="fa fa-check"></i><b>3.5</b> Building A Multilevel Model</a><ul>
+<li class="chapter" data-level="3.5.1" data-path="multilevel-models.html"><a href="multilevel-models.html#centering-covariates"><i class="fa fa-check"></i><b>3.5.1</b> Centering Covariates</a></li>
+<li class="chapter" data-level="3.5.2" data-path="multilevel-models.html"><a href="multilevel-models.html#a-possible-final-model"><i class="fa fa-check"></i><b>3.5.2</b> A Possible Final Model</a></li>
+<li class="chapter" data-level="3.5.3" data-path="multilevel-models.html"><a href="multilevel-models.html#more-data-wrangling-1"><i class="fa fa-check"></i><b>3.5.3</b> More Data Wrangling</a></li>
+<li class="chapter" data-level="3.5.4" data-path="multilevel-models.html"><a href="multilevel-models.html#fitting-model-a"><i class="fa fa-check"></i><b>3.5.4</b> Fitting Model A</a></li>
+<li class="chapter" data-level="3.5.5" data-path="multilevel-models.html"><a href="multilevel-models.html#a-model-without-random-slopes"><i class="fa fa-check"></i><b>3.5.5</b> A Model Without Random Slopes</a></li>
+<li class="chapter" data-level="3.5.6" data-path="multilevel-models.html"><a href="multilevel-models.html#fitting-model-b-in-r"><i class="fa fa-check"></i><b>3.5.6</b> Fitting Model B in R</a></li>
+<li class="chapter" data-level="3.5.7" data-path="multilevel-models.html"><a href="multilevel-models.html#one-more-possible-model"><i class="fa fa-check"></i><b>3.5.7</b> One More Possible Model</a></li>
+<li class="chapter" data-level="3.5.8" data-path="multilevel-models.html"><a href="multilevel-models.html#aic-and-bic-comparisons-for-models-b-and-c"><i class="fa fa-check"></i><b>3.5.8</b> AIC and BIC Comparisons for Models B and C</a></li>
+<li class="chapter" data-level="3.5.9" data-path="multilevel-models.html"><a href="multilevel-models.html#likelihood-ratio-test"><i class="fa fa-check"></i><b>3.5.9</b> Likelihood Ratio Test</a></li>
+<li class="chapter" data-level="3.5.10" data-path="multilevel-models.html"><a href="multilevel-models.html#final-conclusions"><i class="fa fa-check"></i><b>3.5.10</b> Final Conclusions</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="multilevel-models.html"><a href="multilevel-models.html#conceptual-questions"><i class="fa fa-check"></i><b>3.6</b> Conceptual Questions</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="longitudinal-data.html"><a href="longitudinal-data.html"><i class="fa fa-check"></i><b>4</b> Longitudinal Data</a><ul>
+<li class="chapter" data-level="4.1" data-path="longitudinal-data.html"><a href="longitudinal-data.html#charter-schools-exploratory-analysis"><i class="fa fa-check"></i><b>4.1</b> Charter Schools Exploratory Analysis</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="longitudinal-data.html"><a href="longitudinal-data.html#data"><i class="fa fa-check"></i><b>4.1.1</b> Data Organization</a></li>
+<li class="chapter" data-level="4.1.2" data-path="longitudinal-data.html"><a href="longitudinal-data.html#missing-data"><i class="fa fa-check"></i><b>4.1.2</b> Missing Data</a></li>
+<li class="chapter" data-level="4.1.3" data-path="longitudinal-data.html"><a href="longitudinal-data.html#convert-to-tidy-form"><i class="fa fa-check"></i><b>4.1.3</b> Convert to Tidy Form</a></li>
+<li class="chapter" data-level="4.1.4" data-path="longitudinal-data.html"><a href="longitudinal-data.html#exploratory-analyses-for-general-multilevel-models"><i class="fa fa-check"></i><b>4.1.4</b> Exploratory Analyses for General Multilevel Models</a></li>
+<li class="chapter" data-level="4.1.5" data-path="longitudinal-data.html"><a href="longitudinal-data.html#exploratory-analyses-for-longitudinal-data"><i class="fa fa-check"></i><b>4.1.5</b> Exploratory Analyses for Longitudinal Data</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="longitudinal-data.html"><a href="longitudinal-data.html#multilevel-longitudinal-models"><i class="fa fa-check"></i><b>4.2</b> Multilevel Longitudinal Models</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="longitudinal-data.html"><a href="longitudinal-data.html#unconditional-means-model-1"><i class="fa fa-check"></i><b>4.2.1</b> Unconditional Means Model</a></li>
+<li class="chapter" data-level="4.2.2" data-path="longitudinal-data.html"><a href="longitudinal-data.html#interpretations-in-unconditional-means-model"><i class="fa fa-check"></i><b>4.2.2</b> Interpretations in Unconditional Means Model</a></li>
+<li class="chapter" data-level="4.2.3" data-path="longitudinal-data.html"><a href="longitudinal-data.html#intraclass-correlation-coefficient"><i class="fa fa-check"></i><b>4.2.3</b> Intraclass Correlation Coefficient:</a></li>
+<li class="chapter" data-level="4.2.4" data-path="longitudinal-data.html"><a href="longitudinal-data.html#unconditional-growth-model"><i class="fa fa-check"></i><b>4.2.4</b> Unconditional Growth Model</a></li>
+<li class="chapter" data-level="4.2.5" data-path="longitudinal-data.html"><a href="longitudinal-data.html#interpretations-in-unconditional-growth-model"><i class="fa fa-check"></i><b>4.2.5</b> Interpretations in Unconditional Growth Model</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="longitudinal-data.html"><a href="longitudinal-data.html#quadratic-and-piecewise-linear-models"><i class="fa fa-check"></i><b>4.3</b> Quadratic and Piecewise Linear Models</a><ul>
+<li class="chapter" data-level="4.3.1" data-path="longitudinal-data.html"><a href="longitudinal-data.html#quadratic-trend-over-time"><i class="fa fa-check"></i><b>4.3.1</b> Quadratic Trend over Time</a></li>
+<li class="chapter" data-level="4.3.2" data-path="longitudinal-data.html"><a href="longitudinal-data.html#quadratic-model"><i class="fa fa-check"></i><b>4.3.2</b> Quadratic Model</a></li>
+<li class="chapter" data-level="4.3.3" data-path="longitudinal-data.html"><a href="longitudinal-data.html#quadratic-model-in-r-1"><i class="fa fa-check"></i><b>4.3.3</b> Quadratic Model in R</a></li>
+<li class="chapter" data-level="4.3.4" data-path="longitudinal-data.html"><a href="longitudinal-data.html#estimated-response-curve"><i class="fa fa-check"></i><b>4.3.4</b> Estimated Response Curve</a></li>
+<li class="chapter" data-level="4.3.5" data-path="longitudinal-data.html"><a href="longitudinal-data.html#linear-and-quadratic-error-terms"><i class="fa fa-check"></i><b>4.3.5</b> Linear and Quadratic Error Terms</a></li>
+<li class="chapter" data-level="4.3.6" data-path="longitudinal-data.html"><a href="longitudinal-data.html#model-with-many-random-terms-in-r"><i class="fa fa-check"></i><b>4.3.6</b> Model with Many Random Terms in R</a></li>
+<li class="chapter" data-level="4.3.7" data-path="longitudinal-data.html"><a href="longitudinal-data.html#only-a-linear-random-term"><i class="fa fa-check"></i><b>4.3.7</b> Only a Linear Random Term</a></li>
+<li class="chapter" data-level="4.3.8" data-path="longitudinal-data.html"><a href="longitudinal-data.html#comments-on-random-terms"><i class="fa fa-check"></i><b>4.3.8</b> Comments on Random Terms</a></li>
+<li class="chapter" data-level="4.3.9" data-path="longitudinal-data.html"><a href="longitudinal-data.html#model-comparison"><i class="fa fa-check"></i><b>4.3.9</b> Model Comparison</a></li>
+<li class="chapter" data-level="4.3.10" data-path="longitudinal-data.html"><a href="longitudinal-data.html#piecewise-linear-model"><i class="fa fa-check"></i><b>4.3.10</b> Piecewise Linear Model</a></li>
+<li class="chapter" data-level="4.3.11" data-path="longitudinal-data.html"><a href="longitudinal-data.html#piecewise-model-equation"><i class="fa fa-check"></i><b>4.3.11</b> Piecewise Model Equation</a></li>
+<li class="chapter" data-level="4.3.12" data-path="longitudinal-data.html"><a href="longitudinal-data.html#estimated-response-curve-1"><i class="fa fa-check"></i><b>4.3.12</b> Estimated Response Curve</a></li>
+<li class="chapter" data-level="4.3.13" data-path="longitudinal-data.html"><a href="longitudinal-data.html#comparing-quadratic-and-piecewise-models"><i class="fa fa-check"></i><b>4.3.13</b> Comparing Quadratic and Piecewise Models</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="longitudinal-data.html"><a href="longitudinal-data.html#building-to-a-final-model"><i class="fa fa-check"></i><b>4.4</b> Building to a Final Model</a><ul>
+<li class="chapter" data-level="4.4.1" data-path="longitudinal-data.html"><a href="longitudinal-data.html#uncontrolled-effects-of-school-type"><i class="fa fa-check"></i><b>4.4.1</b> Uncontrolled Effects of School Type</a></li>
+<li class="chapter" data-level="4.4.2" data-path="longitudinal-data.html"><a href="longitudinal-data.html#interpretations-for-school-type-model"><i class="fa fa-check"></i><b>4.4.2</b> Interpretations for School Type Model</a></li>
+<li class="chapter" data-level="4.4.3" data-path="longitudinal-data.html"><a href="longitudinal-data.html#illustration"><i class="fa fa-check"></i><b>4.4.3</b> Illustration</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="longitudinal-data.html"><a href="longitudinal-data.html#covariance-structure-among-observations"><i class="fa fa-check"></i><b>4.5</b> Covariance Structure among Observations</a><ul>
+<li class="chapter" data-level="4.5.1" data-path="longitudinal-data.html"><a href="longitudinal-data.html#standard-covariance-structure"><i class="fa fa-check"></i><b>4.5.1</b> Standard Covariance Structure</a></li>
+<li class="chapter" data-level="4.5.2" data-path="longitudinal-data.html"><a href="longitudinal-data.html#derivation-of-vary_i1-optional"><i class="fa fa-check"></i><b>4.5.2</b> Derivation of <span class="math inline">\(Var(Y_{i1})\)</span> (optional)</a></li>
+<li class="chapter" data-level="4.5.3" data-path="longitudinal-data.html"><a href="longitudinal-data.html#alternative-covariance-structure---unstructured"><i class="fa fa-check"></i><b>4.5.3</b> Alternative Covariance Structure - Unstructured</a></li>
+<li class="chapter" data-level="4.5.4" data-path="longitudinal-data.html"><a href="longitudinal-data.html#alternative-covariance-structure---compound-symmetry"><i class="fa fa-check"></i><b>4.5.4</b> Alternative Covariance Structure - Compound Symmetry</a></li>
+<li class="chapter" data-level="4.5.5" data-path="longitudinal-data.html"><a href="longitudinal-data.html#alternative-covariance-structure---autogregressive"><i class="fa fa-check"></i><b>4.5.5</b> Alternative Covariance Structure - Autogregressive</a></li>
+<li class="chapter" data-level="4.5.6" data-path="longitudinal-data.html"><a href="longitudinal-data.html#ar1-model-on-schools-data"><i class="fa fa-check"></i><b>4.5.6</b> AR(1) Model on Schools Data</a></li>
+<li class="chapter" data-level="4.5.7" data-path="longitudinal-data.html"><a href="longitudinal-data.html#non-longitudinal-multilevel-models"><i class="fa fa-check"></i><b>4.5.7</b> Non-longitudinal Multilevel Models</a></li>
+<li class="chapter" data-level="4.5.8" data-path="longitudinal-data.html"><a href="longitudinal-data.html#final-thoughts-regarding-covariance-structures"><i class="fa fa-check"></i><b>4.5.8</b> Final Thoughts Regarding Covariance Structures</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Stat 455: Advanced Statistical Modeling Notes</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="longitudinal-data" class="section level1">
+<h1><span class="header-section-number">Chapter 4</span> Longitudinal Data</h1>
+<p>These notes provide a summary of Chapter 9 in <a href="https://bookdown.org/roback/bookdown-BeyondMLR/">Beyond Multiple Linear Regression</a> by Roback and Legler. Much of the code that appears here comes from the textbook's <a href="https://github.com/proback/BeyondMLR/">Github repository</a>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Packages required for Chapter 9</span>
+<span class="kw">library</span>(MASS)
+<span class="kw">library</span>(gridExtra)  
+<span class="kw">library</span>(mnormt) 
+<span class="kw">library</span>(lme4) 
+<span class="kw">library</span>(lmerTest)
+<span class="kw">library</span>(knitr) 
+<span class="kw">library</span>(kableExtra)
+<span class="kw">library</span>(tidyverse)
+<span class="kw">library</span>(Hmisc)
+<span class="kw">library</span>(nlme)</code></pre></div>
+<p>In this chapter, we look at situations where data are collected on the same observational units over time.</p>
+<div id="charter-schools-exploratory-analysis" class="section level2">
+<h2><span class="header-section-number">4.1</span> Charter Schools Exploratory Analysis</h2>
+<p>Charter schools emerged in the 1990's as alternatives to traditional public schools. While they are publicly funded, charter schools are exempt from many regulations that traditional publics schools must follow. Thus, charters will often extend the school days or year and tend to offer non-traditional techniques and styles of instruction and learning.</p>
+<p>In this case study, we compare the performance of students in public schools and charter schools on the Minnesota Comprehensive Assessment, using data from 2008-2010.</p>
+<div id="data" class="section level3">
+<h3><span class="header-section-number">4.1.1</span> Data Organization</h3>
+<p>Key variables in <code>chart_wide_condense.csv</code> which we will examine to address the research questions above are:</p>
+<ul>
+<li><code>schoolid</code> = includes district type, district number, and school number</li>
+<li><code>schoolName</code> = name of school</li>
+<li><code>urban</code> = is the school in an urban (1) or rural (0) location?</li>
+<li><code>charter</code> = is the school a charter school (1) or a non-charter public school (0)?</li>
+<li><code>schPctsped</code> = proportion of special education students in a school (based on 2010 figures)</li>
+<li><code>schPctfree</code> = proportion of students who receive free or reduced lunches in a school (based on 2010 figures). This serves as a measure of poverty among school families.</li>
+<li><code>MathAvgScore.0</code> = average MCA-II math score for all sixth grade students in a school in 2008</li>
+<li><code>MathAvgScore.1</code> = average MCA-II math score for all sixth grade students in a school in 2009</li>
+<li><code>MathAvgScore.2</code> = average MCA-II math score for all sixth grade students in a school in 2010</li>
+</ul>
+<p>This data is stored in WIDE format, with one row per school.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#Getting started</span>
+chart.wide =<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;https://raw.githubusercontent.com/proback/BeyondMLR/master/data/chart_wide_condense.csv&quot;</span>) </code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(<span class="kw">head</span>(chart.wide))</code></pre></div>
+<pre><code>## # A tibble: 6 x 10
+##      X1 schoolid   schoolName urban charter schPctsped schPctfree MathAvgScore.0
+##   &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;dbl&gt;   &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;          &lt;dbl&gt;
+## 1     1 Dtype 1 D… RIPPLESID…     0       0     0.118       0.363           653.
+## 2     4 Dtype 1 D… WRENSHALL…     0       0     0.152       0.424           647.
+## 3     7 Dtype 1 D… CENTRAL M…     0       0     0.123       0.262           655.
+## 4    10 Dtype 1 D… SANDBURG …     1       0     0.0827      0.248           656.
+## 5    13 Dtype 1 D… OAK VIEW …     1       0     0.0954      0.142           658.
+## 6    16 Dtype 1 D… ROOSEVELT…     1       0     0.0886      0.241           656.
+## # … with 2 more variables: MathAvgScore.1 &lt;dbl&gt;, MathAvgScore.2 &lt;dbl&gt;</code></pre>
+<p><a href="https://github.com/proback/BeyondMLR/blob/master/data/chart_wide_condense.csv">Full Dataset</a></p>
+</div>
+<div id="missing-data" class="section level3">
+<h3><span class="header-section-number">4.1.2</span> Missing Data</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(chart.wide)</code></pre></div>
+<pre><code>##        X1           schoolid          schoolName            urban       
+##  Min.   :   1.0   Length:618         Length:618         Min.   :0.0000  
+##  1st Qu.: 446.8   Class :character   Class :character   1st Qu.:0.0000  
+##  Median : 885.5   Mode  :character   Mode  :character   Median :1.0000  
+##  Mean   : 885.8                                         Mean   :0.6165  
+##  3rd Qu.:1332.2                                         3rd Qu.:1.0000  
+##  Max.   :1733.0                                         Max.   :1.0000  
+##                                                                         
+##     charter         schPctsped        schPctfree     MathAvgScore.0 
+##  Min.   :0.0000   Min.   :0.00000   Min.   :0.0000   Min.   :625.7  
+##  1st Qu.:0.0000   1st Qu.:0.08815   1st Qu.:0.2694   1st Qu.:649.4  
+##  Median :0.0000   Median :0.12500   Median :0.4000   Median :652.8  
+##  Mean   :0.1181   Mean   :0.14356   Mean   :0.4509   Mean   :652.1  
+##  3rd Qu.:0.0000   3rd Qu.:0.17032   3rd Qu.:0.5830   3rd Qu.:655.9  
+##  Max.   :1.0000   Max.   :1.00000   Max.   :1.0000   Max.   :667.6  
+##                                                      NA&#39;s   :61     
+##  MathAvgScore.1  MathAvgScore.2 
+##  Min.   :621.4   Min.   :619.6  
+##  1st Qu.:649.0   1st Qu.:651.5  
+##  Median :653.1   Median :655.6  
+##  Mean   :652.1   Mean   :654.5  
+##  3rd Qu.:656.9   3rd Qu.:658.8  
+##  Max.   :666.4   Max.   :673.3  
+##  NA&#39;s   :46      NA&#39;s   :14</code></pre>
+<ul>
+<li>There are 61 missing values for MathAvgScore.0, 46 for MathAvgScore.1, and 14 for MathAvgScore.2.</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(<span class="kw">complete.cases</span>(chart.wide))</code></pre></div>
+<pre><code>## [1] 540</code></pre>
+<ul>
+<li>540 of the schools have complete data on all variables, while 78 have at least one missing value.</li>
+</ul>
+<p><strong>Approaches for Handling Missing Data</strong></p>
+<ol style="list-style-type: decimal">
+<li><p><strong>Complete Case Analysis</strong> - Include only schools with complete data. While easy, this means throwing away 78 of 618 schools (12.6%). Also, schools with missing values could be systematicall different than those with observed data, so ignoring them might lead to improper conclusions.</p></li>
+<li><p><strong>Last observation carried forward</strong> - Use only the last recorded score for each school. A conservative approach sometimes used in clinical trials. Assumes that a school's most recent score is representative of later missing scores. Information about trajectories over time is thrown away.</p></li>
+<li><p><strong>Imputation of missing observations</strong> - &quot;fill in&quot; missing observations, using information from observed data, then run analysis. Risks include misrepresenting missing observations and overstating precision in final results.</p></li>
+<li><p><strong>Multilevel methods</strong> - use available data to estimate patterns over time by school and combine in a way that recognizes that time trends for schools with complete data are more precise than time trends for schools with fewer measurements.</p></li>
+</ol>
+<p>We will approach this problem using multilevel methods.</p>
+</div>
+<div id="convert-to-tidy-form" class="section level3">
+<h3><span class="header-section-number">4.1.3</span> Convert to Tidy Form</h3>
+<p>First, we will convert the data to <code>long</code> (or in this case <code>tidy</code>) form.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#Getting started-2</span>
+<span class="co"># Create data frame in LONG form (one obs per school-year)</span>
+<span class="co">#   chart.long is 1854x10 with 121 NAs for MathAvgScore</span>
+select &lt;-<span class="st"> </span>dplyr<span class="op">::</span>select
+chart.long &lt;-<span class="st"> </span>chart.wide <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">pivot_longer</span>(<span class="dt">cols=</span>MathAvgScore.<span class="dv">0</span><span class="op">:</span>MathAvgScore.<span class="dv">2</span>, 
+               <span class="dt">names_to =</span> <span class="st">&quot;key&quot;</span>,  <span class="co"># years since 2008</span>
+               <span class="dt">values_to =</span> <span class="st">&quot;MathAvgScore&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">separate</span>(key, <span class="dt">into =</span> <span class="kw">c</span>(<span class="st">&quot;name&quot;</span>, <span class="st">&quot;year08&quot;</span>), <span class="dt">sep =</span> <span class="st">&quot;</span><span class="ch">\\</span><span class="st">.&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(<span class="op">-</span><span class="kw">c</span>(<span class="st">&quot;X1&quot;</span>, <span class="st">&quot;name&quot;</span>)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">arrange</span>(schoolid, year08) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">year08 =</span> <span class="kw">as.numeric</span>(year08))
+<span class="kw">head</span>(chart.long)</code></pre></div>
+<pre><code>## # A tibble: 6 x 8
+##   schoolid   schoolName  urban charter schPctsped schPctfree year08 MathAvgScore
+##   &lt;chr&gt;      &lt;chr&gt;       &lt;dbl&gt;   &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;  &lt;dbl&gt;        &lt;dbl&gt;
+## 1 Dtype 1 D… RIPPLESIDE…     0       0      0.118      0.363      0         653.
+## 2 Dtype 1 D… RIPPLESIDE…     0       0      0.118      0.363      1         657.
+## 3 Dtype 1 D… RIPPLESIDE…     0       0      0.118      0.363      2         653.
+## 4 Dtype 1 D… WRENSHALL …     0       0      0.152      0.424      0         647.
+## 5 Dtype 1 D… WRENSHALL …     0       0      0.152      0.424      1         645.
+## 6 Dtype 1 D… WRENSHALL …     0       0      0.152      0.424      2         652.</code></pre>
+</div>
+<div id="exploratory-analyses-for-general-multilevel-models" class="section level3">
+<h3><span class="header-section-number">4.1.4</span> Exploratory Analyses for General Multilevel Models</h3>
+<p>We have a total of 1733 observation on 618 schools, observed over 3 years. Thus, we can analyze the data at two different levels.</p>
+<p><strong>Levels</strong> Level 2 - observations that pertain to a school and stay constant over time (charter or non-charter, urban or rural, percent free and reduced lunch, percent special education)</p>
+<p>Level 1 - observations that change over time (year and average math scores)</p>
+<p>We calculate the average math score across the three years, and also add indicator variables for whether the school was in an urban setting, and whether it was a charter school.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#Getting started-3</span>
+<span class="co"># Add average across all years for each school for EDA plots</span>
+chart.means &lt;-<span class="st"> </span>chart.long <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">group_by</span>(schoolid) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">mean3yr =</span> <span class="kw">mean</span>(MathAvgScore, <span class="dt">na.rm=</span>T))
+chart.wide &lt;-<span class="st"> </span>chart.wide <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">urban0 =</span> <span class="kw">ifelse</span>(urban<span class="op">==</span><span class="dv">1</span>, <span class="st">&quot;urban&quot;</span>, <span class="st">&quot;rural&quot;</span>),
+         <span class="dt">charter0 =</span> <span class="kw">ifelse</span>(charter<span class="op">==</span><span class="dv">1</span>, <span class="st">&quot;charter&quot;</span>, 
+                           <span class="st">&quot;public non-charter&quot;</span>)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">left_join</span>(chart.means, <span class="dt">by=</span><span class="st">&quot;schoolid&quot;</span>)</code></pre></div>
+<p>Histogram of mean sixth grade MCA math test scores over the years 2008-2010 for 618 Minnesota schools.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">###histogram of mean math scores (1 obs per school)
+<span class="kw">ggplot</span>(<span class="dt">data=</span>chart.wide,<span class="kw">aes</span>(<span class="dt">x=</span>mean3yr)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth=</span><span class="dv">5</span>,<span class="dt">color=</span><span class="st">&quot;black&quot;</span>,<span class="dt">fill=</span><span class="st">&quot;white&quot;</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Mean Math Scores by School&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Frequency&quot;</span>)</code></pre></div>
+<p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-107-1.png" width="576" /></p>
+<p>Boxplots of categorical Level Two covariates vs. average MCA math scores. Plot (a) shows charter vs. public non-charter schools, while plot (b) shows urban vs. rural schools.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">charter.school &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data =</span> chart.wide, 
+    <span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">factor</span>(charter0), <span class="dt">y =</span> mean3yr)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_boxplot</span>() <span class="op">+</span><span class="st"> </span><span class="kw">coord_flip</span>()  <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Mean Math Scores by School&quot;</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">labs</span>(<span class="dt">title=</span><span class="st">&quot;(a)&quot;</span>)
+urban.school &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data =</span> chart.wide, 
+    <span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">factor</span>(urban0), <span class="dt">y =</span> mean3yr)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_boxplot</span>() <span class="op">+</span><span class="st"> </span><span class="kw">coord_flip</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Mean Math Scores by School&quot;</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">labs</span>(<span class="dt">title=</span><span class="st">&quot;(b)&quot;</span>)
+<span class="kw">grid.arrange</span>(charter.school,urban.school,<span class="dt">ncol=</span><span class="dv">1</span>,<span class="dt">nrow=</span><span class="dv">2</span>)</code></pre></div>
+<p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-108-1.png" width="576" /></p>
+<p>Scatterplots of average MCA math scores by (a) percent free and reduced lunch, (b) percent special education.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">PctFree.school &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data =</span> chart.wide, 
+    <span class="kw">aes</span>(<span class="dt">x =</span> schPctfree, <span class="dt">y =</span> mean3yr)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_point</span>()  <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">se=</span><span class="ot">FALSE</span>,<span class="dt">method=</span><span class="st">&quot;lm&quot;</span>,<span class="dt">color=</span><span class="st">&quot;red&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Percent Free/Reduced Lunch&quot;</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Mean Math Scores</span><span class="ch">\n</span><span class="st">by School&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">labs</span>(<span class="dt">title=</span><span class="st">&quot;(a)&quot;</span>)
+PctSped.school &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data =</span> chart.wide, 
+    <span class="kw">aes</span>(<span class="dt">x =</span> schPctsped, <span class="dt">y =</span> mean3yr)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">se=</span><span class="ot">FALSE</span>,<span class="dt">method=</span><span class="st">&quot;lm&quot;</span>,<span class="dt">color=</span><span class="st">&quot;red&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Percent Special Ed&quot;</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Mean Math Scores</span><span class="ch">\n</span><span class="st">by School&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">labs</span>(<span class="dt">title=</span><span class="st">&quot;(b)&quot;</span>)
+
+<span class="kw">grid.arrange</span>(PctFree.school, PctSped.school, <span class="dt">ncol =</span> <span class="dv">2</span>)</code></pre></div>
+<p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-109-1.png" width="576" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">chart.wide <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(charter) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarise</span>(<span class="dt">Percent_Free_Red_Lunch =</span> <span class="kw">mean</span>(schPctfree),
+                                               <span class="dt">Percent_Special_Ed =</span> <span class="kw">mean</span>(schPctsped),
+                                               <span class="dt">Mean_Math_Score =</span> <span class="kw">mean</span>(mean3yr),
+                                               <span class="dt">N=</span><span class="kw">n</span>())</code></pre></div>
+<pre><code>## # A tibble: 2 x 5
+##   charter Percent_Free_Red_Lunch Percent_Special_Ed Mean_Math_Score     N
+##     &lt;dbl&gt;                  &lt;dbl&gt;              &lt;dbl&gt;           &lt;dbl&gt; &lt;int&gt;
+## 1       0                  0.433              0.143            653.   545
+## 2       1                  0.585              0.151            648.    73</code></pre>
+</div>
+<div id="exploratory-analyses-for-longitudinal-data" class="section level3">
+<h3><span class="header-section-number">4.1.5</span> Exploratory Analyses for Longitudinal Data</h3>
+<p>We use lattice plots and spaghetti plots to examine the change in scores over time for various schools.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">smallchart.long &lt;-<span class="st"> </span><span class="kw">filter</span>(chart.long, <span class="kw">row_number</span>() <span class="op">&lt;=</span><span class="st"> </span><span class="dv">72</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#Lattice plots</span>
+<span class="co">#  First change names of Central and Chaska</span>
+smallchart.long<span class="op">$</span>schoolName[<span class="dv">7</span><span class="op">:</span><span class="dv">9</span>]=<span class="st">&quot;CENTRAL108&quot;</span>
+smallchart.long<span class="op">$</span>schoolName[<span class="dv">37</span><span class="op">:</span><span class="dv">39</span>]=<span class="st">&quot;CHASKAEAST&quot;</span>
+smallchart.long<span class="op">$</span>schoolName[<span class="dv">40</span><span class="op">:</span><span class="dv">42</span>]=<span class="st">&quot;CHASKAWEST&quot;</span>
+smallchart.long<span class="op">$</span>schoolName[<span class="dv">64</span><span class="op">:</span><span class="dv">66</span>]=<span class="st">&quot;CENTRAL13&quot;</span></code></pre></div>
+<p>Lattice plot by school of math scores over time with linear fit for the first 24 schools in the data set.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(smallchart.long, <span class="kw">aes</span>(<span class="dt">x =</span> year08, <span class="dt">y =</span> MathAvgScore)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">geom_line</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>schoolName,<span class="dt">ncol=</span><span class="dv">6</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="dt">limits=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">2</span>), <span class="dt">breaks=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">2</span>)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">limits=</span><span class="kw">c</span>(<span class="dv">640</span>,<span class="dv">665</span>)) <span class="op">+</span><span class="st"> </span><span class="kw">theme</span>(<span class="dt">strip.text.x=</span><span class="kw">element_blank</span>()) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x=</span><span class="st">&quot;Years since 2008&quot;</span>,<span class="dt">y=</span><span class="st">&quot;Math Scores&quot;</span>)</code></pre></div>
+<p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-113-1.png" width="576" /></p>
+<p>We select a sampe of 73 non-charter schools (the number of charter schools), and compare scores over time.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">27</span>)  <span class="co">#pulls same random sample every time</span>
+wide.charter &lt;-<span class="st"> </span>chart.wide <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(charter<span class="op">==</span><span class="dv">1</span>)  <span class="co">#dataframe with just charter schools</span>
+
+<span class="co"># select a sample of public schools with size equal to number of charter schools</span>
+samp =<span class="st"> </span><span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(chart.wide<span class="op">$</span>charter<span class="op">==</span><span class="dv">0</span>), <span class="dt">size=</span><span class="kw">dim</span>(wide.charter)[<span class="dv">1</span>])
+wide.public &lt;-<span class="st"> </span>chart.wide <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(charter <span class="op">==</span><span class="st"> </span><span class="dv">0</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">sample_n</span>( <span class="kw">dim</span>(wide.charter)[<span class="dv">1</span>] )
+sampdata &lt;-<span class="st"> </span><span class="kw">bind_rows</span>(wide.charter, wide.public) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>X1) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">vars =</span> <span class="kw">row_number</span>())   <span class="co"># Just use numbers 1-146 as school ids</span>
+
+<span class="co">#convert to long form</span>
+sampdata.l &lt;-<span class="st"> </span>sampdata <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">pivot_longer</span>(<span class="dt">names_to =</span> <span class="st">&quot;key&quot;</span>, <span class="dt">values_to =</span> <span class="st">&quot;MathAvgScore&quot;</span>, <span class="dt">cols=</span>MathAvgScore.<span class="dv">0</span><span class="op">:</span>MathAvgScore.<span class="dv">2</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">separate</span>(key, <span class="dt">into =</span> <span class="kw">c</span>(<span class="st">&quot;name&quot;</span>, <span class="st">&quot;year08&quot;</span>), <span class="dt">sep =</span> <span class="st">&quot;</span><span class="ch">\\</span><span class="st">.&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>name) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">arrange</span>(charter, vars, year08) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">year08 =</span> <span class="kw">as.numeric</span>(year08))</code></pre></div>
+<p>Spaghetti (or trellis) plots showing time trends for each school by school type, for a random sample of charter schools (left) and public non-charter schools (right), with overall fits using loess (bold).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">##Spaghetti Plots
+<span class="co">#get rid of NA data</span>
+newsampdata.l &lt;-<span class="st"> </span>sampdata.l <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">na.omit</span>()
+
+<span class="kw">ggplot</span>(newsampdata.l, <span class="kw">aes</span>(<span class="dt">x =</span> year08, <span class="dt">y =</span> MathAvgScore)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">group=</span>schoolid),<span class="dt">color=</span><span class="st">&quot;grey&quot;</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">facet_grid</span>(.<span class="op">~</span>charter0) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_smooth</span>(<span class="kw">aes</span>(<span class="dt">group=</span><span class="dv">1</span>),<span class="dt">color=</span><span class="st">&quot;black&quot;</span>,<span class="dt">size=</span><span class="dv">1</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x=</span><span class="st">&quot;Years since 2008&quot;</span>,<span class="dt">y=</span><span class="st">&quot;Math Scores&quot;</span>) </code></pre></div>
+<p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-115-1.png" width="576" /></p>
+<p>Spaghetti (or trellis) plots showing time trends for each school by quartiles of percent free and reduced lunch, with loess fits.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># divide into quartiles</span>
+newsampdata.l &lt;-<span class="st"> </span>newsampdata.l <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">splitup =</span> <span class="kw">paste</span>(<span class="st">&quot;Quartile&quot;</span>, 
+                         <span class="kw">as.numeric</span>(<span class="kw">cut2</span>(schPctfree, <span class="dt">g=</span><span class="dv">4</span>))))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(newsampdata.l,<span class="kw">aes</span>(<span class="dt">x=</span>year08,<span class="dt">y=</span>MathAvgScore)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">group=</span>schoolid),<span class="dt">color=</span><span class="st">&quot;grey&quot;</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method=</span><span class="st">&quot;loess&quot;</span>,<span class="dt">color=</span><span class="st">&quot;black&quot;</span>,<span class="dt">se=</span><span class="ot">FALSE</span>,<span class="dt">size=</span>.<span class="dv">75</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">facet_grid</span>(<span class="op">~</span>splitup) <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x=</span><span class="st">&quot;Years since 2008&quot;</span>,<span class="dt">y=</span><span class="st">&quot;Math Scores&quot;</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="dt">limits=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">2</span>), <span class="dt">breaks=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">2</span>)) </code></pre></div>
+<p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-117-1.png" width="960" /></p>
+<ul>
+<li><p>charter schools had math scores that were lower on average than public non-charter schools and more variable.</p></li>
+<li><p>Public non-charter schools have higher scores across all years; both school types show little growth between 2008 and 2009, but greater growth between 2009 and 2010, especially charter schools.</p></li>
+<li><p>Schools with lower percentages of free and reduced lunch students tend to have higher math scores and less variability. Across all levels of free and reduced lunch, we see greater gains between 2009 and 2010 than between 2008 and 2009.</p></li>
+</ul>
+</div>
+</div>
+<div id="multilevel-longitudinal-models" class="section level2">
+<h2><span class="header-section-number">4.2</span> Multilevel Longitudinal Models</h2>
+<div id="unconditional-means-model-1" class="section level3">
+<h3><span class="header-section-number">4.2.1</span> Unconditional Means Model</h3>
+<ul>
+<li>begin with <strong>unconditional means model</strong>, (no predictors at any level).</li>
+<li>assess the amount of variation at each level, compare variability within school to variability between schools.</li>
+</ul>
+<p>Define <span class="math inline">\(Y_{ij}\)</span> as the MCA-II math score from school <span class="math inline">\(i\)</span> and year <span class="math inline">\(j\)</span>.</p>
+<p><span class="math display">\[
+\begin{equation*}
+Y _{ij} = \alpha_{0} + u_{i} + \epsilon_{ij} \textrm{ with } u_{i} \sim N(0, \sigma^2_u) \textrm{ and } \epsilon_{ij} \sim N(0, \sigma^2)
+\end{equation*}
+\]</span></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#Model A (Unconditional means model)</span>
+model.a &lt;-<span class="st"> </span><span class="kw">lmer</span>(MathAvgScore<span class="op">~</span><span class="st"> </span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span><span class="op">|</span>schoolid), 
+                <span class="dt">REML=</span>T, <span class="dt">data=</span>chart.long)
+<span class="kw">summary</span>(model.a)</code></pre></div>
+<pre><code>## Linear mixed model fit by REML. t-tests use Satterthwaite&#39;s method [
+## lmerModLmerTest]
+## Formula: MathAvgScore ~ 1 + (1 | schoolid)
+##    Data: chart.long
+## 
+## REML criterion at convergence: 10530.1
+## 
+## Scaled residuals: 
+##     Min      1Q  Median      3Q     Max 
+## -3.1567 -0.4948  0.0137  0.5130  3.5689 
+## 
+## Random effects:
+##  Groups   Name        Variance Std.Dev.
+##  schoolid (Intercept) 41.87    6.471   
+##  Residual             10.57    3.251   
+## Number of obs: 1733, groups:  schoolid, 618
+## 
+## Fixed effects:
+##             Estimate Std. Error       df t value            Pr(&gt;|t|)    
+## (Intercept) 652.7460     0.2726 591.6845    2395 &lt;0.0000000000000002 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+</div>
+<div id="interpretations-in-unconditional-means-model" class="section level3">
+<h3><span class="header-section-number">4.2.2</span> Interpretations in Unconditional Means Model</h3>
+<ul>
+<li><p><span class="math inline">\(\widehat{\alpha}_{0}\)</span> = 652.7 = the mean math score across all schools and all years</p></li>
+<li><p><span class="math inline">\(\widehat{\sigma}_u\)</span>= 41.9 = the standard deviation in average math scores (averaging across the tree years), for different schools (tells us on average, how much do average scores differ between schools?)</p></li>
+<li><p><span class="math inline">\(\widehat{\sigma}\)</span>= 3.25 = the standard deviation in math scores for the same school between different years (tells us how much scores vary from year to year in the same school)</p></li>
+</ul>
+</div>
+<div id="intraclass-correlation-coefficient" class="section level3">
+<h3><span class="header-section-number">4.2.3</span> Intraclass Correlation Coefficient:</h3>
+<p><span class="math display">\[
+\begin{equation*}
+\widehat{\rho}=\frac{\widehat{\sigma}^2_u}{\widehat{\sigma}^2_u + \widehat{\sigma}^2} = \frac{41.869}{41.869+10.571}= 0.798
+\end{equation*}
+\]</span></p>
+<p>79.8% of the total variation in math scores is attributable to differences among schools rather than changes over time within schools. We can also say that the average correlation for any pair of responses from the same school is 0.798.</p>
+</div>
+<div id="unconditional-growth-model" class="section level3">
+<h3><span class="header-section-number">4.2.4</span> Unconditional Growth Model</h3>
+<p>The second model in most multilevel contexts introduces a covariate at Level One. With longitudinal data, this covariate is time. There are still no predictors at Level Two.</p>
+<p>This model is then called the <strong>unconditional growth model</strong>, and allows us to assess how much of the within-school variability can be attributed to systematic changes over time.</p>
+<p>We include a random slope term to allow the change in scores from year to year to vary between schools.</p>
+<p>Let <span class="math inline">\(Y_{ij}\)</span> be the math score of the <span class="math inline">\(i^{th}\)</span> school in year <span class="math inline">\(j\)</span>. Then we can model the linear change in math test scores over time for School <span class="math inline">\(i\)</span> according to Model B:</p>
+<p><span class="math display">\[
+\begin{equation*}
+Y_{ij}=\alpha_{0} + \beta_{0}\textrm{Year08}_{ij}+u_{i}+v_{i}\textrm{Year08}_{ij} + \epsilon_{ij}
+\end{equation*}
+\]</span></p>
+<p>where <span class="math inline">\(\epsilon_{ij}\sim N(0,\sigma^2)\)</span> and</p>
+<p><span class="math display">\[
+ \left[ \begin{array}{c}
+            u_{i} \\ v_{i}
+          \end{array}  \right] \sim N \left( \left[
+          \begin{array}{c}
+            0 \\ 0
+          \end{array} \right], \left[
+          \begin{array}{cc}
+            \sigma_{u}^{2} &amp; \\
+            \rho_{uv}\sigma_{u}\sigma_{v} &amp; \sigma_{v}^{2}
+          \end{array} \right] \right) . 
+\]</span></p>
+<ul>
+<li><p><span class="math inline">\(\alpha_0\)</span> is the average math score in 2008.</p></li>
+<li><p><span class="math inline">\(\beta_0\)</span> is the slope relating average math score to time, that is the mean change in math scores from one year to the next.</p></li>
+<li><p><span class="math inline">\(u_i\)</span> is a random effect capturing how individual schools 2008 scores vary from the overall average.</p></li>
+<li><p><span class="math inline">\(v_i\)</span> is a random effect capturing how slopes for individual schools vary from the average slope.</p></li>
+<li><p><span class="math inline">\(\sigma_u\)</span> quantifies the amount of variability between scores in different schools in 2008.</p></li>
+<li><p><span class="math inline">\(\sigma_v\)</span> quantifies the amount of variability in average year-to-year change between schools.</p></li>
+<li><p><span class="math inline">\(\sigma\)</span> quantifies the variability in test scores within the same school</p></li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#Model B (Unconditional growth)</span>
+model.b &lt;-<span class="st"> </span><span class="kw">lmer</span>(MathAvgScore<span class="op">~</span><span class="st"> </span>year08 <span class="op">+</span><span class="st"> </span>(year08<span class="op">|</span>schoolid), 
+  <span class="dt">REML=</span>T, <span class="dt">data=</span>chart.long)
+<span class="kw">summary</span>(model.b)</code></pre></div>
+<pre><code>Linear mixed model fit by REML. t-tests use Satterthwaite&#39;s method [
+lmerModLmerTest]
+Formula: MathAvgScore ~ year08 + (year08 | schoolid)
+   Data: chart.long
+
+REML criterion at convergence: 10339.5
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-3.1579 -0.4668  0.0180  0.4596  3.4972 
+
+Random effects:
+ Groups   Name        Variance Std.Dev. Corr
+ schoolid (Intercept) 39.4410  6.2802       
+          year08       0.1105  0.3325   0.72
+ Residual              8.8200  2.9699       
+Number of obs: 1733, groups:  schoolid, 618
+
+Fixed effects:
+             Estimate Std. Error        df t value            Pr(&gt;|t|)    
+(Intercept) 651.40766    0.27934 565.22114 2331.96 &lt;0.0000000000000002 ***
+year08        1.26495    0.08997 537.98738   14.06 &lt;0.0000000000000002 ***
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+Correlation of Fixed Effects:
+       (Intr)
+year08 -0.234</code></pre>
+</div>
+<div id="interpretations-in-unconditional-growth-model" class="section level3">
+<h3><span class="header-section-number">4.2.5</span> Interpretations in Unconditional Growth Model</h3>
+<p>From this output, we obtain estimates of our six model parameters:</p>
+<ul>
+<li><span class="math inline">\(\widehat{\alpha}_{0}\)</span> = 651.4 = the mean math score for the population of schools in 2008.</li>
+<li><span class="math inline">\(\widehat{\beta}_{0}\)</span> = 1.26 = the mean yearly change in math test scores for the population during the three-year observation period.</li>
+<li><span class="math inline">\(\widehat{\sigma}_u\)</span> = 6.28 = the standard deviation in math scores between schools in 2008</li>
+<li><span class="math inline">\(\widehat{\sigma}_v\)</span> = 0.33 = the standard deviation in rates of change in math scores during the three-year observation period.</li>
+<li><span class="math inline">\(\widehat{\sigma}\)</span> = 2.97 = the standard deviation in scores within the same school.<br />
+</li>
+<li><span class="math inline">\(\widehat{\rho}_{uv}\)</span> = 0.72 = the correlation in schools' 2008 math score and their rate of change in scores between 2008 and 2010.</li>
+</ul>
+<p>Schools had a mean math test score of 651.4 in 2008 and their mean test scores tended to increase by 1.26 points per year over the three-year observation period.</p>
+<p>Since <span class="math inline">\(\widehat{\beta}_{0}&gt;0\)</span> and <span class="math inline">\(\rho_{uv} &gt; 0\)</span>, we can conclude that on average, math scores increased from 2008-2010, and that schools with higher math scores in 2008 saw bigger increases than those with lower scores in 2008.</p>
+</div>
+</div>
+<div id="quadratic-and-piecewise-linear-models" class="section level2">
+<h2><span class="header-section-number">4.3</span> Quadratic and Piecewise Linear Models</h2>
+<div id="quadratic-trend-over-time" class="section level3">
+<h3><span class="header-section-number">4.3.1</span> Quadratic Trend over Time</h3>
+<p>Since our exploratory data analysis revealed a possible nonlinear trend, we might consider adding a quadratic term for year.</p>
+<p>When squaring a variable, it's helpful to center it first.</p>
+<p>We create a centered variable <code>yearc</code> by subtracting 1 from <code>year08</code>. (So 2008 is denoted -1, 2009 is denoted 0, and 2010 is denoted 1).</p>
+<p>Then, we create a varaible <code>yearc2</code> that is the square of this variable.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#center year and calculate year^2</span>
+chart.long &lt;-<span class="st"> </span>chart.long <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">yearc =</span> year08 <span class="op">-</span><span class="st"> </span><span class="dv">1</span>, 
+         <span class="dt">yearc2 =</span> yearc <span class="op">^</span><span class="st"> </span><span class="dv">2</span>)</code></pre></div>
+</div>
+<div id="quadratic-model" class="section level3">
+<h3><span class="header-section-number">4.3.2</span> Quadratic Model</h3>
+<p>We'll include a random intercept term <span class="math inline">\(u_i\)</span> modeling random differences between schools.</p>
+<p>Model: <span class="math display">\[
+Y_{ij}=\alpha_{0}+\beta_{0}\textrm{YearC}_{ij}+\gamma_{0}\textrm{YearC}^{2}_{ij} + u_i + \epsilon_{ij}
+\]</span></p>
+<p>where <span class="math inline">\(u_i\sim\mathcal{N}(0, \sigma^2_u)\)</span> and <span class="math inline">\(\epsilon_{ij}\sim\mathcal{N}(0, \sigma^2)\)</span></p>
+</div>
+<div id="quadratic-model-in-r-1" class="section level3">
+<h3><span class="header-section-number">4.3.3</span> Quadratic Model in R</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Modeling quadratic time trend</span>
+model.b1 &lt;-<span class="st"> </span><span class="kw">lmer</span>(MathAvgScore<span class="op">~</span><span class="st"> </span>yearc <span class="op">+</span><span class="st"> </span>yearc2 <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span><span class="op">|</span>schoolid), 
+  <span class="dt">REML=</span>T, <span class="dt">data=</span>chart.long)
+<span class="kw">summary</span>(model.b1)</code></pre></div>
+<pre><code>Linear mixed model fit by REML. t-tests use Satterthwaite&#39;s method [
+lmerModLmerTest]
+Formula: MathAvgScore ~ yearc + yearc2 + (1 | schoolid)
+   Data: chart.long
+
+REML criterion at convergence: 10298.2
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-3.2125 -0.4756  0.0088  0.4687  3.4954 
+
+Random effects:
+ Groups   Name        Variance Std.Dev.
+ schoolid (Intercept) 43.050   6.561   
+ Residual              8.523   2.919   
+Number of obs: 1733, groups:  schoolid, 618
+
+Fixed effects:
+              Estimate Std. Error         df  t value             Pr(&gt;|t|)    
+(Intercept)  651.94235    0.29229  768.06158 2230.448 &lt; 0.0000000000000002 ***
+yearc          1.26993    0.08758 1107.30220   14.501 &lt; 0.0000000000000002 ***
+yearc2         1.06841    0.15046 1098.25375    7.101     0.00000000000222 ***
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+Correlation of Fixed Effects:
+       (Intr) yearc 
+yearc  -0.011       
+yearc2 -0.350 -0.016</code></pre>
+<p>The small p-value on the <code>yearc2</code> line provides evidence of a quadratic relationship between year and test scores.</p>
+</div>
+<div id="estimated-response-curve" class="section level3">
+<h3><span class="header-section-number">4.3.4</span> Estimated Response Curve</h3>
+<p><span class="math display">\[E(Y)_{ij} = 652 + 1.27(\textrm{YearC}) + 1.07(\textrm{YearC})^2
+\]</span></p>
+<p>Where <span class="math inline">\(\textrm{YearC}=\textrm{Year}-2009\)</span>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data=</span>chart.long, <span class="kw">aes</span>(<span class="dt">x=</span>yearc, <span class="dt">y=</span>MathAvgScore)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">stat_smooth</span>(<span class="dt">method=</span><span class="st">&quot;lm&quot;</span>, <span class="dt">se=</span><span class="ot">TRUE</span>, <span class="dt">fill=</span><span class="ot">NA</span>, <span class="dt">formula=</span>y <span class="op">~</span><span class="st"> </span><span class="kw">poly</span>(x, <span class="dv">2</span>, <span class="dt">raw=</span><span class="ot">TRUE</span>),<span class="dt">colour=</span><span class="st">&quot;red&quot;</span>)</code></pre></div>
+<p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-122-1.png" width="576" /></p>
+<p>There is more growth, on average, between 2009 and 2010, than between 2008 and 2009.</p>
+</div>
+<div id="linear-and-quadratic-error-terms" class="section level3">
+<h3><span class="header-section-number">4.3.5</span> Linear and Quadratic Error Terms</h3>
+<p>The previous model assumes that there are differences in average math scores between schools, but that year-to-year change in scores is the same between schools.</p>
+<p>If we wanted to allow year-to-year change to vary between schools, we could add random effects associated with linear and quadratic change.</p>
+<p>One option would be to assume the intercept, linear term, and quadratic term differ between schools, i.e.</p>
+<ul>
+<li>Level One: <span class="math display">\[
+\begin{align*}
+Y_{ij} &amp; =(\alpha_{0} + u_{i})+(\beta_{0} + v_{i})\textrm{Year08}_{ij}+ (\gamma_{0} + w_{i})\textrm{Year08}^{2}_{ij} + \epsilon_{ij} \\
+&amp; =\alpha_{0} +\beta_{0}\textrm{Year08}_{ij}+ \gamma_{0}\textrm{Year08}^{2}_{ij} + u_{i} + v_{i}\textrm{Year08}_{ij} + w_{i}\textrm{Year08}^{2}_{ij} + \epsilon_{ij}
+\end{align*}
+\]</span> where <span class="math inline">\(\epsilon_{ij}\sim N(0,\sigma^2)\)</span> and</li>
+</ul>
+<p><span class="math display">\[ \left[ \begin{array}{c}
+            u_{i} \\ v_{i} \\ w_{i}
+          \end{array}  \right] \sim N \left( \left[
+          \begin{array}{c}
+            0 \\ 0 \\ 0
+          \end{array} \right], \left[
+          \begin{array}{ccc}
+            \sigma_{u}^{2} &amp; &amp; \\
+            \rho_{uv}\sigma_{u}\sigma_{v} &amp; \sigma_{v}^{2} &amp; \\
+            \rho_{uw}\sigma_{u}\sigma_{w} &amp; \rho_{vw}\sigma_{v}\sigma_{w} &amp; \sigma_{w}^{2}
+          \end{array} \right] \right) . \]</span></p>
+</div>
+<div id="model-with-many-random-terms-in-r" class="section level3">
+<h3><span class="header-section-number">4.3.6</span> Model with Many Random Terms in R</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Modeling quadratic time trend</span>
+model.b2 &lt;-<span class="st"> </span><span class="kw">lmer</span>(MathAvgScore<span class="op">~</span><span class="st"> </span>yearc <span class="op">+</span><span class="st"> </span>yearc2 <span class="op">+</span><span class="st"> </span>((yearc2 <span class="op">+</span><span class="st"> </span>yearc) <span class="op">|</span>schoolid), 
+  <span class="dt">REML=</span>T, <span class="dt">data=</span>chart.long)</code></pre></div>
+<pre><code>Error: number of observations (=1733) &lt;= number of random effects (=1854) for term ((yearc2 + yearc) | schoolid); the random-effects parameters and the residual variance (or scale parameter) are probably unidentifiable</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(model.b2)</code></pre></div>
+<pre><code>Error in summary(model.b2): object &#39;model.b2&#39; not found</code></pre>
+<p>We now have 6 variance components (<span class="math inline">\(\sigma_u\)</span>, <span class="math inline">\(\sigma_v\)</span>, <span class="math inline">\(\sigma_w\)</span>, <span class="math inline">\(\rho_u\)</span>, <span class="math inline">\(\rho_v\)</span>, <span class="math inline">\(\rho_w\)</span>) and only three observations at level 2. In order to obtain estimates, we need at least as many observations as parameters being estimated. Hence, this model doesn't work.</p>
+</div>
+<div id="only-a-linear-random-term" class="section level3">
+<h3><span class="header-section-number">4.3.7</span> Only a Linear Random Term</h3>
+<p>We could try a model of the form</p>
+<p><span class="math display">\[
+\begin{equation*}
+Y_{ij}=\alpha_{0} + \beta_{0}\textrm{Year08}_{ij} + \gamma_{0}\textrm{Year08}_{ij}^2 +u_{i}+v_{i}\textrm{Year08}_{ij} + \epsilon_{ij}
+\end{equation*}
+\]</span></p>
+<p>where <span class="math inline">\(\epsilon_{ij}\sim N(0,\sigma^2)\)</span> and</p>
+<p><span class="math display">\[
+ \left[ \begin{array}{c}
+            u_{i} \\ v_{i}
+          \end{array}  \right] \sim N \left( \left[
+          \begin{array}{c}
+            0 \\ 0
+          \end{array} \right], \left[
+          \begin{array}{cc}
+            \sigma_{u}^{2} &amp; \\
+            \rho_{uv}\sigma_{u}\sigma_{v} &amp; \sigma_{v}^{2}
+          \end{array} \right] \right) . 
+\]</span></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Modeling quadratic time trend</span>
+model.b3 &lt;-<span class="st"> </span><span class="kw">lmer</span>(MathAvgScore<span class="op">~</span><span class="st"> </span>yearc <span class="op">+</span><span class="st"> </span>yearc2 <span class="op">+</span><span class="st"> </span>((yearc) <span class="op">|</span>schoolid), 
+  <span class="dt">REML=</span>T, <span class="dt">data=</span>chart.long)
+<span class="kw">summary</span>(model.b3)</code></pre></div>
+<pre><code>Linear mixed model fit by REML. t-tests use Satterthwaite&#39;s method [
+lmerModLmerTest]
+Formula: MathAvgScore ~ yearc + yearc2 + ((yearc) | schoolid)
+   Data: chart.long
+
+REML criterion at convergence: 10290.2
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-3.1287 -0.4581  0.0137  0.4552  3.3694 
+
+Random effects:
+ Groups   Name        Variance Std.Dev. Corr
+ schoolid (Intercept) 42.8574  6.5466       
+          yearc        0.5002  0.7073   0.36
+ Residual              8.0548  2.8381       
+Number of obs: 1733, groups:  schoolid, 618
+
+Fixed effects:
+             Estimate Std. Error        df  t value             Pr(&gt;|t|)    
+(Intercept) 651.94300    0.29028 749.70653 2245.890 &lt; 0.0000000000000002 ***
+yearc         1.25402    0.09001 537.52786   13.933 &lt; 0.0000000000000002 ***
+yearc2        1.07136    0.14634 550.10556    7.321    0.000000000000879 ***
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+Correlation of Fixed Effects:
+       (Intr) yearc 
+yearc   0.094       
+yearc2 -0.342 -0.017</code></pre>
+</div>
+<div id="comments-on-random-terms" class="section level3">
+<h3><span class="header-section-number">4.3.8</span> Comments on Random Terms</h3>
+<p>It's unclear what including a random term for linear effect without a random term for quadratic effect would give us - how would we interpret this?</p>
+<p>In practice, we often use longitudinal models with higher order fixed effects, but only random intercepts. Such a model allows for a separate effect between schools (in this case), while minimizing parameters that must be estimated.</p>
+</div>
+<div id="model-comparison" class="section level3">
+<h3><span class="header-section-number">4.3.9</span> Model Comparison</h3>
+<p>We compare the quadratic model with the random intercept to the quadratic model with random intercept and linear terms.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Intercept only</span>
+<span class="kw">BIC</span>(model.b1)</code></pre></div>
+<pre><code>## [1] 10335.45</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Intercept and linear term</span>
+<span class="kw">BIC</span>(model.b3)</code></pre></div>
+<pre><code>## [1] 10342.4</code></pre>
+<p>The model with only the random intercept term is preferred.</p>
+</div>
+<div id="piecewise-linear-model" class="section level3">
+<h3><span class="header-section-number">4.3.10</span> Piecewise Linear Model</h3>
+<p>Another frequently used approach to modeling time effects is the <strong>piecewise linear model</strong>.</p>
+<p>This model assumes that average scores change linearly from year to year, but that the slope between the first and second years might be different than the slope between the second and third years</p>
+<p>We create a binary variables to indicate whether the score came from the 08-09 or 09-10 school years.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Modeling piecewise linear time trend with 3 time points</span>
+<span class="co">#   (won&#39;t work in general)</span>
+chart.long &lt;-<span class="st"> </span>chart.long <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">year0809 =</span> <span class="kw">ifelse</span>(year08<span class="op">==</span><span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>),
+         <span class="dt">year0810 =</span> <span class="kw">ifelse</span>(year08<span class="op">==</span><span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">0</span>))
+<span class="kw">head</span>(chart.long)</code></pre></div>
+<pre><code>## # A tibble: 6 x 12
+##   schoolid   schoolName  urban charter schPctsped schPctfree year08 MathAvgScore
+##   &lt;chr&gt;      &lt;chr&gt;       &lt;dbl&gt;   &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;  &lt;dbl&gt;        &lt;dbl&gt;
+## 1 Dtype 1 D… RIPPLESIDE…     0       0      0.118      0.363      0         653.
+## 2 Dtype 1 D… RIPPLESIDE…     0       0      0.118      0.363      1         657.
+## 3 Dtype 1 D… RIPPLESIDE…     0       0      0.118      0.363      2         653.
+## 4 Dtype 1 D… WRENSHALL …     0       0      0.152      0.424      0         647.
+## 5 Dtype 1 D… WRENSHALL …     0       0      0.152      0.424      1         645.
+## 6 Dtype 1 D… WRENSHALL …     0       0      0.152      0.424      2         652.
+## # … with 4 more variables: yearc &lt;dbl&gt;, yearc2 &lt;dbl&gt;, year0809 &lt;dbl&gt;,
+## #   year0810 &lt;dbl&gt;</code></pre>
+</div>
+<div id="piecewise-model-equation" class="section level3">
+<h3><span class="header-section-number">4.3.11</span> Piecewise Model Equation</h3>
+<p>Let <code>Year2</code> and <code>Year3</code> denote indicators for the second and third years (09 and 10), respectively. We fit a model of the form:</p>
+<p><span class="math display">\[
+\begin{equation*}
+Y_{ij}=\beta{0} + \beta_{1}\textrm{Year2}_{ij} + \beta_{2}\textrm{Year3}_{ij} +u_{i} + \epsilon_{ij}
+\end{equation*}
+\]</span> where <span class="math inline">\(u_i\sim\mathcal{N}(0, \sigma^2_u)\)</span> and <span class="math inline">\(\epsilon_{ij}\sim\mathcal{N}(0, \sigma^2)\)</span></p>
+<ul>
+<li><span class="math inline">\(\beta_0\)</span> represents the average math score in year 1 (2008)<br />
+</li>
+<li><span class="math inline">\(\beta_1\)</span> represents the average change in math score from year 1 to year 2<br />
+</li>
+<li><span class="math inline">\(\beta_2\)</span> represents the average change in math score from year 1 to year 3</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model.b4 &lt;-<span class="st"> </span><span class="kw">lmer</span>(MathAvgScore<span class="op">~</span><span class="st"> </span>year0809 <span class="op">+</span><span class="st"> </span>year0810 <span class="op">+</span>
+<span class="st">                   </span>(<span class="dv">1</span><span class="op">|</span>schoolid), <span class="dt">REML=</span>T, <span class="dt">data=</span>chart.long)
+<span class="kw">summary</span>(model.b4)</code></pre></div>
+<pre><code>## Linear mixed model fit by REML. t-tests use Satterthwaite&#39;s method [
+## lmerModLmerTest]
+## Formula: MathAvgScore ~ year0809 + year0810 + (1 | schoolid)
+##    Data: chart.long
+## 
+## REML criterion at convergence: 10296.8
+## 
+## Scaled residuals: 
+##     Min      1Q  Median      3Q     Max 
+## -3.2125 -0.4756  0.0088  0.4687  3.4954 
+## 
+## Random effects:
+##  Groups   Name        Variance Std.Dev.
+##  schoolid (Intercept) 43.050   6.561   
+##  Residual              8.523   2.919   
+## Number of obs: 1733, groups:  schoolid, 618
+## 
+## Fixed effects:
+##              Estimate Std. Error        df  t value            Pr(&gt;|t|)    
+## (Intercept)  651.7408     0.2932  777.0126 2222.750 &lt;0.0000000000000002 ***
+## year0809       0.2015     0.1753 1097.5936    1.149               0.251    
+## year0810       2.5399     0.1752 1107.3022   14.501 &lt;0.0000000000000002 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Correlation of Fixed Effects:
+##          (Intr) yr0809
+## year0809 -0.304       
+## year0810 -0.318  0.514</code></pre>
+<ul>
+<li>On average, scores improved by 0.20 points from 2008-2009.<br />
+</li>
+<li>On average, scores improved by 2.54 points from 2009-2010.</li>
+</ul>
+</div>
+<div id="estimated-response-curve-1" class="section level3">
+<h3><span class="header-section-number">4.3.12</span> Estimated Response Curve</h3>
+<p>Red is quadratic estimate. Blue is piecewise linear estimate.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data=</span>chart.long, <span class="kw">aes</span>(<span class="dt">x=</span>yearc, <span class="dt">y=</span>MathAvgScore)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">stat_smooth</span>(<span class="dt">method=</span><span class="st">&quot;lm&quot;</span>, <span class="dt">se=</span><span class="ot">TRUE</span>, <span class="dt">fill=</span><span class="ot">NA</span>, <span class="dt">formula=</span>y <span class="op">~</span><span class="st"> </span><span class="kw">poly</span>(x, <span class="dv">2</span>, <span class="dt">raw=</span><span class="ot">TRUE</span>),<span class="dt">colour=</span><span class="st">&quot;red&quot;</span>) <span class="op">+</span>
+<span class="st"> </span><span class="kw">geom_segment</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="op">-</span><span class="dv">1</span> , <span class="dt">y =</span> <span class="kw">fixef</span>(model.b4)[<span class="dv">1</span>], <span class="dt">xend =</span> <span class="dv">0</span>, <span class="dt">yend =</span> <span class="kw">fixef</span>(model.b4)[<span class="dv">1</span>] <span class="op">+</span><span class="st"> </span><span class="kw">fixef</span>(model.b4)[<span class="dv">2</span>]), <span class="dt">colour =</span> <span class="st">&quot;blue&quot;</span>)<span class="op">+</span>
+<span class="st"> </span><span class="kw">geom_segment</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="dv">0</span> , <span class="dt">y =</span> <span class="kw">fixef</span>(model.b4)[<span class="dv">1</span>], <span class="dt">xend =</span> <span class="dv">1</span>, <span class="dt">yend =</span> <span class="kw">fixef</span>(model.b4)[<span class="dv">1</span>] <span class="op">+</span><span class="st"> </span><span class="kw">fixef</span>(model.b4)[<span class="dv">3</span>]), <span class="dt">colour =</span> <span class="st">&quot;blue&quot;</span>)</code></pre></div>
+<p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-128-1.png" width="576" /></p>
+</div>
+<div id="comparing-quadratic-and-piecewise-models" class="section level3">
+<h3><span class="header-section-number">4.3.13</span> Comparing Quadratic and Piecewise Models</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">AIC</span>(model.b1)   <span class="co"># quadratic</span></code></pre></div>
+<pre><code>## [1] 10308.16</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">AIC</span>(model.b4)   <span class="co"># piecewise</span></code></pre></div>
+<pre><code>## [1] 10306.77</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">BIC</span>(model.b1)   <span class="co">#quadratic</span></code></pre></div>
+<pre><code>## [1] 10335.45</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">BIC</span>(model.b4)   <span class="co">#piecewise </span></code></pre></div>
+<pre><code>## [1] 10334.06</code></pre>
+<p>The performance of this model is very similar to the quadratic growth model by AIC and BIC measures, and the story told by fixed effects estimates is also very similar. While the mean yearly increase in math scores was 0.2 points between 2008 and 2009, it was 2.3 points between 2009 and 2010.</p>
+<p>Despite the good performances of the quadratic growth and piecewise linear models on our three-year window of data, we will continue to use linear growth assumptions in the remainder of this chapter. Not only is a linear model easier to interpret and explain, but it's probably a more reasonable assumption in years beyond 2010. Predicting future performance is more risky by assuming a steep one-year rise or a non-linear rise will continue, rather than by using the average increase over two years.</p>
+</div>
+</div>
+<div id="building-to-a-final-model" class="section level2">
+<h2><span class="header-section-number">4.4</span> Building to a Final Model</h2>
+<div id="uncontrolled-effects-of-school-type" class="section level3">
+<h3><span class="header-section-number">4.4.1</span> Uncontrolled Effects of School Type</h3>
+<p>We'll test for differences between charter and non-charter schools, by adding school type as a fixed effect.</p>
+<p>Model:</p>
+<p><span class="math display">\[
+\begin{align*}
+Y_{ij}  
+       &amp; = [\alpha_{0} + \beta_{0}\textrm{Year08}_{ij} +\alpha_{1}\textrm{Charter}_i+ \beta_{1}\textrm{Charter}_i\textrm{Year08}_{ij}] + \\
+       &amp; \quad [u_{i} + v_{i}\textrm{Year08}_{ij} + \epsilon_{ij}]
+\end{align*}
+\]</span></p>
+<p>where</p>
+<p><span class="math display">\[ \left[ \begin{array}{c}
+            u_{i} \\ v_{i}
+          \end{array}  \right] \sim N \left( \left[
+          \begin{array}{c}
+            0 \\ 0
+          \end{array} \right], \left[
+          \begin{array}{cc}
+            \sigma_{u}^{2} &amp; \\
+            \rho_{uv}\sigma_{u}\sigma_{v} &amp; \sigma_{v}^{2}
+          \end{array} \right] \right) . \]</span></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#Model C (uncontrolled effects of school type on </span>
+<span class="co">#   intercept and slope)</span>
+model.c &lt;-<span class="st"> </span><span class="kw">lmer</span>(MathAvgScore<span class="op">~</span><span class="st"> </span>charter <span class="op">+</span><span class="st"> </span>year08 <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span>charter<span class="op">:</span>year08 <span class="op">+</span><span class="st"> </span>(year08<span class="op">|</span>schoolid), 
+  <span class="dt">REML=</span>T, <span class="dt">data=</span>chart.long)
+<span class="kw">summary</span>(model.c)</code></pre></div>
+<pre><code>## Linear mixed model fit by REML. t-tests use Satterthwaite&#39;s method [
+## lmerModLmerTest]
+## Formula: MathAvgScore ~ charter + year08 + charter:year08 + (year08 |  
+##     schoolid)
+##    Data: chart.long
+## 
+## REML criterion at convergence: 10291.6
+## 
+## Scaled residuals: 
+##     Min      1Q  Median      3Q     Max 
+## -3.1935 -0.4710  0.0129  0.4660  3.4592 
+## 
+## Random effects:
+##  Groups   Name        Variance Std.Dev. Corr
+##  schoolid (Intercept) 35.8319  5.9860       
+##           year08       0.1312  0.3621   0.88
+##  Residual              8.7845  2.9639       
+## Number of obs: 1733, groups:  schoolid, 618
+## 
+## Fixed effects:
+##                 Estimate Std. Error        df  t value             Pr(&gt;|t|)    
+## (Intercept)    652.05844    0.28449 554.58002 2291.996 &lt; 0.0000000000000002 ***
+## charter         -6.01843    0.86562 622.37159   -6.953     0.00000000000908 ***
+## year08           1.19709    0.09427 526.24057   12.698 &lt; 0.0000000000000002 ***
+## charter:year08   0.85570    0.31430 596.42412    2.723              0.00667 ** 
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Correlation of Fixed Effects:
+##             (Intr) chartr year08
+## charter     -0.329              
+## year08      -0.203  0.067       
+## chartr:yr08  0.061 -0.298 -0.300</code></pre>
+</div>
+<div id="interpretations-for-school-type-model" class="section level3">
+<h3><span class="header-section-number">4.4.2</span> Interpretations for School Type Model</h3>
+<ul>
+<li><p>Fixed effects:</p>
+<ul>
+<li><span class="math inline">\(\widehat{\alpha}_{0} = 652.1.\)</span> The estimated mean test score for 2008 for non-charter public schools is 652.1.</li>
+<li><span class="math inline">\(\widehat{\alpha}_{1}= -6.02.\)</span> Charter schools have an estimated test score in 2008 which is 6.02 points lower than public non-charter schools.</li>
+<li><span class="math inline">\(\widehat{\beta}_{0}= 1.20.\)</span> Public non-charter schools have an estimated mean increase in test scores of 1.20 points per year.</li>
+<li><span class="math inline">\(\widehat{\beta}_{1}= 0.86.\)</span> Charter schools have an estimated mean increase in test scores of 2.06 points per year over the three-year observation period, 0.86 points higher than the mean yearly increase among public non-charter schools.</li>
+</ul></li>
+<li><p>Variance components:</p>
+<ul>
+<li><span class="math inline">\(\widehat{\sigma}_u= 5.99.\)</span> The estimated standard deviation of 2008 test scores is 5.99 points, after controlling for school type.</li>
+<li><span class="math inline">\(\widehat{\sigma}_v= 0.36.\)</span> The estimated standard deviation of yearly changes in test scores during the three-year observation period is 0.36 points, after controlling for school type.</li>
+<li><span class="math inline">\(\widehat{\rho}_{uv}= 0.88.\)</span> The estimated correlation between 2008 test scores and yearly changes in test scores is 0.88, after controlling for school type.</li>
+<li><span class="math inline">\(\widehat{\sigma}= 2.96.\)</span> The estimated standard deviation in residuals for the individual growth curves is 2.96 points.</li>
+</ul></li>
+<li><p>Based on t-values reported by R, the effects of <code>year08</code> and <code>charter</code> both appear to be statistically significant, and there is also significant evidence of an interaction between <code>year08</code> and <code>charter</code>.</p></li>
+<li><p>Public schools had a significantly higher mean math score in 2008, while charter schools had significantly greater improvement in scores between 2008 and 2010 (although the mean score of charter schools still lagged behind that of public schools in 2010, as indicated in the graphical comparison of Models B and C).</p></li>
+</ul>
+</div>
+<div id="illustration" class="section level3">
+<h3><span class="header-section-number">4.4.3</span> Illustration</h3>
+<p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-132-1.png" width="960" /></p>
+<p>Section 9.6 of the text goes through several possible models, arriving at a final model with year, and four other covariates. See text for details.</p>
+</div>
+</div>
+<div id="covariance-structure-among-observations" class="section level2">
+<h2><span class="header-section-number">4.5</span> Covariance Structure among Observations</h2>
+<p>An important part of a longitudinal model is the <strong>covariance structure</strong> among observations. What does the model say about the correlation between scores at the same school one year apart? Two years apart?</p>
+<div id="standard-covariance-structure" class="section level3">
+<h3><span class="header-section-number">4.5.1</span> Standard Covariance Structure</h3>
+<p>We will use Model C (uncontrolled effects of school type) to illustrate covariance structure within subjects. Recall that, in composite form, Model C is:</p>
+<p><span class="math display">\[
+\begin{align*}
+Y_{ij} &amp; = [\alpha_{0}+\alpha_{1}\textrm{Charter}_i + \beta_{0}\textrm{Year08}_{ij} + \beta_{1}\textrm{Charter}_i\textrm{Year08}_{ij}]  \\ &amp; + [u_{i}
+        + v_{i}\textrm{Year08}_{ij} + \epsilon_{ij}]
+\end{align*}
+\]</span> where <span class="math inline">\(\epsilon_{ij}\sim N(0,\sigma^2)\)</span> and</p>
+<p><span class="math display">\[
+\left[ \begin{array}{c}
+            u_{i} \\ v_{i}
+          \end{array}  \right] \sim N \left( \left[
+          \begin{array}{c}
+            0 \\ 0
+          \end{array} \right], \left[
+          \begin{array}{cc}
+            \sigma_{u}^{2} &amp; \\
+            \rho_{uv}\sigma_{u}\sigma_{v} &amp; \sigma_{v}^{2}
+          \end{array} \right] \right).
+\]</span></p>
+<p>For School <span class="math inline">\(i\)</span>, the covariance structure for the three time points has general form:</p>
+<p><span class="math display">\[ Cov(\mathbf{Y}_i) =  \left[
+          \begin{array}{cccc}
+            Var(Y_{i1}) &amp; Cov(Y_{i1},Y_{i2}) &amp; Cov(Y_{i1},Y_{i3}) \\
+            Cov(Y_{i1},Y_{i2}) &amp; Var(Y_{i2}) &amp; Cov(Y_{i2},Y_{i3}) \\
+            Cov(Y_{i1},Y_{i3}) &amp; Cov(Y_{i2},Y_{i3}) &amp; Var(Y_{i3})
+          \end{array} \right] \]</span> where</p>
+<ul>
+<li><p><span class="math inline">\(Var(Y_{i1})\)</span> is the variability in 2008 test scores (time <span class="math inline">\(j=1\)</span>),</p></li>
+<li><p><span class="math inline">\(Cov(Y_{i1},Y_{i2})\)</span> is the covariance between 2008 and 2009 test scores (times <span class="math inline">\(j=1\)</span> and <span class="math inline">\(j=2\)</span>), etc.</p></li>
+<li><p>We expect positive values for all three covariance terms in <span class="math inline">\(Cov(\mathbf{Y}_i)\)</span>, since schools with relatively high test scores in 2008 are likely to also have relatively high test scores in 2009 or 2010.</p></li>
+<li><p>We expect correlation coefficients between two years to be near 1.</p></li>
+<li><p>Note that the error structure at Level Two is <em>not</em> the same as the within-school covariance structure among observations.</p></li>
+</ul>
+<p><span class="math display">\[ Cov(\mathbf{Y}_i) \neq  \left[
+          \begin{array}{cc}
+            \sigma_{u}^{2} &amp; \\
+            \rho_{uv}\sigma_{u}\sigma_{v}  &amp; \sigma_{v}^{2}
+          \end{array} \right] . \]</span></p>
+<p><span class="math inline">\(Cov(\mathbf{Y}_i)\)</span> describes correlation between a school's scores in different years. It is a 3x3 matrix, since there are 3 years of data.</p>
+<p>The second matrix describes correlation between the random intercept <span class="math inline">\(u_i\)</span> and random slope <span class="math inline">\(v_i\)</span>. It is a 2x2 matrix, since there are 2 random effects.</p>
+</div>
+<div id="derivation-of-vary_i1-optional" class="section level3">
+<h3><span class="header-section-number">4.5.2</span> Derivation of <span class="math inline">\(Var(Y_{i1})\)</span> (optional)</h3>
+<p><strong>The material on this slide is intended for people who have taken Math 340:Probability. It will not be tested.</strong></p>
+<p>The variance for individual observation <span class="math inline">\(Y_{ij}\)</span> and covariance between two observations <span class="math inline">\(Y_{ij}\)</span> and <span class="math inline">\(Y_{ik}\)</span> (at school <span class="math inline">\(i\)</span>, with different time points <span class="math inline">\(j\)</span> and <span class="math inline">\(k\)</span>) can be derived as follows.</p>
+<p><strong>Probability Fact:</strong></p>
+<p>If <span class="math inline">\(Y_1 = a_1 X_1 + a_2 X_2 + a_3\)</span> and <span class="math inline">\(Y_2 = b_1 X_1 + b_2 X_2 + b_3\)</span> where <span class="math inline">\(X_1\)</span> and <span class="math inline">\(X_2\)</span> are random variables and <span class="math inline">\(a_i\)</span> and <span class="math inline">\(b_i\)</span> are constants for <span class="math inline">\(i=1,2,3\)</span>, then we know from probability theory that:</p>
+<span class="math display">\[\begin{align*}
+Var(Y_1) &amp; = a^{2}_{1} Var(X_1) + a^{2}_{2} Var(X_2) + 2 a_1 a_2 Cov(X_1,X_2) \\
+Cov(Y_1,Y_2) &amp; = a_1 b_1 Var(X_1) + a_2 b_2 Var(X_2) + (a_1 b_2 + a_2 b_1) Cov(X_1,X_2)
+\end{align*}\]</span>
+<p>Applying these identities to Model C, we first see that we can ignore all fixed effects, since they do not contribute to the variability. Thus,</p>
+<p><span class="math display">\[
+\begin{align*}
+Var(Y_{ij}) &amp; = Var(u_{i}+v_{i}\textrm{Year08}_{ij}+\epsilon_{ij}) \\
+ &amp; = Var(u_{i}) + \textrm{Year08}^{2}_{ij} Var(v_{i}) + Var(\epsilon_{ij}) + 2\textrm{Year08}_{ij} Cov(u_{i},v_{i}) \\
+ &amp; = \sigma_{u}^{2} + \textrm{Year08}^{2}_{ij} \sigma_{v}^{2} + \sigma^{2} + 2\textrm{Year08}_{ij}\sigma_{uv} \\
+ &amp; = \sigma_{u}^{2} + t^{2}_{j} \sigma_{v}^{2} + \sigma^{2} + 2t_{j}\sigma_{uv}
+\end{align*}
+\]</span></p>
+<p><span class="math display">\[
+\begin{align*}
+Cov(Y_{ij},Y_{ik}) &amp; = Cov(u_{i}+ v_{i}\textrm{Year08}_{ij}+\epsilon_{ij}, u_{i}+v_{i}\textrm{Year08}_{ik}+\epsilon_{ik}) \\
+ &amp; = Var(u_{i}) + \textrm{Year08}_{ij}\textrm{Year08}_{ik} Var(v_{i}) + \\
+ &amp; \qquad (\textrm{Year08}_{ij} + \textrm{Year08}_{ik}) Cov(u_{i},v_{i}) \\
+ &amp; = \sigma_{u}^{2} + t_{j}t_{k} \sigma_{v}^{2} + (t_{j}+t_{k})\sigma_{uv}
+\end{align*}
+\]</span></p>
+<p><strong>Intuition: </strong></p>
+<ul>
+<li><span class="math inline">\(Var(Y_{i1})\)</span>, the uncertainty (variability) around a school's score in 2008, increases as the uncertainty in intercepts (measured by <span class="math inline">\(\sigma^2_u\)</span>) and slopes (measured by <span class="math inline">\(\sigma^2_v\)</span>) increases, as the uncertainty around that school's linear time trend (measured by <span class="math inline">\(\sigma^2\)</span>) increases, and as the covariance between intercept and slope residuals increases (measured by <span class="math inline">\(\sigma_{uv}\)</span>), since if one is off, the other one is likely off as well.</li>
+</ul>
+<p>We plug into these equations to estimate variance and covariance between individual observations.</p>
+<span class="math display">\[\begin{align*}
+\widehat{Var}(Y_{i1}) &amp; = 35.832 + 0^{2} 0.131 + 8.784 + 2(0)1.907 = 44.62 \\
+\widehat{Var}(Y_{i2}) &amp; = 35.832 + 1^{2} 0.131 + 8.784 + 2(1)1.907 = 48.56 \\
+\widehat{Var}(Y_{i3}) &amp; = 35.832 + 2^{2} 0.131 + 8.784 + 2(2)1.907 = 52.77
+\end{align*}\]</span>
+<p>and our estimated within-school covariances between different time points would be:</p>
+<span class="math display">\[\begin{align*}
+\widehat{Cov}(Y_{i1},Y_{i2}) &amp; = 35.832 + (0)(1)0.131 + (0+1)1.907 = 37.74 \\
+\widehat{Cov}(Y_{i1},Y_{i3}) &amp; = 35.832 + (0)(2)0.131 + (0+2)1.907 = 39.65 \\
+\widehat{Cov}(Y_{i2},Y_{i3}) &amp; = 35.832 + (1)(2)0.131 + (1+2)1.907 = 41.81
+\end{align*}\]</span>
+<p>In fact, these values will be identical for every School <span class="math inline">\(i\)</span>, since scores were assessed at the same three time points. Thus, we will drop the subscript <span class="math inline">\(i\)</span> moving forward.</p>
+<p>Written in matrix form, our two-level model implicitly imposes this estimated covariance structure on within-school observations for any specific School <span class="math inline">\(i\)</span>:</p>
+<p><span class="math display">\[ \widehat{Cov}(\mathbf{Y}) =  \left[
+          \begin{array}{cccc}
+            44.62 &amp; &amp;   \\
+            37.74 &amp; 48.56 &amp;  \\
+            39.65 &amp; 41.81 &amp; 52.77
+          \end{array} \right] \]</span></p>
+<p>We can convert covariances to correlations using</p>
+<p><span class="math inline">\(Corr(Y_{1},Y_{2})=\frac{Cov(Y_{1},Y_{2})}{\sqrt{Var(Y_{1}) Var(Y_{2})}}\)</span>:</p>
+<p><span class="math display">\[ \widehat{Corr}(\mathbf{Y}) =  \left[
+          \begin{array}{cccc}
+            1 &amp; &amp;   \\
+            .811 &amp; 1 &amp;  \\
+            .817 &amp; .826 &amp; 1
+          \end{array} \right] \]</span></p>
+<p><strong>Observations</strong></p>
+<ul>
+<li><p>observations at the same school in different years are highly correlated</p></li>
+<li><p>correlation is estimated to decrease as years get farther apart (though differences are not dramatic in this case)</p></li>
+</ul>
+<p>This model required estimating four parameters associated with the variance-covariance structure: <span class="math inline">\(\sigma^2_u\)</span>, <span class="math inline">\(\sigma^2_v\)</span>, <span class="math inline">\(\sigma_{uv}\)</span>, and <span class="math inline">\(\sigma^2\)</span>.</p>
+</div>
+<div id="alternative-covariance-structure---unstructured" class="section level3">
+<h3><span class="header-section-number">4.5.3</span> Alternative Covariance Structure - Unstructured</h3>
+<p>There are other possible covariance structures that makes sense in certain situations.</p>
+<ul>
+<li><em>Unstructured</em> - Every variance and covariance term for observations within a school is a separate parameter and is therefore estimated uniquely; no patterns among variances or correlations are assumed. This structure offers maximum flexibility but is most costly in terms of parameters estimated.</li>
+</ul>
+<p><span class="math display">\[ \widehat{Cov}(Y_{i1},Y_{i2},Y_{i3}) =  \left[
+          \begin{array}{cccc}
+            \sigma^2_1 &amp; &amp;   \\
+            \sigma_{12} &amp; \sigma^2_2 &amp;  \\
+            \sigma_{13} &amp; \sigma_{23} &amp; \sigma^2_3
+          \end{array} \right] \]</span></p>
+<p>There are 6 parameters associated with the variance-covariance structure that need to be estimated: <span class="math inline">\(\sigma^2_1\)</span>,<span class="math inline">\(\sigma^2_2\)</span>,<span class="math inline">\(\sigma^2_3\)</span>, <span class="math inline">\(\sigma_{12}\)</span>, <span class="math inline">\(\sigma_{13}\)</span>, <span class="math inline">\(\sigma_{23}\)</span>.</p>
+</div>
+<div id="alternative-covariance-structure---compound-symmetry" class="section level3">
+<h3><span class="header-section-number">4.5.4</span> Alternative Covariance Structure - Compound Symmetry</h3>
+<ul>
+<li><em>Compound symmetry</em> - Assume variance is constant across all time points and correlation is constant across all pairs of time points. This structure is highly restrictive but least costly in terms of parameters estimated.</li>
+</ul>
+<p><span class="math display">\[ \widehat{Cov}(Y_{i1},Y_{i2},Y_{i3}) =  \left[
+          \begin{array}{cccc}
+            \sigma^2 &amp; &amp;   \\
+            \rho\sigma &amp; \sigma^2 &amp;  \\
+            \rho\sigma &amp; \rho\sigma &amp; \sigma^2
+          \end{array} \right] \]</span></p>
+<p>There are 2 parameters associated with the variance-covariance structure that need to be estimated: <span class="math inline">\(\sigma^2\)</span>, and <span class="math inline">\(\rho\)</span>.</p>
+</div>
+<div id="alternative-covariance-structure---autogregressive" class="section level3">
+<h3><span class="header-section-number">4.5.5</span> Alternative Covariance Structure - Autogregressive</h3>
+<ul>
+<li><em>Autoregressive</em> - Assume variance is constant across all time points, but correlation drops off in a systematic fashion as the gap in time increases. Autoregressive models expand compound symmetry by allowing for a common structure where points closest in time are most highly correlated.</li>
+</ul>
+<p>A common example of an autoregressive model is the AR(1) time series model. For <span class="math inline">\(\phi\in(-1,1)\)</span>, the covariance matrix is given by:</p>
+<p><span class="math display">\[ \widehat{Cov}(Y_{i1},Y_{i2},Y_{i3}) =  \left[
+          \begin{array}{cccc}
+            \sigma^2 &amp; &amp;   \\
+            \phi\sigma^2 &amp; \sigma^2 &amp;  \\
+            \phi^2\sigma^2 &amp; \phi\sigma^2 &amp; \sigma^2
+          \end{array} \right]. \]</span></p>
+<p>This model requires estimating two parameters <span class="math inline">\(\sigma^2\)</span>, and <span class="math inline">\(\phi\)</span>.</p>
+<p>This implies a correlation matrix</p>
+<p><span class="math display">\[ \widehat{Corr}(Y_{i1},Y_{i2},Y_{i3}) =  \left[
+          \begin{array}{cccc}
+            1 &amp; &amp;   \\
+            \phi &amp; 1 &amp;  \\
+            \phi^2 &amp; \phi &amp; 1
+          \end{array} \right]. \]</span></p>
+<p>More generally, the correlation between observations at the same school, taken t years apart is given by <span class="math inline">\(\phi^{t}\)</span>. Since <span class="math inline">\(\phi\in(-1,1)\)</span>, this correlation decays over time.</p>
+</div>
+<div id="ar1-model-on-schools-data" class="section level3">
+<h3><span class="header-section-number">4.5.6</span> AR(1) Model on Schools Data</h3>
+<p>This is not in the book.</p>
+<p>We fit an AR(1) time series model to the schools data.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># keep only schools with observed scores for all 3 years</span>
+chart.long1 &lt;-<span class="st"> </span>chart.long <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(schoolid <span class="op">%in%</span><span class="st"> </span>chart.wide[<span class="kw">complete.cases</span>(chart.wide),]<span class="op">$</span>schoolid)
+
+AR1.sim =<span class="st"> </span><span class="kw">gls</span>(MathAvgScore <span class="op">~</span><span class="st"> </span>charter <span class="op">+</span><span class="st"> </span>year08 <span class="op">+</span><span class="st"> </span>charter<span class="op">:</span>year08, <span class="dt">data =</span> chart.long1,
+    <span class="dt">correlation =</span> <span class="kw">corAR1</span>(<span class="dt">form =</span> <span class="op">~</span><span class="st"> </span>year08 <span class="op">|</span><span class="st"> </span>schoolid))
+
+<span class="kw">summary</span>(AR1.sim)</code></pre></div>
+<pre><code>## Generalized least squares fit by REML
+##   Model: MathAvgScore ~ charter + year08 + charter:year08 
+##   Data: chart.long1 
+##        AIC      BIC    logLik
+##   9478.691 9511.017 -4733.346
+## 
+## Correlation Structure: AR(1)
+##  Formula: ~year08 | schoolid 
+##  Parameter estimate(s):
+##       Phi 
+## 0.7825271 
+## 
+## Coefficients:
+##                   Value Std.Error   t-value p-value
+## (Intercept)    652.6150 0.2769250 2356.6485  0.0000
+## charter         -5.4830 0.9592965   -5.7156  0.0000
+## year08           1.2117 0.1220596    9.9273  0.0000
+## charter:year08   0.6827 0.4228269    1.6147  0.1066
+## 
+##  Correlation: 
+##                (Intr) chartr year08
+## charter        -0.289              
+## year08         -0.441  0.127       
+## charter:year08  0.127 -0.441 -0.289
+## 
+## Standardized residuals:
+##         Min          Q1         Med          Q3         Max 
+## -5.25884495 -0.53788943  0.06862807  0.59601366  2.96053326 
+## 
+## Residual standard error: 6.16835 
+## Degrees of freedom: 1620 total; 1616 residual</code></pre>
+<p>The fixed effects estimates are very similar to those we saw in <code>model.c</code>.</p>
+<p><span class="math inline">\(\widehat{\phi}^t =0.78^t\)</span> gives the estimated correlation in measurements at the same school taken t years apart.</p>
+<p>The correlation in test scores at the same school, one year apart is estimated to be 0.78.<br />
+The correlation in test scores at the same school, two year2 apart is estimated to be <span class="math inline">\(0.78^2 \approx 0.6084\)</span>.</p>
+<p>Note that the fixed effects estimates and resulting standard errors and p-values are very similar to those seen in Model C.</p>
+<p>There are entire statistics courses and texts on Time Series. These are especially relevant in economics. For more information, see books such as <a href="https://otexts.com/fpp2/">this one</a>.</p>
+</div>
+<div id="non-longitudinal-multilevel-models" class="section level3">
+<h3><span class="header-section-number">4.5.7</span> Non-longitudinal Multilevel Models</h3>
+<p>The variance-covariance structure seen here can be generalized to models that do not involve time as well.</p>
+<p>For example, in the musicians study from Chapter 8, Level One observational units are musical performances rather than time points.</p>
+<p>The standard model implies the following covariance structure for Musician <span class="math inline">\(i\)</span> in Model C, which uses an indicator for large ensembles as a Level One predictor:</p>
+<p><span class="math display">\[
+\begin{align*}
+Var(Y_{ij}) &amp; = \sigma_{u}^{2} + \textrm{Large}^{2}_{ij} \sigma_{v}^{2} + \sigma^{2} + 2\textrm{Large}_{ij}\sigma_{uv} \\
+ &amp; = \left\{ \begin{array}{ll}
+                 \sigma^{2} + \sigma_{u}^{2} &amp; \mbox{if $\textrm{Large}_{ij}=0$} \\
+                 \sigma^{2} + \sigma_{u}^{2} + \sigma_{v}^{2} + 2\sigma_{uv} &amp; \mbox{if $\textrm{Large}_{ij}=1$}
+               \end{array}
+       \right.
+\end{align*}
+\]</span></p>
+<p>and</p>
+<p><span class="math display">\[
+\begin{align*}
+Cov(Y_{ij},Y_{ik}) &amp; = \sigma_{u}^{2} + \textrm{Large}_{ij}\textrm{Large}_{ik} \sigma_{v}^{2} + (\textrm{Large}_{ij} + 
+  \textrm{Large}_{ik}) \sigma_{uv} \\
+ &amp; = \left\{ \begin{array}{ll}
+                 \sigma_{u}^{2} &amp; \mbox{if $\textrm{Large}_{ij}=\textrm{Large}_{ik}=0$} \\
+                 \sigma_{u}^{2} + \sigma_{uv} &amp; \mbox{if $\textrm{Large}_{ij}=0$, $\textrm{Large}_{ik}=1$ or vice versa} \\
+                 \sigma_{u}^{2} + \sigma_{v}^{2} + 2\sigma_{uv} &amp; \mbox{if $\textrm{Large}_{ij}=\textrm{Large}_{ik}=1$}
+               \end{array}
+       \right.
+\end{align*}
+\]</span></p>
+</div>
+<div id="final-thoughts-regarding-covariance-structures" class="section level3">
+<h3><span class="header-section-number">4.5.8</span> Final Thoughts Regarding Covariance Structures</h3>
+<ul>
+<li><p>choice of covariance matrix does not greatly affect estimates of fixed effects.</p></li>
+<li><p>choice of covariance structure could potentially impact the standard errors of fixed effects, but does not appear to have much impact in this situation.</p></li>
+<li><p>If primary interest is in inference regarding fixed effects, and if the standard errors for the fixed effects appear robust to choice of covariance structure, then extensive time spent modeling the covariance structure is not advised.</p></li>
+<li><p>If researchers are interested in predicted random effects and estimated variance components in addition to estimated fixed effects, then choice of covariance structure can make a big difference. -For example, if researchers are interested in drawing conclusions about particular schools rather than charter schools in general, they may more carefully model the covariance structure in this study.</p></li>
+</ul>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="multilevel-models.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/STAT455-W22/stat455-w22-notes/edit/master/04-Longitudinal_Data.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": "https://github.com/STAT455-W22/stat455-w22-notes/blob/master/04-Longitudinal_Data.Rmd",
+"text": null
+},
+"download": null,
+"search": {
+"engine": "lunr",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

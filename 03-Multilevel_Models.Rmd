@@ -1294,4 +1294,20 @@ f. $\sigma_v$
 g. $\sigma$     
 h. $\rho_{uv}$      
 
+3. Now consider a model with no interaction term. 
+
+$$
+\begin{align*}
+Y_{ij} & = [\alpha_{0}+\alpha_{1}\textrm{Ageover18}_{i}+\beta_{0}\textrm{Juried}_{ij}] \\
+ & \textrm{} + [u_{i}+v_{i}\textrm{Juried}_{ij}+\epsilon_{ij}]
+\end{align*}
+$$
+
+Sketch lattice plots, with `juried` on the x-axis and `na` on the y-axis, for 5 different musicians that illustrate each of the following scenarios:
+
+a. $\beta_0 > 0$, $\sigma_u$ is large, and $\sigma_v$ is small       
+b. $\beta_0 > 0$, $\sigma_u$ is small, and $\sigma_v$ is large       
+c. $\beta_0 > 0$, $\rho_{uv} > 0$     
+d. $\beta_0 > 0$, $\rho_{uv} < 0$
+e. $\beta_0 < 0$, $\rho_{uv} < 0$
 
