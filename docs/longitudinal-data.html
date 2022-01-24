@@ -23,7 +23,7 @@
 
 
 
-<meta name="date" content="2022-01-21" />
+<meta name="date" content="2022-01-24" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -296,12 +296,15 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="4.5" data-path="longitudinal-data.html"><a href="longitudinal-data.html#covariance-structure-among-observations"><i class="fa fa-check"></i><b>4.5</b> Covariance Structure among Observations</a><ul>
 <li class="chapter" data-level="4.5.1" data-path="longitudinal-data.html"><a href="longitudinal-data.html#standard-covariance-structure"><i class="fa fa-check"></i><b>4.5.1</b> Standard Covariance Structure</a></li>
 <li class="chapter" data-level="4.5.2" data-path="longitudinal-data.html"><a href="longitudinal-data.html#derivation-of-vary_i1-optional"><i class="fa fa-check"></i><b>4.5.2</b> Derivation of <span class="math inline">\(Var(Y_{i1})\)</span> (optional)</a></li>
-<li class="chapter" data-level="4.5.3" data-path="longitudinal-data.html"><a href="longitudinal-data.html#alternative-covariance-structure---unstructured"><i class="fa fa-check"></i><b>4.5.3</b> Alternative Covariance Structure - Unstructured</a></li>
-<li class="chapter" data-level="4.5.4" data-path="longitudinal-data.html"><a href="longitudinal-data.html#alternative-covariance-structure---compound-symmetry"><i class="fa fa-check"></i><b>4.5.4</b> Alternative Covariance Structure - Compound Symmetry</a></li>
-<li class="chapter" data-level="4.5.5" data-path="longitudinal-data.html"><a href="longitudinal-data.html#alternative-covariance-structure---autogregressive"><i class="fa fa-check"></i><b>4.5.5</b> Alternative Covariance Structure - Autogregressive</a></li>
-<li class="chapter" data-level="4.5.6" data-path="longitudinal-data.html"><a href="longitudinal-data.html#ar1-model-on-schools-data"><i class="fa fa-check"></i><b>4.5.6</b> AR(1) Model on Schools Data</a></li>
-<li class="chapter" data-level="4.5.7" data-path="longitudinal-data.html"><a href="longitudinal-data.html#non-longitudinal-multilevel-models"><i class="fa fa-check"></i><b>4.5.7</b> Non-longitudinal Multilevel Models</a></li>
-<li class="chapter" data-level="4.5.8" data-path="longitudinal-data.html"><a href="longitudinal-data.html#final-thoughts-regarding-covariance-structures"><i class="fa fa-check"></i><b>4.5.8</b> Final Thoughts Regarding Covariance Structures</a></li>
+<li class="chapter" data-level="4.5.3" data-path="longitudinal-data.html"><a href="longitudinal-data.html#interpretations-of-vary_i1-and-covy_ij-y_ik"><i class="fa fa-check"></i><b>4.5.3</b> Interpretations of <span class="math inline">\(Var(Y_{i1})\)</span> and <span class="math inline">\(Cov(Y_{ij}, Y_{ik})\)</span></a></li>
+<li class="chapter" data-level="4.5.4" data-path="longitudinal-data.html"><a href="longitudinal-data.html#variance-and-covariance-estimates"><i class="fa fa-check"></i><b>4.5.4</b> Variance and Covariance Estimates</a></li>
+<li class="chapter" data-level="4.5.5" data-path="longitudinal-data.html"><a href="longitudinal-data.html#alternative-covariance-structure---uncorrelated"><i class="fa fa-check"></i><b>4.5.5</b> Alternative Covariance Structure - Uncorrelated</a></li>
+<li class="chapter" data-level="4.5.6" data-path="longitudinal-data.html"><a href="longitudinal-data.html#alternative-covariance-structure---unstructured"><i class="fa fa-check"></i><b>4.5.6</b> Alternative Covariance Structure - Unstructured</a></li>
+<li class="chapter" data-level="4.5.7" data-path="longitudinal-data.html"><a href="longitudinal-data.html#alternative-covariance-structure---compound-symmetry"><i class="fa fa-check"></i><b>4.5.7</b> Alternative Covariance Structure - Compound Symmetry</a></li>
+<li class="chapter" data-level="4.5.8" data-path="longitudinal-data.html"><a href="longitudinal-data.html#alternative-covariance-structure---autogregressive"><i class="fa fa-check"></i><b>4.5.8</b> Alternative Covariance Structure - Autogregressive</a></li>
+<li class="chapter" data-level="4.5.9" data-path="longitudinal-data.html"><a href="longitudinal-data.html#ar1-model-on-schools-data"><i class="fa fa-check"></i><b>4.5.9</b> AR(1) Model on Schools Data</a></li>
+<li class="chapter" data-level="4.5.10" data-path="longitudinal-data.html"><a href="longitudinal-data.html#non-longitudinal-multilevel-models"><i class="fa fa-check"></i><b>4.5.10</b> Non-longitudinal Multilevel Models</a></li>
+<li class="chapter" data-level="4.5.11" data-path="longitudinal-data.html"><a href="longitudinal-data.html#final-thoughts-regarding-covariance-structures"><i class="fa fa-check"></i><b>4.5.11</b> Final Thoughts Regarding Covariance Structures</a></li>
 </ul></li>
 </ul></li>
 <li class="divider"></li>
@@ -615,7 +618,7 @@ model.a &lt;-<span class="st"> </span><span class="kw">lmer</span>(MathAvgScore<
 <h3><span class="header-section-number">4.2.2</span> Interpretations in Unconditional Means Model</h3>
 <ul>
 <li><p><span class="math inline">\(\widehat{\alpha}_{0}\)</span> = 652.7 = the mean math score across all schools and all years</p></li>
-<li><p><span class="math inline">\(\widehat{\sigma}_u\)</span>= 41.9 = the standard deviation in average math scores (averaging across the tree years), for different schools (tells us on average, how much do average scores differ between schools?)</p></li>
+<li><p><span class="math inline">\(\widehat{\sigma}_u\)</span>= 6.47= the standard deviation in average math scores (averaging across the tree years), for different schools (tells us on average, how much do average scores differ between schools?)</p></li>
 <li><p><span class="math inline">\(\widehat{\sigma}\)</span>= 3.25 = the standard deviation in math scores for the same school between different years (tells us how much scores vary from year to year in the same school)</p></li>
 </ul>
 </div>
@@ -1107,6 +1110,7 @@ Y_{ij} &amp; = [\alpha_{0}+\alpha_{1}\textrm{Charter}_i + \beta_{0}\textrm{Year0
 <ul>
 <li><p><span class="math inline">\(Var(Y_{i1})\)</span> is the variability in 2008 test scores (time <span class="math inline">\(j=1\)</span>),</p></li>
 <li><p><span class="math inline">\(Cov(Y_{i1},Y_{i2})\)</span> is the covariance between 2008 and 2009 test scores (times <span class="math inline">\(j=1\)</span> and <span class="math inline">\(j=2\)</span>), etc.</p></li>
+<li><p><span class="math inline">\(Cov(Y_{i1},Y_{i3})\)</span> is the covariance between 2008 and 2010 test scores (times <span class="math inline">\(j=1\)</span> and <span class="math inline">\(j=2\)</span>), etc.</p></li>
 <li><p>We expect positive values for all three covariance terms in <span class="math inline">\(Cov(\mathbf{Y}_i)\)</span>, since schools with relatively high test scores in 2008 are likely to also have relatively high test scores in 2009 or 2010.</p></li>
 <li><p>We expect correlation coefficients between two years to be near 1.</p></li>
 <li><p>Note that the error structure at Level Two is <em>not</em> the same as the within-school covariance structure among observations.</p></li>
@@ -1146,10 +1150,16 @@ Cov(Y_{ij},Y_{ik}) &amp; = Cov(u_{i}+ v_{i}\textrm{Year08}_{ij}+\epsilon_{ij}, u
  &amp; = \sigma_{u}^{2} + t_{j}t_{k} \sigma_{v}^{2} + (t_{j}+t_{k})\sigma_{uv}
 \end{align*}
 \]</span></p>
-<p><strong>Intuition: </strong></p>
+</div>
+<div id="interpretations-of-vary_i1-and-covy_ij-y_ik" class="section level3">
+<h3><span class="header-section-number">4.5.3</span> Interpretations of <span class="math inline">\(Var(Y_{i1})\)</span> and <span class="math inline">\(Cov(Y_{ij}, Y_{ik})\)</span></h3>
 <ul>
-<li><span class="math inline">\(Var(Y_{i1})\)</span>, the uncertainty (variability) around a school's score in 2008, increases as the uncertainty in intercepts (measured by <span class="math inline">\(\sigma^2_u\)</span>) and slopes (measured by <span class="math inline">\(\sigma^2_v\)</span>) increases, as the uncertainty around that school's linear time trend (measured by <span class="math inline">\(\sigma^2\)</span>) increases, and as the covariance between intercept and slope residuals increases (measured by <span class="math inline">\(\sigma_{uv}\)</span>), since if one is off, the other one is likely off as well.</li>
+<li><p><span class="math inline">\(Var(Y_{i1})\)</span>, the uncertainty (variability) around a school's score in 2008, increases as the uncertainty in intercepts (measured by <span class="math inline">\(\sigma^2_u\)</span>) and slopes (measured by <span class="math inline">\(\sigma^2_v\)</span>) increases, and as the uncertainty around that school's linear time trend (measured by <span class="math inline">\(\sigma^2\)</span>) increases, and as covariance between intercept and slope residuals increases (measured by <span class="math inline">\(\sigma_{uv}\)</span>), since if one is off, the other one is likely off as well.</p></li>
+<li><p><span class="math inline">\(Cov(Y_{ij}, Y_{ik})\)</span> depends only on level two error terms(<span class="math inline">\(\sigma_u\)</span>, <span class="math inline">\(\sigma_v\)</span>, <span class="math inline">\(\sigma_{uv}\)</span>), not on year-to-year variability within the same school (<span class="math inline">\(\sigma\)</span>)</p></li>
 </ul>
+</div>
+<div id="variance-and-covariance-estimates" class="section level3">
+<h3><span class="header-section-number">4.5.4</span> Variance and Covariance Estimates</h3>
 <p>We plug into these equations to estimate variance and covariance between individual observations.</p>
 <span class="math display">\[\begin{align*}
 \widehat{Var}(Y_{i1}) &amp; = 35.832 + 0^{2} 0.131 + 8.784 + 2(0)1.907 = 44.62 \\
@@ -1180,13 +1190,22 @@ Cov(Y_{ij},Y_{ik}) &amp; = Cov(u_{i}+ v_{i}\textrm{Year08}_{ij}+\epsilon_{ij}, u
           \end{array} \right] \]</span></p>
 <p><strong>Observations</strong></p>
 <ul>
-<li><p>observations at the same school in different years are highly correlated</p></li>
-<li><p>correlation is estimated to decrease as years get farther apart (though differences are not dramatic in this case)</p></li>
+<li>observations at the same school in different years are highly correlated</li>
 </ul>
 <p>This model required estimating four parameters associated with the variance-covariance structure: <span class="math inline">\(\sigma^2_u\)</span>, <span class="math inline">\(\sigma^2_v\)</span>, <span class="math inline">\(\sigma_{uv}\)</span>, and <span class="math inline">\(\sigma^2\)</span>.</p>
 </div>
+<div id="alternative-covariance-structure---uncorrelated" class="section level3">
+<h3><span class="header-section-number">4.5.5</span> Alternative Covariance Structure - Uncorrelated</h3>
+<p>In a LLSR model, we assume observations to be independent and following an identical distribution with variance <span class="math inline">\(\sigma^2\)</span>.</p>
+<p><span class="math display">\[ \widehat{Cov}(Y_{i1},Y_{i2},Y_{i3}) =  \left[
+          \begin{array}{cccc}
+            \sigma^2 &amp; 0  &amp;  0 \\
+            0 &amp; \sigma^2 &amp; 0 \\
+            0 &amp; 0 &amp; \sigma^2
+          \end{array} \right] \]</span></p>
+</div>
 <div id="alternative-covariance-structure---unstructured" class="section level3">
-<h3><span class="header-section-number">4.5.3</span> Alternative Covariance Structure - Unstructured</h3>
+<h3><span class="header-section-number">4.5.6</span> Alternative Covariance Structure - Unstructured</h3>
 <p>There are other possible covariance structures that makes sense in certain situations.</p>
 <ul>
 <li><em>Unstructured</em> - Every variance and covariance term for observations within a school is a separate parameter and is therefore estimated uniquely; no patterns among variances or correlations are assumed. This structure offers maximum flexibility but is most costly in terms of parameters estimated.</li>
@@ -1200,7 +1219,7 @@ Cov(Y_{ij},Y_{ik}) &amp; = Cov(u_{i}+ v_{i}\textrm{Year08}_{ij}+\epsilon_{ij}, u
 <p>There are 6 parameters associated with the variance-covariance structure that need to be estimated: <span class="math inline">\(\sigma^2_1\)</span>,<span class="math inline">\(\sigma^2_2\)</span>,<span class="math inline">\(\sigma^2_3\)</span>, <span class="math inline">\(\sigma_{12}\)</span>, <span class="math inline">\(\sigma_{13}\)</span>, <span class="math inline">\(\sigma_{23}\)</span>.</p>
 </div>
 <div id="alternative-covariance-structure---compound-symmetry" class="section level3">
-<h3><span class="header-section-number">4.5.4</span> Alternative Covariance Structure - Compound Symmetry</h3>
+<h3><span class="header-section-number">4.5.7</span> Alternative Covariance Structure - Compound Symmetry</h3>
 <ul>
 <li><em>Compound symmetry</em> - Assume variance is constant across all time points and correlation is constant across all pairs of time points. This structure is highly restrictive but least costly in terms of parameters estimated.</li>
 </ul>
@@ -1213,7 +1232,7 @@ Cov(Y_{ij},Y_{ik}) &amp; = Cov(u_{i}+ v_{i}\textrm{Year08}_{ij}+\epsilon_{ij}, u
 <p>There are 2 parameters associated with the variance-covariance structure that need to be estimated: <span class="math inline">\(\sigma^2\)</span>, and <span class="math inline">\(\rho\)</span>.</p>
 </div>
 <div id="alternative-covariance-structure---autogregressive" class="section level3">
-<h3><span class="header-section-number">4.5.5</span> Alternative Covariance Structure - Autogregressive</h3>
+<h3><span class="header-section-number">4.5.8</span> Alternative Covariance Structure - Autogregressive</h3>
 <ul>
 <li><em>Autoregressive</em> - Assume variance is constant across all time points, but correlation drops off in a systematic fashion as the gap in time increases. Autoregressive models expand compound symmetry by allowing for a common structure where points closest in time are most highly correlated.</li>
 </ul>
@@ -1235,7 +1254,7 @@ Cov(Y_{ij},Y_{ik}) &amp; = Cov(u_{i}+ v_{i}\textrm{Year08}_{ij}+\epsilon_{ij}, u
 <p>More generally, the correlation between observations at the same school, taken t years apart is given by <span class="math inline">\(\phi^{t}\)</span>. Since <span class="math inline">\(\phi\in(-1,1)\)</span>, this correlation decays over time.</p>
 </div>
 <div id="ar1-model-on-schools-data" class="section level3">
-<h3><span class="header-section-number">4.5.6</span> AR(1) Model on Schools Data</h3>
+<h3><span class="header-section-number">4.5.9</span> AR(1) Model on Schools Data</h3>
 <p>This is not in the book.</p>
 <p>We fit an AR(1) time series model to the schools data.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># keep only schools with observed scores for all 3 years</span>
@@ -1284,7 +1303,7 @@ The correlation in test scores at the same school, two year2 apart is estimated 
 <p>There are entire statistics courses and texts on Time Series. These are especially relevant in economics. For more information, see books such as <a href="https://otexts.com/fpp2/">this one</a>.</p>
 </div>
 <div id="non-longitudinal-multilevel-models" class="section level3">
-<h3><span class="header-section-number">4.5.7</span> Non-longitudinal Multilevel Models</h3>
+<h3><span class="header-section-number">4.5.10</span> Non-longitudinal Multilevel Models</h3>
 <p>The variance-covariance structure seen here can be generalized to models that do not involve time as well.</p>
 <p>For example, in the musicians study from Chapter 8, Level One observational units are musical performances rather than time points.</p>
 <p>The standard model implies the following covariance structure for Musician <span class="math inline">\(i\)</span> in Model C, which uses an indicator for large ensembles as a Level One predictor:</p>
@@ -1313,7 +1332,7 @@ Cov(Y_{ij},Y_{ik}) &amp; = \sigma_{u}^{2} + \textrm{Large}_{ij}\textrm{Large}_{i
 \]</span></p>
 </div>
 <div id="final-thoughts-regarding-covariance-structures" class="section level3">
-<h3><span class="header-section-number">4.5.8</span> Final Thoughts Regarding Covariance Structures</h3>
+<h3><span class="header-section-number">4.5.11</span> Final Thoughts Regarding Covariance Structures</h3>
 <ul>
 <li><p>choice of covariance matrix does not greatly affect estimates of fixed effects.</p></li>
 <li><p>choice of covariance structure could potentially impact the standard errors of fixed effects, but does not appear to have much impact in this situation.</p></li>

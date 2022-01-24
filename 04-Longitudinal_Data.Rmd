@@ -306,7 +306,7 @@ summary(model.a)
 
 - $\widehat{\alpha}_{0}$ = 652.7 = the mean math score across all schools and all years
 
-- $\widehat{\sigma}_u$= 41.9 = the standard deviation in average math scores (averaging across the tree years), for different schools (tells us on average, how much do average scores differ between schools?)      
+- $\widehat{\sigma}_u$= 6.47= the standard deviation in average math scores (averaging across the tree years), for different schools (tells us on average, how much do average scores differ between schools?)      
 
 - $\widehat{\sigma}$= 3.25 = the standard deviation in math scores for the same school between different years (tells us how much scores vary from year to year in the same school)      
 
@@ -755,6 +755,7 @@ where
 
 * $Cov(Y_{i1},Y_{i2})$ is the covariance between 2008 and 2009 test scores (times $j=1$ and $j=2$), etc.  
 
+* $Cov(Y_{i1},Y_{i3})$ is the covariance between 2008 and 2010 test scores (times $j=1$ and $j=2$), etc.  
 
 * We expect positive values for all three covariance terms in $Cov(\mathbf{Y}_i)$, since schools with relatively high test scores in 2008 are likely to also have relatively high test scores in 2009 or 2010.  
 
@@ -809,9 +810,13 @@ Cov(Y_{ij},Y_{ik}) & = Cov(u_{i}+ v_{i}\textrm{Year08}_{ij}+\epsilon_{ij}, u_{i}
 \end{align*}
 $$
 
-**Intuition: **
+### Interpretations of $Var(Y_{i1})$ and $Cov(Y_{ij}, Y_{ik})$    
 
-* $Var(Y_{i1})$, the uncertainty (variability) around a school's score in 2008, increases as the uncertainty in intercepts (measured by $\sigma^2_u$) and slopes (measured by $\sigma^2_v$) increases, as the uncertainty around that school's linear time trend (measured by $\sigma^2$) increases, and as the covariance between intercept and slope residuals increases (measured by $\sigma_{uv}$), since if one is off, the other one is likely off as well.  
+* $Var(Y_{i1})$, the uncertainty (variability) around a school's score in 2008, increases as the uncertainty in intercepts (measured by $\sigma^2_u$) and slopes (measured by $\sigma^2_v$) increases, and as the uncertainty around that school's linear time trend (measured by $\sigma^2$) increases, and as covariance between intercept and slope residuals increases (measured by $\sigma_{uv}$), since if one is off, the other one is likely off as well.  
+
+* $Cov(Y_{ij}, Y_{ik})$ depends only on level two error terms($\sigma_u$, $\sigma_v$, $\sigma_{uv}$), not on year-to-year variability within the same school ($\sigma$)    
+
+### Variance and Covariance Estimates 
 
 We plug into these equations to estimate variance and covariance between individual observations.  
 
@@ -854,10 +859,19 @@ $Corr(Y_{1},Y_{2})=\frac{Cov(Y_{1},Y_{2})}{\sqrt{Var(Y_{1}) Var(Y_{2})}}$:
 
 - observations at the same school in different years are highly correlated     
 
-- correlation is estimated to decrease as years get farther apart (though differences are not dramatic in this case)   
-
-
 This model required estimating four parameters associated with the variance-covariance structure: $\sigma^2_u$, $\sigma^2_v$, $\sigma_{uv}$, and $\sigma^2$.   
+
+### Alternative Covariance Structure - Uncorrelated     
+
+In a LLSR model, we assume observations to be independent and following an identical distribution with variance $\sigma^2$.   
+
+\[ \widehat{Cov}(Y_{i1},Y_{i2},Y_{i3}) =  \left[
+          \begin{array}{cccc}
+            \sigma^2 & 0  &  0 \\
+            0 & \sigma^2 & 0 \\
+            0 & 0 & \sigma^2
+          \end{array} \right] \]
+
 
 ### Alternative Covariance Structure - Unstructured
 

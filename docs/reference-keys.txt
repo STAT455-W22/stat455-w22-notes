@@ -176,6 +176,9 @@ illustration
 covariance-structure-among-observations
 standard-covariance-structure
 derivation-of-vary_i1-optional
+interpretations-of-vary_i1-and-covy_ij-y_ik
+variance-and-covariance-estimates
+alternative-covariance-structure---uncorrelated
 alternative-covariance-structure---unstructured
 alternative-covariance-structure---compound-symmetry
 alternative-covariance-structure---autogregressive
