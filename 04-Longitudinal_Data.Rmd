@@ -612,7 +612,7 @@ The performance of this model is very similar to the quadratic growth model by A
 
 Despite the good performances of the quadratic growth and piecewise linear models on our three-year window of data, we will continue to use linear growth assumptions in the remainder of this chapter.  Not only is a linear model easier to interpret and explain, but it's probably a more reasonable assumption in years beyond 2010.  Predicting future performance is more risky by assuming a steep one-year rise or a non-linear rise will continue, rather than by using the average increase over two years.
 
-## Building to a Final Model 
+## Model for School Type     
 
 ### Uncontrolled Effects of School Type 
 
