@@ -251,7 +251,7 @@ $$
 
 where $t_i\sim N(0, \sigma^2_t)$, $p_{ij}\sim N(0, \sigma^2_p)$, $s_{ijk}\sim N(0, \sigma^2_s)$,and $\epsilon_{ijkl}\sim N(0, \sigma^2)$
 
-This model involves random intercepts for each tray($t_i$), pot($p_{ij}$), plant ($f_{ijk}$), in addition to a random error term $\eplsilon{ijkl}$ capturing random differences between measurements on the same plant over time. 
+This model involves random intercepts for each tray($t_i$), pot($p_{ij}$), plant ($f_{ijk}$), in addition to a random error term $\epsilon{ijkl}$ capturing random differences between measurements on the same plant over time. 
 
 In addition to the assumptions of model 1, it assumes each plant grows at the same rate over time, after accounting for the fixed effects in the model.   
 
