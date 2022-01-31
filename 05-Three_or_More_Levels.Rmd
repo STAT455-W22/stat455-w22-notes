@@ -62,7 +62,7 @@ head(plants, 20)
 2. What are the observational units at each level? What are the treatments or variables?   
 
 
-### Three Level Random Intercepts Model in R
+### Three Level Model 
 
 Let $Y_{ijk}$ represent the height of plant $k$ in pot $j$ in tray $i$. A possible model is:  
 
@@ -85,7 +85,7 @@ The model includes 3 random effects:
 
 The model does not include any random slope effects. This means we are assuming the effect of phenotype is the same in each pot, and the effect of fertilizer is the same in each tray.   
 
-### R Implementation of Three Level Random Intercepts Model 
+### R Implementation of Three Level Model 
 
 ```{r}
 M <- lmer(data=plants, height ~ window + fertA + phenoA  + (1|pot) + (1|tray))
@@ -228,6 +228,8 @@ plants <- plants %>% select(plantid, time, everything()) %>% arrange(plantid)
 head(plants, 20)
 ```
 
+### Levels and Variables
+
 Now, this is a 4-level dataset.  
 
 | Level | Observational Unit | Treatment or Variable |
@@ -238,7 +240,7 @@ Now, this is a 4-level dataset.
 | Level 4 | trays |  window | 
 
 
-#### Model for Longitudinal Plants Study
+### Model for Longitudinal Plants Study
 
 Let $Y_{ijkl}$ represent the height of plant $k$ in pot $j$ in tray $i$ at time $l$. A possible model is:  
 
@@ -249,7 +251,7 @@ Y_{ijkl} & = [\alpha_{0}+\alpha_{1}\textrm{Window}_{i}+\beta_{0}\textrm{FertA}_{
 \end{align*}
 $$
 
-where $t_i\sim N(0, \sigma^2_t)$, $p_{ij}\sim N(0, \sigma^2_p)$, $s_{ijk}\sim N(0, \sigma^2_s)$,and $\epsilon_{ijkl}\sim N(0, \sigma^2)$
+where $t_i\sim N(0, \sigma^2_t)$, $p_{ij}\sim N(0, \sigma^2_p)$, $f_{ijk}\sim N(0, \sigma^2_f)$,and $\epsilon_{ijkl}\sim N(0, \sigma^2)$
 
 This model involves random intercepts for each tray($t_i$), pot($p_{ij}$), plant ($f_{ijk}$), in addition to a random error term $\epsilon{ijkl}$ capturing random differences between measurements on the same plant over time. 
 
@@ -276,7 +278,7 @@ We could add a random error term associated with the slope on time, to allow for
 
 $$
 \begin{align*}
-Y_{ij} & = [\beta_{0}+\beta_{1}\textrm{Window}_{i}+\beta_{2}\textrm{FertA}_{ij}+\beta_{3}\textrm{PhenoA}_{ijk} + \beta_{3}\textrm{Time}_{ijkl}] \\
+Y_{ijkl} & = [\alpha_{0}+\alpha_{1}\textrm{Window}_{i}+\beta_{0}\textrm{FertA}_{ij}+\gamma_{0}\textrm{PhenoA}_{ijk} + \delta_{0}\textrm{Time}_{ijkl}]  \\
  & \textrm{} + [t_{i}+ p_{ij} + f_{ijk} + g_{ijk}\textrm{Time}_{ijk} + \epsilon_{ijkl}],
 \end{align*}
 $$
@@ -313,7 +315,7 @@ We could also allow the effect of phenotype to vary between pots and the effect 
 
 $$
 \begin{align*}
-Y_{ij} & = [\beta_{0}+\beta_{1}\textrm{Window}_{i}+\beta_{2}\textrm{FertA}_{ij}+\beta_{3}\textrm{PhenoA}_{ijk} + \beta_{3}\textrm{Time}_{ijkl}] \\
+Y_{ijk} & = [\beta_{0}+\beta_{1}\textrm{Window}_{i}+\beta_{2}\textrm{FertA}_{ij}+\beta_{3}\textrm{PhenoA}_{ijk} + \beta_{3}\textrm{Time}_{ijkl}] \\
  & \textrm{} + [t_{i}+ s_i\textrm{fertA}_i + p_{ij} + q_{ij}\textrm{phenoA}_{ij} + f_{ijk} + g_{ijk}\textrm{Time}_{ijk} + \epsilon_{ijkl}],
 \end{align*}
 $$

@@ -191,8 +191,8 @@ three-level-plants-experiment
 experimental-design
 the-data-1
 questions
-three-level-random-intercepts-model-in-r
-r-implementation-of-three-level-random-intercepts-model
+three-level-model
+r-implementation-of-three-level-model
 inappropriate-llsr-model
 three-level-model-with-random-slopes
 random-slope-for-phenoa
@@ -202,6 +202,7 @@ r-output-for-random-slope-for-fert
 boundary-constraints
 longitudinal-component-to-plants-data
 repeated-measures-over-time
+levels-and-variables
 model-for-longitudinal-plants-study
 r-output-for-longitudinal-model
 four-level-longitudinal-model-with-random-slopes

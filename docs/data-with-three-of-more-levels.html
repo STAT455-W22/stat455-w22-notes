@@ -23,7 +23,7 @@
 
 
 
-<meta name="date" content="2022-01-30" />
+<meta name="date" content="2022-01-31" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -312,8 +312,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="5.1.1" data-path="data-with-three-of-more-levels.html"><a href="data-with-three-of-more-levels.html#experimental-design"><i class="fa fa-check"></i><b>5.1.1</b> Experimental Design</a></li>
 <li class="chapter" data-level="5.1.2" data-path="data-with-three-of-more-levels.html"><a href="data-with-three-of-more-levels.html#the-data-1"><i class="fa fa-check"></i><b>5.1.2</b> The Data</a></li>
 <li class="chapter" data-level="5.1.3" data-path="data-with-three-of-more-levels.html"><a href="data-with-three-of-more-levels.html#questions"><i class="fa fa-check"></i><b>5.1.3</b> Questions</a></li>
-<li class="chapter" data-level="5.1.4" data-path="data-with-three-of-more-levels.html"><a href="data-with-three-of-more-levels.html#three-level-random-intercepts-model-in-r"><i class="fa fa-check"></i><b>5.1.4</b> Three Level Random Intercepts Model in R</a></li>
-<li class="chapter" data-level="5.1.5" data-path="data-with-three-of-more-levels.html"><a href="data-with-three-of-more-levels.html#r-implementation-of-three-level-random-intercepts-model"><i class="fa fa-check"></i><b>5.1.5</b> R Implementation of Three Level Random Intercepts Model</a></li>
+<li class="chapter" data-level="5.1.4" data-path="data-with-three-of-more-levels.html"><a href="data-with-three-of-more-levels.html#three-level-model"><i class="fa fa-check"></i><b>5.1.4</b> Three Level Model</a></li>
+<li class="chapter" data-level="5.1.5" data-path="data-with-three-of-more-levels.html"><a href="data-with-three-of-more-levels.html#r-implementation-of-three-level-model"><i class="fa fa-check"></i><b>5.1.5</b> R Implementation of Three Level Model</a></li>
 <li class="chapter" data-level="5.1.6" data-path="data-with-three-of-more-levels.html"><a href="data-with-three-of-more-levels.html#inappropriate-llsr-model"><i class="fa fa-check"></i><b>5.1.6</b> Inappropriate LLSR Model</a></li>
 </ul></li>
 <li class="chapter" data-level="5.2" data-path="data-with-three-of-more-levels.html"><a href="data-with-three-of-more-levels.html#three-level-model-with-random-slopes"><i class="fa fa-check"></i><b>5.2</b> Three-Level Model with Random Slopes</a><ul>
@@ -325,7 +325,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="5.3" data-path="data-with-three-of-more-levels.html"><a href="data-with-three-of-more-levels.html#longitudinal-component-to-plants-data"><i class="fa fa-check"></i><b>5.3</b> Longitudinal Component to Plants Data</a><ul>
 <li class="chapter" data-level="5.3.1" data-path="data-with-three-of-more-levels.html"><a href="data-with-three-of-more-levels.html#repeated-measures-over-time"><i class="fa fa-check"></i><b>5.3.1</b> Repeated Measures over Time</a></li>
-<li class="chapter" data-level="5.3.2" data-path="data-with-three-of-more-levels.html"><a href="data-with-three-of-more-levels.html#r-output-for-longitudinal-model"><i class="fa fa-check"></i><b>5.3.2</b> R Output for Longitudinal Model</a></li>
+<li class="chapter" data-level="5.3.2" data-path="data-with-three-of-more-levels.html"><a href="data-with-three-of-more-levels.html#levels-and-variables"><i class="fa fa-check"></i><b>5.3.2</b> Levels and Variables</a></li>
+<li class="chapter" data-level="5.3.3" data-path="data-with-three-of-more-levels.html"><a href="data-with-three-of-more-levels.html#model-for-longitudinal-plants-study"><i class="fa fa-check"></i><b>5.3.3</b> Model for Longitudinal Plants Study</a></li>
+<li class="chapter" data-level="5.3.4" data-path="data-with-three-of-more-levels.html"><a href="data-with-three-of-more-levels.html#r-output-for-longitudinal-model"><i class="fa fa-check"></i><b>5.3.4</b> R Output for Longitudinal Model</a></li>
 </ul></li>
 <li class="chapter" data-level="5.4" data-path="data-with-three-of-more-levels.html"><a href="data-with-three-of-more-levels.html#four-level-longitudinal-model-with-random-slopes"><i class="fa fa-check"></i><b>5.4</b> Four-Level Longitudinal Model with Random Slopes</a><ul>
 <li class="chapter" data-level="5.4.1" data-path="data-with-three-of-more-levels.html"><a href="data-with-three-of-more-levels.html#random-slope-for-time"><i class="fa fa-check"></i><b>5.4.1</b> Random Slope for Time</a></li>
@@ -413,8 +415,8 @@ Figure 5.1: Potted Plant Experimental Design
 <li>What are the observational units at each level? What are the treatments or variables?</li>
 </ol>
 </div>
-<div id="three-level-random-intercepts-model-in-r" class="section level3">
-<h3><span class="header-section-number">5.1.4</span> Three Level Random Intercepts Model in R</h3>
+<div id="three-level-model" class="section level3">
+<h3><span class="header-section-number">5.1.4</span> Three Level Model</h3>
 <p>Let <span class="math inline">\(Y_{ijk}\)</span> represent the height of plant <span class="math inline">\(k\)</span> in pot <span class="math inline">\(j\)</span> in tray <span class="math inline">\(i\)</span>. A possible model is:</p>
 <p><span class="math display">\[
 \begin{align*}
@@ -433,8 +435,8 @@ Y_{ij} &amp; = [\alpha_{0}+\alpha_{1}\textrm{Window}_{i}+\beta_{0}\textrm{FertA}
 </ul>
 <p>The model does not include any random slope effects. This means we are assuming the effect of phenotype is the same in each pot, and the effect of fertilizer is the same in each tray.</p>
 </div>
-<div id="r-implementation-of-three-level-random-intercepts-model" class="section level3">
-<h3><span class="header-section-number">5.1.5</span> R Implementation of Three Level Random Intercepts Model</h3>
+<div id="r-implementation-of-three-level-model" class="section level3">
+<h3><span class="header-section-number">5.1.5</span> R Implementation of Three Level Model</h3>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">M &lt;-<span class="st"> </span><span class="kw">lmer</span>(<span class="dt">data=</span>plants, height <span class="op">~</span><span class="st"> </span>window <span class="op">+</span><span class="st"> </span>fertA <span class="op">+</span><span class="st"> </span>phenoA  <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span><span class="op">|</span>pot) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span><span class="op">|</span>tray))
 <span class="kw">summary</span>(M)</code></pre></div>
 <pre><code>## Linear mixed model fit by REML. t-tests use Satterthwaite&#39;s method [
@@ -651,6 +653,9 @@ Y_{ijk} &amp; = [\alpha_{0}+\alpha_{1}\textrm{Window}_{i}+\beta_{0}\textrm{FertA
 ## 18       5    2    1   2      1     0      1 3.626215
 ## 19       5    3    1   2      1     0      1 4.687552
 ## 20       5    4    1   2      1     0      1 5.433369</code></pre>
+</div>
+<div id="levels-and-variables" class="section level3">
+<h3><span class="header-section-number">5.3.2</span> Levels and Variables</h3>
 <p>Now, this is a 4-level dataset.</p>
 <table>
 <thead>
@@ -683,8 +688,9 @@ Y_{ijk} &amp; = [\alpha_{0}+\alpha_{1}\textrm{Window}_{i}+\beta_{0}\textrm{FertA
 </tr>
 </tbody>
 </table>
-<div id="model-for-longitudinal-plants-study" class="section level4">
-<h4><span class="header-section-number">5.3.1.1</span> Model for Longitudinal Plants Study</h4>
+</div>
+<div id="model-for-longitudinal-plants-study" class="section level3">
+<h3><span class="header-section-number">5.3.3</span> Model for Longitudinal Plants Study</h3>
 <p>Let <span class="math inline">\(Y_{ijkl}\)</span> represent the height of plant <span class="math inline">\(k\)</span> in pot <span class="math inline">\(j\)</span> in tray <span class="math inline">\(i\)</span> at time <span class="math inline">\(l\)</span>. A possible model is:</p>
 <p><span class="math display">\[
 \begin{align*}
@@ -692,13 +698,12 @@ Y_{ijkl} &amp; = [\alpha_{0}+\alpha_{1}\textrm{Window}_{i}+\beta_{0}\textrm{Fert
  &amp; \textrm{} + [t_{i}+ p_{ij} + f_{ijk} + \epsilon_{ijkl}],
 \end{align*}
 \]</span></p>
-<p>where <span class="math inline">\(t_i\sim N(0, \sigma^2_t)\)</span>, <span class="math inline">\(p_{ij}\sim N(0, \sigma^2_p)\)</span>, <span class="math inline">\(s_{ijk}\sim N(0, \sigma^2_s)\)</span>,and <span class="math inline">\(\epsilon_{ijkl}\sim N(0, \sigma^2)\)</span></p>
+<p>where <span class="math inline">\(t_i\sim N(0, \sigma^2_t)\)</span>, <span class="math inline">\(p_{ij}\sim N(0, \sigma^2_p)\)</span>, <span class="math inline">\(f_{ijk}\sim N(0, \sigma^2_f)\)</span>,and <span class="math inline">\(\epsilon_{ijkl}\sim N(0, \sigma^2)\)</span></p>
 <p>This model involves random intercepts for each tray(<span class="math inline">\(t_i\)</span>), pot(<span class="math inline">\(p_{ij}\)</span>), plant (<span class="math inline">\(f_{ijk}\)</span>), in addition to a random error term <span class="math inline">\(\epsilon{ijkl}\)</span> capturing random differences between measurements on the same plant over time.</p>
 <p>In addition to the assumptions of model 1, it assumes each plant grows at the same rate over time, after accounting for the fixed effects in the model.</p>
 </div>
-</div>
 <div id="r-output-for-longitudinal-model" class="section level3">
-<h3><span class="header-section-number">5.3.2</span> R Output for Longitudinal Model</h3>
+<h3><span class="header-section-number">5.3.4</span> R Output for Longitudinal Model</h3>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">M5 &lt;-<span class="st"> </span><span class="kw">lmer</span>(<span class="dt">data=</span>plants, height <span class="op">~</span><span class="st"> </span>window <span class="op">+</span><span class="st"> </span>fertA <span class="op">+</span><span class="st"> </span>phenoA <span class="op">+</span><span class="st"> </span>time <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span><span class="op">|</span>tray) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span><span class="op">|</span>pot) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span><span class="op">|</span>plantid))
 <span class="kw">summary</span>(M5)</code></pre></div>
 <pre><code>## Linear mixed model fit by REML. t-tests use Satterthwaite&#39;s method [
@@ -748,7 +753,7 @@ Y_{ijkl} &amp; = [\alpha_{0}+\alpha_{1}\textrm{Window}_{i}+\beta_{0}\textrm{Fert
 <p>We could add a random error term associated with the slope on time, to allow for the possibility that individual plants grow at different rates, even after accounting for the fixed effects in the model</p>
 <p><span class="math display">\[
 \begin{align*}
-Y_{ij} &amp; = [\beta_{0}+\beta_{1}\textrm{Window}_{i}+\beta_{2}\textrm{FertA}_{ij}+\beta_{3}\textrm{PhenoA}_{ijk} + \beta_{3}\textrm{Time}_{ijkl}] \\
+Y_{ijkl} &amp; = [\alpha_{0}+\alpha_{1}\textrm{Window}_{i}+\beta_{0}\textrm{FertA}_{ij}+\gamma_{0}\textrm{PhenoA}_{ijk} + \delta_{0}\textrm{Time}_{ijkl}]  \\
  &amp; \textrm{} + [t_{i}+ p_{ij} + f_{ijk} + g_{ijk}\textrm{Time}_{ijk} + \epsilon_{ijkl}],
 \end{align*}
 \]</span></p>
@@ -813,7 +818,7 @@ Y_{ij} &amp; = [\beta_{0}+\beta_{1}\textrm{Window}_{i}+\beta_{2}\textrm{FertA}_{
 <p>We could also allow the effect of phenotype to vary between pots and the effect of fertilizer to vary between trays. This gives a model of the form:</p>
 <p><span class="math display">\[
 \begin{align*}
-Y_{ij} &amp; = [\beta_{0}+\beta_{1}\textrm{Window}_{i}+\beta_{2}\textrm{FertA}_{ij}+\beta_{3}\textrm{PhenoA}_{ijk} + \beta_{3}\textrm{Time}_{ijkl}] \\
+Y_{ijk} &amp; = [\beta_{0}+\beta_{1}\textrm{Window}_{i}+\beta_{2}\textrm{FertA}_{ij}+\beta_{3}\textrm{PhenoA}_{ijk} + \beta_{3}\textrm{Time}_{ijkl}] \\
  &amp; \textrm{} + [t_{i}+ s_i\textrm{fertA}_i + p_{ij} + q_{ij}\textrm{phenoA}_{ij} + f_{ijk} + g_{ijk}\textrm{Time}_{ijk} + \epsilon_{ijkl}],
 \end{align*}
 \]</span></p>
