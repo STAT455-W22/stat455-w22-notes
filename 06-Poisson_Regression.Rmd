@@ -105,7 +105,7 @@ In this example, we'll treat location as a fixed effect, since we're interested 
 On first thought, we might consider an ordinary LLSR model of the form 
 
 \[
-Y_i = \beta_0 + \beta_1\textrm{locationDavao}_i + \beta_2\textrm{locationIlocos}_i + \beta_3\textrm{locationMetroManila}_i + \beta_4\textrm{locationVisayas}_i + \epsilon_i
+Y_i = \beta_0 + \beta_1\textrm{locationDavao}_i + \beta_2\textrm{locationIlocos}_i + \\\beta_3\textrm{locationMetroManila}_i + \beta_4\textrm{locationVisayas}_i + \epsilon_i
 \]
 
 where $\epsilon_i\sim\mathcal{N}(0,\sigma^2)$
