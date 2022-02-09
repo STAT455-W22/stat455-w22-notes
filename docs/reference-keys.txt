@@ -217,8 +217,8 @@ additional-random-slopes
 r---model-with-additional-random-slopes
 when-not-to-add-random-slopes
 poisson-regression
+modeling-counts
 case-study-household-size-in-the-philippines
-data-description
 map-of-the-philippines
 questions-of-interest-2
 the-data-2

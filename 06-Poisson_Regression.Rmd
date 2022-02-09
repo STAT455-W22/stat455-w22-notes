@@ -27,9 +27,9 @@ if(knitr::is_html_output()){options(knitr.table.format = "html")} else {options(
 
 
 
-## Case Study: Household Size in the Philippines  
+## Modeling Counts
 
-### Data Description
+### Case Study: Household Size in the Philippines  
 
 From Roback & Legler's text: 
 
