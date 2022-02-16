@@ -1873,8 +1873,12 @@ AIC: 574.76
 
 Number of Fisher Scoring iterations: 6</code></pre>
 <p>The Northeast and the South differ significantly from the Central region (p= 0.00000037 and p=0.0000924, respectively).</p>
-<p>The estimated coefficient of 0.778 means that the violent crime rate per 1,000 in the Northeast is nearly 2.2 (<span class="math inline">\(e^{0.778}\)</span>) times that of the Central region controlling for the type of school.</p>
+<p>The estimated coefficient of 0.778 means that the violent crime rate per 1,000 in the Northeast is nearly (<span class="math inline">\(e^{0.778}=2.2\)</span>) times that of the Central region controlling for the type of school.</p>
 <p>A Wald-type confidence interval for this factor can be constructed by first calculating a CI for the coefficient (0.778 <span class="math inline">\(\pm\)</span> <span class="math inline">\(1.96 \cdot 0.153\)</span>) and then exponentiating (1.61 to 2.94).</p>
+<p>Expected number of crimes at a College in the Midwest with 1500 students.</p>
+<p><span class="math display">\[
+\lambda = e^{-1.54971 + 0.09913 + log(1.5)} =  1.5e^{-1.54971 + 0.09913)}=0.35
+\]</span></p>
 </div>
 <div id="model-with-interaction" class="section level3">
 <h3><span class="header-section-number">6.7.6</span> Model with Interaction</h3>
@@ -1917,7 +1921,7 @@ AIC: 505.9
 
 Number of Fisher Scoring iterations: 13</code></pre>
 <p>We have evidence that the difference between colleges and universities in violent crime rate differs by region.<br />
-For example, our model estimates that violent crime rates are 13.6 (<span class="math inline">\(e^{.196+2.411}\)</span>) times higher in universities in the West compared to colleges, while in the Northeast we estimate that violent crime rates are 2.4 (<span class="math inline">\(\frac{1}{e^{.196-1.070}}\)</span>) times higher in colleges.</p>
+For example, our model estimates that violent crime rates are (<span class="math inline">\(e^{.196+2.411}=13.6\)</span>) times higher in universities in the West compared to colleges, while in the Northeast we estimate that violent crime rates are (<span class="math inline">\(\frac{1}{e^{.196-1.070}}=2.4\)</span>) times higher in colleges.</p>
 </div>
 <div id="drop-in-deviance-test-for-interaction" class="section level3">
 <h3><span class="header-section-number">6.7.7</span> Drop-in-Deviance Test for Interaction</h3>
