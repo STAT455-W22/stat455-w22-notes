@@ -454,8 +454,8 @@ For each one-year increase in age of head of household, houshold size is expecte
 
 * Assuming we're comparing households in the same region, for each one-year increase in age of head of household, average household size is expected to multiply be a factor of $e^{-0.004598} = 0.9954$.   
 
-* Assuming we're comparing households in the same region, for each y-year increase in age of head of household, average household size is expected to multiply be a factor of $e^{-0.004598y}$.   
-    - For example expected household size for a 50 year old head of house is expected to be $e^{-.004598*10}$ times that of a 40 year old head of house (an estimated 4.5% decrease).    
+* Assuming we're comparing households in the same region, for each y-year increase in age of head of household, average household size is expected to multiply be a factor of $e^{-0.004598y}$.     
+    - For example expected household size for a 50 year old head of house is expected to be $e^{-.004598*10}=0.9551$ times that of a 40 year old head of house (an estimated 4.5% decrease), assuming region is held constant.     
     
     
 ### Mean = Variance Assumption      
@@ -693,7 +693,7 @@ We can also use a model's residual deviance to test whether it adequtely fits th
 Null Hypothesis: The model adequately fits the data    
 Alternative Hypothesis: The model does not adequately fit the data    
 
-When the null hypothesis is true, the model's residual deviance follows a $\cha^2$ distribution with $n-p$ degrees of freedom, where $p$ is number of parameters in the model.  
+When the null hypothesis is true, the model's residual deviance follows a $\chi^2$ distribution with $n-p$ degrees of freedom, where $p$ is number of parameters in the model.  
 
 ```{r}
 MP3$deviance
@@ -729,7 +729,11 @@ Recall that variance appeared to increase with age, a violation of the Mean=Vari
 
 When data are overdispersed, a Poisson regression model will underestimate standard errors, producing confidence intervals that are too narrow, and p-values that are too small. 
 
-We can estimate a dispersion parameter, $\hat\phi=\frac{\sum(\textrm{Pearson residuals})^2}{n-p}$, where $p$ is the number of model parameters. 
+We can estimate a dispersion parameter, 
+\[
+\hat{\phi}=\frac{\displaystyle\sum\left(\frac{Y_i-\hat{\lambda}_i}{\sqrt{\hat{\lambda_i}}}\right)^2}{n-p} 
+\]
+where $p$ is the number of model parameters. 
 
 We inflate the standard errors by multiplying the variance by $\hat{\phi}$ i.e., $SE_Q(\hat\beta)=\sqrt{\hat\phi}*SE(\hat\beta)$, where $Q$ stands for "quasi-Poisson" \index{quasi-Poisson} 
 
@@ -791,6 +795,190 @@ anova(MQP1, MQP, test = "F")
 After adjusting for overdispersion, we still have statistically significant evidence that the quadratic model is preferred.  
 
 
+## Offsets in Poisson Regression
+
+### Case Study: Campus Crime
+
+We examine data on the number of crimes reported in a year on college campuses. Each row of `c_data.csv` contains crime information from a post secondary institution, either a college or university. The variables include:
+
+- `Enrollment` = enrollment at the school
+- `type` =  college (C) or university (U)
+- `nv` = the number of violent crimes for that institution for the given year
+- `nvrate` = number of violent crimes per 1000 students
+- `enroll1000` = enrollment at the school, in thousands
+- `region` = region of the country (C = Central, MW = Midwest, NE = Northeast, SE = Southeast, SW = Southwest, and W = West)
+
+```{r}
+#Getting started-Crime
+# Crime data for Universities and Colleges
+c.data <- read_csv("https://raw.githubusercontent.com/proback/BeyondMLR/master/data/c_data.csv")
+head(c.data, n=10)
+```
+
+### Distribution of Number of Crimes
+
+```{r, nviolent, fig.align="center",out.width="60%", fig.cap='Histogram of number of violent crimes by institution.',echo=FALSE, warning=FALSE, message=FALSE}
+ggplot(c.data, aes(x=nv)) + 
+  geom_histogram(bins = 15, color = "black", fill = "white") +
+  xlab("Number of violent crimes")
+```
+
+Since crimes are nonnegative counts, a Poisson model seems reasonable. 
+
+
+### Crimes by Type of Institution and Region
+```{r, regions, echo=FALSE}
+table2chp4 <- with(c.data,round(prop.table(table(type,region),2),3)) 
+kable(table2chp4, booktabs=T, caption = 'Proportion of colleges and universities within region in the campus crime data set.')
+```
+
+
+* Counts are not directly comparable because they come from different size schools. Instead, we'll display crimes per 1000 students.  
+
+
+```{r, table4ch4, echo=FALSE, message=FALSE}
+# Removing Outlier
+c.data <- c.data %>% 
+  filter(nvrate<5)
+# Checking mean=variance assumption 
+table4ch4 <- c.data %>%
+    group_by(region, type) %>%
+    dplyr::summarize(MeanCount = mean(nv, na.rm=TRUE),
+              VarCount = var(nv, na.rm=TRUE),
+              MeanRate = mean(nvrate, na.rm=TRUE),
+              VarRate = var(nvrate, na.rm=TRUE),
+              n = n())
+kable(table4ch4, booktabs=T, caption = 'The mean and variance of the violent crime rate by region and type of institution.')
+```
+
+```{r, boxtyperegion, fig.align="center",out.width="60%", fig.cap='Boxplot of violent crime rate by region and type of institution (colleges (C) on the left, and universities (U) on the right).',echo=FALSE, warning=FALSE, message=FALSE}
+#Insert boxplot without the outlier and combining S and SE
+ggplot(c.data, aes(x = region, y = nvrate, fill = type)) +
+  geom_boxplot() +
+  ylab("Violent crimes per 1000 students")
+```
+
+Mean violent crime rates that are generally lower at the colleges within a region (with the exception of the Northeast). 
+
+Regional pattern of rates at universities appears to differ from that of the colleges.
+
+### Accounting for Enrollment
+
+Although we used rates (per 1000 students) for the plots, we want to use actual number of crimes when we fit the Poisson model (since a Poisson distribution requires integer counts).   
+
+We account for enrollment by including an **offset** in our model. Rather than letting $log(\lambda)$ be a linear function of the explanatory variables, we use $log\left(\frac{\lambda}{\text{enroll1000}}\right)$. 
+
+Thus, 
+
+$$
+\begin{align*} 
+log(\frac{\lambda}{\textrm{enroll1000}} )= \beta_0 + \beta_1(\textrm{type}) \nonumber \\
+log(\lambda)-log(\textrm{enroll1000}) = \beta_0 + \beta_1(\textrm{type}) \nonumber \\
+log(\lambda) = \beta_0 + \beta_1(\textrm{type}) + log(\textrm{enroll1000})
+\end{align*}
+$$
+
+So, the expected number of crimes at a school in a given year is:
+
+\[
+\lambda = e^{\beta_0 + \beta_1(\text{type}) + log(\text{enroll1000})} =  e^{\beta_0 + \beta_1(\text{type})}(\text{enroll1000})
+\]
+
+
+### Offset in R
+
+We model number of crimes using type of institution and region as explanatory variables. To do this, we add an argument called `offset` in the model. 
+
+```{r, comment = NA}
+modeltr <- glm(nv ~ type + region, family = poisson,
+               offset = log(enroll1000), data = c.data)
+summary(modeltr)
+```
+
+The Northeast and the South differ significantly from the Central region (p= 0.00000037 and p=0.0000924, respectively). 
+
+The estimated coefficient of 0.778 means that the violent crime rate per 1,000 in the Northeast is nearly 2.2 ($e^{0.778}$) times that of the Central region controlling for the type of school. 
+
+A Wald-type confidence interval for this factor can be constructed by first calculating a CI for the coefficient (0.778 $\pm$ $1.96 \cdot 0.153$) and then exponentiating (1.61 to 2.94). 
+
+### Model with Interaction
+
+Our plots suggested the difference between colleges and universities might vary between regions. To allow for this, we add an interaction term in the model.  
+
+```{r, comment = NA}
+modeli <- glm(nv ~ type + region + region:type, 
+              family = poisson,
+              offset = log(enroll1000), data = c.data)
+summary(modeli)
+```
+
+We have evidence that the difference between colleges and universities in violent crime rate differs by region.    
+For example, our model estimates that violent crime rates are 13.6 ($e^{.196+2.411}$) times higher in universities in the West compared to colleges, while in the Northeast we estimate that violent crime rates are 2.4 ($\frac{1}{e^{.196-1.070}}$) times higher in colleges.
+
+### Drop-in-Deviance Test for Interaction
+
+```{r comment=NA, message=FALSE}
+drop_in_dev <- anova(modeltr, modeli, test = "Chisq")
+drop_in_dev
+```
+
+We have statistically significant evidence ($\chi^2=71.98, df=4, p<.001$) that the difference between colleges and universities in violent crime rate differs by region.    
+
+```{r comment=NA, message=F, echo=F}
+did_print <- data.frame(ResidDF=drop_in_dev$`Resid. Df`,
+    ResidDev=drop_in_dev$`Resid. Dev`,
+    Deviance=drop_in_dev$Deviance, Df=drop_in_dev$Df,
+    pval=drop_in_dev$`Pr(>Chi)`)
+row.names(did_print) <- row.names(drop_in_dev)
+did_print
+```
+
+### Goodness of Fit Test
+
+We perform a goodness of fit test to test whether the interaction model adequately fits the data. 
+
+```{r, comment=NA}
+1-pchisq(modeli$deviance, modeli$df.residual) 
+```
+
+
+```{r, fig.height=3, fig.width=6}
+gf_dist("chisq", df = 70, geom = "area", fill = "turquoise") + 
+  geom_vline(xintercept=276.7038, colour="red")  + theme(legend.position="none") + ylim(c(0,0.05))
+```
+
+There is strong evidence of a lack of fit. 
+
+We don't have any other explanatory variables, and nonlinear terms don't make sense for categorical explanatory variables. 
+
+The issue is likely due to overdispersion.  
+
+### Quasi-Poisson Model
+
+```{r, comment = NA}
+modeliq <- glm(nv ~ type + region + region:type, 
+               family = quasipoisson,
+               offset = log(enroll1000), data = c.data)
+summary(modeliq)
+```
+
+The dispersion parameter of 4.45 suggests the data are highly overdispersed. Standard errors from the original Poisson model will be too low, making intervals and tests unreliable. 
+
+### Test for Interaction
+
+We previously found evidence that the difference between colleges and universities in violent crime rate differs by region. 
+That test, however, was based on a model that  was not appropriate. 
+
+We repeat the test, using the  quasipoisson model, and associated F-test. 
+
+```{r comment=NA, message=F}
+modeltrq <- glm(nv ~ type + region, family = quasipoisson,
+               offset = log(enroll1000), data = c.data)
+drop_in_dev <- anova(modeltrq, modeliq, test = "F")
+drop_in_dev
+```
+
+Even after adjusting for overdispersion, we still have statistically significant evidence ($F=4.05, p=.0052$) that the difference between colleges and universities in violent crime rate differs by region.  
 
 ## Summaries
 

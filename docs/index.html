@@ -23,7 +23,7 @@
 
 
 
-<meta name="date" content="2022-02-09" />
+<meta name="date" content="2022-02-16" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -394,9 +394,21 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="6.6.4" data-path="poisson-regression.html"><a href="poisson-regression.html#drop-in-deviance-tests-for-quasi-poisson-model"><i class="fa fa-check"></i><b>6.6.4</b> Drop-in-Deviance Tests for Quasi-Poisson Model</a></li>
 <li class="chapter" data-level="6.6.5" data-path="poisson-regression.html"><a href="poisson-regression.html#first-vs-second-order-quasi-poisson-models"><i class="fa fa-check"></i><b>6.6.5</b> First vs Second Order Quasi-Poisson Models</a></li>
 </ul></li>
-<li class="chapter" data-level="6.7" data-path="poisson-regression.html"><a href="poisson-regression.html#summaries"><i class="fa fa-check"></i><b>6.7</b> Summaries</a><ul>
-<li class="chapter" data-level="6.7.1" data-path="poisson-regression.html"><a href="poisson-regression.html#llsr-vs.-poisson-regression-comparison"><i class="fa fa-check"></i><b>6.7.1</b> LLSR vs. Poisson Regression Comparison</a></li>
-<li class="chapter" data-level="6.7.2" data-path="poisson-regression.html"><a href="poisson-regression.html#poisson-vs-quasi-poisson-inference"><i class="fa fa-check"></i><b>6.7.2</b> Poisson vs Quasi-Poisson Inference</a></li>
+<li class="chapter" data-level="6.7" data-path="poisson-regression.html"><a href="poisson-regression.html#offsets-in-poisson-regression"><i class="fa fa-check"></i><b>6.7</b> Offsets in Poisson Regression</a><ul>
+<li class="chapter" data-level="6.7.1" data-path="poisson-regression.html"><a href="poisson-regression.html#case-study-campus-crime"><i class="fa fa-check"></i><b>6.7.1</b> Case Study: Campus Crime</a></li>
+<li class="chapter" data-level="6.7.2" data-path="poisson-regression.html"><a href="poisson-regression.html#distribution-of-number-of-crimes"><i class="fa fa-check"></i><b>6.7.2</b> Distribution of Number of Crimes</a></li>
+<li class="chapter" data-level="6.7.3" data-path="poisson-regression.html"><a href="poisson-regression.html#crimes-by-type-of-institution-and-region"><i class="fa fa-check"></i><b>6.7.3</b> Crimes by Type of Institution and Region</a></li>
+<li class="chapter" data-level="6.7.4" data-path="poisson-regression.html"><a href="poisson-regression.html#accounting-for-enrollment"><i class="fa fa-check"></i><b>6.7.4</b> Accounting for Enrollment</a></li>
+<li class="chapter" data-level="6.7.5" data-path="poisson-regression.html"><a href="poisson-regression.html#offset-in-r"><i class="fa fa-check"></i><b>6.7.5</b> Offset in R</a></li>
+<li class="chapter" data-level="6.7.6" data-path="poisson-regression.html"><a href="poisson-regression.html#model-with-interaction"><i class="fa fa-check"></i><b>6.7.6</b> Model with Interaction</a></li>
+<li class="chapter" data-level="6.7.7" data-path="poisson-regression.html"><a href="poisson-regression.html#drop-in-deviance-test-for-interaction"><i class="fa fa-check"></i><b>6.7.7</b> Drop-in-Deviance Test for Interaction</a></li>
+<li class="chapter" data-level="6.7.8" data-path="poisson-regression.html"><a href="poisson-regression.html#goodness-of-fit-test"><i class="fa fa-check"></i><b>6.7.8</b> Goodness of Fit Test</a></li>
+<li class="chapter" data-level="6.7.9" data-path="poisson-regression.html"><a href="poisson-regression.html#quasi-poisson-model-1"><i class="fa fa-check"></i><b>6.7.9</b> Quasi-Poisson Model</a></li>
+<li class="chapter" data-level="6.7.10" data-path="poisson-regression.html"><a href="poisson-regression.html#test-for-interaction"><i class="fa fa-check"></i><b>6.7.10</b> Test for Interaction</a></li>
+</ul></li>
+<li class="chapter" data-level="6.8" data-path="poisson-regression.html"><a href="poisson-regression.html#summaries"><i class="fa fa-check"></i><b>6.8</b> Summaries</a><ul>
+<li class="chapter" data-level="6.8.1" data-path="poisson-regression.html"><a href="poisson-regression.html#llsr-vs.-poisson-regression-comparison"><i class="fa fa-check"></i><b>6.8.1</b> LLSR vs. Poisson Regression Comparison</a></li>
+<li class="chapter" data-level="6.8.2" data-path="poisson-regression.html"><a href="poisson-regression.html#poisson-vs-quasi-poisson-inference"><i class="fa fa-check"></i><b>6.8.2</b> Poisson vs Quasi-Poisson Inference</a></li>
 </ul></li>
 </ul></li>
 <li class="divider"></li>
@@ -420,7 +432,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
             <section class="normal" id="section-">
 <div id="header">
 <h1 class="title">Stat 455: Advanced Statistical Modeling Notes</h1>
-<p class="date"><em>2022-02-09</em></p>
+<p class="date"><em>2022-02-16</em></p>
 </div>
 <div id="preface" class="section level1 unnumbered">
 <h1>Preface</h1>

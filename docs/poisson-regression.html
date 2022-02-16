@@ -23,7 +23,7 @@
 
 
 
-<meta name="date" content="2022-02-09" />
+<meta name="date" content="2022-02-16" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -394,9 +394,21 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="6.6.4" data-path="poisson-regression.html"><a href="poisson-regression.html#drop-in-deviance-tests-for-quasi-poisson-model"><i class="fa fa-check"></i><b>6.6.4</b> Drop-in-Deviance Tests for Quasi-Poisson Model</a></li>
 <li class="chapter" data-level="6.6.5" data-path="poisson-regression.html"><a href="poisson-regression.html#first-vs-second-order-quasi-poisson-models"><i class="fa fa-check"></i><b>6.6.5</b> First vs Second Order Quasi-Poisson Models</a></li>
 </ul></li>
-<li class="chapter" data-level="6.7" data-path="poisson-regression.html"><a href="poisson-regression.html#summaries"><i class="fa fa-check"></i><b>6.7</b> Summaries</a><ul>
-<li class="chapter" data-level="6.7.1" data-path="poisson-regression.html"><a href="poisson-regression.html#llsr-vs.-poisson-regression-comparison"><i class="fa fa-check"></i><b>6.7.1</b> LLSR vs. Poisson Regression Comparison</a></li>
-<li class="chapter" data-level="6.7.2" data-path="poisson-regression.html"><a href="poisson-regression.html#poisson-vs-quasi-poisson-inference"><i class="fa fa-check"></i><b>6.7.2</b> Poisson vs Quasi-Poisson Inference</a></li>
+<li class="chapter" data-level="6.7" data-path="poisson-regression.html"><a href="poisson-regression.html#offsets-in-poisson-regression"><i class="fa fa-check"></i><b>6.7</b> Offsets in Poisson Regression</a><ul>
+<li class="chapter" data-level="6.7.1" data-path="poisson-regression.html"><a href="poisson-regression.html#case-study-campus-crime"><i class="fa fa-check"></i><b>6.7.1</b> Case Study: Campus Crime</a></li>
+<li class="chapter" data-level="6.7.2" data-path="poisson-regression.html"><a href="poisson-regression.html#distribution-of-number-of-crimes"><i class="fa fa-check"></i><b>6.7.2</b> Distribution of Number of Crimes</a></li>
+<li class="chapter" data-level="6.7.3" data-path="poisson-regression.html"><a href="poisson-regression.html#crimes-by-type-of-institution-and-region"><i class="fa fa-check"></i><b>6.7.3</b> Crimes by Type of Institution and Region</a></li>
+<li class="chapter" data-level="6.7.4" data-path="poisson-regression.html"><a href="poisson-regression.html#accounting-for-enrollment"><i class="fa fa-check"></i><b>6.7.4</b> Accounting for Enrollment</a></li>
+<li class="chapter" data-level="6.7.5" data-path="poisson-regression.html"><a href="poisson-regression.html#offset-in-r"><i class="fa fa-check"></i><b>6.7.5</b> Offset in R</a></li>
+<li class="chapter" data-level="6.7.6" data-path="poisson-regression.html"><a href="poisson-regression.html#model-with-interaction"><i class="fa fa-check"></i><b>6.7.6</b> Model with Interaction</a></li>
+<li class="chapter" data-level="6.7.7" data-path="poisson-regression.html"><a href="poisson-regression.html#drop-in-deviance-test-for-interaction"><i class="fa fa-check"></i><b>6.7.7</b> Drop-in-Deviance Test for Interaction</a></li>
+<li class="chapter" data-level="6.7.8" data-path="poisson-regression.html"><a href="poisson-regression.html#goodness-of-fit-test"><i class="fa fa-check"></i><b>6.7.8</b> Goodness of Fit Test</a></li>
+<li class="chapter" data-level="6.7.9" data-path="poisson-regression.html"><a href="poisson-regression.html#quasi-poisson-model-1"><i class="fa fa-check"></i><b>6.7.9</b> Quasi-Poisson Model</a></li>
+<li class="chapter" data-level="6.7.10" data-path="poisson-regression.html"><a href="poisson-regression.html#test-for-interaction"><i class="fa fa-check"></i><b>6.7.10</b> Test for Interaction</a></li>
+</ul></li>
+<li class="chapter" data-level="6.8" data-path="poisson-regression.html"><a href="poisson-regression.html#summaries"><i class="fa fa-check"></i><b>6.8</b> Summaries</a><ul>
+<li class="chapter" data-level="6.8.1" data-path="poisson-regression.html"><a href="poisson-regression.html#llsr-vs.-poisson-regression-comparison"><i class="fa fa-check"></i><b>6.8.1</b> LLSR vs. Poisson Regression Comparison</a></li>
+<li class="chapter" data-level="6.8.2" data-path="poisson-regression.html"><a href="poisson-regression.html#poisson-vs-quasi-poisson-inference"><i class="fa fa-check"></i><b>6.8.2</b> Poisson vs Quasi-Poisson Inference</a></li>
 </ul></li>
 </ul></li>
 <li class="divider"></li>
@@ -805,7 +817,7 @@ log \left(\frac{\lambda_{a+1}}{\lambda_a}\right)   &amp;= \beta_1\\
 <li><p>Assuming we're comparing households in the same region, for each one-year increase in age of head of household, average household size is expected to multiply be a factor of <span class="math inline">\(e^{-0.004598} = 0.9954\)</span>.</p></li>
 <li>Assuming we're comparing households in the same region, for each y-year increase in age of head of household, average household size is expected to multiply be a factor of <span class="math inline">\(e^{-0.004598y}\)</span>.
 <ul>
-<li>For example expected household size for a 50 year old head of house is expected to be <span class="math inline">\(e^{-.004598*10}\)</span> times that of a 40 year old head of house (an estimated 4.5% decrease).</li>
+<li>For example expected household size for a 50 year old head of house is expected to be <span class="math inline">\(e^{-.004598*10}=0.9551\)</span> times that of a 40 year old head of house (an estimated 4.5% decrease), assuming region is held constant.</li>
 </ul></li>
 </ul>
 </div>
@@ -1259,7 +1271,7 @@ Model 2: total ~ age + age2 + location + roof
 <p>We can also use a model's residual deviance to test whether it adequtely fits the data.</p>
 <p>Null Hypothesis: The model adequately fits the data<br />
 Alternative Hypothesis: The model does not adequately fit the data</p>
-<p>When the null hypothesis is true, the model's residual deviance follows a <span class="math inline">\(\cha^2\)</span> distribution with <span class="math inline">\(n-p\)</span> degrees of freedom, where <span class="math inline">\(p\)</span> is number of parameters in the model.</p>
+<p>When the null hypothesis is true, the model's residual deviance follows a <span class="math inline">\(\chi^2\)</span> distribution with <span class="math inline">\(n-p\)</span> degrees of freedom, where <span class="math inline">\(p\)</span> is number of parameters in the model.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">MP3<span class="op">$</span>deviance</code></pre></div>
 <pre><code>## [1] 2187.8</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">MP3<span class="op">$</span>df.residual</code></pre></div>
@@ -1281,7 +1293,9 @@ Alternative Hypothesis: The model does not adequately fit the data</p>
 <h3><span class="header-section-number">6.6.1</span> Quasi-Poisson Model</h3>
 <p><strong>Overdispersion</strong> occurs when there is more variability in the distribution of a response variable than a Poisson model would expect, given the value(s) and category(ies) of explanatory variable(s). Recall that the Poisson model assumes Mean=Variance.</p>
 <p>When data are overdispersed, a Poisson regression model will underestimate standard errors, producing confidence intervals that are too narrow, and p-values that are too small.</p>
-<p>We can estimate a dispersion parameter, <span class="math inline">\(\hat\phi=\frac{\sum(\textrm{Pearson residuals})^2}{n-p}\)</span>, where <span class="math inline">\(p\)</span> is the number of model parameters.</p>
+<p>We can estimate a dispersion parameter, <span class="math display">\[
+\hat{\phi}=\frac{\displaystyle\sum\left(\frac{Y_i-\hat{\lambda}_i}{\sqrt{\hat{\lambda_i}}}\right)^2}{n-p} 
+\]</span> where <span class="math inline">\(p\)</span> is the number of model parameters.</p>
 <p>We inflate the standard errors by multiplying the variance by <span class="math inline">\(\hat{\phi}\)</span> i.e., <span class="math inline">\(SE_Q(\hat\beta)=\sqrt{\hat\phi}*SE(\hat\beta)\)</span>, where <span class="math inline">\(Q\)</span> stands for &quot;quasi-Poisson&quot; </p>
 <p>If there is no overdispersion, this estimate should be close to one. It will be larger than one in the presence of overdispersion.</p>
 </div>
@@ -1367,10 +1381,639 @@ F=\frac{\frac{\text{Drop in Deviance}}{\text{Difference in # Parameters}}}{\hat{
 <p>After adjusting for overdispersion, we still have statistically significant evidence that the quadratic model is preferred.</p>
 </div>
 </div>
+<div id="offsets-in-poisson-regression" class="section level2">
+<h2><span class="header-section-number">6.7</span> Offsets in Poisson Regression</h2>
+<div id="case-study-campus-crime" class="section level3">
+<h3><span class="header-section-number">6.7.1</span> Case Study: Campus Crime</h3>
+<p>We examine data on the number of crimes reported in a year on college campuses. Each row of <code>c_data.csv</code> contains crime information from a post secondary institution, either a college or university. The variables include:</p>
+<ul>
+<li><code>Enrollment</code> = enrollment at the school</li>
+<li><code>type</code> = college (C) or university (U)</li>
+<li><code>nv</code> = the number of violent crimes for that institution for the given year</li>
+<li><code>nvrate</code> = number of violent crimes per 1000 students</li>
+<li><code>enroll1000</code> = enrollment at the school, in thousands</li>
+<li><code>region</code> = region of the country (C = Central, MW = Midwest, NE = Northeast, SE = Southeast, SW = Southwest, and W = West)</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#Getting started-Crime</span>
+<span class="co"># Crime data for Universities and Colleges</span>
+c.data &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;https://raw.githubusercontent.com/proback/BeyondMLR/master/data/c_data.csv&quot;</span>)
+<span class="kw">head</span>(c.data, <span class="dt">n=</span><span class="dv">10</span>)</code></pre></div>
+<pre><code>## # A tibble: 10 x 6
+##    Enrollment type     nv nvrate enroll1000 region
+##         &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt;  &lt;dbl&gt;      &lt;dbl&gt; &lt;chr&gt; 
+##  1       5590 U        30 5.37         5.59 SE    
+##  2        540 C         0 0            0.54 SE    
+##  3      35747 U        23 0.643       35.7  W     
+##  4      28176 C         1 0.0355      28.2  W     
+##  5      10568 U         1 0.0946      10.6  SW    
+##  6       3127 U         0 0            3.13 SW    
+##  7      20675 U         7 0.339       20.7  W     
+##  8      12548 C         0 0           12.5  W     
+##  9      30063 U        19 0.632       30.1  C     
+## 10       4429 C         4 0.903        4.43 C</code></pre>
+</div>
+<div id="distribution-of-number-of-crimes" class="section level3">
+<h3><span class="header-section-number">6.7.2</span> Distribution of Number of Crimes</h3>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:nviolent"></span>
+<img src="Stat-455-Notes_files/figure-html/nviolent-1.png" alt="Histogram of number of violent crimes by institution." width="60%" />
+<p class="caption">
+Figure 6.4: Histogram of number of violent crimes by institution.
+</p>
+</div>
+<p>Since crimes are nonnegative counts, a Poisson model seems reasonable.</p>
+</div>
+<div id="crimes-by-type-of-institution-and-region" class="section level3">
+<h3><span class="header-section-number">6.7.3</span> Crimes by Type of Institution and Region</h3>
+<table>
+<caption>
+<span id="tab:regions">Table 6.2: </span>Proportion of colleges and universities within region in the campus crime data set.
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+C
+</th>
+<th style="text-align:right;">
+MW
+</th>
+<th style="text-align:right;">
+NE
+</th>
+<th style="text-align:right;">
+SE
+</th>
+<th style="text-align:right;">
+SW
+</th>
+<th style="text-align:right;">
+W
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:right;">
+0.294
+</td>
+<td style="text-align:right;">
+0.3
+</td>
+<td style="text-align:right;">
+0.381
+</td>
+<td style="text-align:right;">
+0.4
+</td>
+<td style="text-align:right;">
+0.2
+</td>
+<td style="text-align:right;">
+0.5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+U
+</td>
+<td style="text-align:right;">
+0.706
+</td>
+<td style="text-align:right;">
+0.7
+</td>
+<td style="text-align:right;">
+0.619
+</td>
+<td style="text-align:right;">
+0.6
+</td>
+<td style="text-align:right;">
+0.8
+</td>
+<td style="text-align:right;">
+0.5
+</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Counts are not directly comparable because they come from different size schools. Instead, we'll display crimes per 1000 students.</li>
+</ul>
+<table>
+<caption>
+<span id="tab:table4ch4">Table 6.3: </span>The mean and variance of the violent crime rate by region and type of institution.
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+region
+</th>
+<th style="text-align:left;">
+type
+</th>
+<th style="text-align:right;">
+MeanCount
+</th>
+<th style="text-align:right;">
+VarCount
+</th>
+<th style="text-align:right;">
+MeanRate
+</th>
+<th style="text-align:right;">
+VarRate
+</th>
+<th style="text-align:right;">
+n
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:right;">
+1.6000000
+</td>
+<td style="text-align:right;">
+3.3000000
+</td>
+<td style="text-align:right;">
+0.3979518
+</td>
+<td style="text-align:right;">
+0.2780913
+</td>
+<td style="text-align:right;">
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:left;">
+U
+</td>
+<td style="text-align:right;">
+4.7500000
+</td>
+<td style="text-align:right;">
+30.9318182
+</td>
+<td style="text-align:right;">
+0.2219441
+</td>
+<td style="text-align:right;">
+0.0349266
+</td>
+<td style="text-align:right;">
+12
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+MW
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:right;">
+0.3333333
+</td>
+<td style="text-align:right;">
+0.3333333
+</td>
+<td style="text-align:right;">
+0.0162633
+</td>
+<td style="text-align:right;">
+0.0007935
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+MW
+</td>
+<td style="text-align:left;">
+U
+</td>
+<td style="text-align:right;">
+8.7142857
+</td>
+<td style="text-align:right;">
+30.9047619
+</td>
+<td style="text-align:right;">
+0.4019003
+</td>
+<td style="text-align:right;">
+0.0620748
+</td>
+<td style="text-align:right;">
+7
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+NE
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:right;">
+6.0000000
+</td>
+<td style="text-align:right;">
+32.8571429
+</td>
+<td style="text-align:right;">
+1.1249885
+</td>
+<td style="text-align:right;">
+1.1821000
+</td>
+<td style="text-align:right;">
+8
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+NE
+</td>
+<td style="text-align:left;">
+U
+</td>
+<td style="text-align:right;">
+5.9230769
+</td>
+<td style="text-align:right;">
+79.2435897
+</td>
+<td style="text-align:right;">
+0.4359273
+</td>
+<td style="text-align:right;">
+0.3850333
+</td>
+<td style="text-align:right;">
+13
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+SE
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:right;">
+1.5000000
+</td>
+<td style="text-align:right;">
+7.5000000
+</td>
+<td style="text-align:right;">
+0.2487994
+</td>
+<td style="text-align:right;">
+0.1280345
+</td>
+<td style="text-align:right;">
+6
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+SE
+</td>
+<td style="text-align:left;">
+U
+</td>
+<td style="text-align:right;">
+10.6250000
+</td>
+<td style="text-align:right;">
+50.2678571
+</td>
+<td style="text-align:right;">
+0.7171408
+</td>
+<td style="text-align:right;">
+0.3508841
+</td>
+<td style="text-align:right;">
+8
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+SW
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+<td style="text-align:right;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+SW
+</td>
+<td style="text-align:left;">
+U
+</td>
+<td style="text-align:right;">
+6.6250000
+</td>
+<td style="text-align:right;">
+86.8392857
+</td>
+<td style="text-align:right;">
+0.4254915
+</td>
+<td style="text-align:right;">
+0.1958103
+</td>
+<td style="text-align:right;">
+8
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+W
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:right;">
+0.5000000
+</td>
+<td style="text-align:right;">
+0.3333333
+</td>
+<td style="text-align:right;">
+0.0680164
+</td>
+<td style="text-align:right;">
+0.0129074
+</td>
+<td style="text-align:right;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+W
+</td>
+<td style="text-align:left;">
+U
+</td>
+<td style="text-align:right;">
+12.5000000
+</td>
+<td style="text-align:right;">
+57.0000000
+</td>
+<td style="text-align:right;">
+0.4679478
+</td>
+<td style="text-align:right;">
+0.0246670
+</td>
+<td style="text-align:right;">
+4
+</td>
+</tr>
+</tbody>
+</table>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:boxtyperegion"></span>
+<img src="Stat-455-Notes_files/figure-html/boxtyperegion-1.png" alt="Boxplot of violent crime rate by region and type of institution (colleges (C) on the left, and universities (U) on the right)." width="60%" />
+<p class="caption">
+Figure 6.5: Boxplot of violent crime rate by region and type of institution (colleges (C) on the left, and universities (U) on the right).
+</p>
+</div>
+<p>Mean violent crime rates that are generally lower at the colleges within a region (with the exception of the Northeast).</p>
+<p>Regional pattern of rates at universities appears to differ from that of the colleges.</p>
+</div>
+<div id="accounting-for-enrollment" class="section level3">
+<h3><span class="header-section-number">6.7.4</span> Accounting for Enrollment</h3>
+<p>Although we used rates (per 1000 students) for the plots, we want to use actual number of crimes when we fit the Poisson model (since a Poisson distribution requires integer counts).</p>
+<p>We account for enrollment by including an <strong>offset</strong> in our model. Rather than letting <span class="math inline">\(log(\lambda)\)</span> be a linear function of the explanatory variables, we use <span class="math inline">\(log\left(\frac{\lambda}{\text{enroll1000}}\right)\)</span>.</p>
+<p>Thus,</p>
+<p><span class="math display">\[
+\begin{align*} 
+log(\frac{\lambda}{\textrm{enroll1000}} )= \beta_0 + \beta_1(\textrm{type}) \nonumber \\
+log(\lambda)-log(\textrm{enroll1000}) = \beta_0 + \beta_1(\textrm{type}) \nonumber \\
+log(\lambda) = \beta_0 + \beta_1(\textrm{type}) + log(\textrm{enroll1000})
+\end{align*}
+\]</span></p>
+<p>So, the expected number of crimes at a school in a given year is:</p>
+<p><span class="math display">\[
+\lambda = e^{\beta_0 + \beta_1(\text{type}) + log(\text{enroll1000})} =  e^{\beta_0 + \beta_1(\text{type})}(\text{enroll1000})
+\]</span></p>
+</div>
+<div id="offset-in-r" class="section level3">
+<h3><span class="header-section-number">6.7.5</span> Offset in R</h3>
+<p>We model number of crimes using type of institution and region as explanatory variables. To do this, we add an argument called <code>offset</code> in the model.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">modeltr &lt;-<span class="st"> </span><span class="kw">glm</span>(nv <span class="op">~</span><span class="st"> </span>type <span class="op">+</span><span class="st"> </span>region, <span class="dt">family =</span> poisson,
+               <span class="dt">offset =</span> <span class="kw">log</span>(enroll1000), <span class="dt">data =</span> c.data)
+<span class="kw">summary</span>(modeltr)</code></pre></div>
+<pre><code>
+Call:
+glm(formula = nv ~ type + region, family = poisson, data = c.data, 
+    offset = log(enroll1000))
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-4.5430  -1.7879  -0.7442   1.0885   6.7443  
+
+Coefficients:
+            Estimate Std. Error z value             Pr(&gt;|z|)    
+(Intercept) -1.54971    0.17117  -9.053 &lt; 0.0000000000000002 ***
+typeU        0.28172    0.13316   2.116              0.03438 *  
+regionMW     0.09913    0.17752   0.558              0.57658    
+regionNE     0.77824    0.15307   5.084          0.000000369 ***
+regionSE     0.62997    0.16133   3.905          0.000094285 ***
+regionSW     0.50321    0.18508   2.719              0.00655 ** 
+regionW      0.26313    0.18753   1.403              0.16056    
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+(Dispersion parameter for poisson family taken to be 1)
+
+    Null deviance: 392.76  on 79  degrees of freedom
+Residual deviance: 348.13  on 73  degrees of freedom
+AIC: 574.76
+
+Number of Fisher Scoring iterations: 6</code></pre>
+<p>The Northeast and the South differ significantly from the Central region (p= 0.00000037 and p=0.0000924, respectively).</p>
+<p>The estimated coefficient of 0.778 means that the violent crime rate per 1,000 in the Northeast is nearly 2.2 (<span class="math inline">\(e^{0.778}\)</span>) times that of the Central region controlling for the type of school.</p>
+<p>A Wald-type confidence interval for this factor can be constructed by first calculating a CI for the coefficient (0.778 <span class="math inline">\(\pm\)</span> <span class="math inline">\(1.96 \cdot 0.153\)</span>) and then exponentiating (1.61 to 2.94).</p>
+</div>
+<div id="model-with-interaction" class="section level3">
+<h3><span class="header-section-number">6.7.6</span> Model with Interaction</h3>
+<p>Our plots suggested the difference between colleges and universities might vary between regions. To allow for this, we add an interaction term in the model.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">modeli &lt;-<span class="st"> </span><span class="kw">glm</span>(nv <span class="op">~</span><span class="st"> </span>type <span class="op">+</span><span class="st"> </span>region <span class="op">+</span><span class="st"> </span>region<span class="op">:</span>type, 
+              <span class="dt">family =</span> poisson,
+              <span class="dt">offset =</span> <span class="kw">log</span>(enroll1000), <span class="dt">data =</span> c.data)
+<span class="kw">summary</span>(modeli)</code></pre></div>
+<pre><code>
+Call:
+glm(formula = nv ~ type + region + region:type, family = poisson, 
+    data = c.data, offset = log(enroll1000))
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-3.7292  -1.5756  -0.7685   0.8346   4.8828  
+
+Coefficients:
+               Estimate Std. Error z value  Pr(&gt;|z|)    
+(Intercept)     -1.4741     0.3536  -4.169 0.0000305 ***
+typeU            0.1959     0.3775   0.519   0.60377    
+regionMW        -1.9765     1.0607  -1.863   0.06239 .  
+regionNE         1.5529     0.3819   4.066 0.0000477 ***
+regionSE         0.2508     0.4859   0.516   0.60577    
+regionSW       -15.4630   736.9341  -0.021   0.98326    
+regionW         -1.8337     0.7906  -2.319   0.02037 *  
+typeU:regionMW   2.1965     1.0765   2.040   0.04132 *  
+typeU:regionNE  -1.0698     0.4200  -2.547   0.01086 *  
+typeU:regionSE   0.4276     0.5152   0.830   0.40652    
+typeU:regionSW  16.0837   736.9341   0.022   0.98259    
+typeU:regionW    2.4106     0.8140   2.962   0.00306 ** 
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+(Dispersion parameter for poisson family taken to be 1)
+
+    Null deviance: 392.76  on 79  degrees of freedom
+Residual deviance: 269.27  on 68  degrees of freedom
+AIC: 505.9
+
+Number of Fisher Scoring iterations: 13</code></pre>
+<p>We have evidence that the difference between colleges and universities in violent crime rate differs by region.<br />
+For example, our model estimates that violent crime rates are 13.6 (<span class="math inline">\(e^{.196+2.411}\)</span>) times higher in universities in the West compared to colleges, while in the Northeast we estimate that violent crime rates are 2.4 (<span class="math inline">\(\frac{1}{e^{.196-1.070}}\)</span>) times higher in colleges.</p>
+</div>
+<div id="drop-in-deviance-test-for-interaction" class="section level3">
+<h3><span class="header-section-number">6.7.7</span> Drop-in-Deviance Test for Interaction</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">drop_in_dev &lt;-<span class="st"> </span><span class="kw">anova</span>(modeltr, modeli, <span class="dt">test =</span> <span class="st">&quot;Chisq&quot;</span>)
+drop_in_dev</code></pre></div>
+<pre><code>Analysis of Deviance Table
+
+Model 1: nv ~ type + region
+Model 2: nv ~ type + region + region:type
+  Resid. Df Resid. Dev Df Deviance             Pr(&gt;Chi)    
+1        73     348.13                                     
+2        68     269.27  5   78.866 0.000000000000001449 ***
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>We have statistically significant evidence (<span class="math inline">\(\chi^2=71.98, df=4, p&lt;.001\)</span>) that the difference between colleges and universities in violent crime rate differs by region.</p>
+<pre><code>  ResidDF ResidDev Deviance Df                    pval
+1      73 348.1340       NA NA                      NA
+2      68 269.2682 78.86585  5 0.000000000000001448983</code></pre>
+</div>
+<div id="goodness-of-fit-test" class="section level3">
+<h3><span class="header-section-number">6.7.8</span> Goodness of Fit Test</h3>
+<p>We perform a goodness of fit test to test whether the interaction model adequately fits the data.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">1</span><span class="op">-</span><span class="kw">pchisq</span>(modeli<span class="op">$</span>deviance, modeli<span class="op">$</span>df.residual) </code></pre></div>
+<pre><code>[1] 0</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">gf_dist</span>(<span class="st">&quot;chisq&quot;</span>, <span class="dt">df =</span> <span class="dv">70</span>, <span class="dt">geom =</span> <span class="st">&quot;area&quot;</span>, <span class="dt">fill =</span> <span class="st">&quot;turquoise&quot;</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept=</span><span class="fl">276.7038</span>, <span class="dt">colour=</span><span class="st">&quot;red&quot;</span>)  <span class="op">+</span><span class="st"> </span><span class="kw">theme</span>(<span class="dt">legend.position=</span><span class="st">&quot;none&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylim</span>(<span class="kw">c</span>(<span class="dv">0</span>,<span class="fl">0.05</span>))</code></pre></div>
+<p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-188-1.png" width="576" /></p>
+<p>There is strong evidence of a lack of fit.</p>
+<p>We don't have any other explanatory variables, and nonlinear terms don't make sense for categorical explanatory variables.</p>
+<p>The issue is likely due to overdispersion.</p>
+</div>
+<div id="quasi-poisson-model-1" class="section level3">
+<h3><span class="header-section-number">6.7.9</span> Quasi-Poisson Model</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">modeliq &lt;-<span class="st"> </span><span class="kw">glm</span>(nv <span class="op">~</span><span class="st"> </span>type <span class="op">+</span><span class="st"> </span>region <span class="op">+</span><span class="st"> </span>region<span class="op">:</span>type, 
+               <span class="dt">family =</span> quasipoisson,
+               <span class="dt">offset =</span> <span class="kw">log</span>(enroll1000), <span class="dt">data =</span> c.data)
+<span class="kw">summary</span>(modeliq)</code></pre></div>
+<pre><code>
+Call:
+glm(formula = nv ~ type + region + region:type, family = quasipoisson, 
+    data = c.data, offset = log(enroll1000))
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-3.7292  -1.5756  -0.7685   0.8346   4.8828  
+
+Coefficients:
+                Estimate Std. Error t value Pr(&gt;|t|)  
+(Intercept)      -1.4741     0.7450  -1.979   0.0519 .
+typeU             0.1959     0.7956   0.246   0.8062  
+regionMW         -1.9765     2.2350  -0.884   0.3796  
+regionNE          1.5529     0.8047   1.930   0.0578 .
+regionSE          0.2508     1.0239   0.245   0.8073  
+regionSW        -15.4630  1552.8860  -0.010   0.9921  
+regionW          -1.8337     1.6659  -1.101   0.2749  
+typeU:regionMW    2.1965     2.2685   0.968   0.3364  
+typeU:regionNE   -1.0698     0.8849  -1.209   0.2309  
+typeU:regionSE    0.4276     1.0856   0.394   0.6949  
+typeU:regionSW   16.0837  1552.8861   0.010   0.9918  
+typeU:regionW     2.4106     1.7152   1.405   0.1644  
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+(Dispersion parameter for quasipoisson family taken to be 4.440397)
+
+    Null deviance: 392.76  on 79  degrees of freedom
+Residual deviance: 269.27  on 68  degrees of freedom
+AIC: NA
+
+Number of Fisher Scoring iterations: 13</code></pre>
+<p>The dispersion parameter of 4.45 suggests the data are highly overdispersed. Standard errors from the original Poisson model will be too low, making intervals and tests unreliable.</p>
+</div>
+<div id="test-for-interaction" class="section level3">
+<h3><span class="header-section-number">6.7.10</span> Test for Interaction</h3>
+<p>We previously found evidence that the difference between colleges and universities in violent crime rate differs by region. That test, however, was based on a model that was not appropriate.</p>
+<p>We repeat the test, using the quasipoisson model, and associated F-test.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">modeltrq &lt;-<span class="st"> </span><span class="kw">glm</span>(nv <span class="op">~</span><span class="st"> </span>type <span class="op">+</span><span class="st"> </span>region, <span class="dt">family =</span> quasipoisson,
+               <span class="dt">offset =</span> <span class="kw">log</span>(enroll1000), <span class="dt">data =</span> c.data)
+drop_in_dev &lt;-<span class="st"> </span><span class="kw">anova</span>(modeltrq, modeliq, <span class="dt">test =</span> <span class="st">&quot;F&quot;</span>)
+drop_in_dev</code></pre></div>
+<pre><code>Analysis of Deviance Table
+
+Model 1: nv ~ type + region
+Model 2: nv ~ type + region + region:type
+  Resid. Df Resid. Dev Df Deviance      F   Pr(&gt;F)   
+1        73     348.13                               
+2        68     269.27  5   78.866 3.5522 0.006514 **
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>Even after adjusting for overdispersion, we still have statistically significant evidence (<span class="math inline">\(F=4.05, p=.0052\)</span>) that the difference between colleges and universities in violent crime rate differs by region.</p>
+</div>
+</div>
 <div id="summaries" class="section level2">
-<h2><span class="header-section-number">6.7</span> Summaries</h2>
+<h2><span class="header-section-number">6.8</span> Summaries</h2>
 <div id="llsr-vs.-poisson-regression-comparison" class="section level3">
-<h3><span class="header-section-number">6.7.1</span> LLSR vs. Poisson Regression Comparison</h3>
+<h3><span class="header-section-number">6.8.1</span> LLSR vs. Poisson Regression Comparison</h3>
 <span class="math display">\[\begin{gather*}
 \underline{\textrm{Response}} \\
 \mathbf{LLSR:}\textrm{ Normal} \\
@@ -1399,10 +2042,10 @@ F=\frac{\frac{\text{Drop in Deviance}}{\text{Difference in # Parameters}}}{\hat{
 \end{gather*}\]</span>
 </div>
 <div id="poisson-vs-quasi-poisson-inference" class="section level3">
-<h3><span class="header-section-number">6.7.2</span> Poisson vs Quasi-Poisson Inference</h3>
+<h3><span class="header-section-number">6.8.2</span> Poisson vs Quasi-Poisson Inference</h3>
 <table>
 <caption>
-<span id="tab:compTable">Table 6.2: </span>Comparison of Poisson and quasi-Poisson inference.
+<span id="tab:compTable">Table 6.4: </span>Comparison of Poisson and quasi-Poisson inference.
 </caption>
 <thead>
 <tr>
