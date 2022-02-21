@@ -1,0 +1,1158 @@
+# Logistic Regression
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message=FALSE, warning=FALSE, fig.width = 6, fig.height = 3)
+```
+
+These notes provide a summary of Chapter 6 in [Beyond Multiple Linear Regression](https://bookdown.org/roback/bookdown-BeyondMLR/) by Roback and Legler. The dataset we work with is different than those in the text, but much of the code and analysis is based off the examples in the text. [Github repository](https://github.com/proback/BeyondMLR/). 
+
+
+
+```{r load_packages6, message = FALSE}
+# Packages required for Chapter 6
+library(gridExtra)  
+library(mnormt) 
+library(lme4) 
+library(knitr) 
+library(pander)
+library(tidyverse)
+library(gridExtra)
+library(corrplot)
+```
+   
+## Binomial Logistic Regression
+
+In Stat 255, we learned about Logistic regression models for binary response data. Please review sections 6.1-6.3 in the [Stat 255 notes](https://bookdown.org/ajsage/statistics_for_data_science_notes/) prior to proceeding. 
+
+### Binary Response Data
+
+We can use logistic regression to model binary responses, such as whether or not a student person defaults on a credit card payment, as in the dataset below. 
+
+In this dataset, each  row represents an individual with a single yes/no response. 
+
+```{r}
+library(ISLR)
+data(Default)
+head(Default)
+```
+
+### Binomial Response Data
+
+We can also use logistic regression to model data where the rows represent the number of "successes" in a fixed number of trials. 
+
+
+For example:    
+
+1. Number of games won by a sports team in a given number of games.     
+2. Number of people who survive for at least 10 years after being diagnosed with a disease.    
+3. Number of people who vote for a candidate in election our of total number of voters.    
+
+We'll refer to this kind of regression as **Binomial Logistic Regression**, though the term **logistic regression** is used somewhat abmiguously and is sometimes applied to this context as well.  
+
+
+
+### 2020 Wisconsin Election Data 
+
+We'll work with data on the 2020 presidential election in the state of Wisconsin. Each row of the dataset represents a county in Wisconsin. Variables include:
+
+* `County` - name of the county     
+* `Rvotes` - number of votes for Republican candidate (Donald Trump)      
+* `Dvotes` - number of votes for Democratic candidate (Joe Biden)      
+* `PctD` - percentage of 2-party  vote that went to Biden (i.e. `Rvotes`/(`Rvotes` + `Dvotes`))     
+* `College` - percentage of residents with a college degree      
+* `Unemployment` - unemployment rate   
+* `WhitePct` - percentage of white residents    
+* `COVID_DeathRate` - number of deaths from covid-19 per 100,000 residents     
+* `Income` - median household income
+
+All variables were recorded at the time of the election.   
+
+```{r}
+Wisconsin <- read_csv("WisconsinVote.csv")
+head(Wisconsin, 10)
+```
+
+
+```{r, fig.width=12}
+P1 <- ggplot(Wisconsin, aes(x=College, y=PctD, size=(Rvotes+Dvotes))) + geom_point() + 
+ geom_text(data=Wisconsin %>% filter(County %in% c("Dane County", "Door County" , "Milwaukee County", "Menominee County", "Outagamie County", "Waukesha County")), aes(x=College, y=PctD, label=County, vjust=-2), size=3, color="red") +
+  xlab("Percent with  College Degree") +
+  ylab("Percent Voting for Biden") + theme(legend.position="none")
+P2 <- ggplot(Wisconsin, aes(x=Unemployment, y=PctD, size=(Rvotes+Dvotes))) + geom_point() + 
+ geom_text(data=Wisconsin %>% filter(County %in% c("Dane County", "Door County" , "Milwaukee County", "Menominee County", "Outagamie County", "Waukesha County")), aes(x=Unemployment, y=PctD, label=County, vjust=-2), size=3, color="red") +
+  xlab("Unemployment Rate") +
+  ylab("Percent Voting for Biden") + theme(legend.position="none")
+P3 <- ggplot(Wisconsin, aes(x=WhitePct, y=PctD, size=(Rvotes+Dvotes))) + geom_point() + 
+ geom_text(data=Wisconsin %>% filter(County %in% c("Dane County", "Door County" , "Milwaukee County", "Menominee County", "Outagamie County", "Waukesha County")), aes(x=WhitePct, y=PctD, label=County, vjust=-2), size=3, color="red") +
+  xlab("Percent of Population White") +
+  ylab("Percent Voting for Biden") + theme(legend.position="none")
+P4 <- ggplot(Wisconsin, aes(x=COVID_DeathRate, y=PctD, size=(Rvotes+Dvotes))) + geom_point() + 
+ geom_text(data=Wisconsin %>% filter(County %in% c("Dane County", "Door County" , "Milwaukee County", "Menominee County", "Outagamie County", "Waukesha County")), aes(x=COVID_DeathRate, y=PctD, label=County, vjust=-2), size=3, color="red") +
+  xlab("Covid Deaths Per 100k") +
+  ylab("Percent Voting for Biden") + theme(legend.position="none")
+P5 <- ggplot(Wisconsin, aes(x=Income, y=PctD, size=(Rvotes+Dvotes))) + geom_point() + 
+ geom_text(data=Wisconsin %>% filter(County %in% c("Dane County", "Door County" , "Milwaukee County", "Menominee County", "Outagamie County", "Waukesha County")), aes(x=Income, y=PctD, label=County, vjust=-2), size=3, color="red") +
+  xlab("Median Income") +
+  ylab("Percent Voting for Biden")
+grid.arrange(P1, P2, P3, P4, P5, nrow=2) + theme(legend.position="none")
+```
+
+
+### Correlation Between Explanatory Variables
+
+```{r}
+select <- dplyr::select
+C <- cor(Wisconsin %>% select("College", "Unemployment", "WhitePct", "COVID_DeathRate", "Income"))
+P <- corrplot(C, method="number")
+```
+
+While there is some correlation between the explanatory variables, none of the correlations are strong enough to raise concerns about multicollinearity, so we'll use all of them in our model.  
+
+
+### Modeling Number of Votes      
+
+Suppose we know the total number of votes in a county and the probability of a single voter choosing Biden. 
+
+Since the response is a count, we might think to use a Poisson distribution. However, a Poisson distribution does not place an upper bound on the number of votes a candidate could receive in a county. This is unrealistic since we know that in reality, a candidate will never be able to get more votes than the total number of voters. 
+
+
+### The Binomial Distribution
+
+A **Binomial** random variable is a discrete random variable that models the number of "successes" in a fixed number of independent trials. We let $n$ represent the number of trials, and $p$ represent the probability of success on any given trial. 
+
+**Notation**: $Y\sim Binom(n,p)$,    <b style="word-space:2m">&nbsp;&nbsp;</b> 
+**Probability Mass Function**: $\text{P}(Y=y) = {n\choose y}p^y(1-p)^{n-y}$ <b style="word-space:2m">&nbsp;&nbsp;</b>
+
+For $n = 4, p=0.6$, 
+
+\[ Pr(Y=0) = {4\choose 0}0.6^0(0.4)^{4} = 1(0.4)^4\approx(0.0256)
+\]
+
+\[ Pr(Y=1) = {4\choose 1}0.6^0(0.4)^{3} = 4(.6)(0.4)^3\approx(0.1536)
+\]
+
+\[ Pr(Y=2) = {4\choose 2}0.6^0(0.4)^{2} = 6(.6)^2(0.4)^2\approx(0.3456)
+\]
+
+\[ Pr(Y=3) = {4\choose 3}0.6^0(0.4)^{1} = 4(.6)^3(0.4)^1\approx(0.3456)
+\]
+
+\[ Pr(Y=4) = {4\choose 4}0.6^0(0.4)^{0} = 1(.6)^4(0.4)\approx(0.1296)
+\]
+
+In a binomial distribution, the mean is $np$,    
+
+and the variance is $np(1-p)$.   
+
+A binomial distribution with $n=1$ is called a **Bernoulli Distribution**, denoted $Ber(p)$.    
+
+
+### Binomial Distribution for $n=4, p=0.6$
+
+```{r, fig.height=3, fig.width=6}
+df <- data.frame(x = 0:4, y = dbinom(0:4, size = 4, prob=0.6))
+ggplot(df, aes(x = x, y = y)) + geom_bar(stat = "identity", col = "white", fill = "blue") + 
+  scale_y_continuous(expand = c(0.01, 0)) + scale_x_continuous(breaks=(0:4)) + xlab("x") + ylab(expression(paste("p(x|", p, ")"))) + ggtitle("n=4, p=0.6") + theme_bw() + 
+  theme(plot.title = element_text(size = rel(1.2), vjust = 1.5))
+```
+
+Mean = $0.6 \times 4=2.4$    
+
+Variance = $4\times 0.6 \times 0.4=0.96$ 
+
+
+### More Binomial Distributions
+
+We plot binomial distributions with $n=100$, $p=0.25, 0.5, 0.9$
+
+```{r, echo=FALSE, fig.height=3, fig.width=10}
+N <- 10
+
+df <- data.frame(x = 0:N , y = dbinom(0:N , size = N , prob=0.25))
+p1 <- ggplot(df, aes(x = x, y = y)) + geom_bar(stat = "identity", col = "white", fill = "blue") + 
+  scale_y_continuous(expand = c(0.01, 0)) + scale_x_continuous(breaks=(0:N )) + xlab("x") + ylab(expression(paste("p(x|", p, ")"))) + ggtitle("n=100, p=0.25") + theme_bw() + 
+  theme(plot.title = element_text(size = rel(1.2), vjust = 1.5))
+
+df <- data.frame(x = 0:N , y = dbinom(0:N , size = N , prob=0.6))
+p2 <- ggplot(df, aes(x = x, y = y)) + geom_bar(stat = "identity", col = "white", fill = "blue") + 
+  scale_y_continuous(expand = c(0.01, 0)) + scale_x_continuous(breaks=(0:4)) + xlab("x") + ylab(expression(paste("p(x|", p, ")"))) + ggtitle("n=4, p=0.6") + theme_bw() + 
+  theme(plot.title = element_text(size = rel(1.2), vjust = 1.5))
+
+df <- data.frame(x = 0:N , y = dbinom(0:N , size = N , prob=0.9))
+p3 <- ggplot(df, aes(x = x, y = y)) + geom_bar(stat = "identity", col = "white", fill = "blue") + 
+  scale_y_continuous(expand = c(0.01, 0)) + scale_x_continuous(breaks=(0:4)) + xlab("x") + ylab(expression(paste("p(x|", p, ")"))) + ggtitle("n=4, p=0.6") + theme_bw() + 
+  theme(plot.title = element_text(size = rel(1.2), vjust = 1.5))
+
+grid.arrange(p1, p2, p3, ncol=3)
+```
+
+
+### Connecting Expected Response to Explatory Variables     
+
+```{r}
+set.seed(0)
+dat <- tibble(x=runif(200, -5, 10),
+                  p=exp(-2+1*x)/(1+exp(-2+1*x)),
+                  y=rbinom(200, 1, p),
+                  y2=.3408+.0901*x,
+                  logit=log(p/(1-p)))
+dat2 <- tibble(x = c(dat$x, dat$x),
+               y = c(dat$y2, dat$p),
+               `Regression model` = c(rep("linear", 200),
+                                      rep("logistic", 200)))
+ggplot() + 
+  geom_point(data = dat, aes(x, y)) +
+  geom_line(data = dat2, aes(x, y, linetype = `Regression model`))  + ylab("p")
+```
+
+Let $p_i$ represent the probability that a voter in county $i$ votes for Biden.  
+
+We want to connect $p_i$ to our explanatory variables.   
+
+Assuming
+
+\[p_i =  \beta_0+\beta_1X_{1} + \ldots + \beta_pX_p\]
+
+is a bad idea since $p_1$ must stay between -1 and 1. 
+
+We'll use a sigmoidal function of the form 
+
+\[p_i =  \frac{e^{\beta_0+\beta_1X_{1} + \ldots + \beta_pX_p}}{1+e^{\beta_0+\beta_1X_{1} + \ldots + \beta_pX_p}}\]
+
+Equivalently:    
+
+\[\text{log}\left(\frac{{p_i}}{{1-p_i}}\right) =  \frac{e^{\beta_0+\beta_1X_{1} + \ldots + \beta_pX_p}}{1+e^{\beta_0+\beta_1X_{1} + \ldots + \beta_pX_p}}, \] 
+
+The function $\text{log}\left(\frac{{p_i}}{{1-p_i}}\right)$ is called $\text{logit}(p_i)$. So, we can say: 
+
+\[\text{logit}(p_i) =  \frac{e^{\beta_0+\beta_1X_{1} + \ldots + \beta_pX_p}}{1+e^{\beta_0+\beta_1X_{1} + \ldots + \beta_pX_p}}, \] 
+
+
+
+### Odds and Odds Ratio
+
+For an event with probability $p$, the odds of the event occuring are $\frac{p}{1-p}$
+
+For two events $p_1$ and $p_2$ the odds ratio is defined as $\frac{\text{Odds of Event 1}}{\text{Odds of Event 1}} = \frac{\frac{p_1}{1-p_1}}{\frac{p_2}{1-p_2}}$
+
+
+### Interpreting Regression Coefficients
+
+Let's suppose we have one explanatory variable $x$, so 
+
+\[\text{logit}(p_i) =  \frac{e^{\beta_0+\beta_1X_{1}}}{1+e^{\beta_0+\beta_1X_{1}}}, \] 
+
+
+Consider the odds ratio for a case $j$ with explanatory variable $x + 1$, compared to case $i$ with explanatory variable $x$. 
+
+That is $\text{log}\left(\frac{p_i}{1-\pi_i}\right) = \beta_0+\beta_1x$, and
+$\text{log}\left(\frac{p_j}{1-p_j}\right) = \beta_0+\beta_1(x+1)$.  
+
+$\text{log}\left(\frac{\frac{p_j}{1-p_j}}{\frac{p_i}{1-p_i}}\right)=\text{log}\left(\frac{p_j}{1-p_j}\right)-\text{log}\left(\frac{p_i}{1-p_j}\right)=\beta_0+\beta_1(x+1)-(\beta_0+\beta_1(x))=\beta_1.$
+
+For each 1-unit increase in $x$ the log of the odds ratio of success to failure is expected to multiply by a factor of $\beta_1$. 
+
+For each 1-unit increase in $x$ the odds ratio of success to failure is expected to multiply by a factor of $e^{\beta_1}$. 
+
+For a categorical variable $x_j$ the odds success to failure in category $j$, are expected to be $e^{\beta_1}$ times higher in category $j$ than in the baseline category.   
+
+
+### Binomial Logistic Regression Assumptions
+
+A logistic regression model relies on the following assumptions:    
+
+
+1. __Binary Response__ The response variable is dichotomous (two possible responses) or the sum of dichotomous responses.
+2. __Independence__ The observations must be independent of one another.
+3. __Variance Structure__ By definition, the variance of a binomial random variable is $np(1-p)$, so that variability is highest when $p=.5$.
+4. __Linearity__ The log of the odds ratio, $\text{log}(\frac{p}{1-p}) = \text{logit}(p)$, must be a linear function of $x$. 
+
+## Model for Wisconsin Vote
+
+### An Initial Model
+
+We'll start by trying to model the relationship between number of votes for Biden and percentage of voters with a college degree. 
+
+
+```{r}
+M1 <- glm(cbind(Dvotes, Rvotes) ~ College , family = binomial(link="logit"), data = Wisconsin)
+summary(M1)
+```
+
+For each one percent increase in college education, the odds of voting for Biden are expected to multiply by a factor of $e^{0.0320}=1.0325$ (a 3% increase).    
+
+In a county where 25% of the population has a college degree, the probability of an individual  voter voting for Biden is 
+\[\frac{e^{-0.9521859 + 0.0319564\times25}}{e^{1+ (-0.9521859 + 0.0319564\times25)}}=0.4618\]
+
+In a county where 35% of the population has a college degree, the probability of an individual  voter voting for Biden is 
+
+\[\frac{e^{-0.9521859 + 0.0319564\times35}}{e^{1+ (-0.9521859 + 0.0319564\times35)}}=0.5415\]
+
+
+### Checking Linearity Assumption
+
+The model assumes that $\text{log}\left(\frac{p}{1-p}\right) = \text{logit}(p)$ is a linear function of $x$. To check this, we calculate $\hat{p}_i$ for each county and plot $\text{log}\left(\frac{\hat{p}_i}{1-\hat{p_i}}\right)$ against percentage of college graduates. 
+
+
+```{r,emplogits, fig.align="center",out.width="60%", ,echo=FALSE, warning=FALSE, message=FALSE}
+phat <- with(Wisconsin, (Dvotes)/(Dvotes+Rvotes))
+Wisconsin$elogit <- log(phat/(1-phat))
+## Plots
+ggplot(Wisconsin, aes(x=College, y=elogit))+
+    geom_point(shape=1) +    # Use hollow circles
+    geom_smooth(method=lm,   # Add linear regression line
+                se=FALSE) + # Don't add shaded confidence region
+  xlab("College") + ylab("empirical logits") + 
+  labs(title="Wisconsin Vote Empirical logits by College Pct.")
+```
+
+
+### Overdispersion in Binomial Counts
+
+The binomial model assumes that the variance is equal to $np(1-p)$.  Checking this using graphs or tables is challenging, since it involves both $n$ and $p$, but we can group together counties with similar $n$ and similar percentages of college graduates (hence similar $p$), and calculate variance in each group. 
+
+```{r, warning = FALSE}
+summarize <- dplyr::summarize
+Wisconsin <- Wisconsin %>% mutate(TotalVotes = Dvotes+Rvotes)
+                                
+EdCuts = cut(Wisconsin$College,
+           breaks=c(10,20,30,40,50,60))
+PopCuts = cut(Wisconsin$TotalVotes,
+           breaks=c(seq(from=0, to =100000, by=10000), 500000))
+WisconsinCuts <- data.frame(EdCuts, PopCuts, Wisconsin) 
+WisconsinGrps <- WisconsinCuts %>% group_by(EdCuts, PopCuts) %>% 
+  summarize(NCounties = n(),
+            phat = sum(Dvotes)/sum(TotalVotes),
+            mean_n = mean(TotalVotes),
+            Theoretical_Variance = mean_n*phat*(1-phat),
+            Obs_Var = var(Dvotes)) %>%
+  arrange(desc(NCounties))
+WisconsinGrps                                                                 
+```
+
+In the groups where there are enough counties to compare, the observed variance in counts appears to be much higher than the binomial model assumes.   
+
+The data are heavily overdispersed. 
+
+### Residuals for Binomial Logistic Regression
+
+We examine two kinds of residuals that are similar to those we saw in Poisson regression.  
+
+**Pearson Residual:**
+
+$$
+\begin{equation*}
+\textrm{Pearson residual}_i = \frac{\textrm{actual count}-\textrm{predicted count}}{\textrm{SD of count}} =
+\frac{Y_i-m_i\hat{p_i}}{\sqrt{m_i\hat{p_i}(1-\hat{p_i})}}
+\end{equation*}
+$$
+
+where $m_i$ is the number of trials for the $i^{th}$ observation and $\hat{p}_i$ is the estimated probability of success for that same observation.
+
+**Deviance Residual:**
+$$
+\begin{equation*}
+\textrm{d}_i = 
+\textrm{sign}(Y_i-m_i\hat{p_i})\sqrt{2[Y_i \log\left(\frac{Y_i}{m_i \hat{p_i}}\right)+
+(m_i - Y_i) \log\left(\frac{m_i - Y_i}{m_i - m_i \hat{p_i}}\right)]}
+\end{equation*}
+$$
+
+When the number of trials is large for all of the observations and the models are appropriate, both sets of residuals should follow a standard normal distribution.
+
+
+
+### Quasi-Binomial Model
+
+Like in Poisson regression, we can address overdispersion by fitting quasi-binomial model that estimates a dispersion parameter $\hat{\phi}=\frac{\sum(\textrm{Pearson residuals})^2}{n-p}$ and multiplies standard error by $\sqrt{\phi}$.  
+
+
+```{r}
+M1b <- glm(cbind(Dvotes, Rvotes) ~ College , family = quasibinomial(link="logit"), data = Wisconsin)
+summary(M1b)
+```
+
+The estimate of the dispersion parameter $\hat{\phi} = 2763$ is large.   
+
+* Standard errors increase considerably.    
+* The t-statistics associated with the quasi-binomial model are much smaller the z-statistics associated with the binomial model.    
+* The p-values are bigger, but still small enough to provide evidence of a relationship between college education and voting for Biden.  
+
+
+### Model with All Explanatory Variables
+
+```{r}
+M2 <- glm(cbind(Dvotes, Rvotes) ~ College + Unemployment + WhitePct + COVID_DeathRate + Income , family = binomial(link="logit"), data = Wisconsin)
+summary(M2)
+```
+
+
+* For each one percentage point increase in college education probability (or proportion) voting for Biden is estimated to multiply by $e^0.0463 = 1.047$ ( a 5% increase), assuming all other variables are held constant.   
+
+* For each one percentage point increase in unemployment rate, probability (or proportion) voting for Biden is estimated to multiply by $e^-0.1102 = 0.8957$ (a 10% decrease), assuming all other variables are held constant.
+
+* For each one percentage point increase in white residents, probability (or proportion) voting for Biden is estimated to multiply by $e^-0.02935 = 0.97$ (a 3% decrease), assuming all other variables are held constant.
+
+* For each one death increase per 100k residents, probability (or proportion) voting for Biden is estimated to multiply by $e^-0.006584 = 0.993$ (a 0.7% decrease), assuming all other variables are held constant.
+
+* For each 1000 dollar increase in median income, probability (or proportion) voting for Biden is estimated to multiply by $e^-0.0000328\times1000 = 0.968$ (a 3% decrease), assuming all other variables are held constant.
+
+
+### Tests for Significance of Model Coefficients 
+
+Wald test statistics and p-values for all variables provide evidence of relationships between these variables and percentage voting for Biden.  
+
+This is not surprising since the sample size is very large. In fact, confidence intervals and hypothesis tests don't really make sense to talk about here, because we have the whole population of Wisconsin voters in 2020. We're not trying to generalize from a sample to a population.   
+
+The model estimates still make sense, and are informative, so we should base our conclusions on percentage change estimates given on the previous slide. 
+
+### Drop in Deviance Test
+
+We could perform a drop-in-deviance test to compare our two models so far. 
+
+```{r comment=NA, message=FALSE}
+drop_in_dev <- anova(M1, M2, test = "Chisq")
+drop_in_dev
+```
+
+We see a large drop in residual deviance, providing strong evidence that the larger model is prefered. In this case, that makes sense, since it contains variables we expect to be helpful. 
+
+When we have very large sample sizes we'll get small p-values even when the new variables don't make a practical difference. So we should not base model choices on p-values alone, but should look at confidence intervals and measures of the size of the effect associated with each variable.   
+
+### Goodness of Fit Test
+
+We can also perform the Chi-square goodness of fit test
+
+```{r, gof2, comment=NA}
+1-pchisq(34757, 66)  # Goodness-of-fit test
+```
+
+Not surprisingly, we get a small p-value. This is expected when the sample size is as large as ours, but we should check whether there are signs of model violations.   
+
+
+### Deviance Residual Plot
+
+We plot deviance residuals against the predicted values and against our explanatory variables to test for lack of fit. 
+
+```{r,fig.align="center",out.width="60%",echo=FALSE, warning=FALSE, comment=NA}
+Wisconsinresid <- Wisconsin %>%
+  mutate(Resid = residuals(M2), 
+         Predicted = fitted.values(M2))
+ggplot(Wisconsinresid, aes(x = Predicted, y = Resid)) +
+  geom_point() + 
+  xlab("Predicted Values") +
+  ylab("Deviance Residuals")
+```
+
+```{r,fig.align="center",out.width="60%",echo=FALSE, warning=FALSE, comment=NA}
+p1 <- ggplot(Wisconsinresid, aes(x = College, y = Resid)) +
+  geom_point() +
+  xlab("Predicted Values") + ylab("Deviance Residuals")
+p1
+```
+
+
+```{r, resid,fig.align="center", fig.width=10, ,echo=FALSE, warning=FALSE, comment=NA}
+p1 <- ggplot(Wisconsinresid, aes(x = College, y = Resid)) +
+  geom_point() +
+  xlab("Percent College Graduates") + ylab("Deviance Residuals")
+p2 <- ggplot(Wisconsinresid, aes(x = Unemployment, y = Resid)) +
+  geom_point() +
+  xlab("Predicted Values") + ylab("Deviance Residuals")
+p3 <- ggplot(Wisconsinresid, aes(x = WhitePct, y = Resid)) +
+  geom_point() +
+  xlab("Predicted Values") + ylab("Deviance Residuals")
+p4 <- ggplot(Wisconsinresid, aes(x = COVID_DeathRate, y = Resid)) +
+  geom_point() +
+  xlab("Predicted Values") + ylab("Deviance Residuals")
+p5 <- ggplot(Wisconsinresid, aes(x = Income, y = Resid)) +
+  geom_point() +
+  xlab("Predicted Values") + ylab("Deviance Residuals")
+grid.arrange(p1, p2, p3, p4, p5)
+```
+
+
+### LLSR vs Binomial Logistic Regression 
+
+\begin{gather*}
+\underline{\textrm{Response}} \\
+\mathbf{LLSR:}\textrm{ normal} \\
+\mathbf{Binomial\ Regression:}\textrm{ number of successes in n trials} \\
+\textrm{ } \\
+\underline{\textrm{Variance}} \\
+\mathbf{LLSR:}\textrm{ equal for each level of}\ X \\
+\mathbf{Binomial\ Regression:}\ np(1-p)\textrm{ for each level of}\ X \\
+\textrm{ } \\
+\underline{\textrm{Model Fitting}} \\
+\mathbf{LLSR:}\ \mu=\beta_0+\beta_1x \textrm{ using Least Squares}\\
+\mathbf{Binomial\ Regression:}\ \log\left(\frac{p}{1-p}\right)=\beta_0+\beta_1x \textrm{ using Maximum Likelihood}\\
+\textrm{ } \\
+\underline{\textrm{EDA}} \\
+\mathbf{LLSR:}\textrm{ plot $X$ vs. $Y$; add line} \\
+\mathbf{Binomial\ Regression:}\textrm{ find $\log(\textrm{odds})$ for several subgroups; plot vs. $X$} \\
+\end{gather*}
+
+\begin{gather*}
+\underline{\textrm{Comparing Models}} \\
+\mathbf{LLSR:}\textrm{ extra sum of squares F-tests; AIC/BIC} \\
+\mathbf{Binomial\ Regression:}\textrm{ drop-in-deviance tests; AIC/BIC} \\
+\textrm{ } \\
+\underline{\textrm{Interpreting Coefficients}} \\
+\mathbf{LLSR:}\ \beta_1=\textrm{ change in mean response for unit change in $X$} \\
+\mathbf{Binomial\ Regression:}\ e^{\beta_1}=\textrm{ percent change in odds for unit change in $X$} 
+\end{gather*}
+
+## Maximum Likelihood Estimation
+
+### Parameter Estimation 
+
+Recall that in ordinarly least squares regression, the estimates $b_1, b_2, \ldots, b_p$ of regression coefficients $\beta_1, \beta_2, \ldots \beta_p$ are chosen in a way that minimizes $\displaystyle\sum_{i=1}^n(y_i-\hat{y_i})^2=\displaystyle\sum_{i=1}^n(y_i-(b_0+b_1x_{i1}+\ldots b_px_{ip}))^2$. 
+
+The validity of the least-squares regression process depends on the assumptions associated with a LLSR model, making it inappropriate for the kinds of models we've seen in this class (mixed effects models, generalized linear models, etc.). Instead, we use a process called **maximum likelihood estimation.**
+
+In fact, in an ordinary LLSR model, it can be shown that maximum likelihood estimation would produce the same estimates as least squares estimation. 
+
+In this section, we'll work through a simple example to illustrate how maximum likelihood works in a logistic regression model.   
+
+
+### Steph Curry 3-Point Shooting
+
+Stephen Curry of the Golden State Warriors is widely considered to be the best 3-point shooter in the NBA. So far during the current 2021-22 NBA season, Curry has made 251 out of 663 attempted 3 point shots (37.9\%).   
+
+When playing at home, he has made 150 out of 397 3-point shots (37.8%).    
+
+When playing away, he has made 101 out of 266 4-point shots (38.0%).    
+
+We'll use a logistic regression model to estimate the probability of Curry making a shot at home or away and test whether there is evidence of differences in his shooting based on location.   
+
+### Model for Curry's Shooting
+
+We'll start with a very simple intercept-only model. This model assumes that Curry has a constant probability of success on any shot ($p$), which is the same, regardless of where he is playing. 
+
+Our goal is to estimate $p$ and to find a confidence interval for the range $p$ could plausibly lie in.   
+
+### Likelihood Function
+
+A **likelihood function** is a function that tells us how likely we are to observe our data for a given parameter value.  
+
+Let $p$ represent the probability of a made basket. 
+
+Since the shots are independent, we can write the Likelihood function for Curry's shots as:
+
+\[Lik(p) = p^{\text{#Makes}}(1-p)^{\text{#Misses}} = (p)^{251}(1-p)^{412}\]
+
+If our goal is just to esimate $p$, we could simply find the value of $p$ that maximizes this function. Such a value is called a **maximum likelihood estimate**.   
+
+
+### Plotting Likelihood Function
+
+```{r}
+library(ggplot2)
+p=seq(0,1,length=1001)
+lik=p^251 * (1-p)^(663-251)      # likelihood of getting observed data
+df <- data.frame(p,lik)
+plot<- ggplot(data=df,aes(x=p, y=lik)) + 
+  geom_line(color="blue", size=2) + 
+  xlab("possible values of p") + ylab("Likelihood") + 
+  labs(title="Likelihood function for Curry's shots") 
+plot + xlim(c(0, 1))
+```
+
+It looks like the most likely value of $p$ is around 0.4. 
+
+We'll write a function in R to calculate the value of $p$ that maximizes the function.
+
+### Numerical Maximization
+
+```{r}
+Lik.f <- function(nbasket,nmissed,nGrid){
+    p <- seq(0, 1, length = nGrid)   # create nGrid values of p between 0 and 1
+    lik <- p^{nbasket} * (1 - p)^{nmissed} # calculate value of lik at each p
+    return(p[lik==max(lik)])             # find and return the value of p that maximizes the likelihood function    
+}
+```
+
+
+```{r}
+Lik.f(nbasket = 251, nmissed =  663-251, nGrid = 10000) 
+```
+
+The maximum likelihood estimate is $\hat{p} = 0.3785$.    
+
+In fact, this is equal to 251/663. In this case, the MLE is consistent with our intuition.   
+
+
+### MLE Using Calculus
+
+We can also use calculus to find the value of $p$ that maximizes the function $\text{lik}(p)$. 
+
+In fact, it is usually easier to maximize the log of this function. We can do this since log is a non-decreasing function, ensuring that the value that maximizes $\text{log}(\text{lik}(p))$ will also maximize $\text{lik}(p)$. 
+
+\begin{equation*}
+\frac{d}{dp_B}p_B^{30}(1-p_B)^{20} = 30p_B^{29}(1-p_B)^{20}-p^{30}_B20(1-p_B)^{19} = 0
+\end{equation*}
+
+$$
+\begin{align*}
+ \text{lik}(p)                      &= p^{251}(1-p)^{412} \\
+ \text{log}(\text{lik}(p))                &= 251\log(p)+412\log(1-p) \\
+ \frac{d}{dp} \log(\text{lik}(p)) &= \frac{251}{p} - \frac{412}{1-p} = 0
+\end{align*}
+$$
+
+Thus, 
+$$
+\frac{251}{p} = \frac{412}{1-p} \implies 251(1-p)=412p\implies p=\frac{251}{251+412}\approx0.3785
+
+$$
+
+
+### Likelihood in a Logistic Regression Model 
+
+In a logistic regression model, we don't try to estimate $p$ directly, but rather to estimate $\beta_0, \beta_1, \beta_p$, which are then used to calculate $p$
+
+
+In our simple intercept only example,  
+
+\[p =  \frac{e^{\beta_0}}{1+e^{\beta_0}}\]
+
+and we need to estimate $\beta_0$.   
+
+After removing constants, the new likelihood looks like:
+
+$$ 
+\begin{equation*}
+\begin{gathered}
+    Lik(\beta_0) \propto \\
+    \left( \frac{e^{\beta_0}}{1+e^{\beta_0}}\right)^{251}\left(1- \frac{e^{\beta_0}}{1+e^{\beta_0}}\right)^{412}
+\end{gathered}
+\end{equation*}
+$$
+
+### Plot of Likelihood Function
+
+
+```{r}
+library(ggplot2)
+b=seq(-1,1,length=1001)
+lik= (exp(b)/(1+exp(b)))^251*(1-(exp(b)/(1+exp(b))))^(412)       # likelihood of getting observed data
+df <- data.frame(b,lik)
+plot<- ggplot(data=df,aes(x=b, y=lik)) + 
+  geom_line(color="blue", size=2) + 
+  xlab("possible values of beta_0") + ylab("Likelihood") + 
+  labs(title="Likelihood function for Curry's shots") 
+plot + xlim(c(-1, 1))
+```
+
+
+### Numerical Maximization
+
+```{r}
+Lik.f_logistic <- function(nbasket,nmissed,nGrid){
+    b <- seq(-1, 1, length = nGrid)   # create values between -1 and 1 at which to evaluate the function
+    lik <- (exp(b)/(1+exp(b)))^nbasket*(1-(exp(b)/(1+exp(b))))^nmissed  # calculate values at each b
+    return(b[lik==max(lik)])    # find and return value of b that maximizes the function
+}
+```
+
+```{r}
+Lik.f_logistic(nbasket = 251, nmissed = 412, nGrid = 10000) 
+```
+
+Our estimate is $b_0 = -0.4955$.   
+
+
+From this we can calculate \[\hat{p} =  \frac{e^{-0.4955}}{1+e^{-0.4955}}\approx0.3785\]
+
+### Comparison to R Output
+
+
+```{r}
+Location <- c("Home", "Away")
+Makes <- c(150, 101)
+Misses <- c(247, 165)
+Curry <- data.frame(Location, Makes, Misses)
+head(Curry)
+```
+
+```{r}
+M <- glm(data = Curry, cbind(Makes, Misses) ~ 1 , family = binomial(link="logit"))
+summary(M)
+```
+
+Note that the estimates differ in the 5th decimal place due to issues with numerical approximation. We could get a more precise approximation by increasing the number of points in our grid search.   
+
+We could maximize this function using calculus, which is more involved, but still doable in this case. Calculus-based methods typically do not work for more complicated likelihood methods involving more than one parameter, so we usually rely on numerical approximation methods.   
+
+
+### Model for Home/Away
+
+Now let's build a model that allows Curry's probability of making a shot to differ for away games, compared to home games. 
+
+Let $p_H$ represent the probability of making a shot at home and $p_A$ represent the probability of making a shot in an away game.   
+
+We can write the likelihood function as:
+
+\[Lik(p_H, p_A) = {397 \choose 150}p_H^{150}(1-p_H)^{247}
+{266 \choose 101}p_A^{101}(1-p_A)^{165}\]
+
+Our interest centers on estimating $\hat{\beta_0}$ and $\hat{\beta_1}$, not $p_1$ or $p_0$. So we replace $p_1$ in the likelihood with an expression for $p_1$ in terms of $\beta_0$ and $\beta_1$. Recall 
+
+\[p_i =  \frac{e^{\beta_0+\beta_1\text{Home}}}{1+e^{\beta_0+\beta_1\text{Home}}}\]
+
+
+After removing constants, the new likelihood looks like:
+
+$$ 
+\begin{equation*}
+\begin{gathered}
+    Lik(\beta_0,\beta_1) \propto \\
+    \left( \frac{e^{\beta_0+\beta_1}}{1+e^{\beta_0+\beta_1}}\right)^{150}\left(1- \frac{e^{\beta_0+\beta_1}}{1+e^{\beta_0+\beta_1}}\right)^{247}
+    \left(\frac{e^{\beta_0}}{1+e^{\beta_0}}\right)^{101}\left(1-\frac{e^{\beta_0}}{1+e^{\beta_0}}\right)^{165}
+\end{gathered}
+\end{equation*}
+$$
+
+### Numerical Optimization
+
+```{r}
+Lik.f_logistic2 <- function(nbasketH,nmissedH,nbasketA,nmissedA,nGrid){
+    b0 <- seq(-1, 1, length = nGrid)  # values of b0 
+    b1 <- seq(-1, 1, length=nGrid)  # values of b1
+    B <- expand.grid(b0, b1)  # create all combinations of b0 and b1
+    names(B) <- c("b0", "b1")  # give B the right names
+    B <- B %>% mutate(Lik = (exp(b0+b1)/(1+exp(b0+b1)))^nbasketH*(1-(exp(b0+b1)/(1+exp(b0+b1))))^nmissedH*
+                        (exp(b0)/(1+exp(b0)))^nbasketA*(1-(exp(b0)/(1+exp(b0))))^nmissedA) #evaluate function
+    return(B[B$Lik==max(B$Lik),]) # find and return combination of b0 and b1 that maximize B.     
+}
+```
+
+```{r}
+Lik.f_logistic2(nbasketH = 150, nmissedH = 247, nbasketA = 101, nmissedA = 165, nGrid = 1000) 
+```
+
+
+Although we have worked with the likelihood function here, it is more common to work with the log of the likelihood function. Notice that the maximized log likelihood is very small, which can create numerical instability, though it doesn't here. 
+
+
+### Comparison to R Output
+
+```{r}
+M <- glm(data = Curry, cbind(Makes, Misses) ~ Location , family = binomial(link="logit"))
+summary(M)
+```
+
+The estimates are close to those that we obtained. We can make them closer by using a finer grid search.  
+
+
+### Applications of Likelihood  
+
+Likelihood is at the heart of many of the model comparison tests we've worked with in this class.  
+
+**Likelihood Ratio Tests**
+
+The ANOVA-type tests of reduced vs full models use likelihoods to calculate the improvement in fit, associated with adding additional variables to the model.   
+
+Our test statistic is
+
+\begin{equation*}
+\begin{split}    
+ \textrm{LRT} &= 2[\max(\log(\Lik(\textrm{larger model}))) - \max(\log(\Lik(\textrm{reduced model})))] \\
+     &= 2\log\left(\frac{\max(\Lik(\textrm{larger  model}))}{\max(\Lik(\textrm{reduced model}))} \right)
+\end{split}
+\end{equation*}
+
+Statistical theory tells us that this statistic follows $\chi^2$ distribution with the difference in number of parameters as its degrees of freedom.  
+
+**AIC and BIC** 
+
+AIC and BIC are also calculated using the likelihood function.  
+
+- $\textrm{AIC} = -2 (\textrm{maximum log-likelihood }) + 2p$, where $p$ represents the number of parameters in the fitted model. AIC stands for Akaike Information Criterion. \index{AIC} Because smaller AICs imply better models, we can think of the second term as a penalty for model complexity---the more variables we use, the larger the AIC. 
+
+- $\textrm{BIC} = -2 (\textrm{maximum log-likelihood }) + p\log(n)$, where $p$ is the number of parameters and $n$ is the number of observations. BIC stands for  Bayesian Information Criterion, \index{BIC} also known as Schwarz's Bayesian criterion (SBC). 
+
+### Summary Maximum Likelihood Estimation
+
+
+* Maximum likelihood estimation is widely used to estimate parameters in many different kinds of statistical models    
+
+* In LLSR, MLE and least-squares procedures yield the same estimates     
+
+* Although they can be determined graphically, or using calculus in simple situations, MLE's are usually approximated using numerical methods     
+
+* It's usually best, for reasons of numerical stability, to maximize the log of the likelihood function, rather than the likelihood function itself      
+
+* In this section, we looked at a couple simple examples in logistic regression, but MLE's are used in all of the models we've seen in this course (mixed effects, Poisson regression, etc.) and many more. It is the go-to technique for parameter estimation in classical frequentist statistics (which probably includes all statistics you've studied so far)      
+
+* Maximum Likelihood estimation is taught in much more mathematical detail in STAT 445.     
+
+* An alternative approach to Maximium Likelihood Estimation is Bayesian Estimation, which is taught in STAT 450
+
+
+## Zero-Inflated Poisson Model
+
+### Case Study: Weekend Drinking 
+
+Students in an introductory statistics class at a large university were asked:
+
+"How many alcoholic drinks did you consume last weekend?". 
+
+This survey was conducted on a dry campus where no alcohol is officially allowed, even among students of drinking age, so we expect that some portion of the respondents never drink. The purpose of this survey is to explore factors related to drinking behavior on a dry campus. 
+
+
+```{r}
+#Getting started-weekenddrinks
+# File: weekendDrinks
+drinks <- read.csv("https://raw.githubusercontent.com/proback/BeyondMLR/master/data/weekendDrinks.csv") 
+drinks <- drinks %>% 
+  mutate(off.campus=ifelse(dorm=="off campus",1,0), 
+         firstYear=dorm%in%c("kildahl","mohn","kittlesby")) %>% select(-c(dorm))
+head(drinks)
+```
+ 
+ 
+### Questions of Interest
+
+* What proportion of students on this dry campus never drink?    
+* Do upper class students drink more than first years?     
+* What factors, such as off-campus living and sex, are related to whether students drink?    
+* Among those who do drink, to what extent is moving off campus associated with the number of drinks in a weekend?      
+* It is commonly assumed that males' alcohol consumption is greater than females'; is this true on this campus?       
+
+### Distribution of Number of Drinks   
+
+```{r}
+ggplot(data=drinks, aes(x=drinks)) + geom_histogram() + facet_wrap(~firstYear)
+```
+
+```{r}
+drinks %>% group_by(firstYear) %>% summarize(mean_drinks=mean(drinks), 
+                                             prop_zero = mean(drinks==0), 
+                                             n=n())
+```
+
+
+### Number of Drinks Comparisons
+
+```{r, fig.width=10}
+p1 <- ggplot(data = drinks) + 
+  geom_histogram(mapping = aes(x = drinks)) + facet_wrap(~firstYear, nrow=2) +
+  ggtitle("Drinking by First Year Status") 
+p2 <- ggplot(data = drinks) + 
+  geom_histogram(mapping = aes(x = drinks)) + facet_wrap(~sex, nrow=2) +
+  ggtitle("Drinks by Sex") 
+p3 <- ggplot(data = drinks) + 
+  geom_histogram(mapping = aes(x = drinks)) + facet_wrap(~off.campus, nrow=2) +
+  ggtitle("Drinking by On/Off Campus") 
+grid.arrange(p1, p2, p3, nrow=1)
+```
+
+
+### Proportion of Drinkers       
+
+Now, we compare proportions of students who reported drinking any drinks.   
+
+Drinks by First-Year Status:
+
+```{r, fig.width=10}
+p1 <- ggplot(data = drinks) + 
+  stat_count(mapping = aes(x = firstYear, fill=drinks>0), position="fill" ) + 
+  ggtitle("Drinking by First Year Status") 
+p2 <- ggplot(data = drinks) + 
+  stat_count(mapping = aes(x = sex, fill=drinks>0), position="fill" ) + 
+  ggtitle("Drinking by Sex") 
+p3 <- ggplot(data = drinks) + 
+  stat_count(mapping = aes(x = off.campus, fill=drinks>0), position="fill" ) + 
+  ggtitle("Drinking by On/Off Campus") 
+grid.arrange(p1, p2, p3, nrow=3)
+```
+
+### Modeling Drinks
+
+A Poisson distribution seems like a good choice for modeling drinks, since they are a count, and there is no fixed number of "attempts", as in a binomial distribution.   
+
+```{r, echo=FALSE, fig.height=3, fig.width=10}
+df <- data.frame(x = 0:10, y = dpois(0:10, 2.41))
+p1 <- ggplot(df, aes(x = x, y = y)) + geom_bar(stat = "identity", col = "white", fill = "blue") + 
+  scale_y_continuous(expand = c(0.01, 0)) + scale_x_continuous(breaks=(0:10)) + xlab("x") + ylab(expression(paste("p(x|", theta, ")"))) + ggtitle(expression(paste(lambda, "=2.41"))) + theme_bw() + 
+  theme(plot.title = element_text(size = rel(1.2), vjust = 1.5))
+
+df <- data.frame(x = 0:10, y = dpois(0:10, 0.72))
+p2 <- ggplot(df, aes(x = x, y = y)) + geom_bar(stat = "identity", col = "white", fill = "blue") + 
+  scale_y_continuous(expand = c(0.01, 0))+ scale_x_continuous(breaks=(0:10)) + xlab("x") + ylab(expression(paste("p(x|", theta, ")"))) + ggtitle(expression(paste(lambda, "=0.72"))) + theme_bw() + 
+  theme(plot.title = element_text(size = rel(1.2), vjust = 1.5))
+
+
+grid.arrange(p1, p2, ncol=2)
+```
+
+Expected Proportion of Zeros:
+
+```{r}
+dpois(0, 2.41)
+```
+
+```{r}
+dpois(0, 0.72)
+```
+
+
+The proportion of zeros in our data is much higher than expected under a Poisson model with means equal to those observed in the data. (0.41 compared to 0.09 for upperclass students and 0.67, compared to 0.49 for first-years).   
+
+
+### Explaining the Large Number of Zeros
+
+The students who reported 0 drinks will fall into one of two categories:
+
+1. Students who do not drink at all.    
+2. Students who do drink, but did not drink last weekend.   
+
+Our data consist of a **mixture** of responses from these two different populations. 
+
+Among students who do drink, it is reasonable to model the number of drinks consumed on a given weekend using a Poisson distribution
+
+Among students who do not drink at all, there is no need to model the number of drinks in a given weekend, since we know it's zero.   
+
+Ideally, we'd like to sort out the non-drinkers and drinkers when performing our analysis.
+
+Answering these questions would be a simple matter if we knew who was and was not a drinker in our sample. Unfortunately, the non-drinkers did not identify themselves as such, so we will need to use the data available with a model that allows us to estimate the proportion of drinkers and non-drinkers.
+
+### Zero-Inflated Poisson Model       
+
+We'll fit the model in two steps:
+
+1. Estimate the probability that a person drinks at all, given information contained in the explanatory variables.     
+2. Model the number of drinks consumed in a given weekend, assuming the person does drink at all.   
+
+
+In step 1, we use logistic regression to estimate $p$, the probability that the person drinks at all.    
+
+In step 2, we use a Poisson regression to estimate $\lambda$, the expected number of drinks a person consumes, assumping they drink at all.     
+
+### Developing the Zero-Inflated Poisson Model 
+
+Let
+
+\[ \begin{cases} 
+     1 & \text{if student i drinks at all} \\
+      0 & \text{otherwise}
+   \end{cases}
+\]
+
+
+First, we model $D_i$:   
+
+\[D_i\sim\text{Ber}(p_i)
+\]
+
+and then $Y_{i}$
+
+\[ \begin{cases} 
+     Y_i\sim\text{Pois}(\lambda_i) & \text{if } D_i=0 \\
+     Y_i=0 & \text{if } D_i=1
+   \end{cases}
+\]
+
+
+The variable $D_i$ is called a **latent variable**. It is a variable that is relevant to the process we are interested in studying, but is not directly measured or reported in our data.   
+
+The Zero-Inflated Poisson is an example of a **mixture model**, as the response variable is modeled using a mixture of Bernoulli and Poisson distributions.    
+
+
+
+### Deriving the Poisson PMF
+
+We derive the probability mass function for the Poisson model by considering the two different ways we can observe count $y$.    
+
+$$
+\begin{aligned}
+P(Y=0) &= P(\text{Person Doesn't Drink at All}) + P(\text{Person drinks and didn't drink last week})\\
+& = P(\text{Person Doesn't Drink at All}) + P(\text{0 drinks in a given weekend given person drinks})P(\text{Person drinks}) \\
+& = P(D_i=1) + P(Y_i=0|D_i=1)P(D_i=1) \\
+& = p_i + \frac{\lambda_i^0e^{-\lambda_i}}{0!}(1-p) \\
+& = p_i + e^{-\lambda_i}(1-p_i)
+\end{aligned}
+$$
+
+For $y\neq 0$,   
+
+$$
+\begin{aligned}
+P(Y=y) &= P(\text{Person drinks and drinks y drinks in a weekend})\\
+& =  P(\text{y drinks in a given weekend given person drinks})P(\text{Person drinks}) \\
+& = P(Y_i=y|D_i=1)P(D_i=1) \\
+& =  \frac{\lambda_i^ye^{-\lambda_i}}{y!}(1-p)
+\end{aligned}
+$$
+
+
+Putting these together, we get the ZIP probability mass function:
+
+\[ P(Y=y) = \begin{cases} 
+     p_i + e^{-\lambda_i}(1-p_i) & \text{if } y=0 \\
+     \frac{\lambda_i^ye^{-\lambda_i}}{y!}(1-p) & \text{if } y>0
+   \end{cases}
+\]
+
+
+### Examples of ZIP PMF's
+
+```{r, echo=FALSE, fig.height=3, fig.width=10}
+library(VGAM)
+N<-20
+
+df <- data.frame(x = 0:N , y = dzipois(0:N , lambda=3, pstr0=0.1))
+p1 <- ggplot(df, aes(x = x, y = y)) + geom_bar(stat = "identity", col = "white", fill = "blue") + 
+  scale_y_continuous(expand = c(0.01, 0)) + xlab("y") + ggtitle(expression(paste("lambda=3, ", "p=0.1")))  + theme_bw() + 
+  theme(plot.title = element_text(size = rel(1.2), vjust = 1.5))
+
+df <- data.frame(x = 0:N , y = dzipois(0:N , lambda=7, pstr0=0.1))
+p2 <- ggplot(df, aes(x = x, y = y)) + geom_bar(stat = "identity", col = "white", fill = "blue") + 
+  scale_y_continuous(expand = c(0.01, 0)) + xlab("y") + ggtitle(expression(paste("lambda=7, ", "p=0.1")))  + theme_bw() + 
+  theme(plot.title = element_text(size = rel(1.2), vjust = 1.5))
+
+df <- data.frame(x = 0:N , y = dzipois(0:N , lambda=3, pstr0=0.5))
+p3 <- ggplot(df, aes(x = x, y = y)) + geom_bar(stat = "identity", col = "white", fill = "blue") + 
+  scale_y_continuous(expand = c(0.01, 0)) + xlab("y") + ggtitle(expression(paste("lambda=3, ", "p=0.5")))  + theme_bw() + 
+  theme(plot.title = element_text(size = rel(1.2), vjust = 1.5))
+
+df <- data.frame(x = 0:N , y = dzipois(0:N , lambda=7, pstr0=0.5))
+p4 <- ggplot(df, aes(x = x, y = y)) + geom_bar(stat = "identity", col = "white", fill = "blue") + 
+  scale_y_continuous(expand = c(0.01, 0)) + xlab("y") + ggtitle(expression(paste("lambda=7, ", "p=0.5")))  + theme_bw() + 
+  theme(plot.title = element_text(size = rel(1.2), vjust = 1.5))
+
+grid.arrange(p1, p2, p3, p4, ncol=2)
+```
+
+Mean: ($(1-p)\lambda$)     
+
+Variance: ($(1-p)\lambda(1+p\lambda)$)     
+
+
+### ZIP Model
+
+We assume 
+
+\[
+Y_i \sim\text{ZIP}(p_i, \lambda_i)
+\]
+
+$p_i$ represents the probability that student $i$ drinks at all.    
+$\lambda_i$ represents the average number of drinks student $i$ consumes in a weekend, assuming they do drink at all.   
+
+We want to estimate $p_i$ and $\lambda_i$, using information contained in the explanatory variables. 
+
+We can use different explanatory variables to estimate $p_i$ and $\lambda_i$.     
+
+Let $Z_{1}, Z_2, \ldots, Z_p'$ be the explanatory variables used to estimate $p$, and $X_1, X_2, \ldots, X_p$ be the explanatory variables used to estimate $\lambda$
+
+
+We link $p_i$ and $\lambda_i$ to a linear combination of the explanatory variables, using the link functions:
+
+\[
+log(\lambda_i) = \beta_0+\beta_1X_{i1}+ \ldots +\beta_pX_{ip},
+\]
+
+\[
+log\left(\frac{p_i}{1-p_i}\right) = \alpha_0+\alpha_1Z_{i1}+ \ldots +\alpha_pZ_{ip'},
+\]
+
+We obtain estimates of $\beta_0, \ldots{\beta_p}$ and $\alpha_0, \ldots, \alpha_p$, and from these obtain maximum likelihood etimates for $p_i$ and $\lambda_i$. 
+
+
+## Model for Drinks Data
+
+### ZIP for Drinks Data
+
+A zero-inflated Poisson regression model to take non-drinkers into account consists of two parts:
+
+- One part  models the association, among drinkers, between number of drinks and the predictors of sex and off-campus residence.
+- The other part uses a predictor for first-year status to obtain an estimate of the proportion of non-drinkers based on the reported zeros.
+
+The form for each part of the model follows. The first part looks like an ordinary Poisson regression model:
+
+\[
+log(\lambda)=\beta_0+\beta_1\textrm{off.campus}+ \beta_2\textrm{sex}
+\]
+where $\lambda$ is the mean number of drinks in a weekend *among those who drink*.
+The second part has the form
+
+\[
+logit(\alpha)=\beta_0+\beta_1\textrm{firstYear}
+\]
+where $\alpha$ is the probability of being in the non-drinkers group and $logit(\alpha) = log( \alpha/(1-\alpha))$.  We'll provide more detail on the logit in Chapter \@ref(ch-logreg). There are many ways in which to structure this model; here we use different predictors in the two pieces, athough it would have been perfectly fine to use the same predictors for both pieces, or even no predictors for one of the pieces.
+
+
+
+### ZIP Model in R
+
+We will use the R function `zeroinfl` from the package `pscl` to fit a ZIP model. The terms before the `|` are used to model expected number of drinks, assuming the person really does drink at all.    
+
+The terms after the `|` are used to estimate the probability that the person drinks at all.  
+
+```{r, comment = NA}
+zip.m <- zeroinfl(drinks ~ off.campus + sex | firstYear, 
+                   data = drinks)
+summary(zip.m)
+```
+
+```{r}
+exp(coef(zip.m))   # exponentiated coefficients
+```
+
+**Interpretations**
+
+* For those who drink, the average number of drinks for males is $e^{1.0209}$ or 2.76 times the number for females (Z = 5.827, p < 0.001) given that you are comparing people who live in comparable settings (on or off campus)
+
+* Among drinkers, the mean number of drinks for students living off campus is $e^{0.4159}=1.52$ times that of students living on campus for those of the same sex (Z = 2.021, p = 0.0433).
+
+* The odds that a first-year student is a non-drinker are 3.12 times the odds that an upper-class student is a non-drinker. 
+ 
+* The estimated probability that a first-year student is a non-drinker is
+
+\[
+\frac{e^{0.533}}{1+e^{0.533}} = 0.630
+\]
+
+or 63.0\%, while for non-first-year students, the estimated probability of being a non-drinker is 0.354. 
+
+
+
+### Residual Plot
+
+Fitted values ($\hat{y}$) and residuals ($y-\hat{y}$) can be computed for zero-inflation models and plotted. Figure \@ref(fig:poisRes) reveals that one observation appears to be extreme (Y=22 drinks during the past weekend). Is this a legitimate observation or was there a transcribing error? Without the original respondents, we cannot settle this question. It might be worthwhile to get a sense of how influential this extreme observation is by removing Y=22 and refitting the model.
+
+```{r, poisRes, fig.align="center",out.width="60%", fig.cap='Residuals by fitted counts for ZIP model.',echo=FALSE, warning=FALSE, message=FALSE}
+#yhatXresidZero
+res.df <- data.frame(resid = residuals(zip.m), fit = fitted(zip.m))
+ggplot(res.df, aes(x = fit, y = resid)) +
+  geom_point() +
+  ylab("Residuals from ZIP model") +
+  xlab("Fitted values from ZIP model") +
+  annotate("text", x=4.2, y=5.3, label= "Y=22")
+```
+
+
+
+### Limitations
+
+There are several concerns and limitations we should think about related to this study.   
+
+What time period constitutes the "weekend"?    
+
+What constitutes a drink---a bottle of beer?   
+
+How many drinks will a respondent report for a bottle of wine?    
+
+There is also an issue related to confidentiality.  If the data is collected in class, will the teacher be able to identify the respondent? Will respondents worry that a particular response will affect their grade in the class or lead to repercussions on a dry campus?
+
+In addition to these concerns, there are a number of other limitations that should be noted. Following the concern of whether this data represents a random sample of any population (it doesn't), we also must be concerned with the size of this data set (77). ZIP models are not appropriate for small samples and this data set is not impressively large.
+
+### Final Thoughts on Zero-Inflated Models
+
+At times, a mixture of zeros occurs naturally. It may not come about because of neglecting to ask a critical question on a survey, but the information about the subpopulation may simply not be ascertainable. For example, visitors from a state park were asked as they departed how many fish they caught, but those who report 0 could be either non-fishers or fishers who had bad luck. These kinds of circumstances occur often enough that ZIP models are becoming increasingly common.
+
+Actually, applications which extend beyond ordinary Poisson regression applications---ZIPs and other Poisson modeling approaches such as hurdle models and quasi-Poisson applications---are becoming increasingly common. So it is worth taking a look at these variations of Poisson regression models. Here we have only skimmed the surface of zero-inflated models, but we want you to be aware of models of this type. ZIP models demonstrate that modeling can be flexible and creative---a theme we hope you will see throughout this book.
+
+

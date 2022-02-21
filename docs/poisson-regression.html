@@ -23,7 +23,7 @@
 
 
 
-<meta name="date" content="2022-02-16" />
+<meta name="date" content="2022-02-21" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="data-with-three-of-more-levels.html"/>
-
+<link rel="next" href="logistic-regression.html"/>
 <script src="libs/jquery-3.5.1/jquery-3.5.1.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -409,6 +409,74 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="6.8" data-path="poisson-regression.html"><a href="poisson-regression.html#summaries"><i class="fa fa-check"></i><b>6.8</b> Summaries</a><ul>
 <li class="chapter" data-level="6.8.1" data-path="poisson-regression.html"><a href="poisson-regression.html#llsr-vs.-poisson-regression-comparison"><i class="fa fa-check"></i><b>6.8.1</b> LLSR vs. Poisson Regression Comparison</a></li>
 <li class="chapter" data-level="6.8.2" data-path="poisson-regression.html"><a href="poisson-regression.html#poisson-vs-quasi-poisson-inference"><i class="fa fa-check"></i><b>6.8.2</b> Poisson vs Quasi-Poisson Inference</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="logistic-regression.html"><a href="logistic-regression.html"><i class="fa fa-check"></i><b>7</b> Logistic Regression</a><ul>
+<li class="chapter" data-level="7.1" data-path="logistic-regression.html"><a href="logistic-regression.html#binomial-logistic-regression"><i class="fa fa-check"></i><b>7.1</b> Binomial Logistic Regression</a><ul>
+<li class="chapter" data-level="7.1.1" data-path="logistic-regression.html"><a href="logistic-regression.html#binary-response-data"><i class="fa fa-check"></i><b>7.1.1</b> Binary Response Data</a></li>
+<li class="chapter" data-level="7.1.2" data-path="logistic-regression.html"><a href="logistic-regression.html#binomial-response-data"><i class="fa fa-check"></i><b>7.1.2</b> Binomial Response Data</a></li>
+<li class="chapter" data-level="7.1.3" data-path="logistic-regression.html"><a href="logistic-regression.html#wisconsin-election-data"><i class="fa fa-check"></i><b>7.1.3</b> 2020 Wisconsin Election Data</a></li>
+<li class="chapter" data-level="7.1.4" data-path="logistic-regression.html"><a href="logistic-regression.html#correlation-between-explanatory-variables"><i class="fa fa-check"></i><b>7.1.4</b> Correlation Between Explanatory Variables</a></li>
+<li class="chapter" data-level="7.1.5" data-path="logistic-regression.html"><a href="logistic-regression.html#modeling-number-of-votes"><i class="fa fa-check"></i><b>7.1.5</b> Modeling Number of Votes</a></li>
+<li class="chapter" data-level="7.1.6" data-path="logistic-regression.html"><a href="logistic-regression.html#the-binomial-distribution"><i class="fa fa-check"></i><b>7.1.6</b> The Binomial Distribution</a></li>
+<li class="chapter" data-level="7.1.7" data-path="logistic-regression.html"><a href="logistic-regression.html#binomial-distribution-for-n4-p0.6"><i class="fa fa-check"></i><b>7.1.7</b> Binomial Distribution for <span class="math inline">\(n=4, p=0.6\)</span></a></li>
+<li class="chapter" data-level="7.1.8" data-path="logistic-regression.html"><a href="logistic-regression.html#more-binomial-distributions"><i class="fa fa-check"></i><b>7.1.8</b> More Binomial Distributions</a></li>
+<li class="chapter" data-level="7.1.9" data-path="logistic-regression.html"><a href="logistic-regression.html#connecting-expected-response-to-explatory-variables-1"><i class="fa fa-check"></i><b>7.1.9</b> Connecting Expected Response to Explatory Variables</a></li>
+<li class="chapter" data-level="7.1.10" data-path="logistic-regression.html"><a href="logistic-regression.html#odds-and-odds-ratio"><i class="fa fa-check"></i><b>7.1.10</b> Odds and Odds Ratio</a></li>
+<li class="chapter" data-level="7.1.11" data-path="logistic-regression.html"><a href="logistic-regression.html#interpreting-regression-coefficients"><i class="fa fa-check"></i><b>7.1.11</b> Interpreting Regression Coefficients</a></li>
+<li class="chapter" data-level="7.1.12" data-path="logistic-regression.html"><a href="logistic-regression.html#binomial-logistic-regression-assumptions"><i class="fa fa-check"></i><b>7.1.12</b> Binomial Logistic Regression Assumptions</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="logistic-regression.html"><a href="logistic-regression.html#model-for-wisconsin-vote"><i class="fa fa-check"></i><b>7.2</b> Model for Wisconsin Vote</a><ul>
+<li class="chapter" data-level="7.2.1" data-path="logistic-regression.html"><a href="logistic-regression.html#an-initial-model"><i class="fa fa-check"></i><b>7.2.1</b> An Initial Model</a></li>
+<li class="chapter" data-level="7.2.2" data-path="logistic-regression.html"><a href="logistic-regression.html#checking-linearity-assumption"><i class="fa fa-check"></i><b>7.2.2</b> Checking Linearity Assumption</a></li>
+<li class="chapter" data-level="7.2.3" data-path="logistic-regression.html"><a href="logistic-regression.html#overdispersion-in-binomial-counts"><i class="fa fa-check"></i><b>7.2.3</b> Overdispersion in Binomial Counts</a></li>
+<li class="chapter" data-level="7.2.4" data-path="logistic-regression.html"><a href="logistic-regression.html#residuals-for-binomial-logistic-regression"><i class="fa fa-check"></i><b>7.2.4</b> Residuals for Binomial Logistic Regression</a></li>
+<li class="chapter" data-level="7.2.5" data-path="logistic-regression.html"><a href="logistic-regression.html#quasi-binomial-model"><i class="fa fa-check"></i><b>7.2.5</b> Quasi-Binomial Model</a></li>
+<li class="chapter" data-level="7.2.6" data-path="logistic-regression.html"><a href="logistic-regression.html#model-with-all-explanatory-variables"><i class="fa fa-check"></i><b>7.2.6</b> Model with All Explanatory Variables</a></li>
+<li class="chapter" data-level="7.2.7" data-path="logistic-regression.html"><a href="logistic-regression.html#tests-for-significance-of-model-coefficients"><i class="fa fa-check"></i><b>7.2.7</b> Tests for Significance of Model Coefficients</a></li>
+<li class="chapter" data-level="7.2.8" data-path="logistic-regression.html"><a href="logistic-regression.html#drop-in-deviance-test-2"><i class="fa fa-check"></i><b>7.2.8</b> Drop in Deviance Test</a></li>
+<li class="chapter" data-level="7.2.9" data-path="logistic-regression.html"><a href="logistic-regression.html#goodness-of-fit-test-1"><i class="fa fa-check"></i><b>7.2.9</b> Goodness of Fit Test</a></li>
+<li class="chapter" data-level="7.2.10" data-path="logistic-regression.html"><a href="logistic-regression.html#deviance-residual-plot"><i class="fa fa-check"></i><b>7.2.10</b> Deviance Residual Plot</a></li>
+<li class="chapter" data-level="7.2.11" data-path="logistic-regression.html"><a href="logistic-regression.html#llsr-vs-binomial-logistic-regression"><i class="fa fa-check"></i><b>7.2.11</b> LLSR vs Binomial Logistic Regression</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="logistic-regression.html"><a href="logistic-regression.html#maximum-likelihood-estimation"><i class="fa fa-check"></i><b>7.3</b> Maximum Likelihood Estimation</a><ul>
+<li class="chapter" data-level="7.3.1" data-path="logistic-regression.html"><a href="logistic-regression.html#parameter-estimation"><i class="fa fa-check"></i><b>7.3.1</b> Parameter Estimation</a></li>
+<li class="chapter" data-level="7.3.2" data-path="logistic-regression.html"><a href="logistic-regression.html#steph-curry-3-point-shooting"><i class="fa fa-check"></i><b>7.3.2</b> Steph Curry 3-Point Shooting</a></li>
+<li class="chapter" data-level="7.3.3" data-path="logistic-regression.html"><a href="logistic-regression.html#model-for-currys-shooting"><i class="fa fa-check"></i><b>7.3.3</b> Model for Curry's Shooting</a></li>
+<li class="chapter" data-level="7.3.4" data-path="logistic-regression.html"><a href="logistic-regression.html#likelihood-function"><i class="fa fa-check"></i><b>7.3.4</b> Likelihood Function</a></li>
+<li class="chapter" data-level="7.3.5" data-path="logistic-regression.html"><a href="logistic-regression.html#plotting-likelihood-function"><i class="fa fa-check"></i><b>7.3.5</b> Plotting Likelihood Function</a></li>
+<li class="chapter" data-level="7.3.6" data-path="logistic-regression.html"><a href="logistic-regression.html#numerical-maximization"><i class="fa fa-check"></i><b>7.3.6</b> Numerical Maximization</a></li>
+<li class="chapter" data-level="7.3.7" data-path="logistic-regression.html"><a href="logistic-regression.html#mle-using-calculus"><i class="fa fa-check"></i><b>7.3.7</b> MLE Using Calculus</a></li>
+<li class="chapter" data-level="7.3.8" data-path="logistic-regression.html"><a href="logistic-regression.html#likelihood-in-a-logistic-regression-model"><i class="fa fa-check"></i><b>7.3.8</b> Likelihood in a Logistic Regression Model</a></li>
+<li class="chapter" data-level="7.3.9" data-path="logistic-regression.html"><a href="logistic-regression.html#plot-of-likelihood-function"><i class="fa fa-check"></i><b>7.3.9</b> Plot of Likelihood Function</a></li>
+<li class="chapter" data-level="7.3.10" data-path="logistic-regression.html"><a href="logistic-regression.html#numerical-maximization-1"><i class="fa fa-check"></i><b>7.3.10</b> Numerical Maximization</a></li>
+<li class="chapter" data-level="7.3.11" data-path="logistic-regression.html"><a href="logistic-regression.html#comparison-to-r-output"><i class="fa fa-check"></i><b>7.3.11</b> Comparison to R Output</a></li>
+<li class="chapter" data-level="7.3.12" data-path="logistic-regression.html"><a href="logistic-regression.html#model-for-homeaway"><i class="fa fa-check"></i><b>7.3.12</b> Model for Home/Away</a></li>
+<li class="chapter" data-level="7.3.13" data-path="logistic-regression.html"><a href="logistic-regression.html#numerical-optimization"><i class="fa fa-check"></i><b>7.3.13</b> Numerical Optimization</a></li>
+<li class="chapter" data-level="7.3.14" data-path="logistic-regression.html"><a href="logistic-regression.html#comparison-to-r-output-1"><i class="fa fa-check"></i><b>7.3.14</b> Comparison to R Output</a></li>
+<li class="chapter" data-level="7.3.15" data-path="logistic-regression.html"><a href="logistic-regression.html#applications-of-likelihood"><i class="fa fa-check"></i><b>7.3.15</b> Applications of Likelihood</a></li>
+<li class="chapter" data-level="7.3.16" data-path="logistic-regression.html"><a href="logistic-regression.html#summary-maximum-likelihood-estimation"><i class="fa fa-check"></i><b>7.3.16</b> Summary Maximum Likelihood Estimation</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="logistic-regression.html"><a href="logistic-regression.html#zero-inflated-poisson-model"><i class="fa fa-check"></i><b>7.4</b> Zero-Inflated Poisson Model</a><ul>
+<li class="chapter" data-level="7.4.1" data-path="logistic-regression.html"><a href="logistic-regression.html#case-study-weekend-drinking"><i class="fa fa-check"></i><b>7.4.1</b> Case Study: Weekend Drinking</a></li>
+<li class="chapter" data-level="7.4.2" data-path="logistic-regression.html"><a href="logistic-regression.html#questions-of-interest-3"><i class="fa fa-check"></i><b>7.4.2</b> Questions of Interest</a></li>
+<li class="chapter" data-level="7.4.3" data-path="logistic-regression.html"><a href="logistic-regression.html#distribution-of-number-of-drinks"><i class="fa fa-check"></i><b>7.4.3</b> Distribution of Number of Drinks</a></li>
+<li class="chapter" data-level="7.4.4" data-path="logistic-regression.html"><a href="logistic-regression.html#number-of-drinks-comparisons"><i class="fa fa-check"></i><b>7.4.4</b> Number of Drinks Comparisons</a></li>
+<li class="chapter" data-level="7.4.5" data-path="logistic-regression.html"><a href="logistic-regression.html#proportion-of-drinkers"><i class="fa fa-check"></i><b>7.4.5</b> Proportion of Drinkers</a></li>
+<li class="chapter" data-level="7.4.6" data-path="logistic-regression.html"><a href="logistic-regression.html#modeling-drinks"><i class="fa fa-check"></i><b>7.4.6</b> Modeling Drinks</a></li>
+<li class="chapter" data-level="7.4.7" data-path="logistic-regression.html"><a href="logistic-regression.html#explaining-the-large-number-of-zeros"><i class="fa fa-check"></i><b>7.4.7</b> Explaining the Large Number of Zeros</a></li>
+<li class="chapter" data-level="7.4.8" data-path="logistic-regression.html"><a href="logistic-regression.html#zero-inflated-poisson-model-1"><i class="fa fa-check"></i><b>7.4.8</b> Zero-Inflated Poisson Model</a></li>
+<li class="chapter" data-level="7.4.9" data-path="logistic-regression.html"><a href="logistic-regression.html#developing-the-zero-inflated-poisson-model"><i class="fa fa-check"></i><b>7.4.9</b> Developing the Zero-Inflated Poisson Model</a></li>
+<li class="chapter" data-level="7.4.10" data-path="logistic-regression.html"><a href="logistic-regression.html#deriving-the-poisson-pmf"><i class="fa fa-check"></i><b>7.4.10</b> Deriving the Poisson PMF</a></li>
+<li class="chapter" data-level="7.4.11" data-path="logistic-regression.html"><a href="logistic-regression.html#examples-of-zip-pmfs"><i class="fa fa-check"></i><b>7.4.11</b> Examples of ZIP PMF's</a></li>
+<li class="chapter" data-level="7.4.12" data-path="logistic-regression.html"><a href="logistic-regression.html#zip-model"><i class="fa fa-check"></i><b>7.4.12</b> ZIP Model</a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="logistic-regression.html"><a href="logistic-regression.html#model-for-drinks-data"><i class="fa fa-check"></i><b>7.5</b> Model for Drinks Data</a><ul>
+<li class="chapter" data-level="7.5.1" data-path="logistic-regression.html"><a href="logistic-regression.html#zip-for-drinks-data"><i class="fa fa-check"></i><b>7.5.1</b> ZIP for Drinks Data</a></li>
+<li class="chapter" data-level="7.5.2" data-path="logistic-regression.html"><a href="logistic-regression.html#zip-model-in-r"><i class="fa fa-check"></i><b>7.5.2</b> ZIP Model in R</a></li>
+<li class="chapter" data-level="7.5.3" data-path="logistic-regression.html"><a href="logistic-regression.html#residual-plot"><i class="fa fa-check"></i><b>7.5.3</b> Residual Plot</a></li>
+<li class="chapter" data-level="7.5.4" data-path="logistic-regression.html"><a href="logistic-regression.html#limitations"><i class="fa fa-check"></i><b>7.5.4</b> Limitations</a></li>
+<li class="chapter" data-level="7.5.5" data-path="logistic-regression.html"><a href="logistic-regression.html#final-thoughts-on-zero-inflated-models"><i class="fa fa-check"></i><b>7.5.5</b> Final Thoughts on Zero-Inflated Models</a></li>
 </ul></li>
 </ul></li>
 <li class="divider"></li>
@@ -2130,8 +2198,8 @@ Drop in deviance test
           </div>
         </div>
       </div>
-<a href="data-with-three-of-more-levels.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="data-with-three-of-more-levels.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="logistic-regression.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
