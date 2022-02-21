@@ -163,24 +163,24 @@ Variance = $4\times 0.6 \times 0.4=0.96$
 
 ### More Binomial Distributions
 
-We plot binomial distributions with $n=100$, $p=0.25, 0.5, 0.9$
+We plot binomial distributions with $n=10$, $p=0.25, 0.6, 0.9$
 
 ```{r, echo=FALSE, fig.height=3, fig.width=10}
 N <- 10
 
 df <- data.frame(x = 0:N , y = dbinom(0:N , size = N , prob=0.25))
 p1 <- ggplot(df, aes(x = x, y = y)) + geom_bar(stat = "identity", col = "white", fill = "blue") + 
-  scale_y_continuous(expand = c(0.01, 0)) + scale_x_continuous(breaks=(0:N )) + xlab("x") + ylab(expression(paste("p(x|", p, ")"))) + ggtitle("n=100, p=0.25") + theme_bw() + 
+  scale_y_continuous(expand = c(0.01, 0)) + scale_x_continuous(breaks=(0:N )) + xlab("x") + ylab(expression(paste("p(x|", p, ")"))) + ggtitle("n=10, p=0.25") + theme_bw() + 
   theme(plot.title = element_text(size = rel(1.2), vjust = 1.5))
 
 df <- data.frame(x = 0:N , y = dbinom(0:N , size = N , prob=0.6))
 p2 <- ggplot(df, aes(x = x, y = y)) + geom_bar(stat = "identity", col = "white", fill = "blue") + 
-  scale_y_continuous(expand = c(0.01, 0)) + scale_x_continuous(breaks=(0:4)) + xlab("x") + ylab(expression(paste("p(x|", p, ")"))) + ggtitle("n=4, p=0.6") + theme_bw() + 
+  scale_y_continuous(expand = c(0.01, 0)) + scale_x_continuous(breaks=(0:4)) + xlab("x") + ylab(expression(paste("p(x|", p, ")"))) + ggtitle("n=10, p=0.6") + theme_bw() + 
   theme(plot.title = element_text(size = rel(1.2), vjust = 1.5))
 
 df <- data.frame(x = 0:N , y = dbinom(0:N , size = N , prob=0.9))
 p3 <- ggplot(df, aes(x = x, y = y)) + geom_bar(stat = "identity", col = "white", fill = "blue") + 
-  scale_y_continuous(expand = c(0.01, 0)) + scale_x_continuous(breaks=(0:4)) + xlab("x") + ylab(expression(paste("p(x|", p, ")"))) + ggtitle("n=4, p=0.6") + theme_bw() + 
+  scale_y_continuous(expand = c(0.01, 0)) + scale_x_continuous(breaks=(0:4)) + xlab("x") + ylab(expression(paste("p(x|", p, ")"))) + ggtitle("n=10, p=0.9") + theme_bw() + 
   theme(plot.title = element_text(size = rel(1.2), vjust = 1.5))
 
 grid.arrange(p1, p2, p3, ncol=3)
@@ -221,11 +221,11 @@ We'll use a sigmoidal function of the form
 
 Equivalently:    
 
-\[\text{log}\left(\frac{{p_i}}{{1-p_i}}\right) =  \frac{e^{\beta_0+\beta_1X_{1} + \ldots + \beta_pX_p}}{1+e^{\beta_0+\beta_1X_{1} + \ldots + \beta_pX_p}}, \] 
+\[\text{log}\left(\frac{{p_i}}{{1-p_i}}\right) =  \beta_0+\beta_1X_{1} + \ldots + \beta_pX_p \] 
 
 The function $\text{log}\left(\frac{{p_i}}{{1-p_i}}\right)$ is called $\text{logit}(p_i)$. So, we can say: 
 
-\[\text{logit}(p_i) =  \frac{e^{\beta_0+\beta_1X_{1} + \ldots + \beta_pX_p}}{1+e^{\beta_0+\beta_1X_{1} + \ldots + \beta_pX_p}}, \] 
+\[\text{logit}(p_i) =  \beta_0+\beta_1X_{1} + \ldots + \beta_pX_p\] 
 
 
 
@@ -294,7 +294,7 @@ In a county where 35% of the population has a college degree, the probability of
 The model assumes that $\text{log}\left(\frac{p}{1-p}\right) = \text{logit}(p)$ is a linear function of $x$. To check this, we calculate $\hat{p}_i$ for each county and plot $\text{log}\left(\frac{\hat{p}_i}{1-\hat{p_i}}\right)$ against percentage of college graduates. 
 
 
-```{r,emplogits, fig.align="center",out.width="60%", ,echo=FALSE, warning=FALSE, message=FALSE}
+```{r,emplogits, fig.align="center",out.width="60%", warning=FALSE, message=FALSE}
 phat <- with(Wisconsin, (Dvotes)/(Dvotes+Rvotes))
 Wisconsin$elogit <- log(phat/(1-phat))
 ## Plots

@@ -648,7 +648,7 @@ P &lt;-<span class="st"> </span><span class="kw">corrplot</span>(C, <span class=
 </div>
 <div id="more-binomial-distributions" class="section level3">
 <h3><span class="header-section-number">7.1.8</span> More Binomial Distributions</h3>
-<p>We plot binomial distributions with <span class="math inline">\(n=100\)</span>, <span class="math inline">\(p=0.25, 0.5, 0.9\)</span></p>
+<p>We plot binomial distributions with <span class="math inline">\(n=10\)</span>, <span class="math inline">\(p=0.25, 0.6, 0.9\)</span></p>
 <p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-198-1.png" width="960" /></p>
 </div>
 <div id="connecting-expected-response-to-explatory-variables-1" class="section level3">
@@ -675,9 +675,9 @@ dat2 &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="d
 <p>We'll use a sigmoidal function of the form</p>
 <p><span class="math display">\[p_i =  \frac{e^{\beta_0+\beta_1X_{1} + \ldots + \beta_pX_p}}{1+e^{\beta_0+\beta_1X_{1} + \ldots + \beta_pX_p}}\]</span></p>
 <p>Equivalently:</p>
-<p><span class="math display">\[\text{log}\left(\frac{{p_i}}{{1-p_i}}\right) =  \frac{e^{\beta_0+\beta_1X_{1} + \ldots + \beta_pX_p}}{1+e^{\beta_0+\beta_1X_{1} + \ldots + \beta_pX_p}}, \]</span></p>
+<p><span class="math display">\[\text{log}\left(\frac{{p_i}}{{1-p_i}}\right) =  \beta_0+\beta_1X_{1} + \ldots + \beta_pX_p \]</span></p>
 <p>The function <span class="math inline">\(\text{log}\left(\frac{{p_i}}{{1-p_i}}\right)\)</span> is called <span class="math inline">\(\text{logit}(p_i)\)</span>. So, we can say:</p>
-<p><span class="math display">\[\text{logit}(p_i) =  \frac{e^{\beta_0+\beta_1X_{1} + \ldots + \beta_pX_p}}{1+e^{\beta_0+\beta_1X_{1} + \ldots + \beta_pX_p}}, \]</span></p>
+<p><span class="math display">\[\text{logit}(p_i) =  \beta_0+\beta_1X_{1} + \ldots + \beta_pX_p\]</span></p>
 </div>
 <div id="odds-and-odds-ratio" class="section level3">
 <h3><span class="header-section-number">7.1.10</span> Odds and Odds Ratio</h3>
@@ -744,6 +744,15 @@ dat2 &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="d
 <div id="checking-linearity-assumption" class="section level3">
 <h3><span class="header-section-number">7.2.2</span> Checking Linearity Assumption</h3>
 <p>The model assumes that <span class="math inline">\(\text{log}\left(\frac{p}{1-p}\right) = \text{logit}(p)\)</span> is a linear function of <span class="math inline">\(x\)</span>. To check this, we calculate <span class="math inline">\(\hat{p}_i\)</span> for each county and plot <span class="math inline">\(\text{log}\left(\frac{\hat{p}_i}{1-\hat{p_i}}\right)\)</span> against percentage of college graduates.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">phat &lt;-<span class="st"> </span><span class="kw">with</span>(Wisconsin, (Dvotes)<span class="op">/</span>(Dvotes<span class="op">+</span>Rvotes))
+Wisconsin<span class="op">$</span>elogit &lt;-<span class="st"> </span><span class="kw">log</span>(phat<span class="op">/</span>(<span class="dv">1</span><span class="op">-</span>phat))
+## Plots
+<span class="kw">ggplot</span>(Wisconsin, <span class="kw">aes</span>(<span class="dt">x=</span>College, <span class="dt">y=</span>elogit))<span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_point</span>(<span class="dt">shape=</span><span class="dv">1</span>) <span class="op">+</span><span class="st">    </span><span class="co"># Use hollow circles</span>
+<span class="st">    </span><span class="kw">geom_smooth</span>(<span class="dt">method=</span>lm,   <span class="co"># Add linear regression line</span>
+                <span class="dt">se=</span><span class="ot">FALSE</span>) <span class="op">+</span><span class="st"> </span><span class="co"># Don&#39;t add shaded confidence region</span>
+<span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;College&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;empirical logits&quot;</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">title=</span><span class="st">&quot;Wisconsin Vote Empirical logits by College Pct.&quot;</span>)</code></pre></div>
 <p><img src="Stat-455-Notes_files/figure-html/emplogits-1.png" width="60%" style="display: block; margin: auto;" /></p>
 </div>
 <div id="overdispersion-in-binomial-counts" class="section level3">
