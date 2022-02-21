@@ -309,7 +309,6 @@ quasi-binomial-model
 model-with-all-explanatory-variables
 tests-for-significance-of-model-coefficients
 drop-in-deviance-test-2
-goodness-of-fit-test-1
 deviance-residual-plot
 llsr-vs-binomial-logistic-regression
 maximum-likelihood-estimation

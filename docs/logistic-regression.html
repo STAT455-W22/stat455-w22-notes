@@ -435,9 +435,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="7.2.6" data-path="logistic-regression.html"><a href="logistic-regression.html#model-with-all-explanatory-variables"><i class="fa fa-check"></i><b>7.2.6</b> Model with All Explanatory Variables</a></li>
 <li class="chapter" data-level="7.2.7" data-path="logistic-regression.html"><a href="logistic-regression.html#tests-for-significance-of-model-coefficients"><i class="fa fa-check"></i><b>7.2.7</b> Tests for Significance of Model Coefficients</a></li>
 <li class="chapter" data-level="7.2.8" data-path="logistic-regression.html"><a href="logistic-regression.html#drop-in-deviance-test-2"><i class="fa fa-check"></i><b>7.2.8</b> Drop in Deviance Test</a></li>
-<li class="chapter" data-level="7.2.9" data-path="logistic-regression.html"><a href="logistic-regression.html#goodness-of-fit-test-1"><i class="fa fa-check"></i><b>7.2.9</b> Goodness of Fit Test</a></li>
-<li class="chapter" data-level="7.2.10" data-path="logistic-regression.html"><a href="logistic-regression.html#deviance-residual-plot"><i class="fa fa-check"></i><b>7.2.10</b> Deviance Residual Plot</a></li>
-<li class="chapter" data-level="7.2.11" data-path="logistic-regression.html"><a href="logistic-regression.html#llsr-vs-binomial-logistic-regression"><i class="fa fa-check"></i><b>7.2.11</b> LLSR vs Binomial Logistic Regression</a></li>
+<li class="chapter" data-level="7.2.9" data-path="logistic-regression.html"><a href="logistic-regression.html#deviance-residual-plot"><i class="fa fa-check"></i><b>7.2.9</b> Deviance Residual Plot</a></li>
+<li class="chapter" data-level="7.2.10" data-path="logistic-regression.html"><a href="logistic-regression.html#llsr-vs-binomial-logistic-regression"><i class="fa fa-check"></i><b>7.2.10</b> LLSR vs Binomial Logistic Regression</a></li>
 </ul></li>
 <li class="chapter" data-level="7.3" data-path="logistic-regression.html"><a href="logistic-regression.html#maximum-likelihood-estimation"><i class="fa fa-check"></i><b>7.3</b> Maximum Likelihood Estimation</a><ul>
 <li class="chapter" data-level="7.3.1" data-path="logistic-regression.html"><a href="logistic-regression.html#parameter-estimation"><i class="fa fa-check"></i><b>7.3.1</b> Parameter Estimation</a></li>
@@ -624,13 +623,13 @@ P &lt;-<span class="st"> </span><span class="kw">corrplot</span>(C, <span class=
 <p>For <span class="math inline">\(n = 4, p=0.6\)</span>,</p>
 <p><span class="math display">\[ Pr(Y=0) = {4\choose 0}0.6^0(0.4)^{4} = 1(0.4)^4\approx(0.0256)
 \]</span></p>
-<p><span class="math display">\[ Pr(Y=1) = {4\choose 1}0.6^0(0.4)^{3} = 4(.6)(0.4)^3\approx(0.1536)
+<p><span class="math display">\[ Pr(Y=1) = {4\choose 1}0.6^1(0.4)^{3} = 4(.6)(0.4)^3\approx(0.1536)
 \]</span></p>
-<p><span class="math display">\[ Pr(Y=2) = {4\choose 2}0.6^0(0.4)^{2} = 6(.6)^2(0.4)^2\approx(0.3456)
+<p><span class="math display">\[ Pr(Y=2) = {4\choose 2}0.6^2(0.4)^{2} = 6(.6)^2(0.4)^2\approx(0.3456)
 \]</span></p>
-<p><span class="math display">\[ Pr(Y=3) = {4\choose 3}0.6^0(0.4)^{1} = 4(.6)^3(0.4)^1\approx(0.3456)
+<p><span class="math display">\[ Pr(Y=3) = {4\choose 3}0.6^3(0.4)^{1} = 4(.6)^3(0.4)^1\approx(0.3456)
 \]</span></p>
-<p><span class="math display">\[ Pr(Y=4) = {4\choose 4}0.6^0(0.4)^{0} = 1(.6)^4(0.4)\approx(0.1296)
+<p><span class="math display">\[ Pr(Y=4) = {4\choose 4}0.6^4(0.4)^{0} = 1(.6)^4(0.4)\approx(0.1296)
 \]</span></p>
 <p>In a binomial distribution, the mean is <span class="math inline">\(np\)</span>,</p>
 <p>and the variance is <span class="math inline">\(np(1-p)\)</span>.</p>
@@ -689,7 +688,7 @@ dat2 &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="d
 <p>Let's suppose we have one explanatory variable <span class="math inline">\(x\)</span>, so</p>
 <p><span class="math display">\[\text{logit}(p_i) =  \frac{e^{\beta_0+\beta_1X_{1}}}{1+e^{\beta_0+\beta_1X_{1}}}, \]</span></p>
 <p>Consider the odds ratio for a case <span class="math inline">\(j\)</span> with explanatory variable <span class="math inline">\(x + 1\)</span>, compared to case <span class="math inline">\(i\)</span> with explanatory variable <span class="math inline">\(x\)</span>.</p>
-<p>That is <span class="math inline">\(\text{log}\left(\frac{p_i}{1-\pi_i}\right) = \beta_0+\beta_1x\)</span>, and <span class="math inline">\(\text{log}\left(\frac{p_j}{1-p_j}\right) = \beta_0+\beta_1(x+1)\)</span>.</p>
+<p>That is <span class="math inline">\(\text{log}\left(\frac{p_i}{1-p_i}\right) = \beta_0+\beta_1x\)</span>, and <span class="math inline">\(\text{log}\left(\frac{p_j}{1-p_j}\right) = \beta_0+\beta_1(x+1)\)</span>.</p>
 <p><span class="math inline">\(\text{log}\left(\frac{\frac{p_j}{1-p_j}}{\frac{p_i}{1-p_i}}\right)=\text{log}\left(\frac{p_j}{1-p_j}\right)-\text{log}\left(\frac{p_i}{1-p_j}\right)=\beta_0+\beta_1(x+1)-(\beta_0+\beta_1(x))=\beta_1.\)</span></p>
 <p>For each 1-unit increase in <span class="math inline">\(x\)</span> the log of the odds ratio of success to failure is expected to multiply by a factor of <span class="math inline">\(\beta_1\)</span>.</p>
 <p>For each 1-unit increase in <span class="math inline">\(x\)</span> the odds ratio of success to failure is expected to multiply by a factor of <span class="math inline">\(e^{\beta_1}\)</span>.</p>
@@ -851,12 +850,12 @@ WisconsinGrps                                                                 </
 </div>
 <div id="model-with-all-explanatory-variables" class="section level3">
 <h3><span class="header-section-number">7.2.6</span> Model with All Explanatory Variables</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">M2 &lt;-<span class="st"> </span><span class="kw">glm</span>(<span class="kw">cbind</span>(Dvotes, Rvotes) <span class="op">~</span><span class="st"> </span>College <span class="op">+</span><span class="st"> </span>Unemployment <span class="op">+</span><span class="st"> </span>WhitePct <span class="op">+</span><span class="st"> </span>COVID_DeathRate <span class="op">+</span><span class="st"> </span>Income , <span class="dt">family =</span> <span class="kw">binomial</span>(<span class="dt">link=</span><span class="st">&quot;logit&quot;</span>), <span class="dt">data =</span> Wisconsin)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">M2 &lt;-<span class="st"> </span><span class="kw">glm</span>(<span class="kw">cbind</span>(Dvotes, Rvotes) <span class="op">~</span><span class="st"> </span>College <span class="op">+</span><span class="st"> </span>Unemployment <span class="op">+</span><span class="st"> </span>WhitePct <span class="op">+</span><span class="st"> </span>COVID_DeathRate <span class="op">+</span><span class="st"> </span>Income , <span class="dt">family =</span> <span class="kw">quasibinomial</span>(<span class="dt">link=</span><span class="st">&quot;logit&quot;</span>), <span class="dt">data =</span> Wisconsin)
 <span class="kw">summary</span>(M2)</code></pre></div>
 <pre><code>## 
 ## Call:
 ## glm(formula = cbind(Dvotes, Rvotes) ~ College + Unemployment + 
-##     WhitePct + COVID_DeathRate + Income, family = binomial(link = &quot;logit&quot;), 
+##     WhitePct + COVID_DeathRate + Income, family = quasibinomial(link = &quot;logit&quot;), 
 ##     data = Wisconsin)
 ## 
 ## Deviance Residuals: 
@@ -864,21 +863,21 @@ WisconsinGrps                                                                 </
 ## -48.582  -14.059    0.227    9.791   72.837  
 ## 
 ## Coefficients:
-##                      Estimate    Std. Error z value            Pr(&gt;|z|)    
-## (Intercept)      4.0091883988  0.0252594067  158.72 &lt;0.0000000000000002 ***
-## College          0.0463115761  0.0002568487  180.31 &lt;0.0000000000000002 ***
-## Unemployment    -0.1102336271  0.0026282970  -41.94 &lt;0.0000000000000002 ***
-## WhitePct        -0.0293529999  0.0002103761 -139.53 &lt;0.0000000000000002 ***
-## COVID_DeathRate -0.0065839591  0.0000668470  -98.49 &lt;0.0000000000000002 ***
-## Income          -0.0000332768  0.0000002008 -165.72 &lt;0.0000000000000002 ***
+##                     Estimate   Std. Error t value        Pr(&gt;|t|)    
+## (Intercept)      4.009188399  0.580255296   6.909 0.0000000023471 ***
+## College          0.046311576  0.005900290   7.849 0.0000000000493 ***
+## Unemployment    -0.110233627  0.060376843  -1.826          0.0724 .  
+## WhitePct        -0.029353000  0.004832728  -6.074 0.0000000690197 ***
+## COVID_DeathRate -0.006583959  0.001535600  -4.288 0.0000601756542 ***
+## Income          -0.000033277  0.000004613  -7.214 0.0000000006729 ***
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
-## (Dispersion parameter for binomial family taken to be 1)
+## (Dispersion parameter for quasibinomial family taken to be 527.7059)
 ## 
 ##     Null deviance: 277052  on 71  degrees of freedom
 ## Residual deviance:  34757  on 66  degrees of freedom
-## AIC: 35522
+## AIC: NA
 ## 
 ## Number of Fisher Scoring iterations: 3</code></pre>
 <ul>
@@ -898,36 +897,29 @@ WisconsinGrps                                                                 </
 <div id="drop-in-deviance-test-2" class="section level3">
 <h3><span class="header-section-number">7.2.8</span> Drop in Deviance Test</h3>
 <p>We could perform a drop-in-deviance test to compare our two models so far.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">drop_in_dev &lt;-<span class="st"> </span><span class="kw">anova</span>(M1, M2, <span class="dt">test =</span> <span class="st">&quot;Chisq&quot;</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">drop_in_dev &lt;-<span class="st"> </span><span class="kw">anova</span>(M1b, M2, <span class="dt">test =</span> <span class="st">&quot;F&quot;</span>)
 drop_in_dev</code></pre></div>
 <pre><code>Analysis of Deviance Table
 
 Model 1: cbind(Dvotes, Rvotes) ~ College
 Model 2: cbind(Dvotes, Rvotes) ~ College + Unemployment + WhitePct + COVID_DeathRate + 
     Income
-  Resid. Df Resid. Dev Df Deviance              Pr(&gt;Chi)    
-1        70     194994                                      
-2        66      34757  4   160237 &lt; 0.00000000000000022 ***
+  Resid. Df Resid. Dev Df Deviance      F                Pr(&gt;F)    
+1        70     194994                                             
+2        66      34757  4   160237 75.912 &lt; 0.00000000000000022 ***
 ---
 Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <p>We see a large drop in residual deviance, providing strong evidence that the larger model is prefered. In this case, that makes sense, since it contains variables we expect to be helpful.</p>
 <p>When we have very large sample sizes we'll get small p-values even when the new variables don't make a practical difference. So we should not base model choices on p-values alone, but should look at confidence intervals and measures of the size of the effect associated with each variable.</p>
 </div>
-<div id="goodness-of-fit-test-1" class="section level3">
-<h3><span class="header-section-number">7.2.9</span> Goodness of Fit Test</h3>
-<p>We can also perform the Chi-square goodness of fit test</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="dv">1</span><span class="op">-</span><span class="kw">pchisq</span>(<span class="dv">34757</span>, <span class="dv">66</span>)  <span class="co"># Goodness-of-fit test</span></code></pre></div>
-<pre><code>[1] 0</code></pre>
-<p>Not surprisingly, we get a small p-value. This is expected when the sample size is as large as ours, but we should check whether there are signs of model violations.</p>
-</div>
 <div id="deviance-residual-plot" class="section level3">
-<h3><span class="header-section-number">7.2.10</span> Deviance Residual Plot</h3>
+<h3><span class="header-section-number">7.2.9</span> Deviance Residual Plot</h3>
 <p>We plot deviance residuals against the predicted values and against our explanatory variables to test for lack of fit.</p>
 <p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-205-1.png" width="60%" style="display: block; margin: auto;" /></p>
 <p><img src="Stat-455-Notes_files/figure-html/resid-1.png" width="960" style="display: block; margin: auto;" /></p>
 </div>
 <div id="llsr-vs-binomial-logistic-regression" class="section level3">
-<h3><span class="header-section-number">7.2.11</span> LLSR vs Binomial Logistic Regression</h3>
+<h3><span class="header-section-number">7.2.10</span> LLSR vs Binomial Logistic Regression</h3>
 <span class="math display">\[\begin{gather*}
 \underline{\textrm{Response}} \\
 \mathbf{LLSR:}\textrm{ normal} \\
@@ -982,7 +974,7 @@ Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&
 <p>A <strong>likelihood function</strong> is a function that tells us how likely we are to observe our data for a given parameter value.</p>
 <p>Let <span class="math inline">\(p\)</span> represent the probability of a made basket.</p>
 <p>Since the shots are independent, we can write the Likelihood function for Curry's shots as:</p>
-<p><span class="math display">\[Lik(p) = p^{\text{#Makes}}(1-p)^{\text{#Misses}} = (p)^{251}(1-p)^{412}\]</span></p>
+<p><span class="math display">\[Lik(p) \propto p^{\text{#Makes}}(1-p)^{\text{#Misses}} = (p)^{251}(1-p)^{412}\]</span></p>
 <p>If our goal is just to esimate <span class="math inline">\(p\)</span>, we could simply find the value of <span class="math inline">\(p\)</span> that maximizes this function. Such a value is called a <strong>maximum likelihood estimate</strong>.</p>
 </div>
 <div id="plotting-likelihood-function" class="section level3">
@@ -1017,9 +1009,6 @@ plot <span class="op">+</span><span class="st"> </span><span class="kw">xlim</sp
 <h3><span class="header-section-number">7.3.7</span> MLE Using Calculus</h3>
 <p>We can also use calculus to find the value of <span class="math inline">\(p\)</span> that maximizes the function <span class="math inline">\(\text{lik}(p)\)</span>.</p>
 <p>In fact, it is usually easier to maximize the log of this function. We can do this since log is a non-decreasing function, ensuring that the value that maximizes <span class="math inline">\(\text{log}(\text{lik}(p))\)</span> will also maximize <span class="math inline">\(\text{lik}(p)\)</span>.</p>
-<span class="math display">\[\begin{equation*}
-\frac{d}{dp_B}p_B^{30}(1-p_B)^{20} = 30p_B^{29}(1-p_B)^{20}-p^{30}_B20(1-p_B)^{19} = 0
-\end{equation*}\]</span>
 <p><span class="math display">\[
 \begin{align*}
  \text{lik}(p)                      &amp;= p^{251}(1-p)^{412} \\
@@ -1027,8 +1016,10 @@ plot <span class="op">+</span><span class="st"> </span><span class="kw">xlim</sp
  \frac{d}{dp} \log(\text{lik}(p)) &amp;= \frac{251}{p} - \frac{412}{1-p} = 0
 \end{align*}
 \]</span></p>
-<p>Thus, $$  =  251(1-p)=412pp=0.3785</p>
-<p>$$</p>
+<p>and</p>
+<p><span class="math display">\[
+\frac{251}{p} = \frac{412}{1-p} \implies 251(1-p)=412p\implies p=\frac{251}{251+412}\approx0.3785
+\]</span></p>
 </div>
 <div id="likelihood-in-a-logistic-regression-model" class="section level3">
 <h3><span class="header-section-number">7.3.8</span> Likelihood in a Logistic Regression Model</h3>
@@ -1111,10 +1102,11 @@ Curry &lt;-<span class="st"> </span><span class="kw">data.frame</span>(Location,
 <div id="model-for-homeaway" class="section level3">
 <h3><span class="header-section-number">7.3.12</span> Model for Home/Away</h3>
 <p>Now let's build a model that allows Curry's probability of making a shot to differ for away games, compared to home games.</p>
+<p>Recall that Curry made 150 out of 397 shots at home and 101 out of 265 away.</p>
 <p>Let <span class="math inline">\(p_H\)</span> represent the probability of making a shot at home and <span class="math inline">\(p_A\)</span> represent the probability of making a shot in an away game.</p>
 <p>We can write the likelihood function as:</p>
-<p><span class="math display">\[Lik(p_H, p_A) = {397 \choose 150}p_H^{150}(1-p_H)^{247}
-{266 \choose 101}p_A^{101}(1-p_A)^{165}\]</span></p>
+<p><span class="math display">\[Lik(p_H, p_A) \propto p_H^{150}(1-p_H)^{247}
+p_A^{101}(1-p_A)^{165}\]</span></p>
 <p>Our interest centers on estimating <span class="math inline">\(\hat{\beta_0}\)</span> and <span class="math inline">\(\hat{\beta_1}\)</span>, not <span class="math inline">\(p_1\)</span> or <span class="math inline">\(p_0\)</span>. So we replace <span class="math inline">\(p_1\)</span> in the likelihood with an expression for <span class="math inline">\(p_1\)</span> in terms of <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span>. Recall</p>
 <p><span class="math display">\[p_i =  \frac{e^{\beta_0+\beta_1\text{Home}}}{1+e^{\beta_0+\beta_1\text{Home}}}\]</span></p>
 <p>After removing constants, the new likelihood looks like:</p>

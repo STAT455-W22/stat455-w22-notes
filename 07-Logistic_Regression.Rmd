@@ -128,16 +128,16 @@ For $n = 4, p=0.6$,
 \[ Pr(Y=0) = {4\choose 0}0.6^0(0.4)^{4} = 1(0.4)^4\approx(0.0256)
 \]
 
-\[ Pr(Y=1) = {4\choose 1}0.6^0(0.4)^{3} = 4(.6)(0.4)^3\approx(0.1536)
+\[ Pr(Y=1) = {4\choose 1}0.6^1(0.4)^{3} = 4(.6)(0.4)^3\approx(0.1536)
 \]
 
-\[ Pr(Y=2) = {4\choose 2}0.6^0(0.4)^{2} = 6(.6)^2(0.4)^2\approx(0.3456)
+\[ Pr(Y=2) = {4\choose 2}0.6^2(0.4)^{2} = 6(.6)^2(0.4)^2\approx(0.3456)
 \]
 
-\[ Pr(Y=3) = {4\choose 3}0.6^0(0.4)^{1} = 4(.6)^3(0.4)^1\approx(0.3456)
+\[ Pr(Y=3) = {4\choose 3}0.6^3(0.4)^{1} = 4(.6)^3(0.4)^1\approx(0.3456)
 \]
 
-\[ Pr(Y=4) = {4\choose 4}0.6^0(0.4)^{0} = 1(.6)^4(0.4)\approx(0.1296)
+\[ Pr(Y=4) = {4\choose 4}0.6^4(0.4)^{0} = 1(.6)^4(0.4)\approx(0.1296)
 \]
 
 In a binomial distribution, the mean is $np$,    
@@ -245,7 +245,7 @@ Let's suppose we have one explanatory variable $x$, so
 
 Consider the odds ratio for a case $j$ with explanatory variable $x + 1$, compared to case $i$ with explanatory variable $x$. 
 
-That is $\text{log}\left(\frac{p_i}{1-\pi_i}\right) = \beta_0+\beta_1x$, and
+That is $\text{log}\left(\frac{p_i}{1-p_i}\right) = \beta_0+\beta_1x$, and
 $\text{log}\left(\frac{p_j}{1-p_j}\right) = \beta_0+\beta_1(x+1)$.  
 
 $\text{log}\left(\frac{\frac{p_j}{1-p_j}}{\frac{p_i}{1-p_i}}\right)=\text{log}\left(\frac{p_j}{1-p_j}\right)-\text{log}\left(\frac{p_i}{1-p_j}\right)=\beta_0+\beta_1(x+1)-(\beta_0+\beta_1(x))=\beta_1.$
@@ -382,7 +382,7 @@ The estimate of the dispersion parameter $\hat{\phi} = 2763$ is large.
 ### Model with All Explanatory Variables
 
 ```{r}
-M2 <- glm(cbind(Dvotes, Rvotes) ~ College + Unemployment + WhitePct + COVID_DeathRate + Income , family = binomial(link="logit"), data = Wisconsin)
+M2 <- glm(cbind(Dvotes, Rvotes) ~ College + Unemployment + WhitePct + COVID_DeathRate + Income , family = quasibinomial(link="logit"), data = Wisconsin)
 summary(M2)
 ```
 
@@ -411,23 +411,13 @@ The model estimates still make sense, and are informative, so we should base our
 We could perform a drop-in-deviance test to compare our two models so far. 
 
 ```{r comment=NA, message=FALSE}
-drop_in_dev <- anova(M1, M2, test = "Chisq")
+drop_in_dev <- anova(M1b, M2, test = "F")
 drop_in_dev
 ```
 
 We see a large drop in residual deviance, providing strong evidence that the larger model is prefered. In this case, that makes sense, since it contains variables we expect to be helpful. 
 
 When we have very large sample sizes we'll get small p-values even when the new variables don't make a practical difference. So we should not base model choices on p-values alone, but should look at confidence intervals and measures of the size of the effect associated with each variable.   
-
-### Goodness of Fit Test
-
-We can also perform the Chi-square goodness of fit test
-
-```{r, gof2, comment=NA}
-1-pchisq(34757, 66)  # Goodness-of-fit test
-```
-
-Not surprisingly, we get a small p-value. This is expected when the sample size is as large as ours, but we should check whether there are signs of model violations.   
 
 
 ### Deviance Residual Plot
@@ -450,16 +440,16 @@ p1 <- ggplot(Wisconsinresid, aes(x = College, y = Resid)) +
   xlab("Percent College Graduates") + ylab("Deviance Residuals")
 p2 <- ggplot(Wisconsinresid, aes(x = Unemployment, y = Resid)) +
   geom_point() +
-  xlab("Predicted Values") + ylab("Deviance Residuals")
+  xlab("Unemployment Rate") + ylab("Deviance Residuals")
 p3 <- ggplot(Wisconsinresid, aes(x = WhitePct, y = Resid)) +
   geom_point() +
-  xlab("Predicted Values") + ylab("Deviance Residuals")
+  xlab("Percentage of White Residents") + ylab("Deviance Residuals")
 p4 <- ggplot(Wisconsinresid, aes(x = COVID_DeathRate, y = Resid)) +
   geom_point() +
-  xlab("Predicted Values") + ylab("Deviance Residuals")
+  xlab("Covid Deaths per 100K") + ylab("Deviance Residuals")
 p5 <- ggplot(Wisconsinresid, aes(x = Income, y = Resid)) +
   geom_point() +
-  xlab("Predicted Values") + ylab("Deviance Residuals")
+  xlab("Median Income") + ylab("Deviance Residuals")
 grid.arrange(p1, p2, p3, p4, p5)
 ```
 
@@ -531,7 +521,7 @@ Let $p$ represent the probability of a made basket.
 
 Since the shots are independent, we can write the Likelihood function for Curry's shots as:
 
-\[Lik(p) = p^{\text{#Makes}}(1-p)^{\text{#Misses}} = (p)^{251}(1-p)^{412}\]
+\[Lik(p) \propto p^{\text{#Makes}}(1-p)^{\text{#Misses}} = (p)^{251}(1-p)^{412}\]
 
 If our goal is just to esimate $p$, we could simply find the value of $p$ that maximizes this function. Such a value is called a **maximum likelihood estimate**.   
 
@@ -581,9 +571,6 @@ We can also use calculus to find the value of $p$ that maximizes the function $\
 
 In fact, it is usually easier to maximize the log of this function. We can do this since log is a non-decreasing function, ensuring that the value that maximizes $\text{log}(\text{lik}(p))$ will also maximize $\text{lik}(p)$. 
 
-\begin{equation*}
-\frac{d}{dp_B}p_B^{30}(1-p_B)^{20} = 30p_B^{29}(1-p_B)^{20}-p^{30}_B20(1-p_B)^{19} = 0
-\end{equation*}
 
 $$
 \begin{align*}
@@ -593,11 +580,11 @@ $$
 \end{align*}
 $$
 
-Thus, 
-$$
-\frac{251}{p} = \frac{412}{1-p} \implies 251(1-p)=412p\implies p=\frac{251}{251+412}\approx0.3785
+and
 
-$$
+\[
+\frac{251}{p} = \frac{412}{1-p} \implies 251(1-p)=412p\implies p=\frac{251}{251+412}\approx0.3785
+\]
 
 
 ### Likelihood in a Logistic Regression Model 
@@ -682,12 +669,14 @@ We could maximize this function using calculus, which is more involved, but stil
 
 Now let's build a model that allows Curry's probability of making a shot to differ for away games, compared to home games. 
 
+Recall that Curry made 150 out of 397 shots at home and 101 out of 265 away.  
+
 Let $p_H$ represent the probability of making a shot at home and $p_A$ represent the probability of making a shot in an away game.   
 
 We can write the likelihood function as:
 
-\[Lik(p_H, p_A) = {397 \choose 150}p_H^{150}(1-p_H)^{247}
-{266 \choose 101}p_A^{101}(1-p_A)^{165}\]
+\[Lik(p_H, p_A) \propto p_H^{150}(1-p_H)^{247}
+p_A^{101}(1-p_A)^{165}\]
 
 Our interest centers on estimating $\hat{\beta_0}$ and $\hat{\beta_1}$, not $p_1$ or $p_0$. So we replace $p_1$ in the likelihood with an expression for $p_1$ in terms of $\beta_0$ and $\beta_1$. Recall 
 
