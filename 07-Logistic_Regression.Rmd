@@ -75,26 +75,26 @@ head(Wisconsin, 10)
 
 ```{r, fig.width=12, fig.height=12}
 P1 <- ggplot(Wisconsin, aes(x=College, y=PctD, size=(Rvotes+Dvotes))) + geom_point() + 
- geom_text(data=Wisconsin %>% filter(County %in% c("Dane County", "Door County" , "Milwaukee County", "Menominee County", "Outagamie County", "Waukesha County")), aes(x=College, y=PctD, label=County, vjust=-2), size=3, color="red") +
+ geom_text(data=Wisconsin %>% filter(County %in% c("Dane County", "Door County" , "Milwaukee County", "Menominee County", "Outagamie County", "Waukesha County")), aes(x=College, y=PctD, label=County, vjust=-1), size=3, color="red") +
   xlab("Percent with  College Degree") +
   ylab("Percent Voting for Biden") + theme(legend.position="none")
 P2 <- ggplot(Wisconsin, aes(x=Unemployment, y=PctD, size=(Rvotes+Dvotes))) + geom_point() + 
- geom_text(data=Wisconsin %>% filter(County %in% c("Dane County", "Door County" , "Milwaukee County", "Menominee County", "Outagamie County", "Waukesha County")), aes(x=Unemployment, y=PctD, label=County, vjust=-2), size=3, color="red") +
+ geom_text(data=Wisconsin %>% filter(County %in% c("Dane County", "Door County" , "Milwaukee County", "Menominee County", "Outagamie County", "Waukesha County")), aes(x=Unemployment, y=PctD, label=County, vjust=-1), size=3, color="red") +
   xlab("Unemployment Rate") +
   ylab("Percent Voting for Biden") + theme(legend.position="none")
 P3 <- ggplot(Wisconsin, aes(x=WhitePct, y=PctD, size=(Rvotes+Dvotes))) + geom_point() + 
- geom_text(data=Wisconsin %>% filter(County %in% c("Dane County", "Door County" , "Milwaukee County", "Menominee County", "Outagamie County", "Waukesha County")), aes(x=WhitePct, y=PctD, label=County, vjust=-2), size=3, color="red") +
+ geom_text(data=Wisconsin %>% filter(County %in% c("Dane County", "Door County" , "Milwaukee County", "Menominee County", "Outagamie County", "Waukesha County")), aes(x=WhitePct, y=PctD, label=County, vjust=-1), size=3, color="red") +
   xlab("Percent of Population White") +
   ylab("Percent Voting for Biden") + theme(legend.position="none")
 P4 <- ggplot(Wisconsin, aes(x=COVID_DeathRate, y=PctD, size=(Rvotes+Dvotes))) + geom_point() + 
- geom_text(data=Wisconsin %>% filter(County %in% c("Dane County", "Door County" , "Milwaukee County", "Menominee County", "Outagamie County", "Waukesha County")), aes(x=COVID_DeathRate, y=PctD, label=County, vjust=-2), size=3, color="red") +
+ geom_text(data=Wisconsin %>% filter(County %in% c("Dane County", "Door County" , "Milwaukee County", "Menominee County", "Outagamie County", "Waukesha County")), aes(x=COVID_DeathRate, y=PctD, label=County, vjust=-1), size=3, color="red") +
   xlab("Covid Deaths Per 100k") +
   ylab("Percent Voting for Biden") + theme(legend.position="none")
 P5 <- ggplot(Wisconsin, aes(x=Income, y=PctD, size=(Rvotes+Dvotes))) + geom_point() + 
- geom_text(data=Wisconsin %>% filter(County %in% c("Dane County", "Door County" , "Milwaukee County", "Menominee County", "Outagamie County", "Waukesha County")), aes(x=Income, y=PctD, label=County, vjust=-2), size=3, color="red") +
+ geom_text(data=Wisconsin %>% filter(County %in% c("Dane County", "Door County" , "Milwaukee County", "Menominee County", "Outagamie County", "Waukesha County")), aes(x=Income, y=PctD, label=County, vjust=-1), size=3, color="red") +
   xlab("Median Income") +
   ylab("Percent Voting for Biden") + theme(legend.position="none")
-grid.arrange(P1, P2, P3, P4, P5, nrow=2) + theme(legend.position="none")
+grid.arrange(P1, P2, P3, P4, P5, nrow=3) + theme(legend.position="none")
 ```
 
 
