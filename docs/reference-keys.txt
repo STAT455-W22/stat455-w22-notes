@@ -339,7 +339,7 @@ modeling-drinks
 explaining-the-large-number-of-zeros
 zero-inflated-poisson-model-1
 developing-the-zero-inflated-poisson-model
-deriving-the-poisson-pmf
+deriving-the-zip-pmf
 examples-of-zip-pmfs
 zip-model
 model-for-drinks-data

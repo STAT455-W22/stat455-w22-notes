@@ -467,7 +467,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="7.4.7" data-path="logistic-regression.html"><a href="logistic-regression.html#explaining-the-large-number-of-zeros"><i class="fa fa-check"></i><b>7.4.7</b> Explaining the Large Number of Zeros</a></li>
 <li class="chapter" data-level="7.4.8" data-path="logistic-regression.html"><a href="logistic-regression.html#zero-inflated-poisson-model-1"><i class="fa fa-check"></i><b>7.4.8</b> Zero-Inflated Poisson Model</a></li>
 <li class="chapter" data-level="7.4.9" data-path="logistic-regression.html"><a href="logistic-regression.html#developing-the-zero-inflated-poisson-model"><i class="fa fa-check"></i><b>7.4.9</b> Developing the Zero-Inflated Poisson Model</a></li>
-<li class="chapter" data-level="7.4.10" data-path="logistic-regression.html"><a href="logistic-regression.html#deriving-the-poisson-pmf"><i class="fa fa-check"></i><b>7.4.10</b> Deriving the Poisson PMF</a></li>
+<li class="chapter" data-level="7.4.10" data-path="logistic-regression.html"><a href="logistic-regression.html#deriving-the-zip-pmf"><i class="fa fa-check"></i><b>7.4.10</b> Deriving the ZIP PMF</a></li>
 <li class="chapter" data-level="7.4.11" data-path="logistic-regression.html"><a href="logistic-regression.html#examples-of-zip-pmfs"><i class="fa fa-check"></i><b>7.4.11</b> Examples of ZIP PMF's</a></li>
 <li class="chapter" data-level="7.4.12" data-path="logistic-regression.html"><a href="logistic-regression.html#zip-model"><i class="fa fa-check"></i><b>7.4.12</b> ZIP Model</a></li>
 </ul></li>
@@ -987,7 +987,8 @@ Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&
 </div>
 <div id="plotting-likelihood-function" class="section level3">
 <h3><span class="header-section-number">7.3.5</span> Plotting Likelihood Function</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggplot2)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">options</span>( <span class="dt">scipen =</span> <span class="dv">0</span> )
+<span class="kw">library</span>(ggplot2)
 p=<span class="kw">seq</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dt">length=</span><span class="dv">1001</span>)
 lik=p<span class="op">^</span><span class="dv">251</span> <span class="op">*</span><span class="st"> </span>(<span class="dv">1</span><span class="op">-</span>p)<span class="op">^</span>(<span class="dv">663</span><span class="op">-</span><span class="dv">251</span>)      <span class="co"># likelihood of getting observed data</span>
 df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(p,lik)
@@ -1092,8 +1093,8 @@ Curry &lt;-<span class="st"> </span><span class="kw">data.frame</span>(Location,
 ## -0.03075   0.03755  
 ## 
 ## Coefficients:
-##             Estimate Std. Error z value       Pr(&gt;|z|)    
-## (Intercept) -0.49557    0.08007  -6.189 0.000000000605 ***
+##             Estimate Std. Error z value Pr(&gt;|z|)    
+## (Intercept) -0.49557    0.08007  -6.189 6.05e-10 ***
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
@@ -1139,10 +1140,8 @@ Curry &lt;-<span class="st"> </span><span class="kw">data.frame</span>(Location,
     <span class="kw">return</span>(B[B<span class="op">$</span>Lik<span class="op">==</span><span class="kw">max</span>(B<span class="op">$</span>Lik),]) <span class="co"># find and return combination of b0 and b1 that maximize B.     </span>
 }</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">Lik.f_logistic2</span>(<span class="dt">nbasketH =</span> <span class="dv">150</span>, <span class="dt">nmissedH =</span> <span class="dv">247</span>, <span class="dt">nbasketA =</span> <span class="dv">101</span>, <span class="dt">nmissedA =</span> <span class="dv">165</span>, <span class="dt">nGrid =</span> <span class="dv">1000</span>) </code></pre></div>
-<pre><code>##                b0           b1
-## 496255 -0.4914915 -0.007007007
-##                                                                                                                                                                                                             Lik
-## 496255 0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000009835399</code></pre>
+<pre><code>##                b0           b1           Lik
+## 496255 -0.4914915 -0.007007007 9.835399e-192</code></pre>
 <p>Although we have worked with the likelihood function here, it is more common to work with the log of the likelihood function. Notice that the maximized log likelihood is very small, which can create numerical instability, though it doesn't here.</p>
 </div>
 <div id="comparison-to-r-output-1" class="section level3">
@@ -1166,8 +1165,8 @@ Curry &lt;-<span class="st"> </span><span class="kw">data.frame</span>(Location,
 ## 
 ## (Dispersion parameter for binomial family taken to be 1)
 ## 
-##     Null deviance:  0.00235585301873604  on 1  degrees of freedom
-## Residual deviance: -0.00000000000012368  on 0  degrees of freedom
+##     Null deviance:  2.3559e-03  on 1  degrees of freedom
+## Residual deviance: -1.2368e-13  on 0  degrees of freedom
 ## AIC: 16.353
 ## 
 ## Number of Fisher Scoring iterations: 2</code></pre>
@@ -1181,11 +1180,12 @@ Curry &lt;-<span class="st"> </span><span class="kw">data.frame</span>(Location,
 <p>Our test statistic is</p>
 <span class="math display">\[\begin{equation*}
 \begin{split}    
- \textrm{LRT} &amp;= 2[\max(\log(\Lik(\textrm{larger model}))) - \max(\log(\Lik(\textrm{reduced model})))] \\
-     &amp;= 2\log\left(\frac{\max(\Lik(\textrm{larger  model}))}{\max(\Lik(\textrm{reduced model}))} \right)
+ \textrm{LRT} &amp;= 2[\max(\log(Lik(\textrm{larger model}))) - \max(\log(Lik(\textrm{reduced model})))] \\
+     &amp;= 2\log\left(\frac{\max(Lik(\textrm{larger  model}))}{\max(Lik(\textrm{reduced model}))} \right)
 \end{split}
 \end{equation*}\]</span>
 <p>Statistical theory tells us that this statistic follows <span class="math inline">\(\chi^2\)</span> distribution with the difference in number of parameters as its degrees of freedom.</p>
+<p>In fact, it can be shown that the drop-in-deviance tests we've used for Poisson and logistic regression are special cases of this likelihood ratio test.</p>
 <p><strong>AIC and BIC</strong></p>
 <p>AIC and BIC are also calculated using the likelihood function.</p>
 <ul>
@@ -1341,8 +1341,8 @@ p3 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt"
 <p>The variable <span class="math inline">\(D_i\)</span> is called a <strong>latent variable</strong>. It is a variable that is relevant to the process we are interested in studying, but is not directly measured or reported in our data.</p>
 <p>The Zero-Inflated Poisson is an example of a <strong>mixture model</strong>, as the response variable is modeled using a mixture of Bernoulli and Poisson distributions.</p>
 </div>
-<div id="deriving-the-poisson-pmf" class="section level3">
-<h3><span class="header-section-number">7.4.10</span> Deriving the Poisson PMF</h3>
+<div id="deriving-the-zip-pmf" class="section level3">
+<h3><span class="header-section-number">7.4.10</span> Deriving the ZIP PMF</h3>
 <p>We derive the probability mass function for the Poisson model by considering the two different ways we can observe count <span class="math inline">\(y\)</span>.</p>
 <p><span class="math display">\[
 \begin{aligned}
@@ -1429,10 +1429,10 @@ Pearson residuals:
 -1.1118 -0.8858 -0.5290  0.6367  5.2996 
 
 Count model coefficients (poisson with log link):
-            Estimate Std. Error z value      Pr(&gt;|z|)    
-(Intercept)   0.7543     0.1440   5.238 0.00000016242 ***
-off.campus    0.4159     0.2059   2.020        0.0433 *  
-sexm          1.0209     0.1752   5.827 0.00000000563 ***
+            Estimate Std. Error z value Pr(&gt;|z|)    
+(Intercept)   0.7543     0.1440   5.238 1.62e-07 ***
+off.campus    0.4159     0.2059   2.020   0.0433 *  
+sexm          1.0209     0.1752   5.827 5.63e-09 ***
 
 Zero-inflation model coefficients (binomial with logit link):
               Estimate Std. Error z value Pr(&gt;|z|)  

@@ -539,6 +539,7 @@ If our goal is just to esimate $p$, we could simply find the value of $p$ that m
 ### Plotting Likelihood Function
 
 ```{r}
+options( scipen = 0 )
 library(ggplot2)
 p=seq(0,1,length=1001)
 lik=p^251 * (1-p)^(663-251)      # likelihood of getting observed data
@@ -749,12 +750,14 @@ Our test statistic is
 
 \begin{equation*}
 \begin{split}    
- \textrm{LRT} &= 2[\max(\log(\Lik(\textrm{larger model}))) - \max(\log(\Lik(\textrm{reduced model})))] \\
-     &= 2\log\left(\frac{\max(\Lik(\textrm{larger  model}))}{\max(\Lik(\textrm{reduced model}))} \right)
+ \textrm{LRT} &= 2[\max(\log(Lik(\textrm{larger model}))) - \max(\log(Lik(\textrm{reduced model})))] \\
+     &= 2\log\left(\frac{\max(Lik(\textrm{larger  model}))}{\max(Lik(\textrm{reduced model}))} \right)
 \end{split}
 \end{equation*}
 
 Statistical theory tells us that this statistic follows $\chi^2$ distribution with the difference in number of parameters as its degrees of freedom.  
+
+In fact, it can be shown that the drop-in-deviance tests we've used for Poisson and logistic regression are special cases of this likelihood ratio test.   
 
 **AIC and BIC** 
 
@@ -847,7 +850,7 @@ Now, we compare proportions of students who reported drinking any drinks.
 
 Drinks by First-Year Status:
 
-```{r, fig.width=10}
+```{r, fig.width=10, fig.height=12}
 p1 <- ggplot(data = drinks) + 
   stat_count(mapping = aes(x = firstYear, fill=drinks>0), position="fill" ) + 
   ggtitle("Drinking by First Year Status") 
@@ -953,7 +956,7 @@ The Zero-Inflated Poisson is an example of a **mixture model**, as the response 
 
 
 
-### Deriving the Poisson PMF
+### Deriving the ZIP PMF
 
 We derive the probability mass function for the Poisson model by considering the two different ways we can observe count $y$.    
 
