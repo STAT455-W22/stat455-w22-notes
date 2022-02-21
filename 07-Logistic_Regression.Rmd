@@ -73,7 +73,7 @@ head(Wisconsin, 10)
 ```
 
 
-```{r, fig.width=12}
+```{r, fig.width=12, fig.height=12}
 P1 <- ggplot(Wisconsin, aes(x=College, y=PctD, size=(Rvotes+Dvotes))) + geom_point() + 
  geom_text(data=Wisconsin %>% filter(County %in% c("Dane County", "Door County" , "Milwaukee County", "Menominee County", "Outagamie County", "Waukesha County")), aes(x=College, y=PctD, label=County, vjust=-2), size=3, color="red") +
   xlab("Percent with  College Degree") +
@@ -93,14 +93,14 @@ P4 <- ggplot(Wisconsin, aes(x=COVID_DeathRate, y=PctD, size=(Rvotes+Dvotes))) + 
 P5 <- ggplot(Wisconsin, aes(x=Income, y=PctD, size=(Rvotes+Dvotes))) + geom_point() + 
  geom_text(data=Wisconsin %>% filter(County %in% c("Dane County", "Door County" , "Milwaukee County", "Menominee County", "Outagamie County", "Waukesha County")), aes(x=Income, y=PctD, label=County, vjust=-2), size=3, color="red") +
   xlab("Median Income") +
-  ylab("Percent Voting for Biden")
+  ylab("Percent Voting for Biden") + theme(legend.position="none")
 grid.arrange(P1, P2, P3, P4, P5, nrow=2) + theme(legend.position="none")
 ```
 
 
 ### Correlation Between Explanatory Variables
 
-```{r}
+```{r, fig.width=10, fig.height=10}
 select <- dplyr::select
 C <- cor(Wisconsin %>% select("College", "Unemployment", "WhitePct", "COVID_DeathRate", "Income"))
 P <- corrplot(C, method="number")
@@ -387,15 +387,15 @@ summary(M2)
 ```
 
 
-* For each one percentage point increase in college education probability (or proportion) voting for Biden is estimated to multiply by $e^0.0463 = 1.047$ ( a 5% increase), assuming all other variables are held constant.   
+* For each one percentage point increase in college education probability (or proportion) voting for Biden is estimated to multiply by $e^{0.0463} = 1.047$ ( a 5% increase), assuming all other variables are held constant.   
 
-* For each one percentage point increase in unemployment rate, probability (or proportion) voting for Biden is estimated to multiply by $e^-0.1102 = 0.8957$ (a 10% decrease), assuming all other variables are held constant.
+* For each one percentage point increase in unemployment rate, probability (or proportion) voting for Biden is estimated to multiply by $e^{-0.1102} = 0.8957$ (a 10% decrease), assuming all other variables are held constant.
 
-* For each one percentage point increase in white residents, probability (or proportion) voting for Biden is estimated to multiply by $e^-0.02935 = 0.97$ (a 3% decrease), assuming all other variables are held constant.
+* For each one percentage point increase in white residents, probability (or proportion) voting for Biden is estimated to multiply by $e^{-0.02935} = 0.97$ (a 3% decrease), assuming all other variables are held constant.
 
-* For each one death increase per 100k residents, probability (or proportion) voting for Biden is estimated to multiply by $e^-0.006584 = 0.993$ (a 0.7% decrease), assuming all other variables are held constant.
+* For each one death increase per 100k residents, probability (or proportion) voting for Biden is estimated to multiply by $e^{-0.006584} = 0.993$ (a 0.7% decrease), assuming all other variables are held constant.
 
-* For each 1000 dollar increase in median income, probability (or proportion) voting for Biden is estimated to multiply by $e^-0.0000328\times1000 = 0.968$ (a 3% decrease), assuming all other variables are held constant.
+* For each 1000 dollar increase in median income, probability (or proportion) voting for Biden is estimated to multiply by $e^{-0.0000328\times1000} = 0.968$ (a 3% decrease), assuming all other variables are held constant.
 
 
 ### Tests for Significance of Model Coefficients 
@@ -444,15 +444,7 @@ ggplot(Wisconsinresid, aes(x = Predicted, y = Resid)) +
   ylab("Deviance Residuals")
 ```
 
-```{r,fig.align="center",out.width="60%",echo=FALSE, warning=FALSE, comment=NA}
-p1 <- ggplot(Wisconsinresid, aes(x = College, y = Resid)) +
-  geom_point() +
-  xlab("Predicted Values") + ylab("Deviance Residuals")
-p1
-```
-
-
-```{r, resid,fig.align="center", fig.width=10, ,echo=FALSE, warning=FALSE, comment=NA}
+```{r, resid,fig.align="center", fig.width=10, fig.height=10, echo=FALSE, warning=FALSE, comment=NA}
 p1 <- ggplot(Wisconsinresid, aes(x = College, y = Resid)) +
   geom_point() +
   xlab("Percent College Graduates") + ylab("Deviance Residuals")
