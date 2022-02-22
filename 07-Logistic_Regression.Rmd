@@ -387,15 +387,15 @@ summary(M2)
 ```
 
 
-* For each one percentage point increase in college education probability (or proportion) voting for Biden is estimated to multiply by $e^{0.0463} = 1.047$ ( a 5% increase), assuming all other variables are held constant.   
+* For each one percentage point increase in college education odds of voting for Biden are estimated to multiply by $e^{0.0463} = 1.047$ ( a 5% increase), assuming all other variables are held constant.   
 
-* For each one percentage point increase in unemployment rate, probability (or proportion) voting for Biden is estimated to multiply by $e^{-0.1102} = 0.8957$ (a 10% decrease), assuming all other variables are held constant.
+* For each one percentage point increase in unemployment rate, odds of voting for Biden is estimated to multiply by $e^{-0.1102} = 0.8957$ (a 10% decrease), assuming all other variables are held constant.
 
-* For each one percentage point increase in white residents, probability (or proportion) voting for Biden is estimated to multiply by $e^{-0.02935} = 0.97$ (a 3% decrease), assuming all other variables are held constant.
+* For each one percentage point increase in white residents, odds of voting for Biden is estimated to multiply by $e^{-0.02935} = 0.97$ (a 3% decrease), assuming all other variables are held constant.
 
-* For each one death increase per 100k residents, probability (or proportion) voting for Biden is estimated to multiply by $e^{-0.006584} = 0.993$ (a 0.7% decrease), assuming all other variables are held constant.
+* For each one death increase per 100k residents, odds of voting for Biden is estimated to multiply by $e^{-0.006584} = 0.993$ (a 0.7% decrease), assuming all other variables are held constant.
 
-* For each 1000 dollar increase in median income, probability (or proportion) voting for Biden is estimated to multiply by $e^{-0.0000328\times1000} = 0.968$ (a 3% decrease), assuming all other variables are held constant.
+* For each 1000 dollar increase in median income, odds of voting for Biden is estimated to multiply by $e^{-0.0000328\times1000} = 0.968$ (a 3% decrease), assuming all other variables are held constant.
 
 
 ### Tests for Significance of Model Coefficients 
