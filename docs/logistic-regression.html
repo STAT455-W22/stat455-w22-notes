@@ -1310,7 +1310,7 @@ p3 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt"
 </li>
 <li>Model the number of drinks consumed in a given weekend, assuming the person does drink at all.</li>
 </ol>
-<p>In step 1, we use logistic regression to estimate <span class="math inline">\(p\)</span>, the probability that the person drinks at all.</p>
+<p>In step 1, we use logistic regression to estimate <span class="math inline">\(p\)</span>, the probability that the person does not drink at all.</p>
 <p>In step 2, we use a Poisson regression to estimate <span class="math inline">\(\lambda\)</span>, the expected number of drinks a person consumes, assumping they drink at all.</p>
 </div>
 <div id="developing-the-zero-inflated-poisson-model" class="section level3">
@@ -1318,7 +1318,7 @@ p3 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt"
 <p>Let</p>
 <p><span class="math display">\[ \begin{cases} 
      1 &amp; \text{if student i drinks at all} \\
-      0 &amp; \text{otherwise}
+      0 &amp; \text{if student i does not drink}
    \end{cases}
 \]</span></p>
 <p>First, we model <span class="math inline">\(D_i\)</span>:</p>
@@ -1326,12 +1326,13 @@ p3 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt"
 \]</span></p>
 <p>and then <span class="math inline">\(Y_{i}\)</span></p>
 <p><span class="math display">\[ \begin{cases} 
-     Y_i\sim\text{Pois}(\lambda_i) &amp; \text{if } D_i=0 \\
-     Y_i=0 &amp; \text{if } D_i=1
+     Y_i\sim\text{Pois}(\lambda_i) &amp; \text{if } D_i=1 \\
+     Y_i=0 &amp; \text{if } D_i=0
    \end{cases}
 \]</span></p>
 <p>The variable <span class="math inline">\(D_i\)</span> is called a <strong>latent variable</strong>. It is a variable that is relevant to the process we are interested in studying, but is not directly measured or reported in our data.</p>
 <p>The Zero-Inflated Poisson is an example of a <strong>mixture model</strong>, as the response variable is modeled using a mixture of Bernoulli and Poisson distributions.</p>
+<p>Let <span class="math inline">\(p_i\)</span> represent <span class="math inline">\(P(D_i=0)\)</span>, the probability that person person does not drink.</p>
 </div>
 <div id="deriving-the-zip-pmf" class="section level3">
 <h3><span class="header-section-number">7.4.10</span> Deriving the ZIP PMF</h3>
@@ -1340,7 +1341,7 @@ p3 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt"
 \begin{aligned}
 P(Y=0) &amp;= P(\text{Person Doesn&#39;t Drink at All}) + P(\text{Person drinks and didn&#39;t drink last week})\\
 &amp; = P(\text{Person Doesn&#39;t Drink at All}) + P(\text{0 drinks in a given weekend given person drinks})P(\text{Person drinks}) \\
-&amp; = P(D_i=1) + P(Y_i=0|D_i=1)P(D_i=1) \\
+&amp; = P(D_i=0) + P(Y_i=0|D_i=1)P(D_i=1) \\
 &amp; = p_i + \frac{\lambda_i^0e^{-\lambda_i}}{0!}(1-p) \\
 &amp; = p_i + e^{-\lambda_i}(1-p_i)
 \end{aligned}
@@ -1357,7 +1358,7 @@ P(Y=y) &amp;= P(\text{Person drinks and drinks y drinks in a weekend})\\
 <p>Putting these together, we get the ZIP probability mass function:</p>
 <p><span class="math display">\[ P(Y=y) = \begin{cases} 
      p_i + e^{-\lambda_i}(1-p_i) &amp; \text{if } y=0 \\
-     \frac{\lambda_i^ye^{-\lambda_i}}{y!}(1-p) &amp; \text{if } y&gt;0
+     \frac{\lambda_i^ye^{-\lambda_i}}{y!}(1-p_i) &amp; \text{if } y&gt;0
    \end{cases}
 \]</span></p>
 </div>

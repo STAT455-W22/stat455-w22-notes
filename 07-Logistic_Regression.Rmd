@@ -910,7 +910,7 @@ We'll fit the model in two steps:
 2. Model the number of drinks consumed in a given weekend, assuming the person does drink at all.   
 
 
-In step 1, we use logistic regression to estimate $p$, the probability that the person drinks at all.    
+In step 1, we use logistic regression to estimate $p$, the probability that the person does not drink at all.    
 
 In step 2, we use a Poisson regression to estimate $\lambda$, the expected number of drinks a person consumes, assumping they drink at all.     
 
@@ -920,7 +920,7 @@ Let
 
 \[ \begin{cases} 
      1 & \text{if student i drinks at all} \\
-      0 & \text{otherwise}
+      0 & \text{if student i does not drink}
    \end{cases}
 \]
 
@@ -933,8 +933,8 @@ First, we model $D_i$:
 and then $Y_{i}$
 
 \[ \begin{cases} 
-     Y_i\sim\text{Pois}(\lambda_i) & \text{if } D_i=0 \\
-     Y_i=0 & \text{if } D_i=1
+     Y_i\sim\text{Pois}(\lambda_i) & \text{if } D_i=1 \\
+     Y_i=0 & \text{if } D_i=0
    \end{cases}
 \]
 
@@ -943,7 +943,7 @@ The variable $D_i$ is called a **latent variable**. It is a variable that is rel
 
 The Zero-Inflated Poisson is an example of a **mixture model**, as the response variable is modeled using a mixture of Bernoulli and Poisson distributions.    
 
-
+Let $p_i$ represent $P(D_i=0)$, the probability that person person does not drink.  
 
 ### Deriving the ZIP PMF
 
@@ -953,7 +953,7 @@ $$
 \begin{aligned}
 P(Y=0) &= P(\text{Person Doesn't Drink at All}) + P(\text{Person drinks and didn't drink last week})\\
 & = P(\text{Person Doesn't Drink at All}) + P(\text{0 drinks in a given weekend given person drinks})P(\text{Person drinks}) \\
-& = P(D_i=1) + P(Y_i=0|D_i=1)P(D_i=1) \\
+& = P(D_i=0) + P(Y_i=0|D_i=1)P(D_i=1) \\
 & = p_i + \frac{\lambda_i^0e^{-\lambda_i}}{0!}(1-p) \\
 & = p_i + e^{-\lambda_i}(1-p_i)
 \end{aligned}
@@ -975,7 +975,7 @@ Putting these together, we get the ZIP probability mass function:
 
 \[ P(Y=y) = \begin{cases} 
      p_i + e^{-\lambda_i}(1-p_i) & \text{if } y=0 \\
-     \frac{\lambda_i^ye^{-\lambda_i}}{y!}(1-p) & \text{if } y>0
+     \frac{\lambda_i^ye^{-\lambda_i}}{y!}(1-p_i) & \text{if } y>0
    \end{cases}
 \]
 
