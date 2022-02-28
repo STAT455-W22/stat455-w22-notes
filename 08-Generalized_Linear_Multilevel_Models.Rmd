@@ -221,7 +221,7 @@ time.el <- ggplot(data = time.df, aes(x = times,
   geom_smooth(se = FALSE, method = "lm", color = "black")
 ```
 
-```{r, gmu-cdelogitmat1, fig.cap= "Conditional density and empirical logit plots of the binary model response (foul called on home or visitor) vs. the three continuous Level One covariates (foul differential, score differential, and time remaining).  The dark shading in a conditional density plot shows the proportion of fouls called on the home team for a fixed value of (a) foul differential, (b) score differential, and (c) time remaining.  In empirical logit plots, estimated log odds of a home team foul are calculated for each distinct foul (d) and score (e) differential, except for differentials at the high and low extremes with insufficient data; for time (f), estimated log odds are calculated for two-minute time intervals and plotted against the midpoints of those intervals.", fig.align="center", echo=FALSE, message=F}
+```{r, gmu-cdelogitmat1, fig.cap= "Conditional density and empirical logit plots of the binary model response (foul called on home or visitor) vs. the three continuous Level One covariates (foul differential, score differential, and time remaining).  The dark shading in a conditional density plot shows the proportion of fouls called on the home team for a fixed value of (a) foul differential, (b) score differential, and (c) time remaining.  In empirical logit plots, estimated log odds of a home team foul are calculated for each distinct foul (d) and score (e) differential, except for differentials at the high and low extremes with insufficient data; for time (f), estimated log odds are calculated for two-minute time intervals and plotted against the midpoints of those intervals.", fig.align="center", echo=FALSE, message=F, fig.height=12, fig.width=10}
 grid.arrange(foul.cd, score.cd, time.cd,
   foul.el, score.el, time.el, ncol = 3, nrow = 2)
 ```
@@ -256,7 +256,7 @@ Conclusions about continuous Level One covariates are further supported by summa
 ### Mosaic Plots
 
 
-```{r}
+```{r, fig.height=12, fig.width=10}
 refdata <- refdata %>%
   mutate(leadyes = ifelse(lead.home == 0, "No", "Yes"),
     prevyes = ifelse(previous.foul.home == 0, "No", "Yes")) %>%
@@ -278,7 +278,7 @@ barplot3 <- ggplot(data = refdata) +
   theme(legend.title = element_blank()) 
 ```
 
-```{r gmu-barmat1, fig.cap= "Mosaic plots of the binary model response (foul called on home or visitor) vs. the categorical Level One covariates (team in the lead (a), and team called for the previous foul (b)).  Each bar shows the percentage of fouls called on the home team vs. the percentage of fouls called on the visiting team for a particular category of the covariate.  The bar width shows the proportion of fouls at each of the covariate levels.", fig.align="center",out.width="60%", echo=FALSE}
+```{r gmu-barmat1, fig.cap= "Mosaic plots of the binary model response (foul called on home or visitor) vs. the categorical Level One covariates (team in the lead (a), and team called for the previous foul (b)).  Each bar shows the percentage of fouls called on the home team vs. the percentage of fouls called on the visiting team for a particular category of the covariate.  The bar width shows the proportion of fouls at each of the covariate levels.", fig.align="center", fig.height=10, fig.width=10, echo=FALSE}
 grid.arrange(barplot2, barplot3, ncol = 2, nrow = 2)
 ```
 
@@ -526,8 +526,8 @@ summary(M3)
 - $\hat{\alpha}_{0}=-0.188=$ the mean log odds of a home foul at the point where total fouls are equal between teams.  In other words, when fouls are balanced between teams, the probability that a foul is called on the visiting team (.547) is 20.7\% ($1/e^{-.188}=1.207$) higher than the probability a foul is called on the home team (.453).
 - $\hat{\beta}_{0}=-0.264=$ the decrease in mean log odds of a home foul for each 1 foul increase in the foul differential.  More specifically, the odds the next foul is called on the visiting team rather than the home team increases by 30.2\% with each additional foul called on the home team ($1/e^{-.264}=1.302$).
 - $\hat{\sigma}_{u}^{2}=0.172=$ the variance in intercepts from game-to-game.
-- $\hat{\sigma}_{v}^{2}=0.068=$ the variance in intercepts among different home teams.
-- $\hat{\sigma}_{w}^{2}=0.023=$ the variance in intercepts among different visiting teams.
+- $\hat{\sigma}_{w}^{2}=0.068=$ the variance in intercepts among different home teams.
+- $\hat{\sigma}_{z}^{2}=0.023=$ the variance in intercepts among different visiting teams.
 
 Based on the t-value (-6.80) and p-value ($p<.001$) associated with foul differential in this model, we have significant evidence of a negative association between foul differential and the odds of a home team foul.  That is, we have significant evidence that the odds that a foul is called on the home team shrinks as the home team has more total fouls compared with the visiting team.  Thus, there seems to be preliminary evidence in the 2009-2010 data that college basketball referees tend to even out foul calls over the course of the first half.  Of course, we have yet to adjust for other significant covariates.
 
@@ -551,6 +551,254 @@ Among their conclusions, the authors write
 
 ## Parametric Bootstrapping
 
+### When and Why to Bootstrap
 
+The maximum likelihood estimates, confidence intervals, and hypothesis tests that we've obtained throughout the class have been based on statistical theory telling us things like:
+
+1. In LLSR and linear mixed effects models, regression coefficients follow $t$-distributions.     
+2. In generalized linear regresson models, when the sample size is large, regression coefficients are approximately normally distributed.    
+3. Likelihood ratio based tests (like drop-in-deviance tests) follow $\chi^2$ distributions (or F-distributions for models based on quaasilikelihood).     
+
+All of these are based on model assumptions, as well as "large-sample" theory which will never be exactly true, but are often reasonable approximations.   
+
+If we have doubts about model assumptions, like normality, or if our sample size is not that big, we might instead use a simulation-based method to calculate p-values and confidence intervals. 
+
+A popular simulation-based approach is the **parametric bootstrap**.   
+
+This is different than the bootstrapping procedude we learned in Stat 255, which is actually called the **non-parametric bootstrap.**
+
+
+### Parametric Bootstrap Procedure  
+
+1. Fit the model to the actual data to estimate all parameters ($\beta$'s, $\sigma$'s, etc.)     
+2. Simulate many datasets from model using estimated parameter values.    
+3. For each simulated dataset, estimate parameters using simulated data.     
+4. Calculate relevant statistics (t-statistics, F-statistics, Likelihood ratio's, etc.)     
+5. Form confidence intervals using distribution of simulated values.   
+
+
+### A Simple Example      
+
+We'll start with a simple example, using a LLSR model. Recall the Kentucky Derby Example in Chapter 1 of the notes. 
+
+We used a LSSR model to model a horse's winning speed, with year (since) 1896 as the explanatory variable.    
+
+```{r}
+derby.df <- read.csv("https://raw.githubusercontent.com/proback/BeyondMLR/master/data/derbyplus.csv")
+derby.df <- derby.df %>%
+  mutate( fast = ifelse(condition=="fast",1,0), 
+          good = ifelse(condition=="good",1,0),
+          yearnew = year - 1896,
+          fastfactor = ifelse(fast == 0, "not fast", "fast"))
+```
+
+
+1. Fit the model to the actual data to estimate all parameters ($\beta$'s, $\sigma$'s, etc.)     
+
+```{r, comment=NA}
+M <- lm(speed ~ yearnew, data = derby.df)
+summary(M)
+```
+
+2. Simulate many datasets from model using estimated parameter values, and    
+3. For each simulated dataset, estimate parameters using simulated data.     
+
+```{r}
+# record estimates from the model
+b0 <- M$coefficients[1]
+b1 <- M$coefficients[2]
+sigma <- summary(M)$sigma
+nreps <- 10000
+bootstrap_b0 <- c(rep(NA, nreps))
+bootstrap_b1 <- c(rep(NA, nreps))
+bootstrap_sigma <- c(rep(NA, nreps))
+B_Data <- derby.df
+# simulate data and fit model
+for (i in 1:nreps){
+   # simulate new data
+B_Data <- B_Data %>% mutate(SimSpeed = b0 + b1*yearnew + rnorm(n= nrow(derby.df), mean=0, sd=sigma))
+Mb <- lm(data=B_Data, SimSpeed~yearnew)   #fit model to simulated data
+bootstrap_b0[i] <- Mb$coefficients[1]        #record b0 from model on simulated data
+bootstrap_b1[i] <- Mb$coefficients[2]        #record b1 from model on simulated data
+bootstrap_sigma[i] <- summary(Mb)$sigma      #record sigma from model on simulated data
+}
+Bootstrap_Results <- data.frame(bootstrap_b0, bootstrap_b1, bootstrap_sigma)
+```
+
+4. Calculate relevant statistics (t-statistics, F-statistics, Likelihood ratio's, etc.)     
+5. Form confidence intervals using distribution of simulated values.   
+
+
+### Parametric Bootstrap Confidence Intervals 
+
+```{r}
+p1 <- ggplot(data=Bootstrap_Results, aes(x=bootstrap_b0)) + geom_histogram() + geom_vline(xintercept=quantile(bootstrap_b0, c(.025, .975)), color="red")
+p1
+```
+
+```{r}
+quantile(bootstrap_b0, c(.025, .975))
+```
+
+```{r}
+p2 <- ggplot(data=Bootstrap_Results, aes(x=bootstrap_b1)) + geom_histogram() + geom_vline(xintercept=quantile(bootstrap_b1, c(.025, .975)), color="red")
+p2
+```
+
+```{r}
+quantile(bootstrap_b1, c(.025, .975))
+```
+
+
+```{r}
+p3 <- ggplot(data=Bootstrap_Results, aes(x=bootstrap_sigma)) + geom_histogram() + geom_vline(xintercept=quantile(bootstrap_sigma, c(.025, .975)), color="red")
+p3
+```
+
+
+```{r}
+quantile(bootstrap_sigma, c(.025, .975))
+```
+
+Theory-Based intervals (based on t-distribution)
+
+```{r}
+confint(M)
+```
+
+**Thought Question:** How is this approach to bootstrapping different than the non-parametric bootstrap we saw in  3.5.8 in the [Stat 255 notes](https://bookdown.org/ajsage/statistics_for_data_science_notes/)? What assumption does the parametric bootstrap make that the non-parameteric bootstrap doesn't?    
+
+
+### Model Comparison Tests with Parametric Bootstrap     
+
+
+The distributions of ANOVA F-statistics and other likelihood-ratio-based test statistics for model comparison are vulnerable to deviations from model assumptions. When the assumptions are not valid, these stistics may not follow the distributions they are supposed to (F, $\chi^2$), etc.     
+
+We can use parametric bootstrapping to approximate the null distribution of these statistics in such situations.     
+
+Process:    
+
+1. Fit **full** and **reduced** models and calculate relevant statistic (F-statistic, LRT statistic, etc.)      
+2. Simulate many datasets from the **reduced model** using estimated parameter values.    
+3. For each simulated dataset, fit the **reduced model** and **full model**.
+4. Calculate statistic for model comparison (F-statistics, Likelihood ratio's, etc.) on the models fit to the simulated data.     
+5. Look at where the statistic from the actual data (calculated in (1)) lies, relative to those calculated from the simulated data in (4). (Thought question: Under what assumption were these data simulated?). The simulation-based p-value is the proportion of simulated statistics as extreme or more extreme as the one we observed.    
+
+### Model Comparison for Kentucky Derby Data
+
+```{r}
+M_Red <- lm(speed ~ yearnew, data = derby.df)
+M_Full <- lm(speed ~ yearnew + fast + yearnew:fast, data=derby.df)
+anova(M_Red, M_Full)
+```
+
+The observed F-statistic is 38.914. The associated p-value was calculated from an F-distribution with 2 and 118 df.
+
+If we have concerns about model assumptions, especially normality, the F-statistic might not really follow this F-distribution.    
+
+### Code for Boostrap Model Comparison
+
+We'll simulate the distribution of the F-statistic, using the parametric bootstrap.    
+
+```{r}
+set.seed(02272022)
+# record estimates from reduced model
+b0 <- M_Red$coefficients[1]
+b1 <- M_Red$coefficients[2]
+sigma <- summary(M_Red)$sigma
+nreps <- 10000
+bootstrap_F <- c(rep(NA, nreps))
+B_Data <- derby.df
+# simulate data and fit model
+for (i in 1:nreps){
+   # simulate new data from reduced model
+B_Data <- B_Data %>% mutate(SimSpeed = b0 + b1*yearnew + rnorm(n= nrow(derby.df), mean=0, sd=sigma))
+Mb_Red <- lm(data=B_Data, SimSpeed~yearnew)   #fit reduced model to simulated data
+Mb_Full <- lm(data=B_Data, SimSpeed ~ yearnew + fast + yearnew:fast)   #fit full model to simulated data
+bootstrap_F[i] <- anova(Mb_Full, Mb_Red)$F[2]
+}
+Bootstrap_Results <- data.frame(bootstrap_F)
+```
+
+### Simulation-Based F-Test
+
+```{r}
+p1 <- ggplot(data=Bootstrap_Results, aes(x=bootstrap_F)) + geom_histogram() + geom_vline(xintercept = 38.914, color="red", linetype="dotted", size=2) 
+p1
+```
+
+```{r}
+mean(bootstrap_F>38.914)
+```
+
+None of our simulations produced a F-statistic even close to the one we observed in our actual data.   
+
+
+There is virtually no chance we would have obtained an F-statistic as large as we saw in the data by chance, if the reduced model was really appropriate. We have strong evidence that the full model is a better fit.    
+
+This is consistent with the theory-based F-test.   
+
+
+### Model Comparison in Multilevel GLM     
+
+```{r}
+M1 <- glmer(foul.home ~ foul.diff + (1|game), 
+            family = binomial(link="logit"), data = refdata)
+M2 <- glmer(foul.home ~ foul.diff + (foul.diff|game), 
+            family = binomial(link="logit"), data = refdata)
+```
+
+```{r}
+anova(M1, M2)
+```
+
+
+The $\chi^2$ statistic of 5.4682 and fairly small p-value provide some evidence in favor of the larger model.
+
+Research has shown that when estimates of variance and covariance of random effects are impacted by boundary constraints, "theory-based" tests like the $\chi^2$ test used here are too conservative and produce higher p-values than they should.  
+
+### Multilevel GLM Bootstrap Code
+
+Fitting the model manually gets complicated. The `drop` and `simulate` functions in the `lme4` package do this automatically. 
+
+We'll simulate data from the reduced model, fit both models, and calculate the $\chi^2$ statistic, and repeat this 1,000 times. 
+
+This establishes a bootstrap distribution for where we would expect this statistic to lie if the reduced model is actually "correct". 
+
+```{r, eval=FALSE}
+# This takes a LONG time to run!
+set.seed(02272022)
+nreps <- 1000
+ChiSq <- rep(NA, nreps)
+for(i in 1:nreps){
+SimData <- drop(simulate(M1))  # this command simulates data directly from a model
+M1B <-refit(M1, newresp=SimData)  # refits M1 to simulated data
+M2B <-refit(M2, newresp=SimData)  # refits M2 to simulated data
+ChiSq[i] <- anova(M1B,M2B)$Chisq[2]
+}
+ChiSq<- write.csv(ChiSq, file="ChiSq.csv")
+```
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+ChiSq <- read.csv("ChiSq.csv")
+ChiSq <- ChiSq$x
+```
+
+
+### Simulation-Based $\chi^2$ Test
+
+```{r}
+p <- ggplot(data=data.frame(ChiSq), aes(x=ChiSq)) + geom_histogram() + 
+  geom_vline(xintercept = 5.4682, color="red", linetype="dotted", size=2) 
+p
+```
+
+```{r}
+mean(ChiSq>5.4682)
+```
+
+The simulation-based p-value is 0.037. This is slightly smaller than the one based on the Chi-sqare distribution. Research has shown that when boundary constraints are an issue in estimating variance and correlation of random effects, "thory-based" tests are too conservative, and often yielf p-values that are higher than they should be. 
+
+Our results are consistent with this observation.   
 
 

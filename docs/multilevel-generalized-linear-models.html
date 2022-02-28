@@ -23,7 +23,7 @@
 
 
 
-<meta name="date" content="2022-02-26" />
+<meta name="date" content="2022-02-27" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -506,7 +506,19 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="8.3.5" data-path="multilevel-generalized-linear-models.html"><a href="multilevel-generalized-linear-models.html#more-on-crossed-effects"><i class="fa fa-check"></i><b>8.3.5</b> More on Crossed Effects</a></li>
 <li class="chapter" data-level="8.3.6" data-path="multilevel-generalized-linear-models.html"><a href="multilevel-generalized-linear-models.html#a-final-model-for-examining-referee-bias"><i class="fa fa-check"></i><b>8.3.6</b> A Final Model for Examining Referee Bias</a></li>
 </ul></li>
-<li class="chapter" data-level="8.4" data-path="multilevel-generalized-linear-models.html"><a href="multilevel-generalized-linear-models.html#parametric-bootstrapping"><i class="fa fa-check"></i><b>8.4</b> Parametric Bootstrapping</a></li>
+<li class="chapter" data-level="8.4" data-path="multilevel-generalized-linear-models.html"><a href="multilevel-generalized-linear-models.html#parametric-bootstrapping"><i class="fa fa-check"></i><b>8.4</b> Parametric Bootstrapping</a><ul>
+<li class="chapter" data-level="8.4.1" data-path="multilevel-generalized-linear-models.html"><a href="multilevel-generalized-linear-models.html#when-and-why-to-bootstrap"><i class="fa fa-check"></i><b>8.4.1</b> When and Why to Bootstrap</a></li>
+<li class="chapter" data-level="8.4.2" data-path="multilevel-generalized-linear-models.html"><a href="multilevel-generalized-linear-models.html#parametric-bootstrap-procedure"><i class="fa fa-check"></i><b>8.4.2</b> Parametric Bootstrap Procedure</a></li>
+<li class="chapter" data-level="8.4.3" data-path="multilevel-generalized-linear-models.html"><a href="multilevel-generalized-linear-models.html#a-simple-example"><i class="fa fa-check"></i><b>8.4.3</b> A Simple Example</a></li>
+<li class="chapter" data-level="8.4.4" data-path="multilevel-generalized-linear-models.html"><a href="multilevel-generalized-linear-models.html#parametric-bootstrap-confidence-intervals"><i class="fa fa-check"></i><b>8.4.4</b> Parametric Bootstrap Confidence Intervals</a></li>
+<li class="chapter" data-level="8.4.5" data-path="multilevel-generalized-linear-models.html"><a href="multilevel-generalized-linear-models.html#model-comparison-tests-with-parametric-bootstrap"><i class="fa fa-check"></i><b>8.4.5</b> Model Comparison Tests with Parametric Bootstrap</a></li>
+<li class="chapter" data-level="8.4.6" data-path="multilevel-generalized-linear-models.html"><a href="multilevel-generalized-linear-models.html#model-comparison-for-kentucky-derby-data"><i class="fa fa-check"></i><b>8.4.6</b> Model Comparison for Kentucky Derby Data</a></li>
+<li class="chapter" data-level="8.4.7" data-path="multilevel-generalized-linear-models.html"><a href="multilevel-generalized-linear-models.html#code-for-boostrap-model-comparison"><i class="fa fa-check"></i><b>8.4.7</b> Code for Boostrap Model Comparison</a></li>
+<li class="chapter" data-level="8.4.8" data-path="multilevel-generalized-linear-models.html"><a href="multilevel-generalized-linear-models.html#simulation-based-f-test"><i class="fa fa-check"></i><b>8.4.8</b> Simulation-Based F-Test</a></li>
+<li class="chapter" data-level="8.4.9" data-path="multilevel-generalized-linear-models.html"><a href="multilevel-generalized-linear-models.html#model-comparison-in-multilevel-glm"><i class="fa fa-check"></i><b>8.4.9</b> Model Comparison in Multilevel GLM</a></li>
+<li class="chapter" data-level="8.4.10" data-path="multilevel-generalized-linear-models.html"><a href="multilevel-generalized-linear-models.html#multilevel-glm-bootstrap-code"><i class="fa fa-check"></i><b>8.4.10</b> Multilevel GLM Bootstrap Code</a></li>
+<li class="chapter" data-level="8.4.11" data-path="multilevel-generalized-linear-models.html"><a href="multilevel-generalized-linear-models.html#simulation-based-chi2-test"><i class="fa fa-check"></i><b>8.4.11</b> Simulation-Based <span class="math inline">\(\chi^2\)</span> Test</a></li>
+</ul></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -902,7 +914,7 @@ time.el &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class
 <span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;(f)&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">se =</span> <span class="ot">FALSE</span>, <span class="dt">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="dt">color =</span> <span class="st">&quot;black&quot;</span>)</code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:gmu-cdelogitmat1"></span>
-<img src="Stat-455-Notes_files/figure-html/gmu-cdelogitmat1-1.png" alt="Conditional density and empirical logit plots of the binary model response (foul called on home or visitor) vs. the three continuous Level One covariates (foul differential, score differential, and time remaining).  The dark shading in a conditional density plot shows the proportion of fouls called on the home team for a fixed value of (a) foul differential, (b) score differential, and (c) time remaining.  In empirical logit plots, estimated log odds of a home team foul are calculated for each distinct foul (d) and score (e) differential, except for differentials at the high and low extremes with insufficient data; for time (f), estimated log odds are calculated for two-minute time intervals and plotted against the midpoints of those intervals." width="576" />
+<img src="Stat-455-Notes_files/figure-html/gmu-cdelogitmat1-1.png" alt="Conditional density and empirical logit plots of the binary model response (foul called on home or visitor) vs. the three continuous Level One covariates (foul differential, score differential, and time remaining).  The dark shading in a conditional density plot shows the proportion of fouls called on the home team for a fixed value of (a) foul differential, (b) score differential, and (c) time remaining.  In empirical logit plots, estimated log odds of a home team foul are calculated for each distinct foul (d) and score (e) differential, except for differentials at the high and low extremes with insufficient data; for time (f), estimated log odds are calculated for two-minute time intervals and plotted against the midpoints of those intervals." width="960" />
 <p class="caption">
 Figure 8.2: Conditional density and empirical logit plots of the binary model response (foul called on home or visitor) vs. the three continuous Level One covariates (foul differential, score differential, and time remaining). The dark shading in a conditional density plot shows the proportion of fouls called on the home team for a fixed value of (a) foul differential, (b) score differential, and (c) time remaining. In empirical logit plots, estimated log odds of a home team foul are calculated for each distinct foul (d) and score (e) differential, except for differentials at the high and low extremes with insufficient data; for time (f), estimated log odds are calculated for two-minute time intervals and plotted against the midpoints of those intervals.
 </p>
@@ -948,7 +960,7 @@ barplot3 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span clas
 <span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;(b)&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">scale_fill_grey</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.title =</span> <span class="kw">element_blank</span>()) </code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:gmu-barmat1"></span>
-<img src="Stat-455-Notes_files/figure-html/gmu-barmat1-1.png" alt="Mosaic plots of the binary model response (foul called on home or visitor) vs. the categorical Level One covariates (team in the lead (a), and team called for the previous foul (b)).  Each bar shows the percentage of fouls called on the home team vs. the percentage of fouls called on the visiting team for a particular category of the covariate.  The bar width shows the proportion of fouls at each of the covariate levels." width="60%" />
+<img src="Stat-455-Notes_files/figure-html/gmu-barmat1-1.png" alt="Mosaic plots of the binary model response (foul called on home or visitor) vs. the categorical Level One covariates (team in the lead (a), and team called for the previous foul (b)).  Each bar shows the percentage of fouls called on the home team vs. the percentage of fouls called on the visiting team for a particular category of the covariate.  The bar width shows the proportion of fouls at each of the covariate levels." width="960" />
 <p class="caption">
 Figure 8.3: Mosaic plots of the binary model response (foul called on home or visitor) vs. the categorical Level One covariates (team in the lead (a), and team called for the previous foul (b)). Each bar shows the percentage of fouls called on the home team vs. the percentage of fouls called on the visiting team for a particular category of the covariate. The bar width shows the proportion of fouls at each of the covariate levels.
 </p>
@@ -1235,8 +1247,8 @@ Y_{i[vh]j}\sim\text{Ber}(p_{i[vh]j})
 <li><span class="math inline">\(\hat{\alpha}_{0}=-0.188=\)</span> the mean log odds of a home foul at the point where total fouls are equal between teams. In other words, when fouls are balanced between teams, the probability that a foul is called on the visiting team (.547) is 20.7% (<span class="math inline">\(1/e^{-.188}=1.207\)</span>) higher than the probability a foul is called on the home team (.453).</li>
 <li><span class="math inline">\(\hat{\beta}_{0}=-0.264=\)</span> the decrease in mean log odds of a home foul for each 1 foul increase in the foul differential. More specifically, the odds the next foul is called on the visiting team rather than the home team increases by 30.2% with each additional foul called on the home team (<span class="math inline">\(1/e^{-.264}=1.302\)</span>).</li>
 <li><span class="math inline">\(\hat{\sigma}_{u}^{2}=0.172=\)</span> the variance in intercepts from game-to-game.</li>
-<li><span class="math inline">\(\hat{\sigma}_{v}^{2}=0.068=\)</span> the variance in intercepts among different home teams.</li>
-<li><span class="math inline">\(\hat{\sigma}_{w}^{2}=0.023=\)</span> the variance in intercepts among different visiting teams.</li>
+<li><span class="math inline">\(\hat{\sigma}_{w}^{2}=0.068=\)</span> the variance in intercepts among different home teams.</li>
+<li><span class="math inline">\(\hat{\sigma}_{z}^{2}=0.023=\)</span> the variance in intercepts among different visiting teams.</li>
 </ul>
 <p>Based on the t-value (-6.80) and p-value (<span class="math inline">\(p&lt;.001\)</span>) associated with foul differential in this model, we have significant evidence of a negative association between foul differential and the odds of a home team foul. That is, we have significant evidence that the odds that a foul is called on the home team shrinks as the home team has more total fouls compared with the visiting team. Thus, there seems to be preliminary evidence in the 2009-2010 data that college basketball referees tend to even out foul calls over the course of the first half. Of course, we have yet to adjust for other significant covariates.</p>
 <p>An estimated 65.4% of variability in the intercepts is due to differences from game-to-game, while 25.9% is due to differences among home teams, and 8.7% is due to differences among visiting teams.</p>
@@ -1255,7 +1267,238 @@ Y_{i[vh]j}\sim\text{Ber}(p_{i[vh]j})
 </div>
 <div id="parametric-bootstrapping" class="section level2">
 <h2><span class="header-section-number">8.4</span> Parametric Bootstrapping</h2>
+<div id="when-and-why-to-bootstrap" class="section level3">
+<h3><span class="header-section-number">8.4.1</span> When and Why to Bootstrap</h3>
+<p>The maximum likelihood estimates, confidence intervals, and hypothesis tests that we've obtained throughout the class have been based on statistical theory telling us things like:</p>
+<ol style="list-style-type: decimal">
+<li>In LLSR and linear mixed effects models, regression coefficients follow <span class="math inline">\(t\)</span>-distributions.<br />
+</li>
+<li>In generalized linear regresson models, when the sample size is large, regression coefficients are approximately normally distributed.<br />
+</li>
+<li>Likelihood ratio based tests (like drop-in-deviance tests) follow <span class="math inline">\(\chi^2\)</span> distributions (or F-distributions for models based on quaasilikelihood).</li>
+</ol>
+<p>All of these are based on model assumptions, as well as &quot;large-sample&quot; theory which will never be exactly true, but are often reasonable approximations.</p>
+<p>If we have doubts about model assumptions, like normality, or if our sample size is not that big, we might instead use a simulation-based method to calculate p-values and confidence intervals.</p>
+<p>A popular simulation-based approach is the <strong>parametric bootstrap</strong>.</p>
+<p>This is different than the bootstrapping procedude we learned in Stat 255, which is actually called the <strong>non-parametric bootstrap.</strong></p>
+</div>
+<div id="parametric-bootstrap-procedure" class="section level3">
+<h3><span class="header-section-number">8.4.2</span> Parametric Bootstrap Procedure</h3>
+<ol style="list-style-type: decimal">
+<li>Fit the model to the actual data to estimate all parameters (<span class="math inline">\(\beta\)</span>'s, <span class="math inline">\(\sigma\)</span>'s, etc.)<br />
+</li>
+<li>Simulate many datasets from model using estimated parameter values.<br />
+</li>
+<li>For each simulated dataset, estimate parameters using simulated data.<br />
+</li>
+<li>Calculate relevant statistics (t-statistics, F-statistics, Likelihood ratio's, etc.)<br />
+</li>
+<li>Form confidence intervals using distribution of simulated values.</li>
+</ol>
+</div>
+<div id="a-simple-example" class="section level3">
+<h3><span class="header-section-number">8.4.3</span> A Simple Example</h3>
+<p>We'll start with a simple example, using a LLSR model. Recall the Kentucky Derby Example in Chapter 1 of the notes.</p>
+<p>We used a LSSR model to model a horse's winning speed, with year (since) 1896 as the explanatory variable.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">derby.df &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;https://raw.githubusercontent.com/proback/BeyondMLR/master/data/derbyplus.csv&quot;</span>)
+derby.df &lt;-<span class="st"> </span>derby.df <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>( <span class="dt">fast =</span> <span class="kw">ifelse</span>(condition<span class="op">==</span><span class="st">&quot;fast&quot;</span>,<span class="dv">1</span>,<span class="dv">0</span>), 
+          <span class="dt">good =</span> <span class="kw">ifelse</span>(condition<span class="op">==</span><span class="st">&quot;good&quot;</span>,<span class="dv">1</span>,<span class="dv">0</span>),
+          <span class="dt">yearnew =</span> year <span class="op">-</span><span class="st"> </span><span class="dv">1896</span>,
+          <span class="dt">fastfactor =</span> <span class="kw">ifelse</span>(fast <span class="op">==</span><span class="st"> </span><span class="dv">0</span>, <span class="st">&quot;not fast&quot;</span>, <span class="st">&quot;fast&quot;</span>))</code></pre></div>
+<ol style="list-style-type: decimal">
+<li>Fit the model to the actual data to estimate all parameters (<span class="math inline">\(\beta\)</span>'s, <span class="math inline">\(\sigma\)</span>'s, etc.)</li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">M &lt;-<span class="st"> </span><span class="kw">lm</span>(speed <span class="op">~</span><span class="st"> </span>yearnew, <span class="dt">data =</span> derby.df)
+<span class="kw">summary</span>(M)</code></pre></div>
+<pre><code>
+Call:
+lm(formula = speed ~ yearnew, data = derby.df)
 
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-3.08190 -0.50026  0.07387  0.67367  1.68720 
+
+Coefficients:
+             Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) 51.588393   0.162549  317.37   &lt;2e-16 ***
+yearnew      0.026126   0.002322   11.25   &lt;2e-16 ***
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+Residual standard error: 0.9032 on 120 degrees of freedom
+Multiple R-squared:  0.5134,    Adjusted R-squared:  0.5093 
+F-statistic: 126.6 on 1 and 120 DF,  p-value: &lt; 2.2e-16</code></pre>
+<ol start="2" style="list-style-type: decimal">
+<li>Simulate many datasets from model using estimated parameter values, and<br />
+</li>
+<li>For each simulated dataset, estimate parameters using simulated data.</li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># record estimates from the model</span>
+b0 &lt;-<span class="st"> </span>M<span class="op">$</span>coefficients[<span class="dv">1</span>]
+b1 &lt;-<span class="st"> </span>M<span class="op">$</span>coefficients[<span class="dv">2</span>]
+sigma &lt;-<span class="st"> </span><span class="kw">summary</span>(M)<span class="op">$</span>sigma
+nreps &lt;-<span class="st"> </span><span class="dv">10000</span>
+bootstrap_b0 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">rep</span>(<span class="ot">NA</span>, nreps))
+bootstrap_b1 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">rep</span>(<span class="ot">NA</span>, nreps))
+bootstrap_sigma &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">rep</span>(<span class="ot">NA</span>, nreps))
+B_Data &lt;-<span class="st"> </span>derby.df
+<span class="co"># simulate data and fit model</span>
+<span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>nreps){
+   <span class="co"># simulate new data</span>
+B_Data &lt;-<span class="st"> </span>B_Data <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">SimSpeed =</span> b0 <span class="op">+</span><span class="st"> </span>b1<span class="op">*</span>yearnew <span class="op">+</span><span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n=</span> <span class="kw">nrow</span>(derby.df), <span class="dt">mean=</span><span class="dv">0</span>, <span class="dt">sd=</span>sigma))
+Mb &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data=</span>B_Data, SimSpeed<span class="op">~</span>yearnew)   <span class="co">#fit model to simulated data</span>
+bootstrap_b0[i] &lt;-<span class="st"> </span>Mb<span class="op">$</span>coefficients[<span class="dv">1</span>]        <span class="co">#record b0 from model on simulated data</span>
+bootstrap_b1[i] &lt;-<span class="st"> </span>Mb<span class="op">$</span>coefficients[<span class="dv">2</span>]        <span class="co">#record b1 from model on simulated data</span>
+bootstrap_sigma[i] &lt;-<span class="st"> </span><span class="kw">summary</span>(Mb)<span class="op">$</span>sigma      <span class="co">#record sigma from model on simulated data</span>
+}
+Bootstrap_Results &lt;-<span class="st"> </span><span class="kw">data.frame</span>(bootstrap_b0, bootstrap_b1, bootstrap_sigma)</code></pre></div>
+<ol start="4" style="list-style-type: decimal">
+<li>Calculate relevant statistics (t-statistics, F-statistics, Likelihood ratio's, etc.)<br />
+</li>
+<li>Form confidence intervals using distribution of simulated values.</li>
+</ol>
+</div>
+<div id="parametric-bootstrap-confidence-intervals" class="section level3">
+<h3><span class="header-section-number">8.4.4</span> Parametric Bootstrap Confidence Intervals</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p1 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span>Bootstrap_Results, <span class="kw">aes</span>(<span class="dt">x=</span>bootstrap_b0)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_histogram</span>() <span class="op">+</span><span class="st"> </span><span class="kw">geom_vline</span>(<span class="dt">xintercept=</span><span class="kw">quantile</span>(bootstrap_b0, <span class="kw">c</span>(.<span class="dv">025</span>, .<span class="dv">975</span>)), <span class="dt">color=</span><span class="st">&quot;red&quot;</span>)
+p1</code></pre></div>
+<p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-248-1.png" width="576" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">quantile</span>(bootstrap_b0, <span class="kw">c</span>(.<span class="dv">025</span>, .<span class="dv">975</span>))</code></pre></div>
+<pre><code>##     2.5%    97.5% 
+## 51.26868 51.91032</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p2 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span>Bootstrap_Results, <span class="kw">aes</span>(<span class="dt">x=</span>bootstrap_b1)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_histogram</span>() <span class="op">+</span><span class="st"> </span><span class="kw">geom_vline</span>(<span class="dt">xintercept=</span><span class="kw">quantile</span>(bootstrap_b1, <span class="kw">c</span>(.<span class="dv">025</span>, .<span class="dv">975</span>)), <span class="dt">color=</span><span class="st">&quot;red&quot;</span>)
+p2</code></pre></div>
+<p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-250-1.png" width="576" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">quantile</span>(bootstrap_b1, <span class="kw">c</span>(.<span class="dv">025</span>, .<span class="dv">975</span>))</code></pre></div>
+<pre><code>##       2.5%      97.5% 
+## 0.02163246 0.03069958</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p3 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span>Bootstrap_Results, <span class="kw">aes</span>(<span class="dt">x=</span>bootstrap_sigma)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_histogram</span>() <span class="op">+</span><span class="st"> </span><span class="kw">geom_vline</span>(<span class="dt">xintercept=</span><span class="kw">quantile</span>(bootstrap_sigma, <span class="kw">c</span>(.<span class="dv">025</span>, .<span class="dv">975</span>)), <span class="dt">color=</span><span class="st">&quot;red&quot;</span>)
+p3</code></pre></div>
+<p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-252-1.png" width="576" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">quantile</span>(bootstrap_sigma, <span class="kw">c</span>(.<span class="dv">025</span>, .<span class="dv">975</span>))</code></pre></div>
+<pre><code>##      2.5%     97.5% 
+## 0.7903002 1.0182309</code></pre>
+<p>Theory-Based intervals (based on t-distribution)</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">confint</span>(M)</code></pre></div>
+<pre><code>##                   2.5 %      97.5 %
+## (Intercept) 51.26655655 51.91022874
+## yearnew      0.02152859  0.03072344</code></pre>
+<p><strong>Thought Question:</strong> How is this approach to bootstrapping different than the non-parametric bootstrap we saw in 3.5.8 in the <a href="https://bookdown.org/ajsage/statistics_for_data_science_notes/">Stat 255 notes</a>? What assumption does the parametric bootstrap make that the non-parameteric bootstrap doesn't?</p>
+</div>
+<div id="model-comparison-tests-with-parametric-bootstrap" class="section level3">
+<h3><span class="header-section-number">8.4.5</span> Model Comparison Tests with Parametric Bootstrap</h3>
+<p>The distributions of ANOVA F-statistics and other likelihood-ratio-based test statistics for model comparison are vulnerable to deviations from model assumptions. When the assumptions are not valid, these stistics may not follow the distributions they are supposed to (F, <span class="math inline">\(\chi^2\)</span>), etc.</p>
+<p>We can use parametric bootstrapping to approximate the null distribution of these statistics in such situations.</p>
+<p>Process:</p>
+<ol style="list-style-type: decimal">
+<li>Fit <strong>full</strong> and <strong>reduced</strong> models and calculate relevant statistic (F-statistic, LRT statistic, etc.)<br />
+</li>
+<li>Simulate many datasets from the <strong>reduced model</strong> using estimated parameter values.<br />
+</li>
+<li>For each simulated dataset, fit the <strong>reduced model</strong> and <strong>full model</strong>.</li>
+<li>Calculate statistic for model comparison (F-statistics, Likelihood ratio's, etc.) on the models fit to the simulated data.<br />
+</li>
+<li>Look at where the statistic from the actual data (calculated in (1)) lies, relative to those calculated from the simulated data in (4). (Thought question: Under what assumption were these data simulated?). The simulation-based p-value is the proportion of simulated statistics as extreme or more extreme as the one we observed.</li>
+</ol>
+</div>
+<div id="model-comparison-for-kentucky-derby-data" class="section level3">
+<h3><span class="header-section-number">8.4.6</span> Model Comparison for Kentucky Derby Data</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">M_Red &lt;-<span class="st"> </span><span class="kw">lm</span>(speed <span class="op">~</span><span class="st"> </span>yearnew, <span class="dt">data =</span> derby.df)
+M_Full &lt;-<span class="st"> </span><span class="kw">lm</span>(speed <span class="op">~</span><span class="st"> </span>yearnew <span class="op">+</span><span class="st"> </span>fast <span class="op">+</span><span class="st"> </span>yearnew<span class="op">:</span>fast, <span class="dt">data=</span>derby.df)
+<span class="kw">anova</span>(M_Red, M_Full)</code></pre></div>
+<pre><code>## Analysis of Variance Table
+## 
+## Model 1: speed ~ yearnew
+## Model 2: speed ~ yearnew + fast + yearnew:fast
+##   Res.Df    RSS Df Sum of Sq      F    Pr(&gt;F)    
+## 1    120 97.899                                  
+## 2    118 58.991  2    38.908 38.914 1.048e-13 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>The observed F-statistic is 38.914. The associated p-value was calculated from an F-distribution with 2 and 118 df.</p>
+<p>If we have concerns about model assumptions, especially normality, the F-statistic might not really follow this F-distribution.</p>
+</div>
+<div id="code-for-boostrap-model-comparison" class="section level3">
+<h3><span class="header-section-number">8.4.7</span> Code for Boostrap Model Comparison</h3>
+<p>We'll simulate the distribution of the F-statistic, using the parametric bootstrap.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">02272022</span>)
+<span class="co"># record estimates from reduced model</span>
+b0 &lt;-<span class="st"> </span>M_Red<span class="op">$</span>coefficients[<span class="dv">1</span>]
+b1 &lt;-<span class="st"> </span>M_Red<span class="op">$</span>coefficients[<span class="dv">2</span>]
+sigma &lt;-<span class="st"> </span><span class="kw">summary</span>(M_Red)<span class="op">$</span>sigma
+nreps &lt;-<span class="st"> </span><span class="dv">10000</span>
+bootstrap_F &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">rep</span>(<span class="ot">NA</span>, nreps))
+B_Data &lt;-<span class="st"> </span>derby.df
+<span class="co"># simulate data and fit model</span>
+<span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>nreps){
+   <span class="co"># simulate new data from reduced model</span>
+B_Data &lt;-<span class="st"> </span>B_Data <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">SimSpeed =</span> b0 <span class="op">+</span><span class="st"> </span>b1<span class="op">*</span>yearnew <span class="op">+</span><span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n=</span> <span class="kw">nrow</span>(derby.df), <span class="dt">mean=</span><span class="dv">0</span>, <span class="dt">sd=</span>sigma))
+Mb_Red &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data=</span>B_Data, SimSpeed<span class="op">~</span>yearnew)   <span class="co">#fit reduced model to simulated data</span>
+Mb_Full &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data=</span>B_Data, SimSpeed <span class="op">~</span><span class="st"> </span>yearnew <span class="op">+</span><span class="st"> </span>fast <span class="op">+</span><span class="st"> </span>yearnew<span class="op">:</span>fast)   <span class="co">#fit full model to simulated data</span>
+bootstrap_F[i] &lt;-<span class="st"> </span><span class="kw">anova</span>(Mb_Full, Mb_Red)<span class="op">$</span>F[<span class="dv">2</span>]
+}
+Bootstrap_Results &lt;-<span class="st"> </span><span class="kw">data.frame</span>(bootstrap_F)</code></pre></div>
+</div>
+<div id="simulation-based-f-test" class="section level3">
+<h3><span class="header-section-number">8.4.8</span> Simulation-Based F-Test</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p1 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span>Bootstrap_Results, <span class="kw">aes</span>(<span class="dt">x=</span>bootstrap_F)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_histogram</span>() <span class="op">+</span><span class="st"> </span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> <span class="fl">38.914</span>, <span class="dt">color=</span><span class="st">&quot;red&quot;</span>, <span class="dt">linetype=</span><span class="st">&quot;dotted&quot;</span>, <span class="dt">size=</span><span class="dv">2</span>) 
+p1</code></pre></div>
+<p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-257-1.png" width="576" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(bootstrap_F<span class="op">&gt;</span><span class="fl">38.914</span>)</code></pre></div>
+<pre><code>## [1] 0</code></pre>
+<p>None of our simulations produced a F-statistic even close to the one we observed in our actual data.</p>
+<p>There is virtually no chance we would have obtained an F-statistic as large as we saw in the data by chance, if the reduced model was really appropriate. We have strong evidence that the full model is a better fit.</p>
+<p>This is consistent with the theory-based F-test.</p>
+</div>
+<div id="model-comparison-in-multilevel-glm" class="section level3">
+<h3><span class="header-section-number">8.4.9</span> Model Comparison in Multilevel GLM</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">M1 &lt;-<span class="st"> </span><span class="kw">glmer</span>(foul.home <span class="op">~</span><span class="st"> </span>foul.diff <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span><span class="op">|</span>game), 
+            <span class="dt">family =</span> <span class="kw">binomial</span>(<span class="dt">link=</span><span class="st">&quot;logit&quot;</span>), <span class="dt">data =</span> refdata)
+M2 &lt;-<span class="st"> </span><span class="kw">glmer</span>(foul.home <span class="op">~</span><span class="st"> </span>foul.diff <span class="op">+</span><span class="st"> </span>(foul.diff<span class="op">|</span>game), 
+            <span class="dt">family =</span> <span class="kw">binomial</span>(<span class="dt">link=</span><span class="st">&quot;logit&quot;</span>), <span class="dt">data =</span> refdata)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">anova</span>(M1, M2)</code></pre></div>
+<pre><code>## Data: refdata
+## Models:
+## M1: foul.home ~ foul.diff + (1 | game)
+## M2: foul.home ~ foul.diff + (foul.diff | game)
+##    npar    AIC    BIC  logLik deviance  Chisq Df Pr(&gt;Chisq)  
+## M1    3 6792.5 6812.1 -3393.3   6786.5                       
+## M2    5 6791.1 6823.6 -3390.5   6781.1 5.4682  2    0.06495 .
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>The <span class="math inline">\(\chi^2\)</span> statistic of 5.4682 and fairly small p-value provide some evidence in favor of the larger model.</p>
+<p>Research has shown that when estimates of variance and covariance of random effects are impacted by boundary constraints, &quot;theory-based&quot; tests like the <span class="math inline">\(\chi^2\)</span> test used here are too conservative and produce higher p-values than they should.</p>
+</div>
+<div id="multilevel-glm-bootstrap-code" class="section level3">
+<h3><span class="header-section-number">8.4.10</span> Multilevel GLM Bootstrap Code</h3>
+<p>Fitting the model manually gets complicated. The <code>drop</code> and <code>simulate</code> functions in the <code>lme4</code> package do this automatically.</p>
+<p>We'll simulate data from the reduced model, fit both models, and calculate the <span class="math inline">\(\chi^2\)</span> statistic, and repeat this 1,000 times.</p>
+<p>This establishes a bootstrap distribution for where we would expect this statistic to lie if the reduced model is actually &quot;correct&quot;.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># This takes a LONG time to run!</span>
+<span class="kw">set.seed</span>(<span class="dv">02272022</span>)
+nreps &lt;-<span class="st"> </span><span class="dv">1000</span>
+ChiSq &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="ot">NA</span>, nreps)
+<span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>nreps){
+SimData &lt;-<span class="st"> </span><span class="kw">drop</span>(<span class="kw">simulate</span>(M1))  <span class="co"># this command simulates data directly from a model</span>
+M1B &lt;-<span class="kw">refit</span>(M1, <span class="dt">newresp=</span>SimData)  <span class="co"># refits M1 to simulated data</span>
+M2B &lt;-<span class="kw">refit</span>(M2, <span class="dt">newresp=</span>SimData)  <span class="co"># refits M2 to simulated data</span>
+ChiSq[i] &lt;-<span class="st"> </span><span class="kw">anova</span>(M1B,M2B)<span class="op">$</span>Chisq[<span class="dv">2</span>]
+}
+ChiSq&lt;-<span class="st"> </span><span class="kw">write.csv</span>(ChiSq, <span class="dt">file=</span><span class="st">&quot;ChiSq.csv&quot;</span>)</code></pre></div>
+</div>
+<div id="simulation-based-chi2-test" class="section level3">
+<h3><span class="header-section-number">8.4.11</span> Simulation-Based <span class="math inline">\(\chi^2\)</span> Test</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span><span class="kw">data.frame</span>(ChiSq), <span class="kw">aes</span>(<span class="dt">x=</span>ChiSq)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_histogram</span>() <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> <span class="fl">5.4682</span>, <span class="dt">color=</span><span class="st">&quot;red&quot;</span>, <span class="dt">linetype=</span><span class="st">&quot;dotted&quot;</span>, <span class="dt">size=</span><span class="dv">2</span>) 
+p</code></pre></div>
+<p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-263-1.png" width="576" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(ChiSq<span class="op">&gt;</span><span class="fl">5.4682</span>)</code></pre></div>
+<pre><code>## [1] 0.037</code></pre>
+<p>The simulation-based p-value is 0.037. This is slightly smaller than the one based on the Chi-sqare distribution. Research has shown that when boundary constraints are an issue in estimating variance and correlation of random effects, &quot;thory-based&quot; tests are too conservative, and often yielf p-values that are higher than they should be.</p>
+<p>Our results are consistent with this observation.</p>
+
+</div>
 </div>
 </div>
             </section>

@@ -376,3 +376,14 @@ fitting-model-with-crossed-random-effects-in-r
 more-on-crossed-effects
 a-final-model-for-examining-referee-bias
 parametric-bootstrapping
+when-and-why-to-bootstrap
+parametric-bootstrap-procedure
+a-simple-example
+parametric-bootstrap-confidence-intervals
+model-comparison-tests-with-parametric-bootstrap
+model-comparison-for-kentucky-derby-data
+code-for-boostrap-model-comparison
+simulation-based-f-test
+model-comparison-in-multilevel-glm
+multilevel-glm-bootstrap-code
+simulation-based-chi2-test
