@@ -1246,12 +1246,12 @@ Y_{i[vh]j}\sim\text{Ber}(p_{i[vh]j})
 <ul>
 <li><span class="math inline">\(\hat{\alpha}_{0}=-0.188=\)</span> the mean log odds of a home foul at the point where total fouls are equal between teams. In other words, when fouls are balanced between teams, the probability that a foul is called on the visiting team (.547) is 20.7% (<span class="math inline">\(1/e^{-.188}=1.207\)</span>) higher than the probability a foul is called on the home team (.453).</li>
 <li><span class="math inline">\(\hat{\beta}_{0}=-0.264=\)</span> the decrease in mean log odds of a home foul for each 1 foul increase in the foul differential. More specifically, the odds the next foul is called on the visiting team rather than the home team increases by 30.2% with each additional foul called on the home team (<span class="math inline">\(1/e^{-.264}=1.302\)</span>).</li>
-<li><span class="math inline">\(\hat{\sigma}_{u}^{2}=0.172=\)</span> the variance in intercepts from game-to-game.</li>
-<li><span class="math inline">\(\hat{\sigma}_{w}^{2}=0.068=\)</span> the variance in intercepts among different home teams.</li>
-<li><span class="math inline">\(\hat{\sigma}_{z}^{2}=0.023=\)</span> the variance in intercepts among different visiting teams.</li>
+<li><span class="math inline">\(\hat{\sigma}_{u}^{2}=0.172=\)</span> the variance in log odds of foul going against home team from game-to-game.</li>
+<li><span class="math inline">\(\hat{\sigma}_{w}^{2}=0.068=\)</span> the variance in log odds of foul going against home team among different home teams.</li>
+<li><span class="math inline">\(\hat{\sigma}_{z}^{2}=0.023=\)</span> the variance in log odds of foul going against home team among different visiting teams.</li>
 </ul>
 <p>Based on the t-value (-6.80) and p-value (<span class="math inline">\(p&lt;.001\)</span>) associated with foul differential in this model, we have significant evidence of a negative association between foul differential and the odds of a home team foul. That is, we have significant evidence that the odds that a foul is called on the home team shrinks as the home team has more total fouls compared with the visiting team. Thus, there seems to be preliminary evidence in the 2009-2010 data that college basketball referees tend to even out foul calls over the course of the first half. Of course, we have yet to adjust for other significant covariates.</p>
-<p>An estimated 65.4% of variability in the intercepts is due to differences from game-to-game, while 25.9% is due to differences among home teams, and 8.7% is due to differences among visiting teams.</p>
+<p>An estimated 65.4% of variability in the log odds of foul going against home team is due to differences from game-to-game, while 25.9% is due to differences among home teams, and 8.7% is due to differences among visiting teams.</p>
 </div>
 <div id="more-on-crossed-effects" class="section level3">
 <h3><span class="header-section-number">8.3.5</span> More on Crossed Effects</h3>
@@ -1495,7 +1495,7 @@ p</code></pre></div>
 <p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-263-1.png" width="576" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(ChiSq<span class="op">&gt;</span><span class="fl">5.4682</span>)</code></pre></div>
 <pre><code>## [1] 0.037</code></pre>
-<p>The simulation-based p-value is 0.037. This is slightly smaller than the one based on the Chi-sqare distribution. Research has shown that when boundary constraints are an issue in estimating variance and correlation of random effects, &quot;thory-based&quot; tests are too conservative, and often yielf p-values that are higher than they should be.</p>
+<p>The simulation-based p-value is 0.037. This is slightly smaller than the one based on the Chi-sqare distribution. Research has shown that when boundary constraints are an issue in estimating variance and correlation of random effects, &quot;thory-based&quot; tests are too conservative, and often yield p-values that are higher than they should be.</p>
 <p>Our results are consistent with this observation.</p>
 
 </div>
