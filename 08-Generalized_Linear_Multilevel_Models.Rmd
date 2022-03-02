@@ -797,7 +797,7 @@ p
 mean(ChiSq>5.4682)
 ```
 
-The simulation-based p-value is 0.037. This is slightly smaller than the one based on the Chi-sqare distribution. Research has shown that when boundary constraints are an issue in estimating variance and correlation of random effects, "thory-based" tests are too conservative, and often yielf p-values that are higher than they should be. 
+The simulation-based p-value is 0.037. This is slightly smaller than the one based on the Chi-sqare distribution. Research has shown that when boundary constraints are an issue in estimating variance and correlation of random effects, "thory-based" tests are too conservative, and often yield p-values that are higher than they should be. 
 
 Our results are consistent with this observation.   
 
