@@ -282,11 +282,11 @@ summary(M1)
 For each one percent increase in college education, the odds of voting for Biden are expected to multiply by a factor of $e^{0.0320}=1.0325$ (a 3% increase).    
 
 In a county where 25% of the population has a college degree, the probability of an individual  voter voting for Biden is 
-\[\frac{e^{-0.9521859 + 0.0319564\times25}}{e^{1+ (-0.9521859 + 0.0319564\times25)}}=0.4618\]
+\[\frac{e^{-0.9521859 + 0.0319564\times25}}{1+ e^{ (-0.9521859 + 0.0319564\times25)}}=0.4618\]
 
 In a county where 35% of the population has a college degree, the probability of an individual  voter voting for Biden is 
 
-\[\frac{e^{-0.9521859 + 0.0319564\times35}}{e^{1+ (-0.9521859 + 0.0319564\times35)}}=0.5415\]
+\[\frac{e^{-0.9521859 + 0.0319564\times35}}{1 + e^{ (-0.9521859 + 0.0319564\times35)}}=0.5415\]
 
 
 ### Checking Linearity Assumption
@@ -1065,8 +1065,7 @@ The second part has the form
 \[
 logit(\alpha)=\beta_0+\beta_1\textrm{firstYear}
 \]
-where $\alpha$ is the probability of being in the non-drinkers group and $logit(\alpha) = log( \alpha/(1-\alpha))$.  We'll provide more detail on the logit in Chapter \@ref(ch-logreg). There are many ways in which to structure this model; here we use different predictors in the two pieces, athough it would have been perfectly fine to use the same predictors for both pieces, or even no predictors for one of the pieces.
-
+where $\alpha$ is the probability of being in the non-drinkers group and $logit(\alpha) = log( \alpha/(1-\alpha))$.  
 
 
 ### ZIP Model in R
