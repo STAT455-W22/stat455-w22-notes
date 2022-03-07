@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Stat 455: Advanced Statistical Modeling Notes</title>
-  <meta name="description" content="Stat 455: Advanced Statistical Modeling Notes" />
+  <title>Chapter 9 Epilogue | Stat 455: Advanced Statistical Modeling Notes</title>
+  <meta name="description" content="Chapter 9 Epilogue | Stat 455: Advanced Statistical Modeling Notes" />
   <meta name="generator" content="bookdown 0.23 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Stat 455: Advanced Statistical Modeling Notes" />
+  <meta property="og:title" content="Chapter 9 Epilogue | Stat 455: Advanced Statistical Modeling Notes" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Stat 455: Advanced Statistical Modeling Notes" />
+  <meta name="twitter:title" content="Chapter 9 Epilogue | Stat 455: Advanced Statistical Modeling Notes" />
   
   
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
+<link rel="prev" href="multilevel-generalized-linear-models.html"/>
 
-<link rel="next" href="review-of-multiple-linear-regression.html"/>
 <script src="libs/jquery-3.5.1/jquery-3.5.1.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -546,23 +546,59 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Stat 455: Advanced Statistical Modeling Notes</h1>
-<p class="date"><em>2022-03-07</em></p>
+<div id="epilogue" class="section level1">
+<h1><span class="header-section-number">Chapter 9</span> Epilogue</h1>
+<div id="further-directions" class="section level2">
+<h2><span class="header-section-number">9.1</span> Further Directions</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
+<span class="kw">library</span>(gridExtra)</code></pre></div>
+<div id="more-on-glms" class="section level3">
+<h3><span class="header-section-number">9.1.1</span> More on GLM's</h3>
+<p>A generalized linear model consists of the following two pieces.</p>
+<ol style="list-style-type: decimal">
+<li>A distribution for the response variable, given value(s) of explanatory variables.<br />
+</li>
+<li>A link function expressing parameters associated with that distribution as a linear function of the explanatory variables.</li>
+</ol>
+<p>We've seen GLM's using normal, Poisson, and binomial distributions.</p>
+<p>There are many other distribtions we could use to model the response variable, given value(s) of explanatory variables. Three such continuous distributions, and one discrete one are shown below.</p>
+<p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-267-1.png" width="960" /></p>
+<p>For each distribution, we would need to find an appropriate link function to connect parameters to a linear function of the explanatory variables.</p>
+<p>A possible (often advantageous) link function can be derived using calculus. See [Chapter 5 of the Roback and Legler text] (<a href="https://bookdown.org/roback/bookdown-BeyondMLR/ch-glms.html#generalized-linear-modeling" class="uri">https://bookdown.org/roback/bookdown-BeyondMLR/ch-glms.html#generalized-linear-modeling</a>) for details. In fact, the link functions we've seen are canonical links, but these are not the only possible link functions.</p>
 </div>
-<div id="preface" class="section level1 unnumbered">
-<h1>Preface</h1>
-<p>These notes are written to accompany the text <a href="https://bookdown.org/roback/bookdown-BeyondMLR/">Beyond Multiple Linear Regression</a> by Roback and Legler. Much of the text is either directly from the book, or lightly modified/summarized. Most of the code originates from the book's <a href="https://github.com/proback/BeyondMLR">Github repository</a>.</p>
-<p>These notes will guide our lectures and class discussion, but they are not sufficient as a stand-alone reference. It is important to complete the reading assignments from the full text by Roback and Legler in addition to studying these notes.</p>
+<div id="models-beyond-glms" class="section level3">
+<h3><span class="header-section-number">9.1.2</span> Models Beyond GLM's</h3>
+<p>We've also seen models that account for correlation between observations. There are other kinds of models that account for correlation arising from specific types of experimental designs. There is also considerable theory supporting the approaches we've used in this class.</p>
+<p>Here are some topics that build off of those we've discussed and relevant references for future reading.</p>
+<ul>
+<li><p>The field of spatial statistics is concerned with modeling correlation arising from observations being location in spatial proximity to each other. A good reference is <a href="https://link.springer.com/book/10.1007/978-0-387-92257-7">Spatial Statistics and Modeling</a> by Gaeton and Guyon.</p></li>
+<li><p>Time series analysis pertains to studying correlation between observations taken on the same units over time. The AR-1 model that we looked at briefly is an example of a basic time series model. One reference on time series is <a href="https://link.springer.com/book/10.1007/978-3-319-52452-8">Time Series Analysis and Its Applications</a> by Shumway and Stoffer</p></li>
+<li><p>Survival analysis is the branch of statistics associated with modeling the amount of time until an event occurs. For example, survival after being diagnosed with a disease. See <a href="https://www.amazon.com/Survival-Analysis/s?k=Survival+Analysis">Survival Analysis</a> by Kleinbaum and Klein for more information.</p></li>
+<li><p>Designing experiments carefully allows a researcher to collect data in a way that leads to more precise estimation. <a href="https://www.wiley.com/en-us/Design+and+Analysis+of+Experiments%2C+10th+Edition-p-9781119492443">Design and Analysis of Experiments</a> by Montgomery provides a good introduction, and [Design of Analysis] (<a href="https://www.amazon.com/Design-Experiments-Introduction-Chapman-Statistical/dp/1584889233" class="uri">https://www.amazon.com/Design-Experiments-Introduction-Chapman-Statistical/dp/1584889233</a>) by Morris offers a more advanced look.</p></li>
+<li><p>Linear algebra lies at the heart of statistical modeling. Each model is associated with an underlying &quot;design&quot; matrix. Estimates of model parameters and their distributions are derived using theory about these matrices. See <a href="https://www.amazon.com/Applied-Linear-Regression-Models-Student/dp/0073014664">Applied Linear Regression Models</a> by Kutner et al. for an introduction to linear model theory, and [Linear Model Theory])(<a href="https://link.springer.com/book/10.1007/978-3-030-52063-2" class="uri">https://link.springer.com/book/10.1007/978-3-030-52063-2</a>) by Zimmerman for a more advanced look.</p></li>
+</ul>
+</div>
+<div id="statistics-courses-at-lawrence" class="section level3">
+<h3><span class="header-section-number">9.1.3</span> Statistics Courses at Lawrence</h3>
+<ul>
+<li><p>Most of you have already taken CMSC/STAT 205, and STAT 255.</p></li>
+<li><p>CMSC/STAT 208, Machine Learning, presents a very different focus than this course, focused on making accurate predictions, using modern, often computer-intensive approaches, rather than the kinds of statistical models we've seen in this class.</p></li>
+<li><p>MATH 340, Probability, studies the theory of random variables and probability distributions often used in statistics, such as binomial, normal, Poisson, etc. (Prerequisites: MATH 200 and 230)</p></li>
+<li><p>STAT 445, Mathematical Statistics, offers mathematical theory supporting our approaches point estimation and testing, such maximum likelihood, ANOVA and likelihood ratio tests, etc. (Prerequisite: MATH 340)</p></li>
+<li><p>STAT 450, Bayesian Statistics, examines a popular alternative to the classical &quot;frequentist&quot; approach to statistics by starting with a &quot;prior belief&quot; and updating it based on data we observe. (Prerequisite: MATH 340)</p></li>
+<li><p>Other departments, (Biology, Economics, Government, Psychology, among others) offer courses associated with analyzing data that arise in those fields.</p></li>
+</ul>
 
+</div>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
+<a href="multilevel-generalized-linear-models.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 
-<a href="review-of-multiple-linear-regression.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -594,7 +630,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/STAT455-W22/stat455-w22-notes/edit/master/index.Rmd",
+"link": "https://github.com/STAT455-W22/stat455-w22-notes/edit/master/09-Further_Directions.Rmd",
 "text": "Edit"
 },
 "history": {
@@ -602,7 +638,7 @@ gitbook.start({
 "text": null
 },
 "view": {
-"link": "https://github.com/STAT455-W22/stat455-w22-notes/blob/master/index.Rmd",
+"link": "https://github.com/STAT455-W22/stat455-w22-notes/blob/master/09-Further_Directions.Rmd",
 "text": null
 },
 "download": null,

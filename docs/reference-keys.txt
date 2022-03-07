@@ -387,3 +387,8 @@ simulation-based-f-test
 model-comparison-in-multilevel-glm
 multilevel-glm-bootstrap-code
 simulation-based-chi2-test
+epilogue
+further-directions
+more-on-glms
+models-beyond-glms
+statistics-courses-at-lawrence

@@ -1,0 +1,86 @@
+# Epilogue 
+
+## Further Directions
+
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message=FALSE, warning=FALSE, fig.width = 6, fig.height = 3)
+```
+
+```{r}
+library(tidyverse)
+library(gridExtra)
+```      
+
+### More on GLM's
+
+
+A generalized linear model consists of the following two pieces.   
+
+1. A distribution for the response variable, given value(s) of explanatory variables.    
+2. A link function expressing parameters associated with that distribution as a linear function of the explanatory variables.     
+
+We've seen GLM's using normal, Poisson, and binomial distributions. 
+
+
+There are many other distribtions we could use to model the response variable, given value(s) of explanatory variables. Three such continuous distributions, and one discrete one are shown below.   
+
+```{r, echo=FALSE, fig.height=3, fig.width=10}
+df <- data.frame(x = 0:10, y = dexp(0:10, 1))
+p1 <- ggplot(data=df,aes(x=x))+
+  stat_function(fun=dexp, args=list(rate=1)) + ggtitle(expression(paste("Exponential(", lambda, ")"))) + theme_bw()
+
+df <- data.frame(x = 0:10, y = dgamma(0:10,shape=3, rate=2))
+p2 <- ggplot(data=df,aes(x=x))+
+  stat_function(fun=dgamma, args=list(shape=3, rate=2)) + ggtitle(expression(paste("Gamma(", alpha,",", beta, ")"))) + theme_bw()
+
+
+df <- data.frame(x = 0:10, y = dlnorm(0:10, meanlog=0, sdlog=1))
+p3 <- ggplot(data=df,aes(x=x))+
+  stat_function(fun=dlnorm, args=list(meanlog=0, sdlog=1)) + ggtitle(expression(paste("Lognormal(", mu,sigma, ")"))) + theme_bw()
+
+
+
+p4 <- ggplot(df, aes(x = x, y = y)) + geom_bar(stat = "identity", col = "white", fill = "blue") + 
+  scale_y_continuous(expand = c(0.01, 0)) + scale_x_continuous(breaks=(0:10)) + xlab("x") + ylab(expression(paste("p(x|", theta, ")"))) + ggtitle("Geometric(p)") + 
+  theme(plot.title = element_text(size = rel(1.2), vjust = 1.5))
+
+grid.arrange(p1, p2, p3, p4, ncol=2)
+```
+
+For each distribution, we would need to find an appropriate link function to connect parameters to a linear function of the explanatory variables.    
+
+A possible (often advantageous) link function can be derived using calculus. See [Chapter 5 of the Roback and Legler text] (https://bookdown.org/roback/bookdown-BeyondMLR/ch-glms.html#generalized-linear-modeling) for details. In fact, the link functions we've seen are canonical links, but these are not the only possible link functions. 
+
+### Models Beyond GLM's
+
+We've also seen models that account for correlation between observations. There are other kinds of models that account for correlation arising from specific types of experimental designs. There is also considerable theory supporting the approaches we've used in this class.    
+
+Here are some topics that build off of those we've discussed and relevant references for future reading.   
+
+
+* The field of spatial statistics is concerned with modeling correlation arising from observations being location in spatial proximity to each other. A good reference is [Spatial Statistics and Modeling](https://link.springer.com/book/10.1007/978-0-387-92257-7) by Gaeton and Guyon.   
+
+* Time series analysis pertains to studying correlation between observations taken on the same units over time. The AR-1 model that we looked at briefly is an example of a basic time series model. One reference on time series is [Time Series Analysis and Its Applications](https://link.springer.com/book/10.1007/978-3-319-52452-8) by Shumway and Stoffer     
+
+* Survival analysis is the branch of statistics associated with modeling the amount of time until an event occurs. For example, survival after being diagnosed with a disease. See [Survival Analysis](https://www.amazon.com/Survival-Analysis/s?k=Survival+Analysis)
+ by Kleinbaum and Klein for more information.  
+
+* Designing experiments carefully allows a researcher to collect data in a way that leads to more precise estimation. [Design and Analysis of Experiments](https://www.wiley.com/en-us/Design+and+Analysis+of+Experiments%2C+10th+Edition-p-9781119492443) by Montgomery provides a good introduction, and [Design of Analysis] (https://www.amazon.com/Design-Experiments-Introduction-Chapman-Statistical/dp/1584889233) by Morris offers a more advanced look.  
+
+* Linear algebra lies at the heart of statistical modeling. Each model is associated with an underlying "design" matrix. Estimates of model parameters and their distributions are derived using theory about these matrices. See [Applied Linear Regression Models](https://www.amazon.com/Applied-Linear-Regression-Models-Student/dp/0073014664) by Kutner et al. for an introduction to linear model theory, and [Linear Model Theory])(https://link.springer.com/book/10.1007/978-3-030-52063-2) by Zimmerman for a more advanced look.    
+
+### Statistics Courses at Lawrence      
+
+* Most of you have already taken CMSC/STAT 205, and STAT 255.    
+
+* CMSC/STAT 208, Machine Learning, presents a very different focus than this course, focused on making accurate predictions, using modern, often computer-intensive approaches, rather than the kinds of statistical models we've seen in this class.    
+
+* MATH 340, Probability, studies the theory of random variables and probability distributions often used in statistics, such as binomial, normal, Poisson, etc. (Prerequisites: MATH 200 and 230)    
+
+* STAT 445, Mathematical Statistics, offers mathematical theory supporting our approaches point estimation and testing, such maximum likelihood, ANOVA and likelihood ratio tests, etc. (Prerequisite: MATH 340)     
+
+* STAT 450, Bayesian Statistics, examines a popular alternative to the classical "frequentist" approach to statistics by starting with a "prior belief" and updating it based on data we observe. (Prerequisite: MATH 340)   
+
+* Other departments, (Biology, Economics, Government, Psychology, among others) offer  courses associated with analyzing data that arise in those fields.   
+
