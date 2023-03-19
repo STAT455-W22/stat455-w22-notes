@@ -103,7 +103,7 @@ chart.long <- chart.wide %>%
                names_to = "key",  # years since 2008
                values_to = "MathAvgScore") %>%
   separate(key, into = c("name", "year08"), sep = "\\.") %>%
-  select(-c("X1", "name")) %>%
+  select(-c("name")) %>%
   arrange(schoolid, year08) %>%
   mutate(year08 = as.numeric(year08))
 head(chart.long)
@@ -226,7 +226,6 @@ wide.public <- chart.wide %>%
   filter(charter == 0) %>%
   sample_n( dim(wide.charter)[1] )
 sampdata <- bind_rows(wide.charter, wide.public) %>%
-  select(-X1) %>%
   mutate(vars = row_number())   # Just use numbers 1-146 as school ids
 
 #convert to long form
