@@ -22,7 +22,7 @@
 
 
 
-<meta name="date" content="2023-03-19" />
+<meta name="date" content="2023-03-23" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -178,18 +178,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.4.9" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#anova-f-statistic"><i class="fa fa-check"></i><b>1.4.9</b> ANOVA F-Statistic</a></li>
 <li class="chapter" data-level="1.4.10" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#final-model-residual-plots"><i class="fa fa-check"></i><b>1.4.10</b> Final Model Residual Plots</a></li>
 <li class="chapter" data-level="1.4.11" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#overall-conclusions"><i class="fa fa-check"></i><b>1.4.11</b> Overall Conclusions</a></li>
-</ul></li>
-<li class="chapter" data-level="1.5" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#estimation-and-testing-in-llsr-model"><i class="fa fa-check"></i><b>1.5</b> Estimation and Testing in LLSR Model</a>
-<ul>
-<li class="chapter" data-level="1.5.1" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#estimating-beta_j"><i class="fa fa-check"></i><b>1.5.1</b> Estimating <span class="math inline">\(\beta_j\)</span></a></li>
-<li class="chapter" data-level="1.5.2" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#estimating-sigma2"><i class="fa fa-check"></i><b>1.5.2</b> Estimating <span class="math inline">\(\sigma^2\)</span></a></li>
-<li class="chapter" data-level="1.5.3" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#standard-errors"><i class="fa fa-check"></i><b>1.5.3</b> Standard Errors</a></li>
-<li class="chapter" data-level="1.5.4" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#t-statistics"><i class="fa fa-check"></i><b>1.5.4</b> t-statistics</a></li>
-<li class="chapter" data-level="1.5.5" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#p-values"><i class="fa fa-check"></i><b>1.5.5</b> p-values</a></li>
-<li class="chapter" data-level="1.5.6" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#residual-standard-error"><i class="fa fa-check"></i><b>1.5.6</b> Residual Standard Error</a></li>
-<li class="chapter" data-level="1.5.7" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#degrees-of-freedom"><i class="fa fa-check"></i><b>1.5.7</b> Degrees of Freedom</a></li>
-<li class="chapter" data-level="1.5.8" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#r2"><i class="fa fa-check"></i><b>1.5.8</b> <span class="math inline">\(R^2\)</span></a></li>
-<li class="chapter" data-level="1.5.9" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#f-statistic"><i class="fa fa-check"></i><b>1.5.9</b> F-Statistic</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html"><i class="fa fa-check"></i><b>2</b> Introduction to Correlated Data</a>
@@ -1553,13 +1541,19 @@ Figure 1.9: Relationships between pairs of variables in the Kentucky Derby data 
 </div>
 <p>This happens because over time, the number of starters in the race has increased, as have winning speeds. So, it appears that having more starters is associated with faster winning speeds, but year is acting as a <strong>confounding</strong> variable. The multiple regression model is able to separate the effect of year from that of number of starters. The model tells us that assuming year is held constant, having more starters is actually associated with a slower winning speed.</p>
 <p>A situation like this, where adding a variable (such as year) to a model results in an apparent trend disappearing or reversing itself, is called <strong>Simpson’s Paradox.</strong></p>
-</div>
-</div>
-<div id="estimation-and-testing-in-llsr-model" class="section level2 hasAnchor" number="1.5">
-<h2><span class="header-section-number">1.5</span> Estimation and Testing in LLSR Model<a href="review-of-multiple-linear-regression.html#estimation-and-testing-in-llsr-model" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>We’ll return to model 4. The full R summary output for the model is shown below. In this section, we explain how each of the estimates, standard errors, test statistics, and p-values shown in the output are obtained.</p>
-<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="review-of-multiple-linear-regression.html#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model4)</span></code></pre></div>
-<pre><code>## 
+<!---
+
+## Estimation and Testing in LLSR Model
+
+We'll return to model 4. The full R summary output for the model is shown below. In this section, we explain how each of the estimates, standard errors, test statistics, and p-values shown in the output are obtained.   
+
+
+```r
+summary(model4)
+```
+
+```
+## 
 ## Call:
 ## lm(formula = speed ~ yearnew + fast, data = derby.df)
 ## 
@@ -1568,232 +1562,350 @@ Figure 1.9: Relationships between pairs of variables in the Kentucky Derby data 
 ## -2.36881 -0.43536  0.03596  0.45848  1.55688 
 ## 
 ## Coefficients:
-##              Estimate Std. Error t value             Pr(&gt;|t|)    
-## (Intercept) 50.917822   0.154602  329.35 &lt; 0.0000000000000002 ***
-## yearnew      0.022583   0.001919   11.77 &lt; 0.0000000000000002 ***
+##              Estimate Std. Error t value             Pr(>|t|)    
+## (Intercept) 50.917822   0.154602  329.35 < 0.0000000000000002 ***
+## yearnew      0.022583   0.001919   11.77 < 0.0000000000000002 ***
 ## fast         1.226846   0.150721    8.14    0.000000000000439 ***
 ## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
 ## Residual standard error: 0.7269 on 119 degrees of freedom
 ## Multiple R-squared:  0.6874, Adjusted R-squared:  0.6822 
-## F-statistic: 130.8 on 2 and 119 DF,  p-value: &lt; 0.00000000000000022</code></pre>
-<p>The model equation is</p>
-<p><span class="math display">\[
+## F-statistic: 130.8 on 2 and 119 DF,  p-value: < 0.00000000000000022
+```
+
+The model equation is
+
+$$
 \begin{equation}
 Y_{i}=\beta_{0}+\beta_{1}\textrm{Yearnew}_{i}+\beta_{2}\textrm{Fast}_{i}+\epsilon_{i}\quad \textrm{where}\quad \epsilon_{i}\sim \textrm{N}(0,\sigma^2).
 \end{equation}
-\]</span></p>
-<p>This model contains four parameters (<span class="math inline">\(\beta_0\)</span>, <span class="math inline">\(\beta_1\)</span>, <span class="math inline">\(\beta_2\)</span>, and <span class="math inline">\(\sigma^2\)</span>).</p>
-<div id="estimating-beta_j" class="section level3 hasAnchor" number="1.5.1">
-<h3><span class="header-section-number">1.5.1</span> Estimating <span class="math inline">\(\beta_j\)</span><a href="review-of-multiple-linear-regression.html#estimating-beta_j" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<ul>
-<li>The estimates parameters <span class="math inline">\(\hat{\beta_0}\)</span>, <span class="math inline">\(\hat{\beta_1}\)</span>, and <span class="math inline">\(\hat{\beta_2}\)</span> are chosen in order to minimize the quantity</li>
-</ul>
-<p><span class="math display">\[
+$$
+
+This model contains four parameters ($\beta_0$, $\beta_1$, $\beta_2$, and $\sigma^2$). 
+
+### Estimating $\beta_j$
+
+* The estimates parameters $\hat{\beta_0}$, $\hat{\beta_1}$, and $\hat{\beta_2}$ are chosen in order to minimize the quantity 
+
+
+$$
 \begin{align*}
-\text{SSR} &amp;= \displaystyle\sum_{i=1}^{n}(y_i-\hat{y}_i)^2 \\
-&amp;= \displaystyle\sum_{i=1}^{n}(y_i-(\hat{\beta}_0+\hat{\beta}_1x_{1i}+\hat{\beta}_2x_{2i}))^2  \\
-&amp; = \displaystyle\sum_{i=1}^{n}(\text{Speed}_i-(\hat{\beta}_0+\hat{\beta}_1\text{Yearnew}_i+\hat{\beta}_2\text{Fast}_i))^2 \\
-&amp; = \left(51.66-(\hat{\beta}_0+\hat{\beta}_1(0)+\hat{\beta}_2(0))\right)^2 + \left(49.81-(\hat{\beta}_0+\hat{\beta}_1(1)+\hat{\beta}_2(0))\right)^2 + \\\  &amp; \ldots + \left(53.40-(\hat{\beta}_0+\hat{\beta}_1(121)+\hat{\beta}_2(1))\right)^2
-\end{align*}
-\]</span>
-This is a minimization problem in three dimensions. It can be solved using multivariable calculus techniques.</p>
-<p><strong>Notes:</strong></p>
-<ol style="list-style-type: decimal">
-<li><p>In special cases (such as for a single categorical or quantitative explanatory variable) the estimates <span class="math inline">\(\hat{\beta_j}\)</span> can be found using formulas (see 2.4.3 and 2.4.4 in the Stat 255 notes).</p></li>
-<li><p>(Optional - intended for people who are familiar with linear algebra) If <span class="math inline">\(X\)</span> is a <span class="math inline">\(n \times p\)</span> matrix (of rank <span class="math inline">\(p\)</span>) whose columns contain the values of each variable in the dataset (including a column of 1’s corresponding to the intercept column), and <span class="math inline">\(\vec{y}\)</span> is a n-dimensional vector of response values, then the <span class="math inline">\(p\)</span>-dimensional vector of regression coefficient estimates <span class="math inline">\(\vec{\hat{\beta}}\)</span> can is given by</p></li>
-</ol>
-<p><span class="math display">\[
+\text{SSR} &= \displaystyle\sum_{i=1}^{n}(y_i-\hat{y}_i)^2 \\
+ &= \displaystyle\sum_{i=1}^{n}(y_i-(\hat{\beta}_0+\hat{\beta}_1x_{1i}+\hat{\beta}_2x_{2i}))^2  \\
+& = \displaystyle\sum_{i=1}^{n}(\text{Speed}_i-(\hat{\beta}_0+\hat{\beta}_1\text{Yearnew}_i+\hat{\beta}_2\text{Fast}_i))^2 \\
+& = \left(51.66-(\hat{\beta}_0+\hat{\beta}_1(0)+\hat{\beta}_2(0))\right)^2 + \left(49.81-(\hat{\beta}_0+\hat{\beta}_1(1)+\hat{\beta}_2(0))\right)^2 + \\\  & \ldots + \left(53.40-(\hat{\beta}_0+\hat{\beta}_1(121)+\hat{\beta}_2(1))\right)^2
+ \end{align*}
+$$
+This is a minimization problem in three dimensions. It can be solved using multivariable calculus techniques.
+
+**Notes:**    
+
+1. In special cases (such as for a single categorical or quantitative explanatory variable) the estimates $\hat{\beta_j}$ can be found using formulas (see 2.4.3 and 2.4.4 in the Stat 255 notes).    
+
+2. (Optional - intended for people who are familiar with linear algebra) If $X$ is a $n \times p$ matrix (of rank $p$) whose columns contain the values of each variable in the dataset (including a column of 1's corresponding to the intercept column), and $\vec{y}$ is a n-dimensional vector of response values, then the $p$-dimensional vector of regression coefficient estimates $\vec{\hat{\beta}}$ can is given by 
+
+\[
 \vec{\hat{\beta}} = (X^TX)^{-1}X^T\vec{y}
-\]</span></p>
-<p>This operation is projecting <span class="math inline">\(\vec{y}\)</span> onto the space spanned by the columns of <span class="math inline">\(X\)</span> (also called the column space of <span class="math inline">\(X\)</span>).</p>
-<p>This calculation is shown below, for model 4.</p>
-<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="review-of-multiple-linear-regression.html#cb65-1" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> derby.df<span class="sc">$</span>speed</span>
-<span id="cb65-2"><a href="review-of-multiple-linear-regression.html#cb65-2" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="dv">1</span>, derby.df<span class="sc">$</span>yearnew, derby.df<span class="sc">$</span>fast)</span>
-<span id="cb65-3"><a href="review-of-multiple-linear-regression.html#cb65-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(y)</span></code></pre></div>
-<pre><code>## [1] 51.66 49.81 51.16 50.00 52.28 51.66</code></pre>
-<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="review-of-multiple-linear-regression.html#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(X)</span></code></pre></div>
-<pre><code>##      [,1] [,2] [,3]
+\]
+
+This operation is projecting $\vec{y}$ onto the space spanned by the columns of $X$ (also called the column space of $X$).  
+
+This calculation is shown below, for model 4.  
+
+
+```r
+y <- derby.df$speed
+X <- cbind(1, derby.df$yearnew, derby.df$fast)
+head(y)
+```
+
+```
+## [1] 51.66 49.81 51.16 50.00 52.28 51.66
+```
+
+```r
+head(X)
+```
+
+```
+##      [,1] [,2] [,3]
 ## [1,]    1    0    0
 ## [2,]    1    1    0
 ## [3,]    1    2    0
 ## [4,]    1    3    1
 ## [5,]    1    4    1
-## [6,]    1    5    1</code></pre>
-<p>In R, <span class="math inline">\(t(X)\)</span> calculates the transpose of a matrix <span class="math inline">\(X\)</span>, and <code>solve(X)</code> returns <span class="math inline">\(X^{-1}\)</span></p>
-<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="review-of-multiple-linear-regression.html#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="fu">solve</span>(<span class="fu">t</span>(X) <span class="sc">%*%</span> X) <span class="sc">%*%</span> <span class="fu">t</span>(X) <span class="sc">%*%</span> y</span></code></pre></div>
-<pre><code>##             [,1]
+## [6,]    1    5    1
+```
+
+In R, $t(X)$ calculates the transpose of a matrix $X$, and `solve(X)` returns $X^{-1}$
+
+
+```r
+solve(t(X) %*% X) %*% t(X) %*% y
+```
+
+```
+##             [,1]
 ## [1,] 50.91782155
 ## [2,]  0.02258276
-## [3,]  1.22684588</code></pre>
-</div>
-<div id="estimating-sigma2" class="section level3 hasAnchor" number="1.5.2">
-<h3><span class="header-section-number">1.5.2</span> Estimating <span class="math inline">\(\sigma^2\)</span><a href="review-of-multiple-linear-regression.html#estimating-sigma2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<ul>
-<li>The estimate of the error variance, <span class="math inline">\(\hat{\sigma}^2\)</span> is calculated as:</li>
-</ul>
-<p><span class="math display">\[
+## [3,]  1.22684588
+```
+
+### Estimating $\sigma^2$
+
+* The estimate of the error variance, $\hat{\sigma}^2$ is calculated as: 
+
+\[
 \hat{\sigma}^2=\frac{\displaystyle\sum_{i=1}^{n}(y_i-\hat{y}_i)^2}{n-p},
-\]</span></p>
-<p>where <span class="math inline">\(p\)</span> represents the number of terms in the model, including the intercept (which is the same as the number of lines in the coefficients table).</p>
-<p>This quantity represents the variance in unexplained deviations between individual response values and their expectation after accounting for the explanatory variables in the model.</p>
-<p>In the R-output, the <strong>residual standard error</strong> is the estimate <span class="math inline">\(\hat{\sigma}\)</span>.</p>
-</div>
-<div id="standard-errors" class="section level3 hasAnchor" number="1.5.3">
-<h3><span class="header-section-number">1.5.3</span> Standard Errors<a href="review-of-multiple-linear-regression.html#standard-errors" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Computing standard errors associated with regression coefficients requires matrix operations that go beyond the scope of this class, so we will trust the estimates provided by R. In simple cases, formulas exist to calculate these by hand:</p>
-<table>
-<colgroup>
-<col width="64%" />
-<col width="35%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>Scenario</th>
-<th>Standard Error</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Intercept for baseline category of categorical variable</td>
-<td><span class="math inline">\(SE(\hat{\beta}_0)=\frac{\hat{\sigma}}{\sqrt{n}}\)</span></td>
-</tr>
-<tr class="even">
-<td>Estimated difference between two groups</td>
-<td><span class="math inline">\(SE(\hat{\beta}_j)=\hat{\sigma}\sqrt{\frac{1}{n_1}+\frac{1}{n_2}}\)</span></td>
-</tr>
-<tr class="odd">
-<td>Intercept in Simple Linear Regression</td>
-<td><span class="math inline">\(SE(\hat{\beta}_0)=\hat{\sigma}\sqrt{\frac{1}{n}+\frac{\bar{x}^2}{\sum(x_i-\bar{x})^2}}\)</span></td>
-</tr>
-<tr class="even">
-<td>Slope in Simple Linear Regression</td>
-<td><span class="math inline">\(SE(\hat{\beta}_1)=\sqrt{\frac{\hat{\sigma}^2}{\sum(x_i-\bar{x})^2}}=\sqrt{\frac{1}{n-2}\frac{{\sum(\hat{y}_i-\bar{y})^2}}{\sum(x_i-\bar{x})^2}}\)</span></td>
-</tr>
-</tbody>
-</table>
-<p>Note that in each case, the standard error of a regression coefficient is a function of both the estimated error variance, <span class="math inline">\(\hat{\sigma}^2\)</span>, and the sample size <span class="math inline">\(n\)</span>.</p>
-</div>
-<div id="t-statistics" class="section level3 hasAnchor" number="1.5.4">
-<h3><span class="header-section-number">1.5.4</span> t-statistics<a href="review-of-multiple-linear-regression.html#t-statistics" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>The third column of the coefficients table in R gives the ratio of an estimate <span class="math inline">\(\hat{\beta}_j\)</span> to its standard error <span class="math inline">\(SE(\hat{\beta}_j)\)</span>. This quantity is called a <strong>t-statistic</strong>.</p>
-<p><span class="math display">\[
+\]
+
+where $p$ represents the number of terms in the model, including the intercept (which is the same as the number of lines in the coefficients table). 
+
+This quantity represents the variance in unexplained deviations between individual response values and their expectation after accounting for the explanatory variables in the model.   
+
+In the R-output, the **residual standard error** is the estimate $\hat{\sigma}$. 
+
+### Standard Errors
+
+Computing standard errors associated with regression coefficients requires matrix operations that go beyond the scope of this class, so we will trust the estimates provided by R. In simple cases, formulas exist to calculate these by hand:   
+
+|Scenario| Standard Error | 
+|---------|-----|     
+| Intercept for baseline category of categorical variable | $SE(\hat{\beta}_0)=\frac{\hat{\sigma}}{\sqrt{n}}$ |   
+| Estimated difference between two groups | $SE(\hat{\beta}_j)=\hat{\sigma}\sqrt{\frac{1}{n_1}+\frac{1}{n_2}}$ |    
+| Intercept in Simple Linear Regression | $SE(\hat{\beta}_0)=\hat{\sigma}\sqrt{\frac{1}{n}+\frac{\bar{x}^2}{\sum(x_i-\bar{x})^2}}$ |    
+| Slope in Simple Linear Regression | $SE(\hat{\beta}_1)=\sqrt{\frac{\hat{\sigma}^2}{\sum(x_i-\bar{x})^2}}=\sqrt{\frac{1}{n-2}\frac{{\sum(\hat{y}_i-\bar{y})^2}}{\sum(x_i-\bar{x})^2}}$ | 
+
+Note that in each case, the standard error of a regression coefficient is a function of both the estimated error variance, $\hat{\sigma}^2$, and the sample size $n$. 
+
+### t-statistics
+
+The third column of the coefficients table in R gives the ratio of an estimate $\hat{\beta}_j$ to its standard error $SE(\hat{\beta}_j)$. This quantity is called a **t-statistic**.
+
+\[
 t= \frac{\hat{\beta}_j}{\text{SE}(\hat{\beta}_j)}  
-\]</span></p>
-<p>Under the assumptions of the LLSR model, and the null hypothesis that <span class="math inline">\(\beta_j=0\)</span>, this statistic follows a t-distribution with <span class="math inline">\(n-p\)</span> degrees of freedom.</p>
-<p>A <strong>t-distribution</strong> is a symmetric, bell-shaped curve, with thicker tails (hence more variability), than a standard normal <span class="math inline">\(\mathcal{N}(0,1)\)</span> distribution.</p>
-<p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-23-1.png" width="768" /></p>
-<p>As the degrees of freedom for a t-distribution approach <span class="math inline">\(\infty\)</span>, the t-distribution converges to a standard normal distribution.</p>
-</div>
-<div id="p-values" class="section level3 hasAnchor" number="1.5.5">
-<h3><span class="header-section-number">1.5.5</span> p-values<a href="review-of-multiple-linear-regression.html#p-values" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>The <strong>p-value</strong> associated with a regression coefficient is the probability of obtaining a sample that gives a regression estimate (or equivalently, a t-statistic) as extreme or more extreme than we did, when there is actually no relationship between that explanatory variable and the response (after accounting for other variables in the model). In the case of a categorical variable, this is equivalent to the probability of obtaining a sample that gives an estimated difference in average response between the given category and the baseline category as extreme or more extreme than we did, given that there is actually no difference between the two categories after accounting for other variables in the model.</p>
-<p>In mathematical terms, the p-value is equal to the probability of obtaining a sample that gives a value of <span class="math inline">\(\hat{\beta}_j\)</span> as extreme or more extreme than we did, when <span class="math inline">\(\beta_j=0\)</span>.</p>
-<div id="example-from-model4" class="section level4 hasAnchor" number="1.5.5.1">
-<h4><span class="header-section-number">1.5.5.1</span> Example from <code>model4</code><a href="review-of-multiple-linear-regression.html#example-from-model4" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<p>In model 4, the t-statistic associated with the variable <code>fast</code> is</p>
-<p><span class="math display">\[
-t= \frac{\hat{\beta}_2}{\text{SE}(\hat{\beta}_2)} = \frac{1.226846}{0.15072}=8.14
-\]</span></p>
-<p>We calculate a p-value by finding the probability of obtaining a t-statistic greater than 8.14, or less than -8.14 when working with a t-distribution with <span class="math inline">\(n-p = 122-3\)</span> degrees of freedom.</p>
-<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="review-of-multiple-linear-regression.html#cb71-1" aria-hidden="true" tabindex="-1"></a>tstat <span class="ot">&lt;-</span> <span class="fl">8.14</span></span>
-<span id="cb71-2"><a href="review-of-multiple-linear-regression.html#cb71-2" aria-hidden="true" tabindex="-1"></a><span class="fu">gf_dist</span>(<span class="st">&quot;t&quot;</span>, <span class="at">df=</span><span class="dv">119</span>, <span class="at">geom =</span> <span class="st">&quot;area&quot;</span>, <span class="at">fill =</span> <span class="sc">~</span>(<span class="fu">abs</span>(x)<span class="sc">&lt;</span> <span class="fu">abs</span>(tstat)), <span class="at">show.legend=</span><span class="cn">FALSE</span>) <span class="sc">+</span> <span class="fu">geom_vline</span>(<span class="at">xintercept=</span><span class="fu">c</span>(tstat, <span class="sc">-</span>tstat), <span class="at">color=</span><span class="st">&quot;red&quot;</span>)  <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">&quot;t&quot;</span>)</span></code></pre></div>
-<p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-24-1.png" width="768" /></p>
-<p>We see that this probability is extremely low. We can calculate it precisely, using the <code>pt</code> command.</p>
-<p>This command calculates the probability of getting value to t-statistic the right of 8.14, which we then double, since the t-distribution is symmetric.</p>
-<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="review-of-multiple-linear-regression.html#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span><span class="sc">*</span><span class="fu">pt</span>(<span class="fl">8.14</span>, <span class="at">df=</span><span class="dv">119</span>, <span class="at">lower.tail=</span><span class="cn">FALSE</span>)</span></code></pre></div>
-<pre><code>## [1] 0.0000000000004389194</code></pre>
-<p>This small p-value provides strong evidence of a difference in speed between fast and non-fast tracks, after accounting for year.</p>
-</div>
-<div id="example-from-model0c" class="section level4 hasAnchor" number="1.5.5.2">
-<h4><span class="header-section-number">1.5.5.2</span> Example from <code>model0C</code><a href="review-of-multiple-linear-regression.html#example-from-model0c" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<p>In model 0C, the t-statistic associated with the variable <code>starters</code> is</p>
-<p><span class="math display">\[
-t= \frac{\hat{\beta}_5}{\text{SE}(\hat{\beta}_5)} = \frac{-0.018592}{0.013107}=-1.42.
-\]</span></p>
-<p>We calculate a p-value by finding the probability of obtaining a t-statistic greater than -1.42, or less than 1.42 when working with a t-distribution with <span class="math inline">\(n-p = 122-10\)</span> degrees of freedom. (recall the model included 10 terms)</p>
-<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="review-of-multiple-linear-regression.html#cb74-1" aria-hidden="true" tabindex="-1"></a>tstat <span class="ot">&lt;-</span> <span class="sc">-</span><span class="fl">1.42</span></span>
-<span id="cb74-2"><a href="review-of-multiple-linear-regression.html#cb74-2" aria-hidden="true" tabindex="-1"></a><span class="fu">gf_dist</span>(<span class="st">&quot;t&quot;</span>, <span class="at">df=</span><span class="dv">112</span>, <span class="at">geom =</span> <span class="st">&quot;area&quot;</span>, <span class="at">fill =</span> <span class="sc">~</span>(<span class="fu">abs</span>(x)<span class="sc">&lt;</span> <span class="fu">abs</span>(tstat)), <span class="at">show.legend=</span><span class="cn">FALSE</span>) <span class="sc">+</span> <span class="fu">geom_vline</span>(<span class="at">xintercept=</span><span class="fu">c</span>(tstat, <span class="sc">-</span>tstat), <span class="at">color=</span><span class="st">&quot;red&quot;</span>)  <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">&quot;t&quot;</span>)</span></code></pre></div>
-<p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-26-1.png" width="768" /></p>
-<p>Note, since the t-statistic is negative, we set <code>lower.tail=TRUE</code> to find the probability in the left tail, and then double it.</p>
-<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="review-of-multiple-linear-regression.html#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span><span class="sc">*</span><span class="fu">pt</span>(<span class="sc">-</span><span class="fl">1.42</span>, <span class="at">df=</span><span class="dv">112</span>, <span class="at">lower.tail=</span><span class="cn">TRUE</span>)</span></code></pre></div>
-<pre><code>## [1] 0.1583853</code></pre>
-<p>This large p-value indicates that we do not have evidence of a relationship between in speed and number of starters in the race, after accounting for the other variables in the model.</p>
-</div>
-</div>
-<div id="residual-standard-error" class="section level3 hasAnchor" number="1.5.6">
-<h3><span class="header-section-number">1.5.6</span> Residual Standard Error<a href="review-of-multiple-linear-regression.html#residual-standard-error" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>We’ve now seen how to calculate all of the quantities in the coefficients table, so we turn our attention to the three lines below the table in the summary output.</p>
-<ul>
-<li>Residual Standard Error is the estimate of</li>
-</ul>
-<p><span class="math display">\[
+\]
+
+Under the assumptions of the LLSR model, and the null hypothesis that $\beta_j=0$, this statistic follows a t-distribution with $n-p$ degrees of freedom.   
+
+A **t-distribution** is a symmetric, bell-shaped curve, with thicker tails (hence more variability), than a standard normal $\mathcal{N}(0,1)$ distribution.   
+
+
+
+
+
+<img src="Stat-455-Notes_files/figure-html/unnamed-chunk-23-1.png" width="768" />
+
+As the degrees of freedom for a t-distribution approach $\infty$, the t-distribution converges to a standard normal distribution.   
+
+### p-values  
+
+The **p-value** associated with a regression coefficient is the probability of obtaining a sample that gives a regression estimate (or equivalently, a t-statistic) as extreme or more extreme than we did, when there is actually no relationship between that explanatory variable and the response (after accounting for other variables in the model). In the case of a categorical variable, this is equivalent to the probability of obtaining a sample that gives an estimated difference in average response between the given category and the baseline category as extreme or more extreme than we did, given that there is actually no difference between the two categories after accounting for other variables in the model. 
+
+In mathematical terms, the p-value is equal to the probability of obtaining a sample that gives a value of $\hat{\beta}_j$ as extreme or more extreme than we did, when $\beta_j=0$. 
+
+#### Example from `model4`
+
+In model 4, the t-statistic associated with the variable `fast` is
+
+\[
+t= \frac{\hat{\beta}_2}{\text{SE}(\hat{\beta}_2)} = \frac{1.226846}{0.15072}=8.14 
+\]
+
+We calculate a p-value by finding the probability of obtaining a t-statistic greater than 8.14, or less than -8.14 when working with a t-distribution with $n-p = 122-3$ degrees of freedom.   
+
+
+
+```r
+tstat <- 8.14
+gf_dist("t", df=119, geom = "area", fill = ~(abs(x)< abs(tstat)), show.legend=FALSE) + geom_vline(xintercept=c(tstat, -tstat), color="red")  + xlab("t")
+```
+
+<img src="Stat-455-Notes_files/figure-html/unnamed-chunk-24-1.png" width="768" />
+
+We see that this probability is extremely low. We can calculate it precisely, using the `pt` command. 
+
+This command calculates the probability of getting value to t-statistic the right of 8.14, which we then double, since the t-distribution is symmetric.
+
+
+```r
+2*pt(8.14, df=119, lower.tail=FALSE)
+```
+
+```
+## [1] 0.0000000000004389194
+```
+
+This small p-value provides strong evidence of a difference in speed between fast and non-fast tracks, after accounting for year.   
+
+
+#### Example from `model0C`
+
+In model 0C, the t-statistic associated with the variable `starters` is
+
+\[
+t= \frac{\hat{\beta}_5}{\text{SE}(\hat{\beta}_5)} = \frac{-0.018592}{0.013107}=-1.42. 
+\]
+
+We calculate a p-value by finding the probability of obtaining a t-statistic greater than -1.42, or less than 1.42 when working with a t-distribution with $n-p = 122-10$ degrees of freedom. (recall the model included 10 terms)  
+
+
+
+```r
+tstat <- -1.42
+gf_dist("t", df=112, geom = "area", fill = ~(abs(x)< abs(tstat)), show.legend=FALSE) + geom_vline(xintercept=c(tstat, -tstat), color="red")  + xlab("t")
+```
+
+<img src="Stat-455-Notes_files/figure-html/unnamed-chunk-26-1.png" width="768" />
+
+
+Note, since the t-statistic is negative, we set `lower.tail=TRUE` to find the probability in the left tail, and then double it.   
+
+
+```r
+2*pt(-1.42, df=112, lower.tail=TRUE)
+```
+
+```
+## [1] 0.1583853
+```
+
+This large p-value indicates that we do not have evidence of a relationship between in speed and number of starters in the race, after accounting for the other variables in the model.   
+
+### Residual Standard Error
+
+We've now seen how to calculate all of the quantities in the coefficients table, so we turn our attention to the three lines below the table in the summary output.  
+
+
+* Residual Standard Error is the estimate of 
+
+\[
 \hat{\sigma}=\sqrt{\frac{\displaystyle\sum_{i=1}^{n}(y_i-\hat{y}_i)^2}{n-p}},
-\]</span></p>
-<p>representing variance in unexplained deviations between individual response values and their expectation after accounting for the explanatory variables in the model.</p>
-</div>
-<div id="degrees-of-freedom" class="section level3 hasAnchor" number="1.5.7">
-<h3><span class="header-section-number">1.5.7</span> Degrees of Freedom<a href="review-of-multiple-linear-regression.html#degrees-of-freedom" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<ul>
-<li>Degrees of Freedom are given by <span class="math inline">\(n-p\)</span>, that is, the sample size minus the number of terms in the model (i.e. number of <span class="math inline">\(\beta\)</span>’s being estimated, including the intercept). These effect the amount of spread in the t-distributions associated with the regression estimates.</li>
-</ul>
-</div>
-<div id="r2" class="section level3 hasAnchor" number="1.5.8">
-<h3><span class="header-section-number">1.5.8</span> <span class="math inline">\(R^2\)</span><a href="review-of-multiple-linear-regression.html#r2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<ul>
-<li>The Multiple R-Squared value, representing the proportion of total variability in the response variable, that is explained by the model, is given by</li>
-</ul>
-<p><span class="math display">\[R^2=\frac{\text{Variability Explained by Model}}{\text{Total Variability}}=\frac{\text{SST-SSR}}{\text{SST}} =\frac{\displaystyle\sum_{i=1}^n(\hat{y}_i-\bar{y})^2}{\displaystyle\sum_{i=1}^n(y_i-\bar{y})^2},\]</span></p>
-<p>where <span class="math inline">\(SST = \displaystyle\sum_{i=1}^n (y_i - \bar{y})^2\)</span> represents the total amount of variability in the response variable, without accounting for any explanatory variables, and <span class="math inline">\(\text{SSR} =\displaystyle\sum_{i=1}^n(y_i-\hat{y}_i)^2\)</span> represents the total amount of unexplained variability remaining, after accounting for the explanatory variables used in the model.</p>
-<p>SST Calculation:</p>
-<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="review-of-multiple-linear-regression.html#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>((derby.df<span class="sc">$</span>speed <span class="sc">-</span> <span class="fu">mean</span>(derby.df<span class="sc">$</span>speed))<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div>
-<pre><code>## [1] 201.1791</code></pre>
-<p>SSR Calculation:</p>
-<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="review-of-multiple-linear-regression.html#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>((derby.df<span class="sc">$</span>speed <span class="sc">-</span> model4<span class="sc">$</span>fitted.values)<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div>
-<pre><code>## [1] 62.88574</code></pre>
-<p><span class="math inline">\(R^2 = \frac{201.1791-62.88574}{201.1791} = 0.6874\)</span>.</p>
-<p><span class="math inline">\(R^2\)</span> can never decrease when an additional variable is added to a model. An adjusted version of R-squared, intended to penalize the addition of unimportant terms is also provided in the R-output.</p>
-<p>See Section 2.2 of the <a href="https://stat255-lu.github.io/Notes/">Stat 255 notes</a> for more detail on <span class="math inline">\(R^2\)</span>.</p>
-</div>
-<div id="f-statistic" class="section level3 hasAnchor" number="1.5.9">
-<h3><span class="header-section-number">1.5.9</span> F-Statistic<a href="review-of-multiple-linear-regression.html#f-statistic" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<ul>
-<li>The F-statistic on the last line of the output is associated with goodness of fit test comparing the given model to one with only an intercept term. The null hypothesis associated with this test is that there is no relationship between the response variable and any of the explanatory variables in the model. Typically, a model that is at all useful, will yield a low p-value here.</li>
-</ul>
-<p>Under the assumptions of the LLSR model, and the null hypothesis that the reduced model explains as much variability in the response as the full model, the F-statistic follows a right-skewed distribution, known as an <strong>F-distribution.</strong> This distribution is defined by two parameters, <span class="math inline">\(\nu_1, \nu_2\)</span>, called numerator and denominator degrees of freedom.</p>
-<p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-30-1.png" width="960" /></p>
-<p>We show the calculation for the F-statistic in the model 4 output.</p>
-<p><span class="math display">\[
+\]
+
+representing variance in unexplained deviations between individual response values and their expectation after accounting for the explanatory variables in the model.  
+
+### Degrees of Freedom
+
+* Degrees of Freedom are given by $n-p$, that is, the sample size minus the number of terms in the model (i.e. number of $\beta$'s being estimated, including the intercept). These effect the amount of spread in the t-distributions associated with the regression estimates.     
+
+### $R^2$
+
+* The Multiple R-Squared value, representing the proportion of total variability in the response variable, that is explained by the model, is given by 
+
+\[R^2=\frac{\text{Variability Explained by Model}}{\text{Total Variability}}=\frac{\text{SST-SSR}}{\text{SST}} =\frac{\displaystyle\sum_{i=1}^n(\hat{y}_i-\bar{y})^2}{\displaystyle\sum_{i=1}^n(y_i-\bar{y})^2},\]
+
+where $SST = \displaystyle\sum_{i=1}^n (y_i - \bar{y})^2$ represents the total amount of variability in the response variable, without accounting for any explanatory variables, and $\text{SSR} =\displaystyle\sum_{i=1}^n(y_i-\hat{y}_i)^2$ represents the total amount of unexplained variability remaining, after accounting for the explanatory variables used in the model.
+
+SST Calculation:   
+
+
+```r
+sum((derby.df$speed - mean(derby.df$speed))^2)
+```
+
+```
+## [1] 201.1791
+```
+
+SSR Calculation: 
+
+
+```r
+sum((derby.df$speed - model4$fitted.values)^2)
+```
+
+```
+## [1] 62.88574
+```
+
+$R^2 = \frac{201.1791-62.88574}{201.1791} = 0.6874$.  
+
+
+$R^2$ can never decrease when an additional variable is added to a model. An adjusted version of R-squared, intended to penalize the addition of unimportant terms is also provided in the R-output.   
+
+See Section 2.2 of the [Stat 255 notes](https://stat255-lu.github.io/Notes/) for more detail on $R^2$. 
+
+### F-Statistic
+
+* The F-statistic on the last line of the output is associated with goodness of fit test comparing the given model to one with only an intercept term. The null hypothesis associated with this test is that there is no relationship between the response variable and any of the explanatory variables in the model. Typically, a model that is at all useful, will yield a low p-value here. 
+
+Under the assumptions of the LLSR model, and the null hypothesis that the reduced model explains as much variability in the response as the full model, the F-statistic follows a right-skewed distribution, known as an **F-distribution.** This distribution is defined by two parameters, $\nu_1, \nu_2$, called numerator and denominator degrees of freedom. 
+
+<img src="Stat-455-Notes_files/figure-html/unnamed-chunk-30-1.png" width="960" />
+
+We show the calculation for the F-statistic in the model 4 output. 
+
+$$
 F = \frac{\frac{\text{SSR}_{\text{Reduced}}-\text{SSR}_{\text{Full}}}{p-q}}{\frac{\text{SSR}_{\text{Full}}}{n-p}}=\frac{\frac{201.1791-62.88574}{3-1}}{\frac{62.88574}{122-3}} = 130.8477
-\]</span></p>
-<p>The degrees of freedom associated with this F-distribution are (p-q and n-p), in this case, 2 and 119.</p>
-<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="review-of-multiple-linear-regression.html#cb81-1" aria-hidden="true" tabindex="-1"></a>Fstat<span class="ot">=</span><span class="fl">130.8477</span></span>
-<span id="cb81-2"><a href="review-of-multiple-linear-regression.html#cb81-2" aria-hidden="true" tabindex="-1"></a><span class="fu">gf_dist</span>(<span class="st">&quot;f&quot;</span>, <span class="at">df1=</span><span class="dv">2</span>, <span class="at">df2=</span><span class="dv">119</span>, <span class="at">geom =</span> <span class="st">&quot;area&quot;</span>, <span class="at">fill =</span> <span class="sc">~</span> (<span class="fu">abs</span>(x)<span class="sc">&lt;</span> <span class="fu">abs</span>(Fstat)), <span class="at">show.legend=</span><span class="cn">FALSE</span>) <span class="sc">+</span> <span class="fu">geom_vline</span>(<span class="at">xintercept=</span><span class="fu">c</span>(Fstat), <span class="at">color=</span><span class="st">&quot;red&quot;</span>)  <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">&quot;F&quot;</span>)</span></code></pre></div>
-<p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-31-1.png" width="768" /></p>
-<p>We calculate the p-value, using the <code>pf</code> command.</p>
-<p>p-value:</p>
-<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="review-of-multiple-linear-regression.html#cb82-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pf</span>(Fstat, <span class="at">df1=</span><span class="dv">2</span>, <span class="at">df2=</span><span class="dv">119</span>, <span class="at">lower.tail=</span><span class="cn">FALSE</span>)</span></code></pre></div>
-<pre><code>## [1] 0.0000000000000000000000000000008926378</code></pre>
-<p>We can also use the <code>pf</code> command to calculate the p-value for the F-test we used to compare models 0A and 0B in the previous section.</p>
-<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="review-of-multiple-linear-regression.html#cb84-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compare model0A and model0B</span></span>
-<span id="cb84-2"><a href="review-of-multiple-linear-regression.html#cb84-2" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(model0B, model0C, <span class="at">test =</span> <span class="st">&quot;F&quot;</span>)</span></code></pre></div>
-<pre><code>Analysis of Variance Table
+$$
+
+The degrees of freedom associated with this F-distribution are (p-q and n-p), in this case, 2 and 119. 
+
+
+
+
+```r
+Fstat=130.8477
+gf_dist("f", df1=2, df2=119, geom = "area", fill = ~ (abs(x)< abs(Fstat)), show.legend=FALSE) + geom_vline(xintercept=c(Fstat), color="red")  + xlab("F")
+```
+
+<img src="Stat-455-Notes_files/figure-html/unnamed-chunk-31-1.png" width="768" />
+
+We calculate the p-value, using the `pf` command.
+
+p-value:
+
+
+```r
+pf(Fstat, df1=2, df2=119, lower.tail=FALSE)
+```
+
+```
+## [1] 0.0000000000000000000000000000008926378
+```
+
+We can also use the `pf` command to calculate the p-value for the F-test we used to compare models 0A and 0B in the previous section.  
+
+
+```r
+# Compare model0A and model0B
+anova(model0B, model0C, test = "F")
+```
+
+```
+Analysis of Variance Table
 
 Model 1: speed ~ yearnew + yearnew2 + fast + good + starters
 Model 2: speed ~ yearnew + yearnew2 + fast + good + starters + yearnew:fast + 
     yearnew:good + yearnew2:fast + yearnew2:good
-  Res.Df    RSS Df Sum of Sq      F   Pr(&gt;F)   
+  Res.Df    RSS Df Sum of Sq      F   Pr(>F)   
 1    116 34.870                                
 2    112 30.217  4    4.6531 4.3117 0.002784 **
 ---
-Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
-<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="review-of-multiple-linear-regression.html#cb86-1" aria-hidden="true" tabindex="-1"></a>Fstat<span class="ot">=</span><span class="fl">4.3117</span></span>
-<span id="cb86-2"><a href="review-of-multiple-linear-regression.html#cb86-2" aria-hidden="true" tabindex="-1"></a><span class="fu">gf_dist</span>(<span class="st">&quot;f&quot;</span>, <span class="at">df1=</span><span class="dv">4</span>, <span class="at">df2=</span><span class="dv">112</span>, <span class="at">geom =</span> <span class="st">&quot;area&quot;</span>, <span class="at">fill =</span> <span class="sc">~</span> (<span class="fu">abs</span>(x)<span class="sc">&lt;</span> <span class="fu">abs</span>(Fstat)), <span class="at">show.legend=</span><span class="cn">FALSE</span>) <span class="sc">+</span> <span class="fu">geom_vline</span>(<span class="at">xintercept=</span><span class="fu">c</span>(Fstat), <span class="at">color=</span><span class="st">&quot;red&quot;</span>)  <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">&quot;F&quot;</span>)</span></code></pre></div>
-<p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-34-1.png" width="768" /></p>
-<p>p-value:</p>
-<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="review-of-multiple-linear-regression.html#cb87-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pf</span>(Fstat, <span class="at">df1=</span><span class="dv">4</span>, <span class="at">df2=</span><span class="dv">112</span>, <span class="at">lower.tail=</span><span class="cn">FALSE</span>)</span></code></pre></div>
-<pre><code>## [1] 0.002784336</code></pre>
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+```
+
+```r
+Fstat=4.3117
+gf_dist("f", df1=4, df2=112, geom = "area", fill = ~ (abs(x)< abs(Fstat)), show.legend=FALSE) + geom_vline(xintercept=c(Fstat), color="red")  + xlab("F")
+```
+
+<img src="Stat-455-Notes_files/figure-html/unnamed-chunk-34-1.png" width="768" />
+
+p-value:
+
+
+```r
+pf(Fstat, df1=4, df2=112, lower.tail=FALSE)
+```
+
+```
+## [1] 0.002784336
+```
+
+-->
 
 </div>
 </div>

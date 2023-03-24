@@ -572,6 +572,8 @@ This happens because over time, the number of starters in the race has increased
 
 A situation like this, where adding a variable (such as year) to a model results in an apparent trend disappearing or reversing itself, is called **Simpson's Paradox.**
 
+<!---
+
 ## Estimation and Testing in LLSR Model
 
 We'll return to model 4. The full R summary output for the model is shown below. In this section, we explain how each of the estimates, standard errors, test statistics, and p-values shown in the output are obtained.   
@@ -873,3 +875,4 @@ p-value:
 pf(Fstat, df1=4, df2=112, lower.tail=FALSE)
 ```
 
+-->
