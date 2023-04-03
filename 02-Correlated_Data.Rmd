@@ -249,9 +249,9 @@ has 5 parameters:
 * $\sigma$ - standard deviation in the distribution of differences between individual mice in the same litter (i.e. unexplained variability)      
 
 
-Thus, for a mouse in litter 1, the expected weight gain follows a normal distribution with mean $\beta_0$ and variance $\sigma^2_l + \sigma^2$.    
+Thus, for a mouse on Diet A, the expected weight gain follows a normal distribution with mean $\beta_0$ and variance $\sigma^2_l + \sigma^2$.    
 
-For a mouse in litter 2, the expected weight gain follows a normal distribution with mean $\beta_0 + \beta_2$ and variance $\sigma^2_l + \sigma^2$  
+For a mouse on Diet C, the expected weight gain follows a normal distribution with mean $\beta_0 + \beta_2$ and variance $\sigma^2_l + \sigma^2$  
 
 This is based on the fact that the sum of two independent normal random variables is normal, with mean equal to the sum of the means and variance equal to the sum of the variances.   
 
