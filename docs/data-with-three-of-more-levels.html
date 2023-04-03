@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 5 Data with Three of More Levels | Stat 455: Advanced Statistical Modeling Notes</title>
   <meta name="description" content="Chapter 5 Data with Three of More Levels | Stat 455: Advanced Statistical Modeling Notes" />
-  <meta name="generator" content="bookdown 0.31 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 5 Data with Three of More Levels | Stat 455: Advanced Statistical Modeling Notes" />
   <meta property="og:type" content="book" />
@@ -22,7 +22,7 @@
 
 
 
-<meta name="date" content="2023-03-23" />
+<meta name="date" content="2023-04-03" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -48,6 +48,7 @@
 
 
 
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
@@ -56,18 +57,18 @@
 
 
 <style type="text/css">
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -87,13 +88,13 @@ pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-le
 div.sourceCode
   {   }
 @media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
+code span.bu { } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -106,7 +107,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.im { } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -138,17 +139,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
-<li class="chapter" data-level="1" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html"><i class="fa fa-check"></i><b>1</b> Review of Multiple Linear Regression</a>
-<ul>
-<li class="chapter" data-level="1.1" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#exploratory-data-analysis"><i class="fa fa-check"></i><b>1.1</b> Exploratory Data Analysis</a>
-<ul>
+<li class="chapter" data-level="1" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html"><i class="fa fa-check"></i><b>1</b> Review of Multiple Linear Regression</a><ul>
+<li class="chapter" data-level="1.1" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#exploratory-data-analysis"><i class="fa fa-check"></i><b>1.1</b> Exploratory Data Analysis</a><ul>
 <li class="chapter" data-level="1.1.1" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#kentucky-derby-data"><i class="fa fa-check"></i><b>1.1.1</b> Kentucky Derby Data</a></li>
 <li class="chapter" data-level="1.1.2" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#some-data-wrangling"><i class="fa fa-check"></i><b>1.1.2</b> Some Data Wrangling</a></li>
 <li class="chapter" data-level="1.1.3" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#univariate-graphical-summaries"><i class="fa fa-check"></i><b>1.1.3</b> Univariate Graphical Summaries</a></li>
 <li class="chapter" data-level="1.1.4" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#bivariate-graphical-summaries"><i class="fa fa-check"></i><b>1.1.4</b> Bivariate Graphical Summaries</a></li>
 </ul></li>
-<li class="chapter" data-level="1.2" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#simple-linear-regression-model"><i class="fa fa-check"></i><b>1.2</b> Simple Linear Regression Model</a>
-<ul>
+<li class="chapter" data-level="1.2" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#simple-linear-regression-model"><i class="fa fa-check"></i><b>1.2</b> Simple Linear Regression Model</a><ul>
 <li class="chapter" data-level="1.2.1" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#model-for-winning-time-and-year"><i class="fa fa-check"></i><b>1.2.1</b> Model for Winning Time and Year</a></li>
 <li class="chapter" data-level="1.2.2" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#first-model-r-output"><i class="fa fa-check"></i><b>1.2.2</b> First Model R Output</a></li>
 <li class="chapter" data-level="1.2.3" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#checking-model-assumptions"><i class="fa fa-check"></i><b>1.2.3</b> Checking Model Assumptions</a></li>
@@ -156,8 +154,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.2.5" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#quadratic-model-in-r"><i class="fa fa-check"></i><b>1.2.5</b> Quadratic Model in R</a></li>
 <li class="chapter" data-level="1.2.6" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#quadratic-model-residual-plots"><i class="fa fa-check"></i><b>1.2.6</b> Quadratic Model Residual Plots</a></li>
 </ul></li>
-<li class="chapter" data-level="1.3" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#multiple-linear-regression-with-two-predictors"><i class="fa fa-check"></i><b>1.3</b> Multiple Linear Regression with Two Predictors</a>
-<ul>
+<li class="chapter" data-level="1.3" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#multiple-linear-regression-with-two-predictors"><i class="fa fa-check"></i><b>1.3</b> Multiple Linear Regression with Two Predictors</a><ul>
 <li class="chapter" data-level="1.3.1" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#model-with-year-and-fast-track"><i class="fa fa-check"></i><b>1.3.1</b> Model with Year and Fast Track</a></li>
 <li class="chapter" data-level="1.3.2" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#multiple-regression-model-in-r"><i class="fa fa-check"></i><b>1.3.2</b> Multiple Regression Model in R</a></li>
 <li class="chapter" data-level="1.3.3" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#confidence-intervals-from-mlr-model"><i class="fa fa-check"></i><b>1.3.3</b> Confidence Intervals from MLR Model</a></li>
@@ -165,8 +162,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.3.5" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#mlr-model-with-interaction"><i class="fa fa-check"></i><b>1.3.5</b> MLR Model with Interaction</a></li>
 <li class="chapter" data-level="1.3.6" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#model-equations-for-fast-non-fast-tracks"><i class="fa fa-check"></i><b>1.3.6</b> Model Equations for Fast, Non-Fast Tracks</a></li>
 </ul></li>
-<li class="chapter" data-level="1.4" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#building-a-multiple-linear-regression-model"><i class="fa fa-check"></i><b>1.4</b> Building a Multiple Linear Regression Model</a>
-<ul>
+<li class="chapter" data-level="1.4" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#building-a-multiple-linear-regression-model"><i class="fa fa-check"></i><b>1.4</b> Building a Multiple Linear Regression Model</a><ul>
 <li class="chapter" data-level="1.4.1" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#model-building-considerations"><i class="fa fa-check"></i><b>1.4.1</b> Model Building Considerations</a></li>
 <li class="chapter" data-level="1.4.2" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#model-diagnostics"><i class="fa fa-check"></i><b>1.4.2</b> Model Diagnostics</a></li>
 <li class="chapter" data-level="1.4.3" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#three-possible-models"><i class="fa fa-check"></i><b>1.4.3</b> Three Possible Models</a></li>
@@ -180,10 +176,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.4.11" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#overall-conclusions"><i class="fa fa-check"></i><b>1.4.11</b> Overall Conclusions</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html"><i class="fa fa-check"></i><b>2</b> Introduction to Correlated Data</a>
-<ul>
-<li class="chapter" data-level="2.1" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#introduction-to-correlated-data-1"><i class="fa fa-check"></i><b>2.1</b> Introduction to Correlated Data</a>
-<ul>
+<li class="chapter" data-level="2" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html"><i class="fa fa-check"></i><b>2</b> Introduction to Correlated Data</a><ul>
+<li class="chapter" data-level="2.1" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#introduction-to-correlated-data-1"><i class="fa fa-check"></i><b>2.1</b> Introduction to Correlated Data</a><ul>
 <li class="chapter" data-level="2.1.1" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#weight-gain-in-mice-experiment-design-1"><i class="fa fa-check"></i><b>2.1.1</b> Weight Gain in Mice: Experiment Design #1</a></li>
 <li class="chapter" data-level="2.1.2" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#mice-experiment-1-data"><i class="fa fa-check"></i><b>2.1.2</b> Mice Experiment 1 Data</a></li>
 <li class="chapter" data-level="2.1.3" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#a-naive-graphical-analysis"><i class="fa fa-check"></i><b>2.1.3</b> A Naive Graphical Analysis</a></li>
@@ -194,8 +188,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.1.8" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#an-improper-statistical-analysis"><i class="fa fa-check"></i><b>2.1.8</b> An Improper Statistical Analysis</a></li>
 <li class="chapter" data-level="2.1.9" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#a-more-appropriate-statistical-analysis"><i class="fa fa-check"></i><b>2.1.9</b> A More Appropriate Statistical Analysis</a></li>
 </ul></li>
-<li class="chapter" data-level="2.2" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#linear-mixed-effects-models"><i class="fa fa-check"></i><b>2.2</b> Linear Mixed Effects Models</a>
-<ul>
+<li class="chapter" data-level="2.2" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#linear-mixed-effects-models"><i class="fa fa-check"></i><b>2.2</b> Linear Mixed Effects Models</a><ul>
 <li class="chapter" data-level="2.2.1" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#llsr-model-for-mice-experiment"><i class="fa fa-check"></i><b>2.2.1</b> LLSR Model for Mice Experiment</a></li>
 <li class="chapter" data-level="2.2.2" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#model-accounting-for-correlation"><i class="fa fa-check"></i><b>2.2.2</b> Model Accounting For Correlation</a></li>
 <li class="chapter" data-level="2.2.3" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#questions-of-interest"><i class="fa fa-check"></i><b>2.2.3</b> Questions of Interest</a></li>
@@ -203,8 +196,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.2.5" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#fitting-the-model-in-r"><i class="fa fa-check"></i><b>2.2.5</b> Fitting the Model in R</a></li>
 <li class="chapter" data-level="2.2.6" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#why-not-fixed-effect-for-litter"><i class="fa fa-check"></i><b>2.2.6</b> Why Not Fixed Effect for Litter?</a></li>
 </ul></li>
-<li class="chapter" data-level="2.3" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#a-second-mice-experiment"><i class="fa fa-check"></i><b>2.3</b> A Second Mice Experiment</a>
-<ul>
+<li class="chapter" data-level="2.3" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#a-second-mice-experiment"><i class="fa fa-check"></i><b>2.3</b> A Second Mice Experiment</a><ul>
 <li class="chapter" data-level="2.3.1" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#weight-gain-in-mice-experiment-2"><i class="fa fa-check"></i><b>2.3.1</b> Weight Gain in Mice: Experiment 2</a></li>
 <li class="chapter" data-level="2.3.2" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#mice-experiment-2-data"><i class="fa fa-check"></i><b>2.3.2</b> Mice Experiment 2 Data</a></li>
 <li class="chapter" data-level="2.3.3" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#a-naive-graphical-analysis-for-experiment-2"><i class="fa fa-check"></i><b>2.3.3</b> A Naive Graphical Analysis for Experiment 2</a></li>
@@ -216,8 +208,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.3.9" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#model-for-litter-means"><i class="fa fa-check"></i><b>2.3.9</b> Model for Litter Means</a></li>
 <li class="chapter" data-level="2.3.10" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#fixed-effect-for-litter-in-experiment-2"><i class="fa fa-check"></i><b>2.3.10</b> Fixed Effect for Litter in Experiment 2</a></li>
 </ul></li>
-<li class="chapter" data-level="2.4" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#a-multilevel-experiment"><i class="fa fa-check"></i><b>2.4</b> A Multilevel Experiment</a>
-<ul>
+<li class="chapter" data-level="2.4" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#a-multilevel-experiment"><i class="fa fa-check"></i><b>2.4</b> A Multilevel Experiment</a><ul>
 <li class="chapter" data-level="2.4.1" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#experiment-2-illustration"><i class="fa fa-check"></i><b>2.4.1</b> Experiment 2 Illustration</a></li>
 <li class="chapter" data-level="2.4.2" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#experiment-with-variables-assigned-at-different-levels"><i class="fa fa-check"></i><b>2.4.2</b> Experiment with Variables Assigned at Different Levels</a></li>
 <li class="chapter" data-level="2.4.3" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#experiment-3-data"><i class="fa fa-check"></i><b>2.4.3</b> Experiment 3 Data</a></li>
@@ -227,10 +218,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.4.7" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#comparison-of-llsr-and-lme-models"><i class="fa fa-check"></i><b>2.4.7</b> Comparison of LLSR and LME Models</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="multilevel-models.html"><a href="multilevel-models.html"><i class="fa fa-check"></i><b>3</b> Multilevel Models</a>
-<ul>
-<li class="chapter" data-level="3.1" data-path="multilevel-models.html"><a href="multilevel-models.html#music-performance-anxiety-study-data-and-exploratory-analysis"><i class="fa fa-check"></i><b>3.1</b> Music Performance Anxiety Study: Data and Exploratory Analysis</a>
-<ul>
+<li class="chapter" data-level="3" data-path="multilevel-models.html"><a href="multilevel-models.html"><i class="fa fa-check"></i><b>3</b> Multilevel Models</a><ul>
+<li class="chapter" data-level="3.1" data-path="multilevel-models.html"><a href="multilevel-models.html#music-performance-anxiety-study-data-and-exploratory-analysis"><i class="fa fa-check"></i><b>3.1</b> Music Performance Anxiety Study: Data and Exploratory Analysis</a><ul>
 <li class="chapter" data-level="3.1.1" data-path="multilevel-models.html"><a href="multilevel-models.html#description-of-the-study"><i class="fa fa-check"></i><b>3.1.1</b> Description of the Study</a></li>
 <li class="chapter" data-level="3.1.2" data-path="multilevel-models.html"><a href="multilevel-models.html#variables"><i class="fa fa-check"></i><b>3.1.2</b> Variables</a></li>
 <li class="chapter" data-level="3.1.3" data-path="multilevel-models.html"><a href="multilevel-models.html#the-data"><i class="fa fa-check"></i><b>3.1.3</b> The Data</a></li>
@@ -253,8 +242,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.1.20" data-path="multilevel-models.html"><a href="multilevel-models.html#boxplots-for-orchestral-instrument-effect"><i class="fa fa-check"></i><b>3.1.20</b> Boxplots for Orchestral Instrument Effect</a></li>
 <li class="chapter" data-level="3.1.21" data-path="multilevel-models.html"><a href="multilevel-models.html#negative-affect-by-pem-nem-absorption"><i class="fa fa-check"></i><b>3.1.21</b> Negative Affect by PEM, NEM, Absorption</a></li>
 </ul></li>
-<li class="chapter" data-level="3.2" data-path="multilevel-models.html"><a href="multilevel-models.html#modeling-the-musician-data"><i class="fa fa-check"></i><b>3.2</b> Modeling the Musician Data</a>
-<ul>
+<li class="chapter" data-level="3.2" data-path="multilevel-models.html"><a href="multilevel-models.html#modeling-the-musician-data"><i class="fa fa-check"></i><b>3.2</b> Modeling the Musician Data</a><ul>
 <li class="chapter" data-level="3.2.1" data-path="multilevel-models.html"><a href="multilevel-models.html#model-notation"><i class="fa fa-check"></i><b>3.2.1</b> Model Notation</a></li>
 <li class="chapter" data-level="3.2.2" data-path="multilevel-models.html"><a href="multilevel-models.html#llsr-model-clearly-inappropriate"><i class="fa fa-check"></i><b>3.2.2</b> LLSR Model (Clearly inappropriate)</a></li>
 <li class="chapter" data-level="3.2.3" data-path="multilevel-models.html"><a href="multilevel-models.html#llsr-model-output"><i class="fa fa-check"></i><b>3.2.3</b> LLSR Model Output</a></li>
@@ -266,8 +254,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.2.9" data-path="multilevel-models.html"><a href="multilevel-models.html#interpretations-for-model-without-interaction"><i class="fa fa-check"></i><b>3.2.9</b> Interpretations for Model without Interaction</a></li>
 <li class="chapter" data-level="3.2.10" data-path="multilevel-models.html"><a href="multilevel-models.html#assumptions-in-first-mixed-effects-model"><i class="fa fa-check"></i><b>3.2.10</b> Assumptions in First Mixed Effects Model</a></li>
 </ul></li>
-<li class="chapter" data-level="3.3" data-path="multilevel-models.html"><a href="multilevel-models.html#random-slopes-model"><i class="fa fa-check"></i><b>3.3</b> Random Slopes Model</a>
-<ul>
+<li class="chapter" data-level="3.3" data-path="multilevel-models.html"><a href="multilevel-models.html#random-slopes-model"><i class="fa fa-check"></i><b>3.3</b> Random Slopes Model</a><ul>
 <li class="chapter" data-level="3.3.1" data-path="multilevel-models.html"><a href="multilevel-models.html#differences-in-large-vs-smallsolo"><i class="fa fa-check"></i><b>3.3.1</b> Differences in Large vs Small/Solo</a></li>
 <li class="chapter" data-level="3.3.2" data-path="multilevel-models.html"><a href="multilevel-models.html#illustration-of-previous-model"><i class="fa fa-check"></i><b>3.3.2</b> Illustration of Previous Model</a></li>
 <li class="chapter" data-level="3.3.3" data-path="multilevel-models.html"><a href="multilevel-models.html#illustration-of-new-random-slopes-model"><i class="fa fa-check"></i><b>3.3.3</b> Illustration of New (Random Slopes) Model</a></li>
@@ -281,14 +268,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.3.11" data-path="multilevel-models.html"><a href="multilevel-models.html#random-slopes-model-with-interaction-in-r"><i class="fa fa-check"></i><b>3.3.11</b> Random Slopes Model with Interaction in R</a></li>
 <li class="chapter" data-level="3.3.12" data-path="multilevel-models.html"><a href="multilevel-models.html#random-slope-vs-interaction-term"><i class="fa fa-check"></i><b>3.3.12</b> Random Slope vs Interaction Term</a></li>
 </ul></li>
-<li class="chapter" data-level="3.4" data-path="multilevel-models.html"><a href="multilevel-models.html#unconditional-means-model"><i class="fa fa-check"></i><b>3.4</b> Unconditional Means Model</a>
-<ul>
+<li class="chapter" data-level="3.4" data-path="multilevel-models.html"><a href="multilevel-models.html#unconditional-means-model"><i class="fa fa-check"></i><b>3.4</b> Unconditional Means Model</a><ul>
 <li class="chapter" data-level="3.4.1" data-path="multilevel-models.html"><a href="multilevel-models.html#unconditional-means-model-formulation"><i class="fa fa-check"></i><b>3.4.1</b> Unconditional Means Model Formulation</a></li>
 <li class="chapter" data-level="3.4.2" data-path="multilevel-models.html"><a href="multilevel-models.html#unconditional-means-model-in-r"><i class="fa fa-check"></i><b>3.4.2</b> Unconditional Means Model in R</a></li>
 <li class="chapter" data-level="3.4.3" data-path="multilevel-models.html"><a href="multilevel-models.html#unconditional-means-model-interpretations"><i class="fa fa-check"></i><b>3.4.3</b> Unconditional Means Model Interpretations</a></li>
 </ul></li>
-<li class="chapter" data-level="3.5" data-path="multilevel-models.html"><a href="multilevel-models.html#building-a-multilevel-model"><i class="fa fa-check"></i><b>3.5</b> Building A Multilevel Model</a>
-<ul>
+<li class="chapter" data-level="3.5" data-path="multilevel-models.html"><a href="multilevel-models.html#building-a-multilevel-model"><i class="fa fa-check"></i><b>3.5</b> Building A Multilevel Model</a><ul>
 <li class="chapter" data-level="3.5.1" data-path="multilevel-models.html"><a href="multilevel-models.html#centering-covariates"><i class="fa fa-check"></i><b>3.5.1</b> Centering Covariates</a></li>
 <li class="chapter" data-level="3.5.2" data-path="multilevel-models.html"><a href="multilevel-models.html#a-possible-final-model"><i class="fa fa-check"></i><b>3.5.2</b> A Possible Final Model</a></li>
 <li class="chapter" data-level="3.5.3" data-path="multilevel-models.html"><a href="multilevel-models.html#more-data-wrangling-1"><i class="fa fa-check"></i><b>3.5.3</b> More Data Wrangling</a></li>
@@ -302,26 +287,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="3.6" data-path="multilevel-models.html"><a href="multilevel-models.html#conceptual-questions"><i class="fa fa-check"></i><b>3.6</b> Conceptual Questions</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="longitudinal-data.html"><a href="longitudinal-data.html"><i class="fa fa-check"></i><b>4</b> Longitudinal Data</a>
-<ul>
-<li class="chapter" data-level="4.1" data-path="longitudinal-data.html"><a href="longitudinal-data.html#charter-schools-exploratory-analysis"><i class="fa fa-check"></i><b>4.1</b> Charter Schools Exploratory Analysis</a>
-<ul>
+<li class="chapter" data-level="4" data-path="longitudinal-data.html"><a href="longitudinal-data.html"><i class="fa fa-check"></i><b>4</b> Longitudinal Data</a><ul>
+<li class="chapter" data-level="4.1" data-path="longitudinal-data.html"><a href="longitudinal-data.html#charter-schools-exploratory-analysis"><i class="fa fa-check"></i><b>4.1</b> Charter Schools Exploratory Analysis</a><ul>
 <li class="chapter" data-level="4.1.1" data-path="longitudinal-data.html"><a href="longitudinal-data.html#data"><i class="fa fa-check"></i><b>4.1.1</b> Data Organization</a></li>
 <li class="chapter" data-level="4.1.2" data-path="longitudinal-data.html"><a href="longitudinal-data.html#missing-data"><i class="fa fa-check"></i><b>4.1.2</b> Missing Data</a></li>
 <li class="chapter" data-level="4.1.3" data-path="longitudinal-data.html"><a href="longitudinal-data.html#convert-to-tidy-form"><i class="fa fa-check"></i><b>4.1.3</b> Convert to Tidy Form</a></li>
 <li class="chapter" data-level="4.1.4" data-path="longitudinal-data.html"><a href="longitudinal-data.html#exploratory-analyses-for-general-multilevel-models"><i class="fa fa-check"></i><b>4.1.4</b> Exploratory Analyses for General Multilevel Models</a></li>
 <li class="chapter" data-level="4.1.5" data-path="longitudinal-data.html"><a href="longitudinal-data.html#exploratory-analyses-for-longitudinal-data"><i class="fa fa-check"></i><b>4.1.5</b> Exploratory Analyses for Longitudinal Data</a></li>
 </ul></li>
-<li class="chapter" data-level="4.2" data-path="longitudinal-data.html"><a href="longitudinal-data.html#multilevel-longitudinal-models"><i class="fa fa-check"></i><b>4.2</b> Multilevel Longitudinal Models</a>
-<ul>
+<li class="chapter" data-level="4.2" data-path="longitudinal-data.html"><a href="longitudinal-data.html#multilevel-longitudinal-models"><i class="fa fa-check"></i><b>4.2</b> Multilevel Longitudinal Models</a><ul>
 <li class="chapter" data-level="4.2.1" data-path="longitudinal-data.html"><a href="longitudinal-data.html#unconditional-means-model-1"><i class="fa fa-check"></i><b>4.2.1</b> Unconditional Means Model</a></li>
 <li class="chapter" data-level="4.2.2" data-path="longitudinal-data.html"><a href="longitudinal-data.html#interpretations-in-unconditional-means-model"><i class="fa fa-check"></i><b>4.2.2</b> Interpretations in Unconditional Means Model</a></li>
 <li class="chapter" data-level="4.2.3" data-path="longitudinal-data.html"><a href="longitudinal-data.html#intraclass-correlation-coefficient"><i class="fa fa-check"></i><b>4.2.3</b> Intraclass Correlation Coefficient:</a></li>
 <li class="chapter" data-level="4.2.4" data-path="longitudinal-data.html"><a href="longitudinal-data.html#unconditional-growth-model"><i class="fa fa-check"></i><b>4.2.4</b> Unconditional Growth Model</a></li>
 <li class="chapter" data-level="4.2.5" data-path="longitudinal-data.html"><a href="longitudinal-data.html#interpretations-in-unconditional-growth-model"><i class="fa fa-check"></i><b>4.2.5</b> Interpretations in Unconditional Growth Model</a></li>
 </ul></li>
-<li class="chapter" data-level="4.3" data-path="longitudinal-data.html"><a href="longitudinal-data.html#quadratic-and-piecewise-linear-models"><i class="fa fa-check"></i><b>4.3</b> Quadratic and Piecewise Linear Models</a>
-<ul>
+<li class="chapter" data-level="4.3" data-path="longitudinal-data.html"><a href="longitudinal-data.html#quadratic-and-piecewise-linear-models"><i class="fa fa-check"></i><b>4.3</b> Quadratic and Piecewise Linear Models</a><ul>
 <li class="chapter" data-level="4.3.1" data-path="longitudinal-data.html"><a href="longitudinal-data.html#quadratic-trend-over-time"><i class="fa fa-check"></i><b>4.3.1</b> Quadratic Trend over Time</a></li>
 <li class="chapter" data-level="4.3.2" data-path="longitudinal-data.html"><a href="longitudinal-data.html#quadratic-model"><i class="fa fa-check"></i><b>4.3.2</b> Quadratic Model</a></li>
 <li class="chapter" data-level="4.3.3" data-path="longitudinal-data.html"><a href="longitudinal-data.html#quadratic-model-in-r-1"><i class="fa fa-check"></i><b>4.3.3</b> Quadratic Model in R</a></li>
@@ -336,14 +317,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.3.12" data-path="longitudinal-data.html"><a href="longitudinal-data.html#estimated-response-curve-1"><i class="fa fa-check"></i><b>4.3.12</b> Estimated Response Curve</a></li>
 <li class="chapter" data-level="4.3.13" data-path="longitudinal-data.html"><a href="longitudinal-data.html#comparing-quadratic-and-piecewise-models"><i class="fa fa-check"></i><b>4.3.13</b> Comparing Quadratic and Piecewise Models</a></li>
 </ul></li>
-<li class="chapter" data-level="4.4" data-path="longitudinal-data.html"><a href="longitudinal-data.html#model-for-school-type"><i class="fa fa-check"></i><b>4.4</b> Model for School Type</a>
-<ul>
+<li class="chapter" data-level="4.4" data-path="longitudinal-data.html"><a href="longitudinal-data.html#model-for-school-type"><i class="fa fa-check"></i><b>4.4</b> Model for School Type</a><ul>
 <li class="chapter" data-level="4.4.1" data-path="longitudinal-data.html"><a href="longitudinal-data.html#uncontrolled-effects-of-school-type"><i class="fa fa-check"></i><b>4.4.1</b> Uncontrolled Effects of School Type</a></li>
 <li class="chapter" data-level="4.4.2" data-path="longitudinal-data.html"><a href="longitudinal-data.html#interpretations-for-school-type-model"><i class="fa fa-check"></i><b>4.4.2</b> Interpretations for School Type Model</a></li>
 <li class="chapter" data-level="4.4.3" data-path="longitudinal-data.html"><a href="longitudinal-data.html#illustration"><i class="fa fa-check"></i><b>4.4.3</b> Illustration</a></li>
 </ul></li>
-<li class="chapter" data-level="4.5" data-path="longitudinal-data.html"><a href="longitudinal-data.html#covariance-structure-among-observations"><i class="fa fa-check"></i><b>4.5</b> Covariance Structure among Observations</a>
-<ul>
+<li class="chapter" data-level="4.5" data-path="longitudinal-data.html"><a href="longitudinal-data.html#covariance-structure-among-observations"><i class="fa fa-check"></i><b>4.5</b> Covariance Structure among Observations</a><ul>
 <li class="chapter" data-level="4.5.1" data-path="longitudinal-data.html"><a href="longitudinal-data.html#standard-covariance-structure"><i class="fa fa-check"></i><b>4.5.1</b> Standard Covariance Structure</a></li>
 <li class="chapter" data-level="4.5.2" data-path="longitudinal-data.html"><a href="longitudinal-data.html#derivation-of-vary_i1-optional"><i class="fa fa-check"></i><b>4.5.2</b> Derivation of <span class="math inline">\(Var(Y_{i1})\)</span> (optional)</a></li>
 <li class="chapter" data-level="4.5.3" data-path="longitudinal-data.html"><a href="longitudinal-data.html#interpretations-of-vary_i1-and-covy_ij-y_ik"><i class="fa fa-check"></i><b>4.5.3</b> Interpretations of <span class="math inline">\(Var(Y_{i1})\)</span> and <span class="math inline">\(Cov(Y_{ij}, Y_{ik})\)</span></a></li>
@@ -357,10 +336,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.5.11" data-path="longitudinal-data.html"><a href="longitudinal-data.html#final-thoughts-regarding-covariance-structures"><i class="fa fa-check"></i><b>4.5.11</b> Final Thoughts Regarding Covariance Structures</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="data-with-three-of-more-levels.html"><a href="data-with-three-of-more-levels.html"><i class="fa fa-check"></i><b>5</b> Data with Three of More Levels</a>
-<ul>
-<li class="chapter" data-level="5.1" data-path="data-with-three-of-more-levels.html"><a href="data-with-three-of-more-levels.html#three-level-plants-experiment"><i class="fa fa-check"></i><b>5.1</b> Three-Level Plants Experiment</a>
-<ul>
+<li class="chapter" data-level="5" data-path="data-with-three-of-more-levels.html"><a href="data-with-three-of-more-levels.html"><i class="fa fa-check"></i><b>5</b> Data with Three of More Levels</a><ul>
+<li class="chapter" data-level="5.1" data-path="data-with-three-of-more-levels.html"><a href="data-with-three-of-more-levels.html#three-level-plants-experiment"><i class="fa fa-check"></i><b>5.1</b> Three-Level Plants Experiment</a><ul>
 <li class="chapter" data-level="5.1.1" data-path="data-with-three-of-more-levels.html"><a href="data-with-three-of-more-levels.html#experimental-design"><i class="fa fa-check"></i><b>5.1.1</b> Experimental Design</a></li>
 <li class="chapter" data-level="5.1.2" data-path="data-with-three-of-more-levels.html"><a href="data-with-three-of-more-levels.html#the-data-1"><i class="fa fa-check"></i><b>5.1.2</b> The Data</a></li>
 <li class="chapter" data-level="5.1.3" data-path="data-with-three-of-more-levels.html"><a href="data-with-three-of-more-levels.html#questions"><i class="fa fa-check"></i><b>5.1.3</b> Questions</a></li>
@@ -368,23 +345,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.1.5" data-path="data-with-three-of-more-levels.html"><a href="data-with-three-of-more-levels.html#r-implementation-of-three-level-model"><i class="fa fa-check"></i><b>5.1.5</b> R Implementation of Three Level Model</a></li>
 <li class="chapter" data-level="5.1.6" data-path="data-with-three-of-more-levels.html"><a href="data-with-three-of-more-levels.html#inappropriate-llsr-model"><i class="fa fa-check"></i><b>5.1.6</b> Inappropriate LLSR Model</a></li>
 </ul></li>
-<li class="chapter" data-level="5.2" data-path="data-with-three-of-more-levels.html"><a href="data-with-three-of-more-levels.html#three-level-model-with-random-slopes"><i class="fa fa-check"></i><b>5.2</b> Three-Level Model with Random Slopes</a>
-<ul>
+<li class="chapter" data-level="5.2" data-path="data-with-three-of-more-levels.html"><a href="data-with-three-of-more-levels.html#three-level-model-with-random-slopes"><i class="fa fa-check"></i><b>5.2</b> Three-Level Model with Random Slopes</a><ul>
 <li class="chapter" data-level="5.2.1" data-path="data-with-three-of-more-levels.html"><a href="data-with-three-of-more-levels.html#random-slope-for-phenoa"><i class="fa fa-check"></i><b>5.2.1</b> Random Slope for PhenoA</a></li>
 <li class="chapter" data-level="5.2.2" data-path="data-with-three-of-more-levels.html"><a href="data-with-three-of-more-levels.html#r-output-for-random-slope-for-phenoa"><i class="fa fa-check"></i><b>5.2.2</b> R Output for Random Slope for PhenoA</a></li>
 <li class="chapter" data-level="5.2.3" data-path="data-with-three-of-more-levels.html"><a href="data-with-three-of-more-levels.html#random-slope-for-fert"><i class="fa fa-check"></i><b>5.2.3</b> Random Slope for Fert</a></li>
 <li class="chapter" data-level="5.2.4" data-path="data-with-three-of-more-levels.html"><a href="data-with-three-of-more-levels.html#r-output-for-random-slope-for-fert"><i class="fa fa-check"></i><b>5.2.4</b> R Output for Random Slope for Fert</a></li>
 <li class="chapter" data-level="5.2.5" data-path="data-with-three-of-more-levels.html"><a href="data-with-three-of-more-levels.html#boundary-constraints"><i class="fa fa-check"></i><b>5.2.5</b> Boundary Constraints</a></li>
 </ul></li>
-<li class="chapter" data-level="5.3" data-path="data-with-three-of-more-levels.html"><a href="data-with-three-of-more-levels.html#longitudinal-component-to-plants-data"><i class="fa fa-check"></i><b>5.3</b> Longitudinal Component to Plants Data</a>
-<ul>
+<li class="chapter" data-level="5.3" data-path="data-with-three-of-more-levels.html"><a href="data-with-three-of-more-levels.html#longitudinal-component-to-plants-data"><i class="fa fa-check"></i><b>5.3</b> Longitudinal Component to Plants Data</a><ul>
 <li class="chapter" data-level="5.3.1" data-path="data-with-three-of-more-levels.html"><a href="data-with-three-of-more-levels.html#repeated-measures-over-time"><i class="fa fa-check"></i><b>5.3.1</b> Repeated Measures over Time</a></li>
 <li class="chapter" data-level="5.3.2" data-path="data-with-three-of-more-levels.html"><a href="data-with-three-of-more-levels.html#levels-and-variables"><i class="fa fa-check"></i><b>5.3.2</b> Levels and Variables</a></li>
 <li class="chapter" data-level="5.3.3" data-path="data-with-three-of-more-levels.html"><a href="data-with-three-of-more-levels.html#model-for-longitudinal-plants-study"><i class="fa fa-check"></i><b>5.3.3</b> Model for Longitudinal Plants Study</a></li>
 <li class="chapter" data-level="5.3.4" data-path="data-with-three-of-more-levels.html"><a href="data-with-three-of-more-levels.html#r-output-for-longitudinal-model"><i class="fa fa-check"></i><b>5.3.4</b> R Output for Longitudinal Model</a></li>
 </ul></li>
-<li class="chapter" data-level="5.4" data-path="data-with-three-of-more-levels.html"><a href="data-with-three-of-more-levels.html#four-level-longitudinal-model-with-random-slopes"><i class="fa fa-check"></i><b>5.4</b> Four-Level Longitudinal Model with Random Slopes</a>
-<ul>
+<li class="chapter" data-level="5.4" data-path="data-with-three-of-more-levels.html"><a href="data-with-three-of-more-levels.html#four-level-longitudinal-model-with-random-slopes"><i class="fa fa-check"></i><b>5.4</b> Four-Level Longitudinal Model with Random Slopes</a><ul>
 <li class="chapter" data-level="5.4.1" data-path="data-with-three-of-more-levels.html"><a href="data-with-three-of-more-levels.html#random-slope-for-time"><i class="fa fa-check"></i><b>5.4.1</b> Random Slope for Time</a></li>
 <li class="chapter" data-level="5.4.2" data-path="data-with-three-of-more-levels.html"><a href="data-with-three-of-more-levels.html#more-random-slope-terms"><i class="fa fa-check"></i><b>5.4.2</b> More Random Slope Terms</a></li>
 <li class="chapter" data-level="5.4.3" data-path="data-with-three-of-more-levels.html"><a href="data-with-three-of-more-levels.html#additional-random-slopes"><i class="fa fa-check"></i><b>5.4.3</b> Additional Random Slopes</a></li>
@@ -392,10 +366,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.4.5" data-path="data-with-three-of-more-levels.html"><a href="data-with-three-of-more-levels.html#when-not-to-add-random-slopes"><i class="fa fa-check"></i><b>5.4.5</b> When Not to Add Random Slopes</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="poisson-regression.html"><a href="poisson-regression.html"><i class="fa fa-check"></i><b>6</b> Poisson Regression</a>
-<ul>
-<li class="chapter" data-level="6.1" data-path="poisson-regression.html"><a href="poisson-regression.html#modeling-counts"><i class="fa fa-check"></i><b>6.1</b> Modeling Counts</a>
-<ul>
+<li class="chapter" data-level="6" data-path="poisson-regression.html"><a href="poisson-regression.html"><i class="fa fa-check"></i><b>6</b> Poisson Regression</a><ul>
+<li class="chapter" data-level="6.1" data-path="poisson-regression.html"><a href="poisson-regression.html#modeling-counts"><i class="fa fa-check"></i><b>6.1</b> Modeling Counts</a><ul>
 <li class="chapter" data-level="6.1.1" data-path="poisson-regression.html"><a href="poisson-regression.html#case-study-household-size-in-the-philippines"><i class="fa fa-check"></i><b>6.1.1</b> Case Study: Household Size in the Philippines</a></li>
 <li class="chapter" data-level="6.1.2" data-path="poisson-regression.html"><a href="poisson-regression.html#map-of-the-philippines"><i class="fa fa-check"></i><b>6.1.2</b> Map of the Philippines</a></li>
 <li class="chapter" data-level="6.1.3" data-path="poisson-regression.html"><a href="poisson-regression.html#questions-of-interest-2"><i class="fa fa-check"></i><b>6.1.3</b> Questions of Interest</a></li>
@@ -410,8 +382,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.1.12" data-path="poisson-regression.html"><a href="poisson-regression.html#distribution-in-visayas-region"><i class="fa fa-check"></i><b>6.1.12</b> Distribution in Visayas Region</a></li>
 <li class="chapter" data-level="6.1.13" data-path="poisson-regression.html"><a href="poisson-regression.html#normal-quantile-quantile-plot"><i class="fa fa-check"></i><b>6.1.13</b> Normal Quantile Quantile Plot</a></li>
 </ul></li>
-<li class="chapter" data-level="6.2" data-path="poisson-regression.html"><a href="poisson-regression.html#poisson-regression-models"><i class="fa fa-check"></i><b>6.2</b> Poisson Regression Models</a>
-<ul>
+<li class="chapter" data-level="6.2" data-path="poisson-regression.html"><a href="poisson-regression.html#poisson-regression-models"><i class="fa fa-check"></i><b>6.2</b> Poisson Regression Models</a><ul>
 <li class="chapter" data-level="6.2.1" data-path="poisson-regression.html"><a href="poisson-regression.html#the-poisson-distribution"><i class="fa fa-check"></i><b>6.2.1</b> The Poisson Distribution</a></li>
 <li class="chapter" data-level="6.2.2" data-path="poisson-regression.html"><a href="poisson-regression.html#poisson-distribution-for-lambda1"><i class="fa fa-check"></i><b>6.2.2</b> Poisson Distribution for <span class="math inline">\(\lambda=1\)</span></a></li>
 <li class="chapter" data-level="6.2.3" data-path="poisson-regression.html"><a href="poisson-regression.html#poisson-distribution-for-lambdain135"><i class="fa fa-check"></i><b>6.2.3</b> Poisson Distribution for <span class="math inline">\(\lambda\in\{1,3,5\}\)</span></a></li>
@@ -419,22 +390,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.2.5" data-path="poisson-regression.html"><a href="poisson-regression.html#poisson-regression-assumptions"><i class="fa fa-check"></i><b>6.2.5</b> Poisson Regression Assumptions</a></li>
 <li class="chapter" data-level="6.2.6" data-path="poisson-regression.html"><a href="poisson-regression.html#poisson-regression-illustration"><i class="fa fa-check"></i><b>6.2.6</b> Poisson Regression Illustration</a></li>
 </ul></li>
-<li class="chapter" data-level="6.3" data-path="poisson-regression.html"><a href="poisson-regression.html#poisson-model-for-household-size"><i class="fa fa-check"></i><b>6.3</b> Poisson Model for Household Size</a>
-<ul>
+<li class="chapter" data-level="6.3" data-path="poisson-regression.html"><a href="poisson-regression.html#poisson-model-for-household-size"><i class="fa fa-check"></i><b>6.3</b> Poisson Model for Household Size</a><ul>
 <li class="chapter" data-level="6.3.1" data-path="poisson-regression.html"><a href="poisson-regression.html#poisson-regression-model-for-location"><i class="fa fa-check"></i><b>6.3.1</b> Poisson Regression Model for Location</a></li>
 <li class="chapter" data-level="6.3.2" data-path="poisson-regression.html"><a href="poisson-regression.html#interpreting-model-parameters-in-poisson-regression"><i class="fa fa-check"></i><b>6.3.2</b> Interpreting Model Parameters in Poisson Regression</a></li>
 <li class="chapter" data-level="6.3.3" data-path="poisson-regression.html"><a href="poisson-regression.html#wald-based-confidence-intervals-for-difference"><i class="fa fa-check"></i><b>6.3.3</b> Wald-Based Confidence Intervals for Difference</a></li>
 <li class="chapter" data-level="6.3.4" data-path="poisson-regression.html"><a href="poisson-regression.html#mean-variance-assumption"><i class="fa fa-check"></i><b>6.3.4</b> Mean = Variance Assumption</a></li>
 </ul></li>
-<li class="chapter" data-level="6.4" data-path="poisson-regression.html"><a href="poisson-regression.html#poisson-model-with-multiple-explanatory-variables"><i class="fa fa-check"></i><b>6.4</b> Poisson Model with Multiple Explanatory Variables</a>
-<ul>
+<li class="chapter" data-level="6.4" data-path="poisson-regression.html"><a href="poisson-regression.html#poisson-model-with-multiple-explanatory-variables"><i class="fa fa-check"></i><b>6.4</b> Poisson Model with Multiple Explanatory Variables</a><ul>
 <li class="chapter" data-level="6.4.1" data-path="poisson-regression.html"><a href="poisson-regression.html#accounting-for-age-of-head-of-household"><i class="fa fa-check"></i><b>6.4.1</b> Accounting for Age of Head of Household</a></li>
 <li class="chapter" data-level="6.4.2" data-path="poisson-regression.html"><a href="poisson-regression.html#r-output-for-model-with-age"><i class="fa fa-check"></i><b>6.4.2</b> R Output for Model with Age</a></li>
 <li class="chapter" data-level="6.4.3" data-path="poisson-regression.html"><a href="poisson-regression.html#interpreting-coefficients-for-numeric-explanatory-variable"><i class="fa fa-check"></i><b>6.4.3</b> Interpreting Coefficients for Numeric Explanatory Variable</a></li>
 <li class="chapter" data-level="6.4.4" data-path="poisson-regression.html"><a href="poisson-regression.html#mean-variance-assumption-1"><i class="fa fa-check"></i><b>6.4.4</b> Mean = Variance Assumption</a></li>
 </ul></li>
-<li class="chapter" data-level="6.5" data-path="poisson-regression.html"><a href="poisson-regression.html#deviance-and-model-comparison"><i class="fa fa-check"></i><b>6.5</b> Deviance and Model Comparison</a>
-<ul>
+<li class="chapter" data-level="6.5" data-path="poisson-regression.html"><a href="poisson-regression.html#deviance-and-model-comparison"><i class="fa fa-check"></i><b>6.5</b> Deviance and Model Comparison</a><ul>
 <li class="chapter" data-level="6.5.1" data-path="poisson-regression.html"><a href="poisson-regression.html#accounting-for-nonlinear-trend"><i class="fa fa-check"></i><b>6.5.1</b> Accounting for Nonlinear Trend</a></li>
 <li class="chapter" data-level="6.5.2" data-path="poisson-regression.html"><a href="poisson-regression.html#quadratic-poisson-regresson-model"><i class="fa fa-check"></i><b>6.5.2</b> Quadratic Poisson Regresson Model</a></li>
 <li class="chapter" data-level="6.5.3" data-path="poisson-regression.html"><a href="poisson-regression.html#residuals-for-poisson-models"><i class="fa fa-check"></i><b>6.5.3</b> Residuals for Poisson Models</a></li>
@@ -448,16 +416,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.5.11" data-path="poisson-regression.html"><a href="poisson-regression.html#visual-of-chi2-test-for-roof"><i class="fa fa-check"></i><b>6.5.11</b> Visual of <span class="math inline">\(\chi^2\)</span> Test for Roof</a></li>
 <li class="chapter" data-level="6.5.12" data-path="poisson-regression.html"><a href="poisson-regression.html#goodness-of-fit"><i class="fa fa-check"></i><b>6.5.12</b> Goodness-of-Fit</a></li>
 </ul></li>
-<li class="chapter" data-level="6.6" data-path="poisson-regression.html"><a href="poisson-regression.html#overdisperson"><i class="fa fa-check"></i><b>6.6</b> Overdisperson</a>
-<ul>
+<li class="chapter" data-level="6.6" data-path="poisson-regression.html"><a href="poisson-regression.html#overdisperson"><i class="fa fa-check"></i><b>6.6</b> Overdisperson</a><ul>
 <li class="chapter" data-level="6.6.1" data-path="poisson-regression.html"><a href="poisson-regression.html#quasi-poisson-model"><i class="fa fa-check"></i><b>6.6.1</b> Quasi-Poisson Model</a></li>
 <li class="chapter" data-level="6.6.2" data-path="poisson-regression.html"><a href="poisson-regression.html#quasi-poisson-model-in-r"><i class="fa fa-check"></i><b>6.6.2</b> Quasi-Poisson Model in R</a></li>
 <li class="chapter" data-level="6.6.3" data-path="poisson-regression.html"><a href="poisson-regression.html#standard-errors-in-quasi-poisson-model"><i class="fa fa-check"></i><b>6.6.3</b> Standard Errors in Quasi-Poisson Model</a></li>
 <li class="chapter" data-level="6.6.4" data-path="poisson-regression.html"><a href="poisson-regression.html#drop-in-deviance-tests-for-quasi-poisson-model"><i class="fa fa-check"></i><b>6.6.4</b> Drop-in-Deviance Tests for Quasi-Poisson Model</a></li>
 <li class="chapter" data-level="6.6.5" data-path="poisson-regression.html"><a href="poisson-regression.html#first-vs-second-order-quasi-poisson-models"><i class="fa fa-check"></i><b>6.6.5</b> First vs Second Order Quasi-Poisson Models</a></li>
 </ul></li>
-<li class="chapter" data-level="6.7" data-path="poisson-regression.html"><a href="poisson-regression.html#offsets-in-poisson-regression"><i class="fa fa-check"></i><b>6.7</b> Offsets in Poisson Regression</a>
-<ul>
+<li class="chapter" data-level="6.7" data-path="poisson-regression.html"><a href="poisson-regression.html#offsets-in-poisson-regression"><i class="fa fa-check"></i><b>6.7</b> Offsets in Poisson Regression</a><ul>
 <li class="chapter" data-level="6.7.1" data-path="poisson-regression.html"><a href="poisson-regression.html#case-study-campus-crime"><i class="fa fa-check"></i><b>6.7.1</b> Case Study: Campus Crime</a></li>
 <li class="chapter" data-level="6.7.2" data-path="poisson-regression.html"><a href="poisson-regression.html#distribution-of-number-of-crimes"><i class="fa fa-check"></i><b>6.7.2</b> Distribution of Number of Crimes</a></li>
 <li class="chapter" data-level="6.7.3" data-path="poisson-regression.html"><a href="poisson-regression.html#crimes-by-type-of-institution-and-region"><i class="fa fa-check"></i><b>6.7.3</b> Crimes by Type of Institution and Region</a></li>
@@ -469,16 +435,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.7.9" data-path="poisson-regression.html"><a href="poisson-regression.html#quasi-poisson-model-1"><i class="fa fa-check"></i><b>6.7.9</b> Quasi-Poisson Model</a></li>
 <li class="chapter" data-level="6.7.10" data-path="poisson-regression.html"><a href="poisson-regression.html#test-for-interaction"><i class="fa fa-check"></i><b>6.7.10</b> Test for Interaction</a></li>
 </ul></li>
-<li class="chapter" data-level="6.8" data-path="poisson-regression.html"><a href="poisson-regression.html#summaries"><i class="fa fa-check"></i><b>6.8</b> Summaries</a>
-<ul>
+<li class="chapter" data-level="6.8" data-path="poisson-regression.html"><a href="poisson-regression.html#summaries"><i class="fa fa-check"></i><b>6.8</b> Summaries</a><ul>
 <li class="chapter" data-level="6.8.1" data-path="poisson-regression.html"><a href="poisson-regression.html#llsr-vs.-poisson-regression-comparison"><i class="fa fa-check"></i><b>6.8.1</b> LLSR vs. Poisson Regression Comparison</a></li>
 <li class="chapter" data-level="6.8.2" data-path="poisson-regression.html"><a href="poisson-regression.html#poisson-vs-quasi-poisson-inference"><i class="fa fa-check"></i><b>6.8.2</b> Poisson vs Quasi-Poisson Inference</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="logistic-regression.html"><a href="logistic-regression.html"><i class="fa fa-check"></i><b>7</b> Logistic Regression</a>
-<ul>
-<li class="chapter" data-level="7.1" data-path="logistic-regression.html"><a href="logistic-regression.html#binomial-logistic-regression"><i class="fa fa-check"></i><b>7.1</b> Binomial Logistic Regression</a>
-<ul>
+<li class="chapter" data-level="7" data-path="logistic-regression.html"><a href="logistic-regression.html"><i class="fa fa-check"></i><b>7</b> Logistic Regression</a><ul>
+<li class="chapter" data-level="7.1" data-path="logistic-regression.html"><a href="logistic-regression.html#binomial-logistic-regression"><i class="fa fa-check"></i><b>7.1</b> Binomial Logistic Regression</a><ul>
 <li class="chapter" data-level="7.1.1" data-path="logistic-regression.html"><a href="logistic-regression.html#binary-response-data"><i class="fa fa-check"></i><b>7.1.1</b> Binary Response Data</a></li>
 <li class="chapter" data-level="7.1.2" data-path="logistic-regression.html"><a href="logistic-regression.html#binomial-response-data"><i class="fa fa-check"></i><b>7.1.2</b> Binomial Response Data</a></li>
 <li class="chapter" data-level="7.1.3" data-path="logistic-regression.html"><a href="logistic-regression.html#wisconsin-election-data"><i class="fa fa-check"></i><b>7.1.3</b> 2020 Wisconsin Election Data</a></li>
@@ -492,8 +455,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.1.11" data-path="logistic-regression.html"><a href="logistic-regression.html#interpreting-regression-coefficients"><i class="fa fa-check"></i><b>7.1.11</b> Interpreting Regression Coefficients</a></li>
 <li class="chapter" data-level="7.1.12" data-path="logistic-regression.html"><a href="logistic-regression.html#binomial-logistic-regression-assumptions"><i class="fa fa-check"></i><b>7.1.12</b> Binomial Logistic Regression Assumptions</a></li>
 </ul></li>
-<li class="chapter" data-level="7.2" data-path="logistic-regression.html"><a href="logistic-regression.html#model-for-wisconsin-vote"><i class="fa fa-check"></i><b>7.2</b> Model for Wisconsin Vote</a>
-<ul>
+<li class="chapter" data-level="7.2" data-path="logistic-regression.html"><a href="logistic-regression.html#model-for-wisconsin-vote"><i class="fa fa-check"></i><b>7.2</b> Model for Wisconsin Vote</a><ul>
 <li class="chapter" data-level="7.2.1" data-path="logistic-regression.html"><a href="logistic-regression.html#an-initial-model"><i class="fa fa-check"></i><b>7.2.1</b> An Initial Model</a></li>
 <li class="chapter" data-level="7.2.2" data-path="logistic-regression.html"><a href="logistic-regression.html#checking-linearity-assumption"><i class="fa fa-check"></i><b>7.2.2</b> Checking Linearity Assumption</a></li>
 <li class="chapter" data-level="7.2.3" data-path="logistic-regression.html"><a href="logistic-regression.html#overdispersion-in-binomial-counts"><i class="fa fa-check"></i><b>7.2.3</b> Overdispersion in Binomial Counts</a></li>
@@ -505,8 +467,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.2.9" data-path="logistic-regression.html"><a href="logistic-regression.html#deviance-residual-plot"><i class="fa fa-check"></i><b>7.2.9</b> Deviance Residual Plot</a></li>
 <li class="chapter" data-level="7.2.10" data-path="logistic-regression.html"><a href="logistic-regression.html#llsr-vs-binomial-logistic-regression"><i class="fa fa-check"></i><b>7.2.10</b> LLSR vs Binomial Logistic Regression</a></li>
 </ul></li>
-<li class="chapter" data-level="7.3" data-path="logistic-regression.html"><a href="logistic-regression.html#maximum-likelihood-estimation"><i class="fa fa-check"></i><b>7.3</b> Maximum Likelihood Estimation</a>
-<ul>
+<li class="chapter" data-level="7.3" data-path="logistic-regression.html"><a href="logistic-regression.html#maximum-likelihood-estimation"><i class="fa fa-check"></i><b>7.3</b> Maximum Likelihood Estimation</a><ul>
 <li class="chapter" data-level="7.3.1" data-path="logistic-regression.html"><a href="logistic-regression.html#parameter-estimation"><i class="fa fa-check"></i><b>7.3.1</b> Parameter Estimation</a></li>
 <li class="chapter" data-level="7.3.2" data-path="logistic-regression.html"><a href="logistic-regression.html#steph-curry-3-point-shooting"><i class="fa fa-check"></i><b>7.3.2</b> Steph Curry 3-Point Shooting</a></li>
 <li class="chapter" data-level="7.3.3" data-path="logistic-regression.html"><a href="logistic-regression.html#model-for-currys-shooting"><i class="fa fa-check"></i><b>7.3.3</b> Model for Curry’s Shooting</a></li>
@@ -524,8 +485,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.3.15" data-path="logistic-regression.html"><a href="logistic-regression.html#applications-of-likelihood"><i class="fa fa-check"></i><b>7.3.15</b> Applications of Likelihood</a></li>
 <li class="chapter" data-level="7.3.16" data-path="logistic-regression.html"><a href="logistic-regression.html#summary-maximum-likelihood-estimation"><i class="fa fa-check"></i><b>7.3.16</b> Summary Maximum Likelihood Estimation</a></li>
 </ul></li>
-<li class="chapter" data-level="7.4" data-path="logistic-regression.html"><a href="logistic-regression.html#zero-inflated-poisson-model"><i class="fa fa-check"></i><b>7.4</b> Zero-Inflated Poisson Model</a>
-<ul>
+<li class="chapter" data-level="7.4" data-path="logistic-regression.html"><a href="logistic-regression.html#zero-inflated-poisson-model"><i class="fa fa-check"></i><b>7.4</b> Zero-Inflated Poisson Model</a><ul>
 <li class="chapter" data-level="7.4.1" data-path="logistic-regression.html"><a href="logistic-regression.html#case-study-weekend-drinking"><i class="fa fa-check"></i><b>7.4.1</b> Case Study: Weekend Drinking</a></li>
 <li class="chapter" data-level="7.4.2" data-path="logistic-regression.html"><a href="logistic-regression.html#questions-of-interest-3"><i class="fa fa-check"></i><b>7.4.2</b> Questions of Interest</a></li>
 <li class="chapter" data-level="7.4.3" data-path="logistic-regression.html"><a href="logistic-regression.html#distribution-of-number-of-drinks"><i class="fa fa-check"></i><b>7.4.3</b> Distribution of Number of Drinks</a></li>
@@ -539,8 +499,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.4.11" data-path="logistic-regression.html"><a href="logistic-regression.html#examples-of-zip-pmfs"><i class="fa fa-check"></i><b>7.4.11</b> Examples of ZIP PMF’s</a></li>
 <li class="chapter" data-level="7.4.12" data-path="logistic-regression.html"><a href="logistic-regression.html#zip-model"><i class="fa fa-check"></i><b>7.4.12</b> ZIP Model</a></li>
 </ul></li>
-<li class="chapter" data-level="7.5" data-path="logistic-regression.html"><a href="logistic-regression.html#model-for-drinks-data"><i class="fa fa-check"></i><b>7.5</b> Model for Drinks Data</a>
-<ul>
+<li class="chapter" data-level="7.5" data-path="logistic-regression.html"><a href="logistic-regression.html#model-for-drinks-data"><i class="fa fa-check"></i><b>7.5</b> Model for Drinks Data</a><ul>
 <li class="chapter" data-level="7.5.1" data-path="logistic-regression.html"><a href="logistic-regression.html#zip-for-drinks-data"><i class="fa fa-check"></i><b>7.5.1</b> ZIP for Drinks Data</a></li>
 <li class="chapter" data-level="7.5.2" data-path="logistic-regression.html"><a href="logistic-regression.html#zip-model-in-r"><i class="fa fa-check"></i><b>7.5.2</b> ZIP Model in R</a></li>
 <li class="chapter" data-level="7.5.3" data-path="logistic-regression.html"><a href="logistic-regression.html#residual-plot"><i class="fa fa-check"></i><b>7.5.3</b> Residual Plot</a></li>
@@ -548,10 +507,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.5.5" data-path="logistic-regression.html"><a href="logistic-regression.html#final-thoughts-on-zero-inflated-models"><i class="fa fa-check"></i><b>7.5.5</b> Final Thoughts on Zero-Inflated Models</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="multilevel-generalized-linear-models.html"><a href="multilevel-generalized-linear-models.html"><i class="fa fa-check"></i><b>8</b> Multilevel Generalized Linear Models</a>
-<ul>
-<li class="chapter" data-level="8.1" data-path="multilevel-generalized-linear-models.html"><a href="multilevel-generalized-linear-models.html#basketball-referees-dataset"><i class="fa fa-check"></i><b>8.1</b> Basketball Referees Dataset</a>
-<ul>
+<li class="chapter" data-level="8" data-path="multilevel-generalized-linear-models.html"><a href="multilevel-generalized-linear-models.html"><i class="fa fa-check"></i><b>8</b> Multilevel Generalized Linear Models</a><ul>
+<li class="chapter" data-level="8.1" data-path="multilevel-generalized-linear-models.html"><a href="multilevel-generalized-linear-models.html#basketball-referees-dataset"><i class="fa fa-check"></i><b>8.1</b> Basketball Referees Dataset</a><ul>
 <li class="chapter" data-level="8.1.1" data-path="multilevel-generalized-linear-models.html"><a href="multilevel-generalized-linear-models.html#data-overview"><i class="fa fa-check"></i><b>8.1.1</b> Data Overview</a></li>
 <li class="chapter" data-level="8.1.2" data-path="multilevel-generalized-linear-models.html"><a href="multilevel-generalized-linear-models.html#histograms-for-level-one-covariates"><i class="fa fa-check"></i><b>8.1.2</b> Histograms for Level One Covariates</a></li>
 <li class="chapter" data-level="8.1.3" data-path="multilevel-generalized-linear-models.html"><a href="multilevel-generalized-linear-models.html#average-fouls-by-team"><i class="fa fa-check"></i><b>8.1.3</b> Average Fouls by Team</a></li>
@@ -559,8 +516,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.1.5" data-path="multilevel-generalized-linear-models.html"><a href="multilevel-generalized-linear-models.html#tabular-summary-by-fouling-team"><i class="fa fa-check"></i><b>8.1.5</b> Tabular Summary by Fouling Team</a></li>
 <li class="chapter" data-level="8.1.6" data-path="multilevel-generalized-linear-models.html"><a href="multilevel-generalized-linear-models.html#mosaic-plots"><i class="fa fa-check"></i><b>8.1.6</b> Mosaic Plots</a></li>
 </ul></li>
-<li class="chapter" data-level="8.2" data-path="multilevel-generalized-linear-models.html"><a href="multilevel-generalized-linear-models.html#multilevel-generalized-linear-model"><i class="fa fa-check"></i><b>8.2</b> Multilevel Generalized Linear Model</a>
-<ul>
+<li class="chapter" data-level="8.2" data-path="multilevel-generalized-linear-models.html"><a href="multilevel-generalized-linear-models.html#multilevel-generalized-linear-model"><i class="fa fa-check"></i><b>8.2</b> Multilevel Generalized Linear Model</a><ul>
 <li class="chapter" data-level="8.2.1" data-path="multilevel-generalized-linear-models.html"><a href="multilevel-generalized-linear-models.html#motivation-for-a-statistical-model"><i class="fa fa-check"></i><b>8.2.1</b> Motivation for a Statistical Model</a></li>
 <li class="chapter" data-level="8.2.2" data-path="multilevel-generalized-linear-models.html"><a href="multilevel-generalized-linear-models.html#a-glm-approach"><i class="fa fa-check"></i><b>8.2.2</b> A GLM Approach</a></li>
 <li class="chapter" data-level="8.2.3" data-path="multilevel-generalized-linear-models.html"><a href="multilevel-generalized-linear-models.html#adding-random-effect-for-game"><i class="fa fa-check"></i><b>8.2.3</b> Adding Random Effect for Game</a></li>
@@ -571,8 +527,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.2.8" data-path="multilevel-generalized-linear-models.html"><a href="multilevel-generalized-linear-models.html#aic-bic-comparison"><i class="fa fa-check"></i><b>8.2.8</b> AIC, BIC Comparison</a></li>
 <li class="chapter" data-level="8.2.9" data-path="multilevel-generalized-linear-models.html"><a href="multilevel-generalized-linear-models.html#random-error-terms"><i class="fa fa-check"></i><b>8.2.9</b> Random Error Terms</a></li>
 </ul></li>
-<li class="chapter" data-level="8.3" data-path="multilevel-generalized-linear-models.html"><a href="multilevel-generalized-linear-models.html#crossed-random-effects"><i class="fa fa-check"></i><b>8.3</b> Crossed Random Effects</a>
-<ul>
+<li class="chapter" data-level="8.3" data-path="multilevel-generalized-linear-models.html"><a href="multilevel-generalized-linear-models.html#crossed-random-effects"><i class="fa fa-check"></i><b>8.3</b> Crossed Random Effects</a><ul>
 <li class="chapter" data-level="8.3.1" data-path="multilevel-generalized-linear-models.html"><a href="multilevel-generalized-linear-models.html#random-effects-for-teams"><i class="fa fa-check"></i><b>8.3.1</b> Random Effects for Teams</a></li>
 <li class="chapter" data-level="8.3.2" data-path="multilevel-generalized-linear-models.html"><a href="multilevel-generalized-linear-models.html#crossed-vs-nested-random-effects"><i class="fa fa-check"></i><b>8.3.2</b> Crossed vs Nested Random Effects</a></li>
 <li class="chapter" data-level="8.3.3" data-path="multilevel-generalized-linear-models.html"><a href="multilevel-generalized-linear-models.html#models-for-crossed-random-effects"><i class="fa fa-check"></i><b>8.3.3</b> Models for Crossed Random Effects</a></li>
@@ -580,8 +535,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.3.5" data-path="multilevel-generalized-linear-models.html"><a href="multilevel-generalized-linear-models.html#more-on-crossed-effects"><i class="fa fa-check"></i><b>8.3.5</b> More on Crossed Effects</a></li>
 <li class="chapter" data-level="8.3.6" data-path="multilevel-generalized-linear-models.html"><a href="multilevel-generalized-linear-models.html#a-final-model-for-examining-referee-bias"><i class="fa fa-check"></i><b>8.3.6</b> A Final Model for Examining Referee Bias</a></li>
 </ul></li>
-<li class="chapter" data-level="8.4" data-path="multilevel-generalized-linear-models.html"><a href="multilevel-generalized-linear-models.html#parametric-bootstrapping"><i class="fa fa-check"></i><b>8.4</b> Parametric Bootstrapping</a>
-<ul>
+<li class="chapter" data-level="8.4" data-path="multilevel-generalized-linear-models.html"><a href="multilevel-generalized-linear-models.html#parametric-bootstrapping"><i class="fa fa-check"></i><b>8.4</b> Parametric Bootstrapping</a><ul>
 <li class="chapter" data-level="8.4.1" data-path="multilevel-generalized-linear-models.html"><a href="multilevel-generalized-linear-models.html#when-and-why-to-bootstrap"><i class="fa fa-check"></i><b>8.4.1</b> When and Why to Bootstrap</a></li>
 <li class="chapter" data-level="8.4.2" data-path="multilevel-generalized-linear-models.html"><a href="multilevel-generalized-linear-models.html#parametric-bootstrap-procedure"><i class="fa fa-check"></i><b>8.4.2</b> Parametric Bootstrap Procedure</a></li>
 <li class="chapter" data-level="8.4.3" data-path="multilevel-generalized-linear-models.html"><a href="multilevel-generalized-linear-models.html#a-simple-example"><i class="fa fa-check"></i><b>8.4.3</b> A Simple Example</a></li>
@@ -595,10 +549,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.4.11" data-path="multilevel-generalized-linear-models.html"><a href="multilevel-generalized-linear-models.html#simulation-based-chi2-test"><i class="fa fa-check"></i><b>8.4.11</b> Simulation-Based <span class="math inline">\(\chi^2\)</span> Test</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="epilogue.html"><a href="epilogue.html"><i class="fa fa-check"></i><b>9</b> Epilogue</a>
-<ul>
-<li class="chapter" data-level="9.1" data-path="epilogue.html"><a href="epilogue.html#further-directions"><i class="fa fa-check"></i><b>9.1</b> Further Directions</a>
-<ul>
+<li class="chapter" data-level="9" data-path="epilogue.html"><a href="epilogue.html"><i class="fa fa-check"></i><b>9</b> Epilogue</a><ul>
+<li class="chapter" data-level="9.1" data-path="epilogue.html"><a href="epilogue.html#further-directions"><i class="fa fa-check"></i><b>9.1</b> Further Directions</a><ul>
 <li class="chapter" data-level="9.1.1" data-path="epilogue.html"><a href="epilogue.html#more-on-glms"><i class="fa fa-check"></i><b>9.1.1</b> More on GLM’s</a></li>
 <li class="chapter" data-level="9.1.2" data-path="epilogue.html"><a href="epilogue.html#models-beyond-glms"><i class="fa fa-check"></i><b>9.1.2</b> Models Beyond GLM’s</a></li>
 <li class="chapter" data-level="9.1.3" data-path="epilogue.html"><a href="epilogue.html#statistics-courses-at-lawrence"><i class="fa fa-check"></i><b>9.1.3</b> Statistics Courses at Lawrence</a></li>
@@ -623,23 +575,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="data-with-three-of-more-levels" class="section level1 hasAnchor" number="5">
+<div id="data-with-three-of-more-levels" class="section level1 hasAnchor">
 <h1><span class="header-section-number">Chapter 5</span> Data with Three of More Levels<a href="data-with-three-of-more-levels.html#data-with-three-of-more-levels" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>These notes accompany Chapter 10 in <a href="https://bookdown.org/roback/bookdown-BeyondMLR/">Beyond Multiple Linear Regression</a> by Roback and Legler.</p>
-<div class="sourceCode" id="cb240"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb240-1"><a href="data-with-three-of-more-levels.html#cb240-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Packages required for Chapter 10</span></span>
-<span id="cb240-2"><a href="data-with-three-of-more-levels.html#cb240-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MASS)</span>
-<span id="cb240-3"><a href="data-with-three-of-more-levels.html#cb240-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gridExtra)  </span>
-<span id="cb240-4"><a href="data-with-three-of-more-levels.html#cb240-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mnormt) </span>
-<span id="cb240-5"><a href="data-with-three-of-more-levels.html#cb240-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lme4) </span>
-<span id="cb240-6"><a href="data-with-three-of-more-levels.html#cb240-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lmerTest)</span>
-<span id="cb240-7"><a href="data-with-three-of-more-levels.html#cb240-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr) </span>
-<span id="cb240-8"><a href="data-with-three-of-more-levels.html#cb240-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span>
-<span id="cb240-9"><a href="data-with-three-of-more-levels.html#cb240-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb240-10"><a href="data-with-three-of-more-levels.html#cb240-10" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Hmisc)</span>
-<span id="cb240-11"><a href="data-with-three-of-more-levels.html#cb240-11" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(nlme)</span></code></pre></div>
-<div id="three-level-plants-experiment" class="section level2 hasAnchor" number="5.1">
+<div class="sourceCode" id="cb240"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb240-1"><a href="data-with-three-of-more-levels.html#cb240-1"></a><span class="co"># Packages required for Chapter 10</span></span>
+<span id="cb240-2"><a href="data-with-three-of-more-levels.html#cb240-2"></a><span class="kw">library</span>(MASS)</span>
+<span id="cb240-3"><a href="data-with-three-of-more-levels.html#cb240-3"></a><span class="kw">library</span>(gridExtra)  </span>
+<span id="cb240-4"><a href="data-with-three-of-more-levels.html#cb240-4"></a><span class="kw">library</span>(mnormt) </span>
+<span id="cb240-5"><a href="data-with-three-of-more-levels.html#cb240-5"></a><span class="kw">library</span>(lme4) </span>
+<span id="cb240-6"><a href="data-with-three-of-more-levels.html#cb240-6"></a><span class="kw">library</span>(lmerTest)</span>
+<span id="cb240-7"><a href="data-with-three-of-more-levels.html#cb240-7"></a><span class="kw">library</span>(knitr) </span>
+<span id="cb240-8"><a href="data-with-three-of-more-levels.html#cb240-8"></a><span class="kw">library</span>(kableExtra)</span>
+<span id="cb240-9"><a href="data-with-three-of-more-levels.html#cb240-9"></a><span class="kw">library</span>(tidyverse)</span>
+<span id="cb240-10"><a href="data-with-three-of-more-levels.html#cb240-10"></a><span class="kw">library</span>(Hmisc)</span>
+<span id="cb240-11"><a href="data-with-three-of-more-levels.html#cb240-11"></a><span class="kw">library</span>(nlme)</span></code></pre></div>
+<div id="three-level-plants-experiment" class="section level2 hasAnchor">
 <h2><span class="header-section-number">5.1</span> Three-Level Plants Experiment<a href="data-with-three-of-more-levels.html#three-level-plants-experiment" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="experimental-design" class="section level3 hasAnchor" number="5.1.1">
+<div id="experimental-design" class="section level3 hasAnchor">
 <h3><span class="header-section-number">5.1.1</span> Experimental Design<a href="data-with-three-of-more-levels.html#experimental-design" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Researchers are interested in comparing heights of plants of two different genotypes (A and B), with two different fertilizers (A and B), and also in assessing whether being close to window affects growth. Scientists obtained four trays and placed four pots in each tray. Two of the trays were placed close to windows and the other two were placed away from windows. Within each tray, two of the pots received fertilizer A and two received fertilizer B. Two plants of each phenotype were then planted in each plot. After 4 weeks, researchers recorded the height of each plant.</p>
 <div class="figure"><span style="display:block;" id="fig:unnamed-chunk-154"></span>
@@ -649,10 +601,10 @@ Figure 5.1: Potted Plant Experimental Design
 </p>
 </div>
 </div>
-<div id="the-data-1" class="section level3 hasAnchor" number="5.1.2">
+<div id="the-data-1" class="section level3 hasAnchor">
 <h3><span class="header-section-number">5.1.2</span> The Data<a href="data-with-three-of-more-levels.html#the-data-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The first 20 rows of the dataset are shown below.</p>
-<div class="sourceCode" id="cb241"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb241-1"><a href="data-with-three-of-more-levels.html#cb241-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(plants, <span class="dv">20</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb241"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb241-1"><a href="data-with-three-of-more-levels.html#cb241-1"></a><span class="kw">head</span>(plants, <span class="dv">20</span>)</span></code></pre></div>
 <pre><code>##    plantid tray pot window fertA phenoA height
 ## 1        1    1   1      1     1      1   5.59
 ## 2        2    1   1      1     1      0   5.33
@@ -675,20 +627,20 @@ Figure 5.1: Potted Plant Experimental Design
 ## 19      19    2   5      0     1      1   2.30
 ## 20      20    2   5      0     1      0   2.30</code></pre>
 </div>
-<div id="questions" class="section level3 hasAnchor" number="5.1.3">
+<div id="questions" class="section level3 hasAnchor">
 <h3><span class="header-section-number">5.1.3</span> Questions<a href="data-with-three-of-more-levels.html#questions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ol style="list-style-type: decimal">
 <li>Between plants B, C, and D, which would you expect to be most highly correlated with plant A? Which would you expect to be least highly correlated with plant A?</li>
 <li>What are the observational units at each level? What are the treatments or variables?</li>
 </ol>
 </div>
-<div id="three-level-model" class="section level3 hasAnchor" number="5.1.4">
+<div id="three-level-model" class="section level3 hasAnchor">
 <h3><span class="header-section-number">5.1.4</span> Three Level Model<a href="data-with-three-of-more-levels.html#three-level-model" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Let <span class="math inline">\(Y_{ijk}\)</span> represent the height of plant <span class="math inline">\(k\)</span> in pot <span class="math inline">\(j\)</span> in tray <span class="math inline">\(i\)</span>. A possible model is:</p>
 <p><span class="math display">\[
 \begin{align*}
 Y_{ij} &amp; = [\alpha_{0}+\alpha_{1}\textrm{Window}_{i}+\beta_{0}\textrm{FertA}_{ij}+\gamma_{0}\textrm{PhenoA}_{ijk}] \\
-&amp; \textrm{} + [t_{i}+ p_{ij} + \epsilon_{ijk}],
+ &amp; \textrm{} + [t_{i}+ p_{ij} + \epsilon_{ijk}],
 \end{align*}
 \]</span></p>
 <p>where <span class="math inline">\(t_i\sim N(0, \sigma^2_t)\)</span>, <span class="math inline">\(p_{ij}\sim N(0, \sigma^2_p)\)</span>, and <span class="math inline">\(\epsilon_{ijk}\sim N(0, \sigma^2)\)</span></p>
@@ -702,10 +654,10 @@ Y_{ij} &amp; = [\alpha_{0}+\alpha_{1}\textrm{Window}_{i}+\beta_{0}\textrm{FertA}
 </ul>
 <p>The model does not include any random slope effects. This means we are assuming the effect of phenotype is the same in each pot, and the effect of fertilizer is the same in each tray.</p>
 </div>
-<div id="r-implementation-of-three-level-model" class="section level3 hasAnchor" number="5.1.5">
+<div id="r-implementation-of-three-level-model" class="section level3 hasAnchor">
 <h3><span class="header-section-number">5.1.5</span> R Implementation of Three Level Model<a href="data-with-three-of-more-levels.html#r-implementation-of-three-level-model" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb243"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb243-1"><a href="data-with-three-of-more-levels.html#cb243-1" aria-hidden="true" tabindex="-1"></a>M <span class="ot">&lt;-</span> <span class="fu">lmer</span>(<span class="at">data=</span>plants, height <span class="sc">~</span> window <span class="sc">+</span> fertA <span class="sc">+</span> phenoA  <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>pot) <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>tray))</span>
-<span id="cb243-2"><a href="data-with-three-of-more-levels.html#cb243-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(M)</span></code></pre></div>
+<div class="sourceCode" id="cb243"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb243-1"><a href="data-with-three-of-more-levels.html#cb243-1"></a>M &lt;-<span class="st"> </span><span class="kw">lmer</span>(<span class="dt">data=</span>plants, height <span class="op">~</span><span class="st"> </span>window <span class="op">+</span><span class="st"> </span>fertA <span class="op">+</span><span class="st"> </span>phenoA  <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span><span class="op">|</span>pot) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span><span class="op">|</span>tray))</span>
+<span id="cb243-2"><a href="data-with-three-of-more-levels.html#cb243-2"></a><span class="kw">summary</span>(M)</span></code></pre></div>
 <pre><code>## Linear mixed model fit by REML. t-tests use Satterthwaite&#39;s method [
 ## lmerModLmerTest]
 ## Formula: height ~ window + fertA + phenoA + (1 | pot) + (1 | tray)
@@ -715,7 +667,7 @@ Y_{ij} &amp; = [\alpha_{0}+\alpha_{1}\textrm{Window}_{i}+\beta_{0}\textrm{FertA}
 ## 
 ## Scaled residuals: 
 ##      Min       1Q   Median       3Q      Max 
-## -2.35859 -0.61695 -0.06346  0.56342  2.27449 
+## -2.35859 -0.61695 -0.06345  0.56341  2.27448 
 ## 
 ## Random effects:
 ##  Groups   Name        Variance Std.Dev.
@@ -726,7 +678,7 @@ Y_{ij} &amp; = [\alpha_{0}+\alpha_{1}\textrm{Window}_{i}+\beta_{0}\textrm{FertA}
 ## 
 ## Fixed effects:
 ##             Estimate Std. Error      df t value Pr(&gt;|t|)  
-## (Intercept)   2.1178     0.4731  3.8400   4.476   0.0121 *
+## (Intercept)   2.1178     0.4731  3.8401   4.476   0.0121 *
 ## window        1.1416     0.5662  2.0000   2.016   0.1813  
 ## fertA         0.7528     0.4324 11.0000   1.741   0.1095  
 ## phenoA        0.5997     0.2595 47.0000   2.311   0.0253 *
@@ -741,11 +693,11 @@ Y_{ij} &amp; = [\alpha_{0}+\alpha_{1}\textrm{Window}_{i}+\beta_{0}\textrm{FertA}
 <p><span class="math inline">\(\hat{\sigma}_p=0.6917\)</span>, <span class="math inline">\(\hat{\sigma}_t=0.3655\)</span>, <span class="math inline">\(\hat{\sigma}=1.0380\)</span>.</p>
 <p>After accounting for phenotype, fertilizer, and window, the greatest amount of remaining variability occurs between individual plants in the same pot, followed by average heights among pots in the same tray, followed by average heights between trays.</p>
 </div>
-<div id="inappropriate-llsr-model" class="section level3 hasAnchor" number="5.1.6">
+<div id="inappropriate-llsr-model" class="section level3 hasAnchor">
 <h3><span class="header-section-number">5.1.6</span> Inappropriate LLSR Model<a href="data-with-three-of-more-levels.html#inappropriate-llsr-model" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>We compare this to an inappropriately fit LLSR model.</p>
-<div class="sourceCode" id="cb245"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb245-1"><a href="data-with-three-of-more-levels.html#cb245-1" aria-hidden="true" tabindex="-1"></a>M_LLSR <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data=</span>plants, height <span class="sc">~</span> window <span class="sc">+</span> fertA <span class="sc">+</span> phenoA  )</span>
-<span id="cb245-2"><a href="data-with-three-of-more-levels.html#cb245-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(M_LLSR)</span></code></pre></div>
+<div class="sourceCode" id="cb245"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb245-1"><a href="data-with-three-of-more-levels.html#cb245-1"></a>M_LLSR &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data=</span>plants, height <span class="op">~</span><span class="st"> </span>window <span class="op">+</span><span class="st"> </span>fertA <span class="op">+</span><span class="st"> </span>phenoA  )</span>
+<span id="cb245-2"><a href="data-with-three-of-more-levels.html#cb245-2"></a><span class="kw">summary</span>(M_LLSR)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = height ~ window + fertA + phenoA, data = plants)
@@ -774,15 +726,15 @@ Y_{ij} &amp; = [\alpha_{0}+\alpha_{1}\textrm{Window}_{i}+\beta_{0}\textrm{FertA}
 </ul>
 </div>
 </div>
-<div id="three-level-model-with-random-slopes" class="section level2 hasAnchor" number="5.2">
+<div id="three-level-model-with-random-slopes" class="section level2 hasAnchor">
 <h2><span class="header-section-number">5.2</span> Three-Level Model with Random Slopes<a href="data-with-three-of-more-levels.html#three-level-model-with-random-slopes" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="random-slope-for-phenoa" class="section level3 hasAnchor" number="5.2.1">
+<div id="random-slope-for-phenoa" class="section level3 hasAnchor">
 <h3><span class="header-section-number">5.2.1</span> Random Slope for PhenoA<a href="data-with-three-of-more-levels.html#random-slope-for-phenoa" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>We could allow for the possibility that the effect of phenotype is different in different pots, by adding a random slope effect for phenotype.</p>
 <p><span class="math display">\[
 \begin{align*}
 Y_{ijk} &amp; = [\alpha_{0}+\alpha_{1}\textrm{Window}_{i}+\beta_{0}\textrm{FertA}_{ij}+\gamma_{0}\textrm{PhenoA}_{ijk}] \\
-&amp; \textrm{} + [t_i  + p_{ij} + q_{ij}\textrm{PhenoA}_{ij} + \epsilon_{ijk}],
+ &amp; \textrm{} + [t_i  + p_{ij} + q_{ij}\textrm{PhenoA}_{ij} + \epsilon_{ijk}],
 \end{align*}
 \]</span></p>
 <p>where <span class="math inline">\(t_i\sim N(0, \sigma^2_t)\)</span>, and <span class="math inline">\(\epsilon_{ijk}\sim N(0, \sigma^2)\)</span></p>
@@ -796,14 +748,14 @@ Y_{ijk} &amp; = [\alpha_{0}+\alpha_{1}\textrm{Window}_{i}+\beta_{0}\textrm{FertA
           \begin{array}{cc}
             \sigma_{p}^{2} &amp; \rho_{pq}\sigma_{p}\sigma_q \\
             \rho_{pq}\sigma_{p}\sigma_q &amp; \sigma_{q}^{2}
-          \end{array} \right] \right)
+          \end{array} \right] \right) 
 \]</span></p>
 <p>We assume random error terms on different levels are independent of each other. That is, <span class="math inline">\(t_i\)</span> is independent of <span class="math inline">\(p_{ij}\)</span> and <span class="math inline">\(q_{ij}\)</span>, and all of these are independent of <span class="math inline">\(\epsilon_{ijk}\)</span>.</p>
 </div>
-<div id="r-output-for-random-slope-for-phenoa" class="section level3 hasAnchor" number="5.2.2">
+<div id="r-output-for-random-slope-for-phenoa" class="section level3 hasAnchor">
 <h3><span class="header-section-number">5.2.2</span> R Output for Random Slope for PhenoA<a href="data-with-three-of-more-levels.html#r-output-for-random-slope-for-phenoa" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb247"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb247-1"><a href="data-with-three-of-more-levels.html#cb247-1" aria-hidden="true" tabindex="-1"></a>M3 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(<span class="at">data=</span>plants, height <span class="sc">~</span> window <span class="sc">+</span> fertA <span class="sc">+</span> phenoA  <span class="sc">+</span> (phenoA<span class="sc">|</span>pot) <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>tray))</span>
-<span id="cb247-2"><a href="data-with-three-of-more-levels.html#cb247-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(M3)</span></code></pre></div>
+<div class="sourceCode" id="cb247"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb247-1"><a href="data-with-three-of-more-levels.html#cb247-1"></a>M3 &lt;-<span class="st"> </span><span class="kw">lmer</span>(<span class="dt">data=</span>plants, height <span class="op">~</span><span class="st"> </span>window <span class="op">+</span><span class="st"> </span>fertA <span class="op">+</span><span class="st"> </span>phenoA  <span class="op">+</span><span class="st"> </span>(phenoA<span class="op">|</span>pot) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span><span class="op">|</span>tray))</span>
+<span id="cb247-2"><a href="data-with-three-of-more-levels.html#cb247-2"></a><span class="kw">summary</span>(M3)</span></code></pre></div>
 <pre><code>## Linear mixed model fit by REML. t-tests use Satterthwaite&#39;s method [
 ## lmerModLmerTest]
 ## Formula: height ~ window + fertA + phenoA + (phenoA | pot) + (1 | tray)
@@ -839,17 +791,17 @@ Y_{ijk} &amp; = [\alpha_{0}+\alpha_{1}\textrm{Window}_{i}+\beta_{0}\textrm{FertA
 ## phenoA -0.305  0.000  0.000</code></pre>
 <p>The negative estimate of correlation <span class="math inline">\(\rho_{pq}\)</span> indicates that differences between phenotypes are smaller in pots when plants of phenotype B are taller.</p>
 </div>
-<div id="random-slope-for-fert" class="section level3 hasAnchor" number="5.2.3">
+<div id="random-slope-for-fert" class="section level3 hasAnchor">
 <h3><span class="header-section-number">5.2.3</span> Random Slope for Fert<a href="data-with-three-of-more-levels.html#random-slope-for-fert" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>What if we want to allow for the possibility that the effects of fertilizers varies between trays?</p>
 <p>The R code for such a model is shown below.</p>
-<div class="sourceCode" id="cb249"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb249-1"><a href="data-with-three-of-more-levels.html#cb249-1" aria-hidden="true" tabindex="-1"></a>M4 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(<span class="at">data=</span>plants, height <span class="sc">~</span> window <span class="sc">+</span> fertA <span class="sc">+</span> phenoA  <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>pot) <span class="sc">+</span> (fertA<span class="sc">|</span>tray))</span></code></pre></div>
+<div class="sourceCode" id="cb249"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb249-1"><a href="data-with-three-of-more-levels.html#cb249-1"></a>M4 &lt;-<span class="st"> </span><span class="kw">lmer</span>(<span class="dt">data=</span>plants, height <span class="op">~</span><span class="st"> </span>window <span class="op">+</span><span class="st"> </span>fertA <span class="op">+</span><span class="st"> </span>phenoA  <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span><span class="op">|</span>pot) <span class="op">+</span><span class="st"> </span>(fertA<span class="op">|</span>tray))</span></code></pre></div>
 <p>How would we write this model mathematically? Include any distributional assumptions about the random effects and error terms.</p>
 </div>
-<div id="r-output-for-random-slope-for-fert" class="section level3 hasAnchor" number="5.2.4">
+<div id="r-output-for-random-slope-for-fert" class="section level3 hasAnchor">
 <h3><span class="header-section-number">5.2.4</span> R Output for Random Slope for Fert<a href="data-with-three-of-more-levels.html#r-output-for-random-slope-for-fert" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb250-1"><a href="data-with-three-of-more-levels.html#cb250-1" aria-hidden="true" tabindex="-1"></a>M4 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(<span class="at">data=</span>plants, height <span class="sc">~</span> window <span class="sc">+</span> fertA <span class="sc">+</span> phenoA <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>pot) <span class="sc">+</span> (fertA<span class="sc">|</span>tray))</span>
-<span id="cb250-2"><a href="data-with-three-of-more-levels.html#cb250-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(M4)</span></code></pre></div>
+<div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb250-1"><a href="data-with-three-of-more-levels.html#cb250-1"></a>M4 &lt;-<span class="st"> </span><span class="kw">lmer</span>(<span class="dt">data=</span>plants, height <span class="op">~</span><span class="st"> </span>window <span class="op">+</span><span class="st"> </span>fertA <span class="op">+</span><span class="st"> </span>phenoA <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span><span class="op">|</span>pot) <span class="op">+</span><span class="st"> </span>(fertA<span class="op">|</span>tray))</span>
+<span id="cb250-2"><a href="data-with-three-of-more-levels.html#cb250-2"></a><span class="kw">summary</span>(M4)</span></code></pre></div>
 <pre><code>## Linear mixed model fit by REML. t-tests use Satterthwaite&#39;s method [
 ## lmerModLmerTest]
 ## Formula: height ~ window + fertA + phenoA + (1 | pot) + (fertA | tray)
@@ -886,19 +838,19 @@ Y_{ijk} &amp; = [\alpha_{0}+\alpha_{1}\textrm{Window}_{i}+\beta_{0}\textrm{FertA
 ## optimizer (nloptwrap) convergence code: 0 (OK)
 ## boundary (singular) fit: see help(&#39;isSingular&#39;)</code></pre>
 </div>
-<div id="boundary-constraints" class="section level3 hasAnchor" number="5.2.5">
+<div id="boundary-constraints" class="section level3 hasAnchor">
 <h3><span class="header-section-number">5.2.5</span> Boundary Constraints<a href="data-with-three-of-more-levels.html#boundary-constraints" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Recall that <span class="math inline">\(-1\leq\rho\leq1\)</span>, where <span class="math inline">\(\rho\)</span> represents the correlation between random effects at the same level. When <span class="math inline">\(\hat{\rho}=\pm1\)</span>, this indicates that the maximimum likelihood estimates are occuring along a boundary of this range, usually making them unreliable.</p>
 <p>In these situations, we should not draw conclusions basde on <span class="math inline">\(\rho\)</span> and should consider dropping this random effect from the model.</p>
 <p>We could also add interaction or nonlinear terms for fixed effects if we had reason to do so.</p>
 </div>
 </div>
-<div id="longitudinal-component-to-plants-data" class="section level2 hasAnchor" number="5.3">
+<div id="longitudinal-component-to-plants-data" class="section level2 hasAnchor">
 <h2><span class="header-section-number">5.3</span> Longitudinal Component to Plants Data<a href="data-with-three-of-more-levels.html#longitudinal-component-to-plants-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="repeated-measures-over-time" class="section level3 hasAnchor" number="5.3.1">
+<div id="repeated-measures-over-time" class="section level3 hasAnchor">
 <h3><span class="header-section-number">5.3.1</span> Repeated Measures over Time<a href="data-with-three-of-more-levels.html#repeated-measures-over-time" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Now suppose that in addition to this first measurement, the heights of the same plants were recorded again once per week for 4 weeks.</p>
-<div class="sourceCode" id="cb252"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb252-1"><a href="data-with-three-of-more-levels.html#cb252-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(plants, <span class="dv">20</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb252"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb252-1"><a href="data-with-three-of-more-levels.html#cb252-1"></a><span class="kw">head</span>(plants, <span class="dv">20</span>)</span></code></pre></div>
 <pre><code>##    plantid time tray pot window fertA phenoA   height
 ## 1        1    1    1   1      1     1      1 5.593006
 ## 2        1    2    1   1      1     1      1 6.588438
@@ -921,7 +873,7 @@ Y_{ijk} &amp; = [\alpha_{0}+\alpha_{1}\textrm{Window}_{i}+\beta_{0}\textrm{FertA
 ## 19       5    3    1   2      1     0      1 4.687552
 ## 20       5    4    1   2      1     0      1 5.433369</code></pre>
 </div>
-<div id="levels-and-variables" class="section level3 hasAnchor" number="5.3.2">
+<div id="levels-and-variables" class="section level3 hasAnchor">
 <h3><span class="header-section-number">5.3.2</span> Levels and Variables<a href="data-with-three-of-more-levels.html#levels-and-variables" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Now, this is a 4-level dataset.</p>
 <table>
@@ -956,23 +908,23 @@ Y_{ijk} &amp; = [\alpha_{0}+\alpha_{1}\textrm{Window}_{i}+\beta_{0}\textrm{FertA
 </tbody>
 </table>
 </div>
-<div id="model-for-longitudinal-plants-study" class="section level3 hasAnchor" number="5.3.3">
+<div id="model-for-longitudinal-plants-study" class="section level3 hasAnchor">
 <h3><span class="header-section-number">5.3.3</span> Model for Longitudinal Plants Study<a href="data-with-three-of-more-levels.html#model-for-longitudinal-plants-study" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Let <span class="math inline">\(Y_{ijkl}\)</span> represent the height of plant <span class="math inline">\(k\)</span> in pot <span class="math inline">\(j\)</span> in tray <span class="math inline">\(i\)</span> at time <span class="math inline">\(l\)</span>. A possible model is:</p>
 <p><span class="math display">\[
 \begin{align*}
 Y_{ijkl} &amp; = [\alpha_{0}+\alpha_{1}\textrm{Window}_{i}+\beta_{0}\textrm{FertA}_{ij}+\gamma_{0}\textrm{PhenoA}_{ijk} + \delta_{0}\textrm{Time}_{ijkl}] \\
-&amp; \textrm{} + [t_{i}+ p_{ij} + f_{ijk} + \epsilon_{ijkl}],
+ &amp; \textrm{} + [t_{i}+ p_{ij} + f_{ijk} + \epsilon_{ijkl}],
 \end{align*}
 \]</span></p>
 <p>where <span class="math inline">\(t_i\sim N(0, \sigma^2_t)\)</span>, <span class="math inline">\(p_{ij}\sim N(0, \sigma^2_p)\)</span>, <span class="math inline">\(f_{ijk}\sim N(0, \sigma^2_f)\)</span>,and <span class="math inline">\(\epsilon_{ijkl}\sim N(0, \sigma^2)\)</span></p>
 <p>This model involves random intercepts for each tray(<span class="math inline">\(t_i\)</span>), pot(<span class="math inline">\(p_{ij}\)</span>), plant (<span class="math inline">\(f_{ijk}\)</span>), in addition to a random error term <span class="math inline">\(\epsilon{ijkl}\)</span> capturing random differences between measurements on the same plant over time.</p>
 <p>In addition to the assumptions of model 1, it assumes each plant grows at the same rate over time, after accounting for the fixed effects in the model.</p>
 </div>
-<div id="r-output-for-longitudinal-model" class="section level3 hasAnchor" number="5.3.4">
+<div id="r-output-for-longitudinal-model" class="section level3 hasAnchor">
 <h3><span class="header-section-number">5.3.4</span> R Output for Longitudinal Model<a href="data-with-three-of-more-levels.html#r-output-for-longitudinal-model" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb254"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb254-1"><a href="data-with-three-of-more-levels.html#cb254-1" aria-hidden="true" tabindex="-1"></a>M5 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(<span class="at">data=</span>plants, height <span class="sc">~</span> window <span class="sc">+</span> fertA <span class="sc">+</span> phenoA <span class="sc">+</span> time <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>tray) <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>pot) <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>plantid))</span>
-<span id="cb254-2"><a href="data-with-three-of-more-levels.html#cb254-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(M5)</span></code></pre></div>
+<div class="sourceCode" id="cb254"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb254-1"><a href="data-with-three-of-more-levels.html#cb254-1"></a>M5 &lt;-<span class="st"> </span><span class="kw">lmer</span>(<span class="dt">data=</span>plants, height <span class="op">~</span><span class="st"> </span>window <span class="op">+</span><span class="st"> </span>fertA <span class="op">+</span><span class="st"> </span>phenoA <span class="op">+</span><span class="st"> </span>time <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span><span class="op">|</span>tray) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span><span class="op">|</span>pot) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span><span class="op">|</span>plantid))</span>
+<span id="cb254-2"><a href="data-with-three-of-more-levels.html#cb254-2"></a><span class="kw">summary</span>(M5)</span></code></pre></div>
 <pre><code>## Linear mixed model fit by REML. t-tests use Satterthwaite&#39;s method [
 ## lmerModLmerTest]
 ## Formula: height ~ window + fertA + phenoA + time + (1 | tray) + (1 | pot) +  
@@ -1013,20 +965,20 @@ Y_{ijkl} &amp; = [\alpha_{0}+\alpha_{1}\textrm{Window}_{i}+\beta_{0}\textrm{Fert
 <p>There is evidence that plants grow over time, and evidence of differences between the phenotypes.</p>
 </div>
 </div>
-<div id="four-level-longitudinal-model-with-random-slopes" class="section level2 hasAnchor" number="5.4">
+<div id="four-level-longitudinal-model-with-random-slopes" class="section level2 hasAnchor">
 <h2><span class="header-section-number">5.4</span> Four-Level Longitudinal Model with Random Slopes<a href="data-with-three-of-more-levels.html#four-level-longitudinal-model-with-random-slopes" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="random-slope-for-time" class="section level3 hasAnchor" number="5.4.1">
+<div id="random-slope-for-time" class="section level3 hasAnchor">
 <h3><span class="header-section-number">5.4.1</span> Random Slope for Time<a href="data-with-three-of-more-levels.html#random-slope-for-time" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>We could add a random error term associated with the slope on time, to allow for the possibility that individual plants grow at different rates, even after accounting for the fixed effects in the model</p>
 <p><span class="math display">\[
 \begin{align*}
 Y_{ijkl} &amp; = [\alpha_{0}+\alpha_{1}\textrm{Window}_{i}+\beta_{0}\textrm{FertA}_{ij}+\gamma_{0}\textrm{PhenoA}_{ijk} + \delta_{0}\textrm{Time}_{ijkl}]  \\
-&amp; \textrm{} + [t_{i}+ p_{ij} + f_{ijk} + g_{ijk}\textrm{Time}_{ijk} + \epsilon_{ijkl}],
+ &amp; \textrm{} + [t_{i}+ p_{ij} + f_{ijk} + g_{ijk}\textrm{Time}_{ijk} + \epsilon_{ijkl}],
 \end{align*}
 \]</span></p>
 <p>where <span class="math inline">\(t_i\sim N(0, \sigma^2_t)\)</span>, <span class="math inline">\(p_{ij}\sim N(0, \sigma^2_p)\)</span>, <span class="math inline">\(\epsilon_{ijkl}\sim N(0, \sigma^2)\)</span>, and</p>
 <p><span class="math display">\[
-\begin{equation*}
+\begin{equation*} 
 \left[ \begin{array}{c}
             f_{ijk} \\g_{ijk}
           \end{array}  \right] \sim N \left( \left[
@@ -1036,11 +988,11 @@ Y_{ijkl} &amp; = [\alpha_{0}+\alpha_{1}\textrm{Window}_{i}+\beta_{0}\textrm{Fert
           \begin{array}{cc}
             \sigma_{f}^{2} &amp; \rho_{fg}\sigma_{f}\sigma_g \\
             \rho_{fg}\sigma_{f}\sigma_g &amp; \sigma_{g}^{2}
-          \end{array} \right] \right)
+          \end{array} \right] \right) 
 \end{equation*}
 \]</span></p>
-<div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb256-1"><a href="data-with-three-of-more-levels.html#cb256-1" aria-hidden="true" tabindex="-1"></a>M5 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(<span class="at">data=</span>plants, height <span class="sc">~</span> window <span class="sc">+</span> fertA <span class="sc">+</span> phenoA <span class="sc">+</span> time<span class="sc">+</span>  (time<span class="sc">|</span>plantid) <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>pot) <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>tray))</span>
-<span id="cb256-2"><a href="data-with-three-of-more-levels.html#cb256-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(M5)</span></code></pre></div>
+<div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb256-1"><a href="data-with-three-of-more-levels.html#cb256-1"></a>M5 &lt;-<span class="st"> </span><span class="kw">lmer</span>(<span class="dt">data=</span>plants, height <span class="op">~</span><span class="st"> </span>window <span class="op">+</span><span class="st"> </span>fertA <span class="op">+</span><span class="st"> </span>phenoA <span class="op">+</span><span class="st"> </span>time<span class="op">+</span><span class="st">  </span>(time<span class="op">|</span>plantid) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span><span class="op">|</span>pot) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span><span class="op">|</span>tray))</span>
+<span id="cb256-2"><a href="data-with-three-of-more-levels.html#cb256-2"></a><span class="kw">summary</span>(M5)</span></code></pre></div>
 <pre><code>## Linear mixed model fit by REML. t-tests use Satterthwaite&#39;s method [
 ## lmerModLmerTest]
 ## Formula: height ~ window + fertA + phenoA + time + (time | plantid) +  
@@ -1080,18 +1032,18 @@ Y_{ijkl} &amp; = [\alpha_{0}+\alpha_{1}\textrm{Window}_{i}+\beta_{0}\textrm{Fert
 ## time    0.051  0.000  0.000  0.000</code></pre>
 <p>The positive correlation between <span class="math inline">\(s_{ijk}\)</span> and <span class="math inline">\(r_{ijk}\)</span> tells us that taller plants tend to grow faster on average, even after accounting for fixed effects in the model.</p>
 </div>
-<div id="more-random-slope-terms" class="section level3 hasAnchor" number="5.4.2">
+<div id="more-random-slope-terms" class="section level3 hasAnchor">
 <h3><span class="header-section-number">5.4.2</span> More Random Slope Terms<a href="data-with-three-of-more-levels.html#more-random-slope-terms" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>We could also allow the effect of phenotype to vary between pots and the effect of fertilizer to vary between trays. This gives a model of the form:</p>
 <p><span class="math display">\[
 \begin{align*}
 Y_{ijk} &amp; = [\beta_{0}+\beta_{1}\textrm{Window}_{i}+\beta_{2}\textrm{FertA}_{ij}+\beta_{3}\textrm{PhenoA}_{ijk} + \beta_{3}\textrm{Time}_{ijkl}] \\
-&amp; \textrm{} + [t_{i}+ s_i\textrm{fertA}_i + p_{ij} + q_{ij}\textrm{phenoA}_{ij} + f_{ijk} + g_{ijk}\textrm{Time}_{ijk} + \epsilon_{ijkl}],
+ &amp; \textrm{} + [t_{i}+ s_i\textrm{fertA}_i + p_{ij} + q_{ij}\textrm{phenoA}_{ij} + f_{ijk} + g_{ijk}\textrm{Time}_{ijk} + \epsilon_{ijkl}],
 \end{align*}
 \]</span></p>
 <p>We again assume that random effects at different levels are independent. Thus, <span class="math inline">\(\epsilon_{ijkl}\sim\mathcal{N}(0, \sigma^2)\)</span></p>
 <p><span class="math display">\[
-\begin{equation*}
+\begin{equation*} 
 \left[ \begin{array}{c}
             t_{i} \\s_{i}
           \end{array}  \right] \sim N \left( \left[
@@ -1101,11 +1053,11 @@ Y_{ijk} &amp; = [\beta_{0}+\beta_{1}\textrm{Window}_{i}+\beta_{2}\textrm{FertA}_
           \begin{array}{cc}
             \sigma_{t}^{2} &amp; \rho_{ts}\sigma_{t}\sigma_s \\
             \rho_{ts}\sigma_{t}\sigma_s &amp; \sigma_{s}^{2}
-          \end{array} \right] \right)
+          \end{array} \right] \right) 
 \end{equation*}
 \]</span></p>
 <p><span class="math display">\[
-\begin{equation*}
+\begin{equation*} 
 \left[ \begin{array}{c}
             p_{ij} \\q_{ij}
           \end{array}  \right] \sim N \left( \left[
@@ -1115,11 +1067,11 @@ Y_{ijk} &amp; = [\beta_{0}+\beta_{1}\textrm{Window}_{i}+\beta_{2}\textrm{FertA}_
           \begin{array}{cc}
             \sigma_{p}^{2} &amp; \rho_{pq}\sigma_{p}\sigma_q \\
             \rho_{pq}\sigma_{p}\sigma_q &amp; \sigma_{q}^{2}
-          \end{array} \right] \right)
+          \end{array} \right] \right) 
 \end{equation*}
 \]</span></p>
 <p><span class="math display">\[
-\begin{equation*}
+\begin{equation*} 
 \left[ \begin{array}{c}
             f_{ijk} \\g_{ijk}
           \end{array}  \right] \sim N \left( \left[
@@ -1129,11 +1081,11 @@ Y_{ijk} &amp; = [\beta_{0}+\beta_{1}\textrm{Window}_{i}+\beta_{2}\textrm{FertA}_
           \begin{array}{cc}
             \sigma_{f}^{2} &amp; \rho_{fg}\sigma_{f}\sigma_g \\
             \rho_{fg}\sigma_{f}\sigma_g &amp; \sigma_{g}^{2}
-          \end{array} \right] \right)
+          \end{array} \right] \right) 
 \end{equation*}
 \]</span></p>
-<div class="sourceCode" id="cb258"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb258-1"><a href="data-with-three-of-more-levels.html#cb258-1" aria-hidden="true" tabindex="-1"></a>M5 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(<span class="at">data=</span>plants, height <span class="sc">~</span> window <span class="sc">+</span> fertA <span class="sc">+</span> phenoA <span class="sc">+</span> time<span class="sc">+</span>  (time<span class="sc">|</span>plantid) <span class="sc">+</span> (phenoA<span class="sc">|</span>pot) <span class="sc">+</span> (fertA<span class="sc">|</span>tray))</span>
-<span id="cb258-2"><a href="data-with-three-of-more-levels.html#cb258-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(M5)</span></code></pre></div>
+<div class="sourceCode" id="cb258"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb258-1"><a href="data-with-three-of-more-levels.html#cb258-1"></a>M5 &lt;-<span class="st"> </span><span class="kw">lmer</span>(<span class="dt">data=</span>plants, height <span class="op">~</span><span class="st"> </span>window <span class="op">+</span><span class="st"> </span>fertA <span class="op">+</span><span class="st"> </span>phenoA <span class="op">+</span><span class="st"> </span>time<span class="op">+</span><span class="st">  </span>(time<span class="op">|</span>plantid) <span class="op">+</span><span class="st"> </span>(phenoA<span class="op">|</span>pot) <span class="op">+</span><span class="st"> </span>(fertA<span class="op">|</span>tray))</span>
+<span id="cb258-2"><a href="data-with-three-of-more-levels.html#cb258-2"></a><span class="kw">summary</span>(M5)</span></code></pre></div>
 <pre><code>## Linear mixed model fit by REML. t-tests use Satterthwaite&#39;s method [
 ## lmerModLmerTest]
 ## Formula: height ~ window + fertA + phenoA + time + (time | plantid) +  
@@ -1181,19 +1133,19 @@ Y_{ijk} &amp; = [\beta_{0}+\beta_{1}\textrm{Window}_{i}+\beta_{2}\textrm{FertA}_
 <li><p>difference between fertilizers is smaller in trays where plants receiving fertilizer B are taller</p></li>
 </ul>
 </div>
-<div id="additional-random-slopes" class="section level3 hasAnchor" number="5.4.3">
+<div id="additional-random-slopes" class="section level3 hasAnchor">
 <h3><span class="header-section-number">5.4.3</span> Additional Random Slopes<a href="data-with-three-of-more-levels.html#additional-random-slopes" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>In theory, we could add a random slope term that also allows plants in the same pot to change at different rates over time.</p>
 <p>We would write this model as:</p>
 <p><span class="math display">\[
 \begin{align*}
 Y_{ij} &amp; = [\beta_{0}+\beta_{1}\textrm{Window}_{i}+\beta_{2}\textrm{FertA}_{ij}+\beta_{3}\textrm{PhenoA}_{ijk} + \beta_{3}\textrm{Time}_{ijkl}] \\
-&amp; \textrm{} + [t_{i}+ s_i\textrm{fertA}_i + p_{ij} + q_{ij}\textrm{phenoA}_{ij} +r_{ij}\textrm{Time}_{ijk}+ f_{ijk} + g_{ijk}\textrm{Time}_{ijk} + \epsilon_{ijkl}],
+ &amp; \textrm{} + [t_{i}+ s_i\textrm{fertA}_i + p_{ij} + q_{ij}\textrm{phenoA}_{ij} +r_{ij}\textrm{Time}_{ijk}+ f_{ijk} + g_{ijk}\textrm{Time}_{ijk} + \epsilon_{ijkl}],
 \end{align*}
 \]</span></p>
 <p>We again assume that random effects at different levels are independent. Thus, <span class="math inline">\(\epsilon_{ijkl}\sim\mathcal{N}(0, \sigma^2)\)</span></p>
 <p><span class="math display">\[
-\begin{equation*}
+\begin{equation*} 
 \left[ \begin{array}{c}
             t_{i} \\s_{i}
           \end{array}  \right] \sim N \left( \left[
@@ -1203,11 +1155,11 @@ Y_{ij} &amp; = [\beta_{0}+\beta_{1}\textrm{Window}_{i}+\beta_{2}\textrm{FertA}_{
           \begin{array}{cc}
             \sigma_{t}^{2} &amp; \rho_{ts}\sigma_{t}\sigma_s \\
             \rho_{ts}\sigma_{t}\sigma_s &amp; \sigma_{s}^{2}
-          \end{array} \right] \right)
+          \end{array} \right] \right) 
 \end{equation*}
 \]</span></p>
 <p><span class="math display">\[
-\begin{equation*}
+\begin{equation*} 
 \left[ \begin{array}{c}
             p_{ij} \\q_{ij} \\ r_{ij}
           \end{array}  \right] \sim N \left( \left[
@@ -1218,11 +1170,11 @@ Y_{ij} &amp; = [\beta_{0}+\beta_{1}\textrm{Window}_{i}+\beta_{2}\textrm{FertA}_{
             \sigma_{p}^{2} &amp; \rho_{pq}\sigma_{p}\sigma_q &amp; \rho_{pr}\sigma_{p}\sigma_r\\
             \rho_{pq}\sigma_{p}\sigma_q &amp; \sigma_{q}^{2}&amp; \rho_{qr}\sigma_{q}\sigma_r\\
             \rho_{pr}\sigma_{p}\sigma_r &amp; \rho_{qr}\sigma_{q}\sigma_r &amp; \sigma_r^2 \\
-          \end{array} \right] \right)
+          \end{array} \right] \right) 
 \end{equation*}
 \]</span></p>
 <p><span class="math display">\[
-\begin{equation*}
+\begin{equation*} 
 \left[ \begin{array}{c}
             f_{ijk} \\g_{ijk}
           \end{array}  \right] \sim N \left( \left[
@@ -1232,14 +1184,14 @@ Y_{ij} &amp; = [\beta_{0}+\beta_{1}\textrm{Window}_{i}+\beta_{2}\textrm{FertA}_{
           \begin{array}{cc}
             \sigma_{f}^{2} &amp; \rho_{fg}\sigma_{f}\sigma_g \\
             \rho_{fg}\sigma_{f}\sigma_g &amp; \sigma_{g}^{2}
-          \end{array} \right] \right)
+          \end{array} \right] \right) 
 \end{equation*}
 \]</span></p>
 </div>
-<div id="r---model-with-additional-random-slopes" class="section level3 hasAnchor" number="5.4.4">
+<div id="r---model-with-additional-random-slopes" class="section level3 hasAnchor">
 <h3><span class="header-section-number">5.4.4</span> R - Model with Additional Random Slopes<a href="data-with-three-of-more-levels.html#r---model-with-additional-random-slopes" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb260"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb260-1"><a href="data-with-three-of-more-levels.html#cb260-1" aria-hidden="true" tabindex="-1"></a>M6 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(<span class="at">data=</span>plants, height <span class="sc">~</span> window <span class="sc">+</span> fertA <span class="sc">+</span> phenoA <span class="sc">+</span> time<span class="sc">+</span>  (time<span class="sc">|</span>plantid) <span class="sc">+</span> (time<span class="sc">|</span>pot) <span class="sc">+</span> (phenoA<span class="sc">|</span>pot) <span class="sc">+</span> (fertA<span class="sc">|</span>tray))</span>
-<span id="cb260-2"><a href="data-with-three-of-more-levels.html#cb260-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(M6)</span></code></pre></div>
+<div class="sourceCode" id="cb260"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb260-1"><a href="data-with-three-of-more-levels.html#cb260-1"></a>M6 &lt;-<span class="st"> </span><span class="kw">lmer</span>(<span class="dt">data=</span>plants, height <span class="op">~</span><span class="st"> </span>window <span class="op">+</span><span class="st"> </span>fertA <span class="op">+</span><span class="st"> </span>phenoA <span class="op">+</span><span class="st"> </span>time<span class="op">+</span><span class="st">  </span>(time<span class="op">|</span>plantid) <span class="op">+</span><span class="st"> </span>(time<span class="op">|</span>pot) <span class="op">+</span><span class="st"> </span>(phenoA<span class="op">|</span>pot) <span class="op">+</span><span class="st"> </span>(fertA<span class="op">|</span>tray))</span>
+<span id="cb260-2"><a href="data-with-three-of-more-levels.html#cb260-2"></a><span class="kw">summary</span>(M6)</span></code></pre></div>
 <pre><code>## Linear mixed model fit by REML. t-tests use Satterthwaite&#39;s method [
 ## lmerModLmerTest]
 ## Formula: height ~ window + fertA + phenoA + time + (time | plantid) +  
@@ -1283,12 +1235,12 @@ Y_{ij} &amp; = [\beta_{0}+\beta_{1}\textrm{Window}_{i}+\beta_{2}\textrm{FertA}_{
 ## time    0.446  0.000  0.000  0.000</code></pre>
 <p>This model, however, leads to boundary contraint issues.</p>
 </div>
-<div id="when-not-to-add-random-slopes" class="section level3 hasAnchor" number="5.4.5">
+<div id="when-not-to-add-random-slopes" class="section level3 hasAnchor">
 <h3><span class="header-section-number">5.4.5</span> When Not to Add Random Slopes<a href="data-with-three-of-more-levels.html#when-not-to-add-random-slopes" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>We can only add random slopes for variables measured at a lower level than the observational unit. Otherwise, the variable will not change within the observational unit.</p>
 <p>For example, we can’t add a random slope for effect of fertilizer (a level 3 variable) between pots (our level 3 observational units). All plants in the same pot have the same type of fertilizer, so we can’t estimate difference of fertilizer effects between pots.</p>
-<div class="sourceCode" id="cb262"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb262-1"><a href="data-with-three-of-more-levels.html#cb262-1" aria-hidden="true" tabindex="-1"></a>M7 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(<span class="at">data=</span>plants, height <span class="sc">~</span> window <span class="sc">+</span> fertA <span class="sc">+</span> phenoA <span class="sc">+</span> time<span class="sc">+</span>  (<span class="dv">1</span><span class="sc">|</span>plantid) <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>pot) <span class="sc">+</span> (fertA<span class="sc">|</span>pot) <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>tray))</span>
-<span id="cb262-2"><a href="data-with-three-of-more-levels.html#cb262-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(M7)</span></code></pre></div>
+<div class="sourceCode" id="cb262"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb262-1"><a href="data-with-three-of-more-levels.html#cb262-1"></a>M7 &lt;-<span class="st"> </span><span class="kw">lmer</span>(<span class="dt">data=</span>plants, height <span class="op">~</span><span class="st"> </span>window <span class="op">+</span><span class="st"> </span>fertA <span class="op">+</span><span class="st"> </span>phenoA <span class="op">+</span><span class="st"> </span>time<span class="op">+</span><span class="st">  </span>(<span class="dv">1</span><span class="op">|</span>plantid) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span><span class="op">|</span>pot) <span class="op">+</span><span class="st"> </span>(fertA<span class="op">|</span>pot) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span><span class="op">|</span>tray))</span>
+<span id="cb262-2"><a href="data-with-three-of-more-levels.html#cb262-2"></a><span class="kw">summary</span>(M7)</span></code></pre></div>
 <pre><code>## Linear mixed model fit by REML. t-tests use Satterthwaite&#39;s method [
 ## lmerModLmerTest]
 ## Formula: height ~ window + fertA + phenoA + time + (1 | plantid) + (1 |  
@@ -1398,7 +1350,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');
