@@ -567,6 +567,9 @@ This model assumes that:
 
 * For each musician, negative affect scores between performances deviate from each other according to a normal distribution with standard deviation $\sigma$. 
 
+* The random effect for musician, $u_i$ is uncorrelated with random error term $\epsilon_{ij}$ and also with all fixed effects in the model. (That is, there is no relationship between musicians' performance anxiety and instrument/ensemble type, beyond what is accounted for in the fixed-effect structure of the model.   
+
+
 ## Random Slopes Model
 
 
