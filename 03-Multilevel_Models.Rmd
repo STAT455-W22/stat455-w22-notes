@@ -551,7 +551,7 @@ summary(model1b)
 
 * After accounting for performance type and instrument type there the standard deviation in negative affect scores between different musicians is estimated to be  $\hat{\sigma}_u=2.28$.    
 
-* After accounting for performance type, instrument type, there the standard deviation in negative affect scores between different performances by the same musician is estimated to be  $\hat{\sigma}_u=4.68$.    
+* After accounting for performance type, instrument type, there the standard deviation in negative affect scores between different performances by the same musician is estimated to be  $\hat{\sigma}=4.68$.    
 
 There is more variability in negative affect between different performances by the same musician than between performances by different musicians, after accounting for performance type, instrument type.   
 
@@ -775,9 +775,9 @@ summary(model2b)
 
 * After accounting for performance type and instrument type the standard deviation in negative affect scores between different musicians for solos/small ensembles is estimated to be $\hat{\sigma}_u=2.41$.    
 
-* After accounting for performance type and instrument type the standard deviation in changes in negative affect scores for large ensemble performances, compared to solo/small ensemble performances is estimated to be  $\hat{\sigma}_u=0.85$.    
+* After accounting for performance type and instrument type the standard deviation in changes in negative affect scores for large ensemble performances, compared to solo/small ensemble performances is estimated to be  $\hat{\sigma}_v=0.85$.    
 
-* After accounting for performance type, and instrument type, the standard deviation in negative affect scores between different performances by the same musician is estimated to be  $\hat{\sigma}_u=4.67$.    
+* After accounting for performance type, and instrument type, the standard deviation in negative affect scores between different performances by the same musician is estimated to be  $\hat{\sigma}=4.67$.    
 
 * The correlation between negative affect scores for solos/small ensembles and change in negative affect scores when playing in large ensembles is $\rho_{uv}=-0.59$, indicating a negative correlation. Musicians with larger negative effect scores for solo/small ensemble performances see tend to have greater decreases in performance anxiety for large ensemble performances.
 
@@ -967,7 +967,7 @@ summary(model.a)
 - $\hat{\sigma}=4.739=$ the estimated standard deviation in within-person deviations.
 - $\hat{\sigma}_{u}=2.225=$ the estimated standard deviation in between-person deviations.
 
-The relative levels of between- and within-person variabilities can be compared through the **intraclass correlation coefficient**. 
+The relative levels of between- and within-person variability can be compared through the **intraclass correlation coefficient**. 
 
 $$
 \begin{equation*}
@@ -1285,6 +1285,7 @@ c. $\hat{\sigma} > \hat{\sigma_u}$
 d. $\hat{\sigma_u}$ is about the same as  $\hat{\sigma_v}$    
 e. $\hat{\rho}_{uv}$ is negative     
 
+<!---
 **Answers from 1-21 class**
 
 a)	Expected performance anxiety for 18 year olds is higher for juried performances than for nonjuried ones.  
@@ -1297,7 +1298,7 @@ d)	Variation in neg affect for nonjuried performances is similar to variation in
 
 e)	People who experience more p.a. for nonjuried performances have less increase in anxiety (maybe even decrease) when playing in a juried performance. 
 
- 
+---> 
  
 2. Explain in words what it would mean if the model parameter was equal to zero.    
 
