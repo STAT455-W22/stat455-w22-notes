@@ -22,7 +22,7 @@
 
 
 
-<meta name="date" content="2023-04-07" />
+<meta name="date" content="2023-04-10" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -605,7 +605,7 @@ Figure 6.1: Regions of the Philippines.
 </div>
 <div id="the-data-2" class="section level3 hasAnchor">
 <h3><span class="header-section-number">6.1.4</span> The Data<a href="poisson-regression.html#the-data-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb264"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb264-1"><a href="poisson-regression.html#cb264-1"></a>fHH1 &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;https://raw.githubusercontent.com/proback/BeyondMLR/master/data/fHH1.csv&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb263"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb263-1"><a href="poisson-regression.html#cb263-1"></a>fHH1 &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;https://raw.githubusercontent.com/proback/BeyondMLR/master/data/fHH1.csv&quot;</span>)</span></code></pre></div>
 <p>The data include the following variables:</p>
 <ul>
 <li><code>location</code> = where the house is located (Central Luzon, Davao Region, Ilocos Region, Metro Manila, or Visayas)</li>
@@ -617,7 +617,7 @@ Figure 6.1: Regions of the Philippines.
 </div>
 <div id="first-5-rows" class="section level3 hasAnchor">
 <h3><span class="header-section-number">6.1.5</span> First 5 Rows<a href="poisson-regression.html#first-5-rows" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb265"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb265-1"><a href="poisson-regression.html#cb265-1"></a><span class="kw">head</span>(fHH1)</span></code></pre></div>
+<div class="sourceCode" id="cb264"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb264-1"><a href="poisson-regression.html#cb264-1"></a><span class="kw">head</span>(fHH1)</span></code></pre></div>
 <pre><code># A tibble: 6 × 6
    ...1 location       age total numLT5 roof                         
   &lt;dbl&gt; &lt;chr&gt;        &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;                        
@@ -630,9 +630,9 @@ Figure 6.1: Regions of the Philippines.
 </div>
 <div id="household-size-by-region" class="section level3 hasAnchor">
 <h3><span class="header-section-number">6.1.6</span> Household Size by Region<a href="poisson-regression.html#household-size-by-region" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb267"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb267-1"><a href="poisson-regression.html#cb267-1"></a>fHH1  <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(location)  <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb267-2"><a href="poisson-regression.html#cb267-2"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">mean=</span><span class="kw">mean</span>(total), <span class="dt">sd=</span><span class="kw">sd</span>(total), </span>
-<span id="cb267-3"><a href="poisson-regression.html#cb267-3"></a>            <span class="dt">var=</span><span class="kw">var</span>(total), <span class="dt">n=</span><span class="kw">n</span>())</span></code></pre></div>
+<div class="sourceCode" id="cb266"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb266-1"><a href="poisson-regression.html#cb266-1"></a>fHH1  <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(location)  <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb266-2"><a href="poisson-regression.html#cb266-2"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">mean=</span><span class="kw">mean</span>(total), <span class="dt">sd=</span><span class="kw">sd</span>(total), </span>
+<span id="cb266-3"><a href="poisson-regression.html#cb266-3"></a>            <span class="dt">var=</span><span class="kw">var</span>(total), <span class="dt">n=</span><span class="kw">n</span>())</span></code></pre></div>
 <pre><code>## # A tibble: 5 × 5
 ##   location      mean    sd   var     n
 ##   &lt;chr&gt;        &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt;
@@ -644,11 +644,11 @@ Figure 6.1: Regions of the Philippines.
 </div>
 <div id="household-size-by-region-plots" class="section level3 hasAnchor">
 <h3><span class="header-section-number">6.1.7</span> Household Size by Region Plots<a href="poisson-regression.html#household-size-by-region-plots" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb269"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb269-1"><a href="poisson-regression.html#cb269-1"></a><span class="kw">ggplot</span>(fHH1, <span class="kw">aes</span>(total)) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb269-2"><a href="poisson-regression.html#cb269-2"></a><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth =</span> <span class="fl">.25</span>, <span class="dt">color =</span> <span class="st">&quot;black&quot;</span>, </span>
-<span id="cb269-3"><a href="poisson-regression.html#cb269-3"></a>                 <span class="dt">fill =</span> <span class="st">&quot;white&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">facet_wrap</span>(<span class="op">~</span>location) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb269-4"><a href="poisson-regression.html#cb269-4"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Number in the house excluding head of household&quot;</span>) <span class="op">+</span></span>
-<span id="cb269-5"><a href="poisson-regression.html#cb269-5"></a><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Count of households&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb268"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb268-1"><a href="poisson-regression.html#cb268-1"></a><span class="kw">ggplot</span>(fHH1, <span class="kw">aes</span>(total)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb268-2"><a href="poisson-regression.html#cb268-2"></a><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth =</span> <span class="fl">.25</span>, <span class="dt">color =</span> <span class="st">&quot;black&quot;</span>, </span>
+<span id="cb268-3"><a href="poisson-regression.html#cb268-3"></a>                 <span class="dt">fill =</span> <span class="st">&quot;white&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">facet_wrap</span>(<span class="op">~</span>location) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb268-4"><a href="poisson-regression.html#cb268-4"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Number in the house excluding head of household&quot;</span>) <span class="op">+</span></span>
+<span id="cb268-5"><a href="poisson-regression.html#cb268-5"></a><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Count of households&quot;</span>)</span></code></pre></div>
 <p><img src="Stat-455-Notes_files/figure-html/nhouse-1.png" width="60%" style="display: block; margin: auto;" /></p>
 <ul>
 <li>responses range from 0 to 16 and are most often between 1 and 5<br />
@@ -671,8 +671,8 @@ Y_i = \beta_0 + \beta_1\textrm{locationDavao}_i + \beta_2\textrm{locationIlocos}
 </div>
 <div id="llsr-model-r-output" class="section level3 hasAnchor">
 <h3><span class="header-section-number">6.1.10</span> LLSR Model R Output<a href="poisson-regression.html#llsr-model-r-output" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb270"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb270-1"><a href="poisson-regression.html#cb270-1"></a>M1 &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data=</span>fHH1, total <span class="op">~</span><span class="st"> </span>location)</span>
-<span id="cb270-2"><a href="poisson-regression.html#cb270-2"></a><span class="kw">summary</span>(M1)</span></code></pre></div>
+<div class="sourceCode" id="cb269"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb269-1"><a href="poisson-regression.html#cb269-1"></a>M1 &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">data=</span>fHH1, total <span class="op">~</span><span class="st"> </span>location)</span>
+<span id="cb269-2"><a href="poisson-regression.html#cb269-2"></a><span class="kw">summary</span>(M1)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = total ~ location, data = fHH1)
@@ -709,12 +709,12 @@ Y_i = \beta_0 + \beta_1\textrm{locationDavao}_i + \beta_2\textrm{locationIlocos}
 <div id="distribution-in-visayas-region" class="section level3 hasAnchor">
 <h3><span class="header-section-number">6.1.12</span> Distribution in Visayas Region<a href="poisson-regression.html#distribution-in-visayas-region" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>According to the model, household sizes in the Visayas region are normally distributed with mean <span class="math inline">\(\hat{\beta}_0 + \hat{\beta}_4 = 3.9\)</span> and standard deviation <span class="math inline">\(\hat{\sigma} = 2.346\)</span>.</p>
-<div class="sourceCode" id="cb272"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb272-1"><a href="poisson-regression.html#cb272-1"></a><span class="kw">ggplot</span>(fHH1 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(location<span class="op">==</span><span class="st">&quot;Visayas&quot;</span>), <span class="kw">aes</span>(total)) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb272-2"><a href="poisson-regression.html#cb272-2"></a><span class="kw">geom_histogram</span>(<span class="kw">aes</span>(<span class="dt">y =</span> ..density..), <span class="dt">binwidth =</span> <span class="fl">0.25</span>, <span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb272-3"><a href="poisson-regression.html#cb272-3"></a><span class="kw">stat_function</span>(<span class="dt">fun =</span> dnorm, <span class="dt">args =</span> <span class="kw">list</span>(<span class="dt">mean =</span> <span class="fl">3.9</span>, <span class="dt">sd =</span> <span class="fl">2.346</span>), <span class="dt">size=</span><span class="dv">1</span>, <span class="dt">color=</span><span class="st">&quot;red&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb272-4"><a href="poisson-regression.html#cb272-4"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Number in the house excluding head of household&quot;</span>) <span class="op">+</span></span>
-<span id="cb272-5"><a href="poisson-regression.html#cb272-5"></a><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Count of households&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">xlim</span>(<span class="kw">c</span>(<span class="op">-</span><span class="dv">5</span>,<span class="dv">20</span>))</span></code></pre></div>
-<p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-174-1.png" width="576" /></p>
+<div class="sourceCode" id="cb271"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb271-1"><a href="poisson-regression.html#cb271-1"></a><span class="kw">ggplot</span>(fHH1 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(location<span class="op">==</span><span class="st">&quot;Visayas&quot;</span>), <span class="kw">aes</span>(total)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb271-2"><a href="poisson-regression.html#cb271-2"></a><span class="kw">geom_histogram</span>(<span class="kw">aes</span>(<span class="dt">y =</span> ..density..), <span class="dt">binwidth =</span> <span class="fl">0.25</span>, <span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb271-3"><a href="poisson-regression.html#cb271-3"></a><span class="kw">stat_function</span>(<span class="dt">fun =</span> dnorm, <span class="dt">args =</span> <span class="kw">list</span>(<span class="dt">mean =</span> <span class="fl">3.9</span>, <span class="dt">sd =</span> <span class="fl">2.346</span>), <span class="dt">size=</span><span class="dv">1</span>, <span class="dt">color=</span><span class="st">&quot;red&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb271-4"><a href="poisson-regression.html#cb271-4"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Number in the house excluding head of household&quot;</span>) <span class="op">+</span></span>
+<span id="cb271-5"><a href="poisson-regression.html#cb271-5"></a><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Count of households&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">xlim</span>(<span class="kw">c</span>(<span class="op">-</span><span class="dv">5</span>,<span class="dv">20</span>))</span></code></pre></div>
+<p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-173-1.png" width="576" /></p>
 <p><strong>Problems</strong></p>
 <p>The normal distribution:</p>
 <ul>
@@ -728,8 +728,8 @@ Y_i = \beta_0 + \beta_1\textrm{locationDavao}_i + \beta_2\textrm{locationIlocos}
 <div id="normal-quantile-quantile-plot" class="section level3 hasAnchor">
 <h3><span class="header-section-number">6.1.13</span> Normal Quantile Quantile Plot<a href="poisson-regression.html#normal-quantile-quantile-plot" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>A normal quantile-quantile plot graphs the quantiles of the model residuals against the expected quantiles from a normal distribution. If the normal distribution is appropriate, the points should lie close to a diagonal line.</p>
-<div class="sourceCode" id="cb273"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb273-1"><a href="poisson-regression.html#cb273-1"></a><span class="kw">ggplot</span>(<span class="dt">data=</span><span class="kw">data.frame</span>(M1<span class="op">$</span>residuals), <span class="kw">aes</span>(<span class="dt">sample =</span> <span class="kw">scale</span>(M1<span class="op">$</span>residuals))) <span class="op">+</span><span class="st"> </span><span class="kw">stat_qq</span>() <span class="op">+</span><span class="st"> </span><span class="kw">stat_qq_line</span>() <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Normal Quantiles&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Residual Quantiles&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;QQ Plot&quot;</span>)</span></code></pre></div>
-<p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-175-1.png" width="576" /></p>
+<div class="sourceCode" id="cb272"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb272-1"><a href="poisson-regression.html#cb272-1"></a><span class="kw">ggplot</span>(<span class="dt">data=</span><span class="kw">data.frame</span>(M1<span class="op">$</span>residuals), <span class="kw">aes</span>(<span class="dt">sample =</span> <span class="kw">scale</span>(M1<span class="op">$</span>residuals))) <span class="op">+</span><span class="st"> </span><span class="kw">stat_qq</span>() <span class="op">+</span><span class="st"> </span><span class="kw">stat_qq_line</span>() <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Normal Quantiles&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Residual Quantiles&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="st">&quot;QQ Plot&quot;</span>)</span></code></pre></div>
+<p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-174-1.png" width="576" /></p>
 <p>Residual quantiles are higher than expected on the left (since there are no negative household sizes), and on the right (since some households are larger than expected).</p>
 <p>The normal distribution is a poor fit.</p>
 </div>
@@ -754,17 +754,17 @@ Y_i = \beta_0 + \beta_1\textrm{locationDavao}_i + \beta_2\textrm{locationIlocos}
 </div>
 <div id="poisson-distribution-for-lambda1" class="section level3 hasAnchor">
 <h3><span class="header-section-number">6.2.2</span> Poisson Distribution for <span class="math inline">\(\lambda=1\)</span><a href="poisson-regression.html#poisson-distribution-for-lambda1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb274"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb274-1"><a href="poisson-regression.html#cb274-1"></a>df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x =</span> <span class="dv">0</span><span class="op">:</span><span class="dv">10</span>, <span class="dt">y =</span> <span class="kw">dpois</span>(<span class="dv">0</span><span class="op">:</span><span class="dv">10</span>, <span class="dv">1</span>))</span>
-<span id="cb274-2"><a href="poisson-regression.html#cb274-2"></a><span class="kw">ggplot</span>(df, <span class="kw">aes</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_bar</span>(<span class="dt">stat =</span> <span class="st">&quot;identity&quot;</span>, <span class="dt">col =</span> <span class="st">&quot;white&quot;</span>, <span class="dt">fill =</span> <span class="st">&quot;blue&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb274-3"><a href="poisson-regression.html#cb274-3"></a><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">expand =</span> <span class="kw">c</span>(<span class="fl">0.01</span>, <span class="dv">0</span>)) <span class="op">+</span><span class="st"> </span><span class="kw">scale_x_continuous</span>(<span class="dt">breaks=</span>(<span class="dv">0</span><span class="op">:</span><span class="dv">10</span>)) <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;x&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="kw">expression</span>(<span class="kw">paste</span>(<span class="st">&quot;p(x|&quot;</span>, theta, <span class="st">&quot;)&quot;</span>))) <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="kw">expression</span>(<span class="kw">paste</span>(lambda, <span class="st">&quot;=1&quot;</span>))) <span class="op">+</span><span class="st"> </span><span class="kw">theme_bw</span>() <span class="op">+</span><span class="st"> </span></span>
-<span id="cb274-4"><a href="poisson-regression.html#cb274-4"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="kw">rel</span>(<span class="fl">1.2</span>), <span class="dt">vjust =</span> <span class="fl">1.5</span>))</span></code></pre></div>
-<p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-176-1.png" width="576" /></p>
+<div class="sourceCode" id="cb273"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb273-1"><a href="poisson-regression.html#cb273-1"></a>df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x =</span> <span class="dv">0</span><span class="op">:</span><span class="dv">10</span>, <span class="dt">y =</span> <span class="kw">dpois</span>(<span class="dv">0</span><span class="op">:</span><span class="dv">10</span>, <span class="dv">1</span>))</span>
+<span id="cb273-2"><a href="poisson-regression.html#cb273-2"></a><span class="kw">ggplot</span>(df, <span class="kw">aes</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_bar</span>(<span class="dt">stat =</span> <span class="st">&quot;identity&quot;</span>, <span class="dt">col =</span> <span class="st">&quot;white&quot;</span>, <span class="dt">fill =</span> <span class="st">&quot;blue&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb273-3"><a href="poisson-regression.html#cb273-3"></a><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">expand =</span> <span class="kw">c</span>(<span class="fl">0.01</span>, <span class="dv">0</span>)) <span class="op">+</span><span class="st"> </span><span class="kw">scale_x_continuous</span>(<span class="dt">breaks=</span>(<span class="dv">0</span><span class="op">:</span><span class="dv">10</span>)) <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;x&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="kw">expression</span>(<span class="kw">paste</span>(<span class="st">&quot;p(x|&quot;</span>, theta, <span class="st">&quot;)&quot;</span>))) <span class="op">+</span><span class="st"> </span><span class="kw">ggtitle</span>(<span class="kw">expression</span>(<span class="kw">paste</span>(lambda, <span class="st">&quot;=1&quot;</span>))) <span class="op">+</span><span class="st"> </span><span class="kw">theme_bw</span>() <span class="op">+</span><span class="st"> </span></span>
+<span id="cb273-4"><a href="poisson-regression.html#cb273-4"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="kw">rel</span>(<span class="fl">1.2</span>), <span class="dt">vjust =</span> <span class="fl">1.5</span>))</span></code></pre></div>
+<p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-175-1.png" width="576" /></p>
 <p>Mean = 1</p>
 <p>Variance = 1</p>
 </div>
 <div id="poisson-distribution-for-lambdain135" class="section level3 hasAnchor">
 <h3><span class="header-section-number">6.2.3</span> Poisson Distribution for <span class="math inline">\(\lambda\in\{1,3,5\}\)</span><a href="poisson-regression.html#poisson-distribution-for-lambdain135" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-177-1.png" width="960" /></p>
+<p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-176-1.png" width="960" /></p>
 <p>Poisson distributions are right-skewed, especially when <span class="math inline">\(\lambda\)</span> is small.</p>
 <p>In a Poisson distribution, the mean is equivalent to its variance (both are equal to <span class="math inline">\(\lambda\)</span>).</p>
 </div>
@@ -810,8 +810,8 @@ Figure 6.2: Regression models: Linear regression (left) and Poisson regression (
 <h2><span class="header-section-number">6.3</span> Poisson Model for Household Size<a href="poisson-regression.html#poisson-model-for-household-size" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div id="poisson-regression-model-for-location" class="section level3 hasAnchor">
 <h3><span class="header-section-number">6.3.1</span> Poisson Regression Model for Location<a href="poisson-regression.html#poisson-regression-model-for-location" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb275"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb275-1"><a href="poisson-regression.html#cb275-1"></a>MP1 =<span class="st"> </span><span class="kw">glm</span>(total <span class="op">~</span><span class="st"> </span>location, <span class="dt">family =</span> poisson, <span class="dt">data =</span> fHH1)</span>
-<span id="cb275-2"><a href="poisson-regression.html#cb275-2"></a><span class="kw">summary</span>(MP1)</span></code></pre></div>
+<div class="sourceCode" id="cb274"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb274-1"><a href="poisson-regression.html#cb274-1"></a>MP1 =<span class="st"> </span><span class="kw">glm</span>(total <span class="op">~</span><span class="st"> </span>location, <span class="dt">family =</span> poisson, <span class="dt">data =</span> fHH1)</span>
+<span id="cb274-2"><a href="poisson-regression.html#cb274-2"></a><span class="kw">summary</span>(MP1)</span></code></pre></div>
 <pre><code>
 Call:
 glm(formula = total ~ location, family = poisson, data = fHH1)
@@ -871,15 +871,15 @@ log \left(\frac{\lambda_{V}}{\lambda_{CL}}\right)   &amp;= \beta_4\\
 <span class="math display">\[ (0.0554, 0.2189).
  \]</span></p>
 <p>We are 95% confident that on average, households in the Visayas region have between <span class="math inline">\(e^{0.0554}=1.056\)</span> and <span class="math inline">\(e^{0.2189}=1.24\)</span> times as many people as households in the Central Luzon region, excluding head of household. Equivalently, households in Visayas are expected to have between 5.6% and 24% more people, on average, than those in Central Luzon.</p>
-<div class="sourceCode" id="cb277"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb277-1"><a href="poisson-regression.html#cb277-1"></a><span class="co"># CI for betas using profile likelihood</span></span>
-<span id="cb277-2"><a href="poisson-regression.html#cb277-2"></a><span class="kw">confint</span>(MP1)</span></code></pre></div>
+<div class="sourceCode" id="cb276"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb276-1"><a href="poisson-regression.html#cb276-1"></a><span class="co"># CI for betas using profile likelihood</span></span>
+<span id="cb276-2"><a href="poisson-regression.html#cb276-2"></a><span class="kw">confint</span>(MP1)</span></code></pre></div>
 <pre><code>##                             2.5 %    97.5 %
 ## (Intercept)           1.152446927 1.2944708
 ## locationDavaoRegion  -0.108912941 0.1018527
 ## locationIlocosRegion -0.050467957 0.1559685
 ## locationMetroManila  -0.006175889 0.1785772
 ## locationVisayas       0.055973241 0.2194536</code></pre>
-<div class="sourceCode" id="cb279"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb279-1"><a href="poisson-regression.html#cb279-1"></a><span class="kw">exp</span>(<span class="kw">confint</span>(MP1))</span></code></pre></div>
+<div class="sourceCode" id="cb278"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb278-1"><a href="poisson-regression.html#cb278-1"></a><span class="kw">exp</span>(<span class="kw">confint</span>(MP1))</span></code></pre></div>
 <pre><code>##                          2.5 %   97.5 %
 ## (Intercept)          3.1659302 3.649064
 ## locationDavaoRegion  0.8968085 1.107220
@@ -891,9 +891,9 @@ log \left(\frac{\lambda_{V}}{\lambda_{CL}}\right)   &amp;= \beta_4\\
 <h3><span class="header-section-number">6.3.4</span> Mean = Variance Assumption<a href="poisson-regression.html#mean-variance-assumption" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Recall the Poisson regression model requires the assumption that <span class="math inline">\(\text{Mean} = \text{Variance} = \lambda\)</span>.</p>
 <p>We can check whether this is reasonable by examining the mean and variance of household sizes in each region.</p>
-<div class="sourceCode" id="cb281"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb281-1"><a href="poisson-regression.html#cb281-1"></a>fHH1  <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(location)  <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb281-2"><a href="poisson-regression.html#cb281-2"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">mean=</span><span class="kw">mean</span>(total), <span class="dt">sd=</span><span class="kw">sd</span>(total), </span>
-<span id="cb281-3"><a href="poisson-regression.html#cb281-3"></a>            <span class="dt">var=</span><span class="kw">var</span>(total), <span class="dt">n=</span><span class="kw">n</span>())</span></code></pre></div>
+<div class="sourceCode" id="cb280"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb280-1"><a href="poisson-regression.html#cb280-1"></a>fHH1  <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(location)  <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb280-2"><a href="poisson-regression.html#cb280-2"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">mean=</span><span class="kw">mean</span>(total), <span class="dt">sd=</span><span class="kw">sd</span>(total), </span>
+<span id="cb280-3"><a href="poisson-regression.html#cb280-3"></a>            <span class="dt">var=</span><span class="kw">var</span>(total), <span class="dt">n=</span><span class="kw">n</span>())</span></code></pre></div>
 <pre><code>## # A tibble: 5 × 5
 ##   location      mean    sd   var     n
 ##   &lt;chr&gt;        &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt;
@@ -917,8 +917,8 @@ log(E(Y)) = log(\lambda) = \beta_0 + \beta_1\text{Age}_i + \beta_2\textrm{locati
 </div>
 <div id="r-output-for-model-with-age" class="section level3 hasAnchor">
 <h3><span class="header-section-number">6.4.2</span> R Output for Model with Age<a href="poisson-regression.html#r-output-for-model-with-age" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb283"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb283-1"><a href="poisson-regression.html#cb283-1"></a>MP2 =<span class="st"> </span><span class="kw">glm</span>(total <span class="op">~</span><span class="st"> </span>age <span class="op">+</span><span class="st"> </span>location, <span class="dt">family =</span> poisson, <span class="dt">data =</span> fHH1)</span>
-<span id="cb283-2"><a href="poisson-regression.html#cb283-2"></a><span class="kw">summary</span>(MP2)</span></code></pre></div>
+<div class="sourceCode" id="cb282"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb282-1"><a href="poisson-regression.html#cb282-1"></a>MP2 =<span class="st"> </span><span class="kw">glm</span>(total <span class="op">~</span><span class="st"> </span>age <span class="op">+</span><span class="st"> </span>location, <span class="dt">family =</span> poisson, <span class="dt">data =</span> fHH1)</span>
+<span id="cb282-2"><a href="poisson-regression.html#cb282-2"></a><span class="kw">summary</span>(MP2)</span></code></pre></div>
 <pre><code>
 Call:
 glm(formula = total ~ age + location, family = poisson, data = fHH1)
@@ -975,28 +975,28 @@ log \left(\frac{\lambda_{a+1}}{\lambda_a}\right)   &amp;= \beta_1\\
 <p>This model depends on the assumption that for a given region and age, mean is equal to variance.</p>
 <p>We’ll examine whether this is reasonable, using the largest region, Visayas.</p>
 <p>Since we have limited obsevations for specific ages, we’ll group people in similar age ranges together.</p>
-<div class="sourceCode" id="cb285"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb285-1"><a href="poisson-regression.html#cb285-1"></a>fHH1V &lt;-<span class="st"> </span>fHH1 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(location<span class="op">==</span><span class="st">&quot;Visayas&quot;</span>)</span>
-<span id="cb285-2"><a href="poisson-regression.html#cb285-2"></a>cuts =<span class="st"> </span><span class="kw">cut</span>(fHH1V<span class="op">$</span>age,</span>
-<span id="cb285-3"><a href="poisson-regression.html#cb285-3"></a>           <span class="dt">breaks=</span><span class="kw">c</span>(<span class="dv">15</span>,<span class="dv">20</span>,<span class="dv">25</span>,<span class="dv">30</span>,<span class="dv">35</span>,<span class="dv">40</span>,<span class="dv">45</span>,<span class="dv">50</span>,<span class="dv">55</span>,<span class="dv">60</span>,<span class="dv">65</span>,<span class="dv">70</span>))</span>
-<span id="cb285-4"><a href="poisson-regression.html#cb285-4"></a>ageGrps &lt;-<span class="st"> </span><span class="kw">data.frame</span>(cuts,fHH1V)</span>
-<span id="cb285-5"><a href="poisson-regression.html#cb285-5"></a><span class="kw">ggplot</span>(<span class="dt">data =</span> ageGrps, <span class="kw">aes</span>(<span class="dt">x =</span> total)) <span class="op">+</span></span>
-<span id="cb285-6"><a href="poisson-regression.html#cb285-6"></a><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth =</span> <span class="fl">.25</span>, <span class="dt">color =</span> <span class="st">&quot;black&quot;</span>, </span>
-<span id="cb285-7"><a href="poisson-regression.html#cb285-7"></a>                 <span class="dt">fill =</span> <span class="st">&quot;white&quot;</span>) <span class="op">+</span></span>
-<span id="cb285-8"><a href="poisson-regression.html#cb285-8"></a><span class="st">  </span><span class="kw">facet_wrap</span>(cuts) <span class="op">+</span></span>
-<span id="cb285-9"><a href="poisson-regression.html#cb285-9"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Household size&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb284"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb284-1"><a href="poisson-regression.html#cb284-1"></a>fHH1V &lt;-<span class="st"> </span>fHH1 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(location<span class="op">==</span><span class="st">&quot;Visayas&quot;</span>)</span>
+<span id="cb284-2"><a href="poisson-regression.html#cb284-2"></a>cuts =<span class="st"> </span><span class="kw">cut</span>(fHH1V<span class="op">$</span>age,</span>
+<span id="cb284-3"><a href="poisson-regression.html#cb284-3"></a>           <span class="dt">breaks=</span><span class="kw">c</span>(<span class="dv">15</span>,<span class="dv">20</span>,<span class="dv">25</span>,<span class="dv">30</span>,<span class="dv">35</span>,<span class="dv">40</span>,<span class="dv">45</span>,<span class="dv">50</span>,<span class="dv">55</span>,<span class="dv">60</span>,<span class="dv">65</span>,<span class="dv">70</span>))</span>
+<span id="cb284-4"><a href="poisson-regression.html#cb284-4"></a>ageGrps &lt;-<span class="st"> </span><span class="kw">data.frame</span>(cuts,fHH1V)</span>
+<span id="cb284-5"><a href="poisson-regression.html#cb284-5"></a><span class="kw">ggplot</span>(<span class="dt">data =</span> ageGrps, <span class="kw">aes</span>(<span class="dt">x =</span> total)) <span class="op">+</span></span>
+<span id="cb284-6"><a href="poisson-regression.html#cb284-6"></a><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth =</span> <span class="fl">.25</span>, <span class="dt">color =</span> <span class="st">&quot;black&quot;</span>, </span>
+<span id="cb284-7"><a href="poisson-regression.html#cb284-7"></a>                 <span class="dt">fill =</span> <span class="st">&quot;white&quot;</span>) <span class="op">+</span></span>
+<span id="cb284-8"><a href="poisson-regression.html#cb284-8"></a><span class="st">  </span><span class="kw">facet_wrap</span>(cuts) <span class="op">+</span></span>
+<span id="cb284-9"><a href="poisson-regression.html#cb284-9"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Household size&quot;</span>)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:totalPoisByAge"></span>
 <img src="Stat-455-Notes_files/figure-html/totalPoisByAge-1.png" alt="Distribution of household sizes by age group of the household head." width="60%" />
 <p class="caption">
 Figure 6.3: Distribution of household sizes by age group of the household head.
 </p>
 </div>
-<div class="sourceCode" id="cb286"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb286-1"><a href="poisson-regression.html#cb286-1"></a><span class="co"># Mean = Variance</span></span>
-<span id="cb286-2"><a href="poisson-regression.html#cb286-2"></a>table1chp4&lt;-<span class="st"> </span>ageGrps  <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(cuts)  <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb286-3"><a href="poisson-regression.html#cb286-3"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">mnNum=</span> <span class="kw">mean</span>(total),<span class="dt">varNum=</span><span class="kw">var</span>(total),<span class="dt">n=</span><span class="kw">n</span>())</span>
-<span id="cb286-4"><a href="poisson-regression.html#cb286-4"></a><span class="kw">kable</span>(table1chp4, <span class="dt">booktabs=</span>T, </span>
-<span id="cb286-5"><a href="poisson-regression.html#cb286-5"></a>      <span class="dt">caption=</span><span class="st">&quot;Compare mean and variance of household size within each age group.&quot;</span>,</span>
-<span id="cb286-6"><a href="poisson-regression.html#cb286-6"></a>      <span class="dt">col.names =</span> <span class="kw">c</span>(<span class="st">&quot;Age Groups&quot;</span>, <span class="st">&quot;Mean&quot;</span>, <span class="st">&quot;Variance&quot;</span>, <span class="st">&quot;n&quot;</span>)) <span class="op">%&gt;%</span></span>
-<span id="cb286-7"><a href="poisson-regression.html#cb286-7"></a><span class="st">  </span><span class="kw">kable_styling</span>(<span class="dt">full_width =</span> F)</span></code></pre></div>
+<div class="sourceCode" id="cb285"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb285-1"><a href="poisson-regression.html#cb285-1"></a><span class="co"># Mean = Variance</span></span>
+<span id="cb285-2"><a href="poisson-regression.html#cb285-2"></a>table1chp4&lt;-<span class="st"> </span>ageGrps  <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(cuts)  <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb285-3"><a href="poisson-regression.html#cb285-3"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">mnNum=</span> <span class="kw">mean</span>(total),<span class="dt">varNum=</span><span class="kw">var</span>(total),<span class="dt">n=</span><span class="kw">n</span>())</span>
+<span id="cb285-4"><a href="poisson-regression.html#cb285-4"></a><span class="kw">kable</span>(table1chp4, <span class="dt">booktabs=</span>T, </span>
+<span id="cb285-5"><a href="poisson-regression.html#cb285-5"></a>      <span class="dt">caption=</span><span class="st">&quot;Compare mean and variance of household size within each age group.&quot;</span>,</span>
+<span id="cb285-6"><a href="poisson-regression.html#cb285-6"></a>      <span class="dt">col.names =</span> <span class="kw">c</span>(<span class="st">&quot;Age Groups&quot;</span>, <span class="st">&quot;Mean&quot;</span>, <span class="st">&quot;Variance&quot;</span>, <span class="st">&quot;n&quot;</span>)) <span class="op">%&gt;%</span></span>
+<span id="cb285-7"><a href="poisson-regression.html#cb285-7"></a><span class="st">  </span><span class="kw">kable_styling</span>(<span class="dt">full_width =</span> F)</span></code></pre></div>
 <table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:table1chp4">Table 6.1: </span>Compare mean and variance of household size within each age group.
@@ -1201,25 +1201,25 @@ NA
 log(E(Y)) = log(\lambda) = \beta_0 + \beta_1\text{Age}_i + \beta_2\textrm{locationDavao}_i + \\ \beta_3\textrm{locationIlocos}_i + \beta_4\textrm{locationMetroManila}_i + \beta_5\textrm{locationVisayas}_i
 \]</span></p>
 <p>We plot the relationship between log(count) and age for each region.</p>
-<div class="sourceCode" id="cb287"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb287-1"><a href="poisson-regression.html#cb287-1"></a><span class="co">## Checking linearity assumption: Empirical log of the means plot</span></span>
-<span id="cb287-2"><a href="poisson-regression.html#cb287-2"></a>sumStats &lt;-<span class="st"> </span>fHH1 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(age, location) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb287-3"><a href="poisson-regression.html#cb287-3"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">mntotal =</span> <span class="kw">mean</span>(total),</span>
-<span id="cb287-4"><a href="poisson-regression.html#cb287-4"></a>            <span class="dt">logmntotal =</span> <span class="kw">log</span>(mntotal), <span class="dt">n=</span><span class="kw">n</span>())</span>
-<span id="cb287-5"><a href="poisson-regression.html#cb287-5"></a><span class="kw">ggplot</span>(sumStats, <span class="kw">aes</span>(<span class="dt">x=</span>age, <span class="dt">y=</span>logmntotal)) <span class="op">+</span></span>
-<span id="cb287-6"><a href="poisson-regression.html#cb287-6"></a><span class="st">  </span><span class="kw">geom_point</span>()<span class="op">+</span></span>
-<span id="cb287-7"><a href="poisson-regression.html#cb287-7"></a><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">&quot;loess&quot;</span>, <span class="dt">size =</span> <span class="fl">1.5</span>)<span class="op">+</span></span>
-<span id="cb287-8"><a href="poisson-regression.html#cb287-8"></a><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>location) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb287-9"><a href="poisson-regression.html#cb287-9"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Age of head of the household&quot;</span>) <span class="op">+</span></span>
-<span id="cb287-10"><a href="poisson-regression.html#cb287-10"></a><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Log of the mean number in the house&quot;</span>) </span></code></pre></div>
+<div class="sourceCode" id="cb286"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb286-1"><a href="poisson-regression.html#cb286-1"></a><span class="co">## Checking linearity assumption: Empirical log of the means plot</span></span>
+<span id="cb286-2"><a href="poisson-regression.html#cb286-2"></a>sumStats &lt;-<span class="st"> </span>fHH1 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(age, location) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb286-3"><a href="poisson-regression.html#cb286-3"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">mntotal =</span> <span class="kw">mean</span>(total),</span>
+<span id="cb286-4"><a href="poisson-regression.html#cb286-4"></a>            <span class="dt">logmntotal =</span> <span class="kw">log</span>(mntotal), <span class="dt">n=</span><span class="kw">n</span>())</span>
+<span id="cb286-5"><a href="poisson-regression.html#cb286-5"></a><span class="kw">ggplot</span>(sumStats, <span class="kw">aes</span>(<span class="dt">x=</span>age, <span class="dt">y=</span>logmntotal)) <span class="op">+</span></span>
+<span id="cb286-6"><a href="poisson-regression.html#cb286-6"></a><span class="st">  </span><span class="kw">geom_point</span>()<span class="op">+</span></span>
+<span id="cb286-7"><a href="poisson-regression.html#cb286-7"></a><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">&quot;loess&quot;</span>, <span class="dt">size =</span> <span class="fl">1.5</span>)<span class="op">+</span></span>
+<span id="cb286-8"><a href="poisson-regression.html#cb286-8"></a><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>location) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb286-9"><a href="poisson-regression.html#cb286-9"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Age of head of the household&quot;</span>) <span class="op">+</span></span>
+<span id="cb286-10"><a href="poisson-regression.html#cb286-10"></a><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Log of the mean number in the house&quot;</span>) </span></code></pre></div>
 <p><img src="Stat-455-Notes_files/figure-html/ageXnhouse-1.png" width="60%" style="display: block; margin: auto;" /></p>
 <p>The relationship appears to be quadratic, rather than linear. We should add a quadratic term to our model.</p>
 <p>The effect of age on log(count) appears to be roughly the same in each region. If it weren’t, we would need to add interaction terms to the model.</p>
 </div>
 <div id="quadratic-poisson-regresson-model" class="section level3 hasAnchor">
 <h3><span class="header-section-number">6.5.2</span> Quadratic Poisson Regresson Model<a href="poisson-regression.html#quadratic-poisson-regresson-model" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb288"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb288-1"><a href="poisson-regression.html#cb288-1"></a>fHH1 &lt;-<span class="st"> </span>fHH1 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">age2 =</span> age<span class="op">*</span>age)</span></code></pre></div>
-<div class="sourceCode" id="cb289"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb289-1"><a href="poisson-regression.html#cb289-1"></a>MP3 &lt;-<span class="st"> </span><span class="kw">glm</span>(total <span class="op">~</span><span class="st"> </span>age <span class="op">+</span><span class="st"> </span>age2 <span class="op">+</span><span class="st"> </span>location, <span class="dt">family =</span> poisson, <span class="dt">data =</span> fHH1)</span>
-<span id="cb289-2"><a href="poisson-regression.html#cb289-2"></a><span class="kw">summary</span>(MP3)</span></code></pre></div>
+<div class="sourceCode" id="cb287"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb287-1"><a href="poisson-regression.html#cb287-1"></a>fHH1 &lt;-<span class="st"> </span>fHH1 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">age2 =</span> age<span class="op">*</span>age)</span></code></pre></div>
+<div class="sourceCode" id="cb288"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb288-1"><a href="poisson-regression.html#cb288-1"></a>MP3 &lt;-<span class="st"> </span><span class="kw">glm</span>(total <span class="op">~</span><span class="st"> </span>age <span class="op">+</span><span class="st"> </span>age2 <span class="op">+</span><span class="st"> </span>location, <span class="dt">family =</span> poisson, <span class="dt">data =</span> fHH1)</span>
+<span id="cb288-2"><a href="poisson-regression.html#cb288-2"></a><span class="kw">summary</span>(MP3)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## glm(formula = total ~ age + age2 + location, family = poisson, 
@@ -1278,10 +1278,26 @@ where <span class="math inline">\(\textrm{sign}(x)\)</span> is defined such that
 </div>
 <div id="plot-of-deviance-residuals-for-first-order-poisson-model" class="section level3 hasAnchor">
 <h3><span class="header-section-number">6.5.4</span> Plot of Deviance Residuals for First-Order Poisson Model<a href="poisson-regression.html#plot-of-deviance-residuals-for-first-order-poisson-model" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb290"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb290-1"><a href="poisson-regression.html#cb290-1"></a><span class="co"># Residual plot for the first order model</span></span>
+<span id="cb290-2"><a href="poisson-regression.html#cb290-2"></a><span class="co">## Log scale</span></span>
+<span id="cb290-3"><a href="poisson-regression.html#cb290-3"></a>Pred =<span class="st"> </span><span class="kw">predict</span>(MP2) <span class="co"># log scale</span></span>
+<span id="cb290-4"><a href="poisson-regression.html#cb290-4"></a>Resid =<span class="st"> </span><span class="kw">resid</span>(MP2)  <span class="co"># linear model</span></span>
+<span id="cb290-5"><a href="poisson-regression.html#cb290-5"></a>Residdf =<span class="st"> </span><span class="kw">data.frame</span>(Pred,Resid)</span>
+<span id="cb290-6"><a href="poisson-regression.html#cb290-6"></a><span class="kw">ggplot</span>(Residdf,<span class="kw">aes</span>(<span class="dt">x=</span>Pred, <span class="dt">y=</span>Resid)) <span class="op">+</span></span>
+<span id="cb290-7"><a href="poisson-regression.html#cb290-7"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">alpha =</span> <span class="fl">.25</span>)<span class="op">+</span></span>
+<span id="cb290-8"><a href="poisson-regression.html#cb290-8"></a><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">&quot;loess&quot;</span>, <span class="dt">size =</span> <span class="fl">1.5</span>, <span class="dt">linetype =</span> <span class="dv">2</span>)<span class="op">+</span></span>
+<span id="cb290-9"><a href="poisson-regression.html#cb290-9"></a><span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">y=</span><span class="dv">0</span>, <span class="dt">size=</span><span class="fl">1.5</span>, <span class="dt">col=</span><span class="st">&quot;red&quot;</span>)<span class="op">+</span></span>
+<span id="cb290-10"><a href="poisson-regression.html#cb290-10"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Fitted values&quot;</span>) <span class="op">+</span></span>
+<span id="cb290-11"><a href="poisson-regression.html#cb290-11"></a><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Deviance Residuals&quot;</span>) </span></code></pre></div>
+<p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-183-1.png" width="60%" style="display: block; margin: auto;" /></p>
+<p>A plot of the deviance residuals versus predicted responses for the first order model exhibits curvature, supporting the idea that the model may improved by adding a quadratic term.</p>
+</div>
+<div id="plot-of-deviance-residuals-for-quadratic-poisson-model" class="section level3 hasAnchor">
+<h3><span class="header-section-number">6.5.5</span> Plot of Deviance Residuals for Quadratic Poisson Model<a href="poisson-regression.html#plot-of-deviance-residuals-for-quadratic-poisson-model" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="sourceCode" id="cb291"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb291-1"><a href="poisson-regression.html#cb291-1"></a><span class="co"># Residual plot for the first order model</span></span>
 <span id="cb291-2"><a href="poisson-regression.html#cb291-2"></a><span class="co">## Log scale</span></span>
-<span id="cb291-3"><a href="poisson-regression.html#cb291-3"></a>Pred =<span class="st"> </span><span class="kw">predict</span>(MP2) <span class="co"># log scale</span></span>
-<span id="cb291-4"><a href="poisson-regression.html#cb291-4"></a>Resid =<span class="st"> </span><span class="kw">resid</span>(MP2)  <span class="co"># linear model</span></span>
+<span id="cb291-3"><a href="poisson-regression.html#cb291-3"></a>Pred =<span class="st"> </span><span class="kw">predict</span>(MP3) <span class="co"># log scale</span></span>
+<span id="cb291-4"><a href="poisson-regression.html#cb291-4"></a>Resid =<span class="st"> </span><span class="kw">resid</span>(MP3)  <span class="co"># linear model</span></span>
 <span id="cb291-5"><a href="poisson-regression.html#cb291-5"></a>Residdf =<span class="st"> </span><span class="kw">data.frame</span>(Pred,Resid)</span>
 <span id="cb291-6"><a href="poisson-regression.html#cb291-6"></a><span class="kw">ggplot</span>(Residdf,<span class="kw">aes</span>(<span class="dt">x=</span>Pred, <span class="dt">y=</span>Resid)) <span class="op">+</span></span>
 <span id="cb291-7"><a href="poisson-regression.html#cb291-7"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">alpha =</span> <span class="fl">.25</span>)<span class="op">+</span></span>
@@ -1290,22 +1306,6 @@ where <span class="math inline">\(\textrm{sign}(x)\)</span> is defined such that
 <span id="cb291-10"><a href="poisson-regression.html#cb291-10"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Fitted values&quot;</span>) <span class="op">+</span></span>
 <span id="cb291-11"><a href="poisson-regression.html#cb291-11"></a><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Deviance Residuals&quot;</span>) </span></code></pre></div>
 <p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-184-1.png" width="60%" style="display: block; margin: auto;" /></p>
-<p>A plot of the deviance residuals versus predicted responses for the first order model exhibits curvature, supporting the idea that the model may improved by adding a quadratic term.</p>
-</div>
-<div id="plot-of-deviance-residuals-for-quadratic-poisson-model" class="section level3 hasAnchor">
-<h3><span class="header-section-number">6.5.5</span> Plot of Deviance Residuals for Quadratic Poisson Model<a href="poisson-regression.html#plot-of-deviance-residuals-for-quadratic-poisson-model" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb292"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb292-1"><a href="poisson-regression.html#cb292-1"></a><span class="co"># Residual plot for the first order model</span></span>
-<span id="cb292-2"><a href="poisson-regression.html#cb292-2"></a><span class="co">## Log scale</span></span>
-<span id="cb292-3"><a href="poisson-regression.html#cb292-3"></a>Pred =<span class="st"> </span><span class="kw">predict</span>(MP3) <span class="co"># log scale</span></span>
-<span id="cb292-4"><a href="poisson-regression.html#cb292-4"></a>Resid =<span class="st"> </span><span class="kw">resid</span>(MP3)  <span class="co"># linear model</span></span>
-<span id="cb292-5"><a href="poisson-regression.html#cb292-5"></a>Residdf =<span class="st"> </span><span class="kw">data.frame</span>(Pred,Resid)</span>
-<span id="cb292-6"><a href="poisson-regression.html#cb292-6"></a><span class="kw">ggplot</span>(Residdf,<span class="kw">aes</span>(<span class="dt">x=</span>Pred, <span class="dt">y=</span>Resid)) <span class="op">+</span></span>
-<span id="cb292-7"><a href="poisson-regression.html#cb292-7"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">alpha =</span> <span class="fl">.25</span>)<span class="op">+</span></span>
-<span id="cb292-8"><a href="poisson-regression.html#cb292-8"></a><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> <span class="st">&quot;loess&quot;</span>, <span class="dt">size =</span> <span class="fl">1.5</span>, <span class="dt">linetype =</span> <span class="dv">2</span>)<span class="op">+</span></span>
-<span id="cb292-9"><a href="poisson-regression.html#cb292-9"></a><span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">y=</span><span class="dv">0</span>, <span class="dt">size=</span><span class="fl">1.5</span>, <span class="dt">col=</span><span class="st">&quot;red&quot;</span>)<span class="op">+</span></span>
-<span id="cb292-10"><a href="poisson-regression.html#cb292-10"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Fitted values&quot;</span>) <span class="op">+</span></span>
-<span id="cb292-11"><a href="poisson-regression.html#cb292-11"></a><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Deviance Residuals&quot;</span>) </span></code></pre></div>
-<p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-185-1.png" width="60%" style="display: block; margin: auto;" /></p>
 <p>The quadratic trend disappears when using the quadratic model, suggesting the model is better capturing the trend in the data.</p>
 </div>
 <div id="residual-deviance-for-a-model" class="section level3 hasAnchor">
@@ -1329,7 +1329,7 @@ W=\frac{\text{Drop in Deviance}}{\text{Difference in # Parameters}}
 </div>
 <div id="drop-in-deviance-test-1" class="section level3 hasAnchor">
 <h3><span class="header-section-number">6.5.8</span> Drop-in-Deviance Test<a href="poisson-regression.html#drop-in-deviance-test-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb293"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb293-1"><a href="poisson-regression.html#cb293-1"></a><span class="kw">anova</span>(MP2, MP3, <span class="dt">test =</span> <span class="st">&quot;Chisq&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb292"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb292-1"><a href="poisson-regression.html#cb292-1"></a><span class="kw">anova</span>(MP2, MP3, <span class="dt">test =</span> <span class="st">&quot;Chisq&quot;</span>)</span></code></pre></div>
 <pre><code>Analysis of Deviance Table
 
 Model 1: total ~ age + location
@@ -1351,17 +1351,17 @@ Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&
 </div>
 <div id="visual-of-chi2-test" class="section level3 hasAnchor">
 <h3><span class="header-section-number">6.5.9</span> Visual of <span class="math inline">\(\chi^2\)</span> Test<a href="poisson-regression.html#visual-of-chi2-test" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb295"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb295-1"><a href="poisson-regression.html#cb295-1"></a><span class="kw">gf_dist</span>(<span class="st">&quot;chisq&quot;</span>, <span class="dt">df =</span> <span class="dv">1</span>, <span class="dt">geom =</span> <span class="st">&quot;area&quot;</span>, <span class="dt">fill=</span><span class="st">&quot;turquoise&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb295-2"><a href="poisson-regression.html#cb295-2"></a><span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept=</span><span class="fl">133.04</span>, <span class="dt">colour=</span><span class="st">&quot;red&quot;</span>)  <span class="op">+</span><span class="st"> </span><span class="kw">theme</span>(<span class="dt">legend.position=</span><span class="st">&quot;none&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylim</span>(<span class="kw">c</span>(<span class="dv">0</span>,<span class="fl">0.1</span>))</span></code></pre></div>
-<p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-187-1.png" width="576" /></p>
+<div class="sourceCode" id="cb294"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb294-1"><a href="poisson-regression.html#cb294-1"></a><span class="kw">gf_dist</span>(<span class="st">&quot;chisq&quot;</span>, <span class="dt">df =</span> <span class="dv">1</span>, <span class="dt">geom =</span> <span class="st">&quot;area&quot;</span>, <span class="dt">fill=</span><span class="st">&quot;turquoise&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb294-2"><a href="poisson-regression.html#cb294-2"></a><span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept=</span><span class="fl">133.04</span>, <span class="dt">colour=</span><span class="st">&quot;red&quot;</span>)  <span class="op">+</span><span class="st"> </span><span class="kw">theme</span>(<span class="dt">legend.position=</span><span class="st">&quot;none&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylim</span>(<span class="kw">c</span>(<span class="dv">0</span>,<span class="fl">0.1</span>))</span></code></pre></div>
+<p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-186-1.png" width="576" /></p>
 <p>If the null hypothesis is correct, the drop in deviance would follow a <span class="math inline">\(\chi^2\)</span> distribution with 1 degree of freedom. The probability of observing a value as extreme as 133.04 on such a distribution is essentially 0, so the data provide significant support for including the quadratic term.</p>
 </div>
 <div id="adding-roofing-material-to-model" class="section level3 hasAnchor">
 <h3><span class="header-section-number">6.5.10</span> Adding Roofing Material to Model<a href="poisson-regression.html#adding-roofing-material-to-model" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>We also consider whether there is evidence of differences in household size between the two roofing material types, which might be used to measure household wealth.</p>
-<div class="sourceCode" id="cb296"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb296-1"><a href="poisson-regression.html#cb296-1"></a>MP4 &lt;-<span class="st"> </span><span class="kw">glm</span>(total <span class="op">~</span><span class="st"> </span>age <span class="op">+</span><span class="st"> </span>age2 <span class="op">+</span><span class="st"> </span>location <span class="op">+</span><span class="st"> </span>roof, </span>
-<span id="cb296-2"><a href="poisson-regression.html#cb296-2"></a>              <span class="dt">family =</span> poisson, <span class="dt">data =</span> fHH1)</span>
-<span id="cb296-3"><a href="poisson-regression.html#cb296-3"></a><span class="kw">summary</span>(MP4)</span></code></pre></div>
+<div class="sourceCode" id="cb295"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb295-1"><a href="poisson-regression.html#cb295-1"></a>MP4 &lt;-<span class="st"> </span><span class="kw">glm</span>(total <span class="op">~</span><span class="st"> </span>age <span class="op">+</span><span class="st"> </span>age2 <span class="op">+</span><span class="st"> </span>location <span class="op">+</span><span class="st"> </span>roof, </span>
+<span id="cb295-2"><a href="poisson-regression.html#cb295-2"></a>              <span class="dt">family =</span> poisson, <span class="dt">data =</span> fHH1)</span>
+<span id="cb295-3"><a href="poisson-regression.html#cb295-3"></a><span class="kw">summary</span>(MP4)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## glm(formula = total ~ age + age2 + location + roof, family = poisson, 
@@ -1400,7 +1400,7 @@ Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&
 ## AIC: 6575.5
 ## 
 ## Number of Fisher Scoring iterations: 5</code></pre>
-<div class="sourceCode" id="cb298"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb298-1"><a href="poisson-regression.html#cb298-1"></a><span class="kw">anova</span>(MP3, MP4, <span class="dt">test =</span> <span class="st">&quot;Chisq&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb297"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb297-1"><a href="poisson-regression.html#cb297-1"></a><span class="kw">anova</span>(MP3, MP4, <span class="dt">test =</span> <span class="st">&quot;Chisq&quot;</span>)</span></code></pre></div>
 <pre><code>Analysis of Deviance Table
 
 Model 1: total ~ age + age2 + location
@@ -1412,9 +1412,9 @@ Model 2: total ~ age + age2 + location + roof
 </div>
 <div id="visual-of-chi2-test-for-roof" class="section level3 hasAnchor">
 <h3><span class="header-section-number">6.5.11</span> Visual of <span class="math inline">\(\chi^2\)</span> Test for Roof<a href="poisson-regression.html#visual-of-chi2-test-for-roof" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb300"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb300-1"><a href="poisson-regression.html#cb300-1"></a><span class="kw">gf_dist</span>(<span class="st">&quot;chisq&quot;</span>, <span class="dt">df =</span> <span class="dv">1</span>, <span class="dt">geom =</span> <span class="st">&quot;area&quot;</span>, <span class="dt">fill =</span> <span class="op">~</span><span class="st"> </span><span class="op">!</span>(x <span class="op">&gt;</span><span class="st"> </span><span class="fl">1.2</span>)) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb300-2"><a href="poisson-regression.html#cb300-2"></a><span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept=</span><span class="fl">1.2</span>, <span class="dt">colour=</span><span class="st">&quot;red&quot;</span>)  <span class="op">+</span><span class="st"> </span><span class="kw">theme</span>(<span class="dt">legend.position=</span><span class="st">&quot;none&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylim</span>(<span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">1</span>))</span></code></pre></div>
-<p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-189-1.png" width="576" /></p>
+<div class="sourceCode" id="cb299"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb299-1"><a href="poisson-regression.html#cb299-1"></a><span class="kw">gf_dist</span>(<span class="st">&quot;chisq&quot;</span>, <span class="dt">df =</span> <span class="dv">1</span>, <span class="dt">geom =</span> <span class="st">&quot;area&quot;</span>, <span class="dt">fill =</span> <span class="op">~</span><span class="st"> </span><span class="op">!</span>(x <span class="op">&gt;</span><span class="st"> </span><span class="fl">1.2</span>)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb299-2"><a href="poisson-regression.html#cb299-2"></a><span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept=</span><span class="fl">1.2</span>, <span class="dt">colour=</span><span class="st">&quot;red&quot;</span>)  <span class="op">+</span><span class="st"> </span><span class="kw">theme</span>(<span class="dt">legend.position=</span><span class="st">&quot;none&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylim</span>(<span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">1</span>))</span></code></pre></div>
+<p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-188-1.png" width="576" /></p>
 </div>
 <div id="goodness-of-fit" class="section level3 hasAnchor">
 <h3><span class="header-section-number">6.5.12</span> Goodness-of-Fit<a href="poisson-regression.html#goodness-of-fit" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -1422,15 +1422,15 @@ Model 2: total ~ age + age2 + location + roof
 <p>Null Hypothesis: The model adequately fits the data<br />
 Alternative Hypothesis: The model does not adequately fit the data</p>
 <p>When the null hypothesis is true, the model’s residual deviance follows a <span class="math inline">\(\chi^2\)</span> distribution with <span class="math inline">\(n-p\)</span> degrees of freedom, where <span class="math inline">\(p\)</span> is number of parameters in the model.</p>
-<div class="sourceCode" id="cb301"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb301-1"><a href="poisson-regression.html#cb301-1"></a>MP3<span class="op">$</span>deviance</span></code></pre></div>
+<div class="sourceCode" id="cb300"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb300-1"><a href="poisson-regression.html#cb300-1"></a>MP3<span class="op">$</span>deviance</span></code></pre></div>
 <pre><code>## [1] 2187.8</code></pre>
-<div class="sourceCode" id="cb303"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb303-1"><a href="poisson-regression.html#cb303-1"></a>MP3<span class="op">$</span>df.residual</span></code></pre></div>
+<div class="sourceCode" id="cb302"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb302-1"><a href="poisson-regression.html#cb302-1"></a>MP3<span class="op">$</span>df.residual</span></code></pre></div>
 <pre><code>## [1] 1493</code></pre>
-<div class="sourceCode" id="cb305"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb305-1"><a href="poisson-regression.html#cb305-1"></a><span class="dv">1</span><span class="op">-</span><span class="kw">pchisq</span>(MP3<span class="op">$</span>deviance, MP3<span class="op">$</span>df.residual) </span></code></pre></div>
+<div class="sourceCode" id="cb304"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb304-1"><a href="poisson-regression.html#cb304-1"></a><span class="dv">1</span><span class="op">-</span><span class="kw">pchisq</span>(MP3<span class="op">$</span>deviance, MP3<span class="op">$</span>df.residual) </span></code></pre></div>
 <pre><code>[1] 0</code></pre>
-<div class="sourceCode" id="cb307"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb307-1"><a href="poisson-regression.html#cb307-1"></a><span class="kw">gf_dist</span>(<span class="st">&quot;chisq&quot;</span>, <span class="dt">df =</span> <span class="dv">1493</span>, <span class="dt">geom =</span> <span class="st">&quot;area&quot;</span>, <span class="dt">fill =</span> <span class="st">&quot;turquoise&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb307-2"><a href="poisson-regression.html#cb307-2"></a><span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept=</span><span class="fl">2187.8</span>, <span class="dt">colour=</span><span class="st">&quot;red&quot;</span>)  <span class="op">+</span><span class="st"> </span><span class="kw">theme</span>(<span class="dt">legend.position=</span><span class="st">&quot;none&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylim</span>(<span class="kw">c</span>(<span class="dv">0</span>,<span class="fl">0.01</span>))</span></code></pre></div>
-<p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-193-1.png" width="576" /></p>
+<div class="sourceCode" id="cb306"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb306-1"><a href="poisson-regression.html#cb306-1"></a><span class="kw">gf_dist</span>(<span class="st">&quot;chisq&quot;</span>, <span class="dt">df =</span> <span class="dv">1493</span>, <span class="dt">geom =</span> <span class="st">&quot;area&quot;</span>, <span class="dt">fill =</span> <span class="st">&quot;turquoise&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb306-2"><a href="poisson-regression.html#cb306-2"></a><span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept=</span><span class="fl">2187.8</span>, <span class="dt">colour=</span><span class="st">&quot;red&quot;</span>)  <span class="op">+</span><span class="st"> </span><span class="kw">theme</span>(<span class="dt">legend.position=</span><span class="st">&quot;none&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylim</span>(<span class="kw">c</span>(<span class="dv">0</span>,<span class="fl">0.01</span>))</span></code></pre></div>
+<p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-192-1.png" width="576" /></p>
 <p>The small p-value indicates that the quadratic model does not adequately fit the data.</p>
 <p>We’ve already counted for the quadratic trend, and determined that roof material does not help explain variability in household size.</p>
 <p>It appears that the deficiency is not with the structure of the model’s estimated response, but rather with it’s ability to account for variability.</p>
@@ -1453,8 +1453,8 @@ where <span class="math inline">\(p\)</span> is the number of model parameters.<
 </div>
 <div id="quasi-poisson-model-in-r" class="section level3 hasAnchor">
 <h3><span class="header-section-number">6.6.2</span> Quasi-Poisson Model in R<a href="poisson-regression.html#quasi-poisson-model-in-r" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb308"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb308-1"><a href="poisson-regression.html#cb308-1"></a>MQP &lt;-<span class="st"> </span><span class="kw">glm</span>(total <span class="op">~</span><span class="st"> </span>age <span class="op">+</span><span class="st"> </span>age2 <span class="op">+</span><span class="st"> </span>location, <span class="dt">family =</span> quasipoisson, <span class="dt">data =</span> fHH1)</span>
-<span id="cb308-2"><a href="poisson-regression.html#cb308-2"></a><span class="kw">summary</span>(MQP)</span></code></pre></div>
+<div class="sourceCode" id="cb307"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb307-1"><a href="poisson-regression.html#cb307-1"></a>MQP &lt;-<span class="st"> </span><span class="kw">glm</span>(total <span class="op">~</span><span class="st"> </span>age <span class="op">+</span><span class="st"> </span>age2 <span class="op">+</span><span class="st"> </span>location, <span class="dt">family =</span> quasipoisson, <span class="dt">data =</span> fHH1)</span>
+<span id="cb307-2"><a href="poisson-regression.html#cb307-2"></a><span class="kw">summary</span>(MQP)</span></code></pre></div>
 <pre><code>
 Call:
 glm(formula = total ~ age + age2 + location, family = quasipoisson, 
@@ -1490,7 +1490,7 @@ Number of Fisher Scoring iterations: 5</code></pre>
 <p>Example standard error calculation:
 <span class="math inline">\(SE_Q(\hat\beta_6)=\sqrt{1.414965}\times0.0417496 = 0.04966211\)</span></p>
 <p>Confidence intervals will be <span class="math inline">\(\sqrt{1.414965}\)</span> times as wide.</p>
-<div class="sourceCode" id="cb310"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb310-1"><a href="poisson-regression.html#cb310-1"></a><span class="kw">confint</span>(MP3)</span></code></pre></div>
+<div class="sourceCode" id="cb309"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb309-1"><a href="poisson-regression.html#cb309-1"></a><span class="kw">confint</span>(MP3)</span></code></pre></div>
 <pre><code>##                              2.5 %        97.5 %
 ## (Intercept)          -0.7443966318 -0.0305771038
 ## age                   0.0569439548  0.0840125597
@@ -1499,7 +1499,7 @@ Number of Fisher Scoring iterations: 5</code></pre>
 ## locationIlocosRegion -0.0423469612  0.1641217501
 ## locationMetroManila  -0.0377905252  0.1472678216
 ## locationVisayas       0.0308360654  0.1945162354</code></pre>
-<div class="sourceCode" id="cb312"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb312-1"><a href="poisson-regression.html#cb312-1"></a><span class="kw">confint</span>(MQP)</span></code></pre></div>
+<div class="sourceCode" id="cb311"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb311-1"><a href="poisson-regression.html#cb311-1"></a><span class="kw">confint</span>(MQP)</span></code></pre></div>
 <pre><code>##                              2.5 %        97.5 %
 ## (Intercept)          -0.8133555745  0.0357651067
 ## age                   0.0544264830  0.0866258208
@@ -1520,8 +1520,8 @@ F=\frac{\frac{\text{Drop in Deviance}}{\text{Difference in # Parameters}}}{\hat{
 <div id="first-vs-second-order-quasi-poisson-models" class="section level3 hasAnchor">
 <h3><span class="header-section-number">6.6.5</span> First vs Second Order Quasi-Poisson Models<a href="poisson-regression.html#first-vs-second-order-quasi-poisson-models" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>We compare first and second order quasi-Poisson models, using a drop-in-deviance test.</p>
-<div class="sourceCode" id="cb314"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb314-1"><a href="poisson-regression.html#cb314-1"></a>MQP1 &lt;-<span class="st"> </span><span class="kw">glm</span>(total <span class="op">~</span><span class="st"> </span>age <span class="op">+</span><span class="st"> </span>location, <span class="dt">family =</span> quasipoisson, <span class="dt">data =</span> fHH1)</span></code></pre></div>
-<div class="sourceCode" id="cb315"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb315-1"><a href="poisson-regression.html#cb315-1"></a><span class="kw">anova</span>(MQP1, MQP, <span class="dt">test =</span> <span class="st">&quot;F&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb313"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb313-1"><a href="poisson-regression.html#cb313-1"></a>MQP1 &lt;-<span class="st"> </span><span class="kw">glm</span>(total <span class="op">~</span><span class="st"> </span>age <span class="op">+</span><span class="st"> </span>location, <span class="dt">family =</span> quasipoisson, <span class="dt">data =</span> fHH1)</span></code></pre></div>
+<div class="sourceCode" id="cb314"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb314-1"><a href="poisson-regression.html#cb314-1"></a><span class="kw">anova</span>(MQP1, MQP, <span class="dt">test =</span> <span class="st">&quot;F&quot;</span>)</span></code></pre></div>
 <pre><code>## Analysis of Deviance Table
 ## 
 ## Model 1: total ~ age + location
@@ -1547,10 +1547,10 @@ F=\frac{\frac{\text{Drop in Deviance}}{\text{Difference in # Parameters}}}{\hat{
 <li><code>enroll1000</code> = enrollment at the school, in thousands</li>
 <li><code>region</code> = region of the country (C = Central, MW = Midwest, NE = Northeast, SE = Southeast, SW = Southwest, and W = West)</li>
 </ul>
-<div class="sourceCode" id="cb317"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb317-1"><a href="poisson-regression.html#cb317-1"></a><span class="co">#Getting started-Crime</span></span>
-<span id="cb317-2"><a href="poisson-regression.html#cb317-2"></a><span class="co"># Crime data for Universities and Colleges</span></span>
-<span id="cb317-3"><a href="poisson-regression.html#cb317-3"></a>c.data &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;https://raw.githubusercontent.com/proback/BeyondMLR/master/data/c_data.csv&quot;</span>)</span>
-<span id="cb317-4"><a href="poisson-regression.html#cb317-4"></a><span class="kw">head</span>(c.data, <span class="dt">n=</span><span class="dv">10</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb316"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb316-1"><a href="poisson-regression.html#cb316-1"></a><span class="co">#Getting started-Crime</span></span>
+<span id="cb316-2"><a href="poisson-regression.html#cb316-2"></a><span class="co"># Crime data for Universities and Colleges</span></span>
+<span id="cb316-3"><a href="poisson-regression.html#cb316-3"></a>c.data &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;https://raw.githubusercontent.com/proback/BeyondMLR/master/data/c_data.csv&quot;</span>)</span>
+<span id="cb316-4"><a href="poisson-regression.html#cb316-4"></a><span class="kw">head</span>(c.data, <span class="dt">n=</span><span class="dv">10</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 10 × 6
 ##    Enrollment type     nv nvrate enroll1000 region
 ##         &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt;  &lt;dbl&gt;      &lt;dbl&gt; &lt;chr&gt; 
@@ -1994,9 +1994,9 @@ log(\lambda) = \beta_0 + \beta_1(\textrm{type}) + log(\textrm{enroll1000})
 <div id="offset-in-r" class="section level3 hasAnchor">
 <h3><span class="header-section-number">6.7.5</span> Offset in R<a href="poisson-regression.html#offset-in-r" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>We model number of crimes using type of institution and region as explanatory variables. To do this, we add an argument called <code>offset</code> in the model.</p>
-<div class="sourceCode" id="cb319"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb319-1"><a href="poisson-regression.html#cb319-1"></a>modeltr &lt;-<span class="st"> </span><span class="kw">glm</span>(nv <span class="op">~</span><span class="st"> </span>type <span class="op">+</span><span class="st"> </span>region, <span class="dt">family =</span> poisson,</span>
-<span id="cb319-2"><a href="poisson-regression.html#cb319-2"></a>               <span class="dt">offset =</span> <span class="kw">log</span>(enroll1000), <span class="dt">data =</span> c.data)</span>
-<span id="cb319-3"><a href="poisson-regression.html#cb319-3"></a><span class="kw">summary</span>(modeltr)</span></code></pre></div>
+<div class="sourceCode" id="cb318"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb318-1"><a href="poisson-regression.html#cb318-1"></a>modeltr &lt;-<span class="st"> </span><span class="kw">glm</span>(nv <span class="op">~</span><span class="st"> </span>type <span class="op">+</span><span class="st"> </span>region, <span class="dt">family =</span> poisson,</span>
+<span id="cb318-2"><a href="poisson-regression.html#cb318-2"></a>               <span class="dt">offset =</span> <span class="kw">log</span>(enroll1000), <span class="dt">data =</span> c.data)</span>
+<span id="cb318-3"><a href="poisson-regression.html#cb318-3"></a><span class="kw">summary</span>(modeltr)</span></code></pre></div>
 <pre><code>
 Call:
 glm(formula = nv ~ type + region, family = poisson, data = c.data, 
@@ -2036,10 +2036,10 @@ Number of Fisher Scoring iterations: 6</code></pre>
 <div id="model-with-interaction" class="section level3 hasAnchor">
 <h3><span class="header-section-number">6.7.6</span> Model with Interaction<a href="poisson-regression.html#model-with-interaction" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Our plots suggested the difference between colleges and universities might vary between regions. To allow for this, we add an interaction term in the model.</p>
-<div class="sourceCode" id="cb321"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb321-1"><a href="poisson-regression.html#cb321-1"></a>modeli &lt;-<span class="st"> </span><span class="kw">glm</span>(nv <span class="op">~</span><span class="st"> </span>type <span class="op">+</span><span class="st"> </span>region <span class="op">+</span><span class="st"> </span>region<span class="op">:</span>type, </span>
-<span id="cb321-2"><a href="poisson-regression.html#cb321-2"></a>              <span class="dt">family =</span> poisson,</span>
-<span id="cb321-3"><a href="poisson-regression.html#cb321-3"></a>              <span class="dt">offset =</span> <span class="kw">log</span>(enroll1000), <span class="dt">data =</span> c.data)</span>
-<span id="cb321-4"><a href="poisson-regression.html#cb321-4"></a><span class="kw">summary</span>(modeli)</span></code></pre></div>
+<div class="sourceCode" id="cb320"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb320-1"><a href="poisson-regression.html#cb320-1"></a>modeli &lt;-<span class="st"> </span><span class="kw">glm</span>(nv <span class="op">~</span><span class="st"> </span>type <span class="op">+</span><span class="st"> </span>region <span class="op">+</span><span class="st"> </span>region<span class="op">:</span>type, </span>
+<span id="cb320-2"><a href="poisson-regression.html#cb320-2"></a>              <span class="dt">family =</span> poisson,</span>
+<span id="cb320-3"><a href="poisson-regression.html#cb320-3"></a>              <span class="dt">offset =</span> <span class="kw">log</span>(enroll1000), <span class="dt">data =</span> c.data)</span>
+<span id="cb320-4"><a href="poisson-regression.html#cb320-4"></a><span class="kw">summary</span>(modeli)</span></code></pre></div>
 <pre><code>
 Call:
 glm(formula = nv ~ type + region + region:type, family = poisson, 
@@ -2078,8 +2078,8 @@ For example, our model estimates that violent crime rates are (<span class="math
 </div>
 <div id="drop-in-deviance-test-for-interaction" class="section level3 hasAnchor">
 <h3><span class="header-section-number">6.7.7</span> Drop-in-Deviance Test for Interaction<a href="poisson-regression.html#drop-in-deviance-test-for-interaction" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb323"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb323-1"><a href="poisson-regression.html#cb323-1"></a>drop_in_dev &lt;-<span class="st"> </span><span class="kw">anova</span>(modeltr, modeli, <span class="dt">test =</span> <span class="st">&quot;Chisq&quot;</span>)</span>
-<span id="cb323-2"><a href="poisson-regression.html#cb323-2"></a>drop_in_dev</span></code></pre></div>
+<div class="sourceCode" id="cb322"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb322-1"><a href="poisson-regression.html#cb322-1"></a>drop_in_dev &lt;-<span class="st"> </span><span class="kw">anova</span>(modeltr, modeli, <span class="dt">test =</span> <span class="st">&quot;Chisq&quot;</span>)</span>
+<span id="cb322-2"><a href="poisson-regression.html#cb322-2"></a>drop_in_dev</span></code></pre></div>
 <pre><code>Analysis of Deviance Table
 
 Model 1: nv ~ type + region
@@ -2097,21 +2097,21 @@ Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&
 <div id="goodness-of-fit-test" class="section level3 hasAnchor">
 <h3><span class="header-section-number">6.7.8</span> Goodness of Fit Test<a href="poisson-regression.html#goodness-of-fit-test" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>We perform a goodness of fit test to test whether the interaction model adequately fits the data.</p>
-<div class="sourceCode" id="cb326"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb326-1"><a href="poisson-regression.html#cb326-1"></a><span class="dv">1</span><span class="op">-</span><span class="kw">pchisq</span>(modeli<span class="op">$</span>deviance, modeli<span class="op">$</span>df.residual) </span></code></pre></div>
+<div class="sourceCode" id="cb325"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb325-1"><a href="poisson-regression.html#cb325-1"></a><span class="dv">1</span><span class="op">-</span><span class="kw">pchisq</span>(modeli<span class="op">$</span>deviance, modeli<span class="op">$</span>df.residual) </span></code></pre></div>
 <pre><code>[1] 0</code></pre>
-<div class="sourceCode" id="cb328"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb328-1"><a href="poisson-regression.html#cb328-1"></a><span class="kw">gf_dist</span>(<span class="st">&quot;chisq&quot;</span>, <span class="dt">df =</span> <span class="dv">70</span>, <span class="dt">geom =</span> <span class="st">&quot;area&quot;</span>, <span class="dt">fill =</span> <span class="st">&quot;turquoise&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb328-2"><a href="poisson-regression.html#cb328-2"></a><span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept=</span><span class="fl">276.7038</span>, <span class="dt">colour=</span><span class="st">&quot;red&quot;</span>)  <span class="op">+</span><span class="st"> </span><span class="kw">theme</span>(<span class="dt">legend.position=</span><span class="st">&quot;none&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylim</span>(<span class="kw">c</span>(<span class="dv">0</span>,<span class="fl">0.05</span>))</span></code></pre></div>
-<p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-206-1.png" width="576" /></p>
+<div class="sourceCode" id="cb327"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb327-1"><a href="poisson-regression.html#cb327-1"></a><span class="kw">gf_dist</span>(<span class="st">&quot;chisq&quot;</span>, <span class="dt">df =</span> <span class="dv">70</span>, <span class="dt">geom =</span> <span class="st">&quot;area&quot;</span>, <span class="dt">fill =</span> <span class="st">&quot;turquoise&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb327-2"><a href="poisson-regression.html#cb327-2"></a><span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept=</span><span class="fl">276.7038</span>, <span class="dt">colour=</span><span class="st">&quot;red&quot;</span>)  <span class="op">+</span><span class="st"> </span><span class="kw">theme</span>(<span class="dt">legend.position=</span><span class="st">&quot;none&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylim</span>(<span class="kw">c</span>(<span class="dv">0</span>,<span class="fl">0.05</span>))</span></code></pre></div>
+<p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-205-1.png" width="576" /></p>
 <p>There is strong evidence of a lack of fit.</p>
 <p>We don’t have any other explanatory variables, and nonlinear terms don’t make sense for categorical explanatory variables.</p>
 <p>The issue is likely due to overdispersion.</p>
 </div>
 <div id="quasi-poisson-model-1" class="section level3 hasAnchor">
 <h3><span class="header-section-number">6.7.9</span> Quasi-Poisson Model<a href="poisson-regression.html#quasi-poisson-model-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb329"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb329-1"><a href="poisson-regression.html#cb329-1"></a>modeliq &lt;-<span class="st"> </span><span class="kw">glm</span>(nv <span class="op">~</span><span class="st"> </span>type <span class="op">+</span><span class="st"> </span>region <span class="op">+</span><span class="st"> </span>region<span class="op">:</span>type, </span>
-<span id="cb329-2"><a href="poisson-regression.html#cb329-2"></a>               <span class="dt">family =</span> quasipoisson,</span>
-<span id="cb329-3"><a href="poisson-regression.html#cb329-3"></a>               <span class="dt">offset =</span> <span class="kw">log</span>(enroll1000), <span class="dt">data =</span> c.data)</span>
-<span id="cb329-4"><a href="poisson-regression.html#cb329-4"></a><span class="kw">summary</span>(modeliq)</span></code></pre></div>
+<div class="sourceCode" id="cb328"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb328-1"><a href="poisson-regression.html#cb328-1"></a>modeliq &lt;-<span class="st"> </span><span class="kw">glm</span>(nv <span class="op">~</span><span class="st"> </span>type <span class="op">+</span><span class="st"> </span>region <span class="op">+</span><span class="st"> </span>region<span class="op">:</span>type, </span>
+<span id="cb328-2"><a href="poisson-regression.html#cb328-2"></a>               <span class="dt">family =</span> quasipoisson,</span>
+<span id="cb328-3"><a href="poisson-regression.html#cb328-3"></a>               <span class="dt">offset =</span> <span class="kw">log</span>(enroll1000), <span class="dt">data =</span> c.data)</span>
+<span id="cb328-4"><a href="poisson-regression.html#cb328-4"></a><span class="kw">summary</span>(modeliq)</span></code></pre></div>
 <pre><code>
 Call:
 glm(formula = nv ~ type + region + region:type, family = quasipoisson, 
@@ -2152,10 +2152,10 @@ Number of Fisher Scoring iterations: 13</code></pre>
 <p>We previously found evidence that the difference between colleges and universities in violent crime rate differs by region.
 That test, however, was based on a model that was not appropriate.</p>
 <p>We repeat the test, using the quasipoisson model, and associated F-test.</p>
-<div class="sourceCode" id="cb331"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb331-1"><a href="poisson-regression.html#cb331-1"></a>modeltrq &lt;-<span class="st"> </span><span class="kw">glm</span>(nv <span class="op">~</span><span class="st"> </span>type <span class="op">+</span><span class="st"> </span>region, <span class="dt">family =</span> quasipoisson,</span>
-<span id="cb331-2"><a href="poisson-regression.html#cb331-2"></a>               <span class="dt">offset =</span> <span class="kw">log</span>(enroll1000), <span class="dt">data =</span> c.data)</span>
-<span id="cb331-3"><a href="poisson-regression.html#cb331-3"></a>drop_in_dev &lt;-<span class="st"> </span><span class="kw">anova</span>(modeltrq, modeliq, <span class="dt">test =</span> <span class="st">&quot;F&quot;</span>)</span>
-<span id="cb331-4"><a href="poisson-regression.html#cb331-4"></a>drop_in_dev</span></code></pre></div>
+<div class="sourceCode" id="cb330"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb330-1"><a href="poisson-regression.html#cb330-1"></a>modeltrq &lt;-<span class="st"> </span><span class="kw">glm</span>(nv <span class="op">~</span><span class="st"> </span>type <span class="op">+</span><span class="st"> </span>region, <span class="dt">family =</span> quasipoisson,</span>
+<span id="cb330-2"><a href="poisson-regression.html#cb330-2"></a>               <span class="dt">offset =</span> <span class="kw">log</span>(enroll1000), <span class="dt">data =</span> c.data)</span>
+<span id="cb330-3"><a href="poisson-regression.html#cb330-3"></a>drop_in_dev &lt;-<span class="st"> </span><span class="kw">anova</span>(modeltrq, modeliq, <span class="dt">test =</span> <span class="st">&quot;F&quot;</span>)</span>
+<span id="cb330-4"><a href="poisson-regression.html#cb330-4"></a>drop_in_dev</span></code></pre></div>
 <pre><code>Analysis of Deviance Table
 
 Model 1: nv ~ type + region
