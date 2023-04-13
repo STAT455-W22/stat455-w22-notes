@@ -1281,20 +1281,19 @@ c. $\hat{\sigma} > \hat{\sigma_u}$
 d. $\hat{\sigma_u}$ is about the same as  $\hat{\sigma_v}$    
 e. $\hat{\rho}_{uv}$ is slightly negative     
 
-<!---
-**Answers from 1-21 class**
+**Answers**
 
-a)	Expected performance anxiety for 18 year olds is higher for juried performances than for nonjuried ones.  
+a)	There is evidence that expected performance anxiety for musicians with no prior years of study is higher when giving a juried performance than a non-juried one. 
 
-b)	The gap in perf. Anxiety between juried and nonjuried performances decreases as the performers get older.    
+b)	While the gap in performance anxiety between juried and non-juried performances may decrease with a musician's years of study, it is plausible that this gap does not change at all.      
 
-c)	There is more variability between performances by the same musician than between nonjuried performances by different musicians, after accounting for age and type of performance.    
+c)	There is more variability in residuals for performance anxiety between performances of the same type (juried or non-juried) by the same performer than there is in average residuals between different performers for non-juried performances, after accounting for years of study and whether the performance was juried.    
 
-d)	Variation in neg affect for nonjuried performances is similar to variation in change in neg. affect between juried and nonjuried performances.     
+d)	After accounting for years of study and whether the performance was juried, variation in average residuals between different performers, for non-juried performances, is about the same as variation in change in performance anxiety for juried vs non-juried performances between individuals. 
 
-e)	People who experience more p.a. for nonjuried performances have less increase in anxiety (maybe even decrease) when playing in a juried performance. 
+e)	After accounting for years of study and whether the performance ws juried, people who experience higher than expected performance anxiety for nonjuried performances have less increase in anxiety (maybe even decrease) when playing in a juried performance.
 
----> 
+
  
 2. Explain in words what it would mean if the model parameter was equal to zero.    
 
@@ -1306,6 +1305,26 @@ e. $\sigma_u$
 f. $\sigma_v$      
 g. $\sigma$     
 h. $\rho_{uv}$      
+
+**Solution**
+
+a. $\alpha_0 =0$ would imply that the average performance anxiety score for a musician with no prior study in a non-juried performance is 0.  
+
+b. $\alpha_1=0$ would imply that for non-juried performances, average performance anxiety does not change as the muscician gains more years of study.
+
+c. $\beta_0=0$ would imply that a musician with no prior years of study has no difference, on average, between performance anxiety scores when playing in a juried performance, compared to a non-juried one. 
+
+d. $\beta_1=0$ would imply that on average, the difference in a musician's performance anxiety scores in juried performances compared to non-juried ones stays the same, regardless of how many prior years of study the musician has.   
+
+e. $\sigma_u=0$ would imply that all musicians with the same amount of prior study would have the same average performance anxiety score in their non-juried performances. 
+
+f. $\sigma_v=0$ would imply that all musicians with the same amount of prior study would, on average, have the same change in performance anxiety between juried and non-juried performances.   
+
+g. $\sigma=0$ would imply that all performances of the same type (juried vs nonjuried), that are given by musicians with the same amount of prior study would have the same performance anxiety scores.  
+
+h. $\rho_{uv}=0$ would imply that after accounting for age and whether a performance is juried, there is no relationship between a performer's average performance anxiety in a non-juried performance, and their change in performance anxiety between juried and non-juried performances. (Another way to say is that, after accounting for years of prior study and type of performance, a musician who has a higher than expected performance anxiety score in non-juried performances is not expected to have any bigger, or smaller, change when playing in a juried performance than a musician who has lower than expected performance anxiety in a non-juried performance).  
+
+
 
 3. Now consider a model with no interaction term. 
 
