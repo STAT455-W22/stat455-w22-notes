@@ -199,7 +199,7 @@ alternative-covariance-structure---autogregressive
 ar1-model-on-schools-data
 non-longitudinal-multilevel-models
 final-thoughts-regarding-covariance-structures
-data-with-three-of-more-levels
+data-with-three-or-more-levels
 three-level-plants-experiment
 experimental-design
 the-data-1

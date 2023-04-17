@@ -1,4 +1,4 @@
-# Data with Three of More Levels
+# Data with Three or More Levels
 
 
 ```{r, include=FALSE}
