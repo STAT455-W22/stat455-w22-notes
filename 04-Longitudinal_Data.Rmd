@@ -744,17 +744,17 @@ For School $i$, the covariance structure for the three time points has general f
 
 \[ Cov(\mathbf{Y}_i) =  \left[
           \begin{array}{cccc}
-            Var(Y_{i1}) & Cov(Y_{i1},Y_{i2}) & Cov(Y_{i1},Y_{i3}) \\
-            Cov(Y_{i1},Y_{i2}) & Var(Y_{i2}) & Cov(Y_{i2},Y_{i3}) \\
-            Cov(Y_{i1},Y_{i3}) & Cov(Y_{i2},Y_{i3}) & Var(Y_{i3})
+            Var(Y_{i0}) & Cov(Y_{i0},Y_{i1}) & Cov(Y_{i0},Y_{i2}) \\
+            Cov(Y_{i0},Y_{i1}) & Var(Y_{i1}) & Cov(Y_{i1},Y_{i2}) \\
+            Cov(Y_{i0},Y_{i2}) & Cov(Y_{i1},Y_{i2}) & Var(Y_{i2})
           \end{array} \right] \]
 where
 
-* $Var(Y_{i1})$ is the variability in 2008 test scores (time $j=1$), 
+* $Var(Y_{i0})$ is the variability in 2008 test scores (time $j=0$), 
 
-* $Cov(Y_{i1},Y_{i2})$ is the covariance between 2008 and 2009 test scores (times $j=1$ and $j=2$), etc.  
+* $Cov(Y_{i0},Y_{i1})$ is the covariance between 2008 and 2009 test scores (times $j=0$ and $j=1$), etc.  
 
-* $Cov(Y_{i1},Y_{i3})$ is the covariance between 2008 and 2010 test scores (times $j=1$ and $j=2$), etc.  
+* $Cov(Y_{i0},Y_{i2})$ is the covariance between 2008 and 2010 test scores (times $j=0$ and $j=2$), etc.  
 
 * We expect positive values for all three covariance terms in $Cov(\mathbf{Y}_i)$, since schools with relatively high test scores in 2008 are likely to also have relatively high test scores in 2009 or 2010.  
 
@@ -809,9 +809,21 @@ Cov(Y_{ij},Y_{ik}) & = Cov(u_{i}+ v_{i}\textrm{Year08}_{ij}+\epsilon_{ij}, u_{i}
 \end{align*}
 $$
 
+Thus, the correlation between observations in consecutive years at school $i$ is given by   
+
+\[ \widehat{Cov}(Y_{i0},Y_{i1},Y_{i2}) =  \left[
+          \begin{array}{cccc}
+            \sigma_u^2 + \sigma^2 & \sigma_u^2 + (1)\sigma_{uv}  &  \sigma_u^2 + (0+2)\sigma_{uv} \\
+            \sigma_u^2 + (1+0)\sigma_{uv} & \sigma_u^2 + 1^2\sigma_v^2 + \sigma^2 + 2(1)\sigma_{uv} & \sigma_u^2 + 2(1)\sigma^2_{v} +  (1+2)\sigma_{uv} \\
+            \sigma_u^2 + (2+0)\sigma_{uv} & \sigma_u^2 + 1(2)\sigma^2_{v} +  (2+1)\sigma_{uv} & \sigma_u^2 + 2^2\sigma_v^2 + \sigma^2 + 2(2)\sigma_{uv}
+          \end{array} \right] \]
+          
+          
+          
+
 ### Interpretations of $Var(Y_{i1})$ and $Cov(Y_{ij}, Y_{ik})$    
 
-* $Var(Y_{i1})$, the uncertainty (variability) around a school's score in 2008, increases as the uncertainty in intercepts (measured by $\sigma^2_u$) and slopes (measured by $\sigma^2_v$) increases, and as the uncertainty around that school's linear time trend (measured by $\sigma^2$) increases, and as covariance between intercept and slope residuals increases (measured by $\sigma_{uv}$), since if one is off, the other one is likely off as well.  
+* $Var(Y_{i0})$, the uncertainty (variability) around a school's score in 2008, increases as the uncertainty in intercepts (measured by $\sigma^2_u$) and slopes (measured by $\sigma^2_v$) increases, and as the uncertainty around that school's linear time trend (measured by $\sigma^2$) increases, and as covariance between intercept and slope residuals increases (measured by $\sigma_{uv}$), since if one is off, the other one is likely off as well.  
 
 * $Cov(Y_{ij}, Y_{ik})$ depends only on level two error terms($\sigma_u$, $\sigma_v$, $\sigma_{uv}$), not on year-to-year variability within the same school ($\sigma$)    
 
@@ -820,16 +832,16 @@ $$
 We plug into these equations to estimate variance and covariance between individual observations.  
 
 \begin{align*}
-\widehat{Var}(Y_{i1}) & = 35.832 + 0^{2} 0.131 + 8.784 + 2(0)1.907 = 44.62 \\
-\widehat{Var}(Y_{i2}) & = 35.832 + 1^{2} 0.131 + 8.784 + 2(1)1.907 = 48.56 \\
-\widehat{Var}(Y_{i3}) & = 35.832 + 2^{2} 0.131 + 8.784 + 2(2)1.907 = 52.77
+\widehat{Var}(Y_{i0}) & = 35.832 + 0^{2} 0.131 + 8.784 + 2(0)1.907 = 44.62 \\
+\widehat{Var}(Y_{i1}) & = 35.832 + 1^{2} 0.131 + 8.784 + 2(1)1.907 = 48.56 \\
+\widehat{Var}(Y_{i2}) & = 35.832 + 2^{2} 0.131 + 8.784 + 2(2)1.907 = 52.77
 \end{align*}
 \noindent and our estimated within-school covariances between different time points would be:
 
 \begin{align*}
-\widehat{Cov}(Y_{i1},Y_{i2}) & = 35.832 + (0)(1)0.131 + (0+1)1.907 = 37.74 \\
-\widehat{Cov}(Y_{i1},Y_{i3}) & = 35.832 + (0)(2)0.131 + (0+2)1.907 = 39.65 \\
-\widehat{Cov}(Y_{i2},Y_{i3}) & = 35.832 + (1)(2)0.131 + (1+2)1.907 = 41.81
+\widehat{Cov}(Y_{i0},Y_{i1}) & = 35.832 + (0)(1)0.131 + (0+1)1.907 = 37.74 \\
+\widehat{Cov}(Y_{i0},Y_{i2}) & = 35.832 + (0)(2)0.131 + (0+2)1.907 = 39.65 \\
+\widehat{Cov}(Y_{i1},Y_{i2}) & = 35.832 + (1)(2)0.131 + (1+2)1.907 = 41.81
 \end{align*}
 
 In fact, these values will be identical for every School $i$, since scores were assessed at the same three time points.  Thus, we will drop the subscript $i$ moving forward.  
@@ -845,7 +857,7 @@ Written in matrix form, our two-level model implicitly imposes this estimated co
 
 We can convert covariances to correlations using
 
-$Corr(Y_{1},Y_{2})=\frac{Cov(Y_{1},Y_{2})}{\sqrt{Var(Y_{1}) Var(Y_{2})}}$:
+$Corr(Y_{0},Y_{1})=\frac{Cov(Y_{0},Y_{1})}{\sqrt{Var(Y_{0}) Var(Y_{1})}}$:
 
 \[ \widehat{Corr}(\mathbf{Y}) =  \left[
           \begin{array}{cccc}
@@ -864,7 +876,7 @@ This model required estimating four parameters associated with the variance-cova
 
 In a LLSR model, we assume observations to be independent and following an identical distribution with variance $\sigma^2$.   
 
-\[ \widehat{Cov}(Y_{i1},Y_{i2},Y_{i3}) =  \left[
+\[ \widehat{Cov}(Y_{i0},Y_{i1},Y_{i2}) =  \left[
           \begin{array}{cccc}
             \sigma^2 & 0  &  0 \\
             0 & \sigma^2 & 0 \\
@@ -878,20 +890,20 @@ There are other possible covariance structures that makes sense in certain situa
 
 - _Unstructured_ - Every variance and covariance term for observations within a school is a separate parameter and is therefore estimated uniquely; no patterns among variances or correlations are assumed.  This structure offers maximum flexibility but is most costly in terms of parameters estimated.
 
-\[ \widehat{Cov}(Y_{i1},Y_{i2},Y_{i3}) =  \left[
+\[ \widehat{Cov}(Y_{i0},Y_{i1},Y_{i2}) =  \left[
           \begin{array}{cccc}
-            \sigma^2_1 & &   \\
-            \sigma_{12} & \sigma^2_2 &  \\
-            \sigma_{13} & \sigma_{23} & \sigma^2_3
+            \sigma^2_0 & &   \\
+            \sigma_{01} & \sigma^2_1 &  \\
+            \sigma_{02} & \sigma_{12} & \sigma^2_2
           \end{array} \right] \]
 
-There are 6 parameters associated with the variance-covariance structure that need to be estimated: $\sigma^2_1$,$\sigma^2_2$,$\sigma^2_3$, $\sigma_{12}$, $\sigma_{13}$, $\sigma_{23}$.  
+There are 6 parameters associated with the variance-covariance structure that need to be estimated: $\sigma^2_0$,$\sigma^2_1$,$\sigma^2_2$, $\sigma_{01}$, $\sigma_{02}$, $\sigma_{12}$.  
 
 ### Alternative Covariance Structure - Compound Symmetry
 
 - _Compound symmetry_ - Assume variance is constant across all time points and correlation is constant across all pairs of time points.  This structure is highly restrictive but least costly in terms of parameters estimated.
 
-\[ \widehat{Cov}(Y_{i1},Y_{i2},Y_{i3}) =  \left[
+\[ \widehat{Cov}(Y_{i0},Y_{i1},Y_{i2}) =  \left[
           \begin{array}{cccc}
             \sigma^2 & &   \\
             \rho\sigma & \sigma^2 &  \\
@@ -908,7 +920,7 @@ There are 2 parameters associated with the variance-covariance structure that ne
 A common example of an autoregressive model is the AR(1) time series model. For $\phi\in(-1,1)$, the covariance matrix is given by:
 
 
-\[ \widehat{Cov}(Y_{i1},Y_{i2},Y_{i3}) =  \left[
+\[ \widehat{Cov}(Y_{i0},Y_{i1},Y_{i2}) =  \left[
           \begin{array}{cccc}
             \sigma^2 & &   \\
             \phi\sigma^2 & \sigma^2 &  \\
@@ -919,7 +931,7 @@ This model requires estimating two parameters $\sigma^2$, and $\phi$.
 
 This implies a correlation matrix 
 
-\[ \widehat{Corr}(Y_{i1},Y_{i2},Y_{i3}) =  \left[
+\[ \widehat{Corr}(Y_{i0},Y_{i1},Y_{i2}) =  \left[
           \begin{array}{cccc}
             1 & &   \\
             \phi & 1 &  \\

@@ -22,7 +22,7 @@
 
 
 
-<meta name="date" content="2023-04-12" />
+<meta name="date" content="2023-04-16" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -1409,15 +1409,15 @@ where <span class="math inline">\(\epsilon_{ij}\sim N(0,\sigma^2)\)</span> and</
 <p>For School <span class="math inline">\(i\)</span>, the covariance structure for the three time points has general form:</p>
 <p><span class="math display">\[ Cov(\mathbf{Y}_i) =  \left[
           \begin{array}{cccc}
-            Var(Y_{i1}) &amp; Cov(Y_{i1},Y_{i2}) &amp; Cov(Y_{i1},Y_{i3}) \\
-            Cov(Y_{i1},Y_{i2}) &amp; Var(Y_{i2}) &amp; Cov(Y_{i2},Y_{i3}) \\
-            Cov(Y_{i1},Y_{i3}) &amp; Cov(Y_{i2},Y_{i3}) &amp; Var(Y_{i3})
+            Var(Y_{i0}) &amp; Cov(Y_{i0},Y_{i1}) &amp; Cov(Y_{i0},Y_{i2}) \\
+            Cov(Y_{i0},Y_{i1}) &amp; Var(Y_{i1}) &amp; Cov(Y_{i1},Y_{i2}) \\
+            Cov(Y_{i0},Y_{i2}) &amp; Cov(Y_{i1},Y_{i2}) &amp; Var(Y_{i2})
           \end{array} \right] \]</span>
 where</p>
 <ul>
-<li><p><span class="math inline">\(Var(Y_{i1})\)</span> is the variability in 2008 test scores (time <span class="math inline">\(j=1\)</span>),</p></li>
-<li><p><span class="math inline">\(Cov(Y_{i1},Y_{i2})\)</span> is the covariance between 2008 and 2009 test scores (times <span class="math inline">\(j=1\)</span> and <span class="math inline">\(j=2\)</span>), etc.</p></li>
-<li><p><span class="math inline">\(Cov(Y_{i1},Y_{i3})\)</span> is the covariance between 2008 and 2010 test scores (times <span class="math inline">\(j=1\)</span> and <span class="math inline">\(j=2\)</span>), etc.</p></li>
+<li><p><span class="math inline">\(Var(Y_{i0})\)</span> is the variability in 2008 test scores (time <span class="math inline">\(j=0\)</span>),</p></li>
+<li><p><span class="math inline">\(Cov(Y_{i0},Y_{i1})\)</span> is the covariance between 2008 and 2009 test scores (times <span class="math inline">\(j=0\)</span> and <span class="math inline">\(j=1\)</span>), etc.</p></li>
+<li><p><span class="math inline">\(Cov(Y_{i0},Y_{i2})\)</span> is the covariance between 2008 and 2010 test scores (times <span class="math inline">\(j=0\)</span> and <span class="math inline">\(j=2\)</span>), etc.</p></li>
 <li><p>We expect positive values for all three covariance terms in <span class="math inline">\(Cov(\mathbf{Y}_i)\)</span>, since schools with relatively high test scores in 2008 are likely to also have relatively high test scores in 2009 or 2010.</p></li>
 <li><p>We expect correlation coefficients between two years to be near 1.</p></li>
 <li><p>Note that the error structure at Level Two is <em>not</em> the same as the within-school covariance structure among observations.</p></li>
@@ -1457,11 +1457,18 @@ Cov(Y_{ij},Y_{ik}) &amp; = Cov(u_{i}+ v_{i}\textrm{Year08}_{ij}+\epsilon_{ij}, u
 &amp; = \sigma_{u}^{2} + t_{j}t_{k} \sigma_{v}^{2} + (t_{j}+t_{k})\sigma_{uv}
 \end{align*}
 \]</span></p>
+<p>Thus, the correlation between observations in consecutive years at school <span class="math inline">\(i\)</span> is given by</p>
+<p><span class="math display">\[ \widehat{Cov}(Y_{i0},Y_{i1},Y_{i2}) =  \left[
+          \begin{array}{cccc}
+            \sigma_u^2 + \sigma^2 &amp; \sigma_u^2 + (1)\sigma_{uv}  &amp;  \sigma_u^2 + (0+2)\sigma_{uv} \\
+            \sigma_u^2 + (1+0)\sigma_{uv} &amp; \sigma_u^2 + 1^2\sigma_v^2 + \sigma^2 + 2(1)\sigma_{uv} &amp; \sigma_u^2 + 2(1)\sigma^2_{v} +  (1+2)\sigma_{uv} \\
+            \sigma_u^2 + (2+0)\sigma_{uv} &amp; \sigma_u^2 + 1(2)\sigma^2_{v} +  (2+1)\sigma_{uv} &amp; \sigma_u^2 + 2^2\sigma_v^2 + \sigma^2 + 2(2)\sigma_{uv}
+          \end{array} \right] \]</span></p>
 </div>
 <div id="interpretations-of-vary_i1-and-covy_ij-y_ik" class="section level3 hasAnchor" number="4.5.3">
 <h3><span class="header-section-number">4.5.3</span> Interpretations of <span class="math inline">\(Var(Y_{i1})\)</span> and <span class="math inline">\(Cov(Y_{ij}, Y_{ik})\)</span><a href="longitudinal-data.html#interpretations-of-vary_i1-and-covy_ij-y_ik" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li><p><span class="math inline">\(Var(Y_{i1})\)</span>, the uncertainty (variability) around a school’s score in 2008, increases as the uncertainty in intercepts (measured by <span class="math inline">\(\sigma^2_u\)</span>) and slopes (measured by <span class="math inline">\(\sigma^2_v\)</span>) increases, and as the uncertainty around that school’s linear time trend (measured by <span class="math inline">\(\sigma^2\)</span>) increases, and as covariance between intercept and slope residuals increases (measured by <span class="math inline">\(\sigma_{uv}\)</span>), since if one is off, the other one is likely off as well.</p></li>
+<li><p><span class="math inline">\(Var(Y_{i0})\)</span>, the uncertainty (variability) around a school’s score in 2008, increases as the uncertainty in intercepts (measured by <span class="math inline">\(\sigma^2_u\)</span>) and slopes (measured by <span class="math inline">\(\sigma^2_v\)</span>) increases, and as the uncertainty around that school’s linear time trend (measured by <span class="math inline">\(\sigma^2\)</span>) increases, and as covariance between intercept and slope residuals increases (measured by <span class="math inline">\(\sigma_{uv}\)</span>), since if one is off, the other one is likely off as well.</p></li>
 <li><p><span class="math inline">\(Cov(Y_{ij}, Y_{ik})\)</span> depends only on level two error terms(<span class="math inline">\(\sigma_u\)</span>, <span class="math inline">\(\sigma_v\)</span>, <span class="math inline">\(\sigma_{uv}\)</span>), not on year-to-year variability within the same school (<span class="math inline">\(\sigma\)</span>)</p></li>
 </ul>
 </div>
@@ -1469,15 +1476,15 @@ Cov(Y_{ij},Y_{ik}) &amp; = Cov(u_{i}+ v_{i}\textrm{Year08}_{ij}+\epsilon_{ij}, u
 <h3><span class="header-section-number">4.5.4</span> Variance and Covariance Estimates<a href="longitudinal-data.html#variance-and-covariance-estimates" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>We plug into these equations to estimate variance and covariance between individual observations.</p>
 <p><span class="math display">\[\begin{align*}
-\widehat{Var}(Y_{i1}) &amp; = 35.832 + 0^{2} 0.131 + 8.784 + 2(0)1.907 = 44.62 \\
-\widehat{Var}(Y_{i2}) &amp; = 35.832 + 1^{2} 0.131 + 8.784 + 2(1)1.907 = 48.56 \\
-\widehat{Var}(Y_{i3}) &amp; = 35.832 + 2^{2} 0.131 + 8.784 + 2(2)1.907 = 52.77
+\widehat{Var}(Y_{i0}) &amp; = 35.832 + 0^{2} 0.131 + 8.784 + 2(0)1.907 = 44.62 \\
+\widehat{Var}(Y_{i1}) &amp; = 35.832 + 1^{2} 0.131 + 8.784 + 2(1)1.907 = 48.56 \\
+\widehat{Var}(Y_{i2}) &amp; = 35.832 + 2^{2} 0.131 + 8.784 + 2(2)1.907 = 52.77
 \end{align*}\]</span>
 and our estimated within-school covariances between different time points would be:</p>
 <p><span class="math display">\[\begin{align*}
-\widehat{Cov}(Y_{i1},Y_{i2}) &amp; = 35.832 + (0)(1)0.131 + (0+1)1.907 = 37.74 \\
-\widehat{Cov}(Y_{i1},Y_{i3}) &amp; = 35.832 + (0)(2)0.131 + (0+2)1.907 = 39.65 \\
-\widehat{Cov}(Y_{i2},Y_{i3}) &amp; = 35.832 + (1)(2)0.131 + (1+2)1.907 = 41.81
+\widehat{Cov}(Y_{i0},Y_{i1}) &amp; = 35.832 + (0)(1)0.131 + (0+1)1.907 = 37.74 \\
+\widehat{Cov}(Y_{i0},Y_{i2}) &amp; = 35.832 + (0)(2)0.131 + (0+2)1.907 = 39.65 \\
+\widehat{Cov}(Y_{i1},Y_{i2}) &amp; = 35.832 + (1)(2)0.131 + (1+2)1.907 = 41.81
 \end{align*}\]</span></p>
 <p>In fact, these values will be identical for every School <span class="math inline">\(i\)</span>, since scores were assessed at the same three time points. Thus, we will drop the subscript <span class="math inline">\(i\)</span> moving forward.</p>
 <p>Written in matrix form, our two-level model implicitly imposes this estimated covariance structure on within-school observations for any specific School <span class="math inline">\(i\)</span>:</p>
@@ -1488,7 +1495,7 @@ and our estimated within-school covariances between different time points would 
             39.65 &amp; 41.81 &amp; 52.77
           \end{array} \right] \]</span></p>
 <p>We can convert covariances to correlations using</p>
-<p><span class="math inline">\(Corr(Y_{1},Y_{2})=\frac{Cov(Y_{1},Y_{2})}{\sqrt{Var(Y_{1}) Var(Y_{2})}}\)</span>:</p>
+<p><span class="math inline">\(Corr(Y_{0},Y_{1})=\frac{Cov(Y_{0},Y_{1})}{\sqrt{Var(Y_{0}) Var(Y_{1})}}\)</span>:</p>
 <p><span class="math display">\[ \widehat{Corr}(\mathbf{Y}) =  \left[
           \begin{array}{cccc}
             1 &amp; &amp;   \\
@@ -1504,7 +1511,7 @@ and our estimated within-school covariances between different time points would 
 <div id="alternative-covariance-structure---uncorrelated" class="section level3 hasAnchor" number="4.5.5">
 <h3><span class="header-section-number">4.5.5</span> Alternative Covariance Structure - Uncorrelated<a href="longitudinal-data.html#alternative-covariance-structure---uncorrelated" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>In a LLSR model, we assume observations to be independent and following an identical distribution with variance <span class="math inline">\(\sigma^2\)</span>.</p>
-<p><span class="math display">\[ \widehat{Cov}(Y_{i1},Y_{i2},Y_{i3}) =  \left[
+<p><span class="math display">\[ \widehat{Cov}(Y_{i0},Y_{i1},Y_{i2}) =  \left[
           \begin{array}{cccc}
             \sigma^2 &amp; 0  &amp;  0 \\
             0 &amp; \sigma^2 &amp; 0 \\
@@ -1517,20 +1524,20 @@ and our estimated within-school covariances between different time points would 
 <ul>
 <li><em>Unstructured</em> - Every variance and covariance term for observations within a school is a separate parameter and is therefore estimated uniquely; no patterns among variances or correlations are assumed. This structure offers maximum flexibility but is most costly in terms of parameters estimated.</li>
 </ul>
-<p><span class="math display">\[ \widehat{Cov}(Y_{i1},Y_{i2},Y_{i3}) =  \left[
+<p><span class="math display">\[ \widehat{Cov}(Y_{i0},Y_{i1},Y_{i2}) =  \left[
           \begin{array}{cccc}
-            \sigma^2_1 &amp; &amp;   \\
-            \sigma_{12} &amp; \sigma^2_2 &amp;  \\
-            \sigma_{13} &amp; \sigma_{23} &amp; \sigma^2_3
+            \sigma^2_0 &amp; &amp;   \\
+            \sigma_{01} &amp; \sigma^2_1 &amp;  \\
+            \sigma_{02} &amp; \sigma_{12} &amp; \sigma^2_2
           \end{array} \right] \]</span></p>
-<p>There are 6 parameters associated with the variance-covariance structure that need to be estimated: <span class="math inline">\(\sigma^2_1\)</span>,<span class="math inline">\(\sigma^2_2\)</span>,<span class="math inline">\(\sigma^2_3\)</span>, <span class="math inline">\(\sigma_{12}\)</span>, <span class="math inline">\(\sigma_{13}\)</span>, <span class="math inline">\(\sigma_{23}\)</span>.</p>
+<p>There are 6 parameters associated with the variance-covariance structure that need to be estimated: <span class="math inline">\(\sigma^2_0\)</span>,<span class="math inline">\(\sigma^2_1\)</span>,<span class="math inline">\(\sigma^2_2\)</span>, <span class="math inline">\(\sigma_{01}\)</span>, <span class="math inline">\(\sigma_{02}\)</span>, <span class="math inline">\(\sigma_{12}\)</span>.</p>
 </div>
 <div id="alternative-covariance-structure---compound-symmetry" class="section level3 hasAnchor" number="4.5.7">
 <h3><span class="header-section-number">4.5.7</span> Alternative Covariance Structure - Compound Symmetry<a href="longitudinal-data.html#alternative-covariance-structure---compound-symmetry" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
 <li><em>Compound symmetry</em> - Assume variance is constant across all time points and correlation is constant across all pairs of time points. This structure is highly restrictive but least costly in terms of parameters estimated.</li>
 </ul>
-<p><span class="math display">\[ \widehat{Cov}(Y_{i1},Y_{i2},Y_{i3}) =  \left[
+<p><span class="math display">\[ \widehat{Cov}(Y_{i0},Y_{i1},Y_{i2}) =  \left[
           \begin{array}{cccc}
             \sigma^2 &amp; &amp;   \\
             \rho\sigma &amp; \sigma^2 &amp;  \\
@@ -1544,7 +1551,7 @@ and our estimated within-school covariances between different time points would 
 <li><em>Autoregressive</em> - Assume variance is constant across all time points, but correlation drops off in a systematic fashion as the gap in time increases. Autoregressive models expand compound symmetry by allowing for a common structure where points closest in time are most highly correlated.</li>
 </ul>
 <p>A common example of an autoregressive model is the AR(1) time series model. For <span class="math inline">\(\phi\in(-1,1)\)</span>, the covariance matrix is given by:</p>
-<p><span class="math display">\[ \widehat{Cov}(Y_{i1},Y_{i2},Y_{i3}) =  \left[
+<p><span class="math display">\[ \widehat{Cov}(Y_{i0},Y_{i1},Y_{i2}) =  \left[
           \begin{array}{cccc}
             \sigma^2 &amp; &amp;   \\
             \phi\sigma^2 &amp; \sigma^2 &amp;  \\
@@ -1552,7 +1559,7 @@ and our estimated within-school covariances between different time points would 
           \end{array} \right]. \]</span></p>
 <p>This model requires estimating two parameters <span class="math inline">\(\sigma^2\)</span>, and <span class="math inline">\(\phi\)</span>.</p>
 <p>This implies a correlation matrix</p>
-<p><span class="math display">\[ \widehat{Corr}(Y_{i1},Y_{i2},Y_{i3}) =  \left[
+<p><span class="math display">\[ \widehat{Corr}(Y_{i0},Y_{i1},Y_{i2}) =  \left[
           \begin{array}{cccc}
             1 &amp; &amp;   \\
             \phi &amp; 1 &amp;  \\
