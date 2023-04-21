@@ -22,7 +22,7 @@
 
 
 
-<meta name="date" content="2023-04-17" />
+<meta name="date" content="2023-04-21" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -639,7 +639,7 @@ Figure 5.1: Potted Plant Experimental Design
 <p>Let <span class="math inline">\(Y_{ijk}\)</span> represent the height of plant <span class="math inline">\(k\)</span> in pot <span class="math inline">\(j\)</span> in tray <span class="math inline">\(i\)</span>. A possible model is:</p>
 <p><span class="math display">\[
 \begin{align*}
-Y_{ij} &amp; = [\alpha_{0}+\alpha_{1}\textrm{Window}_{i}+\beta_{0}\textrm{FertA}_{ij}+\gamma_{0}\textrm{PhenoA}_{ijk}] \\
+Y_{ijk} &amp; = [\alpha_{0}+\alpha_{1}\textrm{Window}_{i}+\beta_{0}\textrm{FertA}_{ij}+\gamma_{0}\textrm{PhenoA}_{ijk}] \\
  &amp; \textrm{} + [t_{i}+ p_{ij} + \epsilon_{ijk}],
 \end{align*}
 \]</span></p>
@@ -734,7 +734,7 @@ Y_{ij} &amp; = [\alpha_{0}+\alpha_{1}\textrm{Window}_{i}+\beta_{0}\textrm{FertA}
 <p><span class="math display">\[
 \begin{align*}
 Y_{ijk} &amp; = [\alpha_{0}+\alpha_{1}\textrm{Window}_{i}+\beta_{0}\textrm{FertA}_{ij}+\gamma_{0}\textrm{PhenoA}_{ijk}] \\
- &amp; \textrm{} + [t_i  + p_{ij} + q_{ij}\textrm{PhenoA}_{ij} + \epsilon_{ijk}],
+ &amp; \textrm{} + [t_i  + p_{ij} + q_{ij}\textrm{PhenoA}_{ijk} + \epsilon_{ijk}],
 \end{align*}
 \]</span></p>
 <p>where <span class="math inline">\(t_i\sim N(0, \sigma^2_t)\)</span>, and <span class="math inline">\(\epsilon_{ijk}\sim N(0, \sigma^2)\)</span></p>
@@ -973,7 +973,7 @@ Y_{ijkl} &amp; = [\alpha_{0}+\alpha_{1}\textrm{Window}_{i}+\beta_{0}\textrm{Fert
 <p><span class="math display">\[
 \begin{align*}
 Y_{ijkl} &amp; = [\alpha_{0}+\alpha_{1}\textrm{Window}_{i}+\beta_{0}\textrm{FertA}_{ij}+\gamma_{0}\textrm{PhenoA}_{ijk} + \delta_{0}\textrm{Time}_{ijkl}]  \\
- &amp; \textrm{} + [t_{i}+ p_{ij} + f_{ijk} + g_{ijk}\textrm{Time}_{ijk} + \epsilon_{ijkl}],
+ &amp; \textrm{} + [t_{i}+ p_{ij} + f_{ijk} + g_{ijk}\textrm{Time}_{ijkl} + \epsilon_{ijkl}],
 \end{align*}
 \]</span></p>
 <p>where <span class="math inline">\(t_i\sim N(0, \sigma^2_t)\)</span>, <span class="math inline">\(p_{ij}\sim N(0, \sigma^2_p)\)</span>, <span class="math inline">\(\epsilon_{ijkl}\sim N(0, \sigma^2)\)</span>, and</p>
@@ -1038,7 +1038,7 @@ Y_{ijkl} &amp; = [\alpha_{0}+\alpha_{1}\textrm{Window}_{i}+\beta_{0}\textrm{Fert
 <p><span class="math display">\[
 \begin{align*}
 Y_{ijk} &amp; = [\beta_{0}+\beta_{1}\textrm{Window}_{i}+\beta_{2}\textrm{FertA}_{ij}+\beta_{3}\textrm{PhenoA}_{ijk} + \beta_{3}\textrm{Time}_{ijkl}] \\
- &amp; \textrm{} + [t_{i}+ s_i\textrm{fertA}_i + p_{ij} + q_{ij}\textrm{phenoA}_{ij} + f_{ijk} + g_{ijk}\textrm{Time}_{ijk} + \epsilon_{ijkl}],
+ &amp; \textrm{} + [t_{i}+ s_i\textrm{fertA}_i + p_{ij} + q_{ij}\textrm{phenoA}_{ij} + f_{ijk} + g_{ijk}\textrm{Time}_{ijkl} + \epsilon_{ijkl}],
 \end{align*}
 \]</span></p>
 <p>We again assume that random effects at different levels are independent. Thus, <span class="math inline">\(\epsilon_{ijkl}\sim\mathcal{N}(0, \sigma^2)\)</span></p>
@@ -1140,7 +1140,7 @@ Y_{ijk} &amp; = [\beta_{0}+\beta_{1}\textrm{Window}_{i}+\beta_{2}\textrm{FertA}_
 <p><span class="math display">\[
 \begin{align*}
 Y_{ij} &amp; = [\beta_{0}+\beta_{1}\textrm{Window}_{i}+\beta_{2}\textrm{FertA}_{ij}+\beta_{3}\textrm{PhenoA}_{ijk} + \beta_{3}\textrm{Time}_{ijkl}] \\
- &amp; \textrm{} + [t_{i}+ s_i\textrm{fertA}_i + p_{ij} + q_{ij}\textrm{phenoA}_{ij} +r_{ij}\textrm{Time}_{ijk}+ f_{ijk} + g_{ijk}\textrm{Time}_{ijk} + \epsilon_{ijkl}],
+ &amp; \textrm{} + [t_{i}+ s_i\textrm{fertA}_{ij} + p_{ij} + q_{ij}\textrm{phenoA}_{ijk} +r_{ij}\textrm{Time}_{ijkl}+ f_{ijk} + g_{ijk}\textrm{Time}_{ijkl} + \epsilon_{ijkl}],
 \end{align*}
 \]</span></p>
 <p>We again assume that random effects at different levels are independent. Thus, <span class="math inline">\(\epsilon_{ijkl}\sim\mathcal{N}(0, \sigma^2)\)</span></p>

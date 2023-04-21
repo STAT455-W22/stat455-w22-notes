@@ -68,7 +68,7 @@ Let $Y_{ijk}$ represent the height of plant $k$ in pot $j$ in tray $i$. A possib
 
 $$
 \begin{align*}
-Y_{ij} & = [\alpha_{0}+\alpha_{1}\textrm{Window}_{i}+\beta_{0}\textrm{FertA}_{ij}+\gamma_{0}\textrm{PhenoA}_{ijk}] \\
+Y_{ijk} & = [\alpha_{0}+\alpha_{1}\textrm{Window}_{i}+\beta_{0}\textrm{FertA}_{ij}+\gamma_{0}\textrm{PhenoA}_{ijk}] \\
  & \textrm{} + [t_{i}+ p_{ij} + \epsilon_{ijk}],
 \end{align*}
 $$
@@ -125,7 +125,7 @@ We could allow for the possibility that the effect of phenotype is different in 
 $$
 \begin{align*}
 Y_{ijk} & = [\alpha_{0}+\alpha_{1}\textrm{Window}_{i}+\beta_{0}\textrm{FertA}_{ij}+\gamma_{0}\textrm{PhenoA}_{ijk}] \\
- & \textrm{} + [t_i  + p_{ij} + q_{ij}\textrm{PhenoA}_{ij} + \epsilon_{ijk}],
+ & \textrm{} + [t_i  + p_{ij} + q_{ij}\textrm{PhenoA}_{ijk} + \epsilon_{ijk}],
 \end{align*}
 $$
 
@@ -279,7 +279,7 @@ We could add a random error term associated with the slope on time, to allow for
 $$
 \begin{align*}
 Y_{ijkl} & = [\alpha_{0}+\alpha_{1}\textrm{Window}_{i}+\beta_{0}\textrm{FertA}_{ij}+\gamma_{0}\textrm{PhenoA}_{ijk} + \delta_{0}\textrm{Time}_{ijkl}]  \\
- & \textrm{} + [t_{i}+ p_{ij} + f_{ijk} + g_{ijk}\textrm{Time}_{ijk} + \epsilon_{ijkl}],
+ & \textrm{} + [t_{i}+ p_{ij} + f_{ijk} + g_{ijk}\textrm{Time}_{ijkl} + \epsilon_{ijkl}],
 \end{align*}
 $$
 
@@ -316,7 +316,7 @@ We could also allow the effect of phenotype to vary between pots and the effect 
 $$
 \begin{align*}
 Y_{ijk} & = [\beta_{0}+\beta_{1}\textrm{Window}_{i}+\beta_{2}\textrm{FertA}_{ij}+\beta_{3}\textrm{PhenoA}_{ijk} + \beta_{3}\textrm{Time}_{ijkl}] \\
- & \textrm{} + [t_{i}+ s_i\textrm{fertA}_i + p_{ij} + q_{ij}\textrm{phenoA}_{ij} + f_{ijk} + g_{ijk}\textrm{Time}_{ijk} + \epsilon_{ijkl}],
+ & \textrm{} + [t_{i}+ s_i\textrm{fertA}_i + p_{ij} + q_{ij}\textrm{phenoA}_{ij} + f_{ijk} + g_{ijk}\textrm{Time}_{ijkl} + \epsilon_{ijkl}],
 \end{align*}
 $$
 
@@ -392,7 +392,7 @@ We would write this model as:
 $$
 \begin{align*}
 Y_{ij} & = [\beta_{0}+\beta_{1}\textrm{Window}_{i}+\beta_{2}\textrm{FertA}_{ij}+\beta_{3}\textrm{PhenoA}_{ijk} + \beta_{3}\textrm{Time}_{ijkl}] \\
- & \textrm{} + [t_{i}+ s_i\textrm{fertA}_i + p_{ij} + q_{ij}\textrm{phenoA}_{ij} +r_{ij}\textrm{Time}_{ijk}+ f_{ijk} + g_{ijk}\textrm{Time}_{ijk} + \epsilon_{ijkl}],
+ & \textrm{} + [t_{i}+ s_i\textrm{fertA}_{ij} + p_{ij} + q_{ij}\textrm{phenoA}_{ijk} +r_{ij}\textrm{Time}_{ijkl}+ f_{ijk} + g_{ijk}\textrm{Time}_{ijkl} + \epsilon_{ijkl}],
 \end{align*}
 $$
 
