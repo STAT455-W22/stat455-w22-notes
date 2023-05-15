@@ -22,7 +22,7 @@ library(corrplot)
    
 ## Binomial Logistic Regression
 
-In Stat 255, we learned about Logistic regression models for binary response data. Please review sections 6.1-6.3 in the [Stat 255 notes](https://bookdown.org/ajsage/statistics_for_data_science_notes/) prior to proceeding. 
+In Stat 255, we learned about Logistic regression models for binary response data. Please review sections 8.1-8.3 in the [Stat 255 notes](https://bookdown.org/ajsage/statistics_for_data_science_notes/) prior to proceeding. 
 
 ### Binary Response Data
 
