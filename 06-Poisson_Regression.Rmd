@@ -246,6 +246,10 @@ Equivalently, we assume
 
 \[ \text{log}(E(Y)) = \text{log}(\lambda) = \beta_0+\beta_1X_{1} + \ldots + \beta_pX_p\]. 
 
+The function that relates the expected response to the linear function of the explanatory variables is called a **link function.** In Poission regression, the link function is $f(y)= log(y).$
+
+Note: we could use other nonnegative functions to link the expected response to the explanatory variables, but the log function works especially well here, and is the one most frequently used.   
+
 
 To summarize:
 * a LLSR model assumes the expected response is a linear function of the explanatory variables.   

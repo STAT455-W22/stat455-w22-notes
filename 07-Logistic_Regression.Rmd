@@ -225,8 +225,11 @@ Equivalently:
 
 The function $\text{log}\left(\frac{{p_i}}{{1-p_i}}\right)$ is called $\text{logit}(p_i)$. So, we can say: 
 
-\[\text{logit}(p_i) =  \beta_0+\beta_1X_{1} + \ldots + \beta_pX_p\] 
+\[\text{logit}(p_i) =  \beta_0+\beta_1X_{i1} + \ldots + \beta_pX_{ip}\] 
 
+The function $f(p) = \text{logit}(p) = log\left(\frac{p}{1-p}\right)$ is the link function.     
+
+Note: we could use different functions that map the real numbers into the interval (0,1), but the logit function works well and is frequently used.   
 
 
 ### Odds and Odds Ratio
@@ -1057,15 +1060,15 @@ A zero-inflated Poisson regression model to take non-drinkers into account consi
 The form for each part of the model follows. The first part looks like an ordinary Poisson regression model:
 
 \[
-log(\lambda)=\beta_0+\beta_1\textrm{off.campus}+ \beta_2\textrm{sex}
+log(\lambda_i)=\beta_0+\beta_1\textrm{off.campus}_i+ \beta_2\textrm{sex}_i
 \]
 where $\lambda$ is the mean number of drinks in a weekend *among those who drink*.
 The second part has the form
 
 \[
-logit(\alpha)=\beta_0+\beta_1\textrm{firstYear}
+logit(p_i)=\alpha_0+\alpha_1\textrm{firstYear}_i
 \]
-where $\alpha$ is the probability of being in the non-drinkers group and $logit(\alpha) = log( \alpha/(1-\alpha))$.  
+where $\alpha$ is the probability of being in the non-drinkers group and $logit(p_i) = log( p_i/(1-p_i))$.  
 
 
 ### ZIP Model in R
