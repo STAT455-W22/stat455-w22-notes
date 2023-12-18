@@ -1,5 +1,13 @@
 # Data with Three or More Levels
 
+**Chapter 5 Learning Outcomes**    
+
+28. Identify the levels of a three-level experiment and the observational units and variables at each level.     
+
+29. Interpret fixed and random effects and associated parameter estimates in models with three or more levels.      
+
+30. Write equations for linear mixed effects models in mathematical notation, including assumptions about distributions of random effects and error terms for models with three or more levels.      
+
 
 ```{r, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, message=FALSE, warning=FALSE, fig.width = 6, fig.height = 3)

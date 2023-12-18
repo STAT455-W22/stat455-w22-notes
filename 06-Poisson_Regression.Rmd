@@ -1,5 +1,28 @@
 # Poisson Regression
 
+**Chapter 6 Learning Outcomes**     
+
+31. Determine whether it is appropriate to use a Poisson regression model in a given situation and justify your answer.      
+
+32. State the assumptions associated with a Poisson regression model and determine whether the assumptions are satisfied.      
+
+33. Calculate expected responses and expected changes associated with fixed effects in a Poisson regression model.      
+
+34. Use drop-in-deviance and goodness-of-fit tests to assess and compare models.      
+
+35. Interpret fixed effect coefficients in a Poisson regression model.      
+
+36. Explain how to detect and control for overdispersion in a Poisson regression model.      
+
+37. Explain the purpose of using an offset term in Poisson regression.       
+
+38. Compare and contrast properties of LLSR models and Poisson regression models.      
+
+39. Analyze data using a Poisson regression model in R. 
+
+
+
+
 ```{r, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, message=FALSE, warning=FALSE, fig.width = 6, fig.height = 3)
 ```

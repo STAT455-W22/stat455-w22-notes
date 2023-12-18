@@ -1,5 +1,23 @@
 # Multilevel Models
 
+**Chapter 3 Learning Outcomes**
+
+12. Identify the levels of a two-level experiment and the observational units and variables at each level.    
+
+13. Interpret random slopes, intercepts, error terms and their estimated variances and correlations in linear mixed effects models.    
+
+14. Determine whether it is appropriate to add a random slope term to a model in a given context.
+
+15. Distinguish between random slope terms and interactions terms and explain what the inclusion/exclusion of each in a LME model says about our assumptions regarding the nature of our data.     
+
+16. Calculate expected responses and expected changes associated with fixed effects in a LME model.    
+
+17. Write equations for linear mixed effects models in mathematical notation, including assumptions about distributions of random effects and error terms.     
+
+18. Give examples of values of the response variable that would satisfy given conditions about parameters in a LME model (for example ($\sigma_u>\sigma$)).  
+
+19. Analyze data using a multilevel linear mixed effects model in R.    
+
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, message=FALSE, warning=FALSE, fig.width = 6, fig.height = 3)

@@ -1,5 +1,18 @@
 # Introduction to Correlated Data
 
+**Chapter 2 Learning Outcomes**
+
+6. Identify the response variable and fixed and random effects associated with a given set of data.      
+
+7. Interpret parameter estimates, confidence intervals, and hypothesis tests associated with fixed effects in LME models.      
+
+8. Interpret variance component estimates ($\sigma$ and $\sigma_u$) in linear mixed effects (LME) models.          
+
+9. Compare the size of different variance component estimates given a LME model and a small set of data (i.e. say whether $\sigma_u$, or $\sigma$ will larger).        
+
+10. Determine how standard errors in a LME model would compare to the standard errors we would get if we used a LLSR model on the same data.      
+
+11. Determine how changes in sample size and/or experimental design will impact standard errors, confidence intervals, and p-values in a LME model.      
 
 ```{r}
 library(tidyverse)

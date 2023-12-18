@@ -1,8 +1,19 @@
 # Review of Multiple Linear Regression
 
 
-This chapter provides an outline of Sections 1.4-1.7 of [Beyond Multiple Linear Regression](https://bookdown.org/roback/bookdown-BeyondMLR/) by Roback and Legler. Much of the text is either directly from the book, or lightly modified/summarized. Most of the code originates from the book's [Github repository](https://github.com/proback/BeyondMLR).  
+**Chapter 1 Learning Outcomes**
 
+1. Identify violations of linear least squares regression (LLSR) assumptions based on descriptions of data collection.      
+
+2. Interpret parameter estimates in LLSR models, including models with transformations and/or interactions.     
+
+3. Calculate expected responses and expected changes associated with explanatory variables in a LLSR model.      
+
+4. Calculate and interpret standard errors, t-statistics, residual standard error, $R^2$, and F-statistics in a LLSR model's R output.          
+
+5. Analyze data using linear least squares regression in R.           
+
+This chapter provides an outline of Sections 1.4-1.7 of [Beyond Multiple Linear Regression](https://bookdown.org/roback/bookdown-BeyondMLR/) by Roback and Legler. Much of the text is either directly from the book, or lightly modified/summarized. Most of the code originates from the book's [Github repository](https://github.com/proback/BeyondMLR).  
 
 ```{r load_packages1, message = FALSE}
 knitr::opts_chunk$set(echo = TRUE, message=FALSE, warning=FALSE, fig.height = 3, fig.width = 6)

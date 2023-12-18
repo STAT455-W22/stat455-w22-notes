@@ -1,5 +1,26 @@
 # Longitudinal Data
 
+**Chapter 4 Learning Outcomes**
+
+20. Compare and contrast the assumptions associated with linear, quadratic, and piecewise linear longitudinal models and determine which is most appropriate in a given context.           
+
+21. Calculate and interpret intraclass correlation coefficient.      
+
+22. Draw lattice (or spaghetti) plots that are consistent with given conditions involving parameters in a LME model.      
+
+23. Answer research questions related to fixed and random effects in a study given output from LME models.       
+
+24. Sketch either a set of scatterplots corresponding to a given variance-covariance matrix, or estimate the values in a variance-covariance matrix, given a set of scatterplots.       
+
+25. Explain, in words, what a variance-covariance matrix says about our assumptions regarding the structure of data.      
+
+26. Interpret the variance and correlation parameters $\sigma^2$ and $\phi$ in a first-order autoregressive (AR-1) model.      
+
+27. Analyze longitudinal data using R.      
+
+
+
+
 ```{r, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, message=FALSE, warning=FALSE, fig.width = 6, fig.height = 3)
 ```

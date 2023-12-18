@@ -1,5 +1,8 @@
 # Multilevel Generalized Linear Models 
 
+51. Interpret fixed and random effects in a generalized linear mixed effects model.      
+
+52. Write equations for generalized linear models in mathematical notation, including assumptions about distributions of random effects and error terms.      
 
 These notes provide a summary of Chapter 11 in [Beyond Multiple Linear Regression](https://bookdown.org/roback/bookdown-BeyondMLR/) by Roback and Legler. Much of the code that appears here comes from the textbook's [Github repository](https://github.com/proback/BeyondMLR/). 
 

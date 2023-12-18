@@ -1,4 +1,18 @@
-# Logistic Regression
+# Logistic Regression    
+
+**Chapter 6 Learning Outcomes**      
+
+40. State the assumptions associated with a binomial logistic regression model and determine whether the assumptions are satisfied.      
+
+41. Calculate probabilities and odds and expected changes associated with fixed effects in a binomial logistic regression model.      
+
+42. Interpret fixed effect coefficients in a binomial logistic regression model.      
+
+43. Analyze data using a binomial logistic regression model and Zero-Inflated Poisson Model in R.      
+
+44. Interpret fixed effect coefficients in a Zero-Inflated Poisson model.      
+53. Explain the role of a link function in a generalized linear model and determine which link function(s) might be appropriate in a given model.    
+
 
 ```{r, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, message=FALSE, warning=FALSE, fig.width = 6, fig.height = 3)
