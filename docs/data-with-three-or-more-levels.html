@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 5 Data with Three or More Levels | Stat 455: Advanced Statistical Modeling Notes</title>
   <meta name="description" content="Chapter 5 Data with Three or More Levels | Stat 455: Advanced Statistical Modeling Notes" />
-  <meta name="generator" content="bookdown 0.31 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.37 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 5 Data with Three or More Levels | Stat 455: Advanced Statistical Modeling Notes" />
   <meta property="og:type" content="book" />
@@ -22,7 +22,7 @@
 
 
 
-<meta name="date" content="2023-12-17" />
+<meta name="date" content="2023-12-31" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -120,6 +120,10 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -151,10 +155,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="1.2.1" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#model-for-winning-time-and-year"><i class="fa fa-check"></i><b>1.2.1</b> Model for Winning Time and Year</a></li>
 <li class="chapter" data-level="1.2.2" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#first-model-r-output"><i class="fa fa-check"></i><b>1.2.2</b> First Model R Output</a></li>
-<li class="chapter" data-level="1.2.3" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#checking-model-assumptions"><i class="fa fa-check"></i><b>1.2.3</b> Checking Model Assumptions</a></li>
-<li class="chapter" data-level="1.2.4" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#quadratic-term-for-year"><i class="fa fa-check"></i><b>1.2.4</b> Quadratic Term for Year</a></li>
-<li class="chapter" data-level="1.2.5" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#quadratic-model-in-r"><i class="fa fa-check"></i><b>1.2.5</b> Quadratic Model in R</a></li>
-<li class="chapter" data-level="1.2.6" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#quadratic-model-residual-plots"><i class="fa fa-check"></i><b>1.2.6</b> Quadratic Model Residual Plots</a></li>
+<li class="chapter" data-level="1.2.3" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#calculations-in-slr"><i class="fa fa-check"></i><b>1.2.3</b> Calculations in SLR</a></li>
+<li class="chapter" data-level="1.2.4" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#checking-model-assumptions"><i class="fa fa-check"></i><b>1.2.4</b> Checking Model Assumptions</a></li>
+<li class="chapter" data-level="1.2.5" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#quadratic-term-for-year"><i class="fa fa-check"></i><b>1.2.5</b> Quadratic Term for Year</a></li>
+<li class="chapter" data-level="1.2.6" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#quadratic-model-in-r"><i class="fa fa-check"></i><b>1.2.6</b> Quadratic Model in R</a></li>
+<li class="chapter" data-level="1.2.7" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#quadratic-model-residual-plots"><i class="fa fa-check"></i><b>1.2.7</b> Quadratic Model Residual Plots</a></li>
 </ul></li>
 <li class="chapter" data-level="1.3" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#multiple-linear-regression-with-two-predictors"><i class="fa fa-check"></i><b>1.3</b> Multiple Linear Regression with Two Predictors</a>
 <ul>
@@ -632,23 +637,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>Write equations for linear mixed effects models in mathematical notation, including assumptions about distributions of random effects and error terms for models with three or more levels.</p></li>
 </ol>
 <p>These notes accompany Chapter 10 in <a href="https://bookdown.org/roback/bookdown-BeyondMLR/">Beyond Multiple Linear Regression</a> by Roback and Legler.</p>
-<div class="sourceCode" id="cb239"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb239-1"><a href="data-with-three-or-more-levels.html#cb239-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Packages required for Chapter 10</span></span>
-<span id="cb239-2"><a href="data-with-three-or-more-levels.html#cb239-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MASS)</span>
-<span id="cb239-3"><a href="data-with-three-or-more-levels.html#cb239-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gridExtra)  </span>
-<span id="cb239-4"><a href="data-with-three-or-more-levels.html#cb239-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mnormt) </span>
-<span id="cb239-5"><a href="data-with-three-or-more-levels.html#cb239-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lme4) </span>
-<span id="cb239-6"><a href="data-with-three-or-more-levels.html#cb239-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lmerTest)</span>
-<span id="cb239-7"><a href="data-with-three-or-more-levels.html#cb239-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr) </span>
-<span id="cb239-8"><a href="data-with-three-or-more-levels.html#cb239-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span>
-<span id="cb239-9"><a href="data-with-three-or-more-levels.html#cb239-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb239-10"><a href="data-with-three-or-more-levels.html#cb239-10" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Hmisc)</span>
-<span id="cb239-11"><a href="data-with-three-or-more-levels.html#cb239-11" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(nlme)</span></code></pre></div>
+<div class="sourceCode" id="cb247"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb247-1"><a href="data-with-three-or-more-levels.html#cb247-1" tabindex="-1"></a><span class="co"># Packages required for Chapter 10</span></span>
+<span id="cb247-2"><a href="data-with-three-or-more-levels.html#cb247-2" tabindex="-1"></a><span class="fu">library</span>(MASS)</span>
+<span id="cb247-3"><a href="data-with-three-or-more-levels.html#cb247-3" tabindex="-1"></a><span class="fu">library</span>(gridExtra)  </span>
+<span id="cb247-4"><a href="data-with-three-or-more-levels.html#cb247-4" tabindex="-1"></a><span class="fu">library</span>(mnormt) </span>
+<span id="cb247-5"><a href="data-with-three-or-more-levels.html#cb247-5" tabindex="-1"></a><span class="fu">library</span>(lme4) </span>
+<span id="cb247-6"><a href="data-with-three-or-more-levels.html#cb247-6" tabindex="-1"></a><span class="fu">library</span>(lmerTest)</span>
+<span id="cb247-7"><a href="data-with-three-or-more-levels.html#cb247-7" tabindex="-1"></a><span class="fu">library</span>(knitr) </span>
+<span id="cb247-8"><a href="data-with-three-or-more-levels.html#cb247-8" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span>
+<span id="cb247-9"><a href="data-with-three-or-more-levels.html#cb247-9" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb247-10"><a href="data-with-three-or-more-levels.html#cb247-10" tabindex="-1"></a><span class="fu">library</span>(Hmisc)</span>
+<span id="cb247-11"><a href="data-with-three-or-more-levels.html#cb247-11" tabindex="-1"></a><span class="fu">library</span>(nlme)</span></code></pre></div>
 <div id="three-level-plants-experiment" class="section level2 hasAnchor" number="5.1">
 <h2><span class="header-section-number">5.1</span> Three-Level Plants Experiment<a href="data-with-three-or-more-levels.html#three-level-plants-experiment" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div id="experimental-design" class="section level3 hasAnchor" number="5.1.1">
 <h3><span class="header-section-number">5.1.1</span> Experimental Design<a href="data-with-three-or-more-levels.html#experimental-design" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Researchers are interested in comparing heights of plants of two different genotypes (A and B), with two different fertilizers (A and B), and also in assessing whether being close to window affects growth. Scientists obtained four trays and placed four pots in each tray. Two of the trays were placed close to windows and the other two were placed away from windows. Within each tray, two of the pots received fertilizer A and two received fertilizer B. Two plants of each phenotype were then planted in each plot. After 4 weeks, researchers recorded the height of each plant.</p>
-<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-153"></span>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-158"></span>
 <img src="Ch10Ill.png" alt="Potted Plant Experimental Design" width="75%" />
 <p class="caption">
 Figure 5.1: Potted Plant Experimental Design
@@ -658,7 +663,7 @@ Figure 5.1: Potted Plant Experimental Design
 <div id="the-data-1" class="section level3 hasAnchor" number="5.1.2">
 <h3><span class="header-section-number">5.1.2</span> The Data<a href="data-with-three-or-more-levels.html#the-data-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The first 20 rows of the dataset are shown below.</p>
-<div class="sourceCode" id="cb240"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb240-1"><a href="data-with-three-or-more-levels.html#cb240-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(plants, <span class="dv">20</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb248"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb248-1"><a href="data-with-three-or-more-levels.html#cb248-1" tabindex="-1"></a><span class="fu">head</span>(plants, <span class="dv">20</span>)</span></code></pre></div>
 <pre><code>##    plantid tray pot window fertA phenoA height
 ## 1        1    1   1      1     1      1   5.59
 ## 2        2    1   1      1     1      0   5.33
@@ -710,8 +715,8 @@ Y_{ijk} &amp; = [\alpha_{0}+\alpha_{1}\textrm{Window}_{i}+\beta_{0}\textrm{FertA
 </div>
 <div id="r-implementation-of-three-level-model" class="section level3 hasAnchor" number="5.1.5">
 <h3><span class="header-section-number">5.1.5</span> R Implementation of Three Level Model<a href="data-with-three-or-more-levels.html#r-implementation-of-three-level-model" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb242"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb242-1"><a href="data-with-three-or-more-levels.html#cb242-1" aria-hidden="true" tabindex="-1"></a>M <span class="ot">&lt;-</span> <span class="fu">lmer</span>(<span class="at">data=</span>plants, height <span class="sc">~</span> window <span class="sc">+</span> fertA <span class="sc">+</span> phenoA  <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>pot) <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>tray))</span>
-<span id="cb242-2"><a href="data-with-three-or-more-levels.html#cb242-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(M)</span></code></pre></div>
+<div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb250-1"><a href="data-with-three-or-more-levels.html#cb250-1" tabindex="-1"></a>M <span class="ot">&lt;-</span> <span class="fu">lmer</span>(<span class="at">data=</span>plants, height <span class="sc">~</span> window <span class="sc">+</span> fertA <span class="sc">+</span> phenoA  <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>pot) <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>tray))</span>
+<span id="cb250-2"><a href="data-with-three-or-more-levels.html#cb250-2" tabindex="-1"></a><span class="fu">summary</span>(M)</span></code></pre></div>
 <pre><code>## Linear mixed model fit by REML. t-tests use Satterthwaite&#39;s method [
 ## lmerModLmerTest]
 ## Formula: height ~ window + fertA + phenoA + (1 | pot) + (1 | tray)
@@ -750,8 +755,8 @@ Y_{ijk} &amp; = [\alpha_{0}+\alpha_{1}\textrm{Window}_{i}+\beta_{0}\textrm{FertA
 <div id="inappropriate-llsr-model" class="section level3 hasAnchor" number="5.1.6">
 <h3><span class="header-section-number">5.1.6</span> Inappropriate LLSR Model<a href="data-with-three-or-more-levels.html#inappropriate-llsr-model" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>We compare this to an inappropriately fit LLSR model.</p>
-<div class="sourceCode" id="cb244"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb244-1"><a href="data-with-three-or-more-levels.html#cb244-1" aria-hidden="true" tabindex="-1"></a>M_LLSR <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data=</span>plants, height <span class="sc">~</span> window <span class="sc">+</span> fertA <span class="sc">+</span> phenoA  )</span>
-<span id="cb244-2"><a href="data-with-three-or-more-levels.html#cb244-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(M_LLSR)</span></code></pre></div>
+<div class="sourceCode" id="cb252"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb252-1"><a href="data-with-three-or-more-levels.html#cb252-1" tabindex="-1"></a>M_LLSR <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data=</span>plants, height <span class="sc">~</span> window <span class="sc">+</span> fertA <span class="sc">+</span> phenoA  )</span>
+<span id="cb252-2"><a href="data-with-three-or-more-levels.html#cb252-2" tabindex="-1"></a><span class="fu">summary</span>(M_LLSR)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = height ~ window + fertA + phenoA, data = plants)
@@ -808,8 +813,8 @@ Y_{ijk} &amp; = [\alpha_{0}+\alpha_{1}\textrm{Window}_{i}+\beta_{0}\textrm{FertA
 </div>
 <div id="r-output-for-random-slope-for-phenoa" class="section level3 hasAnchor" number="5.2.2">
 <h3><span class="header-section-number">5.2.2</span> R Output for Random Slope for PhenoA<a href="data-with-three-or-more-levels.html#r-output-for-random-slope-for-phenoa" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb246"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb246-1"><a href="data-with-three-or-more-levels.html#cb246-1" aria-hidden="true" tabindex="-1"></a>M3 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(<span class="at">data=</span>plants, height <span class="sc">~</span> window <span class="sc">+</span> fertA <span class="sc">+</span> phenoA  <span class="sc">+</span> (phenoA<span class="sc">|</span>pot) <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>tray))</span>
-<span id="cb246-2"><a href="data-with-three-or-more-levels.html#cb246-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(M3)</span></code></pre></div>
+<div class="sourceCode" id="cb254"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb254-1"><a href="data-with-three-or-more-levels.html#cb254-1" tabindex="-1"></a>M3 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(<span class="at">data=</span>plants, height <span class="sc">~</span> window <span class="sc">+</span> fertA <span class="sc">+</span> phenoA  <span class="sc">+</span> (phenoA<span class="sc">|</span>pot) <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>tray))</span>
+<span id="cb254-2"><a href="data-with-three-or-more-levels.html#cb254-2" tabindex="-1"></a><span class="fu">summary</span>(M3)</span></code></pre></div>
 <pre><code>## Linear mixed model fit by REML. t-tests use Satterthwaite&#39;s method [
 ## lmerModLmerTest]
 ## Formula: height ~ window + fertA + phenoA + (phenoA | pot) + (1 | tray)
@@ -849,13 +854,13 @@ Y_{ijk} &amp; = [\alpha_{0}+\alpha_{1}\textrm{Window}_{i}+\beta_{0}\textrm{FertA
 <h3><span class="header-section-number">5.2.3</span> Random Slope for Fert<a href="data-with-three-or-more-levels.html#random-slope-for-fert" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>What if we want to allow for the possibility that the effects of fertilizers varies between trays?</p>
 <p>The R code for such a model is shown below.</p>
-<div class="sourceCode" id="cb248"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb248-1"><a href="data-with-three-or-more-levels.html#cb248-1" aria-hidden="true" tabindex="-1"></a>M4 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(<span class="at">data=</span>plants, height <span class="sc">~</span> window <span class="sc">+</span> fertA <span class="sc">+</span> phenoA  <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>pot) <span class="sc">+</span> (fertA<span class="sc">|</span>tray))</span></code></pre></div>
+<div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb256-1"><a href="data-with-three-or-more-levels.html#cb256-1" tabindex="-1"></a>M4 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(<span class="at">data=</span>plants, height <span class="sc">~</span> window <span class="sc">+</span> fertA <span class="sc">+</span> phenoA  <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>pot) <span class="sc">+</span> (fertA<span class="sc">|</span>tray))</span></code></pre></div>
 <p>How would we write this model mathematically? Include any distributional assumptions about the random effects and error terms.</p>
 </div>
 <div id="r-output-for-random-slope-for-fert" class="section level3 hasAnchor" number="5.2.4">
 <h3><span class="header-section-number">5.2.4</span> R Output for Random Slope for Fert<a href="data-with-three-or-more-levels.html#r-output-for-random-slope-for-fert" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb249"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb249-1"><a href="data-with-three-or-more-levels.html#cb249-1" aria-hidden="true" tabindex="-1"></a>M4 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(<span class="at">data=</span>plants, height <span class="sc">~</span> window <span class="sc">+</span> fertA <span class="sc">+</span> phenoA <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>pot) <span class="sc">+</span> (fertA<span class="sc">|</span>tray))</span>
-<span id="cb249-2"><a href="data-with-three-or-more-levels.html#cb249-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(M4)</span></code></pre></div>
+<div class="sourceCode" id="cb257"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb257-1"><a href="data-with-three-or-more-levels.html#cb257-1" tabindex="-1"></a>M4 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(<span class="at">data=</span>plants, height <span class="sc">~</span> window <span class="sc">+</span> fertA <span class="sc">+</span> phenoA <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>pot) <span class="sc">+</span> (fertA<span class="sc">|</span>tray))</span>
+<span id="cb257-2"><a href="data-with-three-or-more-levels.html#cb257-2" tabindex="-1"></a><span class="fu">summary</span>(M4)</span></code></pre></div>
 <pre><code>## Linear mixed model fit by REML. t-tests use Satterthwaite&#39;s method [
 ## lmerModLmerTest]
 ## Formula: height ~ window + fertA + phenoA + (1 | pot) + (fertA | tray)
@@ -904,7 +909,7 @@ Y_{ijk} &amp; = [\alpha_{0}+\alpha_{1}\textrm{Window}_{i}+\beta_{0}\textrm{FertA
 <div id="repeated-measures-over-time" class="section level3 hasAnchor" number="5.3.1">
 <h3><span class="header-section-number">5.3.1</span> Repeated Measures over Time<a href="data-with-three-or-more-levels.html#repeated-measures-over-time" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Now suppose that in addition to this first measurement, the heights of the same plants were recorded again once per week for 4 weeks.</p>
-<div class="sourceCode" id="cb251"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb251-1"><a href="data-with-three-or-more-levels.html#cb251-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(plants, <span class="dv">20</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb259"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb259-1"><a href="data-with-three-or-more-levels.html#cb259-1" tabindex="-1"></a><span class="fu">head</span>(plants, <span class="dv">20</span>)</span></code></pre></div>
 <pre><code>##    plantid time tray pot window fertA phenoA   height
 ## 1        1    1    1   1      1     1      1 5.593006
 ## 2        1    2    1   1      1     1      1 6.588438
@@ -977,8 +982,8 @@ Y_{ijkl} &amp; = [\alpha_{0}+\alpha_{1}\textrm{Window}_{i}+\beta_{0}\textrm{Fert
 </div>
 <div id="r-output-for-longitudinal-model" class="section level3 hasAnchor" number="5.3.4">
 <h3><span class="header-section-number">5.3.4</span> R Output for Longitudinal Model<a href="data-with-three-or-more-levels.html#r-output-for-longitudinal-model" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb253"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb253-1"><a href="data-with-three-or-more-levels.html#cb253-1" aria-hidden="true" tabindex="-1"></a>M5 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(<span class="at">data=</span>plants, height <span class="sc">~</span> window <span class="sc">+</span> fertA <span class="sc">+</span> phenoA <span class="sc">+</span> time <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>tray) <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>pot) <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>plantid))</span>
-<span id="cb253-2"><a href="data-with-three-or-more-levels.html#cb253-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(M5)</span></code></pre></div>
+<div class="sourceCode" id="cb261"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb261-1"><a href="data-with-three-or-more-levels.html#cb261-1" tabindex="-1"></a>M5 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(<span class="at">data=</span>plants, height <span class="sc">~</span> window <span class="sc">+</span> fertA <span class="sc">+</span> phenoA <span class="sc">+</span> time <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>tray) <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>pot) <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>plantid))</span>
+<span id="cb261-2"><a href="data-with-three-or-more-levels.html#cb261-2" tabindex="-1"></a><span class="fu">summary</span>(M5)</span></code></pre></div>
 <pre><code>## Linear mixed model fit by REML. t-tests use Satterthwaite&#39;s method [
 ## lmerModLmerTest]
 ## Formula: height ~ window + fertA + phenoA + time + (1 | tray) + (1 | pot) +  
@@ -993,19 +998,19 @@ Y_{ijkl} &amp; = [\alpha_{0}+\alpha_{1}\textrm{Window}_{i}+\beta_{0}\textrm{Fert
 ## 
 ## Random effects:
 ##  Groups   Name        Variance Std.Dev.
-##  plantid  (Intercept) 1.10405  1.0507  
+##  plantid  (Intercept) 1.10406  1.0507  
 ##  pot      (Intercept) 0.77702  0.8815  
-##  tray     (Intercept) 0.07314  0.2704  
+##  tray     (Intercept) 0.07314  0.2705  
 ##  Residual             0.08029  0.2834  
 ## Number of obs: 256, groups:  plantid, 64; pot, 16; tray, 4
 ## 
 ## Fixed effects:
 ##              Estimate Std. Error        df t value            Pr(&gt;|t|)    
-## (Intercept)   1.21075    0.50407   4.40526   2.402              0.0683 .  
-## window        1.47080    0.58108   2.00000   2.531              0.1270    
-## fertA         0.90342    0.51431  11.00008   1.757              0.1068    
-## phenoA        0.58651    0.26506  47.00103   2.213              0.0318 *  
-## time          0.66370    0.01584 190.99960  41.899 &lt;0.0000000000000002 ***
+## (Intercept)   1.21075    0.50407   4.40523   2.402              0.0683 .  
+## window        1.47080    0.58108   2.00001   2.531              0.1270    
+## fertA         0.90342    0.51431  11.00003   1.757              0.1068    
+## phenoA        0.58651    0.26506  47.00038   2.213              0.0318 *  
+## time          0.66370    0.01584 190.99990  41.899 &lt;0.0000000000000002 ***
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
@@ -1045,8 +1050,8 @@ Y_{ijkl} &amp; = [\alpha_{0}+\alpha_{1}\textrm{Window}_{i}+\beta_{0}\textrm{Fert
           \end{array} \right] \right)
 \end{equation*}
 \]</span></p>
-<div class="sourceCode" id="cb255"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb255-1"><a href="data-with-three-or-more-levels.html#cb255-1" aria-hidden="true" tabindex="-1"></a>M5 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(<span class="at">data=</span>plants, height <span class="sc">~</span> window <span class="sc">+</span> fertA <span class="sc">+</span> phenoA <span class="sc">+</span> time<span class="sc">+</span>  (time<span class="sc">|</span>plantid) <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>pot) <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>tray))</span>
-<span id="cb255-2"><a href="data-with-three-or-more-levels.html#cb255-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(M5)</span></code></pre></div>
+<div class="sourceCode" id="cb263"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb263-1"><a href="data-with-three-or-more-levels.html#cb263-1" tabindex="-1"></a>M5 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(<span class="at">data=</span>plants, height <span class="sc">~</span> window <span class="sc">+</span> fertA <span class="sc">+</span> phenoA <span class="sc">+</span> time<span class="sc">+</span>  (time<span class="sc">|</span>plantid) <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>pot) <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>tray))</span>
+<span id="cb263-2"><a href="data-with-three-or-more-levels.html#cb263-2" tabindex="-1"></a><span class="fu">summary</span>(M5)</span></code></pre></div>
 <pre><code>## Linear mixed model fit by REML. t-tests use Satterthwaite&#39;s method [
 ## lmerModLmerTest]
 ## Formula: height ~ window + fertA + phenoA + time + (time | plantid) +  
@@ -1138,8 +1143,8 @@ Y_{ijk} &amp; = [\beta_{0}+\beta_{1}\textrm{Window}_{i}+\beta_{2}\textrm{FertA}_
           \end{array} \right] \right)
 \end{equation*}
 \]</span></p>
-<div class="sourceCode" id="cb257"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb257-1"><a href="data-with-three-or-more-levels.html#cb257-1" aria-hidden="true" tabindex="-1"></a>M5 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(<span class="at">data=</span>plants, height <span class="sc">~</span> window <span class="sc">+</span> fertA <span class="sc">+</span> phenoA <span class="sc">+</span> time<span class="sc">+</span>  (time<span class="sc">|</span>plantid) <span class="sc">+</span> (phenoA<span class="sc">|</span>pot) <span class="sc">+</span> (fertA<span class="sc">|</span>tray))</span>
-<span id="cb257-2"><a href="data-with-three-or-more-levels.html#cb257-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(M5)</span></code></pre></div>
+<div class="sourceCode" id="cb265"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb265-1"><a href="data-with-three-or-more-levels.html#cb265-1" tabindex="-1"></a>M5 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(<span class="at">data=</span>plants, height <span class="sc">~</span> window <span class="sc">+</span> fertA <span class="sc">+</span> phenoA <span class="sc">+</span> time<span class="sc">+</span>  (time<span class="sc">|</span>plantid) <span class="sc">+</span> (phenoA<span class="sc">|</span>pot) <span class="sc">+</span> (fertA<span class="sc">|</span>tray))</span>
+<span id="cb265-2"><a href="data-with-three-or-more-levels.html#cb265-2" tabindex="-1"></a><span class="fu">summary</span>(M5)</span></code></pre></div>
 <pre><code>## Linear mixed model fit by REML. t-tests use Satterthwaite&#39;s method [
 ## lmerModLmerTest]
 ## Formula: height ~ window + fertA + phenoA + time + (time | plantid) +  
@@ -1244,8 +1249,8 @@ Y_{ij} &amp; = [\beta_{0}+\beta_{1}\textrm{Window}_{i}+\beta_{2}\textrm{FertA}_{
 </div>
 <div id="r---model-with-additional-random-slopes" class="section level3 hasAnchor" number="5.4.4">
 <h3><span class="header-section-number">5.4.4</span> R - Model with Additional Random Slopes<a href="data-with-three-or-more-levels.html#r---model-with-additional-random-slopes" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb259"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb259-1"><a href="data-with-three-or-more-levels.html#cb259-1" aria-hidden="true" tabindex="-1"></a>M6 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(<span class="at">data=</span>plants, height <span class="sc">~</span> window <span class="sc">+</span> fertA <span class="sc">+</span> phenoA <span class="sc">+</span> time<span class="sc">+</span>  (time<span class="sc">|</span>plantid) <span class="sc">+</span> (time<span class="sc">|</span>pot) <span class="sc">+</span> (phenoA<span class="sc">|</span>pot) <span class="sc">+</span> (fertA<span class="sc">|</span>tray))</span>
-<span id="cb259-2"><a href="data-with-three-or-more-levels.html#cb259-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(M6)</span></code></pre></div>
+<div class="sourceCode" id="cb267"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb267-1"><a href="data-with-three-or-more-levels.html#cb267-1" tabindex="-1"></a>M6 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(<span class="at">data=</span>plants, height <span class="sc">~</span> window <span class="sc">+</span> fertA <span class="sc">+</span> phenoA <span class="sc">+</span> time<span class="sc">+</span>  (time<span class="sc">|</span>plantid) <span class="sc">+</span> (time<span class="sc">|</span>pot) <span class="sc">+</span> (phenoA<span class="sc">|</span>pot) <span class="sc">+</span> (fertA<span class="sc">|</span>tray))</span>
+<span id="cb267-2"><a href="data-with-three-or-more-levels.html#cb267-2" tabindex="-1"></a><span class="fu">summary</span>(M6)</span></code></pre></div>
 <pre><code>## Linear mixed model fit by REML. t-tests use Satterthwaite&#39;s method [
 ## lmerModLmerTest]
 ## Formula: height ~ window + fertA + phenoA + time + (time | plantid) +  
@@ -1256,45 +1261,47 @@ Y_{ij} &amp; = [\beta_{0}+\beta_{1}\textrm{Window}_{i}+\beta_{2}\textrm{FertA}_{
 ## 
 ## Scaled residuals: 
 ##      Min       1Q   Median       3Q      Max 
-## -2.09129 -0.52578  0.03103  0.47586  2.20610 
+## -2.09118 -0.52573  0.03103  0.47582  2.20602 
 ## 
 ## Random effects:
 ##  Groups   Name        Variance Std.Dev. Corr 
-##  plantid  (Intercept) 0.84586  0.9197        
-##           time        0.01242  0.1115   -0.03
-##  pot      (Intercept) 0.61408  0.7836        
-##           time        0.02760  0.1661   1.00 
-##  pot.1    (Intercept) 0.17413  0.4173        
-##           phenoA      0.58696  0.7661   -1.00
-##  tray     (Intercept) 0.05386  0.2321        
-##           fertA       0.29488  0.5430   1.00 
+##  plantid  (Intercept) 0.84573  0.9196        
+##           time        0.01243  0.1115   -0.03
+##  pot      (Intercept) 0.61375  0.7834        
+##           time        0.02758  0.1661   1.00 
+##  pot.1    (Intercept) 0.17401  0.4171        
+##           phenoA      0.58649  0.7658   -1.00
+##  tray     (Intercept) 0.05352  0.2313        
+##           fertA       0.29478  0.5429   1.00 
 ##  Residual             0.01646  0.1283        
 ## Number of obs: 256, groups:  plantid, 64; pot, 16; tray, 4
 ## 
 ## Fixed effects:
 ##             Estimate Std. Error       df t value       Pr(&gt;|t|)    
-## (Intercept)  2.51518    0.40285  6.82721   6.244       0.000472 ***
-## window      -0.30245    0.45895  3.00925  -0.659       0.556822    
-## fertA        0.09250    0.39111  3.17685   0.237       0.827477    
-## phenoA       0.56183    0.30104 14.99004   1.866       0.081690 .  
-## time         0.66370    0.04439 15.03669  14.952 0.000000000196 ***
+## (Intercept)  2.51486    0.40257  6.85950   6.247       0.000461 ***
+## window      -0.30184    0.45850  3.01923  -0.658       0.557062    
+## fertA        0.09256    0.39106  3.17981   0.237       0.827342    
+## phenoA       0.56182    0.30098 14.99441   1.867       0.081635 .  
+## time         0.66370    0.04438 15.04525  14.955 0.000000000194 ***
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
 ## Correlation of Fixed Effects:
 ##        (Intr) window fertA  phenoA
-## window -0.570                     
+## window -0.569                     
 ## fertA  -0.052  0.000              
 ## phenoA -0.387  0.000  0.000       
-## time    0.446  0.000  0.000  0.000</code></pre>
+## time    0.446  0.000  0.000  0.000
+## optimizer (nloptwrap) convergence code: 0 (OK)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)</code></pre>
 <p>This model, however, leads to boundary contraint issues.</p>
 </div>
 <div id="when-not-to-add-random-slopes" class="section level3 hasAnchor" number="5.4.5">
 <h3><span class="header-section-number">5.4.5</span> When Not to Add Random Slopes<a href="data-with-three-or-more-levels.html#when-not-to-add-random-slopes" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>We can only add random slopes for variables measured at a lower level than the observational unit. Otherwise, the variable will not change within the observational unit.</p>
 <p>For example, we can’t add a random slope for effect of fertilizer (a level 3 variable) between pots (our level 3 observational units). All plants in the same pot have the same type of fertilizer, so we can’t estimate difference of fertilizer effects between pots.</p>
-<div class="sourceCode" id="cb261"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb261-1"><a href="data-with-three-or-more-levels.html#cb261-1" aria-hidden="true" tabindex="-1"></a>M7 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(<span class="at">data=</span>plants, height <span class="sc">~</span> window <span class="sc">+</span> fertA <span class="sc">+</span> phenoA <span class="sc">+</span> time<span class="sc">+</span>  (<span class="dv">1</span><span class="sc">|</span>plantid) <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>pot) <span class="sc">+</span> (fertA<span class="sc">|</span>pot) <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>tray))</span>
-<span id="cb261-2"><a href="data-with-three-or-more-levels.html#cb261-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(M7)</span></code></pre></div>
+<div class="sourceCode" id="cb269"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb269-1"><a href="data-with-three-or-more-levels.html#cb269-1" tabindex="-1"></a>M7 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(<span class="at">data=</span>plants, height <span class="sc">~</span> window <span class="sc">+</span> fertA <span class="sc">+</span> phenoA <span class="sc">+</span> time<span class="sc">+</span>  (<span class="dv">1</span><span class="sc">|</span>plantid) <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>pot) <span class="sc">+</span> (fertA<span class="sc">|</span>pot) <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>tray))</span>
+<span id="cb269-2"><a href="data-with-three-or-more-levels.html#cb269-2" tabindex="-1"></a><span class="fu">summary</span>(M7)</span></code></pre></div>
 <pre><code>## Linear mixed model fit by REML. t-tests use Satterthwaite&#39;s method [
 ## lmerModLmerTest]
 ## Formula: height ~ window + fertA + phenoA + time + (1 | plantid) + (1 |  
@@ -1305,25 +1312,25 @@ Y_{ij} &amp; = [\beta_{0}+\beta_{1}\textrm{Window}_{i}+\beta_{2}\textrm{FertA}_{
 ## 
 ## Scaled residuals: 
 ##      Min       1Q   Median       3Q      Max 
-## -2.79063 -0.55735 -0.00856  0.57002  2.67333 
+## -2.79058 -0.55734 -0.00857  0.57002  2.67329 
 ## 
 ## Random effects:
-##  Groups   Name        Variance     Std.Dev.  Corr
-##  plantid  (Intercept) 1.0715982358 1.0351803     
-##  pot      (Intercept) 0.0000001555 0.0003943     
-##  pot.1    (Intercept) 0.0000002716 0.0005211     
-##           fertA       1.5286919355 1.2364028 0.75
-##  tray     (Intercept) 0.6376007573 0.7984991     
-##  Residual             0.0802920056 0.2833584     
+##  Groups   Name        Variance       Std.Dev.   Corr
+##  plantid  (Intercept) 1.071505907081 1.03513570     
+##  pot      (Intercept) 0.000000001668 0.00004084     
+##  pot.1    (Intercept) 0.000000000000 0.00000000     
+##           fertA       1.529967713440 1.23691864  NaN
+##  tray     (Intercept) 0.637103820226 0.79818784     
+##  Residual             0.080293948587 0.28336187     
 ## Number of obs: 256, groups:  plantid, 64; pot, 16; tray, 4
 ## 
 ## Fixed effects:
 ##              Estimate Std. Error        df t value            Pr(&gt;|t|)    
-## (Intercept)   1.43322    0.63338   2.21644   2.263              0.1395    
-## window        1.02587    0.86955   1.96345   1.180              0.3613    
-## fertA         0.90342    0.50935   8.37031   1.774              0.1124    
-## phenoA        0.58651    0.26121  50.12707   2.245              0.0292 *  
-## time          0.66370    0.01584 191.00264  41.900 &lt;0.0000000000000002 ***
+## (Intercept)   1.43324    0.63318   2.21882   2.264              0.1393    
+## window        1.02583    0.86926   1.96543   1.180              0.3611    
+## fertA         0.90342    0.50938   8.36789   1.774              0.1124    
+## phenoA        0.58651    0.26120  50.13334   2.245              0.0292 *  
+## time          0.66370    0.01584 191.00029  41.899 &lt;0.0000000000000002 ***
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
@@ -1332,7 +1339,9 @@ Y_{ij} &amp; = [\beta_{0}+\beta_{1}\textrm{Window}_{i}+\beta_{2}\textrm{FertA}_{
 ## window -0.686                     
 ## fertA  -0.106  0.000              
 ## phenoA -0.206  0.000  0.000       
-## time   -0.063  0.000  0.000  0.000</code></pre>
+## time   -0.063  0.000  0.000  0.000
+## optimizer (nloptwrap) convergence code: 0 (OK)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)</code></pre>
 <p>In this section, we have focused on random effects, but we can, of course, explore fixed effects (such as interactions) as we’ve done before.</p>
 
 </div>

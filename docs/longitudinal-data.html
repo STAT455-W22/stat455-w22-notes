@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 4 Longitudinal Data | Stat 455: Advanced Statistical Modeling Notes</title>
   <meta name="description" content="Chapter 4 Longitudinal Data | Stat 455: Advanced Statistical Modeling Notes" />
-  <meta name="generator" content="bookdown 0.31 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.37 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 4 Longitudinal Data | Stat 455: Advanced Statistical Modeling Notes" />
   <meta property="og:type" content="book" />
@@ -22,7 +22,7 @@
 
 
 
-<meta name="date" content="2023-12-17" />
+<meta name="date" content="2023-12-31" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -120,6 +120,10 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -151,10 +155,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="1.2.1" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#model-for-winning-time-and-year"><i class="fa fa-check"></i><b>1.2.1</b> Model for Winning Time and Year</a></li>
 <li class="chapter" data-level="1.2.2" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#first-model-r-output"><i class="fa fa-check"></i><b>1.2.2</b> First Model R Output</a></li>
-<li class="chapter" data-level="1.2.3" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#checking-model-assumptions"><i class="fa fa-check"></i><b>1.2.3</b> Checking Model Assumptions</a></li>
-<li class="chapter" data-level="1.2.4" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#quadratic-term-for-year"><i class="fa fa-check"></i><b>1.2.4</b> Quadratic Term for Year</a></li>
-<li class="chapter" data-level="1.2.5" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#quadratic-model-in-r"><i class="fa fa-check"></i><b>1.2.5</b> Quadratic Model in R</a></li>
-<li class="chapter" data-level="1.2.6" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#quadratic-model-residual-plots"><i class="fa fa-check"></i><b>1.2.6</b> Quadratic Model Residual Plots</a></li>
+<li class="chapter" data-level="1.2.3" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#calculations-in-slr"><i class="fa fa-check"></i><b>1.2.3</b> Calculations in SLR</a></li>
+<li class="chapter" data-level="1.2.4" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#checking-model-assumptions"><i class="fa fa-check"></i><b>1.2.4</b> Checking Model Assumptions</a></li>
+<li class="chapter" data-level="1.2.5" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#quadratic-term-for-year"><i class="fa fa-check"></i><b>1.2.5</b> Quadratic Term for Year</a></li>
+<li class="chapter" data-level="1.2.6" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#quadratic-model-in-r"><i class="fa fa-check"></i><b>1.2.6</b> Quadratic Model in R</a></li>
+<li class="chapter" data-level="1.2.7" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#quadratic-model-residual-plots"><i class="fa fa-check"></i><b>1.2.7</b> Quadratic Model Residual Plots</a></li>
 </ul></li>
 <li class="chapter" data-level="1.3" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#multiple-linear-regression-with-two-predictors"><i class="fa fa-check"></i><b>1.3</b> Multiple Linear Regression with Two Predictors</a>
 <ul>
@@ -637,17 +642,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>Analyze longitudinal data using R.</p></li>
 </ol>
 <p>These notes provide a summary of Chapter 9 in <a href="https://bookdown.org/roback/bookdown-BeyondMLR/">Beyond Multiple Linear Regression</a> by Roback and Legler. Much of the code that appears here comes from the textbook’s <a href="https://github.com/proback/BeyondMLR/">Github repository</a>.</p>
-<div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb181-1"><a href="longitudinal-data.html#cb181-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Packages required for Chapter 9</span></span>
-<span id="cb181-2"><a href="longitudinal-data.html#cb181-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MASS)</span>
-<span id="cb181-3"><a href="longitudinal-data.html#cb181-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gridExtra)  </span>
-<span id="cb181-4"><a href="longitudinal-data.html#cb181-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mnormt) </span>
-<span id="cb181-5"><a href="longitudinal-data.html#cb181-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lme4) </span>
-<span id="cb181-6"><a href="longitudinal-data.html#cb181-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lmerTest)</span>
-<span id="cb181-7"><a href="longitudinal-data.html#cb181-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr) </span>
-<span id="cb181-8"><a href="longitudinal-data.html#cb181-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span>
-<span id="cb181-9"><a href="longitudinal-data.html#cb181-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb181-10"><a href="longitudinal-data.html#cb181-10" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Hmisc)</span>
-<span id="cb181-11"><a href="longitudinal-data.html#cb181-11" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(nlme)</span></code></pre></div>
+<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb189-1"><a href="longitudinal-data.html#cb189-1" tabindex="-1"></a><span class="co"># Packages required for Chapter 9</span></span>
+<span id="cb189-2"><a href="longitudinal-data.html#cb189-2" tabindex="-1"></a><span class="fu">library</span>(MASS)</span>
+<span id="cb189-3"><a href="longitudinal-data.html#cb189-3" tabindex="-1"></a><span class="fu">library</span>(gridExtra)  </span>
+<span id="cb189-4"><a href="longitudinal-data.html#cb189-4" tabindex="-1"></a><span class="fu">library</span>(mnormt) </span>
+<span id="cb189-5"><a href="longitudinal-data.html#cb189-5" tabindex="-1"></a><span class="fu">library</span>(lme4) </span>
+<span id="cb189-6"><a href="longitudinal-data.html#cb189-6" tabindex="-1"></a><span class="fu">library</span>(lmerTest)</span>
+<span id="cb189-7"><a href="longitudinal-data.html#cb189-7" tabindex="-1"></a><span class="fu">library</span>(knitr) </span>
+<span id="cb189-8"><a href="longitudinal-data.html#cb189-8" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span>
+<span id="cb189-9"><a href="longitudinal-data.html#cb189-9" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb189-10"><a href="longitudinal-data.html#cb189-10" tabindex="-1"></a><span class="fu">library</span>(Hmisc)</span>
+<span id="cb189-11"><a href="longitudinal-data.html#cb189-11" tabindex="-1"></a><span class="fu">library</span>(nlme)</span></code></pre></div>
 <p>In this chapter, we look at situations where data are collected on the same observational units over time.</p>
 <div id="charter-schools-exploratory-analysis" class="section level2 hasAnchor" number="4.1">
 <h2><span class="header-section-number">4.1</span> Charter Schools Exploratory Analysis<a href="longitudinal-data.html#charter-schools-exploratory-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -668,9 +673,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><code>MathAvgScore.2</code> = average MCA-II math score for all sixth grade students in a school in 2010</li>
 </ul>
 <p>This data is stored in WIDE format, with one row per school.</p>
-<div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb182-1"><a href="longitudinal-data.html#cb182-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Getting started</span></span>
-<span id="cb182-2"><a href="longitudinal-data.html#cb182-2" aria-hidden="true" tabindex="-1"></a>chart.wide <span class="ot">=</span> <span class="fu">read_csv</span>(<span class="st">&quot;https://raw.githubusercontent.com/proback/BeyondMLR/master/data/chart_wide_condense.csv&quot;</span>) </span></code></pre></div>
-<div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb183-1"><a href="longitudinal-data.html#cb183-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">head</span>(chart.wide))</span></code></pre></div>
+<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb190-1"><a href="longitudinal-data.html#cb190-1" tabindex="-1"></a><span class="co">#Getting started</span></span>
+<span id="cb190-2"><a href="longitudinal-data.html#cb190-2" tabindex="-1"></a>chart.wide <span class="ot">=</span> <span class="fu">read_csv</span>(<span class="st">&quot;https://raw.githubusercontent.com/proback/BeyondMLR/master/data/chart_wide_condense.csv&quot;</span>) </span></code></pre></div>
+<div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb191-1"><a href="longitudinal-data.html#cb191-1" tabindex="-1"></a><span class="fu">head</span>(<span class="fu">head</span>(chart.wide))</span></code></pre></div>
 <pre><code>## # A tibble: 6 × 10
 ##    ...1 schoolid   schoolName urban charter schPctsped schPctfree MathAvgScore.0
 ##   &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;dbl&gt;   &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;          &lt;dbl&gt;
@@ -685,7 +690,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="missing-data" class="section level3 hasAnchor" number="4.1.2">
 <h3><span class="header-section-number">4.1.2</span> Missing Data<a href="longitudinal-data.html#missing-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb185-1"><a href="longitudinal-data.html#cb185-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(chart.wide)</span></code></pre></div>
+<div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb193-1"><a href="longitudinal-data.html#cb193-1" tabindex="-1"></a><span class="fu">summary</span>(chart.wide)</span></code></pre></div>
 <pre><code>##       ...1          schoolid          schoolName            urban       
 ##  Min.   :   1.0   Length:618         Length:618         Min.   :0.0000  
 ##  1st Qu.: 446.8   Class :character   Class :character   1st Qu.:0.0000  
@@ -713,7 +718,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li>There are 61 missing values for MathAvgScore.0, 46 for MathAvgScore.1, and 14 for MathAvgScore.2.</li>
 </ul>
-<div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb187-1"><a href="longitudinal-data.html#cb187-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">complete.cases</span>(chart.wide))</span></code></pre></div>
+<div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb195-1"><a href="longitudinal-data.html#cb195-1" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">complete.cases</span>(chart.wide))</span></code></pre></div>
 <pre><code>## [1] 540</code></pre>
 <ul>
 <li>540 of the schools have complete data on all variables, while 78 have at least one missing value.</li>
@@ -730,19 +735,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="convert-to-tidy-form" class="section level3 hasAnchor" number="4.1.3">
 <h3><span class="header-section-number">4.1.3</span> Convert to Tidy Form<a href="longitudinal-data.html#convert-to-tidy-form" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>First, we will convert the data to <code>long</code> (or in this case <code>tidy</code>) form.</p>
-<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb189-1"><a href="longitudinal-data.html#cb189-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Getting started-2</span></span>
-<span id="cb189-2"><a href="longitudinal-data.html#cb189-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Create data frame in LONG form (one obs per school-year)</span></span>
-<span id="cb189-3"><a href="longitudinal-data.html#cb189-3" aria-hidden="true" tabindex="-1"></a><span class="co">#   chart.long is 1854x10 with 121 NAs for MathAvgScore</span></span>
-<span id="cb189-4"><a href="longitudinal-data.html#cb189-4" aria-hidden="true" tabindex="-1"></a>select <span class="ot">&lt;-</span> dplyr<span class="sc">::</span>select</span>
-<span id="cb189-5"><a href="longitudinal-data.html#cb189-5" aria-hidden="true" tabindex="-1"></a>chart.long <span class="ot">&lt;-</span> chart.wide <span class="sc">%&gt;%</span></span>
-<span id="cb189-6"><a href="longitudinal-data.html#cb189-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols=</span>MathAvgScore<span class="fl">.0</span><span class="sc">:</span>MathAvgScore<span class="fl">.2</span>, </span>
-<span id="cb189-7"><a href="longitudinal-data.html#cb189-7" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="st">&quot;key&quot;</span>,  <span class="co"># years since 2008</span></span>
-<span id="cb189-8"><a href="longitudinal-data.html#cb189-8" aria-hidden="true" tabindex="-1"></a>               <span class="at">values_to =</span> <span class="st">&quot;MathAvgScore&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb189-9"><a href="longitudinal-data.html#cb189-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(key, <span class="at">into =</span> <span class="fu">c</span>(<span class="st">&quot;name&quot;</span>, <span class="st">&quot;year08&quot;</span>), <span class="at">sep =</span> <span class="st">&quot;</span><span class="sc">\\</span><span class="st">.&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb189-10"><a href="longitudinal-data.html#cb189-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span><span class="fu">c</span>(<span class="st">&quot;name&quot;</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb189-11"><a href="longitudinal-data.html#cb189-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(schoolid, year08) <span class="sc">%&gt;%</span></span>
-<span id="cb189-12"><a href="longitudinal-data.html#cb189-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">year08 =</span> <span class="fu">as.numeric</span>(year08))</span>
-<span id="cb189-13"><a href="longitudinal-data.html#cb189-13" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(chart.long)</span></code></pre></div>
+<div class="sourceCode" id="cb197"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb197-1"><a href="longitudinal-data.html#cb197-1" tabindex="-1"></a><span class="co">#Getting started-2</span></span>
+<span id="cb197-2"><a href="longitudinal-data.html#cb197-2" tabindex="-1"></a><span class="co"># Create data frame in LONG form (one obs per school-year)</span></span>
+<span id="cb197-3"><a href="longitudinal-data.html#cb197-3" tabindex="-1"></a><span class="co">#   chart.long is 1854x10 with 121 NAs for MathAvgScore</span></span>
+<span id="cb197-4"><a href="longitudinal-data.html#cb197-4" tabindex="-1"></a>select <span class="ot">&lt;-</span> dplyr<span class="sc">::</span>select</span>
+<span id="cb197-5"><a href="longitudinal-data.html#cb197-5" tabindex="-1"></a>chart.long <span class="ot">&lt;-</span> chart.wide <span class="sc">%&gt;%</span></span>
+<span id="cb197-6"><a href="longitudinal-data.html#cb197-6" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols=</span>MathAvgScore<span class="fl">.0</span><span class="sc">:</span>MathAvgScore<span class="fl">.2</span>, </span>
+<span id="cb197-7"><a href="longitudinal-data.html#cb197-7" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="st">&quot;key&quot;</span>,  <span class="co"># years since 2008</span></span>
+<span id="cb197-8"><a href="longitudinal-data.html#cb197-8" tabindex="-1"></a>               <span class="at">values_to =</span> <span class="st">&quot;MathAvgScore&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb197-9"><a href="longitudinal-data.html#cb197-9" tabindex="-1"></a>  <span class="fu">separate</span>(key, <span class="at">into =</span> <span class="fu">c</span>(<span class="st">&quot;name&quot;</span>, <span class="st">&quot;year08&quot;</span>), <span class="at">sep =</span> <span class="st">&quot;</span><span class="sc">\\</span><span class="st">.&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb197-10"><a href="longitudinal-data.html#cb197-10" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span><span class="fu">c</span>(<span class="st">&quot;name&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb197-11"><a href="longitudinal-data.html#cb197-11" tabindex="-1"></a>  <span class="fu">arrange</span>(schoolid, year08) <span class="sc">%&gt;%</span></span>
+<span id="cb197-12"><a href="longitudinal-data.html#cb197-12" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">year08 =</span> <span class="fu">as.numeric</span>(year08))</span>
+<span id="cb197-13"><a href="longitudinal-data.html#cb197-13" tabindex="-1"></a><span class="fu">head</span>(chart.long)</span></code></pre></div>
 <pre><code>## # A tibble: 6 × 9
 ##    ...1 schoolid           schoolName urban charter schPctsped schPctfree year08
 ##   &lt;dbl&gt; &lt;chr&gt;              &lt;chr&gt;      &lt;dbl&gt;   &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;  &lt;dbl&gt;
@@ -761,53 +766,53 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Level 2 - observations that pertain to a school and stay constant over time (charter or non-charter, urban or rural, percent free and reduced lunch, percent special education)</p>
 <p>Level 1 - observations that change over time (year and average math scores)</p>
 <p>We calculate the average math score across the three years, and also add indicator variables for whether the school was in an urban setting, and whether it was a charter school.</p>
-<div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb191-1"><a href="longitudinal-data.html#cb191-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Getting started-3</span></span>
-<span id="cb191-2"><a href="longitudinal-data.html#cb191-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Add average across all years for each school for EDA plots</span></span>
-<span id="cb191-3"><a href="longitudinal-data.html#cb191-3" aria-hidden="true" tabindex="-1"></a>chart.means <span class="ot">&lt;-</span> chart.long <span class="sc">%&gt;%</span></span>
-<span id="cb191-4"><a href="longitudinal-data.html#cb191-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(schoolid) <span class="sc">%&gt;%</span></span>
-<span id="cb191-5"><a href="longitudinal-data.html#cb191-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean3yr =</span> <span class="fu">mean</span>(MathAvgScore, <span class="at">na.rm=</span>T))</span>
-<span id="cb191-6"><a href="longitudinal-data.html#cb191-6" aria-hidden="true" tabindex="-1"></a>chart.wide <span class="ot">&lt;-</span> chart.wide <span class="sc">%&gt;%</span></span>
-<span id="cb191-7"><a href="longitudinal-data.html#cb191-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">urban0 =</span> <span class="fu">ifelse</span>(urban<span class="sc">==</span><span class="dv">1</span>, <span class="st">&quot;urban&quot;</span>, <span class="st">&quot;rural&quot;</span>),</span>
-<span id="cb191-8"><a href="longitudinal-data.html#cb191-8" aria-hidden="true" tabindex="-1"></a>         <span class="at">charter0 =</span> <span class="fu">ifelse</span>(charter<span class="sc">==</span><span class="dv">1</span>, <span class="st">&quot;charter&quot;</span>, </span>
-<span id="cb191-9"><a href="longitudinal-data.html#cb191-9" aria-hidden="true" tabindex="-1"></a>                           <span class="st">&quot;public non-charter&quot;</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb191-10"><a href="longitudinal-data.html#cb191-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(chart.means, <span class="at">by=</span><span class="st">&quot;schoolid&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb199-1"><a href="longitudinal-data.html#cb199-1" tabindex="-1"></a><span class="co">#Getting started-3</span></span>
+<span id="cb199-2"><a href="longitudinal-data.html#cb199-2" tabindex="-1"></a><span class="co"># Add average across all years for each school for EDA plots</span></span>
+<span id="cb199-3"><a href="longitudinal-data.html#cb199-3" tabindex="-1"></a>chart.means <span class="ot">&lt;-</span> chart.long <span class="sc">%&gt;%</span></span>
+<span id="cb199-4"><a href="longitudinal-data.html#cb199-4" tabindex="-1"></a>  <span class="fu">group_by</span>(schoolid) <span class="sc">%&gt;%</span></span>
+<span id="cb199-5"><a href="longitudinal-data.html#cb199-5" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean3yr =</span> <span class="fu">mean</span>(MathAvgScore, <span class="at">na.rm=</span>T))</span>
+<span id="cb199-6"><a href="longitudinal-data.html#cb199-6" tabindex="-1"></a>chart.wide <span class="ot">&lt;-</span> chart.wide <span class="sc">%&gt;%</span></span>
+<span id="cb199-7"><a href="longitudinal-data.html#cb199-7" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">urban0 =</span> <span class="fu">ifelse</span>(urban<span class="sc">==</span><span class="dv">1</span>, <span class="st">&quot;urban&quot;</span>, <span class="st">&quot;rural&quot;</span>),</span>
+<span id="cb199-8"><a href="longitudinal-data.html#cb199-8" tabindex="-1"></a>         <span class="at">charter0 =</span> <span class="fu">ifelse</span>(charter<span class="sc">==</span><span class="dv">1</span>, <span class="st">&quot;charter&quot;</span>, </span>
+<span id="cb199-9"><a href="longitudinal-data.html#cb199-9" tabindex="-1"></a>                           <span class="st">&quot;public non-charter&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb199-10"><a href="longitudinal-data.html#cb199-10" tabindex="-1"></a>  <span class="fu">left_join</span>(chart.means, <span class="at">by=</span><span class="st">&quot;schoolid&quot;</span>)</span></code></pre></div>
 <p>Histogram of mean sixth grade MCA math test scores over the years 2008-2010 for 618 Minnesota schools.</p>
-<div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb192-1"><a href="longitudinal-data.html#cb192-1" aria-hidden="true" tabindex="-1"></a><span class="do">###histogram of mean math scores (1 obs per school)</span></span>
-<span id="cb192-2"><a href="longitudinal-data.html#cb192-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>chart.wide,<span class="fu">aes</span>(<span class="at">x=</span>mean3yr)) <span class="sc">+</span> </span>
-<span id="cb192-3"><a href="longitudinal-data.html#cb192-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth=</span><span class="dv">5</span>,<span class="at">color=</span><span class="st">&quot;black&quot;</span>,<span class="at">fill=</span><span class="st">&quot;white&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb192-4"><a href="longitudinal-data.html#cb192-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Mean Math Scores by School&quot;</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;Frequency&quot;</span>)</span></code></pre></div>
-<p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-124-1.png" width="576" /></p>
+<div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb200-1"><a href="longitudinal-data.html#cb200-1" tabindex="-1"></a><span class="do">###histogram of mean math scores (1 obs per school)</span></span>
+<span id="cb200-2"><a href="longitudinal-data.html#cb200-2" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>chart.wide,<span class="fu">aes</span>(<span class="at">x=</span>mean3yr)) <span class="sc">+</span> </span>
+<span id="cb200-3"><a href="longitudinal-data.html#cb200-3" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth=</span><span class="dv">5</span>,<span class="at">color=</span><span class="st">&quot;black&quot;</span>,<span class="at">fill=</span><span class="st">&quot;white&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb200-4"><a href="longitudinal-data.html#cb200-4" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Mean Math Scores by School&quot;</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;Frequency&quot;</span>)</span></code></pre></div>
+<p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-129-1.png" width="576" /></p>
 <p>Boxplots of categorical Level Two covariates vs. average MCA math scores. Plot (a) shows charter vs. public non-charter schools, while plot (b) shows urban vs. rural schools.</p>
-<div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb193-1"><a href="longitudinal-data.html#cb193-1" aria-hidden="true" tabindex="-1"></a>charter.school <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> chart.wide, </span>
-<span id="cb193-2"><a href="longitudinal-data.html#cb193-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(charter0), <span class="at">y =</span> mean3yr)) <span class="sc">+</span> </span>
-<span id="cb193-3"><a href="longitudinal-data.html#cb193-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span> <span class="fu">coord_flip</span>()  <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;Mean Math Scores by School&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb193-4"><a href="longitudinal-data.html#cb193-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;&quot;</span>) <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">title=</span><span class="st">&quot;(a)&quot;</span>)</span>
-<span id="cb193-5"><a href="longitudinal-data.html#cb193-5" aria-hidden="true" tabindex="-1"></a>urban.school <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> chart.wide, </span>
-<span id="cb193-6"><a href="longitudinal-data.html#cb193-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(urban0), <span class="at">y =</span> mean3yr)) <span class="sc">+</span> </span>
-<span id="cb193-7"><a href="longitudinal-data.html#cb193-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span> <span class="fu">coord_flip</span>() <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;Mean Math Scores by School&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb193-8"><a href="longitudinal-data.html#cb193-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;&quot;</span>) <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">title=</span><span class="st">&quot;(b)&quot;</span>)</span>
-<span id="cb193-9"><a href="longitudinal-data.html#cb193-9" aria-hidden="true" tabindex="-1"></a><span class="fu">grid.arrange</span>(charter.school,urban.school,<span class="at">ncol=</span><span class="dv">1</span>,<span class="at">nrow=</span><span class="dv">2</span>)</span></code></pre></div>
-<p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-125-1.png" width="576" /></p>
+<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb201-1"><a href="longitudinal-data.html#cb201-1" tabindex="-1"></a>charter.school <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> chart.wide, </span>
+<span id="cb201-2"><a href="longitudinal-data.html#cb201-2" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(charter0), <span class="at">y =</span> mean3yr)) <span class="sc">+</span> </span>
+<span id="cb201-3"><a href="longitudinal-data.html#cb201-3" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span> <span class="fu">coord_flip</span>()  <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;Mean Math Scores by School&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb201-4"><a href="longitudinal-data.html#cb201-4" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;&quot;</span>) <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">title=</span><span class="st">&quot;(a)&quot;</span>)</span>
+<span id="cb201-5"><a href="longitudinal-data.html#cb201-5" tabindex="-1"></a>urban.school <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> chart.wide, </span>
+<span id="cb201-6"><a href="longitudinal-data.html#cb201-6" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(urban0), <span class="at">y =</span> mean3yr)) <span class="sc">+</span> </span>
+<span id="cb201-7"><a href="longitudinal-data.html#cb201-7" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span> <span class="fu">coord_flip</span>() <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;Mean Math Scores by School&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb201-8"><a href="longitudinal-data.html#cb201-8" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;&quot;</span>) <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">title=</span><span class="st">&quot;(b)&quot;</span>)</span>
+<span id="cb201-9"><a href="longitudinal-data.html#cb201-9" tabindex="-1"></a><span class="fu">grid.arrange</span>(charter.school,urban.school,<span class="at">ncol=</span><span class="dv">1</span>,<span class="at">nrow=</span><span class="dv">2</span>)</span></code></pre></div>
+<p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-130-1.png" width="576" /></p>
 <p>Scatterplots of average MCA math scores by (a) percent free and reduced lunch, (b) percent special education.</p>
-<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb194-1"><a href="longitudinal-data.html#cb194-1" aria-hidden="true" tabindex="-1"></a>PctFree.school <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> chart.wide, </span>
-<span id="cb194-2"><a href="longitudinal-data.html#cb194-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> schPctfree, <span class="at">y =</span> mean3yr)) <span class="sc">+</span> </span>
-<span id="cb194-3"><a href="longitudinal-data.html#cb194-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()  <span class="sc">+</span> </span>
-<span id="cb194-4"><a href="longitudinal-data.html#cb194-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">se=</span><span class="cn">FALSE</span>,<span class="at">method=</span><span class="st">&quot;lm&quot;</span>,<span class="at">color=</span><span class="st">&quot;red&quot;</span>) <span class="sc">+</span></span>
-<span id="cb194-5"><a href="longitudinal-data.html#cb194-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Percent Free/Reduced Lunch&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb194-6"><a href="longitudinal-data.html#cb194-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Mean Math Scores</span><span class="sc">\n</span><span class="st">by School&quot;</span>) <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">title=</span><span class="st">&quot;(a)&quot;</span>)</span>
-<span id="cb194-7"><a href="longitudinal-data.html#cb194-7" aria-hidden="true" tabindex="-1"></a>PctSped.school <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> chart.wide, </span>
-<span id="cb194-8"><a href="longitudinal-data.html#cb194-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> schPctsped, <span class="at">y =</span> mean3yr)) <span class="sc">+</span> </span>
-<span id="cb194-9"><a href="longitudinal-data.html#cb194-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
-<span id="cb194-10"><a href="longitudinal-data.html#cb194-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">se=</span><span class="cn">FALSE</span>,<span class="at">method=</span><span class="st">&quot;lm&quot;</span>,<span class="at">color=</span><span class="st">&quot;red&quot;</span>) <span class="sc">+</span></span>
-<span id="cb194-11"><a href="longitudinal-data.html#cb194-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Percent Special Ed&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb194-12"><a href="longitudinal-data.html#cb194-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Mean Math Scores</span><span class="sc">\n</span><span class="st">by School&quot;</span>) <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">title=</span><span class="st">&quot;(b)&quot;</span>)</span>
-<span id="cb194-13"><a href="longitudinal-data.html#cb194-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb194-14"><a href="longitudinal-data.html#cb194-14" aria-hidden="true" tabindex="-1"></a><span class="fu">grid.arrange</span>(PctFree.school, PctSped.school, <span class="at">ncol =</span> <span class="dv">2</span>)</span></code></pre></div>
-<p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-126-1.png" width="576" /></p>
-<div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb195-1"><a href="longitudinal-data.html#cb195-1" aria-hidden="true" tabindex="-1"></a>chart.wide <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(charter) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">Percent_Free_Red_Lunch =</span> <span class="fu">mean</span>(schPctfree),</span>
-<span id="cb195-2"><a href="longitudinal-data.html#cb195-2" aria-hidden="true" tabindex="-1"></a>                                               <span class="at">Percent_Special_Ed =</span> <span class="fu">mean</span>(schPctsped),</span>
-<span id="cb195-3"><a href="longitudinal-data.html#cb195-3" aria-hidden="true" tabindex="-1"></a>                                               <span class="at">Mean_Math_Score =</span> <span class="fu">mean</span>(mean3yr),</span>
-<span id="cb195-4"><a href="longitudinal-data.html#cb195-4" aria-hidden="true" tabindex="-1"></a>                                               <span class="at">N=</span><span class="fu">n</span>())</span></code></pre></div>
+<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb202-1"><a href="longitudinal-data.html#cb202-1" tabindex="-1"></a>PctFree.school <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> chart.wide, </span>
+<span id="cb202-2"><a href="longitudinal-data.html#cb202-2" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> schPctfree, <span class="at">y =</span> mean3yr)) <span class="sc">+</span> </span>
+<span id="cb202-3"><a href="longitudinal-data.html#cb202-3" tabindex="-1"></a>  <span class="fu">geom_point</span>()  <span class="sc">+</span> </span>
+<span id="cb202-4"><a href="longitudinal-data.html#cb202-4" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">se=</span><span class="cn">FALSE</span>,<span class="at">method=</span><span class="st">&quot;lm&quot;</span>,<span class="at">color=</span><span class="st">&quot;red&quot;</span>) <span class="sc">+</span></span>
+<span id="cb202-5"><a href="longitudinal-data.html#cb202-5" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Percent Free/Reduced Lunch&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb202-6"><a href="longitudinal-data.html#cb202-6" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Mean Math Scores</span><span class="sc">\n</span><span class="st">by School&quot;</span>) <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">title=</span><span class="st">&quot;(a)&quot;</span>)</span>
+<span id="cb202-7"><a href="longitudinal-data.html#cb202-7" tabindex="-1"></a>PctSped.school <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> chart.wide, </span>
+<span id="cb202-8"><a href="longitudinal-data.html#cb202-8" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> schPctsped, <span class="at">y =</span> mean3yr)) <span class="sc">+</span> </span>
+<span id="cb202-9"><a href="longitudinal-data.html#cb202-9" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb202-10"><a href="longitudinal-data.html#cb202-10" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">se=</span><span class="cn">FALSE</span>,<span class="at">method=</span><span class="st">&quot;lm&quot;</span>,<span class="at">color=</span><span class="st">&quot;red&quot;</span>) <span class="sc">+</span></span>
+<span id="cb202-11"><a href="longitudinal-data.html#cb202-11" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Percent Special Ed&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb202-12"><a href="longitudinal-data.html#cb202-12" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Mean Math Scores</span><span class="sc">\n</span><span class="st">by School&quot;</span>) <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">title=</span><span class="st">&quot;(b)&quot;</span>)</span>
+<span id="cb202-13"><a href="longitudinal-data.html#cb202-13" tabindex="-1"></a></span>
+<span id="cb202-14"><a href="longitudinal-data.html#cb202-14" tabindex="-1"></a><span class="fu">grid.arrange</span>(PctFree.school, PctSped.school, <span class="at">ncol =</span> <span class="dv">2</span>)</span></code></pre></div>
+<p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-131-1.png" width="576" /></p>
+<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb203-1"><a href="longitudinal-data.html#cb203-1" tabindex="-1"></a>chart.wide <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(charter) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">Percent_Free_Red_Lunch =</span> <span class="fu">mean</span>(schPctfree),</span>
+<span id="cb203-2"><a href="longitudinal-data.html#cb203-2" tabindex="-1"></a>                                               <span class="at">Percent_Special_Ed =</span> <span class="fu">mean</span>(schPctsped),</span>
+<span id="cb203-3"><a href="longitudinal-data.html#cb203-3" tabindex="-1"></a>                                               <span class="at">Mean_Math_Score =</span> <span class="fu">mean</span>(mean3yr),</span>
+<span id="cb203-4"><a href="longitudinal-data.html#cb203-4" tabindex="-1"></a>                                               <span class="at">N=</span><span class="fu">n</span>())</span></code></pre></div>
 <pre><code>## # A tibble: 2 × 5
 ##   charter Percent_Free_Red_Lunch Percent_Special_Ed Mean_Math_Score     N
 ##     &lt;dbl&gt;                  &lt;dbl&gt;              &lt;dbl&gt;           &lt;dbl&gt; &lt;int&gt;
@@ -817,63 +822,63 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="exploratory-analyses-for-longitudinal-data" class="section level3 hasAnchor" number="4.1.5">
 <h3><span class="header-section-number">4.1.5</span> Exploratory Analyses for Longitudinal Data<a href="longitudinal-data.html#exploratory-analyses-for-longitudinal-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>We use lattice plots and spaghetti plots to examine the change in scores over time for various schools.</p>
-<div class="sourceCode" id="cb197"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb197-1"><a href="longitudinal-data.html#cb197-1" aria-hidden="true" tabindex="-1"></a>smallchart.long <span class="ot">&lt;-</span> <span class="fu">filter</span>(chart.long, <span class="fu">row_number</span>() <span class="sc">&lt;=</span> <span class="dv">72</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb198-1"><a href="longitudinal-data.html#cb198-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Lattice plots</span></span>
-<span id="cb198-2"><a href="longitudinal-data.html#cb198-2" aria-hidden="true" tabindex="-1"></a><span class="co">#  First change names of Central and Chaska</span></span>
-<span id="cb198-3"><a href="longitudinal-data.html#cb198-3" aria-hidden="true" tabindex="-1"></a>smallchart.long<span class="sc">$</span>schoolName[<span class="dv">7</span><span class="sc">:</span><span class="dv">9</span>]<span class="ot">=</span><span class="st">&quot;CENTRAL108&quot;</span></span>
-<span id="cb198-4"><a href="longitudinal-data.html#cb198-4" aria-hidden="true" tabindex="-1"></a>smallchart.long<span class="sc">$</span>schoolName[<span class="dv">37</span><span class="sc">:</span><span class="dv">39</span>]<span class="ot">=</span><span class="st">&quot;CHASKAEAST&quot;</span></span>
-<span id="cb198-5"><a href="longitudinal-data.html#cb198-5" aria-hidden="true" tabindex="-1"></a>smallchart.long<span class="sc">$</span>schoolName[<span class="dv">40</span><span class="sc">:</span><span class="dv">42</span>]<span class="ot">=</span><span class="st">&quot;CHASKAWEST&quot;</span></span>
-<span id="cb198-6"><a href="longitudinal-data.html#cb198-6" aria-hidden="true" tabindex="-1"></a>smallchart.long<span class="sc">$</span>schoolName[<span class="dv">64</span><span class="sc">:</span><span class="dv">66</span>]<span class="ot">=</span><span class="st">&quot;CENTRAL13&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb205"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb205-1"><a href="longitudinal-data.html#cb205-1" tabindex="-1"></a>smallchart.long <span class="ot">&lt;-</span> <span class="fu">filter</span>(chart.long, <span class="fu">row_number</span>() <span class="sc">&lt;=</span> <span class="dv">72</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb206"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb206-1"><a href="longitudinal-data.html#cb206-1" tabindex="-1"></a><span class="co">#Lattice plots</span></span>
+<span id="cb206-2"><a href="longitudinal-data.html#cb206-2" tabindex="-1"></a><span class="co">#  First change names of Central and Chaska</span></span>
+<span id="cb206-3"><a href="longitudinal-data.html#cb206-3" tabindex="-1"></a>smallchart.long<span class="sc">$</span>schoolName[<span class="dv">7</span><span class="sc">:</span><span class="dv">9</span>]<span class="ot">=</span><span class="st">&quot;CENTRAL108&quot;</span></span>
+<span id="cb206-4"><a href="longitudinal-data.html#cb206-4" tabindex="-1"></a>smallchart.long<span class="sc">$</span>schoolName[<span class="dv">37</span><span class="sc">:</span><span class="dv">39</span>]<span class="ot">=</span><span class="st">&quot;CHASKAEAST&quot;</span></span>
+<span id="cb206-5"><a href="longitudinal-data.html#cb206-5" tabindex="-1"></a>smallchart.long<span class="sc">$</span>schoolName[<span class="dv">40</span><span class="sc">:</span><span class="dv">42</span>]<span class="ot">=</span><span class="st">&quot;CHASKAWEST&quot;</span></span>
+<span id="cb206-6"><a href="longitudinal-data.html#cb206-6" tabindex="-1"></a>smallchart.long<span class="sc">$</span>schoolName[<span class="dv">64</span><span class="sc">:</span><span class="dv">66</span>]<span class="ot">=</span><span class="st">&quot;CENTRAL13&quot;</span></span></code></pre></div>
 <p>Lattice plot by school of math scores over time with linear fit for the first 24 schools in the data set.</p>
-<div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb199-1"><a href="longitudinal-data.html#cb199-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(smallchart.long, <span class="fu">aes</span>(<span class="at">x =</span> year08, <span class="at">y =</span> MathAvgScore)) <span class="sc">+</span></span>
-<span id="cb199-2"><a href="longitudinal-data.html#cb199-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb199-3"><a href="longitudinal-data.html#cb199-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>schoolName,<span class="at">ncol=</span><span class="dv">6</span>) <span class="sc">+</span> </span>
-<span id="cb199-4"><a href="longitudinal-data.html#cb199-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">limits=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">2</span>), <span class="at">breaks=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">2</span>)) <span class="sc">+</span></span>
-<span id="cb199-5"><a href="longitudinal-data.html#cb199-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits=</span><span class="fu">c</span>(<span class="dv">640</span>,<span class="dv">665</span>)) <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">strip.text.x=</span><span class="fu">element_blank</span>()) <span class="sc">+</span> </span>
-<span id="cb199-6"><a href="longitudinal-data.html#cb199-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Years since 2008&quot;</span>,<span class="at">y=</span><span class="st">&quot;Math Scores&quot;</span>)</span></code></pre></div>
-<p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-130-1.png" width="576" /></p>
+<div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb207-1"><a href="longitudinal-data.html#cb207-1" tabindex="-1"></a><span class="fu">ggplot</span>(smallchart.long, <span class="fu">aes</span>(<span class="at">x =</span> year08, <span class="at">y =</span> MathAvgScore)) <span class="sc">+</span></span>
+<span id="cb207-2"><a href="longitudinal-data.html#cb207-2" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb207-3"><a href="longitudinal-data.html#cb207-3" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>schoolName,<span class="at">ncol=</span><span class="dv">6</span>) <span class="sc">+</span> </span>
+<span id="cb207-4"><a href="longitudinal-data.html#cb207-4" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">limits=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">2</span>), <span class="at">breaks=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">2</span>)) <span class="sc">+</span></span>
+<span id="cb207-5"><a href="longitudinal-data.html#cb207-5" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits=</span><span class="fu">c</span>(<span class="dv">640</span>,<span class="dv">665</span>)) <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">strip.text.x=</span><span class="fu">element_blank</span>()) <span class="sc">+</span> </span>
+<span id="cb207-6"><a href="longitudinal-data.html#cb207-6" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Years since 2008&quot;</span>,<span class="at">y=</span><span class="st">&quot;Math Scores&quot;</span>)</span></code></pre></div>
+<p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-135-1.png" width="576" /></p>
 <p>We select a sampe of 73 non-charter schools (the number of charter schools), and compare scores over time.</p>
-<div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb200-1"><a href="longitudinal-data.html#cb200-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">27</span>)  <span class="co">#pulls same random sample every time</span></span>
-<span id="cb200-2"><a href="longitudinal-data.html#cb200-2" aria-hidden="true" tabindex="-1"></a>wide.charter <span class="ot">&lt;-</span> chart.wide <span class="sc">%&gt;%</span> <span class="fu">filter</span>(charter<span class="sc">==</span><span class="dv">1</span>)  <span class="co">#dataframe with just charter schools</span></span>
-<span id="cb200-3"><a href="longitudinal-data.html#cb200-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb200-4"><a href="longitudinal-data.html#cb200-4" aria-hidden="true" tabindex="-1"></a><span class="co"># select a sample of public schools with size equal to number of charter schools</span></span>
-<span id="cb200-5"><a href="longitudinal-data.html#cb200-5" aria-hidden="true" tabindex="-1"></a>samp <span class="ot">=</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(chart.wide<span class="sc">$</span>charter<span class="sc">==</span><span class="dv">0</span>), <span class="at">size=</span><span class="fu">dim</span>(wide.charter)[<span class="dv">1</span>])</span>
-<span id="cb200-6"><a href="longitudinal-data.html#cb200-6" aria-hidden="true" tabindex="-1"></a>wide.public <span class="ot">&lt;-</span> chart.wide <span class="sc">%&gt;%</span></span>
-<span id="cb200-7"><a href="longitudinal-data.html#cb200-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(charter <span class="sc">==</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb200-8"><a href="longitudinal-data.html#cb200-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sample_n</span>( <span class="fu">dim</span>(wide.charter)[<span class="dv">1</span>] )</span>
-<span id="cb200-9"><a href="longitudinal-data.html#cb200-9" aria-hidden="true" tabindex="-1"></a>sampdata <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(wide.charter, wide.public) <span class="sc">%&gt;%</span></span>
-<span id="cb200-10"><a href="longitudinal-data.html#cb200-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">vars =</span> <span class="fu">row_number</span>())   <span class="co"># Just use numbers 1-146 as school ids</span></span>
-<span id="cb200-11"><a href="longitudinal-data.html#cb200-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb200-12"><a href="longitudinal-data.html#cb200-12" aria-hidden="true" tabindex="-1"></a><span class="co">#convert to long form</span></span>
-<span id="cb200-13"><a href="longitudinal-data.html#cb200-13" aria-hidden="true" tabindex="-1"></a>sampdata.l <span class="ot">&lt;-</span> sampdata <span class="sc">%&gt;%</span></span>
-<span id="cb200-14"><a href="longitudinal-data.html#cb200-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">names_to =</span> <span class="st">&quot;key&quot;</span>, <span class="at">values_to =</span> <span class="st">&quot;MathAvgScore&quot;</span>, <span class="at">cols=</span>MathAvgScore<span class="fl">.0</span><span class="sc">:</span>MathAvgScore<span class="fl">.2</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb200-15"><a href="longitudinal-data.html#cb200-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(key, <span class="at">into =</span> <span class="fu">c</span>(<span class="st">&quot;name&quot;</span>, <span class="st">&quot;year08&quot;</span>), <span class="at">sep =</span> <span class="st">&quot;</span><span class="sc">\\</span><span class="st">.&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb200-16"><a href="longitudinal-data.html#cb200-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>name) <span class="sc">%&gt;%</span></span>
-<span id="cb200-17"><a href="longitudinal-data.html#cb200-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(charter, vars, year08) <span class="sc">%&gt;%</span></span>
-<span id="cb200-18"><a href="longitudinal-data.html#cb200-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">year08 =</span> <span class="fu">as.numeric</span>(year08))</span></code></pre></div>
+<div class="sourceCode" id="cb208"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb208-1"><a href="longitudinal-data.html#cb208-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">27</span>)  <span class="co">#pulls same random sample every time</span></span>
+<span id="cb208-2"><a href="longitudinal-data.html#cb208-2" tabindex="-1"></a>wide.charter <span class="ot">&lt;-</span> chart.wide <span class="sc">%&gt;%</span> <span class="fu">filter</span>(charter<span class="sc">==</span><span class="dv">1</span>)  <span class="co">#dataframe with just charter schools</span></span>
+<span id="cb208-3"><a href="longitudinal-data.html#cb208-3" tabindex="-1"></a></span>
+<span id="cb208-4"><a href="longitudinal-data.html#cb208-4" tabindex="-1"></a><span class="co"># select a sample of public schools with size equal to number of charter schools</span></span>
+<span id="cb208-5"><a href="longitudinal-data.html#cb208-5" tabindex="-1"></a>samp <span class="ot">=</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(chart.wide<span class="sc">$</span>charter<span class="sc">==</span><span class="dv">0</span>), <span class="at">size=</span><span class="fu">dim</span>(wide.charter)[<span class="dv">1</span>])</span>
+<span id="cb208-6"><a href="longitudinal-data.html#cb208-6" tabindex="-1"></a>wide.public <span class="ot">&lt;-</span> chart.wide <span class="sc">%&gt;%</span></span>
+<span id="cb208-7"><a href="longitudinal-data.html#cb208-7" tabindex="-1"></a>  <span class="fu">filter</span>(charter <span class="sc">==</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb208-8"><a href="longitudinal-data.html#cb208-8" tabindex="-1"></a>  <span class="fu">sample_n</span>( <span class="fu">dim</span>(wide.charter)[<span class="dv">1</span>] )</span>
+<span id="cb208-9"><a href="longitudinal-data.html#cb208-9" tabindex="-1"></a>sampdata <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(wide.charter, wide.public) <span class="sc">%&gt;%</span></span>
+<span id="cb208-10"><a href="longitudinal-data.html#cb208-10" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">vars =</span> <span class="fu">row_number</span>())   <span class="co"># Just use numbers 1-146 as school ids</span></span>
+<span id="cb208-11"><a href="longitudinal-data.html#cb208-11" tabindex="-1"></a></span>
+<span id="cb208-12"><a href="longitudinal-data.html#cb208-12" tabindex="-1"></a><span class="co">#convert to long form</span></span>
+<span id="cb208-13"><a href="longitudinal-data.html#cb208-13" tabindex="-1"></a>sampdata.l <span class="ot">&lt;-</span> sampdata <span class="sc">%&gt;%</span></span>
+<span id="cb208-14"><a href="longitudinal-data.html#cb208-14" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">names_to =</span> <span class="st">&quot;key&quot;</span>, <span class="at">values_to =</span> <span class="st">&quot;MathAvgScore&quot;</span>, <span class="at">cols=</span>MathAvgScore<span class="fl">.0</span><span class="sc">:</span>MathAvgScore<span class="fl">.2</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb208-15"><a href="longitudinal-data.html#cb208-15" tabindex="-1"></a>  <span class="fu">separate</span>(key, <span class="at">into =</span> <span class="fu">c</span>(<span class="st">&quot;name&quot;</span>, <span class="st">&quot;year08&quot;</span>), <span class="at">sep =</span> <span class="st">&quot;</span><span class="sc">\\</span><span class="st">.&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb208-16"><a href="longitudinal-data.html#cb208-16" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>name) <span class="sc">%&gt;%</span></span>
+<span id="cb208-17"><a href="longitudinal-data.html#cb208-17" tabindex="-1"></a>  <span class="fu">arrange</span>(charter, vars, year08) <span class="sc">%&gt;%</span></span>
+<span id="cb208-18"><a href="longitudinal-data.html#cb208-18" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">year08 =</span> <span class="fu">as.numeric</span>(year08))</span></code></pre></div>
 <p>Spaghetti (or trellis) plots showing time trends for each school by school type, for a random sample of charter schools (left) and public non-charter schools (right), with overall fits using loess (bold).</p>
-<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb201-1"><a href="longitudinal-data.html#cb201-1" aria-hidden="true" tabindex="-1"></a><span class="do">##Spaghetti Plots</span></span>
-<span id="cb201-2"><a href="longitudinal-data.html#cb201-2" aria-hidden="true" tabindex="-1"></a><span class="co">#get rid of NA data</span></span>
-<span id="cb201-3"><a href="longitudinal-data.html#cb201-3" aria-hidden="true" tabindex="-1"></a>newsampdata.l <span class="ot">&lt;-</span> sampdata.l <span class="sc">%&gt;%</span> <span class="fu">na.omit</span>()</span>
-<span id="cb201-4"><a href="longitudinal-data.html#cb201-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb201-5"><a href="longitudinal-data.html#cb201-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(newsampdata.l, <span class="fu">aes</span>(<span class="at">x =</span> year08, <span class="at">y =</span> MathAvgScore)) <span class="sc">+</span> </span>
-<span id="cb201-6"><a href="longitudinal-data.html#cb201-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">group=</span>schoolid),<span class="at">color=</span><span class="st">&quot;grey&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb201-7"><a href="longitudinal-data.html#cb201-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(.<span class="sc">~</span>charter0) <span class="sc">+</span> </span>
-<span id="cb201-8"><a href="longitudinal-data.html#cb201-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="fu">aes</span>(<span class="at">group=</span><span class="dv">1</span>),<span class="at">color=</span><span class="st">&quot;black&quot;</span>,<span class="at">size=</span><span class="dv">1</span>) <span class="sc">+</span> </span>
-<span id="cb201-9"><a href="longitudinal-data.html#cb201-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Years since 2008&quot;</span>,<span class="at">y=</span><span class="st">&quot;Math Scores&quot;</span>) </span></code></pre></div>
-<p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-132-1.png" width="576" /></p>
+<div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb209-1"><a href="longitudinal-data.html#cb209-1" tabindex="-1"></a><span class="do">##Spaghetti Plots</span></span>
+<span id="cb209-2"><a href="longitudinal-data.html#cb209-2" tabindex="-1"></a><span class="co">#get rid of NA data</span></span>
+<span id="cb209-3"><a href="longitudinal-data.html#cb209-3" tabindex="-1"></a>newsampdata.l <span class="ot">&lt;-</span> sampdata.l <span class="sc">%&gt;%</span> <span class="fu">na.omit</span>()</span>
+<span id="cb209-4"><a href="longitudinal-data.html#cb209-4" tabindex="-1"></a></span>
+<span id="cb209-5"><a href="longitudinal-data.html#cb209-5" tabindex="-1"></a><span class="fu">ggplot</span>(newsampdata.l, <span class="fu">aes</span>(<span class="at">x =</span> year08, <span class="at">y =</span> MathAvgScore)) <span class="sc">+</span> </span>
+<span id="cb209-6"><a href="longitudinal-data.html#cb209-6" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">group=</span>schoolid),<span class="at">color=</span><span class="st">&quot;grey&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb209-7"><a href="longitudinal-data.html#cb209-7" tabindex="-1"></a>  <span class="fu">facet_grid</span>(.<span class="sc">~</span>charter0) <span class="sc">+</span> </span>
+<span id="cb209-8"><a href="longitudinal-data.html#cb209-8" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="fu">aes</span>(<span class="at">group=</span><span class="dv">1</span>),<span class="at">color=</span><span class="st">&quot;black&quot;</span>,<span class="at">size=</span><span class="dv">1</span>) <span class="sc">+</span> </span>
+<span id="cb209-9"><a href="longitudinal-data.html#cb209-9" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Years since 2008&quot;</span>,<span class="at">y=</span><span class="st">&quot;Math Scores&quot;</span>) </span></code></pre></div>
+<p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-137-1.png" width="576" /></p>
 <p>Spaghetti (or trellis) plots showing time trends for each school by quartiles of percent free and reduced lunch, with loess fits.</p>
-<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb202-1"><a href="longitudinal-data.html#cb202-1" aria-hidden="true" tabindex="-1"></a><span class="co"># divide into quartiles</span></span>
-<span id="cb202-2"><a href="longitudinal-data.html#cb202-2" aria-hidden="true" tabindex="-1"></a>newsampdata.l <span class="ot">&lt;-</span> newsampdata.l <span class="sc">%&gt;%</span></span>
-<span id="cb202-3"><a href="longitudinal-data.html#cb202-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">splitup =</span> <span class="fu">paste</span>(<span class="st">&quot;Quartile&quot;</span>, </span>
-<span id="cb202-4"><a href="longitudinal-data.html#cb202-4" aria-hidden="true" tabindex="-1"></a>                         <span class="fu">as.numeric</span>(<span class="fu">cut2</span>(schPctfree, <span class="at">g=</span><span class="dv">4</span>))))</span></code></pre></div>
-<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb203-1"><a href="longitudinal-data.html#cb203-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(newsampdata.l,<span class="fu">aes</span>(<span class="at">x=</span>year08,<span class="at">y=</span>MathAvgScore)) <span class="sc">+</span> </span>
-<span id="cb203-2"><a href="longitudinal-data.html#cb203-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">group=</span>schoolid),<span class="at">color=</span><span class="st">&quot;grey&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb203-3"><a href="longitudinal-data.html#cb203-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">&quot;loess&quot;</span>,<span class="at">color=</span><span class="st">&quot;black&quot;</span>,<span class="at">se=</span><span class="cn">FALSE</span>,<span class="at">size=</span>.<span class="dv">75</span>) <span class="sc">+</span></span>
-<span id="cb203-4"><a href="longitudinal-data.html#cb203-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(<span class="sc">~</span>splitup) <span class="sc">+</span></span>
-<span id="cb203-5"><a href="longitudinal-data.html#cb203-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Years since 2008&quot;</span>,<span class="at">y=</span><span class="st">&quot;Math Scores&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb203-6"><a href="longitudinal-data.html#cb203-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">limits=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">2</span>), <span class="at">breaks=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">2</span>)) </span></code></pre></div>
-<p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-134-1.png" width="960" /></p>
+<div class="sourceCode" id="cb210"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb210-1"><a href="longitudinal-data.html#cb210-1" tabindex="-1"></a><span class="co"># divide into quartiles</span></span>
+<span id="cb210-2"><a href="longitudinal-data.html#cb210-2" tabindex="-1"></a>newsampdata.l <span class="ot">&lt;-</span> newsampdata.l <span class="sc">%&gt;%</span></span>
+<span id="cb210-3"><a href="longitudinal-data.html#cb210-3" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">splitup =</span> <span class="fu">paste</span>(<span class="st">&quot;Quartile&quot;</span>, </span>
+<span id="cb210-4"><a href="longitudinal-data.html#cb210-4" tabindex="-1"></a>                         <span class="fu">as.numeric</span>(<span class="fu">cut2</span>(schPctfree, <span class="at">g=</span><span class="dv">4</span>))))</span></code></pre></div>
+<div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb211-1"><a href="longitudinal-data.html#cb211-1" tabindex="-1"></a><span class="fu">ggplot</span>(newsampdata.l,<span class="fu">aes</span>(<span class="at">x=</span>year08,<span class="at">y=</span>MathAvgScore)) <span class="sc">+</span> </span>
+<span id="cb211-2"><a href="longitudinal-data.html#cb211-2" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">group=</span>schoolid),<span class="at">color=</span><span class="st">&quot;grey&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb211-3"><a href="longitudinal-data.html#cb211-3" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">&quot;loess&quot;</span>,<span class="at">color=</span><span class="st">&quot;black&quot;</span>,<span class="at">se=</span><span class="cn">FALSE</span>,<span class="at">size=</span>.<span class="dv">75</span>) <span class="sc">+</span></span>
+<span id="cb211-4"><a href="longitudinal-data.html#cb211-4" tabindex="-1"></a>  <span class="fu">facet_grid</span>(<span class="sc">~</span>splitup) <span class="sc">+</span></span>
+<span id="cb211-5"><a href="longitudinal-data.html#cb211-5" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Years since 2008&quot;</span>,<span class="at">y=</span><span class="st">&quot;Math Scores&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb211-6"><a href="longitudinal-data.html#cb211-6" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">limits=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">2</span>), <span class="at">breaks=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">2</span>)) </span></code></pre></div>
+<p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-139-1.png" width="960" /></p>
 <ul>
 <li><p>charter schools had math scores that were lower on average than public non-charter schools and more variable.</p></li>
 <li><p>Public non-charter schools have higher scores across all years; both school types show little growth between 2008 and 2009, but greater growth between 2009 and 2010, especially charter schools.</p></li>
@@ -895,10 +900,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 Y _{ij} = \alpha_{0} + u_{i} + \epsilon_{ij} \textrm{ with } u_{i} \sim N(0, \sigma^2_u) \textrm{ and } \epsilon_{ij} \sim N(0, \sigma^2)
 \end{equation*}
 \]</span></p>
-<div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb204-1"><a href="longitudinal-data.html#cb204-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Model A (Unconditional means model)</span></span>
-<span id="cb204-2"><a href="longitudinal-data.html#cb204-2" aria-hidden="true" tabindex="-1"></a>model.a <span class="ot">&lt;-</span> <span class="fu">lmer</span>(MathAvgScore<span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>schoolid), </span>
-<span id="cb204-3"><a href="longitudinal-data.html#cb204-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">REML=</span>T, <span class="at">data=</span>chart.long)</span>
-<span id="cb204-4"><a href="longitudinal-data.html#cb204-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model.a)</span></code></pre></div>
+<div class="sourceCode" id="cb212"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb212-1"><a href="longitudinal-data.html#cb212-1" tabindex="-1"></a><span class="co">#Model A (Unconditional means model)</span></span>
+<span id="cb212-2"><a href="longitudinal-data.html#cb212-2" tabindex="-1"></a>model.a <span class="ot">&lt;-</span> <span class="fu">lmer</span>(MathAvgScore<span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>schoolid), </span>
+<span id="cb212-3"><a href="longitudinal-data.html#cb212-3" tabindex="-1"></a>                <span class="at">REML=</span>T, <span class="at">data=</span>chart.long)</span>
+<span id="cb212-4"><a href="longitudinal-data.html#cb212-4" tabindex="-1"></a><span class="fu">summary</span>(model.a)</span></code></pre></div>
 <pre><code>## Linear mixed model fit by REML. t-tests use Satterthwaite&#39;s method [
 ## lmerModLmerTest]
 ## Formula: MathAvgScore ~ 1 + (1 | schoolid)
@@ -972,10 +977,10 @@ Y_{ij}=\alpha_{0} + \beta_{0}\textrm{Year08}_{ij}+u_{i}+v_{i}\textrm{Year08}_{ij
 <li><p><span class="math inline">\(\sigma_v\)</span> quantifies the amount of variability in average year-to-year change between schools.</p></li>
 <li><p><span class="math inline">\(\sigma\)</span> quantifies the variability in test scores within the same school</p></li>
 </ul>
-<div class="sourceCode" id="cb206"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb206-1"><a href="longitudinal-data.html#cb206-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Model B (Unconditional growth)</span></span>
-<span id="cb206-2"><a href="longitudinal-data.html#cb206-2" aria-hidden="true" tabindex="-1"></a>model.b <span class="ot">&lt;-</span> <span class="fu">lmer</span>(MathAvgScore<span class="sc">~</span> year08 <span class="sc">+</span> (year08<span class="sc">|</span>schoolid), </span>
-<span id="cb206-3"><a href="longitudinal-data.html#cb206-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">REML=</span>T, <span class="at">data=</span>chart.long)</span>
-<span id="cb206-4"><a href="longitudinal-data.html#cb206-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model.b)</span></code></pre></div>
+<div class="sourceCode" id="cb214"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb214-1"><a href="longitudinal-data.html#cb214-1" tabindex="-1"></a><span class="co">#Model B (Unconditional growth)</span></span>
+<span id="cb214-2"><a href="longitudinal-data.html#cb214-2" tabindex="-1"></a>model.b <span class="ot">&lt;-</span> <span class="fu">lmer</span>(MathAvgScore<span class="sc">~</span> year08 <span class="sc">+</span> (year08<span class="sc">|</span>schoolid), </span>
+<span id="cb214-3"><a href="longitudinal-data.html#cb214-3" tabindex="-1"></a>  <span class="at">REML=</span>T, <span class="at">data=</span>chart.long)</span>
+<span id="cb214-4"><a href="longitudinal-data.html#cb214-4" tabindex="-1"></a><span class="fu">summary</span>(model.b)</span></code></pre></div>
 <pre><code>Linear mixed model fit by REML. t-tests use Satterthwaite&#39;s method [
 lmerModLmerTest]
 Formula: MathAvgScore ~ year08 + (year08 | schoolid)
@@ -1029,10 +1034,10 @@ year08 -0.234</code></pre>
 <p>When squaring a variable, it’s helpful to center it first.</p>
 <p>We create a centered variable <code>yearc</code> by subtracting 1 from <code>year08</code>. (So 2008 is denoted -1, 2009 is denoted 0, and 2010 is denoted 1).</p>
 <p>Then, we create a varaible <code>yearc2</code> that is the square of this variable.</p>
-<div class="sourceCode" id="cb208"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb208-1"><a href="longitudinal-data.html#cb208-1" aria-hidden="true" tabindex="-1"></a><span class="co">#center year and calculate year^2</span></span>
-<span id="cb208-2"><a href="longitudinal-data.html#cb208-2" aria-hidden="true" tabindex="-1"></a>chart.long <span class="ot">&lt;-</span> chart.long <span class="sc">%&gt;%</span></span>
-<span id="cb208-3"><a href="longitudinal-data.html#cb208-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">yearc =</span> year08 <span class="sc">-</span> <span class="dv">1</span>, </span>
-<span id="cb208-4"><a href="longitudinal-data.html#cb208-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">yearc2 =</span> yearc <span class="sc">^</span> <span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb216"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb216-1"><a href="longitudinal-data.html#cb216-1" tabindex="-1"></a><span class="co">#center year and calculate year^2</span></span>
+<span id="cb216-2"><a href="longitudinal-data.html#cb216-2" tabindex="-1"></a>chart.long <span class="ot">&lt;-</span> chart.long <span class="sc">%&gt;%</span></span>
+<span id="cb216-3"><a href="longitudinal-data.html#cb216-3" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">yearc =</span> year08 <span class="sc">-</span> <span class="dv">1</span>, </span>
+<span id="cb216-4"><a href="longitudinal-data.html#cb216-4" tabindex="-1"></a>         <span class="at">yearc2 =</span> yearc <span class="sc">^</span> <span class="dv">2</span>)</span></code></pre></div>
 </div>
 <div id="quadratic-model" class="section level3 hasAnchor" number="4.3.2">
 <h3><span class="header-section-number">4.3.2</span> Quadratic Model<a href="longitudinal-data.html#quadratic-model" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -1045,10 +1050,10 @@ Y_{ij}=\alpha_{0}+\beta_{0}\textrm{YearC}_{ij}+\gamma_{0}\textrm{YearC}^{2}_{ij}
 </div>
 <div id="quadratic-model-in-r-1" class="section level3 hasAnchor" number="4.3.3">
 <h3><span class="header-section-number">4.3.3</span> Quadratic Model in R<a href="longitudinal-data.html#quadratic-model-in-r-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb209-1"><a href="longitudinal-data.html#cb209-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Modeling quadratic time trend</span></span>
-<span id="cb209-2"><a href="longitudinal-data.html#cb209-2" aria-hidden="true" tabindex="-1"></a>model.b1 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(MathAvgScore<span class="sc">~</span> yearc <span class="sc">+</span> yearc2 <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>schoolid), </span>
-<span id="cb209-3"><a href="longitudinal-data.html#cb209-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">REML=</span>T, <span class="at">data=</span>chart.long)</span>
-<span id="cb209-4"><a href="longitudinal-data.html#cb209-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model.b1)</span></code></pre></div>
+<div class="sourceCode" id="cb217"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb217-1"><a href="longitudinal-data.html#cb217-1" tabindex="-1"></a><span class="co"># Modeling quadratic time trend</span></span>
+<span id="cb217-2"><a href="longitudinal-data.html#cb217-2" tabindex="-1"></a>model.b1 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(MathAvgScore<span class="sc">~</span> yearc <span class="sc">+</span> yearc2 <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>schoolid), </span>
+<span id="cb217-3"><a href="longitudinal-data.html#cb217-3" tabindex="-1"></a>  <span class="at">REML=</span>T, <span class="at">data=</span>chart.long)</span>
+<span id="cb217-4"><a href="longitudinal-data.html#cb217-4" tabindex="-1"></a><span class="fu">summary</span>(model.b1)</span></code></pre></div>
 <pre><code>Linear mixed model fit by REML. t-tests use Satterthwaite&#39;s method [
 lmerModLmerTest]
 Formula: MathAvgScore ~ yearc + yearc2 + (1 | schoolid)
@@ -1085,8 +1090,8 @@ yearc2 -0.350 -0.016</code></pre>
 <p><span class="math display">\[E(Y)_{ij} = 652 + 1.27(\textrm{YearC}) + 1.07(\textrm{YearC})^2
 \]</span></p>
 <p>Where <span class="math inline">\(\textrm{YearC}=\textrm{Year}-2009\)</span>.</p>
-<div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb211-1"><a href="longitudinal-data.html#cb211-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>chart.long, <span class="fu">aes</span>(<span class="at">x=</span>yearc, <span class="at">y=</span>MathAvgScore)) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">stat_smooth</span>(<span class="at">method=</span><span class="st">&quot;lm&quot;</span>, <span class="at">se=</span><span class="cn">TRUE</span>, <span class="at">fill=</span><span class="cn">NA</span>, <span class="at">formula=</span>y <span class="sc">~</span> <span class="fu">poly</span>(x, <span class="dv">2</span>, <span class="at">raw=</span><span class="cn">TRUE</span>),<span class="at">colour=</span><span class="st">&quot;red&quot;</span>)</span></code></pre></div>
-<p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-139-1.png" width="576" /></p>
+<div class="sourceCode" id="cb219"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb219-1"><a href="longitudinal-data.html#cb219-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>chart.long, <span class="fu">aes</span>(<span class="at">x=</span>yearc, <span class="at">y=</span>MathAvgScore)) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">stat_smooth</span>(<span class="at">method=</span><span class="st">&quot;lm&quot;</span>, <span class="at">se=</span><span class="cn">TRUE</span>, <span class="at">fill=</span><span class="cn">NA</span>, <span class="at">formula=</span>y <span class="sc">~</span> <span class="fu">poly</span>(x, <span class="dv">2</span>, <span class="at">raw=</span><span class="cn">TRUE</span>),<span class="at">colour=</span><span class="st">&quot;red&quot;</span>)</span></code></pre></div>
+<p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-144-1.png" width="576" /></p>
 <p>There is more growth, on average, between 2009 and 2010, than between 2008 and 2009.</p>
 </div>
 <div id="linear-and-quadratic-error-terms" class="section level3 hasAnchor" number="4.3.5">
@@ -1118,11 +1123,11 @@ where <span class="math inline">\(\epsilon_{ij}\sim N(0,\sigma^2)\)</span> and</
 </div>
 <div id="model-with-many-random-terms-in-r" class="section level3 hasAnchor" number="4.3.6">
 <h3><span class="header-section-number">4.3.6</span> Model with Many Random Terms in R<a href="longitudinal-data.html#model-with-many-random-terms-in-r" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb212"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb212-1"><a href="longitudinal-data.html#cb212-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Modeling quadratic time trend</span></span>
-<span id="cb212-2"><a href="longitudinal-data.html#cb212-2" aria-hidden="true" tabindex="-1"></a>model.b2 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(MathAvgScore<span class="sc">~</span> yearc <span class="sc">+</span> yearc2 <span class="sc">+</span> ((yearc2 <span class="sc">+</span> yearc) <span class="sc">|</span>schoolid), </span>
-<span id="cb212-3"><a href="longitudinal-data.html#cb212-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">REML=</span>T, <span class="at">data=</span>chart.long)</span></code></pre></div>
+<div class="sourceCode" id="cb220"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb220-1"><a href="longitudinal-data.html#cb220-1" tabindex="-1"></a><span class="co"># Modeling quadratic time trend</span></span>
+<span id="cb220-2"><a href="longitudinal-data.html#cb220-2" tabindex="-1"></a>model.b2 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(MathAvgScore<span class="sc">~</span> yearc <span class="sc">+</span> yearc2 <span class="sc">+</span> ((yearc2 <span class="sc">+</span> yearc) <span class="sc">|</span>schoolid), </span>
+<span id="cb220-3"><a href="longitudinal-data.html#cb220-3" tabindex="-1"></a>  <span class="at">REML=</span>T, <span class="at">data=</span>chart.long)</span></code></pre></div>
 <pre><code>Error: number of observations (=1733) &lt;= number of random effects (=1854) for term ((yearc2 + yearc) | schoolid); the random-effects parameters and the residual variance (or scale parameter) are probably unidentifiable</code></pre>
-<div class="sourceCode" id="cb214"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb214-1"><a href="longitudinal-data.html#cb214-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model.b2)</span></code></pre></div>
+<div class="sourceCode" id="cb222"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb222-1"><a href="longitudinal-data.html#cb222-1" tabindex="-1"></a><span class="fu">summary</span>(model.b2)</span></code></pre></div>
 <pre><code>Error in h(simpleError(msg, call)): error in evaluating the argument &#39;object&#39; in selecting a method for function &#39;summary&#39;: object &#39;model.b2&#39; not found</code></pre>
 <p>We now have 6 variance components (<span class="math inline">\(\sigma_u\)</span>, <span class="math inline">\(\sigma_v\)</span>, <span class="math inline">\(\sigma_w\)</span>, <span class="math inline">\(\rho_u\)</span>, <span class="math inline">\(\rho_v\)</span>, <span class="math inline">\(\rho_w\)</span>) and only three observations at level 2. In order to obtain estimates, we need at least as many observations as parameters being estimated. Hence, this model doesn’t work.</p>
 </div>
@@ -1147,10 +1152,10 @@ Y_{ij}=\alpha_{0} + \beta_{0}\textrm{Year08}_{ij} + \gamma_{0}\textrm{Year08}_{i
             \rho_{uv}\sigma_{u}\sigma_{v} &amp; \sigma_{v}^{2}
           \end{array} \right] \right) .
 \]</span></p>
-<div class="sourceCode" id="cb216"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb216-1"><a href="longitudinal-data.html#cb216-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Modeling quadratic time trend</span></span>
-<span id="cb216-2"><a href="longitudinal-data.html#cb216-2" aria-hidden="true" tabindex="-1"></a>model.b3 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(MathAvgScore<span class="sc">~</span> yearc <span class="sc">+</span> yearc2 <span class="sc">+</span> ((yearc) <span class="sc">|</span>schoolid), </span>
-<span id="cb216-3"><a href="longitudinal-data.html#cb216-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">REML=</span>T, <span class="at">data=</span>chart.long)</span>
-<span id="cb216-4"><a href="longitudinal-data.html#cb216-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model.b3)</span></code></pre></div>
+<div class="sourceCode" id="cb224"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb224-1"><a href="longitudinal-data.html#cb224-1" tabindex="-1"></a><span class="co"># Modeling quadratic time trend</span></span>
+<span id="cb224-2"><a href="longitudinal-data.html#cb224-2" tabindex="-1"></a>model.b3 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(MathAvgScore<span class="sc">~</span> yearc <span class="sc">+</span> yearc2 <span class="sc">+</span> ((yearc) <span class="sc">|</span>schoolid), </span>
+<span id="cb224-3"><a href="longitudinal-data.html#cb224-3" tabindex="-1"></a>  <span class="at">REML=</span>T, <span class="at">data=</span>chart.long)</span>
+<span id="cb224-4"><a href="longitudinal-data.html#cb224-4" tabindex="-1"></a><span class="fu">summary</span>(model.b3)</span></code></pre></div>
 <pre><code>Linear mixed model fit by REML. t-tests use Satterthwaite&#39;s method [
 lmerModLmerTest]
 Formula: MathAvgScore ~ yearc + yearc2 + ((yearc) | schoolid)
@@ -1190,11 +1195,11 @@ yearc2 -0.342 -0.017</code></pre>
 <div id="model-comparison" class="section level3 hasAnchor" number="4.3.9">
 <h3><span class="header-section-number">4.3.9</span> Model Comparison<a href="longitudinal-data.html#model-comparison" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>We compare the quadratic model with the random intercept to the quadratic model with random intercept and linear terms.</p>
-<div class="sourceCode" id="cb218"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb218-1"><a href="longitudinal-data.html#cb218-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Intercept only</span></span>
-<span id="cb218-2"><a href="longitudinal-data.html#cb218-2" aria-hidden="true" tabindex="-1"></a><span class="fu">BIC</span>(model.b1)</span></code></pre></div>
+<div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb226-1"><a href="longitudinal-data.html#cb226-1" tabindex="-1"></a><span class="co"># Intercept only</span></span>
+<span id="cb226-2"><a href="longitudinal-data.html#cb226-2" tabindex="-1"></a><span class="fu">BIC</span>(model.b1)</span></code></pre></div>
 <pre><code>## [1] 10335.45</code></pre>
-<div class="sourceCode" id="cb220"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb220-1"><a href="longitudinal-data.html#cb220-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Intercept and linear term</span></span>
-<span id="cb220-2"><a href="longitudinal-data.html#cb220-2" aria-hidden="true" tabindex="-1"></a><span class="fu">BIC</span>(model.b3)</span></code></pre></div>
+<div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb228-1"><a href="longitudinal-data.html#cb228-1" tabindex="-1"></a><span class="co"># Intercept and linear term</span></span>
+<span id="cb228-2"><a href="longitudinal-data.html#cb228-2" tabindex="-1"></a><span class="fu">BIC</span>(model.b3)</span></code></pre></div>
 <pre><code>## [1] 10342.4</code></pre>
 <p>The model with only the random intercept term is preferred.</p>
 </div>
@@ -1203,12 +1208,12 @@ yearc2 -0.342 -0.017</code></pre>
 <p>Another frequently used approach to modeling time effects is the <strong>piecewise linear model</strong>.</p>
 <p>This model assumes that average scores change linearly from year to year, but that the slope between the first and second years might be different than the slope between the second and third years</p>
 <p>We create a binary variables to indicate whether the score came from the 08-09 or 09-10 school years.</p>
-<div class="sourceCode" id="cb222"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb222-1"><a href="longitudinal-data.html#cb222-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Modeling piecewise linear time trend with 3 time points</span></span>
-<span id="cb222-2"><a href="longitudinal-data.html#cb222-2" aria-hidden="true" tabindex="-1"></a><span class="co">#   (won&#39;t work in general)</span></span>
-<span id="cb222-3"><a href="longitudinal-data.html#cb222-3" aria-hidden="true" tabindex="-1"></a>chart.long <span class="ot">&lt;-</span> chart.long <span class="sc">%&gt;%</span></span>
-<span id="cb222-4"><a href="longitudinal-data.html#cb222-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">year0809 =</span> <span class="fu">ifelse</span>(year08<span class="sc">==</span><span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>),</span>
-<span id="cb222-5"><a href="longitudinal-data.html#cb222-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">year0810 =</span> <span class="fu">ifelse</span>(year08<span class="sc">==</span><span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">0</span>))</span>
-<span id="cb222-6"><a href="longitudinal-data.html#cb222-6" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(chart.long)</span></code></pre></div>
+<div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb230-1"><a href="longitudinal-data.html#cb230-1" tabindex="-1"></a><span class="co"># Modeling piecewise linear time trend with 3 time points</span></span>
+<span id="cb230-2"><a href="longitudinal-data.html#cb230-2" tabindex="-1"></a><span class="co">#   (won&#39;t work in general)</span></span>
+<span id="cb230-3"><a href="longitudinal-data.html#cb230-3" tabindex="-1"></a>chart.long <span class="ot">&lt;-</span> chart.long <span class="sc">%&gt;%</span></span>
+<span id="cb230-4"><a href="longitudinal-data.html#cb230-4" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">year0809 =</span> <span class="fu">ifelse</span>(year08<span class="sc">==</span><span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>),</span>
+<span id="cb230-5"><a href="longitudinal-data.html#cb230-5" tabindex="-1"></a>         <span class="at">year0810 =</span> <span class="fu">ifelse</span>(year08<span class="sc">==</span><span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">0</span>))</span>
+<span id="cb230-6"><a href="longitudinal-data.html#cb230-6" tabindex="-1"></a><span class="fu">head</span>(chart.long)</span></code></pre></div>
 <pre><code>## # A tibble: 6 × 13
 ##    ...1 schoolid           schoolName urban charter schPctsped schPctfree year08
 ##   &lt;dbl&gt; &lt;chr&gt;              &lt;chr&gt;      &lt;dbl&gt;   &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;  &lt;dbl&gt;
@@ -1237,9 +1242,9 @@ where <span class="math inline">\(u_i\sim\mathcal{N}(0, \sigma^2_u)\)</span> and
 </li>
 <li><span class="math inline">\(\beta_2\)</span> represents the average change in math score from year 1 to year 3</li>
 </ul>
-<div class="sourceCode" id="cb224"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb224-1"><a href="longitudinal-data.html#cb224-1" aria-hidden="true" tabindex="-1"></a>model.b4 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(MathAvgScore<span class="sc">~</span> year0809 <span class="sc">+</span> year0810 <span class="sc">+</span></span>
-<span id="cb224-2"><a href="longitudinal-data.html#cb224-2" aria-hidden="true" tabindex="-1"></a>                   (<span class="dv">1</span><span class="sc">|</span>schoolid), <span class="at">REML=</span>T, <span class="at">data=</span>chart.long)</span>
-<span id="cb224-3"><a href="longitudinal-data.html#cb224-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model.b4)</span></code></pre></div>
+<div class="sourceCode" id="cb232"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb232-1"><a href="longitudinal-data.html#cb232-1" tabindex="-1"></a>model.b4 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(MathAvgScore<span class="sc">~</span> year0809 <span class="sc">+</span> year0810 <span class="sc">+</span></span>
+<span id="cb232-2"><a href="longitudinal-data.html#cb232-2" tabindex="-1"></a>                   (<span class="dv">1</span><span class="sc">|</span>schoolid), <span class="at">REML=</span>T, <span class="at">data=</span>chart.long)</span>
+<span id="cb232-3"><a href="longitudinal-data.html#cb232-3" tabindex="-1"></a><span class="fu">summary</span>(model.b4)</span></code></pre></div>
 <pre><code>## Linear mixed model fit by REML. t-tests use Satterthwaite&#39;s method [
 ## lmerModLmerTest]
 ## Formula: MathAvgScore ~ year0809 + year0810 + (1 | schoolid)
@@ -1279,20 +1284,20 @@ where <span class="math inline">\(u_i\sim\mathcal{N}(0, \sigma^2_u)\)</span> and
 <h3><span class="header-section-number">4.3.12</span> Estimated Response Curve<a href="longitudinal-data.html#estimated-response-curve-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Red is quadratic estimate.
 Blue is piecewise linear estimate.</p>
-<div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb226-1"><a href="longitudinal-data.html#cb226-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>chart.long, <span class="fu">aes</span>(<span class="at">x=</span>yearc, <span class="at">y=</span>MathAvgScore)) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">stat_smooth</span>(<span class="at">method=</span><span class="st">&quot;lm&quot;</span>, <span class="at">se=</span><span class="cn">TRUE</span>, <span class="at">fill=</span><span class="cn">NA</span>, <span class="at">formula=</span>y <span class="sc">~</span> <span class="fu">poly</span>(x, <span class="dv">2</span>, <span class="at">raw=</span><span class="cn">TRUE</span>),<span class="at">colour=</span><span class="st">&quot;red&quot;</span>) <span class="sc">+</span></span>
-<span id="cb226-2"><a href="longitudinal-data.html#cb226-2" aria-hidden="true" tabindex="-1"></a> <span class="fu">geom_segment</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="sc">-</span><span class="dv">1</span> , <span class="at">y =</span> <span class="fu">fixef</span>(model.b4)[<span class="dv">1</span>], <span class="at">xend =</span> <span class="dv">0</span>, <span class="at">yend =</span> <span class="fu">fixef</span>(model.b4)[<span class="dv">1</span>] <span class="sc">+</span> <span class="fu">fixef</span>(model.b4)[<span class="dv">2</span>]), <span class="at">colour =</span> <span class="st">&quot;blue&quot;</span>)<span class="sc">+</span></span>
-<span id="cb226-3"><a href="longitudinal-data.html#cb226-3" aria-hidden="true" tabindex="-1"></a> <span class="fu">geom_segment</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="dv">0</span> , <span class="at">y =</span> <span class="fu">fixef</span>(model.b4)[<span class="dv">1</span>], <span class="at">xend =</span> <span class="dv">1</span>, <span class="at">yend =</span> <span class="fu">fixef</span>(model.b4)[<span class="dv">1</span>] <span class="sc">+</span> <span class="fu">fixef</span>(model.b4)[<span class="dv">3</span>]), <span class="at">colour =</span> <span class="st">&quot;blue&quot;</span>)</span></code></pre></div>
-<p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-145-1.png" width="576" /></p>
+<div class="sourceCode" id="cb234"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb234-1"><a href="longitudinal-data.html#cb234-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>chart.long, <span class="fu">aes</span>(<span class="at">x=</span>yearc, <span class="at">y=</span>MathAvgScore)) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">stat_smooth</span>(<span class="at">method=</span><span class="st">&quot;lm&quot;</span>, <span class="at">se=</span><span class="cn">TRUE</span>, <span class="at">fill=</span><span class="cn">NA</span>, <span class="at">formula=</span>y <span class="sc">~</span> <span class="fu">poly</span>(x, <span class="dv">2</span>, <span class="at">raw=</span><span class="cn">TRUE</span>),<span class="at">colour=</span><span class="st">&quot;red&quot;</span>) <span class="sc">+</span></span>
+<span id="cb234-2"><a href="longitudinal-data.html#cb234-2" tabindex="-1"></a> <span class="fu">geom_segment</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="sc">-</span><span class="dv">1</span> , <span class="at">y =</span> <span class="fu">fixef</span>(model.b4)[<span class="dv">1</span>], <span class="at">xend =</span> <span class="dv">0</span>, <span class="at">yend =</span> <span class="fu">fixef</span>(model.b4)[<span class="dv">1</span>] <span class="sc">+</span> <span class="fu">fixef</span>(model.b4)[<span class="dv">2</span>]), <span class="at">colour =</span> <span class="st">&quot;blue&quot;</span>)<span class="sc">+</span></span>
+<span id="cb234-3"><a href="longitudinal-data.html#cb234-3" tabindex="-1"></a> <span class="fu">geom_segment</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="dv">0</span> , <span class="at">y =</span> <span class="fu">fixef</span>(model.b4)[<span class="dv">1</span>], <span class="at">xend =</span> <span class="dv">1</span>, <span class="at">yend =</span> <span class="fu">fixef</span>(model.b4)[<span class="dv">1</span>] <span class="sc">+</span> <span class="fu">fixef</span>(model.b4)[<span class="dv">3</span>]), <span class="at">colour =</span> <span class="st">&quot;blue&quot;</span>)</span></code></pre></div>
+<p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-150-1.png" width="576" /></p>
 </div>
 <div id="comparing-quadratic-and-piecewise-models" class="section level3 hasAnchor" number="4.3.13">
 <h3><span class="header-section-number">4.3.13</span> Comparing Quadratic and Piecewise Models<a href="longitudinal-data.html#comparing-quadratic-and-piecewise-models" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb227"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb227-1"><a href="longitudinal-data.html#cb227-1" aria-hidden="true" tabindex="-1"></a><span class="fu">AIC</span>(model.b1)   <span class="co"># quadratic</span></span></code></pre></div>
+<div class="sourceCode" id="cb235"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb235-1"><a href="longitudinal-data.html#cb235-1" tabindex="-1"></a><span class="fu">AIC</span>(model.b1)   <span class="co"># quadratic</span></span></code></pre></div>
 <pre><code>## [1] 10308.16</code></pre>
-<div class="sourceCode" id="cb229"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb229-1"><a href="longitudinal-data.html#cb229-1" aria-hidden="true" tabindex="-1"></a><span class="fu">AIC</span>(model.b4)   <span class="co"># piecewise</span></span></code></pre></div>
+<div class="sourceCode" id="cb237"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb237-1"><a href="longitudinal-data.html#cb237-1" tabindex="-1"></a><span class="fu">AIC</span>(model.b4)   <span class="co"># piecewise</span></span></code></pre></div>
 <pre><code>## [1] 10306.77</code></pre>
-<div class="sourceCode" id="cb231"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb231-1"><a href="longitudinal-data.html#cb231-1" aria-hidden="true" tabindex="-1"></a><span class="fu">BIC</span>(model.b1)   <span class="co">#quadratic</span></span></code></pre></div>
+<div class="sourceCode" id="cb239"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb239-1"><a href="longitudinal-data.html#cb239-1" tabindex="-1"></a><span class="fu">BIC</span>(model.b1)   <span class="co">#quadratic</span></span></code></pre></div>
 <pre><code>## [1] 10335.45</code></pre>
-<div class="sourceCode" id="cb233"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb233-1"><a href="longitudinal-data.html#cb233-1" aria-hidden="true" tabindex="-1"></a><span class="fu">BIC</span>(model.b4)   <span class="co">#piecewise </span></span></code></pre></div>
+<div class="sourceCode" id="cb241"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb241-1"><a href="longitudinal-data.html#cb241-1" tabindex="-1"></a><span class="fu">BIC</span>(model.b4)   <span class="co">#piecewise </span></span></code></pre></div>
 <pre><code>## [1] 10334.06</code></pre>
 <p>The performance of this model is very similar to the quadratic growth model by AIC and BIC measures, and the story told by fixed effects estimates is also very similar. While the mean yearly increase in math scores was 0.2 points between 2008 and 2009, it was 2.3 points between 2009 and 2010.</p>
 <p>Despite the good performances of the quadratic growth and piecewise linear models on our three-year window of data, we will continue to use linear growth assumptions in the remainder of this chapter. Not only is a linear model easier to interpret and explain, but it’s probably a more reasonable assumption in years beyond 2010. Predicting future performance is more risky by assuming a steep one-year rise or a non-linear rise will continue, rather than by using the average increase over two years.</p>
@@ -1322,12 +1327,12 @@ Y_{ij}
             \sigma_{u}^{2} &amp; \\
             \rho_{uv}\sigma_{u}\sigma_{v} &amp; \sigma_{v}^{2}
           \end{array} \right] \right) . \]</span></p>
-<div class="sourceCode" id="cb235"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb235-1"><a href="longitudinal-data.html#cb235-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Model C (uncontrolled effects of school type on </span></span>
-<span id="cb235-2"><a href="longitudinal-data.html#cb235-2" aria-hidden="true" tabindex="-1"></a><span class="co">#   intercept and slope)</span></span>
-<span id="cb235-3"><a href="longitudinal-data.html#cb235-3" aria-hidden="true" tabindex="-1"></a>model.c <span class="ot">&lt;-</span> <span class="fu">lmer</span>(MathAvgScore<span class="sc">~</span> charter <span class="sc">+</span> year08 <span class="sc">+</span> </span>
-<span id="cb235-4"><a href="longitudinal-data.html#cb235-4" aria-hidden="true" tabindex="-1"></a>  charter<span class="sc">:</span>year08 <span class="sc">+</span> (year08<span class="sc">|</span>schoolid), </span>
-<span id="cb235-5"><a href="longitudinal-data.html#cb235-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">REML=</span>T, <span class="at">data=</span>chart.long)</span>
-<span id="cb235-6"><a href="longitudinal-data.html#cb235-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model.c)</span></code></pre></div>
+<div class="sourceCode" id="cb243"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb243-1"><a href="longitudinal-data.html#cb243-1" tabindex="-1"></a><span class="co">#Model C (uncontrolled effects of school type on </span></span>
+<span id="cb243-2"><a href="longitudinal-data.html#cb243-2" tabindex="-1"></a><span class="co">#   intercept and slope)</span></span>
+<span id="cb243-3"><a href="longitudinal-data.html#cb243-3" tabindex="-1"></a>model.c <span class="ot">&lt;-</span> <span class="fu">lmer</span>(MathAvgScore<span class="sc">~</span> charter <span class="sc">+</span> year08 <span class="sc">+</span> </span>
+<span id="cb243-4"><a href="longitudinal-data.html#cb243-4" tabindex="-1"></a>  charter<span class="sc">:</span>year08 <span class="sc">+</span> (year08<span class="sc">|</span>schoolid), </span>
+<span id="cb243-5"><a href="longitudinal-data.html#cb243-5" tabindex="-1"></a>  <span class="at">REML=</span>T, <span class="at">data=</span>chart.long)</span>
+<span id="cb243-6"><a href="longitudinal-data.html#cb243-6" tabindex="-1"></a><span class="fu">summary</span>(model.c)</span></code></pre></div>
 <pre><code>## Linear mixed model fit by REML. t-tests use Satterthwaite&#39;s method [
 ## lmerModLmerTest]
 ## Formula: MathAvgScore ~ charter + year08 + charter:year08 + (year08 |  
@@ -1385,7 +1390,7 @@ Y_{ij}
 </div>
 <div id="illustration" class="section level3 hasAnchor" number="4.4.3">
 <h3><span class="header-section-number">4.4.3</span> Illustration<a href="longitudinal-data.html#illustration" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-149-1.png" width="960" /></p>
+<p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-154-1.png" width="960" /></p>
 <p>Section 9.6 of the text goes through several possible models, arriving at a final model with year, and four other covariates. See text for details.</p>
 </div>
 </div>
@@ -1579,13 +1584,13 @@ and our estimated within-school covariances between different time points would 
 <h3><span class="header-section-number">4.5.9</span> AR(1) Model on Schools Data<a href="longitudinal-data.html#ar1-model-on-schools-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>This is not in the book.</p>
 <p>We fit an AR(1) time series model to the schools data.</p>
-<div class="sourceCode" id="cb237"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb237-1"><a href="longitudinal-data.html#cb237-1" aria-hidden="true" tabindex="-1"></a><span class="co"># keep only schools with observed scores for all 3 years</span></span>
-<span id="cb237-2"><a href="longitudinal-data.html#cb237-2" aria-hidden="true" tabindex="-1"></a>chart.long1 <span class="ot">&lt;-</span> chart.long <span class="sc">%&gt;%</span> <span class="fu">filter</span>(schoolid <span class="sc">%in%</span> chart.wide[<span class="fu">complete.cases</span>(chart.wide),]<span class="sc">$</span>schoolid)</span>
-<span id="cb237-3"><a href="longitudinal-data.html#cb237-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb237-4"><a href="longitudinal-data.html#cb237-4" aria-hidden="true" tabindex="-1"></a>AR1.sim <span class="ot">=</span> <span class="fu">gls</span>(MathAvgScore <span class="sc">~</span> charter <span class="sc">+</span> year08 <span class="sc">+</span> charter<span class="sc">:</span>year08, <span class="at">data =</span> chart.long1,</span>
-<span id="cb237-5"><a href="longitudinal-data.html#cb237-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">correlation =</span> <span class="fu">corAR1</span>(<span class="at">form =</span> <span class="sc">~</span> year08 <span class="sc">|</span> schoolid))</span>
-<span id="cb237-6"><a href="longitudinal-data.html#cb237-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb237-7"><a href="longitudinal-data.html#cb237-7" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(AR1.sim)</span></code></pre></div>
+<div class="sourceCode" id="cb245"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb245-1"><a href="longitudinal-data.html#cb245-1" tabindex="-1"></a><span class="co"># keep only schools with observed scores for all 3 years</span></span>
+<span id="cb245-2"><a href="longitudinal-data.html#cb245-2" tabindex="-1"></a>chart.long1 <span class="ot">&lt;-</span> chart.long <span class="sc">%&gt;%</span> <span class="fu">filter</span>(schoolid <span class="sc">%in%</span> chart.wide[<span class="fu">complete.cases</span>(chart.wide),]<span class="sc">$</span>schoolid)</span>
+<span id="cb245-3"><a href="longitudinal-data.html#cb245-3" tabindex="-1"></a></span>
+<span id="cb245-4"><a href="longitudinal-data.html#cb245-4" tabindex="-1"></a>AR1.sim <span class="ot">=</span> <span class="fu">gls</span>(MathAvgScore <span class="sc">~</span> charter <span class="sc">+</span> year08 <span class="sc">+</span> charter<span class="sc">:</span>year08, <span class="at">data =</span> chart.long1,</span>
+<span id="cb245-5"><a href="longitudinal-data.html#cb245-5" tabindex="-1"></a>    <span class="at">correlation =</span> <span class="fu">corAR1</span>(<span class="at">form =</span> <span class="sc">~</span> year08 <span class="sc">|</span> schoolid))</span>
+<span id="cb245-6"><a href="longitudinal-data.html#cb245-6" tabindex="-1"></a></span>
+<span id="cb245-7"><a href="longitudinal-data.html#cb245-7" tabindex="-1"></a><span class="fu">summary</span>(AR1.sim)</span></code></pre></div>
 <pre><code>## Generalized least squares fit by REML
 ##   Model: MathAvgScore ~ charter + year08 + charter:year08 
 ##   Data: chart.long1 

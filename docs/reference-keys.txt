@@ -5,12 +5,12 @@ fig:codeds
 fig:resid2
 fig:models2and2q
 fig:resid2q
-fig:unnamed-chunk-7
-fig:unnamed-chunk-15
-fig:unnamed-chunk-17
-fig:unnamed-chunk-37
-fig:unnamed-chunk-49
-fig:unnamed-chunk-153
+fig:unnamed-chunk-12
+fig:unnamed-chunk-20
+fig:unnamed-chunk-22
+fig:unnamed-chunk-42
+fig:unnamed-chunk-54
+fig:unnamed-chunk-158
 fig:philippinesmap
 fig:OLSpois
 fig:totalPoisByAge
@@ -33,6 +33,7 @@ bivariate-graphical-summaries
 simple-linear-regression-model
 model-for-winning-time-and-year
 first-model-r-output
+calculations-in-slr
 checking-model-assumptions
 quadratic-term-for-year
 quadratic-model-in-r

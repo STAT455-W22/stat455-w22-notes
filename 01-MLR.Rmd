@@ -131,20 +131,185 @@ We fit the model in R.
 
 ```{r model2, comment=NA}
 model2 <- lm(speed ~ yearnew, data = derby.df)
+summary(model2)
 ```
 
-```{r, echo=TRUE, message=FALSE}
-coef(summary(model2))
-cat(" R squared = ", summary(model2)$r.squared, "\n", 
-    "Residual standard error = ", summary(model2)$sigma)
-```
 
 **Interpretations:**
 
 * The expected winning speed in 1896 is 51.59 ft/s.    
 * Winning speed is expected to increase by 0.026 ft./s on average for each year since 1896. The low p-value provides evidence that average winning speed has increased over time.      
 * 51\% of the total variability in winning speed is explained by the simple linear regression model with year since 1896 as the explanatory variable.    
-* We estimate that the error standard deviation $\sigma$ is 0.90.   
+* We estimate that the error standard deviation $\sigma$ is 0.90. This represents the average deviation between the actual winning speed in a given year and the model's predicted winning speed. If there were multiple races run in the same year, this could be interpreted as the variability in winning speeds between different races run in the same year.    
+
+
+
+
+
+### Calculations in SLR 
+
+The `summary` command for a linear model in R displays a table with 4 columns. 
+
+
+* **Estimate** gives the least-squares estimates $b_0, b_1, \ldots, b_p$     
+
+* **Standard Error** gives estimates of the standard deviation in the sampling distribution for estimate. It tells us how the estimate is expected to vary between different samples of the given size. Standard error formulas are given in the table below.     
+
+* **t value** is the estimate divided by its standard error.     
+
+* **Pr(>|t|)** is a p-value for the hypothesis test associated with the null hypothesis $\beta_j = 0$, where $\beta_j$ is the regression coefficient pertaining to the given line. Note that $\beta_j$ is the unknown population parameter estimated by $b_j$.   
+
+* The **Residual Standard Error** is $s =\sqrt{\frac{\text{SSR}}{n-(p+1)}} = \sqrt{\frac{\displaystyle\sum_{i=1}^n(y_i-\hat{y}_i)^2}{(n-(p+1))}}$. This is an estimate of $\sigma$, which represents the standard deviation in the distribution of the response variable for given value(s) or category(ies) of explanatory variable(s). It tells us how much variability is expected in the response variable between different individuals with the same values/categories of the explanatory variables.     
+
+* The **degrees of freedom** are $n-(p+1)$.     
+
+* The **Multiple R-Squared** value is the $R^2$ value seen in Chapter 2. $R^2 = \frac{\text{SST} -\text{SSR}}{\text{SST}} = \frac{\displaystyle\sum_{i=1}^n(y_i-\hat{y}_i)^2}{\displaystyle\sum_{i=1}^n(y_i-\bar{y}_i)^2}$
+
+* We know that $R^2$ can never decrease when additional variables are added to a model. The **Adjusted-R^2** value is an alternate version of $R^2$ that is designed to penalize adding variables that do little to explain variation in the response.   
+
+* The F-statistic on the bottom line of the R-output corresponds to an F-test of the given model against a reduced model that include no explanatory variables. The p-value on this line is associated with the test of the null hypothesis that there is no relationship between the response variable and any of the explanatory variables. Since SSR for this reduced model is equal to SST, the F-statistic calculation simplifies to:   
+
+\[
+F=\frac{\frac{SST - SSR}{p}}{\frac{SSR}{n-(p+1)}}
+\]
+
+The degrees of freedom associated with the F-statistic are given by $p$ and $(n-(p+1))$. 
+
+
+**Standard Error Formulas**
+
+|Scenario| Standard Error | 
+|---------|-----|     
+| Single Mean | $SE(b_0)=\frac{s}{\sqrt{n}}$ |   
+| Difference in Means | $SE(b_j)=s\sqrt{\frac{1}{n_1}+\frac{1}{n_2}}$ |   
+| Single Proportion| $SE(\hat{p}) = \sqrt{\frac{\hat{p}(1-\hat{p})}{n}}$|
+| Difference in Proportions| $SE(\hat{p}) = \sqrt{\left(\frac{\hat{p_1}(1-\hat{p}_1)}{n_1}+\frac{\hat{p_2}(1-\hat{p_2})}{n_2}\right)}$|
+| Intercept in Simple Linear Regression | $SE(b_0)=s\sqrt{\frac{1}{n}+\frac{\bar{x}^2}{\sum(x_i-\bar{x})^2}}$ |    
+| Slope in Simple Linear Regression | $SE(b_1)=\sqrt{\frac{s^2}{\sum(x_i-\bar{x})^2}}=\sqrt{\frac{1}{n-2}\frac{{\sum(\hat{y}_i-y_i)^2}}{\sum(x_i-\bar{x})^2}}$ | 
+
+* $s=\sqrt{\frac{\displaystyle\sum_{i=1}^n(y_i-\hat{y}_i)^2}{(n-(p+1))}}$, (p is number of regression coefficients not including $b_0$) is sample standard deviation. Note that in the one-sample case, this simplifies to the standard deviation formula we've seen previously.        
+
+* In the 2nd formula, the standard error estimate $s\sqrt{\frac{1}{n_1+n_2}}$ is called a "pooled" estimate since it combines information from all groups. When there is reason to believe standard deviation differs between groups, we often use an "unpooled" standard error estimate of $\sqrt{\frac{s_1^2}{n_1}+\frac{s_2^2}{n_2}}$, where $s_1, s_2$ represent the standard deviation for groups 1 and 2. 
+
+
+**Variability Sums of Squares**     
+
+* the total variability in the response variable is the sum of the squared differences between the observed values and the overall average.   
+
+\[\text{Total Variability in Response Var.}= \text{SST} =\displaystyle\sum_{i=1}^n(y_i-\bar{y})^2\]
+
+* the variability remaining unexplained even after accounting for explanatory variable(s) in a model is given by the sum of squared residuals. We abbreviate this SSR, for sum of squared residuals.    
+
+\[
+\text{SSR} = \text{Variability Remaining}=\displaystyle\sum_{i=1}^n(y_i-\hat{y}_i)^2
+\]
+
+* the variability explained by the model, abbreviated SSM, is given by 
+
+\[ \text{SSM} = \text{SST} - \text{SSR} \]
+
+
+* The coefficient of determination (abbreviated $R^2$) is defined as    
+
+\[R^2=\frac{\text{Variability Explained by Model}}{\text{Total Variability}}=\frac{\text{SSM}}{\text{SST}} =\frac{\displaystyle\sum_{i=1}^n(\hat{y}_i-\bar{y})^2}{\displaystyle\sum_{i=1}^n(y_i-\bar{y})^2}\]
+
+Note that some texts use different abbreviations than the ones used here. When working with resources outside this class, be sure to carefully check the notation being used. 
+
+
+The estimated regression equation is 
+
+\[
+\text{Speed} = 51.59 - 0.026 \times\text{YearNew}, \text{where } \epsilon_i\sim\mathcal{N}(0, \sigma)
+\]
+
+* SSR is:
+
+```{r}
+sum(model2$residuals^2)
+```
+
+* SST is:
+
+```{r}
+sum((derby.df$speed - mean(derby.df$speed))^2)
+```
+
+
+* The residual standard error $s$ is our estimate of $\sigma$, the standard deviation in winning speeds among races run in the same year.  
+
+\[
+s =\sqrt{\frac{\text{SSR}}{n-(p+1)}} = \sqrt{\frac{\text{SSR}}{n-(p+1)}} = \sqrt{\frac{97.8993}{122-(1+1)}}=0.9032
+\]
+
+The degrees of freedom associated with this estimate is $122-(1+1) = 120$.
+
+* The Multiple R-Squared is:    
+
+\[
+R^2 = \frac{201.1791 - 97.8993}{201.1791} = 0.5134
+\]
+
+* The F-statistic is
+
+\[
+F=\frac{\frac{SST - SSR}{p}}{\frac{SSR}{n-(p+1)}} = \frac{\frac{201.1791 - 97.8993}{1}}{\frac{97.8993}{122-(1+1)}} = 126.6
+\]
+
+This F-statistic is associated with 1 and 120 degrees of freedom.   
+
+To obtain the standard error estimates for $b_0$ and $b_1$, we need to calculate $\bar{x}$ and $\sum(x_i-\bar{x})^2$, where $x$ represents the explanatory variable, $\text{YearNew}$. 
+
+```{r}
+mean(derby.df$yearnew)
+```
+
+```{r}
+sum((derby.df$yearnew-mean(derby.df$yearnew))^2)
+```
+
+ 
+
+\[
+SE(b_0)=s\sqrt{\frac{1}{n}+\frac{\bar{x}^2}{\sum(x_i-\bar{x})^2}} = 0.9032317\sqrt{\frac{1}{122} + \frac{60.5^2}{151310.5} } = 0.1625
+\]
+
+$SE(b_0)$ represents the variability in expected winning speed for races run in 1896, between different samples of 122 races.   
+
+
+\[
+SE(b_1)=\sqrt{\frac{s^2}{\sum(x_i-\bar{x})^2}}=\sqrt{\frac{0.9032^2}{151310.5}} = 0.0023219
+\]
+
+$SE(b_1)$ represents the variability in rate of change in winning speed per year, between different samples of 122 races.    
+
+**Hypothesis Test for Intercept Line**
+
+**Null Hypothesis:** The average winning speed among all races similar to the Kentucky Derby, run in 1896 is 0. ($\beta_0=0$).   
+
+**Alternative Hypothesis:** The average winning speed among all races similar to the Kentucky Derby, run in 1896 is not 0. ($\beta_0 \neq 0$).  
+
+Obviously, a horse that wins a race will not have a running speed of 0, so this is not a sensible hypothesis test.       
+
+**Hypothesis Test for pH Line**
+
+**Null Hypothesis:** There is no relationship between year and average winning speed, i.e., average winning speed does not change over time. ($\beta_1=0$).   
+
+**Alternative Hypothesis:** There is a relationship between year and average winning speed, i.e., average winning speed does change over time. ($\beta_1 \neq 0$).  
+
+**Test Statistic**: $t=\frac{{b_j}}{\text{SE}(b_j)} = \frac{-0.02612601}{0.002322013} = 11.25$ 
+
+```{r, fig.height=4, fig.width=8}
+ts=11.25145
+gf_dist("t", df=120, geom = "area", fill = ~ (abs(x)> abs(ts)), show.legend=FALSE) + geom_vline(xintercept=c(ts, -ts), color="red")  + xlab("t")
+```
+
+
+
+```{r}
+2*pt(-abs(ts), df=120)
+```
+
+The tiny p-value provides strong evidence of a relationship between year and winning speed. Kentucky Derby winners do indeed appear to be getting faster over time.    
 
 
 
