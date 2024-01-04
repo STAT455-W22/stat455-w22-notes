@@ -22,7 +22,7 @@
 
 
 
-<meta name="date" content="2023-12-31" />
+<meta name="date" content="2024-01-04" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -669,6 +669,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>number of <code>starters</code> (horses who raced)</li>
 </ul>
 <p>We would like to use least squares linear regression techniques to model the speed of the winning horse as a function of track condition, field size, and trends over time.</p>
+<p><strong>Sample and Population</strong></p>
+<p>Statistics are often used to generalize conclusions from a sample to a larger population. In this scenario, it’s not immediately clear what a larger population of interest might be. The Kentucky Derby is run only once each year, and we have results for all years between 1896 and 2017. We could imagine, however, that even if the same horses were to run the race multiple times, even under the same track conditions, their times might vary from one race to the next. Thus, we can think of the larger population as being all races that might have been run with the same horses, under similar conditions.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="review-of-multiple-linear-regression.html#cb2-1" tabindex="-1"></a>derby.df <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;https://raw.githubusercontent.com/proback/BeyondMLR/master/data/derbyplus.csv&quot;</span>)</span>
 <span id="cb2-2"><a href="review-of-multiple-linear-regression.html#cb2-2" tabindex="-1"></a><span class="fu">head</span>(derby.df)</span></code></pre></div>
 <pre><code>##   year        winner condition speed starters
@@ -1241,18 +1243,18 @@ F=\frac{\frac{SST - SSR}{p}}{\frac{SSR}{n-(p+1)}} = \frac{\frac{201.1791 - 97.89
 <p><span class="math display">\[
 SE(b_0)=s\sqrt{\frac{1}{n}+\frac{\bar{x}^2}{\sum(x_i-\bar{x})^2}} = 0.9032317\sqrt{\frac{1}{122} + \frac{60.5^2}{151310.5} } = 0.1625
 \]</span></p>
-<p><span class="math inline">\(SE(b_0)\)</span> represents the variability in expected winning speed for races run in 1896, between different samples of 122 races.</p>
+<p><span class="math inline">\(SE(b_0)\)</span> represents the variability in expected winning speed in 1896, between different samples of 122 races that might have been run by these horses under similar conditions.</p>
 <p><span class="math display">\[
 SE(b_1)=\sqrt{\frac{s^2}{\sum(x_i-\bar{x})^2}}=\sqrt{\frac{0.9032^2}{151310.5}} = 0.0023219
 \]</span></p>
-<p><span class="math inline">\(SE(b_1)\)</span> represents the variability in rate of change in winning speed per year, between different samples of 122 races.</p>
+<p><span class="math inline">\(SE(b_1)\)</span> represents the variability in rate of change in winning speed per year, between different samples of 122 races that might have been run by these horses under similar conditions.</p>
 <p><strong>Hypothesis Test for Intercept Line</strong></p>
-<p><strong>Null Hypothesis:</strong> The average winning speed among all races similar to the Kentucky Derby, run in 1896 is 0. (<span class="math inline">\(\beta_0=0\)</span>).</p>
-<p><strong>Alternative Hypothesis:</strong> The average winning speed among all races similar to the Kentucky Derby, run in 1896 is not 0. (<span class="math inline">\(\beta_0 \neq 0\)</span>).</p>
+<p><strong>Null Hypothesis:</strong> The average winning speed among all races that might have been run by these horses, under similar conditions, in 1896 is 0. (<span class="math inline">\(\beta_0=0\)</span>).</p>
+<p><strong>Alternative Hypothesis:</strong> The average winning speed among all races that might have been run by these horses, under similar conditions, in 1896 is not 0. (<span class="math inline">\(\beta_0 \neq 0\)</span>).</p>
 <p>Obviously, a horse that wins a race will not have a running speed of 0, so this is not a sensible hypothesis test.</p>
 <p><strong>Hypothesis Test for pH Line</strong></p>
-<p><strong>Null Hypothesis:</strong> There is no relationship between year and average winning speed, i.e., average winning speed does not change over time. (<span class="math inline">\(\beta_1=0\)</span>).</p>
-<p><strong>Alternative Hypothesis:</strong> There is a relationship between year and average winning speed, i.e., average winning speed does change over time. (<span class="math inline">\(\beta_1 \neq 0\)</span>).</p>
+<p><strong>Null Hypothesis:</strong> There is no relationship between year and average winning speed, i.e., average winning speed does not change over time among all races that might have been run by these horses under similar conditions. (<span class="math inline">\(\beta_1=0\)</span>).</p>
+<p><strong>Alternative Hypothesis:</strong> There is a relationship between year and average winning speed, i.e., average winning speed does change over time among all races that might have been run by these horses under similar conditions. (<span class="math inline">\(\beta_1 \neq 0\)</span>).</p>
 <p><strong>Test Statistic</strong>: <span class="math inline">\(t=\frac{{b_j}}{\text{SE}(b_j)} = \frac{-0.02612601}{0.002322013} = 11.25\)</span></p>
 <div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="review-of-multiple-linear-regression.html#cb18-1" tabindex="-1"></a>ts<span class="ot">=</span><span class="fl">11.25145</span></span>
 <span id="cb18-2"><a href="review-of-multiple-linear-regression.html#cb18-2" tabindex="-1"></a><span class="fu">gf_dist</span>(<span class="st">&quot;t&quot;</span>, <span class="at">df=</span><span class="dv">120</span>, <span class="at">geom =</span> <span class="st">&quot;area&quot;</span>, <span class="at">fill =</span> <span class="sc">~</span> (<span class="fu">abs</span>(x)<span class="sc">&gt;</span> <span class="fu">abs</span>(ts)), <span class="at">show.legend=</span><span class="cn">FALSE</span>) <span class="sc">+</span> <span class="fu">geom_vline</span>(<span class="at">xintercept=</span><span class="fu">c</span>(ts, <span class="sc">-</span>ts), <span class="at">color=</span><span class="st">&quot;red&quot;</span>)  <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">&quot;t&quot;</span>)</span></code></pre></div>
@@ -1282,7 +1284,7 @@ Figure 1.4: Residual plots for Model 2.
 <li>The lower left plot, Scale-Location, can be used to check the Equal Variance assumption. Positive or negative trends across the fitted values indicate variability that is not constant.</li>
 <li>The lower right plot, Residuals vs. Leverage, can be used to check for influential points. Points with high leverage (having unusual values of the predictors) and/or high absolute residuals can have an undue influence on estimates of model parameters.</li>
 </ul>
-<p>There is typically no residual plot, to evaluate the Independence assumption. Evidence for lack of independence comes from knowing about the study design and methods of data collection. In this case, with a new field of horses each year, the assumption of independence is pretty reasonable.</p>
+<p>There is typically no residual plot to evaluate the Independence assumption. Evidence for lack of independence comes from knowing about the study design and methods of data collection. In this case, with a new field of horses each year, the assumption of independence is pretty reasonable.</p>
 <p>In this case, the Residuals vs. Fitted plot indicates that a quadratic fit might be better than the linear fit of Model 2; other assumptions look reasonable.</p>
 </div>
 <div id="quadratic-term-for-year" class="section level3 hasAnchor" number="1.2.5">

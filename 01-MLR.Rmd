@@ -49,6 +49,10 @@ Our data set `derbyplus.csv` contains data from 1896-2017, and includes the foll
 
 We would like to use least squares linear regression techniques to model the speed of the winning horse as a function of track condition, field size, and trends over time.  
 
+**Sample and Population**   
+
+Statistics are often used to generalize conclusions from a sample to a larger population. In this scenario, it's not immediately clear what a larger population of interest might be. The Kentucky Derby is run only once each year, and we have results for all years between 1896 and 2017. We could imagine, however, that even if the same horses were to run the race multiple times, even under the same track conditions, their times might vary from one race to the next. Thus, we can think of the larger population as being all races that might have been run with the same horses, under similar conditions.    
+
 
 ```{r introtable1,echo=TRUE, warning=FALSE}
 derby.df <- read.csv("https://raw.githubusercontent.com/proback/BeyondMLR/master/data/derbyplus.csv")
@@ -276,28 +280,29 @@ sum((derby.df$yearnew-mean(derby.df$yearnew))^2)
 SE(b_0)=s\sqrt{\frac{1}{n}+\frac{\bar{x}^2}{\sum(x_i-\bar{x})^2}} = 0.9032317\sqrt{\frac{1}{122} + \frac{60.5^2}{151310.5} } = 0.1625
 \]
 
-$SE(b_0)$ represents the variability in expected winning speed for races run in 1896, between different samples of 122 races.   
+$SE(b_0)$ represents the variability in expected winning speed in 1896, between different samples of 122 races that might have been run by these horses under similar conditions.    
+
 
 
 \[
 SE(b_1)=\sqrt{\frac{s^2}{\sum(x_i-\bar{x})^2}}=\sqrt{\frac{0.9032^2}{151310.5}} = 0.0023219
 \]
 
-$SE(b_1)$ represents the variability in rate of change in winning speed per year, between different samples of 122 races.    
+$SE(b_1)$ represents the variability in rate of change in winning speed per year, between different samples of 122 races that might have been run by these horses under similar conditions.    
 
 **Hypothesis Test for Intercept Line**
 
-**Null Hypothesis:** The average winning speed among all races similar to the Kentucky Derby, run in 1896 is 0. ($\beta_0=0$).   
+**Null Hypothesis:** The average winning speed among all races that might have been run by these horses, under similar conditions, in 1896 is 0. ($\beta_0=0$).   
 
-**Alternative Hypothesis:** The average winning speed among all races similar to the Kentucky Derby, run in 1896 is not 0. ($\beta_0 \neq 0$).  
+**Alternative Hypothesis:** The average winning speed among all races that might have been run by these horses, under similar conditions, in 1896 is not 0. ($\beta_0 \neq 0$).  
 
 Obviously, a horse that wins a race will not have a running speed of 0, so this is not a sensible hypothesis test.       
 
 **Hypothesis Test for pH Line**
 
-**Null Hypothesis:** There is no relationship between year and average winning speed, i.e., average winning speed does not change over time. ($\beta_1=0$).   
+**Null Hypothesis:** There is no relationship between year and average winning speed, i.e., average winning speed does not change over time among all races that might have been run by these horses under similar conditions. ($\beta_1=0$).   
 
-**Alternative Hypothesis:** There is a relationship between year and average winning speed, i.e., average winning speed does change over time. ($\beta_1 \neq 0$).  
+**Alternative Hypothesis:** There is a relationship between year and average winning speed, i.e., average winning speed does change over time among all races that might have been run by these horses under similar conditions. ($\beta_1 \neq 0$).  
 
 **Test Statistic**: $t=\frac{{b_j}}{\text{SE}(b_j)} = \frac{-0.02612601}{0.002322013} = 11.25$ 
 
@@ -333,7 +338,7 @@ The residual plots help tell us what trends/relationships our model is missing, 
 - The lower left plot, Scale-Location, can be used to check the Equal Variance assumption.  Positive or negative trends across the fitted values indicate variability that is not constant.
 - The lower right plot, Residuals vs. Leverage, can be used to check for influential points.  Points with high leverage (having unusual values of the predictors) and/or high absolute residuals can have an undue influence on estimates of model parameters.  
 
-There is typically no residual plot, to evaluate the Independence assumption. Evidence for lack of independence comes from knowing about the study design and methods of data collection.  In this case, with a new field of horses each year, the assumption of independence is pretty reasonable.  
+There is typically no residual plot to evaluate the Independence assumption. Evidence for lack of independence comes from knowing about the study design and methods of data collection.  In this case, with a new field of horses each year, the assumption of independence is pretty reasonable.  
 
 
 
