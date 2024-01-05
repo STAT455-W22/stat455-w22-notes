@@ -935,14 +935,16 @@ sum(M5$residuals^2)
 * a) standard errors     
 * b) t-statistics     
 * c) residual standard error     
-* d) $R^2$ F-statistic     
+* d) $R^2$     
+* e) F-statistic     
 
 **For model M5, show how to calculate each of the following quantities that appear in the model summary output, using the information given.**    
 
 * standard errors     
 * t-statistics     
 * residual standard error     
-* $R^2$ F-statistic     
+* $R^2$   
+* F-statistic     
 
 
 ### 5. Interpret standard errors, t-statistics, residual standard error, $R^2$, and F-statistics in a LLSR model's R output.  {-}        
