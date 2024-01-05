@@ -8,9 +8,9 @@ fig:resid2q
 fig:unnamed-chunk-12
 fig:unnamed-chunk-20
 fig:unnamed-chunk-22
-fig:unnamed-chunk-42
-fig:unnamed-chunk-54
-fig:unnamed-chunk-158
+fig:unnamed-chunk-41
+fig:unnamed-chunk-53
+fig:unnamed-chunk-157
 fig:philippinesmap
 fig:OLSpois
 fig:totalPoisByAge
@@ -57,6 +57,7 @@ goodness-of-fit-tests
 anova-f-statistic
 final-model-residual-plots
 overall-conclusions
+practice-questions
 introduction-to-correlated-data
 introduction-to-correlated-data-1
 weight-gain-in-mice-experiment-design-1
