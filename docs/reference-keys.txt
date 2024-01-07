@@ -8,9 +8,13 @@ fig:resid2q
 fig:unnamed-chunk-12
 fig:unnamed-chunk-20
 fig:unnamed-chunk-22
-fig:unnamed-chunk-41
-fig:unnamed-chunk-53
-fig:unnamed-chunk-157
+fig:unnamed-chunk-42
+fig:unnamed-chunk-54
+fig:unnamed-chunk-77
+fig:unnamed-chunk-79
+fig:unnamed-chunk-80
+fig:unnamed-chunk-82
+fig:unnamed-chunk-171
 fig:philippinesmap
 fig:OLSpois
 fig:totalPoisByAge
@@ -95,6 +99,7 @@ graphical-analysis-for-experiment-3
 an-inappropriate-model-for-the-3rd-design
 a-more-appropriate-model-for-experiment-3
 comparison-of-llsr-and-lme-models
+practice-questions-1
 multilevel-models
 music-performance-anxiety-study-data-and-exploratory-analysis
 description-of-the-study

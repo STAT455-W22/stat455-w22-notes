@@ -930,21 +930,31 @@ summary(M5)
 sum(M5$residuals^2)
 ```
 
-**For model M4, show how to calculate each of the following quantities that appear in the model summary output, using the information given.**     
+**a) For model M4, show how to calculate each of the following quantities that appear in the model summary output, using the information given.**     
 
-* a) standard errors     
-* b) t-statistics     
-* c) residual standard error     
-* d) $R^2$     
-* e) F-statistic     
+* standard errors     
+* t-statistics     
+* residual standard error     
+* $R^2$     
+* F-statistic     
 
-**For model M5, show how to calculate each of the following quantities that appear in the model summary output, using the information given.**    
+**b) For model M5, show how to calculate each of the following quantities that appear in the model summary output, using the information given.**    
 
 * standard errors     
 * t-statistics     
 * residual standard error     
 * $R^2$   
 * F-statistic     
+
+c) Suppose that someone accidentally duplicated the dataset and fit a model of the form of model M4. Thus, the new dataset would contain 600 films, with each of the original 300 films included twice. How would each of the following statistics compare to those calculated in Model M5. State whether they would increase, decrease, or stay the same.     
+
+* standard errors     
+* t-statistics     
+* residual standard error     
+* $R^2$   
+* F-statistic   
+
+
 
 
 ### 5. Interpret standard errors, t-statistics, residual standard error, $R^2$, and F-statistics in a LLSR model's R output.  {-}        
@@ -971,4 +981,17 @@ d) Suppose that we were to take two different samples of size 300 movies and fit
 
 e) Suppose that we were to take two different films, produced in the same year, that both passed the Bechdel test. Would it be unusual for their ROI's to differ by 0.5? By 1? By 10? Explain your answer.     
 
+<!--
+### Practice Advanced Tasks
+
+a) Explain why we cannot assess the appropriateness of the normality assumption by looking only at a histogram of the response variable. For example, why shouldn't we conclude that the normality assumption in model M1 above is inappropriate, based on the fact the the histogram below is right-skewed?    
+
+```{r}
+ggplot(data=Bechdel, aes(x=totalROI)) + geom_histogram(fill="blue")
+```
+
+
+b) 
+
+-->
 

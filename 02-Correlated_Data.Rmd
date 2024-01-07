@@ -645,8 +645,210 @@ Compared to the incorrect LLSR model, when we use the linear mixed effects model
 
 The mixed effects model suggests evidence of differences due to supplement, but not evidence of differences due to diet. This is the opposite of the incorrect LLSR model.   
 
+## Practice Questions
+
+```{r, echo=FALSE}
+plants <- read_csv("https://raw.githubusercontent.com/AndrewjSage/andrewjsage.github.io/master/Datasets/Plants.csv")
+```
+
+```{r, echo=FALSE}
+plants2 <- read_csv("https://raw.githubusercontent.com/AndrewjSage/andrewjsage.github.io/master/Datasets/Plants2.csv")
+```
+
+**Refer to the following scenarios to answer the questions in this section.**    
+
+
+**Scenario 1**   
+
+An experiment was conducted to compare the effects of two different fertilizers on plants. Twelve plants were grown in each of eight trays, for a total of 96 plants. Fertilizers were randomly assigned to entire trays, so that all plants in a tray received the same fertilizer, and each fertilizer was used on four different trays. The amount of fertilizer applied to each plant (in ounces) also varied between trays. Two trays received 2, oz, two received, 4 oz, two received 6 oz, and two received 8 oz. Plants in the same tray received the same amount of fertilizer. (See the diagram for an illustration.) The growth of each plant (in cm.) over a two week period was recorded.  
+
+**Scenario 1 Illustration**    
+
+The diagram shows values of the explanatory variables, brand and amount, but not the response variable, growth.   
+
+```{r, echo=FALSE, fig.cap="Plant Experiment Scenario 1", out.width = '75%'}
+knitr::include_graphics("Plants1.png")
+```
+
+The first few rows of the data are shown below. 
+
+```{r}
+head(plants)
+```
+
+A scatterplot showing growth by amount of fertilizer, brand, and tray is shown below. 
+
+```{r, fig.cap="Scenario 1"}
+ggplot(data=plants, aes(x=amount, y=growth, shape=factor(brand), color=factor(tray))) + geom_point() 
+```
+
+**Scenario 2**    
+
+Now consider a different version of the experiment in Question 2. In this version, the plants are planted in separate plots, which are then placed in the 8 trays. All 12 plants in each tray still receive the same brand of fertilizer, but the amount applied is randomly assigned to pots, so that within each tray, three pots get 2 oz, three get 4 oz, three get 6 oz, and three get 8 oz. (See illustration).    
+
+
+**Scenario 2 Illustration**    
+
+The diagram shows values of the explanatory variables, brand and amount, but not the response variable, growth.   
+
+
+```{r, echo=FALSE, fig.cap="Plant Experiment Scenario 2", out.width = '75%'}
+knitr::include_graphics("Plants2.png")
+```
+
+
+The first few rows of the data are shown below. 
+
+```{r}
+head(plants2)
+```
+
+A scatterplot showing growth by amount of fertilizer, brand, and tray in Scenario 2 is shown below. 
+
+
+```{r, fig.cap="Scenario 2"}
+ggplot(data=plants2, aes(x=amount, y=growth, shape=factor(brand), color=factor(tray))) + geom_point() 
+```
 
 
 
 
+
+### 7. Identify the response variable and fixed and random effects associated with a given set of data.   {-}
+
+Identify the response variable and all fixed and random effects in scenarios 1 and 2.   
+
+
+### 8. Interpret variance component estimates ($\sigma$ and $\sigma_u$) in linear mixed effects (LME) models.    {-}
+
+Let $Y_{ij}$ represent growth of plant $j$ in tray $i$. We will work with a random effects model of the form: 
+
+\[
+Y_{ij}  = \beta_{0}+\beta_1\textrm{Brand2}_{ij} + \alpha\textrm{Amount}_{ij} + t_{i} + \epsilon_{ij},
+\]
+
+ where $t_i\sim\mathcal{N}(0, \sigma^2_t)$, and $\epsilon_{ij} \sim\mathcal{N}(0, \sigma^2)$.  
+
+**a)** Explain, in words what $\sigma$ and $\sigma_t$ represent in this model.   
+
+**b)** 
+
+R output for Model M1 is shown below.   
+
+```{r}
+M1 <- lmer(data=plants, growth ~ factor(brand) + amount + (1|tray))
+summary(M1)
+```
+Give the estimates of $\sigma$ and $\sigma_u$. Which is bigger and what does that tell us?    
+
+
+### 10. Determine how standard errors in a LME model would compare to the standard errors we would get if we used a LLSR model on the same data.   {-} 
+  
+
+**a)** 
+
+In each of scenarios 1 and 2, suppose we inappropriately fit a LLSR model of the form  
+\[
+Y_{ij}  = \beta_{0}+\beta_1\textrm{Brand2}_{ij} + \alpha\textrm{Amount}_{ij}  + \epsilon_{ij}. 
+\]
+
+to the same data. For each scenario, state whether the standard errors associated with brand and amount would increase, decrease, or stay the same. How would this affect the p-value and the amount of evidence of effects associated with these variables?    
+
+
+**b)** 
+
+For the data in Scenario 1, we now create a dataset grouped by tray, with the average growth displayed for each tray. The data are displayed below.      
+
+```{r}
+plants_summary <- plants %>% group_by(tray) %>% summarize(brand=mean(brand),
+                                                          amount=mean(amount),
+                                                          growth=mean(growth), 
+                                                          N=n())
+plants_summary
+```
+
+If we fit a linear least squares regression model with brand and amount as explanatory variables, how would the estimates, standard errors, and p-values compare to those obtained from the LME model for Scenario 1?    
+
+**c)** 
+
+Explain why it would not make sense to group the data by tray and fit a LLSR model in scenario 2?    
+
+
+### 11. Determine how changes in sample size and/or experimental design will impact standard errors, confidence intervals, and p-values in a LME model. {-}      
+
+**a)** 
+
+In Scenario 1, explain why it is inappropriate to think of our sample size as being 96 plants in this scenario. What are the appropriate observational units, and what is the effective sample size for determining the effects of brand and amount?    
+
+**b)** 
+
+In Scenario 2, what is the effective sample size associated with brand variable? What about the amount variable?     
+
+**c)** 
+
+Consider the experimental designs in Questions 1 and 2. If you were designing the experiment and could choose either design, at equal cost, which would you choose? Why?
+
+
+### 9. Compare the size of different variance component estimates given a LME model and a small set of data (i.e. say whether $\sigma_u$, or $\sigma$ will be larger).    {-}      
+
+**a)** 
+
+Consider the simplified version of the plant experiment shown below. Here, there are no fixed effects, and we simply seek to estimate the average height of the plants and measure the amount of variability associated with plants and trays. **Now note that unlike the previous diagrams, the values of the response variable, growth, are shown.**   
+
+```{r, echo=FALSE}
+knitr::include_graphics("Plantsa.png")
+```
+
+Let $Y_{ij}$ represent growth of plant $j$ in tray $i$. (i=1, \ldots, 4 and j=1, \ldots, 6). We will work with a random effects model of the form: 
+
+\[
+Y_{ij}  = \beta_{0} + t_{i} + \epsilon_{ij},
+\]
+
+ where $t_i\sim\mathcal{N}(0, \sigma^2_t)$, and $\epsilon_{ij} \sim\mathcal{N}(0, \sigma^2)$.  
+ 
+Will $\sigma_t$ or $\sigma$ be larger? Explain your answer. (Don't actually try to calculate these, just answer based on the information given in the diagram)      
+
+
+
+**b)** 
+
+Answer the same question as in (a), for the following data. In this scenario, there are only 3 trays.    
+
+```{r, echo=FALSE}
+knitr::include_graphics("Plantsb.png")
+```
+
+
+**c)** 
+
+Consider Model 1 below, fit to data shown underneath it. State whether $\sigma_t$ or $\sigma$ will be larger? Explain your answer.
+
+Let $Y_{ij}$ represent growth of plant $j$ in tray $i$. 
+
+**Model 1:**    
+
+\[
+Y_{ij}  = \beta_{0} + t_{i} + \epsilon_{ij},
+\]
+
+ where $t_i\sim\mathcal{N}(0, \sigma^2_t)$, and $\epsilon_{ij} \sim\mathcal{N}(0, \sigma^2)$.  
+ 
+
+```{r, echo=FALSE}
+knitr::include_graphics("Plantsc.png")
+```
+
+**b)**
+
+Now suppose that Model 2 is fit to the same data. State whether $\sigma_t$ or $\sigma$ will be larger? Explain your answer.
+
+ 
+**Model 2:**    
+
+\[
+Y_{ij}  = \beta_{0} + \beta_1\text{Brand}_{ij} + t_{i} + \epsilon_{ij},
+\]
+
+where $t_i\sim\mathcal{N}(0, \sigma^2_t)$, and $\epsilon_{ij} \sim\mathcal{N}(0, \sigma^2)$.  
 
