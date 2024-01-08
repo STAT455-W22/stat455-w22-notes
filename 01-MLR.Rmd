@@ -817,7 +817,7 @@ $$
 **M2:**     
 
 $$
-\text{ROI}_{i}=\beta_{0}+\beta_{1}\textrm{YearSince1990}_{i}+\beta_{2}\textrm{Pass}_{i}+\beta_{3}\textrm{YearSince1990}_{i}\times\beta_{2}\textrm{Pass}_{i}+\epsilon_{i} \quad \textrm{where} \quad \epsilon_{i}\sim \textrm{N}(0,\sigma^2).
+\text{ROI}_{i}=\beta_{0}+\beta_{1}\textrm{YearSince1990}_{i}+\beta_{2}\textrm{Pass}_{i}+\beta_{3}\textrm{YearSince1990}_{i}\times\textrm{Pass}_{i}+\epsilon_{i} \quad \textrm{where} \quad \epsilon_{i}\sim \textrm{N}(0,\sigma^2).
 $$
 
 **M3:**  

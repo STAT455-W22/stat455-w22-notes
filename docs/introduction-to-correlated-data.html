@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 2 Introduction to Correlated Data | Stat 455: Advanced Statistical Modeling Notes</title>
   <meta name="description" content="Chapter 2 Introduction to Correlated Data | Stat 455: Advanced Statistical Modeling Notes" />
-  <meta name="generator" content="bookdown 0.31 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.37 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 2 Introduction to Correlated Data | Stat 455: Advanced Statistical Modeling Notes" />
   <meta property="og:type" content="book" />
@@ -22,7 +22,7 @@
 
 
 
-<meta name="date" content="2024-01-07" />
+<meta name="date" content="2024-01-08" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -120,6 +120,10 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -651,10 +655,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>Determine how standard errors in a LME model would compare to the standard errors we would get if we used a LLSR model on the same data.</p></li>
 <li><p>Determine how changes in sample size and/or experimental design will impact standard errors, confidence intervals, and p-values in a LME model.</p></li>
 </ol>
-<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="introduction-to-correlated-data.html#cb103-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb103-2"><a href="introduction-to-correlated-data.html#cb103-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lme4)</span>
-<span id="cb103-3"><a href="introduction-to-correlated-data.html#cb103-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lmerTest)</span>
-<span id="cb103-4"><a href="introduction-to-correlated-data.html#cb103-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span></code></pre></div>
+<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="introduction-to-correlated-data.html#cb103-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb103-2"><a href="introduction-to-correlated-data.html#cb103-2" tabindex="-1"></a><span class="fu">library</span>(lme4)</span>
+<span id="cb103-3"><a href="introduction-to-correlated-data.html#cb103-3" tabindex="-1"></a><span class="fu">library</span>(lmerTest)</span>
+<span id="cb103-4"><a href="introduction-to-correlated-data.html#cb103-4" tabindex="-1"></a><span class="fu">library</span>(knitr)</span></code></pre></div>
 <div id="introduction-to-correlated-data-1" class="section level2 hasAnchor" number="2.1">
 <h2><span class="header-section-number">2.1</span> Introduction to Correlated Data<a href="introduction-to-correlated-data.html#introduction-to-correlated-data-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div id="weight-gain-in-mice-experiment-design-1" class="section level3 hasAnchor" number="2.1.1">
@@ -671,7 +675,7 @@ Figure 2.1: Mouse Experiment Version 1
 <div id="mice-experiment-1-data" class="section level3 hasAnchor" number="2.1.2">
 <h3><span class="header-section-number">2.1.2</span> Mice Experiment 1 Data<a href="introduction-to-correlated-data.html#mice-experiment-1-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The first 10 rows of the dataset look like this:</p>
-<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="introduction-to-correlated-data.html#cb104-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(mice,<span class="dv">10</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="introduction-to-correlated-data.html#cb104-1" tabindex="-1"></a><span class="fu">head</span>(mice,<span class="dv">10</span>)</span></code></pre></div>
 <pre><code>##    litter diet weight_gain
 ## 1       1    A -0.03526041
 ## 2       1    B -0.06841666
@@ -689,9 +693,9 @@ Figure 2.1: Mouse Experiment Version 1
 <p>Let’s temporarily ignore the fact that some mice came from the same litter, and treat all observations as independent.</p>
 <p>The plot below shows the weight gain (or loss) for each of the mice, by diet. The red dots and connecting lines show the mean weight gain for each diet.</p>
 <p>The ensuing table shows the mean and standard deviation in weight gain for each of the three diets.</p>
-<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="introduction-to-correlated-data.html#cb106-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>mice, <span class="fu">aes</span>(<span class="at">x=</span><span class="fu">factor</span>(diet), <span class="at">y=</span>weight_gain))  <span class="sc">+</span> <span class="fu">geom_point</span>()  <span class="sc">+</span> </span>
-<span id="cb106-2"><a href="introduction-to-correlated-data.html#cb106-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun=</span><span class="st">&quot;mean&quot;</span>, <span class="at">geom=</span><span class="st">&quot;line&quot;</span>, <span class="fu">aes</span>(<span class="at">group=</span><span class="fu">factor</span>(<span class="dv">1</span>)))  <span class="sc">+</span></span>
-<span id="cb106-3"><a href="introduction-to-correlated-data.html#cb106-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun=</span><span class="st">&quot;mean&quot;</span>, <span class="at">geom=</span><span class="st">&quot;point&quot;</span>, <span class="at">color=</span><span class="st">&quot;red&quot;</span>, <span class="at">size=</span><span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="introduction-to-correlated-data.html#cb106-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>mice, <span class="fu">aes</span>(<span class="at">x=</span><span class="fu">factor</span>(diet), <span class="at">y=</span>weight_gain))  <span class="sc">+</span> <span class="fu">geom_point</span>()  <span class="sc">+</span> </span>
+<span id="cb106-2"><a href="introduction-to-correlated-data.html#cb106-2" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun=</span><span class="st">&quot;mean&quot;</span>, <span class="at">geom=</span><span class="st">&quot;line&quot;</span>, <span class="fu">aes</span>(<span class="at">group=</span><span class="fu">factor</span>(<span class="dv">1</span>)))  <span class="sc">+</span></span>
+<span id="cb106-3"><a href="introduction-to-correlated-data.html#cb106-3" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun=</span><span class="st">&quot;mean&quot;</span>, <span class="at">geom=</span><span class="st">&quot;point&quot;</span>, <span class="at">color=</span><span class="st">&quot;red&quot;</span>, <span class="at">size=</span><span class="dv">2</span>)</span></code></pre></div>
 <p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-45-1.png" width="576" /></p>
 <p><strong>Question:</strong></p>
 <p>Based on this graph, do you think there is evidence of diets have an effect on weight gain in mice? Why or why not?</p>
@@ -700,23 +704,23 @@ Figure 2.1: Mouse Experiment Version 1
 <h3><span class="header-section-number">2.1.4</span> A More Informed Graphical Analysis<a href="introduction-to-correlated-data.html#a-more-informed-graphical-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>So far, we’ve ignored the fact that some of the mice came from the same litter. Now, let’s take litter into account. The figure below colors the mice by litter.</p>
 <p>The lines represent the average weight gain (or loss) in each litter.</p>
-<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="introduction-to-correlated-data.html#cb107-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>mice, <span class="fu">aes</span>(<span class="at">x=</span><span class="fu">factor</span>(diet), <span class="at">y=</span>weight_gain, <span class="at">color=</span><span class="fu">factor</span>(litter))) <span class="sc">+</span> </span>
-<span id="cb107-2"><a href="introduction-to-correlated-data.html#cb107-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span>  <span class="fu">stat_summary</span>(<span class="at">fun=</span><span class="st">&quot;mean&quot;</span>, <span class="at">geom=</span><span class="st">&quot;line&quot;</span>, <span class="fu">aes</span>(<span class="at">group=</span><span class="fu">factor</span>(litter)))</span></code></pre></div>
+<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="introduction-to-correlated-data.html#cb107-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>mice, <span class="fu">aes</span>(<span class="at">x=</span><span class="fu">factor</span>(diet), <span class="at">y=</span>weight_gain, <span class="at">color=</span><span class="fu">factor</span>(litter))) <span class="sc">+</span> </span>
+<span id="cb107-2"><a href="introduction-to-correlated-data.html#cb107-2" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span>  <span class="fu">stat_summary</span>(<span class="at">fun=</span><span class="st">&quot;mean&quot;</span>, <span class="at">geom=</span><span class="st">&quot;line&quot;</span>, <span class="fu">aes</span>(<span class="at">group=</span><span class="fu">factor</span>(litter)))</span></code></pre></div>
 <p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-46-1.png" width="576" /></p>
 <p>It may be helpful to examine each litter individually.</p>
-<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="introduction-to-correlated-data.html#cb108-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>mice, <span class="fu">aes</span>(<span class="at">x=</span><span class="fu">factor</span>(diet), <span class="at">y=</span>weight_gain, <span class="at">color=</span><span class="fu">factor</span>(litter))) <span class="sc">+</span> </span>
-<span id="cb108-2"><a href="introduction-to-correlated-data.html#cb108-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()  <span class="sc">+</span> </span>
-<span id="cb108-3"><a href="introduction-to-correlated-data.html#cb108-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(.<span class="sc">~</span>litter, <span class="at">scales =</span> <span class="st">&quot;free&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb108-4"><a href="introduction-to-correlated-data.html#cb108-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun=</span><span class="st">&quot;mean&quot;</span>, <span class="at">geom=</span><span class="st">&quot;line&quot;</span>, <span class="fu">aes</span>(<span class="at">group=</span><span class="fu">factor</span>(litter)))</span></code></pre></div>
+<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="introduction-to-correlated-data.html#cb108-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>mice, <span class="fu">aes</span>(<span class="at">x=</span><span class="fu">factor</span>(diet), <span class="at">y=</span>weight_gain, <span class="at">color=</span><span class="fu">factor</span>(litter))) <span class="sc">+</span> </span>
+<span id="cb108-2"><a href="introduction-to-correlated-data.html#cb108-2" tabindex="-1"></a>  <span class="fu">geom_point</span>()  <span class="sc">+</span> </span>
+<span id="cb108-3"><a href="introduction-to-correlated-data.html#cb108-3" tabindex="-1"></a>  <span class="fu">facet_grid</span>(.<span class="sc">~</span>litter, <span class="at">scales =</span> <span class="st">&quot;free&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb108-4"><a href="introduction-to-correlated-data.html#cb108-4" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun=</span><span class="st">&quot;mean&quot;</span>, <span class="at">geom=</span><span class="st">&quot;line&quot;</span>, <span class="fu">aes</span>(<span class="at">group=</span><span class="fu">factor</span>(litter)))</span></code></pre></div>
 <p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-47-1.png" width="576" /></p>
 <p><strong>Question:</strong></p>
 <p>Based on the information about litters, do your thoughts about whether diets have an effect on weight gain in mice change? Does there appear to be stronger evidence of differences between groups? Weaker? Same?</p>
 </div>
 <div id="table-of-mean-weight-by-diet" class="section level3 hasAnchor" number="2.1.5">
 <h3><span class="header-section-number">2.1.5</span> Table of Mean Weight By Diet<a href="introduction-to-correlated-data.html#table-of-mean-weight-by-diet" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb109-1"><a href="introduction-to-correlated-data.html#cb109-1" aria-hidden="true" tabindex="-1"></a>mouse_groups <span class="ot">&lt;-</span> mice <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(diet)<span class="sc">%&gt;%</span> </span>
-<span id="cb109-2"><a href="introduction-to-correlated-data.html#cb109-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">Mean_Weight=</span><span class="fu">mean</span>(weight_gain), <span class="at">SD_Weight =</span> <span class="fu">sd</span>(weight_gain), <span class="at">N=</span><span class="fu">n</span>())</span>
-<span id="cb109-3"><a href="introduction-to-correlated-data.html#cb109-3" aria-hidden="true" tabindex="-1"></a>mouse_groups</span></code></pre></div>
+<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb109-1"><a href="introduction-to-correlated-data.html#cb109-1" tabindex="-1"></a>mouse_groups <span class="ot">&lt;-</span> mice <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(diet)<span class="sc">%&gt;%</span> </span>
+<span id="cb109-2"><a href="introduction-to-correlated-data.html#cb109-2" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">Mean_Weight=</span><span class="fu">mean</span>(weight_gain), <span class="at">SD_Weight =</span> <span class="fu">sd</span>(weight_gain), <span class="at">N=</span><span class="fu">n</span>())</span>
+<span id="cb109-3"><a href="introduction-to-correlated-data.html#cb109-3" tabindex="-1"></a>mouse_groups</span></code></pre></div>
 <pre><code>## # A tibble: 3 × 4
 ##   diet  Mean_Weight SD_Weight     N
 ##   &lt;chr&gt;       &lt;dbl&gt;     &lt;dbl&gt; &lt;int&gt;
@@ -726,9 +730,9 @@ Figure 2.1: Mouse Experiment Version 1
 </div>
 <div id="table-of-mean-weight-by-diet-and-litter" class="section level3 hasAnchor" number="2.1.6">
 <h3><span class="header-section-number">2.1.6</span> Table of Mean Weight By Diet and Litter<a href="introduction-to-correlated-data.html#table-of-mean-weight-by-diet-and-litter" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="introduction-to-correlated-data.html#cb111-1" aria-hidden="true" tabindex="-1"></a>mouse_groups <span class="ot">&lt;-</span> mice <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(diet, litter)<span class="sc">%&gt;%</span> </span>
-<span id="cb111-2"><a href="introduction-to-correlated-data.html#cb111-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">Mean_Weight=</span><span class="fu">mean</span>(weight_gain), <span class="at">SD_Weight =</span> <span class="fu">sd</span>(weight_gain), <span class="at">N=</span><span class="fu">n</span>())</span>
-<span id="cb111-3"><a href="introduction-to-correlated-data.html#cb111-3" aria-hidden="true" tabindex="-1"></a>mouse_groups</span></code></pre></div>
+<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="introduction-to-correlated-data.html#cb111-1" tabindex="-1"></a>mouse_groups <span class="ot">&lt;-</span> mice <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(diet, litter)<span class="sc">%&gt;%</span> </span>
+<span id="cb111-2"><a href="introduction-to-correlated-data.html#cb111-2" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">Mean_Weight=</span><span class="fu">mean</span>(weight_gain), <span class="at">SD_Weight =</span> <span class="fu">sd</span>(weight_gain), <span class="at">N=</span><span class="fu">n</span>())</span>
+<span id="cb111-3"><a href="introduction-to-correlated-data.html#cb111-3" tabindex="-1"></a>mouse_groups</span></code></pre></div>
 <pre><code>## # A tibble: 18 × 5
 ## # Groups:   diet [3]
 ##    diet  litter Mean_Weight SD_Weight     N
@@ -769,8 +773,8 @@ t= \frac{\bar{x}_1-\bar{x}_2}{\textrm{SE}(\bar{x}_1-\bar{x}_2)}=\frac{\bar{x}_1-
 <h3><span class="header-section-number">2.1.8</span> An Improper Statistical Analysis<a href="introduction-to-correlated-data.html#an-improper-statistical-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>We’ve seen graphically, and in table form, how accounting for litter impacts our ability to discern differences between diets. Now, let’s look at how this happens in a statistical model.</p>
 <p>If we ignore the fact that some mice are from the same litter, and wrongly treat them as independent, we might use an ordinary linear least squares regression model.</p>
-<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb113-1"><a href="introduction-to-correlated-data.html#cb113-1" aria-hidden="true" tabindex="-1"></a>M_LLSR <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data=</span>mice, weight_gain<span class="sc">~</span><span class="fu">factor</span>(diet))</span>
-<span id="cb113-2"><a href="introduction-to-correlated-data.html#cb113-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(M_LLSR)<span class="sc">$</span>coefficients</span></code></pre></div>
+<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb113-1"><a href="introduction-to-correlated-data.html#cb113-1" tabindex="-1"></a>M_LLSR <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data=</span>mice, weight_gain<span class="sc">~</span><span class="fu">factor</span>(diet))</span>
+<span id="cb113-2"><a href="introduction-to-correlated-data.html#cb113-2" tabindex="-1"></a><span class="fu">summary</span>(M_LLSR)<span class="sc">$</span>coefficients</span></code></pre></div>
 <pre><code>##                  Estimate Std. Error    t value    Pr(&gt;|t|)
 ## (Intercept)    0.05798494 0.01696450  3.4180166 0.001693572
 ## factor(diet)B -0.02394185 0.02399142 -0.9979334 0.325573272
@@ -781,8 +785,8 @@ t= \frac{\bar{x}_1-\bar{x}_2}{\textrm{SE}(\bar{x}_1-\bar{x}_2)}=\frac{\bar{x}_1-
 <div id="a-more-appropriate-statistical-analysis" class="section level3 hasAnchor" number="2.1.9">
 <h3><span class="header-section-number">2.1.9</span> A More Appropriate Statistical Analysis<a href="introduction-to-correlated-data.html#a-more-appropriate-statistical-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The following command fits a linear mixed effects model (or multilevel model) that accounts for correlation between mice in the same litter.</p>
-<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="introduction-to-correlated-data.html#cb115-1" aria-hidden="true" tabindex="-1"></a>M_LME <span class="ot">&lt;-</span> <span class="fu">lmer</span>(<span class="at">data=</span>mice, weight_gain<span class="sc">~</span><span class="fu">factor</span>(diet) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> <span class="fu">factor</span>(litter)))</span>
-<span id="cb115-2"><a href="introduction-to-correlated-data.html#cb115-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(M_LME)<span class="sc">$</span>coeff</span></code></pre></div>
+<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="introduction-to-correlated-data.html#cb115-1" tabindex="-1"></a>M_LME <span class="ot">&lt;-</span> <span class="fu">lmer</span>(<span class="at">data=</span>mice, weight_gain<span class="sc">~</span><span class="fu">factor</span>(diet) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> <span class="fu">factor</span>(litter)))</span>
+<span id="cb115-2"><a href="introduction-to-correlated-data.html#cb115-2" tabindex="-1"></a><span class="fu">summary</span>(M_LME)<span class="sc">$</span>coeff</span></code></pre></div>
 <pre><code>##                  Estimate  Std. Error        df   t value          Pr(&gt;|t|)
 ## (Intercept)    0.05798494 0.025057550  5.046906  2.314071 0.068074390235216
 ## factor(diet)B -0.02394185 0.002962717 28.000001 -8.081043 0.000000008464648
@@ -998,8 +1002,8 @@ Y_{ij}  = \beta_{0}+\beta_{1}\textrm{DietB}_{ij} +\beta_{2}\textrm{DietC}_{ij} +
 <h3><span class="header-section-number">2.2.5</span> Fitting the Model in R<a href="introduction-to-correlated-data.html#fitting-the-model-in-r" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>To fit a linear mixed effects model in R, we use the <code>lmer()</code> command that is part of the <code>lme4</code> package. It is also helpful to load the <code>lmerTest</code> package, in order to obtain p-values in the output.</p>
 <p>To add a random effect for a variable add <code>(1 | variable_name)</code> in the model.</p>
-<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb117-1"><a href="introduction-to-correlated-data.html#cb117-1" aria-hidden="true" tabindex="-1"></a>M_LME <span class="ot">&lt;-</span> <span class="fu">lmer</span>(<span class="at">data=</span>mice, weight_gain<span class="sc">~</span><span class="fu">factor</span>(diet) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> <span class="fu">factor</span>(litter)))</span>
-<span id="cb117-2"><a href="introduction-to-correlated-data.html#cb117-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(M_LME)</span></code></pre></div>
+<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb117-1"><a href="introduction-to-correlated-data.html#cb117-1" tabindex="-1"></a>M_LME <span class="ot">&lt;-</span> <span class="fu">lmer</span>(<span class="at">data=</span>mice, weight_gain<span class="sc">~</span><span class="fu">factor</span>(diet) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> <span class="fu">factor</span>(litter)))</span>
+<span id="cb117-2"><a href="introduction-to-correlated-data.html#cb117-2" tabindex="-1"></a><span class="fu">summary</span>(M_LME)</span></code></pre></div>
 <pre><code>## Linear mixed model fit by REML. t-tests use Satterthwaite&#39;s method [
 ## lmerModLmerTest]
 ## Formula: weight_gain ~ factor(diet) + (1 | factor(litter))
@@ -1049,8 +1053,8 @@ There is more variability in weight between different litters than between mice 
 <div id="why-not-fixed-effect-for-litter" class="section level3 hasAnchor" number="2.2.6">
 <h3><span class="header-section-number">2.2.6</span> Why Not Fixed Effect for Litter?<a href="introduction-to-correlated-data.html#why-not-fixed-effect-for-litter" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Why would a model like the following, which uses litter as an expanatory variable in Example 1, not be very useful?</p>
-<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="introduction-to-correlated-data.html#cb119-1" aria-hidden="true" tabindex="-1"></a>M_fixed_litter <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data=</span>mice, weight_gain<span class="sc">~</span> <span class="fu">factor</span>(diet) <span class="sc">+</span> <span class="fu">factor</span>(litter))</span>
-<span id="cb119-2"><a href="introduction-to-correlated-data.html#cb119-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(M_fixed_litter)</span></code></pre></div>
+<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="introduction-to-correlated-data.html#cb119-1" tabindex="-1"></a>M_fixed_litter <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data=</span>mice, weight_gain<span class="sc">~</span> <span class="fu">factor</span>(diet) <span class="sc">+</span> <span class="fu">factor</span>(litter))</span>
+<span id="cb119-2"><a href="introduction-to-correlated-data.html#cb119-2" tabindex="-1"></a><span class="fu">summary</span>(M_fixed_litter)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = weight_gain ~ factor(diet) + factor(litter), data = mice)
@@ -1100,7 +1104,7 @@ Figure 2.2: Mouse Experiment Version 2
 <div id="mice-experiment-2-data" class="section level3 hasAnchor" number="2.3.2">
 <h3><span class="header-section-number">2.3.2</span> Mice Experiment 2 Data<a href="introduction-to-correlated-data.html#mice-experiment-2-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The first 15 rows of the dataset look like this:</p>
-<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb121-1"><a href="introduction-to-correlated-data.html#cb121-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(mice2,<span class="dv">15</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb121-1"><a href="introduction-to-correlated-data.html#cb121-1" tabindex="-1"></a><span class="fu">head</span>(mice2,<span class="dv">15</span>)</span></code></pre></div>
 <pre><code>##    litter diet   weight_gain
 ## 1       1    A -0.0352604099
 ## 2       1    A -0.0474166604
@@ -1121,22 +1125,22 @@ Figure 2.2: Mouse Experiment Version 2
 <div id="a-naive-graphical-analysis-for-experiment-2" class="section level3 hasAnchor" number="2.3.3">
 <h3><span class="header-section-number">2.3.3</span> A Naive Graphical Analysis for Experiment 2<a href="introduction-to-correlated-data.html#a-naive-graphical-analysis-for-experiment-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Again, we’ll temporarily ignore the fact that mice come from the same litter and treat all observations as independent.</p>
-<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="introduction-to-correlated-data.html#cb123-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>mice2, <span class="fu">aes</span>(<span class="at">x=</span><span class="fu">factor</span>(diet), <span class="at">y=</span>weight_gain))  <span class="sc">+</span> <span class="fu">geom_point</span>()  <span class="sc">+</span> </span>
-<span id="cb123-2"><a href="introduction-to-correlated-data.html#cb123-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun=</span><span class="st">&quot;mean&quot;</span>, <span class="at">geom=</span><span class="st">&quot;line&quot;</span>, <span class="fu">aes</span>(<span class="at">group=</span><span class="fu">factor</span>(<span class="dv">1</span>)))<span class="sc">+</span>  </span>
-<span id="cb123-3"><a href="introduction-to-correlated-data.html#cb123-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun=</span><span class="st">&quot;mean&quot;</span>, <span class="at">geom=</span><span class="st">&quot;point&quot;</span>, <span class="at">color=</span><span class="st">&quot;red&quot;</span>, <span class="at">size=</span><span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="introduction-to-correlated-data.html#cb123-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>mice2, <span class="fu">aes</span>(<span class="at">x=</span><span class="fu">factor</span>(diet), <span class="at">y=</span>weight_gain))  <span class="sc">+</span> <span class="fu">geom_point</span>()  <span class="sc">+</span> </span>
+<span id="cb123-2"><a href="introduction-to-correlated-data.html#cb123-2" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun=</span><span class="st">&quot;mean&quot;</span>, <span class="at">geom=</span><span class="st">&quot;line&quot;</span>, <span class="fu">aes</span>(<span class="at">group=</span><span class="fu">factor</span>(<span class="dv">1</span>)))<span class="sc">+</span>  </span>
+<span id="cb123-3"><a href="introduction-to-correlated-data.html#cb123-3" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun=</span><span class="st">&quot;mean&quot;</span>, <span class="at">geom=</span><span class="st">&quot;point&quot;</span>, <span class="at">color=</span><span class="st">&quot;red&quot;</span>, <span class="at">size=</span><span class="dv">2</span>)</span></code></pre></div>
 <p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-57-1.png" width="576" /></p>
 </div>
 <div id="a-more-informed-graphical-analysis-for-experiment-2" class="section level3 hasAnchor" number="2.3.4">
 <h3><span class="header-section-number">2.3.4</span> A More Informed Graphical Analysis for Experiment 2<a href="introduction-to-correlated-data.html#a-more-informed-graphical-analysis-for-experiment-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Now, we’ll account for the fact that mice in the same litter got the same diets. The plot below adds color to show litter.</p>
-<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="introduction-to-correlated-data.html#cb124-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>mice2, <span class="fu">aes</span>(<span class="at">x=</span><span class="fu">factor</span>(diet), <span class="at">y=</span>weight_gain, <span class="at">color=</span><span class="fu">factor</span>(litter))) <span class="sc">+</span> <span class="fu">geom_point</span>() </span></code></pre></div>
+<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="introduction-to-correlated-data.html#cb124-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>mice2, <span class="fu">aes</span>(<span class="at">x=</span><span class="fu">factor</span>(diet), <span class="at">y=</span>weight_gain, <span class="at">color=</span><span class="fu">factor</span>(litter))) <span class="sc">+</span> <span class="fu">geom_point</span>() </span></code></pre></div>
 <p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-58-1.png" width="576" /></p>
 <p>Since diets were assigned to litters, not individual mice, it is the litters we should be comparing.</p>
 <p>When comparing diets, our observational units are litters, not individual mice. Since there are only 6 litters, our sample size is 6, rather than 36.</p>
 <p>Thus, the best graphical analysis would come from the following plot, which displays average weight for each litter:</p>
-<div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb125-1"><a href="introduction-to-correlated-data.html#cb125-1" aria-hidden="true" tabindex="-1"></a>Litters <span class="ot">&lt;-</span> mice2 <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(diet, litter)<span class="sc">%&gt;%</span> </span>
-<span id="cb125-2"><a href="introduction-to-correlated-data.html#cb125-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean_weight_gain=</span><span class="fu">mean</span>(weight_gain), <span class="at">N=</span><span class="fu">n</span>())</span>
-<span id="cb125-3"><a href="introduction-to-correlated-data.html#cb125-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(Litters)</span></code></pre></div>
+<div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb125-1"><a href="introduction-to-correlated-data.html#cb125-1" tabindex="-1"></a>Litters <span class="ot">&lt;-</span> mice2 <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(diet, litter)<span class="sc">%&gt;%</span> </span>
+<span id="cb125-2"><a href="introduction-to-correlated-data.html#cb125-2" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean_weight_gain=</span><span class="fu">mean</span>(weight_gain), <span class="at">N=</span><span class="fu">n</span>())</span>
+<span id="cb125-3"><a href="introduction-to-correlated-data.html#cb125-3" tabindex="-1"></a><span class="fu">head</span>(Litters)</span></code></pre></div>
 <pre><code>## # A tibble: 6 × 4
 ## # Groups:   diet [3]
 ##   diet  litter mean_weight_gain     N
@@ -1147,14 +1151,14 @@ Figure 2.2: Mouse Experiment Version 2
 ## 4 B          4          0.0788      6
 ## 5 C          5          0.0994      6
 ## 6 C          6          0.0779      6</code></pre>
-<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb127-1"><a href="introduction-to-correlated-data.html#cb127-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>Litters, <span class="fu">aes</span>(<span class="at">x=</span><span class="fu">factor</span>(diet), <span class="at">y=</span>mean_weight_gain, <span class="at">color=</span><span class="fu">factor</span>(litter))) <span class="sc">+</span> <span class="fu">geom_point</span>() </span></code></pre></div>
+<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb127-1"><a href="introduction-to-correlated-data.html#cb127-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>Litters, <span class="fu">aes</span>(<span class="at">x=</span><span class="fu">factor</span>(diet), <span class="at">y=</span>mean_weight_gain, <span class="at">color=</span><span class="fu">factor</span>(litter))) <span class="sc">+</span> <span class="fu">geom_point</span>() </span></code></pre></div>
 <p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-60-1.png" width="576" /></p>
 </div>
 <div id="table-of-mean-weight-by-diet-for-experiment-2" class="section level3 hasAnchor" number="2.3.5">
 <h3><span class="header-section-number">2.3.5</span> Table of Mean Weight By Diet for Experiment 2<a href="introduction-to-correlated-data.html#table-of-mean-weight-by-diet-for-experiment-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="introduction-to-correlated-data.html#cb128-1" aria-hidden="true" tabindex="-1"></a>mouse_groups <span class="ot">&lt;-</span> mice2 <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(diet)<span class="sc">%&gt;%</span> </span>
-<span id="cb128-2"><a href="introduction-to-correlated-data.html#cb128-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">Mean_Weight=</span><span class="fu">mean</span>(weight_gain), <span class="at">SD_Weight =</span> <span class="fu">sd</span>(weight_gain), <span class="at">N=</span><span class="fu">n</span>())</span>
-<span id="cb128-3"><a href="introduction-to-correlated-data.html#cb128-3" aria-hidden="true" tabindex="-1"></a>mouse_groups</span></code></pre></div>
+<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="introduction-to-correlated-data.html#cb128-1" tabindex="-1"></a>mouse_groups <span class="ot">&lt;-</span> mice2 <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(diet)<span class="sc">%&gt;%</span> </span>
+<span id="cb128-2"><a href="introduction-to-correlated-data.html#cb128-2" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">Mean_Weight=</span><span class="fu">mean</span>(weight_gain), <span class="at">SD_Weight =</span> <span class="fu">sd</span>(weight_gain), <span class="at">N=</span><span class="fu">n</span>())</span>
+<span id="cb128-3"><a href="introduction-to-correlated-data.html#cb128-3" tabindex="-1"></a>mouse_groups</span></code></pre></div>
 <pre><code>## # A tibble: 3 × 4
 ##   diet  Mean_Weight SD_Weight     N
 ##   &lt;chr&gt;       &lt;dbl&gt;     &lt;dbl&gt; &lt;int&gt;
@@ -1167,9 +1171,9 @@ Figure 2.2: Mouse Experiment Version 2
 <div id="table-comparing-litters-means-by-diet-for-experiment-2" class="section level3 hasAnchor" number="2.3.6">
 <h3><span class="header-section-number">2.3.6</span> Table Comparing Litters Means by Diet for Experiment 2<a href="introduction-to-correlated-data.html#table-comparing-litters-means-by-diet-for-experiment-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>We now look at means and standard deviations between litter means, using the average rate in each litter as the response variable.</p>
-<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb130-1"><a href="introduction-to-correlated-data.html#cb130-1" aria-hidden="true" tabindex="-1"></a>litter_groups <span class="ot">&lt;-</span> Litters <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(diet)<span class="sc">%&gt;%</span> </span>
-<span id="cb130-2"><a href="introduction-to-correlated-data.html#cb130-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">Mean_Weight=</span><span class="fu">mean</span>(mean_weight_gain), <span class="at">SD_Weight =</span> <span class="fu">sd</span>(mean_weight_gain), <span class="at">N=</span><span class="fu">n</span>())</span>
-<span id="cb130-3"><a href="introduction-to-correlated-data.html#cb130-3" aria-hidden="true" tabindex="-1"></a>litter_groups</span></code></pre></div>
+<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb130-1"><a href="introduction-to-correlated-data.html#cb130-1" tabindex="-1"></a>litter_groups <span class="ot">&lt;-</span> Litters <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(diet)<span class="sc">%&gt;%</span> </span>
+<span id="cb130-2"><a href="introduction-to-correlated-data.html#cb130-2" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">Mean_Weight=</span><span class="fu">mean</span>(mean_weight_gain), <span class="at">SD_Weight =</span> <span class="fu">sd</span>(mean_weight_gain), <span class="at">N=</span><span class="fu">n</span>())</span>
+<span id="cb130-3"><a href="introduction-to-correlated-data.html#cb130-3" tabindex="-1"></a>litter_groups</span></code></pre></div>
 <pre><code>## # A tibble: 3 × 4
 ##   diet  Mean_Weight SD_Weight     N
 ##   &lt;chr&gt;       &lt;dbl&gt;     &lt;dbl&gt; &lt;int&gt;
@@ -1185,8 +1189,8 @@ Figure 2.2: Mouse Experiment Version 2
 Y_{ij}  = \beta_{0}+\beta_{1}\textrm{DietB}_{ij} +\beta_{2}\textrm{DietC}_{ij} + \epsilon_{ij},
 \]</span></p>
 <p>Output for such a model is shown below.</p>
-<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb132-1"><a href="introduction-to-correlated-data.html#cb132-1" aria-hidden="true" tabindex="-1"></a>M2_LLSR <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data=</span>mice2, weight_gain<span class="sc">~</span><span class="fu">factor</span>(diet))</span>
-<span id="cb132-2"><a href="introduction-to-correlated-data.html#cb132-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(M2_LLSR)</span></code></pre></div>
+<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb132-1"><a href="introduction-to-correlated-data.html#cb132-1" tabindex="-1"></a>M2_LLSR <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data=</span>mice2, weight_gain<span class="sc">~</span><span class="fu">factor</span>(diet))</span>
+<span id="cb132-2"><a href="introduction-to-correlated-data.html#cb132-2" tabindex="-1"></a><span class="fu">summary</span>(M2_LLSR)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = weight_gain ~ factor(diet), data = mice2)
@@ -1215,8 +1219,8 @@ Y_{ij}  = \beta_{0}+\beta_{1}\textrm{DietB}_{ij} +\beta_{2}\textrm{DietC}_{ij} +
 \]</span></p>
 <p>where <span class="math inline">\(l_i\sim\mathcal{N}(0, \sigma^2_l)\)</span>, and <span class="math inline">\(\epsilon_{ij} \sim\mathcal{N}(0, \sigma^2)\)</span></p>
 <p>Output for a model that accounts for correlation between mice in the same litter is shown.</p>
-<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb134-1"><a href="introduction-to-correlated-data.html#cb134-1" aria-hidden="true" tabindex="-1"></a>M2_LME <span class="ot">&lt;-</span> <span class="fu">lmer</span>(<span class="at">data=</span>mice2, weight_gain<span class="sc">~</span><span class="fu">factor</span>(diet) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> <span class="fu">factor</span>(litter)))</span>
-<span id="cb134-2"><a href="introduction-to-correlated-data.html#cb134-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(M2_LME)</span></code></pre></div>
+<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb134-1"><a href="introduction-to-correlated-data.html#cb134-1" tabindex="-1"></a>M2_LME <span class="ot">&lt;-</span> <span class="fu">lmer</span>(<span class="at">data=</span>mice2, weight_gain<span class="sc">~</span><span class="fu">factor</span>(diet) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> <span class="fu">factor</span>(litter)))</span>
+<span id="cb134-2"><a href="introduction-to-correlated-data.html#cb134-2" tabindex="-1"></a><span class="fu">summary</span>(M2_LME)</span></code></pre></div>
 <pre><code>## Linear mixed model fit by REML. t-tests use Satterthwaite&#39;s method [
 ## lmerModLmerTest]
 ## Formula: weight_gain ~ factor(diet) + (1 | factor(litter))
@@ -1261,8 +1265,8 @@ Y_{i}  = \beta_{0}+\beta_{1}\textrm{DietB}_{i} +\beta_{2}\textrm{DietC}_{i} + \e
 \]</span></p>
 <p>where <span class="math inline">\(\epsilon_{i} \sim\mathcal{N}(0, \sigma^2)\)</span></p>
 <p>Since it is reasonable to assume that litters are independent, we could use an ordinary LLSR model in this context.</p>
-<div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb136-1"><a href="introduction-to-correlated-data.html#cb136-1" aria-hidden="true" tabindex="-1"></a>M2_Means <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data=</span>Litters, mean_weight_gain<span class="sc">~</span><span class="fu">factor</span>(diet))</span>
-<span id="cb136-2"><a href="introduction-to-correlated-data.html#cb136-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(M2_Means)</span></code></pre></div>
+<div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb136-1"><a href="introduction-to-correlated-data.html#cb136-1" tabindex="-1"></a>M2_Means <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data=</span>Litters, mean_weight_gain<span class="sc">~</span><span class="fu">factor</span>(diet))</span>
+<span id="cb136-2"><a href="introduction-to-correlated-data.html#cb136-2" tabindex="-1"></a><span class="fu">summary</span>(M2_Means)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = mean_weight_gain ~ factor(diet), data = Litters)
@@ -1287,8 +1291,8 @@ Y_{i}  = \beta_{0}+\beta_{1}\textrm{DietB}_{i} +\beta_{2}\textrm{DietC}_{i} + \e
 <div id="fixed-effect-for-litter-in-experiment-2" class="section level3 hasAnchor" number="2.3.10">
 <h3><span class="header-section-number">2.3.10</span> Fixed Effect for Litter in Experiment 2<a href="introduction-to-correlated-data.html#fixed-effect-for-litter-in-experiment-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>If we try to treat litter as a fixed effect in Experiment 2, we would not even be able to estimate all of the parameters.</p>
-<div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb138-1"><a href="introduction-to-correlated-data.html#cb138-1" aria-hidden="true" tabindex="-1"></a>M2_fixed_litter <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data=</span>mice2, weight_gain<span class="sc">~</span> <span class="fu">factor</span>(diet) <span class="sc">+</span> <span class="fu">factor</span>(litter))</span>
-<span id="cb138-2"><a href="introduction-to-correlated-data.html#cb138-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(M2_fixed_litter)</span></code></pre></div>
+<div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb138-1"><a href="introduction-to-correlated-data.html#cb138-1" tabindex="-1"></a>M2_fixed_litter <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data=</span>mice2, weight_gain<span class="sc">~</span> <span class="fu">factor</span>(diet) <span class="sc">+</span> <span class="fu">factor</span>(litter))</span>
+<span id="cb138-2"><a href="introduction-to-correlated-data.html#cb138-2" tabindex="-1"></a><span class="fu">summary</span>(M2_fixed_litter)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = weight_gain ~ factor(diet) + factor(litter), data = mice2)
@@ -1348,7 +1352,7 @@ Y_{i}  = \beta_{0}+\beta_{1}\textrm{DietB}_{i} +\beta_{2}\textrm{DietC}_{i} + \e
 </div>
 <div id="experiment-3-data" class="section level3 hasAnchor" number="2.4.3">
 <h3><span class="header-section-number">2.4.3</span> Experiment 3 Data<a href="introduction-to-correlated-data.html#experiment-3-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb140-1"><a href="introduction-to-correlated-data.html#cb140-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(mice3,<span class="dv">15</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb140-1"><a href="introduction-to-correlated-data.html#cb140-1" tabindex="-1"></a><span class="fu">head</span>(mice3,<span class="dv">15</span>)</span></code></pre></div>
 <pre><code>##    litter diet supplement  weight_gain
 ## 1       1    A          1 -0.033260410
 ## 2       1    A          0 -0.047416660
@@ -1369,8 +1373,8 @@ Y_{i}  = \beta_{0}+\beta_{1}\textrm{DietB}_{i} +\beta_{2}\textrm{DietC}_{i} + \e
 <div id="graphical-analysis-for-experiment-3" class="section level3 hasAnchor" number="2.4.4">
 <h3><span class="header-section-number">2.4.4</span> Graphical Analysis for Experiment 3<a href="introduction-to-correlated-data.html#graphical-analysis-for-experiment-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>We use color to represent litter, and shape to represent supplement. We’ll use the argument <code>position=position_jitterdodge()</code> to stagger litters and supplement levels, which avoids overlap and makes the graph easier to read.</p>
-<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="introduction-to-correlated-data.html#cb142-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>mice3, <span class="fu">aes</span>(<span class="at">x=</span><span class="fu">factor</span>(diet), <span class="at">y=</span>weight_gain, <span class="at">color=</span><span class="fu">factor</span>(litter), </span>
-<span id="cb142-2"><a href="introduction-to-correlated-data.html#cb142-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">shape=</span><span class="fu">factor</span>(supplement))) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="at">position=</span><span class="fu">position_jitterdodge</span>())</span></code></pre></div>
+<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="introduction-to-correlated-data.html#cb142-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>mice3, <span class="fu">aes</span>(<span class="at">x=</span><span class="fu">factor</span>(diet), <span class="at">y=</span>weight_gain, <span class="at">color=</span><span class="fu">factor</span>(litter), </span>
+<span id="cb142-2"><a href="introduction-to-correlated-data.html#cb142-2" tabindex="-1"></a>       <span class="at">shape=</span><span class="fu">factor</span>(supplement))) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="at">position=</span><span class="fu">position_jitterdodge</span>())</span></code></pre></div>
 <p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-72-1.png" width="576" /></p>
 </div>
 <div id="an-inappropriate-model-for-the-3rd-design" class="section level3 hasAnchor" number="2.4.5">
@@ -1382,8 +1386,8 @@ Y_{ij}  = \beta_{0} + \alpha\textrm{Supplement}_i + \beta_{1}\textrm{DietB}_{ij}
 \]</span></p>
 <p>where <span class="math inline">\(\epsilon_{ij} \sim\mathcal{N}(0, \sigma^2)\)</span></p>
 <p>Output for such a model is shown below.</p>
-<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb143-1"><a href="introduction-to-correlated-data.html#cb143-1" aria-hidden="true" tabindex="-1"></a>M3_LLSR <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data=</span>mice3, weight_gain<span class="sc">~</span>supplement <span class="sc">+</span> <span class="fu">factor</span>(diet))</span>
-<span id="cb143-2"><a href="introduction-to-correlated-data.html#cb143-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(M3_LLSR)</span></code></pre></div>
+<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb143-1"><a href="introduction-to-correlated-data.html#cb143-1" tabindex="-1"></a>M3_LLSR <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data=</span>mice3, weight_gain<span class="sc">~</span>supplement <span class="sc">+</span> <span class="fu">factor</span>(diet))</span>
+<span id="cb143-2"><a href="introduction-to-correlated-data.html#cb143-2" tabindex="-1"></a><span class="fu">summary</span>(M3_LLSR)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = weight_gain ~ supplement + factor(diet), data = mice3)
@@ -1416,8 +1420,8 @@ Y_{ij}  = \beta_{0} + \alpha\textrm{Supplement}_i + \beta_{1}\textrm{DietB}_{ij}
 \]</span></p>
 <p>where <span class="math inline">\(l_i\sim\mathcal{N}(0, \sigma^2_l)\)</span>, and <span class="math inline">\(\epsilon_{ij} \sim\mathcal{N}(0, \sigma^2)\)</span></p>
 <p>Output for a model that accounts for correlation between mice in the same litter is shown.</p>
-<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb145-1"><a href="introduction-to-correlated-data.html#cb145-1" aria-hidden="true" tabindex="-1"></a>M3_LME <span class="ot">&lt;-</span> <span class="fu">lmer</span>(<span class="at">data=</span>mice3, weight_gain <span class="sc">~</span> supplement <span class="sc">+</span> <span class="fu">factor</span>(diet) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> <span class="fu">factor</span>(litter)))</span>
-<span id="cb145-2"><a href="introduction-to-correlated-data.html#cb145-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(M3_LME)</span></code></pre></div>
+<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb145-1"><a href="introduction-to-correlated-data.html#cb145-1" tabindex="-1"></a>M3_LME <span class="ot">&lt;-</span> <span class="fu">lmer</span>(<span class="at">data=</span>mice3, weight_gain <span class="sc">~</span> supplement <span class="sc">+</span> <span class="fu">factor</span>(diet) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> <span class="fu">factor</span>(litter)))</span>
+<span id="cb145-2"><a href="introduction-to-correlated-data.html#cb145-2" tabindex="-1"></a><span class="fu">summary</span>(M3_LME)</span></code></pre></div>
 <pre><code>## Linear mixed model fit by REML. t-tests use Satterthwaite&#39;s method [
 ## lmerModLmerTest]
 ## Formula: weight_gain ~ supplement + factor(diet) + (1 | factor(litter))
@@ -1488,7 +1492,7 @@ Figure 2.3: Plant Experiment Scenario 1
 </p>
 </div>
 <p>The first few rows of the data are shown below.</p>
-<div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb147-1"><a href="introduction-to-correlated-data.html#cb147-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(plants)</span></code></pre></div>
+<div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb147-1"><a href="introduction-to-correlated-data.html#cb147-1" tabindex="-1"></a><span class="fu">head</span>(plants)</span></code></pre></div>
 <pre><code>## # A tibble: 6 × 5
 ##    ...1  tray brand amount growth
 ##   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
@@ -1499,7 +1503,7 @@ Figure 2.3: Plant Experiment Scenario 1
 ## 5     5     1     1      2   3.28
 ## 6     6     1     1      2   2.94</code></pre>
 <p>A scatterplot showing growth by amount of fertilizer, brand, and tray is shown below.</p>
-<div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb149-1"><a href="introduction-to-correlated-data.html#cb149-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>plants, <span class="fu">aes</span>(<span class="at">x=</span>amount, <span class="at">y=</span>growth, <span class="at">shape=</span><span class="fu">factor</span>(brand), <span class="at">color=</span><span class="fu">factor</span>(tray))) <span class="sc">+</span> <span class="fu">geom_point</span>() </span></code></pre></div>
+<div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb149-1"><a href="introduction-to-correlated-data.html#cb149-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>plants, <span class="fu">aes</span>(<span class="at">x=</span>amount, <span class="at">y=</span>growth, <span class="at">shape=</span><span class="fu">factor</span>(brand), <span class="at">color=</span><span class="fu">factor</span>(tray))) <span class="sc">+</span> <span class="fu">geom_point</span>() </span></code></pre></div>
 <div class="figure"><span style="display:block;" id="fig:unnamed-chunk-79"></span>
 <img src="Stat-455-Notes_files/figure-html/unnamed-chunk-79-1.png" alt="Scenario 1" width="576" />
 <p class="caption">
@@ -1517,7 +1521,7 @@ Figure 2.5: Plant Experiment Scenario 2
 </p>
 </div>
 <p>The first few rows of the data are shown below.</p>
-<div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb150-1"><a href="introduction-to-correlated-data.html#cb150-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(plants2)</span></code></pre></div>
+<div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb150-1"><a href="introduction-to-correlated-data.html#cb150-1" tabindex="-1"></a><span class="fu">head</span>(plants2)</span></code></pre></div>
 <pre><code>## # A tibble: 6 × 5
 ##    ...1  tray brand amount growth
 ##   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
@@ -1528,7 +1532,7 @@ Figure 2.5: Plant Experiment Scenario 2
 ## 5     5     1     1      4   3.82
 ## 6     6     1     1      4   3.48</code></pre>
 <p>A scatterplot showing growth by amount of fertilizer, brand, and tray in Scenario 2 is shown below.</p>
-<div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb152-1"><a href="introduction-to-correlated-data.html#cb152-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>plants2, <span class="fu">aes</span>(<span class="at">x=</span>amount, <span class="at">y=</span>growth, <span class="at">shape=</span><span class="fu">factor</span>(brand), <span class="at">color=</span><span class="fu">factor</span>(tray))) <span class="sc">+</span> <span class="fu">geom_point</span>() </span></code></pre></div>
+<div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb152-1"><a href="introduction-to-correlated-data.html#cb152-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>plants2, <span class="fu">aes</span>(<span class="at">x=</span>amount, <span class="at">y=</span>growth, <span class="at">shape=</span><span class="fu">factor</span>(brand), <span class="at">color=</span><span class="fu">factor</span>(tray))) <span class="sc">+</span> <span class="fu">geom_point</span>() </span></code></pre></div>
 <div class="figure"><span style="display:block;" id="fig:unnamed-chunk-82"></span>
 <img src="Stat-455-Notes_files/figure-html/unnamed-chunk-82-1.png" alt="Scenario 2" width="576" />
 <p class="caption">
@@ -1549,8 +1553,8 @@ Y_{ij}  = \beta_{0}+\beta_1\textrm{Brand2}_{ij} + \alpha\textrm{Amount}_{ij} + t
 <p><strong>a)</strong> Explain, in words what <span class="math inline">\(\sigma\)</span> and <span class="math inline">\(\sigma_t\)</span> represent in this model.</p>
 <p><strong>b)</strong></p>
 <p>R output for Model M1 is shown below.</p>
-<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb153-1"><a href="introduction-to-correlated-data.html#cb153-1" aria-hidden="true" tabindex="-1"></a>M1 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(<span class="at">data=</span>plants, growth <span class="sc">~</span> <span class="fu">factor</span>(brand) <span class="sc">+</span> amount <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>tray))</span>
-<span id="cb153-2"><a href="introduction-to-correlated-data.html#cb153-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(M1)</span></code></pre></div>
+<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb153-1"><a href="introduction-to-correlated-data.html#cb153-1" tabindex="-1"></a>M1 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(<span class="at">data=</span>plants, growth <span class="sc">~</span> <span class="fu">factor</span>(brand) <span class="sc">+</span> amount <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>tray))</span>
+<span id="cb153-2"><a href="introduction-to-correlated-data.html#cb153-2" tabindex="-1"></a><span class="fu">summary</span>(M1)</span></code></pre></div>
 <pre><code>## Linear mixed model fit by REML. t-tests use Satterthwaite&#39;s method [
 ## lmerModLmerTest]
 ## Formula: growth ~ factor(brand) + amount + (1 | tray)
@@ -1592,11 +1596,11 @@ Y_{ij}  = \beta_{0}+\beta_1\textrm{Brand2}_{ij} + \alpha\textrm{Amount}_{ij}  + 
 <p>to the same data. For each scenario, state whether the standard errors associated with brand and amount would increase, decrease, or stay the same. How would this affect the p-value and the amount of evidence of effects associated with these variables?</p>
 <p><strong>b)</strong></p>
 <p>For the data in Scenario 1, we now create a dataset grouped by tray, with the average growth displayed for each tray. The data are displayed below.</p>
-<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb155-1"><a href="introduction-to-correlated-data.html#cb155-1" aria-hidden="true" tabindex="-1"></a>plants_summary <span class="ot">&lt;-</span> plants <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(tray) <span class="sc">%&gt;%</span> <span class="fu">summarize</span>(<span class="at">brand=</span><span class="fu">mean</span>(brand),</span>
-<span id="cb155-2"><a href="introduction-to-correlated-data.html#cb155-2" aria-hidden="true" tabindex="-1"></a>                                                          <span class="at">amount=</span><span class="fu">mean</span>(amount),</span>
-<span id="cb155-3"><a href="introduction-to-correlated-data.html#cb155-3" aria-hidden="true" tabindex="-1"></a>                                                          <span class="at">growth=</span><span class="fu">mean</span>(growth), </span>
-<span id="cb155-4"><a href="introduction-to-correlated-data.html#cb155-4" aria-hidden="true" tabindex="-1"></a>                                                          <span class="at">N=</span><span class="fu">n</span>())</span>
-<span id="cb155-5"><a href="introduction-to-correlated-data.html#cb155-5" aria-hidden="true" tabindex="-1"></a>plants_summary</span></code></pre></div>
+<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb155-1"><a href="introduction-to-correlated-data.html#cb155-1" tabindex="-1"></a>plants_summary <span class="ot">&lt;-</span> plants <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(tray) <span class="sc">%&gt;%</span> <span class="fu">summarize</span>(<span class="at">brand=</span><span class="fu">mean</span>(brand),</span>
+<span id="cb155-2"><a href="introduction-to-correlated-data.html#cb155-2" tabindex="-1"></a>                                                          <span class="at">amount=</span><span class="fu">mean</span>(amount),</span>
+<span id="cb155-3"><a href="introduction-to-correlated-data.html#cb155-3" tabindex="-1"></a>                                                          <span class="at">growth=</span><span class="fu">mean</span>(growth), </span>
+<span id="cb155-4"><a href="introduction-to-correlated-data.html#cb155-4" tabindex="-1"></a>                                                          <span class="at">N=</span><span class="fu">n</span>())</span>
+<span id="cb155-5"><a href="introduction-to-correlated-data.html#cb155-5" tabindex="-1"></a>plants_summary</span></code></pre></div>
 <pre><code>## # A tibble: 8 × 5
 ##    tray brand amount growth     N
 ##   &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;int&gt;
@@ -1625,7 +1629,7 @@ Y_{ij}  = \beta_{0}+\beta_1\textrm{Brand2}_{ij} + \alpha\textrm{Amount}_{ij}  + 
 <h3>9. Compare the size of different variance component estimates given a LME model and a small set of data (i.e. say whether <span class="math inline">\(\sigma_u\)</span>, or <span class="math inline">\(\sigma\)</span> will be larger).<a href="introduction-to-correlated-data.html#compare-the-size-of-different-variance-component-estimates-given-a-lme-model-and-a-small-set-of-data-i.e.-say-whether-sigma_u-or-sigma-will-be-larger." class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><strong>a)</strong></p>
 <p>Consider the simplified version of the plant experiment shown below. Here, there are no fixed effects, and we simply seek to estimate the average height of the plants and measure the amount of variability associated with plants and trays. <strong>Now note that unlike the previous diagrams, the values of the response variable, growth, are shown.</strong></p>
-<p><img src="Plantsa.png" width="234" /></p>
+<p><img src="Plantsa.png" width="75%" /></p>
 <p>Let <span class="math inline">\(Y_{ij}\)</span> represent growth of plant <span class="math inline">\(j\)</span> in tray <span class="math inline">\(i\)</span>. (i=1, , 4 and j=1, , 6). We will work with a random effects model of the form:</p>
 <p><span class="math display">\[
 Y_{ij}  = \beta_{0} + t_{i} + \epsilon_{ij},
@@ -1634,8 +1638,9 @@ Y_{ij}  = \beta_{0} + t_{i} + \epsilon_{ij},
 <p>Will <span class="math inline">\(\sigma_t\)</span> or <span class="math inline">\(\sigma\)</span> be larger? Explain your answer. (Don’t actually try to calculate these, just answer based on the information given in the diagram)</p>
 <p><strong>b)</strong></p>
 <p>Answer the same question as in (a), for the following data. In this scenario, there are only 3 trays.</p>
-<p><img src="Plantsb.png" width="234" /></p>
+<p><img src="Plantsb.png" width="75%" /></p>
 <p><strong>c)</strong></p>
+<p>Now, suppose 3 plants in each tray receive fertilizer brand A and 3 receive fertilizer brand B. The fertilizer brands are shown in the plots below.</p>
 <p>Consider Model 1 below, fit to data shown underneath it. State whether <span class="math inline">\(\sigma_t\)</span> or <span class="math inline">\(\sigma\)</span> will be larger? Explain your answer.</p>
 <p>Let <span class="math inline">\(Y_{ij}\)</span> represent growth of plant <span class="math inline">\(j\)</span> in tray <span class="math inline">\(i\)</span>.</p>
 <p><strong>Model 1:</strong></p>
@@ -1643,12 +1648,12 @@ Y_{ij}  = \beta_{0} + t_{i} + \epsilon_{ij},
 Y_{ij}  = \beta_{0} + t_{i} + \epsilon_{ij},
 \]</span></p>
 <p>where <span class="math inline">\(t_i\sim\mathcal{N}(0, \sigma^2_t)\)</span>, and <span class="math inline">\(\epsilon_{ij} \sim\mathcal{N}(0, \sigma^2)\)</span>.</p>
-<p><img src="Plantsc.png" width="234" /></p>
+<p><img src="Plantsc.png" width="75%" /></p>
 <p><strong>b)</strong></p>
 <p>Now suppose that Model 2 is fit to the same data. State whether <span class="math inline">\(\sigma_t\)</span> or <span class="math inline">\(\sigma\)</span> will be larger? Explain your answer.</p>
 <p><strong>Model 2:</strong></p>
 <p><span class="math display">\[
-Y_{ij}  = \beta_{0} + \beta_1\text{Brand}_{ij} + t_{i} + \epsilon_{ij},
+Y_{ij}  = \beta_{0} + \beta_1\text{BrandB}_{ij} + t_{i} + \epsilon_{ij},
 \]</span></p>
 <p>where <span class="math inline">\(t_i\sim\mathcal{N}(0, \sigma^2_t)\)</span>, and <span class="math inline">\(\epsilon_{ij} \sim\mathcal{N}(0, \sigma^2)\)</span>.</p>
 

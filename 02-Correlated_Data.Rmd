@@ -795,7 +795,7 @@ Consider the experimental designs in Questions 1 and 2. If you were designing th
 
 Consider the simplified version of the plant experiment shown below. Here, there are no fixed effects, and we simply seek to estimate the average height of the plants and measure the amount of variability associated with plants and trays. **Now note that unlike the previous diagrams, the values of the response variable, growth, are shown.**   
 
-```{r, echo=FALSE}
+```{r, echo=FALSE, out.width = '75%'}
 knitr::include_graphics("Plantsa.png")
 ```
 
@@ -815,12 +815,14 @@ Will $\sigma_t$ or $\sigma$ be larger? Explain your answer. (Don't actually try 
 
 Answer the same question as in (a), for the following data. In this scenario, there are only 3 trays.    
 
-```{r, echo=FALSE}
+```{r, echo=FALSE, out.width = '75%'}
 knitr::include_graphics("Plantsb.png")
 ```
 
 
 **c)** 
+
+Now, suppose 3 plants in each tray receive fertilizer brand A and 3 receive fertilizer brand B. The fertilizer brands are shown in the plots below.    
 
 Consider Model 1 below, fit to data shown underneath it. State whether $\sigma_t$ or $\sigma$ will be larger? Explain your answer.
 
@@ -835,7 +837,7 @@ Y_{ij}  = \beta_{0} + t_{i} + \epsilon_{ij},
  where $t_i\sim\mathcal{N}(0, \sigma^2_t)$, and $\epsilon_{ij} \sim\mathcal{N}(0, \sigma^2)$.  
  
 
-```{r, echo=FALSE}
+```{r, echo=FALSE, out.width = '75%'}
 knitr::include_graphics("Plantsc.png")
 ```
 
@@ -847,7 +849,7 @@ Now suppose that Model 2 is fit to the same data. State whether $\sigma_t$ or $\
 **Model 2:**    
 
 \[
-Y_{ij}  = \beta_{0} + \beta_1\text{Brand}_{ij} + t_{i} + \epsilon_{ij},
+Y_{ij}  = \beta_{0} + \beta_1\text{BrandB}_{ij} + t_{i} + \epsilon_{ij},
 \]
 
 where $t_i\sim\mathcal{N}(0, \sigma^2_t)$, and $\epsilon_{ij} \sim\mathcal{N}(0, \sigma^2)$.  
