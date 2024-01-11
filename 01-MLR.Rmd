@@ -981,17 +981,42 @@ d) Suppose that we were to take two different samples of size 300 movies and fit
 
 e) Suppose that we were to take two different films, produced in the same year, that both passed the Bechdel test. Would it be unusual for their ROI's to differ by 0.5? By 1? By 10? Explain your answer.     
 
-<!--
+
 ### Practice Advanced Tasks
 
-a) Explain why we cannot assess the appropriateness of the normality assumption by looking only at a histogram of the response variable. For example, why shouldn't we conclude that the normality assumption in model M1 above is inappropriate, based on the fact the the histogram below is right-skewed?    
+a) Assumption that the estimates $b_0$, $b_1$, and $b_2$ in the model M1 R output were actually the true values of parameters $\beta_1$, $\beta_2$, and $\beta_3$. Give an approximate 95% prediction interval for the ROI of a film made in 2000 that passes the Bechdel test. (You might also think about how the width of the interval would change if we were to remove the assumption stated in the first sentence, and instead treat these values as estimates, which they really are).     
+
+b) Consider a multiple regression model with response variable $Y$ and explanatory variables $X_1$ and $X_2$. The model equation is 
+
+\[\text{Y}_i = \beta_0 + \beta_1X_1+\beta_2X_2 + \epsilon_i, \text{ where } \epsilon_i\sim\mathcal{N}(0, \sigma^2)
+\]
+
+Histograms of the explanatory variables and their standard deviations are shown below. 
+
+```{r, echo=FALSE}
+X1 <- rnorm(100, 50, 5)
+X2 <- rnorm(100, 50, 15)
+Y <- rnorm(100, 25, 3)
+df <- data.frame(X1, X2, Y)
+```
 
 ```{r}
-ggplot(data=Bechdel, aes(x=totalROI)) + geom_histogram(fill="blue")
+P1 <- ggplot(data=df, aes(x=X1)) + geom_histogram(fill="blue") + ggtitle("Distribution of X1")
+P2 <- ggplot(data=df, aes(x=X2)) + geom_histogram(fill="blue") + ggtitle("Distribution of X2")
+P3 <- ggplot(data=df, aes(x=Y)) + geom_histogram(fill="blue") + ggtitle("Distribution of Y")
+grid.arrange(P1, P2, ncol=1)
+```
+
+The standard deviations of the two explanatory variables are shown below. 
+
+```{r}
+sd(X1)
 ```
 
 
-b) 
+```{r}
+sd(X2)
+```
 
--->
+Notice that there is much more variability in the distribution of $X2$ than $X1$. Explain why this is not a violation of the constant variance assumption in a LLSR model. In your answer state clearly what the constant variance assumption says and explain why it is not necessarily violated in this situation.   
 

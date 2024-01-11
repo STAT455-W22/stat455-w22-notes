@@ -8,13 +8,13 @@ fig:resid2q
 fig:unnamed-chunk-12
 fig:unnamed-chunk-20
 fig:unnamed-chunk-22
-fig:unnamed-chunk-42
-fig:unnamed-chunk-54
-fig:unnamed-chunk-77
-fig:unnamed-chunk-79
+fig:unnamed-chunk-45
+fig:unnamed-chunk-57
 fig:unnamed-chunk-80
 fig:unnamed-chunk-82
-fig:unnamed-chunk-171
+fig:unnamed-chunk-83
+fig:unnamed-chunk-85
+fig:unnamed-chunk-174
 fig:philippinesmap
 fig:OLSpois
 fig:totalPoisByAge
@@ -62,6 +62,7 @@ anova-f-statistic
 final-model-residual-plots
 overall-conclusions
 practice-questions
+practice-advanced-tasks
 introduction-to-correlated-data
 introduction-to-correlated-data-1
 weight-gain-in-mice-experiment-design-1

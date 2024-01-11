@@ -22,7 +22,7 @@
 
 
 
-<meta name="date" content="2024-01-08" />
+<meta name="date" content="2024-01-11" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -191,6 +191,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#calculate-expected-responses-and-expected-changes-associated-with-explanatory-variables-in-a-llsr-model."><i class="fa fa-check"></i>3. Calculate expected responses and expected changes associated with explanatory variables in a LLSR model.</a></li>
 <li class="chapter" data-level="" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#calculate-standard-errors-t-statistics-residual-standard-error-r2-and-f-statistics-in-a-llsr-models-r-output."><i class="fa fa-check"></i>4. Calculate standard errors, t-statistics, residual standard error, <span class="math inline">\(R^2\)</span>, and F-statistics in a LLSR model’s R output.</a></li>
 <li class="chapter" data-level="" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#interpret-standard-errors-t-statistics-residual-standard-error-r2-and-f-statistics-in-a-llsr-models-r-output."><i class="fa fa-check"></i>5. Interpret standard errors, t-statistics, residual standard error, <span class="math inline">\(R^2\)</span>, and F-statistics in a LLSR model’s R output.</a></li>
+<li class="chapter" data-level="1.5.1" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#practice-advanced-tasks"><i class="fa fa-check"></i><b>1.5.1</b> Practice Advanced Tasks</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html"><i class="fa fa-check"></i><b>2</b> Introduction to Correlated Data</a>
@@ -648,8 +649,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1><span class="header-section-number">Chapter 9</span> Epilogue<a href="epilogue.html#epilogue" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <div id="further-directions" class="section level2 hasAnchor" number="9.1">
 <h2><span class="header-section-number">9.1</span> Further Directions<a href="epilogue.html#further-directions" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb493"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb493-1"><a href="epilogue.html#cb493-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb493-2"><a href="epilogue.html#cb493-2" tabindex="-1"></a><span class="fu">library</span>(gridExtra)</span></code></pre></div>
+<div class="sourceCode" id="cb498"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb498-1"><a href="epilogue.html#cb498-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb498-2"><a href="epilogue.html#cb498-2" tabindex="-1"></a><span class="fu">library</span>(gridExtra)</span></code></pre></div>
 <div id="more-on-glms" class="section level3 hasAnchor" number="9.1.1">
 <h3><span class="header-section-number">9.1.1</span> More on GLM’s<a href="epilogue.html#more-on-glms" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>A generalized linear model consists of the following two pieces.</p>
@@ -660,7 +661,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ol>
 <p>We’ve seen GLM’s using normal, Poisson, and binomial distributions.</p>
 <p>There are many other distribtions we could use to model the response variable, given value(s) of explanatory variables. Three such continuous distributions, and one discrete one are shown below.</p>
-<p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-302-1.png" width="960" /></p>
+<p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-305-1.png" width="960" /></p>
 <p>For each distribution, we would need to find an appropriate link function to connect parameters to a linear function of the explanatory variables.</p>
 <p>A possible (often advantageous) link function can be derived using calculus. See [Chapter 5 of the Roback and Legler text] (<a href="https://bookdown.org/roback/bookdown-BeyondMLR/ch-glms.html#generalized-linear-modeling" class="uri">https://bookdown.org/roback/bookdown-BeyondMLR/ch-glms.html#generalized-linear-modeling</a>) for details. In fact, the link functions we’ve seen are canonical links, but these are not the only possible link functions.</p>
 </div>

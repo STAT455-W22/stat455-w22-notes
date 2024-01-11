@@ -22,7 +22,7 @@
 
 
 
-<meta name="date" content="2024-01-08" />
+<meta name="date" content="2024-01-11" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -191,6 +191,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#calculate-expected-responses-and-expected-changes-associated-with-explanatory-variables-in-a-llsr-model."><i class="fa fa-check"></i>3. Calculate expected responses and expected changes associated with explanatory variables in a LLSR model.</a></li>
 <li class="chapter" data-level="" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#calculate-standard-errors-t-statistics-residual-standard-error-r2-and-f-statistics-in-a-llsr-models-r-output."><i class="fa fa-check"></i>4. Calculate standard errors, t-statistics, residual standard error, <span class="math inline">\(R^2\)</span>, and F-statistics in a LLSR model’s R output.</a></li>
 <li class="chapter" data-level="" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#interpret-standard-errors-t-statistics-residual-standard-error-r2-and-f-statistics-in-a-llsr-models-r-output."><i class="fa fa-check"></i>5. Interpret standard errors, t-statistics, residual standard error, <span class="math inline">\(R^2\)</span>, and F-statistics in a LLSR model’s R output.</a></li>
+<li class="chapter" data-level="1.5.1" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#practice-advanced-tasks"><i class="fa fa-check"></i><b>1.5.1</b> Practice Advanced Tasks</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html"><i class="fa fa-check"></i><b>2</b> Introduction to Correlated Data</a>
@@ -2049,22 +2050,27 @@ totalROI = total return on investment (total gross divided by budget)</p>
 <li><p>Suppose that we were to take two different samples of size 300 movies and fit model of the same form as M1. Let R1 represent the expected yearly rate of change in Return on Investment, assuming Bechdel status is held constant, using movies in the first sample, and let R2 represent the same quantity for films in the second sample. Would it be unusual for R1 and R2 to differ by 0.5? By 1? By 10? Explain your answer.</p></li>
 <li><p>Suppose that we were to take two different films, produced in the same year, that both passed the Bechdel test. Would it be unusual for their ROI’s to differ by 0.5? By 1? By 10? Explain your answer.</p></li>
 </ol>
-<!--
-### Practice Advanced Tasks
-
-a) Explain why we cannot assess the appropriateness of the normality assumption by looking only at a histogram of the response variable. For example, why shouldn't we conclude that the normality assumption in model M1 above is inappropriate, based on the fact the the histogram below is right-skewed?    
-
-
-```r
-ggplot(data=Bechdel, aes(x=totalROI)) + geom_histogram(fill="blue")
-```
-
-<img src="Stat-455-Notes_files/figure-html/unnamed-chunk-40-1.png" width="576" />
-
-
-b) 
-
--->
+</div>
+<div id="practice-advanced-tasks" class="section level3 hasAnchor" number="1.5.1">
+<h3><span class="header-section-number">1.5.1</span> Practice Advanced Tasks<a href="review-of-multiple-linear-regression.html#practice-advanced-tasks" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ol style="list-style-type: lower-alpha">
+<li><p>Assumption that the estimates <span class="math inline">\(b_0\)</span>, <span class="math inline">\(b_1\)</span>, and <span class="math inline">\(b_2\)</span> in the model M1 R output were actually the true values of parameters <span class="math inline">\(\beta_1\)</span>, <span class="math inline">\(\beta_2\)</span>, and <span class="math inline">\(\beta_3\)</span>. Give an approximate 95% prediction interval for the ROI of a film made in 2000 that passes the Bechdel test. (You might also think about how the width of the interval would change if we were to remove the assumption stated in the first sentence, and instead treat these values as estimates, which they really are).</p></li>
+<li><p>Consider a multiple regression model with response variable <span class="math inline">\(Y\)</span> and explanatory variables <span class="math inline">\(X_1\)</span> and <span class="math inline">\(X_2\)</span>. The model equation is</p></li>
+</ol>
+<p><span class="math display">\[\text{Y}_i = \beta_0 + \beta_1X_1+\beta_2X_2 + \epsilon_i, \text{ where } \epsilon_i\sim\mathcal{N}(0, \sigma^2)
+\]</span></p>
+<p>Histograms of the explanatory variables and their standard deviations are shown below.</p>
+<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="review-of-multiple-linear-regression.html#cb103-1" tabindex="-1"></a>P1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data=</span>df, <span class="fu">aes</span>(<span class="at">x=</span>X1)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">fill=</span><span class="st">&quot;blue&quot;</span>) <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">&quot;Distribution of X1&quot;</span>)</span>
+<span id="cb103-2"><a href="review-of-multiple-linear-regression.html#cb103-2" tabindex="-1"></a>P2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data=</span>df, <span class="fu">aes</span>(<span class="at">x=</span>X2)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">fill=</span><span class="st">&quot;blue&quot;</span>) <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">&quot;Distribution of X2&quot;</span>)</span>
+<span id="cb103-3"><a href="review-of-multiple-linear-regression.html#cb103-3" tabindex="-1"></a>P3 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data=</span>df, <span class="fu">aes</span>(<span class="at">x=</span>Y)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">fill=</span><span class="st">&quot;blue&quot;</span>) <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">&quot;Distribution of Y&quot;</span>)</span>
+<span id="cb103-4"><a href="review-of-multiple-linear-regression.html#cb103-4" tabindex="-1"></a><span class="fu">grid.arrange</span>(P1, P2, <span class="at">ncol=</span><span class="dv">1</span>)</span></code></pre></div>
+<p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-41-1.png" width="576" /></p>
+<p>The standard deviations of the two explanatory variables are shown below.</p>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="review-of-multiple-linear-regression.html#cb104-1" tabindex="-1"></a><span class="fu">sd</span>(X1)</span></code></pre></div>
+<pre><code>## [1] 4.940104</code></pre>
+<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="review-of-multiple-linear-regression.html#cb106-1" tabindex="-1"></a><span class="fu">sd</span>(X2)</span></code></pre></div>
+<pre><code>## [1] 16.87209</code></pre>
+<p>Notice that there is much more variability in the distribution of <span class="math inline">\(X2\)</span> than <span class="math inline">\(X1\)</span>. Explain why this is not a violation of the constant variance assumption in a LLSR model. In your answer state clearly what the constant variance assumption says and explain why it is not necessarily violated in this situation.</p>
 
 </div>
 </div>
