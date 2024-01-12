@@ -778,11 +778,11 @@ Explain why it would not make sense to group the data by tray and fit a LLSR mod
 
 **a)** 
 
-In Scenario 1, explain why it is inappropriate to think of our sample size as being 96 plants in this scenario. What are the appropriate observational units, and what is the effective sample size for determining the effects of brand and amount?    
+In Scenario 1, explain why it is inappropriate to think of our sample size as being 96 plants in this scenario. What are the appropriate observational units, and what is the relevant sample size for determining the effects of brand and amount?    
 
 **b)** 
 
-In Scenario 2, what is the effective sample size associated with brand variable? What about the amount variable?     
+In Scenario 2, what is the relevant sample size associated with brand variable? What about the amount variable?     
 
 **c)** 
 
