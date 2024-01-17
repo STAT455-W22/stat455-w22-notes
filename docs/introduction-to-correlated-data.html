@@ -22,7 +22,7 @@
 
 
 
-<meta name="date" content="2024-01-12" />
+<meta name="date" content="2024-01-17" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -1553,7 +1553,7 @@ Y_{ij}  = \beta_{0}+\beta_1\textrm{Brand2}_{ij} + \alpha\textrm{Amount}_{ij} + t
 <p>where <span class="math inline">\(t_i\sim\mathcal{N}(0, \sigma^2_t)\)</span>, and <span class="math inline">\(\epsilon_{ij} \sim\mathcal{N}(0, \sigma^2)\)</span>.</p>
 <p><strong>a)</strong> Explain, in words what <span class="math inline">\(\sigma\)</span> and <span class="math inline">\(\sigma_t\)</span> represent in this model.</p>
 <p><strong>b)</strong></p>
-<p>R output for Model M1 is shown below.</p>
+<p>R output for a linear mixed effects model for scenario 1 is shown below.</p>
 <div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb158-1"><a href="introduction-to-correlated-data.html#cb158-1" tabindex="-1"></a>M1 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(<span class="at">data=</span>plants, growth <span class="sc">~</span> <span class="fu">factor</span>(brand) <span class="sc">+</span> amount <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>tray))</span>
 <span id="cb158-2"><a href="introduction-to-correlated-data.html#cb158-2" tabindex="-1"></a><span class="fu">summary</span>(M1)</span></code></pre></div>
 <pre><code>## Linear mixed model fit by REML. t-tests use Satterthwaite&#39;s method [

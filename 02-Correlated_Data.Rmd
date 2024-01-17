@@ -733,12 +733,13 @@ Y_{ij}  = \beta_{0}+\beta_1\textrm{Brand2}_{ij} + \alpha\textrm{Amount}_{ij} + t
 
 **b)** 
 
-R output for Model M1 is shown below.   
+R output for a linear mixed effects model for scenario 1 is shown below.   
 
 ```{r}
 M1 <- lmer(data=plants, growth ~ factor(brand) + amount + (1|tray))
 summary(M1)
 ```
+
 Give the estimates of $\sigma$ and $\sigma_u$. Which is bigger and what does that tell us?    
 
 
