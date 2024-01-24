@@ -1252,11 +1252,98 @@ After controlling for other factors we have evidence that:
  
  
  
-## Conceptual Questions
+## Practice Questions
 
 
+We analyze simulated data pertaining to the effectiveness of a nutrition and training program for beginning adult runners. In a group of 16 beginner runners, eight were randomly assigned to participate in the program, while the other eight prepared and trained on their own. Before starting the program, the runners ran five kilometers (3.1 miles), and their average mile pace (minutes it took to run 1 mile) was recorded. The runners were again timed running the same distance after one, two, and three weeks of training. Researchers are interested in determining whether runners who participate in the program gain speed faster than those training on their own.   
 
-We now model performance anxiety, measured by `na` using the following model:
+
+The dataset includes the following variables.    
+
+`Id` - runner's ID number     
+`Week` - number of weeks since starting training (0,1,2,3)    
+`Age18` - runner's age in years over 18     
+`Program` - was the runner in the training and nutrition program (0=no, 1=yes)    
+`Pace` - average amount of time it takes to run one mile (in minutes per mile)    
+
+The first 10 rows of the dataset are shown in the R output below.  
+
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+library(MASS)
+set.seed(02982022)
+Id <- rep(1:16, each=4)
+Week <- rep(0:3, times=16)
+Age18 <- (rep(rnorm(16,35,5), each=4)-18) %>% round(0)
+Program <- rep(rep(0:1, each=4), times=8)
+
+
+ssu <- 1
+ssv <- 0.2
+rhouv <- -0.5   
+ss <- 0.5
+
+Sigma = matrix(rep(NA, 16), nrow=4, ncol=4)
+t <- 0
+#Var
+Sigma[1,1] <- c(ssu + t*ssv + ss + 2*t*rhouv*sqrt(ssu)*sqrt(ssv))
+t <- 1
+#Var
+Sigma[2,2] <- c(ssu + t*ssv + ss + 2*t*rhouv*sqrt(ssu)*sqrt(ssv))
+#Cov
+Sigma[1,2] <- Sigma[2,1] <- Sigma[2,3] <- Sigma[3,2] <- Sigma[3,4] <- Sigma[4,3] <- V21 <- c(ssu + t*ssv + 2*t*rhouv*sqrt(ssu)*sqrt(ssv))
+t <- 2
+#Var
+Sigma[3,3] <- c(ssu + t*ssv + ss + 2*t*rhouv*sqrt(ssu)*sqrt(ssv))
+#Cov
+Sigma[1,3] <- Sigma[3,1] <- Sigma[2,4] <- Sigma[4,2]  <- V21 <- c(ssu + t*ssv + 2*t*rhouv*sqrt(ssu)*sqrt(ssv))
+t <- 3
+#Var
+Sigma[4,4] <- c(ssu + t*ssv + ss + 2*t*rhouv*sqrt(ssu)*sqrt(ssv))
+#Cov
+Sigma[1,4] <- Sigma[4,1] <- V21 <- c(ssu + t*ssv + 2*t*rhouv*sqrt(ssu)*sqrt(ssv))
+
+M <- mvrnorm(n=16, mu=rep(0,4), Sigma=Sigma)
+
+Deviations <- c(unlist(M[1,]),unlist(M[2,]),unlist(M[3,]),unlist(M[4,]),
+          unlist(M[5,]),unlist(M[6,]),unlist(M[7,]),unlist(M[8,]),
+          unlist(M[9,]),unlist(M[10,]),unlist(M[11,]),unlist(M[12,]),unlist(M[13,]),
+          unlist(M[14,]),unlist(M[15,]),unlist(M[16,]))
+
+Pace <- (9 + (Age18-12)*0.05 - 0.03*Week -  0.25*Program*Week +Deviations) %>% round(2)
+
+Runners <- data.frame(Id, Week, Age18, Program, Pace)
+#M1 <- lmer(data=Runners, Pace ~  Age18 + Program  +  Week + Program:Week + (Week|Id)) 
+#summary(M1)
+```
+
+```{r}
+head(Runners, 10)
+```
+
+### 12. Identify the levels of a two-level experiment and the observational units and variables at each level.    {-}
+
+Identify the levels of the runners dataset and the observational units and variables at each level.   
+
+
+### 13. Interpret random slopes, intercepts, error terms and their estimated variances and correlations in linear mixed effects models.    {-}   
+
+**Question 1:**
+
+A linear mixed effects model is fit to the runners data. 
+
+```{r}
+M1 <- lmer(data=Runners, Pace ~  Age18 + Program  +  Week + Program:Week + (Week|Id)) 
+summary(M1)
+```
+
+a) Give the estimates of $\sigma_u$, $\sigma_v$, and $\sigma$, and $\rho_{uv}$, and interpret each in context.    
+
+b) What are the units on the estimates of $\sigma_u$, $\sigma_v$, and $\sigma$, and $\rho_{uv}$? What does this tell us about which of these are and aren't comparable?
+
+**Question 2:**
+
+Continuing with the musicians example referenced in the chapter, we now model performance anxiety, measured by `na` using the following model:
 
 $$
 \begin{align*}
@@ -1291,14 +1378,236 @@ summary(lmer(data=music, na ~ years_study + juried + years_study:juried
              + (juried|id)), REML=TRUE)
 ```
 
-1. Explain in words what we should conclude from each of the following facts:
+a) Explain in words what we should conclude from each of the following facts:      
 
-a. $\hat{\beta_0}$ is positive and the associated p-value is small.    
-b. $\hat{\beta_1}$ is negative and the associated p-value is large.    
-c. $\hat{\sigma} > \hat{\sigma_u}$     
-d. $\hat{\sigma_u}$ is about the same as  $\hat{\sigma_v}$    
-e. $\hat{\rho}_{uv}$ is slightly negative     
+i. $\hat{\beta_0}$ is positive and the associated p-value is small.    
+ii. $\hat{\beta_1}$ is negative and the associated p-value is large.    
+iii. $\hat{\sigma} > \hat{\sigma_u}$     
+iv. $\hat{\sigma_u}$ is about the same as  $\hat{\sigma_v}$    
+v. $\hat{\rho}_{uv}$ is slightly negative     
 
+b) Explain in words what it would mean if the model parameter was equal to zero.      
+
+i. $\alpha_0$     
+ii. $\alpha_1$      
+iii. $\beta_0$     
+iv. $\beta_1$     
+v. $\sigma_u$    
+vi. $\sigma_v$      
+vii. $\sigma$     
+viii. $\rho_{uv}$      
+
+
+### 14. Determine whether it is appropriate to add a random slope term to a model in a given context.     {-}
+
+Continue with the runners example in Question 13 Part 1. 
+
+a) The lattice plots below show each runner's pace each week, faceted by whether or not they were in the program. Do the plots suggest that a random slope term should be added to the model? Justify your answer.    
+
+
+```{r, fig.height=4, fig.width=8}
+# Lattice plot for NA vs. Performance Type
+ggplot(Runners,aes(x=Week,y=Pace)) + theme.1 + 
+  geom_point() + geom_smooth(method="lm",color="black") + 
+  facet_grid(Program~Id) +   
+  theme(strip.text.x=element_blank()) + ylim(0,15) +
+  labs(x="Week",y="Pace") 
+```
+
+
+b) We consider models with and without random slope terms. AIC and BIC for both models are shown below. Based on these results should a random slope term be included in the model? 
+
+```{r}
+M1 <- lmer(data=Runners, Pace ~  Age18 + Program  +  Week + Program:Week + (Week|Id)) 
+M2 <- lmer(data=Runners, Pace ~  Age18 + Program  +  Week + Program:Week + (1|Id)) 
+AIC(M1, M2)
+BIC(M1, M2)
+```
+
+### 15. Distinguish between random slope terms and interactions terms and explain what the inclusion/exclusion of each in a LME model says about our assumptions regarding the nature of our data.     {-}
+
+Continue with the runners example in Question 13 Part 1. 
+
+a) Suppose that two runners are the same age and both participate in the program and that runner #1 runs at a faster pace (less time per mile) than runner #2 in the first run (prior to starting training). Based on the model, which runner's time should we expect to change more from the first run to the second? Cite a specific value from the R output to justify your answer.     
+
+b) Suppose that two runners are the same age and one participates in the program and the other doesn't. Based on the model, which runner's time should we expect to change more from the first run to the second? Cite a specific value from the R output to justify your answer.      
+
+### 16. Calculate expected responses and expected changes associated with fixed effects in a LME model. If it is not possible to calculate the quantity, explain why.     {-}
+
+Continue with the runners example in Question 13 Part 1. 
+
+Calculate the following quantities:     
+
+a) Expected pace in week 3 for a 20-year old who participates in the program.    
+b) Difference in expected paces in week 3 between a 20-year old who participates in the program and a 20-year old who does not.    
+c) Expected difference in pace between a two people who participate in the program, in the same week, assuming one is five years older than the other.     
+d) Expected difference in pace between a person who participates in the program and a person of the same age, who does not participate, assuming they ran in the same week.    
+e) Expected weekly change in pace for runners who are in the program, assuming age is held constant.    
+f) Expected weekly change in pace for runners who are not in the program, assuming age is held constant.    
+
+
+### 17. Write equations for linear mixed effects models in mathematical notation, including assumptions about distributions of random effects and error terms.       {-}
+
+Continue with the runners example in Question 13 Part 1. 
+
+Let $Y_{ij}$ represent the pace of runner $i$ after $j$ weeks of training. Write the mathematical form of each of the following models, including assumption about random effects and error terms. 
+
+```{r, eval=FALSE}
+M1 <- lmer(data=Runners, Pace ~  Age18 + Program  +  Week + (Week|Id)) 
+```
+
+```{r, eval=FALSE}
+M2 <- lmer(data=Runners, Pace ~  Age18 + Program  +  Week + Program:Week + (Week|Id)) 
+```
+
+<!--
+
+We fit a linear mixed effects model of the form
+
+$Y_{ij}  = \alpha_{0}+\alpha_{1}\textrm{Age18}_{i}+\alpha_{2}\textrm{Program}_{i}+\beta_{1}\textrm{Week}_{ij} + u_{i}+v_{i}\textrm{Week}_{ij}+\epsilon_{ij}$, 
+
+
+     where 
+$\epsilon_{ij}\sim N(0,\sigma^2)$, and 
+\[
+\left[ \begin{array}{c}
+            u_{i} \\ v_{i}
+          \end{array}  \right] \sim N \left( \left[
+          \begin{array}{c}
+            0 \\ 0
+          \end{array} \right], \left[
+          \begin{array}{cc}
+            \sigma_{u}^{2} & \rho_{uv}\sigma_{u}\sigma_v \\
+            \rho_{uv}\sigma_{u}\sigma_v & \sigma_{v}^{2}
+          \end{array} \right] \right) 
+\]
+
+-->
+
+```{r, eval=FALSE}
+M3 <- lmer(data=Runners, Pace ~  Age18 + Program  +  Week + (1|Id)) 
+```
+
+```{r, eval=FALSE}
+M4 <- lm(data=Runners, Pace ~  Age18 + Program  +  Week 
+```
+
+
+### 18. Give examples of values of the response variable that would satisfy given conditions about parameters in a LME model (for example ($\sigma_u>\sigma$)).         {-}
+
+Researchers are interested in estimating the average weight of a particular species of fish. They visit three different lakes and collect samples of four fish from each lake, and weigh each fish on a scale. 
+
+Let $Y_{ij}$ represent the weight (in lbs) of fish $j$ in lake $i$. A possible model is:  
+
+\[
+Y_{ij}  = \alpha_{0} + u_{i} + \epsilon_{ij},
+\]
+
+
+where $u_i\sim N(0, \sigma^2_u)$, and $\epsilon_{ij}\sim N(0, \sigma^2)$.   
+
+**Fill in values for weights of individual fish in a way that would be consistent with the model parameters described. There are many different correct ways to do this.**
+
+Notes:     
+
+1. You may use integer values.    
+2. You may assume that the fish described weigh somewhere around 10 lbs on average. (You don't need to make your answers average out to exactly 10, but this is meant to give you a general idea of the size of the numbers you might write.)
+
+a) $\sigma_u > 0$, $\sigma = 0$
+
+
+```{r, echo=FALSE,  out.width = '100%'}
+knitr::include_graphics("Lakes1.png")
+```
+
+
+b) $\sigma_u = 0$, $\sigma > 0$
+
+
+```{r, echo=FALSE,  out.width = '100%'}
+knitr::include_graphics("Lakes1.png")
+```
+
+
+Now, suppose there are two different species of fish, striped fish (the left two fish in each lake), and smiley fish (the right two fish in each lake. We use a model with an indicator variable `StripedSpecies` indicating whether or not the fish is of the striped species, as an explanatory variable.  
+
+The model is:  
+
+$$
+Y_{ij} = \alpha_{0} + \alpha_1\text{StripedSpecies}_{ij} + u_{i} + v_i\text{StripedSpecies}_{ij} + \epsilon_{ij},
+$$
+
+where $\epsilon_{ij}\sim N(0,\sigma^2)$ and
+
+$$
+ \left[ \begin{array}{c}
+            u_{i} \\ v_{i}
+          \end{array}  \right] \sim N \left( \left[
+          \begin{array}{c}
+            0 \\ 0
+          \end{array} \right], \left[
+          \begin{array}{cc}
+            \sigma_{u}^{2} & \\
+            \rho_{uv}\sigma_{u}\sigma_{v} & \sigma_{v}^{2}
+          \end{array} \right] \right) . 
+$$
+
+**Fill in values for weights of individual fish in a way that would be consistent with the model parameters described. There are many different correct ways to do this.**
+
+You may continue to follow the guidance in Notes 1 and 2.  
+
+
+c) $\alpha_1=2$, $\sigma_u > 0$, $\sigma_v = 0$, $\sigma = 0$
+
+
+```{r, echo=FALSE,  out.width = '100%'}
+knitr::include_graphics("Lakes2.png")
+```
+
+
+d) $\alpha_1=2$, $\sigma_u = 0$, $\sigma_v > 0$, $\sigma = 0$. 
+
+```{r, echo=FALSE,  out.width = '100%', out.height = '150%'}
+knitr::include_graphics("Lakes2.png")
+```
+
+
+
+### 22. Draw lattice (or spaghetti) plots that are consistent with given conditions involving parameters in a LME model.         {-}
+
+Returning to the musician data consider a model with no interaction term. 
+
+$$
+\begin{align*}
+Y_{ij} & = [\alpha_{0}+\alpha_{1}\textrm{Years_Study}_{i}+\beta_{0}\textrm{Juried}_{ij}] \\
+ & \textrm{} + [u_{i}+v_{i}\textrm{Juried}_{ij}+\epsilon_{ij}]
+\end{align*}
+$$
+
+Sketch lattice plots, with `juried` on the x-axis and `na` on the y-axis, for 5 different musicians that illustrate each of the following scenarios. If any are impossible, explain why:
+
+i. $\beta_0 > 0$, $\sigma_u$ is large, and $\sigma_v$ is small       
+ii. $\beta_0 > 0$, $\sigma_u$ is small, and $\sigma_v$ is large       
+iii. $\beta_0 > 0$, $\rho_{uv} > 0$     
+iv. $\beta_0 > 0$, $\rho_{uv} < 0$
+v. $\beta_0 < 0$, $\rho_{uv} < 0$     
+vi. $\beta_0 > 0$, $\sigma_v = 0$, $\sigma_u > 0$  
+vii. $\beta_0 > 0$, $\sigma_v > 0$, $\sigma_u > 0$, $\rho_{uv}=0$      
+viii. $\beta_0 > 0$, $\sigma_v = 0$, $\sigma_u > 0$, $\rho_{uv} > 0$       
+
+### 23. Answer research questions related to fixed and random effects in a study given output from LME models.         {-}
+
+a) Notice that the estimate associated with `program` is a very small and the associated p-value is very large. Explain why it would be incorrect to conclude from these values that the program has little effect on running pace. In your answer, explain specifically what this estimate tells us, and why it is not a good measure the effectiveness of the program.  
+
+
+b) Cite a value from the R output that can used to assess the effectiveness of the program. Is there evidence that participating in the program helps runners run faster than training on their own? Justify your answer.    
+
+
+
+
+
+
+<!--
 **Answers**
 
 a)	There is evidence that expected performance anxiety for musicians with no prior years of study is higher when giving a juried performance than a non-juried one. 
@@ -1311,19 +1620,10 @@ d)	After accounting for years of study and whether the performance was juried, v
 
 e)	After accounting for years of study and whether the performance ws juried, people who experience higher than expected performance anxiety for nonjuried performances have less increase in anxiety (maybe even decrease) when playing in a juried performance.
 
-
+-->
  
-2. Explain in words what it would mean if the model parameter was equal to zero.    
 
-a. $\alpha_0$     
-b. $\alpha_1$      
-c. $\beta_0$     
-d. $\beta_1$     
-e. $\sigma_u$    
-f. $\sigma_v$      
-g. $\sigma$     
-h. $\rho_{uv}$      
-
+<!--
 **Solution**
 
 a. $\alpha_0 =0$ would imply that the average performance anxiety score for a musician with no prior study in a non-juried performance is 0.  
@@ -1342,22 +1642,8 @@ g. $\sigma=0$ would imply that all performances of the same type (juried vs nonj
 
 h. $\rho_{uv}=0$ would imply that after accounting for age and whether a performance is juried, there is no relationship between a performer's average performance anxiety in a non-juried performance, and their change in performance anxiety between juried and non-juried performances. (Another way to say is that, after accounting for years of prior study and type of performance, a musician who has a higher than expected performance anxiety score in non-juried performances is not expected to have any bigger, or smaller, change when playing in a juried performance than a musician who has lower than expected performance anxiety in a non-juried performance).  
 
+-->
 
 
-3. Now consider a model with no interaction term. 
 
-$$
-\begin{align*}
-Y_{ij} & = [\alpha_{0}+\alpha_{1}\textrm{Years_Study}_{i}+\beta_{0}\textrm{Juried}_{ij}] \\
- & \textrm{} + [u_{i}+v_{i}\textrm{Juried}_{ij}+\epsilon_{ij}]
-\end{align*}
-$$
-
-Sketch lattice plots, with `juried` on the x-axis and `na` on the y-axis, for 5 different musicians that illustrate each of the following scenarios:
-
-a. $\beta_0 > 0$, $\sigma_u$ is large, and $\sigma_v$ is small       
-b. $\beta_0 > 0$, $\sigma_u$ is small, and $\sigma_v$ is large       
-c. $\beta_0 > 0$, $\rho_{uv} > 0$     
-d. $\beta_0 > 0$, $\rho_{uv} < 0$
-e. $\beta_0 < 0$, $\rho_{uv} < 0$
 

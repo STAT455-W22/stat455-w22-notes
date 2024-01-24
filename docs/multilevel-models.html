@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 3 Multilevel Models | Stat 455: Advanced Statistical Modeling Notes</title>
   <meta name="description" content="Chapter 3 Multilevel Models | Stat 455: Advanced Statistical Modeling Notes" />
-  <meta name="generator" content="bookdown 0.37 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.31 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 3 Multilevel Models | Stat 455: Advanced Statistical Modeling Notes" />
   <meta property="og:type" content="book" />
@@ -22,7 +22,7 @@
 
 
 
-<meta name="date" content="2024-01-17" />
+<meta name="date" content="2024-01-23" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -120,10 +120,6 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
-<style type="text/css">
-  
-  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -322,7 +318,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.5.9" data-path="multilevel-models.html"><a href="multilevel-models.html#likelihood-ratio-test"><i class="fa fa-check"></i><b>3.5.9</b> Likelihood Ratio Test</a></li>
 <li class="chapter" data-level="3.5.10" data-path="multilevel-models.html"><a href="multilevel-models.html#final-conclusions"><i class="fa fa-check"></i><b>3.5.10</b> Final Conclusions</a></li>
 </ul></li>
-<li class="chapter" data-level="3.6" data-path="multilevel-models.html"><a href="multilevel-models.html#conceptual-questions"><i class="fa fa-check"></i><b>3.6</b> Conceptual Questions</a></li>
+<li class="chapter" data-level="3.6" data-path="multilevel-models.html"><a href="multilevel-models.html#practice-questions-2"><i class="fa fa-check"></i><b>3.6</b> Practice Questions</a>
+<ul>
+<li class="chapter" data-level="" data-path="multilevel-models.html"><a href="multilevel-models.html#identify-the-levels-of-a-two-level-experiment-and-the-observational-units-and-variables-at-each-level."><i class="fa fa-check"></i>12. Identify the levels of a two-level experiment and the observational units and variables at each level.</a></li>
+<li class="chapter" data-level="" data-path="multilevel-models.html"><a href="multilevel-models.html#interpret-random-slopes-intercepts-error-terms-and-their-estimated-variances-and-correlations-in-linear-mixed-effects-models."><i class="fa fa-check"></i>13. Interpret random slopes, intercepts, error terms and their estimated variances and correlations in linear mixed effects models.</a></li>
+<li class="chapter" data-level="" data-path="multilevel-models.html"><a href="multilevel-models.html#determine-whether-it-is-appropriate-to-add-a-random-slope-term-to-a-model-in-a-given-context."><i class="fa fa-check"></i>14. Determine whether it is appropriate to add a random slope term to a model in a given context.</a></li>
+<li class="chapter" data-level="" data-path="multilevel-models.html"><a href="multilevel-models.html#distinguish-between-random-slope-terms-and-interactions-terms-and-explain-what-the-inclusionexclusion-of-each-in-a-lme-model-says-about-our-assumptions-regarding-the-nature-of-our-data."><i class="fa fa-check"></i>15. Distinguish between random slope terms and interactions terms and explain what the inclusion/exclusion of each in a LME model says about our assumptions regarding the nature of our data.</a></li>
+<li class="chapter" data-level="" data-path="multilevel-models.html"><a href="multilevel-models.html#calculate-expected-responses-and-expected-changes-associated-with-fixed-effects-in-a-lme-model.-if-it-is-not-possible-to-calculate-the-quantity-explain-why."><i class="fa fa-check"></i>16. Calculate expected responses and expected changes associated with fixed effects in a LME model. If it is not possible to calculate the quantity, explain why.</a></li>
+<li class="chapter" data-level="" data-path="multilevel-models.html"><a href="multilevel-models.html#write-equations-for-linear-mixed-effects-models-in-mathematical-notation-including-assumptions-about-distributions-of-random-effects-and-error-terms."><i class="fa fa-check"></i>17. Write equations for linear mixed effects models in mathematical notation, including assumptions about distributions of random effects and error terms.</a></li>
+<li class="chapter" data-level="" data-path="multilevel-models.html"><a href="multilevel-models.html#give-examples-of-values-of-the-response-variable-that-would-satisfy-given-conditions-about-parameters-in-a-lme-model-for-example-sigma_usigma."><i class="fa fa-check"></i>18. Give examples of values of the response variable that would satisfy given conditions about parameters in a LME model (for example (<span class="math inline">\(\sigma_u&gt;\sigma\)</span>)).</a></li>
+<li class="chapter" data-level="" data-path="multilevel-models.html"><a href="multilevel-models.html#draw-lattice-or-spaghetti-plots-that-are-consistent-with-given-conditions-involving-parameters-in-a-lme-model."><i class="fa fa-check"></i>22. Draw lattice (or spaghetti) plots that are consistent with given conditions involving parameters in a LME model.</a></li>
+<li class="chapter" data-level="" data-path="multilevel-models.html"><a href="multilevel-models.html#answer-research-questions-related-to-fixed-and-random-effects-in-a-study-given-output-from-lme-models."><i class="fa fa-check"></i>23. Answer research questions related to fixed and random effects in a study given output from LME models.</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="longitudinal-data.html"><a href="longitudinal-data.html"><i class="fa fa-check"></i><b>4</b> Longitudinal Data</a>
 <ul>
@@ -659,15 +666,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>Analyze data using a multilevel linear mixed effects model in R.</p></li>
 </ol>
 <p>These notes provide a summary of Chapter 8 in <a href="https://bookdown.org/roback/bookdown-BeyondMLR/">Beyond Multiple Linear Regression</a> by Roback and Legler. Much of the code that appears here comes from the textbook’s <a href="https://github.com/proback/BeyondMLR/">Github repository</a>.</p>
-<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb162-1"><a href="multilevel-models.html#cb162-1" tabindex="-1"></a><span class="co"># Packages required for Chapter 8</span></span>
-<span id="cb162-2"><a href="multilevel-models.html#cb162-2" tabindex="-1"></a><span class="fu">library</span>(MASS)</span>
-<span id="cb162-3"><a href="multilevel-models.html#cb162-3" tabindex="-1"></a><span class="fu">library</span>(gridExtra)  </span>
-<span id="cb162-4"><a href="multilevel-models.html#cb162-4" tabindex="-1"></a><span class="fu">library</span>(mnormt) </span>
-<span id="cb162-5"><a href="multilevel-models.html#cb162-5" tabindex="-1"></a><span class="fu">library</span>(lme4) </span>
-<span id="cb162-6"><a href="multilevel-models.html#cb162-6" tabindex="-1"></a><span class="fu">library</span>(lmerTest)</span>
-<span id="cb162-7"><a href="multilevel-models.html#cb162-7" tabindex="-1"></a><span class="fu">library</span>(knitr) </span>
-<span id="cb162-8"><a href="multilevel-models.html#cb162-8" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span>
-<span id="cb162-9"><a href="multilevel-models.html#cb162-9" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
+<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb162-1"><a href="multilevel-models.html#cb162-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Packages required for Chapter 8</span></span>
+<span id="cb162-2"><a href="multilevel-models.html#cb162-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MASS)</span>
+<span id="cb162-3"><a href="multilevel-models.html#cb162-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gridExtra)  </span>
+<span id="cb162-4"><a href="multilevel-models.html#cb162-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mnormt) </span>
+<span id="cb162-5"><a href="multilevel-models.html#cb162-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lme4) </span>
+<span id="cb162-6"><a href="multilevel-models.html#cb162-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lmerTest)</span>
+<span id="cb162-7"><a href="multilevel-models.html#cb162-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr) </span>
+<span id="cb162-8"><a href="multilevel-models.html#cb162-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span>
+<span id="cb162-9"><a href="multilevel-models.html#cb162-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
 <div id="music-performance-anxiety-study-data-and-exploratory-analysis" class="section level2 hasAnchor" number="3.1">
 <h2><span class="header-section-number">3.1</span> Music Performance Anxiety Study: Data and Exploratory Analysis<a href="multilevel-models.html#music-performance-anxiety-study-data-and-exploratory-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div id="description-of-the-study" class="section level3 hasAnchor" number="3.1.1">
@@ -702,9 +709,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="the-data" class="section level3 hasAnchor" number="3.1.3">
 <h3><span class="header-section-number">3.1.3</span> The Data<a href="multilevel-models.html#the-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb163-1"><a href="multilevel-models.html#cb163-1" tabindex="-1"></a><span class="co">#Getting started</span></span>
-<span id="cb163-2"><a href="multilevel-models.html#cb163-2" tabindex="-1"></a>music <span class="ot">=</span> <span class="fu">read.csv</span>(<span class="st">&quot;https://raw.githubusercontent.com/proback/BeyondMLR/master/data/musicdata.csv&quot;</span>)</span>
-<span id="cb163-3"><a href="multilevel-models.html#cb163-3" tabindex="-1"></a><span class="fu">head</span>(music,<span class="dv">10</span>)       <span class="co"># examine first 10 rows</span></span></code></pre></div>
+<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb163-1"><a href="multilevel-models.html#cb163-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Getting started</span></span>
+<span id="cb163-2"><a href="multilevel-models.html#cb163-2" aria-hidden="true" tabindex="-1"></a>music <span class="ot">=</span> <span class="fu">read.csv</span>(<span class="st">&quot;https://raw.githubusercontent.com/proback/BeyondMLR/master/data/musicdata.csv&quot;</span>)</span>
+<span id="cb163-3"><a href="multilevel-models.html#cb163-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(music,<span class="dv">10</span>)       <span class="co"># examine first 10 rows</span></span></code></pre></div>
 <pre><code>##     X id diary previous   perform_type      memory           audience pa na age
 ## 1   1  1     1        0           Solo Unspecified         Instructor 40 11  18
 ## 2   2  1     2        1 Large Ensemble      Memory Public Performance 33 19  18
@@ -727,18 +734,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 8  Female      voice           3    16     7     52     16     30
 ## 9  Female      voice           3    16     7     52     16     30
 ## 10 Female      voice           3    16     7     52     16     30</code></pre>
-<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb165-1"><a href="multilevel-models.html#cb165-1" tabindex="-1"></a><span class="fu">dim</span>(music)        <span class="co"># should be 497 x 18</span></span></code></pre></div>
+<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb165-1"><a href="multilevel-models.html#cb165-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(music)        <span class="co"># should be 497 x 18</span></span></code></pre></div>
 <pre><code>## [1] 497  18</code></pre>
 <p><a href="https://github.com/proback/BeyondMLR/blob/master/data/musicdata.csv">Full Dataset</a></p>
 </div>
 <div id="some-data-wrangling-1" class="section level3 hasAnchor" number="3.1.4">
 <h3><span class="header-section-number">3.1.4</span> Some Data Wrangling<a href="multilevel-models.html#some-data-wrangling-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>We’ll select variables we’re interested in working with.</p>
-<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb167-1"><a href="multilevel-models.html#cb167-1" tabindex="-1"></a>select <span class="ot">&lt;-</span> dplyr<span class="sc">::</span> select</span>
-<span id="cb167-2"><a href="multilevel-models.html#cb167-2" tabindex="-1"></a>keydata <span class="ot">&lt;-</span> music <span class="sc">%&gt;%</span> </span>
-<span id="cb167-3"><a href="multilevel-models.html#cb167-3" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(id, diary, perform_type, memory, audience, </span>
-<span id="cb167-4"><a href="multilevel-models.html#cb167-4" tabindex="-1"></a>      na, gender, instrument, mpqab, mpqpem, mpqnem)</span>
-<span id="cb167-5"><a href="multilevel-models.html#cb167-5" tabindex="-1"></a><span class="fu">head</span>(keydata)</span></code></pre></div>
+<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb167-1"><a href="multilevel-models.html#cb167-1" aria-hidden="true" tabindex="-1"></a>select <span class="ot">&lt;-</span> dplyr<span class="sc">::</span> select</span>
+<span id="cb167-2"><a href="multilevel-models.html#cb167-2" aria-hidden="true" tabindex="-1"></a>keydata <span class="ot">&lt;-</span> music <span class="sc">%&gt;%</span> </span>
+<span id="cb167-3"><a href="multilevel-models.html#cb167-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(id, diary, perform_type, memory, audience, </span>
+<span id="cb167-4"><a href="multilevel-models.html#cb167-4" aria-hidden="true" tabindex="-1"></a>      na, gender, instrument, mpqab, mpqpem, mpqnem)</span>
+<span id="cb167-5"><a href="multilevel-models.html#cb167-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(keydata)</span></code></pre></div>
 <pre><code>##   id diary   perform_type      memory           audience na gender instrument
 ## 1  1     1           Solo Unspecified         Instructor 11 Female      voice
 ## 2  1     2 Large Ensemble      Memory Public Performance 19 Female      voice
@@ -781,8 +788,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3><span class="header-section-number">3.1.7</span> Number of Performances by Musician<a href="multilevel-models.html#number-of-performances-by-musician" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>When creating graphical summaries of level one covariates (variables) it is helpful to plot both 1) the 497 observations individually, and 2) averages for each of the 37 individuals, averaging across performances.</p>
 <p>Number of performances by each musician:</p>
-<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb169-1"><a href="multilevel-models.html#cb169-1" tabindex="-1"></a><span class="co"># number of diary entries for each subject</span></span>
-<span id="cb169-2"><a href="multilevel-models.html#cb169-2" tabindex="-1"></a>music <span class="sc">%&gt;%</span> <span class="fu">count</span>(id)     </span></code></pre></div>
+<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb169-1"><a href="multilevel-models.html#cb169-1" aria-hidden="true" tabindex="-1"></a><span class="co"># number of diary entries for each subject</span></span>
+<span id="cb169-2"><a href="multilevel-models.html#cb169-2" aria-hidden="true" tabindex="-1"></a>music <span class="sc">%&gt;%</span> <span class="fu">count</span>(id)     </span></code></pre></div>
 <pre><code>##    id  n
 ## 1   1 13
 ## 2   2 14
@@ -825,16 +832,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="number-of-performances-of-each-type" class="section level3 hasAnchor" number="3.1.8">
 <h3><span class="header-section-number">3.1.8</span> Number of Performances of Each Type<a href="multilevel-models.html#number-of-performances-of-each-type" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>We summarize level one covariates, ignoring the fact that there are multiple observations on the same musicians.</p>
-<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb171-1"><a href="multilevel-models.html#cb171-1" tabindex="-1"></a><span class="co"># Exploratory data analysis</span></span>
-<span id="cb171-2"><a href="multilevel-models.html#cb171-2" tabindex="-1"></a><span class="co"># Summarize Level 1 covariates (and responses) by </span></span>
-<span id="cb171-3"><a href="multilevel-models.html#cb171-3" tabindex="-1"></a><span class="co"># ignoring within subject correlation and pretending </span></span>
-<span id="cb171-4"><a href="multilevel-models.html#cb171-4" tabindex="-1"></a><span class="co"># all observations are independent</span></span>
-<span id="cb171-5"><a href="multilevel-models.html#cb171-5" tabindex="-1"></a>music <span class="sc">%&gt;%</span> <span class="fu">count</span>(perform_type) </span></code></pre></div>
+<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb171-1"><a href="multilevel-models.html#cb171-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Exploratory data analysis</span></span>
+<span id="cb171-2"><a href="multilevel-models.html#cb171-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Summarize Level 1 covariates (and responses) by </span></span>
+<span id="cb171-3"><a href="multilevel-models.html#cb171-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ignoring within subject correlation and pretending </span></span>
+<span id="cb171-4"><a href="multilevel-models.html#cb171-4" aria-hidden="true" tabindex="-1"></a><span class="co"># all observations are independent</span></span>
+<span id="cb171-5"><a href="multilevel-models.html#cb171-5" aria-hidden="true" tabindex="-1"></a>music <span class="sc">%&gt;%</span> <span class="fu">count</span>(perform_type) </span></code></pre></div>
 <pre><code>##     perform_type   n
 ## 1 Large Ensemble 136
 ## 2 Small Ensemble  82
 ## 3           Solo 279</code></pre>
-<div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb173-1"><a href="multilevel-models.html#cb173-1" tabindex="-1"></a>music <span class="sc">%&gt;%</span> <span class="fu">count</span>(audience) </span></code></pre></div>
+<div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb173-1"><a href="multilevel-models.html#cb173-1" aria-hidden="true" tabindex="-1"></a>music <span class="sc">%&gt;%</span> <span class="fu">count</span>(audience) </span></code></pre></div>
 <pre><code>##             audience   n
 ## 1         Instructor 149
 ## 2     Juried Recital  44
@@ -844,37 +851,37 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="distribution-of-negative-affect-for-all-performances" class="section level3 hasAnchor" number="3.1.9">
 <h3><span class="header-section-number">3.1.9</span> Distribution of Negative Affect for All Performances<a href="multilevel-models.html#distribution-of-negative-affect-for-all-performances" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>We display the distribution of the response variable (negative affect) across all 497 performances.</p>
-<div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb175-1"><a href="multilevel-models.html#cb175-1" tabindex="-1"></a><span class="co"># create ggplot theme for plots</span></span>
-<span id="cb175-2"><a href="multilevel-models.html#cb175-2" tabindex="-1"></a><span class="co"># theme with grid, grey background </span></span>
-<span id="cb175-3"><a href="multilevel-models.html#cb175-3" tabindex="-1"></a>theme<span class="fl">.1</span> <span class="ot">&lt;-</span> <span class="fu">theme</span>(<span class="at">axis.title.x =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">14</span>),</span>
-<span id="cb175-4"><a href="multilevel-models.html#cb175-4" tabindex="-1"></a>  <span class="at">axis.title.y =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">14</span>),</span>
-<span id="cb175-5"><a href="multilevel-models.html#cb175-5" tabindex="-1"></a>  <span class="at">plot.title=</span><span class="fu">element_text</span>(<span class="at">hjust=</span>.<span class="dv">9</span>,<span class="at">face=</span><span class="st">&quot;italic&quot;</span>,<span class="at">size=</span><span class="dv">12</span>))</span>
-<span id="cb175-6"><a href="multilevel-models.html#cb175-6" tabindex="-1"></a><span class="do">## Histogram of negative affect frequencies</span></span>
-<span id="cb175-7"><a href="multilevel-models.html#cb175-7" tabindex="-1"></a>na.all <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data=</span>music,<span class="fu">aes</span>(<span class="at">x=</span>na)) <span class="sc">+</span> </span>
-<span id="cb175-8"><a href="multilevel-models.html#cb175-8" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">2</span>, <span class="at">fill =</span> <span class="st">&quot;white&quot;</span>,<span class="at">color =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb175-9"><a href="multilevel-models.html#cb175-9" tabindex="-1"></a>  theme<span class="fl">.1</span> <span class="sc">+</span> <span class="fu">xlim</span>(<span class="dv">10</span>,<span class="dv">35</span>) <span class="sc">+</span></span>
-<span id="cb175-10"><a href="multilevel-models.html#cb175-10" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Negative Affect&quot;</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;Frequency&quot;</span>) <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">title=</span><span class="st">&quot;(a)&quot;</span>) </span>
-<span id="cb175-11"><a href="multilevel-models.html#cb175-11" tabindex="-1"></a>na.all</span></code></pre></div>
+<div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb175-1"><a href="multilevel-models.html#cb175-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create ggplot theme for plots</span></span>
+<span id="cb175-2"><a href="multilevel-models.html#cb175-2" aria-hidden="true" tabindex="-1"></a><span class="co"># theme with grid, grey background </span></span>
+<span id="cb175-3"><a href="multilevel-models.html#cb175-3" aria-hidden="true" tabindex="-1"></a>theme<span class="fl">.1</span> <span class="ot">&lt;-</span> <span class="fu">theme</span>(<span class="at">axis.title.x =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">14</span>),</span>
+<span id="cb175-4"><a href="multilevel-models.html#cb175-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">axis.title.y =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">14</span>),</span>
+<span id="cb175-5"><a href="multilevel-models.html#cb175-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">plot.title=</span><span class="fu">element_text</span>(<span class="at">hjust=</span>.<span class="dv">9</span>,<span class="at">face=</span><span class="st">&quot;italic&quot;</span>,<span class="at">size=</span><span class="dv">12</span>))</span>
+<span id="cb175-6"><a href="multilevel-models.html#cb175-6" aria-hidden="true" tabindex="-1"></a><span class="do">## Histogram of negative affect frequencies</span></span>
+<span id="cb175-7"><a href="multilevel-models.html#cb175-7" aria-hidden="true" tabindex="-1"></a>na.all <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data=</span>music,<span class="fu">aes</span>(<span class="at">x=</span>na)) <span class="sc">+</span> </span>
+<span id="cb175-8"><a href="multilevel-models.html#cb175-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">2</span>, <span class="at">fill =</span> <span class="st">&quot;white&quot;</span>,<span class="at">color =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb175-9"><a href="multilevel-models.html#cb175-9" aria-hidden="true" tabindex="-1"></a>  theme<span class="fl">.1</span> <span class="sc">+</span> <span class="fu">xlim</span>(<span class="dv">10</span>,<span class="dv">35</span>) <span class="sc">+</span></span>
+<span id="cb175-10"><a href="multilevel-models.html#cb175-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Negative Affect&quot;</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;Frequency&quot;</span>) <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">title=</span><span class="st">&quot;(a)&quot;</span>) </span>
+<span id="cb175-11"><a href="multilevel-models.html#cb175-11" aria-hidden="true" tabindex="-1"></a>na.all</span></code></pre></div>
 <p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-98-1.png" width="576" /></p>
 </div>
 <div id="distribution-of-average-negative-affect-for-each-musician" class="section level3 hasAnchor" number="3.1.10">
 <h3><span class="header-section-number">3.1.10</span> Distribution of Average Negative Affect for each Musician<a href="multilevel-models.html#distribution-of-average-negative-affect-for-each-musician" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>We also create a level two dataset, containing the average negative affect across all of the musician’s performances.</p>
-<div class="sourceCode" id="cb176"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb176-1"><a href="multilevel-models.html#cb176-1" tabindex="-1"></a><span class="co"># Create Level2 data set by picking off one observation </span></span>
-<span id="cb176-2"><a href="multilevel-models.html#cb176-2" tabindex="-1"></a><span class="co"># per subject, which would be easier if every subject </span></span>
-<span id="cb176-3"><a href="multilevel-models.html#cb176-3" tabindex="-1"></a><span class="co"># had a diary entry labeled &#39;1&#39; - should be 37 rows </span></span>
-<span id="cb176-4"><a href="multilevel-models.html#cb176-4" tabindex="-1"></a><span class="co"># and 6 columns (one per L2 variable)</span></span>
-<span id="cb176-5"><a href="multilevel-models.html#cb176-5" tabindex="-1"></a>music.lev2 <span class="ot">&lt;-</span>  keydata <span class="sc">%&gt;%</span></span>
-<span id="cb176-6"><a href="multilevel-models.html#cb176-6" tabindex="-1"></a>  <span class="fu">group_by</span>(id) <span class="sc">%&gt;%</span></span>
-<span id="cb176-7"><a href="multilevel-models.html#cb176-7" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">row_number</span>() <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb176-8"><a href="multilevel-models.html#cb176-8" tabindex="-1"></a>  <span class="fu">select</span>(id, gender<span class="sc">:</span>mpqnem)</span>
-<span id="cb176-9"><a href="multilevel-models.html#cb176-9" tabindex="-1"></a><span class="co"># Add average across all performances for each subject </span></span>
-<span id="cb176-10"><a href="multilevel-models.html#cb176-10" tabindex="-1"></a><span class="co"># for EDA plots</span></span>
-<span id="cb176-11"><a href="multilevel-models.html#cb176-11" tabindex="-1"></a>meanbysubj <span class="ot">&lt;-</span> music <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(id) <span class="sc">%&gt;%</span></span>
-<span id="cb176-12"><a href="multilevel-models.html#cb176-12" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">meanbysubj =</span> <span class="fu">mean</span>(na, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
-<span id="cb176-13"><a href="multilevel-models.html#cb176-13" tabindex="-1"></a>music.lev2 <span class="ot">&lt;-</span> music.lev2 <span class="sc">%&gt;%</span></span>
-<span id="cb176-14"><a href="multilevel-models.html#cb176-14" tabindex="-1"></a>  <span class="fu">left_join</span>(meanbysubj, <span class="at">by =</span> <span class="st">&quot;id&quot;</span>)</span>
-<span id="cb176-15"><a href="multilevel-models.html#cb176-15" tabindex="-1"></a><span class="fu">head</span>(music.lev2)</span></code></pre></div>
+<div class="sourceCode" id="cb176"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb176-1"><a href="multilevel-models.html#cb176-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create Level2 data set by picking off one observation </span></span>
+<span id="cb176-2"><a href="multilevel-models.html#cb176-2" aria-hidden="true" tabindex="-1"></a><span class="co"># per subject, which would be easier if every subject </span></span>
+<span id="cb176-3"><a href="multilevel-models.html#cb176-3" aria-hidden="true" tabindex="-1"></a><span class="co"># had a diary entry labeled &#39;1&#39; - should be 37 rows </span></span>
+<span id="cb176-4"><a href="multilevel-models.html#cb176-4" aria-hidden="true" tabindex="-1"></a><span class="co"># and 6 columns (one per L2 variable)</span></span>
+<span id="cb176-5"><a href="multilevel-models.html#cb176-5" aria-hidden="true" tabindex="-1"></a>music.lev2 <span class="ot">&lt;-</span>  keydata <span class="sc">%&gt;%</span></span>
+<span id="cb176-6"><a href="multilevel-models.html#cb176-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(id) <span class="sc">%&gt;%</span></span>
+<span id="cb176-7"><a href="multilevel-models.html#cb176-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">row_number</span>() <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb176-8"><a href="multilevel-models.html#cb176-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(id, gender<span class="sc">:</span>mpqnem)</span>
+<span id="cb176-9"><a href="multilevel-models.html#cb176-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Add average across all performances for each subject </span></span>
+<span id="cb176-10"><a href="multilevel-models.html#cb176-10" aria-hidden="true" tabindex="-1"></a><span class="co"># for EDA plots</span></span>
+<span id="cb176-11"><a href="multilevel-models.html#cb176-11" aria-hidden="true" tabindex="-1"></a>meanbysubj <span class="ot">&lt;-</span> music <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(id) <span class="sc">%&gt;%</span></span>
+<span id="cb176-12"><a href="multilevel-models.html#cb176-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">meanbysubj =</span> <span class="fu">mean</span>(na, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb176-13"><a href="multilevel-models.html#cb176-13" aria-hidden="true" tabindex="-1"></a>music.lev2 <span class="ot">&lt;-</span> music.lev2 <span class="sc">%&gt;%</span></span>
+<span id="cb176-14"><a href="multilevel-models.html#cb176-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(meanbysubj, <span class="at">by =</span> <span class="st">&quot;id&quot;</span>)</span>
+<span id="cb176-15"><a href="multilevel-models.html#cb176-15" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(music.lev2)</span></code></pre></div>
 <pre><code>## # A tibble: 6 × 7
 ## # Groups:   id [6]
 ##      id gender instrument            mpqab mpqpem mpqnem meanbysubj
@@ -886,18 +893,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 5     6 Female voice                    27     58     26       12.7
 ## 6     7 Female orchestral instrument    11     41     44       17.5</code></pre>
 <p>We display the mean negative affect scores for each of the 37 musicians.</p>
-<div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb178-1"><a href="multilevel-models.html#cb178-1" tabindex="-1"></a>na.mean <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data=</span>music.lev2,<span class="fu">aes</span>(<span class="at">x=</span>meanbysubj)) <span class="sc">+</span> </span>
-<span id="cb178-2"><a href="multilevel-models.html#cb178-2" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">2</span>, <span class="at">fill =</span> <span class="st">&quot;white&quot;</span>, </span>
-<span id="cb178-3"><a href="multilevel-models.html#cb178-3" tabindex="-1"></a>                 <span class="at">color =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb178-4"><a href="multilevel-models.html#cb178-4" tabindex="-1"></a>  theme<span class="fl">.1</span> <span class="sc">+</span> <span class="fu">xlim</span>(<span class="dv">10</span>,<span class="dv">35</span>) <span class="sc">+</span></span>
-<span id="cb178-5"><a href="multilevel-models.html#cb178-5" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Mean Negative Affect&quot;</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;Frequency&quot;</span>) <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">title=</span><span class="st">&quot;(b)&quot;</span>) </span>
-<span id="cb178-6"><a href="multilevel-models.html#cb178-6" tabindex="-1"></a>na.mean</span></code></pre></div>
+<div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb178-1"><a href="multilevel-models.html#cb178-1" aria-hidden="true" tabindex="-1"></a>na.mean <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data=</span>music.lev2,<span class="fu">aes</span>(<span class="at">x=</span>meanbysubj)) <span class="sc">+</span> </span>
+<span id="cb178-2"><a href="multilevel-models.html#cb178-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">2</span>, <span class="at">fill =</span> <span class="st">&quot;white&quot;</span>, </span>
+<span id="cb178-3"><a href="multilevel-models.html#cb178-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">color =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb178-4"><a href="multilevel-models.html#cb178-4" aria-hidden="true" tabindex="-1"></a>  theme<span class="fl">.1</span> <span class="sc">+</span> <span class="fu">xlim</span>(<span class="dv">10</span>,<span class="dv">35</span>) <span class="sc">+</span></span>
+<span id="cb178-5"><a href="multilevel-models.html#cb178-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Mean Negative Affect&quot;</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;Frequency&quot;</span>) <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">title=</span><span class="st">&quot;(b)&quot;</span>) </span>
+<span id="cb178-6"><a href="multilevel-models.html#cb178-6" aria-hidden="true" tabindex="-1"></a>na.mean</span></code></pre></div>
 <p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-100-1.png" width="576" /></p>
 </div>
 <div id="distribution-of-level-two-covariates" class="section level3 hasAnchor" number="3.1.11">
 <h3><span class="header-section-number">3.1.11</span> Distribution of Level Two Covariates<a href="multilevel-models.html#distribution-of-level-two-covariates" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>We examine the distribution of level 2 covariate instrument type (obtained from first performance by each musician, since these will be the same for all performances).</p>
-<div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb179-1"><a href="multilevel-models.html#cb179-1" tabindex="-1"></a>music.lev2 <span class="sc">%&gt;%</span> <span class="fu">ungroup</span>(id) <span class="sc">%&gt;%</span> <span class="fu">count</span>(instrument)</span></code></pre></div>
+<div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb179-1"><a href="multilevel-models.html#cb179-1" aria-hidden="true" tabindex="-1"></a>music.lev2 <span class="sc">%&gt;%</span> <span class="fu">ungroup</span>(id) <span class="sc">%&gt;%</span> <span class="fu">count</span>(instrument)</span></code></pre></div>
 <pre><code>## # A tibble: 3 × 2
 ##   instrument                    n
 ##   &lt;chr&gt;                     &lt;int&gt;
@@ -907,101 +914,101 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="distributions-of-nem-pem-absorption" class="section level3 hasAnchor" number="3.1.12">
 <h3><span class="header-section-number">3.1.12</span> Distributions of NEM, PEM, Absorption<a href="multilevel-models.html#distributions-of-nem-pem-absorption" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb181-1"><a href="multilevel-models.html#cb181-1" tabindex="-1"></a>nem1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data=</span>music.lev2,<span class="fu">aes</span>(<span class="at">x=</span>mpqnem)) <span class="sc">+</span> </span>
-<span id="cb181-2"><a href="multilevel-models.html#cb181-2" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">5</span>, <span class="at">fill =</span> <span class="st">&quot;white&quot;</span>,</span>
-<span id="cb181-3"><a href="multilevel-models.html#cb181-3" tabindex="-1"></a>                 <span class="at">color =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb181-4"><a href="multilevel-models.html#cb181-4" tabindex="-1"></a>  theme<span class="fl">.1</span> <span class="sc">+</span> </span>
-<span id="cb181-5"><a href="multilevel-models.html#cb181-5" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;NEM&quot;</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;Frequency&quot;</span>) <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">title=</span><span class="st">&quot;(a)&quot;</span>)</span>
-<span id="cb181-6"><a href="multilevel-models.html#cb181-6" tabindex="-1"></a>pem1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data=</span>music.lev2,<span class="fu">aes</span>(<span class="at">x=</span>mpqpem)) <span class="sc">+</span> </span>
-<span id="cb181-7"><a href="multilevel-models.html#cb181-7" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">5</span>, <span class="at">fill =</span> <span class="st">&quot;white&quot;</span>, </span>
-<span id="cb181-8"><a href="multilevel-models.html#cb181-8" tabindex="-1"></a>                 <span class="at">color =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb181-9"><a href="multilevel-models.html#cb181-9" tabindex="-1"></a>  theme<span class="fl">.1</span> <span class="sc">+</span> </span>
-<span id="cb181-10"><a href="multilevel-models.html#cb181-10" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;PEM&quot;</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;&quot;</span>) <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">title=</span><span class="st">&quot;(b)&quot;</span>)</span>
-<span id="cb181-11"><a href="multilevel-models.html#cb181-11" tabindex="-1"></a>abs <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data=</span>music.lev2,<span class="fu">aes</span>(<span class="at">x=</span>mpqab)) <span class="sc">+</span> </span>
-<span id="cb181-12"><a href="multilevel-models.html#cb181-12" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">5</span>, <span class="at">fill =</span> <span class="st">&quot;white&quot;</span>, </span>
-<span id="cb181-13"><a href="multilevel-models.html#cb181-13" tabindex="-1"></a>                 <span class="at">color =</span> <span class="st">&quot;black &quot;</span>) <span class="sc">+</span> </span>
-<span id="cb181-14"><a href="multilevel-models.html#cb181-14" tabindex="-1"></a>  theme<span class="fl">.1</span> <span class="sc">+</span> </span>
-<span id="cb181-15"><a href="multilevel-models.html#cb181-15" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Absorption&quot;</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;&quot;</span>) <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">title=</span><span class="st">&quot;(c)&quot;</span>)</span>
-<span id="cb181-16"><a href="multilevel-models.html#cb181-16" tabindex="-1"></a><span class="fu">grid.arrange</span>(nem1,pem1,abs,<span class="at">ncol=</span><span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb181-1"><a href="multilevel-models.html#cb181-1" aria-hidden="true" tabindex="-1"></a>nem1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data=</span>music.lev2,<span class="fu">aes</span>(<span class="at">x=</span>mpqnem)) <span class="sc">+</span> </span>
+<span id="cb181-2"><a href="multilevel-models.html#cb181-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">5</span>, <span class="at">fill =</span> <span class="st">&quot;white&quot;</span>,</span>
+<span id="cb181-3"><a href="multilevel-models.html#cb181-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">color =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb181-4"><a href="multilevel-models.html#cb181-4" aria-hidden="true" tabindex="-1"></a>  theme<span class="fl">.1</span> <span class="sc">+</span> </span>
+<span id="cb181-5"><a href="multilevel-models.html#cb181-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;NEM&quot;</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;Frequency&quot;</span>) <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">title=</span><span class="st">&quot;(a)&quot;</span>)</span>
+<span id="cb181-6"><a href="multilevel-models.html#cb181-6" aria-hidden="true" tabindex="-1"></a>pem1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data=</span>music.lev2,<span class="fu">aes</span>(<span class="at">x=</span>mpqpem)) <span class="sc">+</span> </span>
+<span id="cb181-7"><a href="multilevel-models.html#cb181-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">5</span>, <span class="at">fill =</span> <span class="st">&quot;white&quot;</span>, </span>
+<span id="cb181-8"><a href="multilevel-models.html#cb181-8" aria-hidden="true" tabindex="-1"></a>                 <span class="at">color =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb181-9"><a href="multilevel-models.html#cb181-9" aria-hidden="true" tabindex="-1"></a>  theme<span class="fl">.1</span> <span class="sc">+</span> </span>
+<span id="cb181-10"><a href="multilevel-models.html#cb181-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;PEM&quot;</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;&quot;</span>) <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">title=</span><span class="st">&quot;(b)&quot;</span>)</span>
+<span id="cb181-11"><a href="multilevel-models.html#cb181-11" aria-hidden="true" tabindex="-1"></a>abs <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data=</span>music.lev2,<span class="fu">aes</span>(<span class="at">x=</span>mpqab)) <span class="sc">+</span> </span>
+<span id="cb181-12"><a href="multilevel-models.html#cb181-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">5</span>, <span class="at">fill =</span> <span class="st">&quot;white&quot;</span>, </span>
+<span id="cb181-13"><a href="multilevel-models.html#cb181-13" aria-hidden="true" tabindex="-1"></a>                 <span class="at">color =</span> <span class="st">&quot;black &quot;</span>) <span class="sc">+</span> </span>
+<span id="cb181-14"><a href="multilevel-models.html#cb181-14" aria-hidden="true" tabindex="-1"></a>  theme<span class="fl">.1</span> <span class="sc">+</span> </span>
+<span id="cb181-15"><a href="multilevel-models.html#cb181-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Absorption&quot;</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;&quot;</span>) <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">title=</span><span class="st">&quot;(c)&quot;</span>)</span>
+<span id="cb181-16"><a href="multilevel-models.html#cb181-16" aria-hidden="true" tabindex="-1"></a><span class="fu">grid.arrange</span>(nem1,pem1,abs,<span class="at">ncol=</span><span class="dv">3</span>)</span></code></pre></div>
 <p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-102-1.png" width="864" /></p>
 </div>
 <div id="negative-affect-by-performance-type-audience-type-and-previous-performances" class="section level3 hasAnchor" number="3.1.13">
 <h3><span class="header-section-number">3.1.13</span> Negative Affect by Performance Type, Audience Type, and Previous Performances<a href="multilevel-models.html#negative-affect-by-performance-type-audience-type-and-previous-performances" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Boxplots of two categorical Level One covariates (performance type (a) and audience type (b)) vs. model response, and scatterplot of one continuous Level One covariate (number of previous diary entries (c)) vs. model response (negative affect). Each plot contains one observation for each of the 497 performances.</p>
-<div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb182-1"><a href="multilevel-models.html#cb182-1" tabindex="-1"></a><span class="co"># Look at relationships among Level 1 covariates and </span></span>
-<span id="cb182-2"><a href="multilevel-models.html#cb182-2" tabindex="-1"></a><span class="co"># primary response (again ignoring correlation).  </span></span>
-<span id="cb182-3"><a href="multilevel-models.html#cb182-3" tabindex="-1"></a><span class="co"># Boxplots for categorical covariates and</span></span>
-<span id="cb182-4"><a href="multilevel-models.html#cb182-4" tabindex="-1"></a><span class="co"># scatterplots and lattice plot for continuous covariates.</span></span>
-<span id="cb182-5"><a href="multilevel-models.html#cb182-5" tabindex="-1"></a><span class="co"># boxplot of negative affect by performance type</span></span>
-<span id="cb182-6"><a href="multilevel-models.html#cb182-6" tabindex="-1"></a>box.perform <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data=</span>music,<span class="fu">aes</span>(<span class="fu">factor</span>(perform_type),na)) <span class="sc">+</span></span>
-<span id="cb182-7"><a href="multilevel-models.html#cb182-7" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span> </span>
-<span id="cb182-8"><a href="multilevel-models.html#cb182-8" tabindex="-1"></a>  theme<span class="fl">.1</span> <span class="sc">+</span> <span class="fu">coord_flip</span>() <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;Negative affect&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb182-9"><a href="multilevel-models.html#cb182-9" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;&quot;</span>) <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">title=</span><span class="st">&quot;(a) Negative Affect by Instrument Type&quot;</span>)</span>
-<span id="cb182-10"><a href="multilevel-models.html#cb182-10" tabindex="-1"></a><span class="co"># boxplot of negative affect by audience</span></span>
-<span id="cb182-11"><a href="multilevel-models.html#cb182-11" tabindex="-1"></a>box.audience <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data=</span>music,<span class="fu">aes</span>(<span class="fu">factor</span>(audience),na)) <span class="sc">+</span></span>
-<span id="cb182-12"><a href="multilevel-models.html#cb182-12" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
-<span id="cb182-13"><a href="multilevel-models.html#cb182-13" tabindex="-1"></a>  theme<span class="fl">.1</span> <span class="sc">+</span> <span class="fu">coord_flip</span>() <span class="sc">+</span>  <span class="fu">ylab</span>(<span class="st">&quot;Negative affect&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb182-14"><a href="multilevel-models.html#cb182-14" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;&quot;</span>) <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">title=</span><span class="st">&quot;(b) Negative Affect by Performance Type&quot;</span>)</span>
-<span id="cb182-15"><a href="multilevel-models.html#cb182-15" tabindex="-1"></a><span class="co"># scatterplot of negative affect versus number of </span></span>
-<span id="cb182-16"><a href="multilevel-models.html#cb182-16" tabindex="-1"></a><span class="co"># previous performances</span></span>
-<span id="cb182-17"><a href="multilevel-models.html#cb182-17" tabindex="-1"></a>scatter.previous <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data=</span>music, <span class="fu">aes</span>(<span class="at">x=</span>previous,<span class="at">y=</span>na)) <span class="sc">+</span></span>
-<span id="cb182-18"><a href="multilevel-models.html#cb182-18" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
-<span id="cb182-19"><a href="multilevel-models.html#cb182-19" tabindex="-1"></a>  theme<span class="fl">.1</span> <span class="sc">+</span> </span>
-<span id="cb182-20"><a href="multilevel-models.html#cb182-20" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">&quot;lm&quot;</span>,<span class="at">color=</span><span class="st">&quot;black&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb182-21"><a href="multilevel-models.html#cb182-21" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Negative affect&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb182-22"><a href="multilevel-models.html#cb182-22" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Previous Performances&quot;</span>) <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">title=</span><span class="st">&quot;(c) Negative Affect by Number of Previous Performances&quot;</span>)</span>
-<span id="cb182-23"><a href="multilevel-models.html#cb182-23" tabindex="-1"></a><span class="co"># all three together</span></span>
-<span id="cb182-24"><a href="multilevel-models.html#cb182-24" tabindex="-1"></a><span class="fu">grid.arrange</span>(box.perform,box.audience,scatter.previous,<span class="at">ncol=</span><span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb182-1"><a href="multilevel-models.html#cb182-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Look at relationships among Level 1 covariates and </span></span>
+<span id="cb182-2"><a href="multilevel-models.html#cb182-2" aria-hidden="true" tabindex="-1"></a><span class="co"># primary response (again ignoring correlation).  </span></span>
+<span id="cb182-3"><a href="multilevel-models.html#cb182-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Boxplots for categorical covariates and</span></span>
+<span id="cb182-4"><a href="multilevel-models.html#cb182-4" aria-hidden="true" tabindex="-1"></a><span class="co"># scatterplots and lattice plot for continuous covariates.</span></span>
+<span id="cb182-5"><a href="multilevel-models.html#cb182-5" aria-hidden="true" tabindex="-1"></a><span class="co"># boxplot of negative affect by performance type</span></span>
+<span id="cb182-6"><a href="multilevel-models.html#cb182-6" aria-hidden="true" tabindex="-1"></a>box.perform <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data=</span>music,<span class="fu">aes</span>(<span class="fu">factor</span>(perform_type),na)) <span class="sc">+</span></span>
+<span id="cb182-7"><a href="multilevel-models.html#cb182-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span> </span>
+<span id="cb182-8"><a href="multilevel-models.html#cb182-8" aria-hidden="true" tabindex="-1"></a>  theme<span class="fl">.1</span> <span class="sc">+</span> <span class="fu">coord_flip</span>() <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;Negative affect&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb182-9"><a href="multilevel-models.html#cb182-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;&quot;</span>) <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">title=</span><span class="st">&quot;(a) Negative Affect by Instrument Type&quot;</span>)</span>
+<span id="cb182-10"><a href="multilevel-models.html#cb182-10" aria-hidden="true" tabindex="-1"></a><span class="co"># boxplot of negative affect by audience</span></span>
+<span id="cb182-11"><a href="multilevel-models.html#cb182-11" aria-hidden="true" tabindex="-1"></a>box.audience <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data=</span>music,<span class="fu">aes</span>(<span class="fu">factor</span>(audience),na)) <span class="sc">+</span></span>
+<span id="cb182-12"><a href="multilevel-models.html#cb182-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb182-13"><a href="multilevel-models.html#cb182-13" aria-hidden="true" tabindex="-1"></a>  theme<span class="fl">.1</span> <span class="sc">+</span> <span class="fu">coord_flip</span>() <span class="sc">+</span>  <span class="fu">ylab</span>(<span class="st">&quot;Negative affect&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb182-14"><a href="multilevel-models.html#cb182-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;&quot;</span>) <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">title=</span><span class="st">&quot;(b) Negative Affect by Performance Type&quot;</span>)</span>
+<span id="cb182-15"><a href="multilevel-models.html#cb182-15" aria-hidden="true" tabindex="-1"></a><span class="co"># scatterplot of negative affect versus number of </span></span>
+<span id="cb182-16"><a href="multilevel-models.html#cb182-16" aria-hidden="true" tabindex="-1"></a><span class="co"># previous performances</span></span>
+<span id="cb182-17"><a href="multilevel-models.html#cb182-17" aria-hidden="true" tabindex="-1"></a>scatter.previous <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data=</span>music, <span class="fu">aes</span>(<span class="at">x=</span>previous,<span class="at">y=</span>na)) <span class="sc">+</span></span>
+<span id="cb182-18"><a href="multilevel-models.html#cb182-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb182-19"><a href="multilevel-models.html#cb182-19" aria-hidden="true" tabindex="-1"></a>  theme<span class="fl">.1</span> <span class="sc">+</span> </span>
+<span id="cb182-20"><a href="multilevel-models.html#cb182-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">&quot;lm&quot;</span>,<span class="at">color=</span><span class="st">&quot;black&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb182-21"><a href="multilevel-models.html#cb182-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Negative affect&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb182-22"><a href="multilevel-models.html#cb182-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Previous Performances&quot;</span>) <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">title=</span><span class="st">&quot;(c) Negative Affect by Number of Previous Performances&quot;</span>)</span>
+<span id="cb182-23"><a href="multilevel-models.html#cb182-23" aria-hidden="true" tabindex="-1"></a><span class="co"># all three together</span></span>
+<span id="cb182-24"><a href="multilevel-models.html#cb182-24" aria-hidden="true" tabindex="-1"></a><span class="fu">grid.arrange</span>(box.perform,box.audience,scatter.previous,<span class="at">ncol=</span><span class="dv">2</span>)</span></code></pre></div>
 <p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-103-1.png" width="768" /></p>
 </div>
 <div id="lattice-plot-for-negative-affect-by-performance-type" class="section level3 hasAnchor" number="3.1.14">
 <h3><span class="header-section-number">3.1.14</span> Lattice Plot for Negative Affect by Performance Type<a href="multilevel-models.html#lattice-plot-for-negative-affect-by-performance-type" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>We plot negative affect by type of performance for each musician individually. (Lattice plot)</p>
-<div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb183-1"><a href="multilevel-models.html#cb183-1" tabindex="-1"></a><span class="co"># Lattice plot for NA vs. Performance Type</span></span>
-<span id="cb183-2"><a href="multilevel-models.html#cb183-2" tabindex="-1"></a><span class="fu">ggplot</span>(music,<span class="fu">aes</span>(<span class="at">x=</span><span class="fu">factor</span>(perform_type),<span class="at">y=</span>na)) <span class="sc">+</span> theme<span class="fl">.1</span> <span class="sc">+</span> </span>
-<span id="cb183-3"><a href="multilevel-models.html#cb183-3" tabindex="-1"></a>  <span class="fu">geom_dotplot</span>(<span class="at">binaxis=</span><span class="st">&quot;y&quot;</span>,<span class="at">stackdir=</span><span class="st">&quot;center&quot;</span>,<span class="at">binwidth=</span><span class="dv">25</span><span class="sc">/</span><span class="dv">30</span>) <span class="sc">+</span> </span>
-<span id="cb183-4"><a href="multilevel-models.html#cb183-4" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>id,<span class="at">ncol=</span><span class="dv">5</span>) <span class="sc">+</span>   </span>
-<span id="cb183-5"><a href="multilevel-models.html#cb183-5" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">strip.text.x=</span><span class="fu">element_blank</span>()) <span class="sc">+</span> <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
-<span id="cb183-6"><a href="multilevel-models.html#cb183-6" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Performance Type&quot;</span>,<span class="at">y=</span><span class="st">&quot;Negative Affect&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb183-1"><a href="multilevel-models.html#cb183-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Lattice plot for NA vs. Performance Type</span></span>
+<span id="cb183-2"><a href="multilevel-models.html#cb183-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(music,<span class="fu">aes</span>(<span class="at">x=</span><span class="fu">factor</span>(perform_type),<span class="at">y=</span>na)) <span class="sc">+</span> theme<span class="fl">.1</span> <span class="sc">+</span> </span>
+<span id="cb183-3"><a href="multilevel-models.html#cb183-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_dotplot</span>(<span class="at">binaxis=</span><span class="st">&quot;y&quot;</span>,<span class="at">stackdir=</span><span class="st">&quot;center&quot;</span>,<span class="at">binwidth=</span><span class="dv">25</span><span class="sc">/</span><span class="dv">30</span>) <span class="sc">+</span> </span>
+<span id="cb183-4"><a href="multilevel-models.html#cb183-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>id,<span class="at">ncol=</span><span class="dv">5</span>) <span class="sc">+</span>   </span>
+<span id="cb183-5"><a href="multilevel-models.html#cb183-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">strip.text.x=</span><span class="fu">element_blank</span>()) <span class="sc">+</span> <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb183-6"><a href="multilevel-models.html#cb183-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Performance Type&quot;</span>,<span class="at">y=</span><span class="st">&quot;Negative Affect&quot;</span>)</span></code></pre></div>
 <p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-104-1.png" width="768" /></p>
 </div>
 <div id="lattice-plot-for-negative-affect-by-audience-type" class="section level3 hasAnchor" number="3.1.15">
 <h3><span class="header-section-number">3.1.15</span> Lattice Plot for Negative Affect by Audience Type<a href="multilevel-models.html#lattice-plot-for-negative-affect-by-audience-type" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>We plot negative affect by type of audience for each musician individually.</p>
-<div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb184-1"><a href="multilevel-models.html#cb184-1" tabindex="-1"></a><span class="co"># Lattice plot for NA vs. Audience</span></span>
-<span id="cb184-2"><a href="multilevel-models.html#cb184-2" tabindex="-1"></a><span class="fu">ggplot</span>(music,<span class="fu">aes</span>(<span class="at">x=</span><span class="fu">factor</span>(audience),<span class="at">y=</span>na)) <span class="sc">+</span> theme<span class="fl">.1</span> <span class="sc">+</span> </span>
-<span id="cb184-3"><a href="multilevel-models.html#cb184-3" tabindex="-1"></a>  <span class="fu">geom_dotplot</span>(<span class="at">binaxis=</span><span class="st">&quot;y&quot;</span>,<span class="at">stackdir=</span><span class="st">&quot;center&quot;</span>,<span class="at">binwidth=</span><span class="dv">25</span><span class="sc">/</span><span class="dv">30</span>) <span class="sc">+</span> </span>
-<span id="cb184-4"><a href="multilevel-models.html#cb184-4" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>id,<span class="at">ncol=</span><span class="dv">5</span>) <span class="sc">+</span>   </span>
-<span id="cb184-5"><a href="multilevel-models.html#cb184-5" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">strip.text.x=</span><span class="fu">element_blank</span>()) <span class="sc">+</span> <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
-<span id="cb184-6"><a href="multilevel-models.html#cb184-6" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Audience&quot;</span>,<span class="at">y=</span><span class="st">&quot;Negative Affect&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb184-1"><a href="multilevel-models.html#cb184-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Lattice plot for NA vs. Audience</span></span>
+<span id="cb184-2"><a href="multilevel-models.html#cb184-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(music,<span class="fu">aes</span>(<span class="at">x=</span><span class="fu">factor</span>(audience),<span class="at">y=</span>na)) <span class="sc">+</span> theme<span class="fl">.1</span> <span class="sc">+</span> </span>
+<span id="cb184-3"><a href="multilevel-models.html#cb184-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_dotplot</span>(<span class="at">binaxis=</span><span class="st">&quot;y&quot;</span>,<span class="at">stackdir=</span><span class="st">&quot;center&quot;</span>,<span class="at">binwidth=</span><span class="dv">25</span><span class="sc">/</span><span class="dv">30</span>) <span class="sc">+</span> </span>
+<span id="cb184-4"><a href="multilevel-models.html#cb184-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>id,<span class="at">ncol=</span><span class="dv">5</span>) <span class="sc">+</span>   </span>
+<span id="cb184-5"><a href="multilevel-models.html#cb184-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">strip.text.x=</span><span class="fu">element_blank</span>()) <span class="sc">+</span> <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb184-6"><a href="multilevel-models.html#cb184-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Audience&quot;</span>,<span class="at">y=</span><span class="st">&quot;Negative Affect&quot;</span>)</span></code></pre></div>
 <p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-105-1.png" width="768" /></p>
 </div>
 <div id="lattice-plot-for-previous-performances-vs-negative-affect" class="section level3 hasAnchor" number="3.1.16">
 <h3><span class="header-section-number">3.1.16</span> Lattice Plot for Previous Performances vs Negative Affect<a href="multilevel-models.html#lattice-plot-for-previous-performances-vs-negative-affect" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>We plot of previous performances vs. negative affect, with separate scatterplots with fitted lines by musician</p>
-<div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb185-1"><a href="multilevel-models.html#cb185-1" tabindex="-1"></a><span class="co"># Lattice plot for NA vs. Previous Performances</span></span>
-<span id="cb185-2"><a href="multilevel-models.html#cb185-2" tabindex="-1"></a><span class="fu">ggplot</span>(music,<span class="fu">aes</span>(<span class="at">x=</span>previous,<span class="at">y=</span>na)) <span class="sc">+</span> theme<span class="fl">.1</span> <span class="sc">+</span> </span>
-<span id="cb185-3"><a href="multilevel-models.html#cb185-3" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">&quot;lm&quot;</span>,<span class="at">color=</span><span class="st">&quot;black&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb185-4"><a href="multilevel-models.html#cb185-4" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>id,<span class="at">ncol=</span><span class="dv">5</span>) <span class="sc">+</span>   </span>
-<span id="cb185-5"><a href="multilevel-models.html#cb185-5" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">strip.text.x=</span><span class="fu">element_blank</span>()) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="dv">10</span>,<span class="dv">35</span>) <span class="sc">+</span></span>
-<span id="cb185-6"><a href="multilevel-models.html#cb185-6" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Previous Performances&quot;</span>,<span class="at">y=</span><span class="st">&quot;Negative Affect&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb185-1"><a href="multilevel-models.html#cb185-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Lattice plot for NA vs. Previous Performances</span></span>
+<span id="cb185-2"><a href="multilevel-models.html#cb185-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(music,<span class="fu">aes</span>(<span class="at">x=</span>previous,<span class="at">y=</span>na)) <span class="sc">+</span> theme<span class="fl">.1</span> <span class="sc">+</span> </span>
+<span id="cb185-3"><a href="multilevel-models.html#cb185-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">&quot;lm&quot;</span>,<span class="at">color=</span><span class="st">&quot;black&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb185-4"><a href="multilevel-models.html#cb185-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>id,<span class="at">ncol=</span><span class="dv">5</span>) <span class="sc">+</span>   </span>
+<span id="cb185-5"><a href="multilevel-models.html#cb185-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">strip.text.x=</span><span class="fu">element_blank</span>()) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="dv">10</span>,<span class="dv">35</span>) <span class="sc">+</span></span>
+<span id="cb185-6"><a href="multilevel-models.html#cb185-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Previous Performances&quot;</span>,<span class="at">y=</span><span class="st">&quot;Negative Affect&quot;</span>)</span></code></pre></div>
 <p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-106-1.png" width="768" /></p>
 </div>
 <div id="negative-affect-by-instrument-type" class="section level3 hasAnchor" number="3.1.17">
 <h3><span class="header-section-number">3.1.17</span> Negative Affect by Instrument Type<a href="multilevel-models.html#negative-affect-by-instrument-type" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Boxplots of the categorical Level Two covariate (instrument) vs. model response (negative affect). Plot (a) is based on all 497 observations from all 37 subjects, while plot (b) uses only one observation per subject.</p>
-<div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb186-1"><a href="multilevel-models.html#cb186-1" tabindex="-1"></a><span class="co"># Look at relationships among Level 2 covariates and </span></span>
-<span id="cb186-2"><a href="multilevel-models.html#cb186-2" tabindex="-1"></a><span class="co"># negative affect (again ignoring correlation)</span></span>
-<span id="cb186-3"><a href="multilevel-models.html#cb186-3" tabindex="-1"></a>instr.all <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data=</span>music,<span class="fu">aes</span>(<span class="fu">factor</span>(instrument),na)) <span class="sc">+</span></span>
-<span id="cb186-4"><a href="multilevel-models.html#cb186-4" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span> </span>
-<span id="cb186-5"><a href="multilevel-models.html#cb186-5" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span> theme<span class="fl">.1</span> <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;Negative Affect&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb186-6"><a href="multilevel-models.html#cb186-6" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;&quot;</span>) <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">title=</span><span class="st">&quot;(a)&quot;</span>) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="dv">10</span>,<span class="dv">35</span>)</span>
-<span id="cb186-7"><a href="multilevel-models.html#cb186-7" tabindex="-1"></a>instr.mean <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data=</span>music.lev2,</span>
-<span id="cb186-8"><a href="multilevel-models.html#cb186-8" tabindex="-1"></a>                     <span class="fu">aes</span>(<span class="fu">factor</span>(instrument),meanbysubj)) <span class="sc">+</span> </span>
-<span id="cb186-9"><a href="multilevel-models.html#cb186-9" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span> <span class="fu">coord_flip</span>() <span class="sc">+</span> </span>
-<span id="cb186-10"><a href="multilevel-models.html#cb186-10" tabindex="-1"></a>  theme<span class="fl">.1</span> <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;Mean Negative Affect&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb186-11"><a href="multilevel-models.html#cb186-11" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;&quot;</span>) <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">title=</span><span class="st">&quot;(b)&quot;</span>) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="dv">10</span>,<span class="dv">35</span>)</span>
-<span id="cb186-12"><a href="multilevel-models.html#cb186-12" tabindex="-1"></a><span class="fu">grid.arrange</span>(instr.all, instr.mean, <span class="at">ncol =</span> <span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb186-1"><a href="multilevel-models.html#cb186-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Look at relationships among Level 2 covariates and </span></span>
+<span id="cb186-2"><a href="multilevel-models.html#cb186-2" aria-hidden="true" tabindex="-1"></a><span class="co"># negative affect (again ignoring correlation)</span></span>
+<span id="cb186-3"><a href="multilevel-models.html#cb186-3" aria-hidden="true" tabindex="-1"></a>instr.all <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data=</span>music,<span class="fu">aes</span>(<span class="fu">factor</span>(instrument),na)) <span class="sc">+</span></span>
+<span id="cb186-4"><a href="multilevel-models.html#cb186-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span> </span>
+<span id="cb186-5"><a href="multilevel-models.html#cb186-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span> theme<span class="fl">.1</span> <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;Negative Affect&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb186-6"><a href="multilevel-models.html#cb186-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;&quot;</span>) <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">title=</span><span class="st">&quot;(a)&quot;</span>) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="dv">10</span>,<span class="dv">35</span>)</span>
+<span id="cb186-7"><a href="multilevel-models.html#cb186-7" aria-hidden="true" tabindex="-1"></a>instr.mean <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data=</span>music.lev2,</span>
+<span id="cb186-8"><a href="multilevel-models.html#cb186-8" aria-hidden="true" tabindex="-1"></a>                     <span class="fu">aes</span>(<span class="fu">factor</span>(instrument),meanbysubj)) <span class="sc">+</span> </span>
+<span id="cb186-9"><a href="multilevel-models.html#cb186-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span> <span class="fu">coord_flip</span>() <span class="sc">+</span> </span>
+<span id="cb186-10"><a href="multilevel-models.html#cb186-10" aria-hidden="true" tabindex="-1"></a>  theme<span class="fl">.1</span> <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;Mean Negative Affect&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb186-11"><a href="multilevel-models.html#cb186-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;&quot;</span>) <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">title=</span><span class="st">&quot;(b)&quot;</span>) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="dv">10</span>,<span class="dv">35</span>)</span>
+<span id="cb186-12"><a href="multilevel-models.html#cb186-12" aria-hidden="true" tabindex="-1"></a><span class="fu">grid.arrange</span>(instr.all, instr.mean, <span class="at">ncol =</span> <span class="dv">1</span>)</span></code></pre></div>
 <p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-107-1.png" width="576" /></p>
 </div>
 <div id="more-data-wrangling" class="section level3 hasAnchor" number="3.1.18">
@@ -1010,70 +1017,70 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="lattice-plot-for-large-ensemble-effect" class="section level3 hasAnchor" number="3.1.19">
 <h3><span class="header-section-number">3.1.19</span> Lattice Plot for Large Ensemble Effect<a href="multilevel-models.html#lattice-plot-for-large-ensemble-effect" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb187-1"><a href="multilevel-models.html#cb187-1" tabindex="-1"></a><span class="co"># Lattice plot for NA vs. Performance Type</span></span>
-<span id="cb187-2"><a href="multilevel-models.html#cb187-2" tabindex="-1"></a><span class="fu">ggplot</span>(music,<span class="fu">aes</span>(<span class="at">x=</span>large,<span class="at">y=</span>na)) <span class="sc">+</span> theme<span class="fl">.1</span> <span class="sc">+</span> </span>
-<span id="cb187-3"><a href="multilevel-models.html#cb187-3" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">&quot;lm&quot;</span>,<span class="at">color=</span><span class="st">&quot;black&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb187-4"><a href="multilevel-models.html#cb187-4" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>id,<span class="at">ncol=</span><span class="dv">5</span>) <span class="sc">+</span>   </span>
-<span id="cb187-5"><a href="multilevel-models.html#cb187-5" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">strip.text.x=</span><span class="fu">element_blank</span>()) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="dv">10</span>,<span class="dv">35</span>) <span class="sc">+</span></span>
-<span id="cb187-6"><a href="multilevel-models.html#cb187-6" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Large Ensemble Performance&quot;</span>,<span class="at">y=</span><span class="st">&quot;Negative Affect&quot;</span>) </span></code></pre></div>
+<div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb187-1"><a href="multilevel-models.html#cb187-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Lattice plot for NA vs. Performance Type</span></span>
+<span id="cb187-2"><a href="multilevel-models.html#cb187-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(music,<span class="fu">aes</span>(<span class="at">x=</span>large,<span class="at">y=</span>na)) <span class="sc">+</span> theme<span class="fl">.1</span> <span class="sc">+</span> </span>
+<span id="cb187-3"><a href="multilevel-models.html#cb187-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">&quot;lm&quot;</span>,<span class="at">color=</span><span class="st">&quot;black&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb187-4"><a href="multilevel-models.html#cb187-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>id,<span class="at">ncol=</span><span class="dv">5</span>) <span class="sc">+</span>   </span>
+<span id="cb187-5"><a href="multilevel-models.html#cb187-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">strip.text.x=</span><span class="fu">element_blank</span>()) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="dv">10</span>,<span class="dv">35</span>) <span class="sc">+</span></span>
+<span id="cb187-6"><a href="multilevel-models.html#cb187-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Large Ensemble Performance&quot;</span>,<span class="at">y=</span><span class="st">&quot;Negative Affect&quot;</span>) </span></code></pre></div>
 <p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-108-1.png" width="768" /></p>
 </div>
 <div id="boxplots-for-orchestral-instrument-effect" class="section level3 hasAnchor" number="3.1.20">
 <h3><span class="header-section-number">3.1.20</span> Boxplots for Orchestral Instrument Effect<a href="multilevel-models.html#boxplots-for-orchestral-instrument-effect" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb188-1"><a href="multilevel-models.html#cb188-1" tabindex="-1"></a><span class="co"># Look at relationships among Level 2 covariates and </span></span>
-<span id="cb188-2"><a href="multilevel-models.html#cb188-2" tabindex="-1"></a><span class="co"># negative affect (again ignoring correlation)</span></span>
-<span id="cb188-3"><a href="multilevel-models.html#cb188-3" tabindex="-1"></a>instr.all <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data=</span>music,<span class="fu">aes</span>(<span class="fu">factor</span>(orch),na)) <span class="sc">+</span></span>
-<span id="cb188-4"><a href="multilevel-models.html#cb188-4" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span> </span>
-<span id="cb188-5"><a href="multilevel-models.html#cb188-5" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span> theme<span class="fl">.1</span> <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;Negative Affect&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb188-6"><a href="multilevel-models.html#cb188-6" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Orchestral Instrument&quot;</span>) <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">title=</span><span class="st">&quot;(a)&quot;</span>) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="dv">10</span>,<span class="dv">35</span>)</span>
-<span id="cb188-7"><a href="multilevel-models.html#cb188-7" tabindex="-1"></a>instr.mean <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data=</span>music.lev2,</span>
-<span id="cb188-8"><a href="multilevel-models.html#cb188-8" tabindex="-1"></a>                     <span class="fu">aes</span>(<span class="fu">factor</span>(orch),meanbysubj)) <span class="sc">+</span> </span>
-<span id="cb188-9"><a href="multilevel-models.html#cb188-9" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span> <span class="fu">coord_flip</span>() <span class="sc">+</span> </span>
-<span id="cb188-10"><a href="multilevel-models.html#cb188-10" tabindex="-1"></a>  theme<span class="fl">.1</span> <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;Mean Negative Affect&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb188-11"><a href="multilevel-models.html#cb188-11" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Orchestral Instrument&quot;</span>) <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">title=</span><span class="st">&quot;(b)&quot;</span>) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="dv">10</span>,<span class="dv">35</span>)</span>
-<span id="cb188-12"><a href="multilevel-models.html#cb188-12" tabindex="-1"></a><span class="fu">grid.arrange</span>(instr.all, instr.mean, <span class="at">ncol =</span> <span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb188-1"><a href="multilevel-models.html#cb188-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Look at relationships among Level 2 covariates and </span></span>
+<span id="cb188-2"><a href="multilevel-models.html#cb188-2" aria-hidden="true" tabindex="-1"></a><span class="co"># negative affect (again ignoring correlation)</span></span>
+<span id="cb188-3"><a href="multilevel-models.html#cb188-3" aria-hidden="true" tabindex="-1"></a>instr.all <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data=</span>music,<span class="fu">aes</span>(<span class="fu">factor</span>(orch),na)) <span class="sc">+</span></span>
+<span id="cb188-4"><a href="multilevel-models.html#cb188-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span> </span>
+<span id="cb188-5"><a href="multilevel-models.html#cb188-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span> theme<span class="fl">.1</span> <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;Negative Affect&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb188-6"><a href="multilevel-models.html#cb188-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Orchestral Instrument&quot;</span>) <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">title=</span><span class="st">&quot;(a)&quot;</span>) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="dv">10</span>,<span class="dv">35</span>)</span>
+<span id="cb188-7"><a href="multilevel-models.html#cb188-7" aria-hidden="true" tabindex="-1"></a>instr.mean <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data=</span>music.lev2,</span>
+<span id="cb188-8"><a href="multilevel-models.html#cb188-8" aria-hidden="true" tabindex="-1"></a>                     <span class="fu">aes</span>(<span class="fu">factor</span>(orch),meanbysubj)) <span class="sc">+</span> </span>
+<span id="cb188-9"><a href="multilevel-models.html#cb188-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span> <span class="fu">coord_flip</span>() <span class="sc">+</span> </span>
+<span id="cb188-10"><a href="multilevel-models.html#cb188-10" aria-hidden="true" tabindex="-1"></a>  theme<span class="fl">.1</span> <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;Mean Negative Affect&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb188-11"><a href="multilevel-models.html#cb188-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Orchestral Instrument&quot;</span>) <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">title=</span><span class="st">&quot;(b)&quot;</span>) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="dv">10</span>,<span class="dv">35</span>)</span>
+<span id="cb188-12"><a href="multilevel-models.html#cb188-12" aria-hidden="true" tabindex="-1"></a><span class="fu">grid.arrange</span>(instr.all, instr.mean, <span class="at">ncol =</span> <span class="dv">1</span>)</span></code></pre></div>
 <p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-109-1.png" width="576" /></p>
 </div>
 <div id="negative-affect-by-pem-nem-absorption" class="section level3 hasAnchor" number="3.1.21">
 <h3><span class="header-section-number">3.1.21</span> Negative Affect by PEM, NEM, Absorption<a href="multilevel-models.html#negative-affect-by-pem-nem-absorption" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Scatterplots of continuous Level Two covariates (positive emotionality (PEM), negative emotionality (NEM), and absorption) vs. model response (negative affect). The top plots (a1, b1, c1) are based on all 497 observations from all 37 subjects, while the bottom plots (a2, b2, c2) use only one observation per subject.</p>
-<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb189-1"><a href="multilevel-models.html#cb189-1" tabindex="-1"></a>pem2.all <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data=</span>music,<span class="fu">aes</span>(<span class="at">x=</span>mpqpem,<span class="at">y=</span>na)) <span class="sc">+</span> </span>
-<span id="cb189-2"><a href="multilevel-models.html#cb189-2" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
-<span id="cb189-3"><a href="multilevel-models.html#cb189-3" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">&quot;lm&quot;</span>,<span class="at">color=</span><span class="st">&quot;black&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb189-4"><a href="multilevel-models.html#cb189-4" tabindex="-1"></a>  theme<span class="fl">.1</span> <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;Negative Affect&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb189-5"><a href="multilevel-models.html#cb189-5" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;PEM&quot;</span>) <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">title=</span><span class="st">&quot;(a1)&quot;</span>)</span>
-<span id="cb189-6"><a href="multilevel-models.html#cb189-6" tabindex="-1"></a>nem2.all <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data=</span>music,<span class="fu">aes</span>(<span class="at">x=</span>mpqnem,<span class="at">y=</span>na)) <span class="sc">+</span> </span>
-<span id="cb189-7"><a href="multilevel-models.html#cb189-7" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
-<span id="cb189-8"><a href="multilevel-models.html#cb189-8" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">&quot;lm&quot;</span>,<span class="at">color=</span><span class="st">&quot;black&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb189-9"><a href="multilevel-models.html#cb189-9" tabindex="-1"></a>  theme<span class="fl">.1</span> <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;&quot;</span>) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">&quot;NEM&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb189-10"><a href="multilevel-models.html#cb189-10" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">&quot;(b1)&quot;</span>)</span>
-<span id="cb189-11"><a href="multilevel-models.html#cb189-11" tabindex="-1"></a>abs2.all <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data=</span>music,<span class="fu">aes</span>(<span class="at">x=</span>mpqab,<span class="at">y=</span>na)) <span class="sc">+</span> </span>
-<span id="cb189-12"><a href="multilevel-models.html#cb189-12" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
-<span id="cb189-13"><a href="multilevel-models.html#cb189-13" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">&quot;lm&quot;</span>,<span class="at">color=</span><span class="st">&quot;black&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb189-14"><a href="multilevel-models.html#cb189-14" tabindex="-1"></a>  theme<span class="fl">.1</span> <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb189-15"><a href="multilevel-models.html#cb189-15" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Absorption&quot;</span>) <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">title=</span><span class="st">&quot;(c1)&quot;</span>)</span>
-<span id="cb189-16"><a href="multilevel-models.html#cb189-16" tabindex="-1"></a>pem2.mean <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> music.lev2,</span>
-<span id="cb189-17"><a href="multilevel-models.html#cb189-17" tabindex="-1"></a>                    <span class="fu">aes</span>(<span class="at">x =</span> mpqpem, <span class="at">y =</span> meanbysubj)) <span class="sc">+</span> </span>
-<span id="cb189-18"><a href="multilevel-models.html#cb189-18" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
-<span id="cb189-19"><a href="multilevel-models.html#cb189-19" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb189-20"><a href="multilevel-models.html#cb189-20" tabindex="-1"></a>  theme<span class="fl">.1</span> <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;Mean Negative Affect&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb189-21"><a href="multilevel-models.html#cb189-21" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;PEM&quot;</span>) <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;(a2)&quot;</span>)</span>
-<span id="cb189-22"><a href="multilevel-models.html#cb189-22" tabindex="-1"></a>nem2.mean <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> music.lev2,</span>
-<span id="cb189-23"><a href="multilevel-models.html#cb189-23" tabindex="-1"></a>                    <span class="fu">aes</span>(<span class="at">x =</span> mpqnem, <span class="at">y =</span> meanbysubj)) <span class="sc">+</span> </span>
-<span id="cb189-24"><a href="multilevel-models.html#cb189-24" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
-<span id="cb189-25"><a href="multilevel-models.html#cb189-25" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb189-26"><a href="multilevel-models.html#cb189-26" tabindex="-1"></a>  theme<span class="fl">.1</span> <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;&quot;</span>) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">&quot;NEM&quot;</span>) <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;(b2)&quot;</span>)</span>
-<span id="cb189-27"><a href="multilevel-models.html#cb189-27" tabindex="-1"></a>abs2.mean <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> music.lev2,</span>
-<span id="cb189-28"><a href="multilevel-models.html#cb189-28" tabindex="-1"></a>                    <span class="fu">aes</span>(<span class="at">x =</span> mpqab, <span class="at">y =</span> meanbysubj)) <span class="sc">+</span></span>
-<span id="cb189-29"><a href="multilevel-models.html#cb189-29" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
-<span id="cb189-30"><a href="multilevel-models.html#cb189-30" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb189-31"><a href="multilevel-models.html#cb189-31" tabindex="-1"></a>  theme<span class="fl">.1</span> <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb189-32"><a href="multilevel-models.html#cb189-32" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Absorption&quot;</span>) <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">title=</span><span class="st">&quot;(c2)&quot;</span>)</span>
-<span id="cb189-33"><a href="multilevel-models.html#cb189-33" tabindex="-1"></a>mli.scatmat1 <span class="ot">&lt;-</span> <span class="fu">grid.arrange</span>(pem2.all, nem2.all, abs2.all,</span>
-<span id="cb189-34"><a href="multilevel-models.html#cb189-34" tabindex="-1"></a>  pem2.mean, nem2.mean, abs2.mean, <span class="at">ncol =</span> <span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb189-1"><a href="multilevel-models.html#cb189-1" aria-hidden="true" tabindex="-1"></a>pem2.all <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data=</span>music,<span class="fu">aes</span>(<span class="at">x=</span>mpqpem,<span class="at">y=</span>na)) <span class="sc">+</span> </span>
+<span id="cb189-2"><a href="multilevel-models.html#cb189-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb189-3"><a href="multilevel-models.html#cb189-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">&quot;lm&quot;</span>,<span class="at">color=</span><span class="st">&quot;black&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb189-4"><a href="multilevel-models.html#cb189-4" aria-hidden="true" tabindex="-1"></a>  theme<span class="fl">.1</span> <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;Negative Affect&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb189-5"><a href="multilevel-models.html#cb189-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;PEM&quot;</span>) <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">title=</span><span class="st">&quot;(a1)&quot;</span>)</span>
+<span id="cb189-6"><a href="multilevel-models.html#cb189-6" aria-hidden="true" tabindex="-1"></a>nem2.all <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data=</span>music,<span class="fu">aes</span>(<span class="at">x=</span>mpqnem,<span class="at">y=</span>na)) <span class="sc">+</span> </span>
+<span id="cb189-7"><a href="multilevel-models.html#cb189-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb189-8"><a href="multilevel-models.html#cb189-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">&quot;lm&quot;</span>,<span class="at">color=</span><span class="st">&quot;black&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb189-9"><a href="multilevel-models.html#cb189-9" aria-hidden="true" tabindex="-1"></a>  theme<span class="fl">.1</span> <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;&quot;</span>) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">&quot;NEM&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb189-10"><a href="multilevel-models.html#cb189-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">&quot;(b1)&quot;</span>)</span>
+<span id="cb189-11"><a href="multilevel-models.html#cb189-11" aria-hidden="true" tabindex="-1"></a>abs2.all <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data=</span>music,<span class="fu">aes</span>(<span class="at">x=</span>mpqab,<span class="at">y=</span>na)) <span class="sc">+</span> </span>
+<span id="cb189-12"><a href="multilevel-models.html#cb189-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb189-13"><a href="multilevel-models.html#cb189-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">&quot;lm&quot;</span>,<span class="at">color=</span><span class="st">&quot;black&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb189-14"><a href="multilevel-models.html#cb189-14" aria-hidden="true" tabindex="-1"></a>  theme<span class="fl">.1</span> <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb189-15"><a href="multilevel-models.html#cb189-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Absorption&quot;</span>) <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">title=</span><span class="st">&quot;(c1)&quot;</span>)</span>
+<span id="cb189-16"><a href="multilevel-models.html#cb189-16" aria-hidden="true" tabindex="-1"></a>pem2.mean <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> music.lev2,</span>
+<span id="cb189-17"><a href="multilevel-models.html#cb189-17" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">aes</span>(<span class="at">x =</span> mpqpem, <span class="at">y =</span> meanbysubj)) <span class="sc">+</span> </span>
+<span id="cb189-18"><a href="multilevel-models.html#cb189-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb189-19"><a href="multilevel-models.html#cb189-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb189-20"><a href="multilevel-models.html#cb189-20" aria-hidden="true" tabindex="-1"></a>  theme<span class="fl">.1</span> <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;Mean Negative Affect&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb189-21"><a href="multilevel-models.html#cb189-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;PEM&quot;</span>) <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;(a2)&quot;</span>)</span>
+<span id="cb189-22"><a href="multilevel-models.html#cb189-22" aria-hidden="true" tabindex="-1"></a>nem2.mean <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> music.lev2,</span>
+<span id="cb189-23"><a href="multilevel-models.html#cb189-23" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">aes</span>(<span class="at">x =</span> mpqnem, <span class="at">y =</span> meanbysubj)) <span class="sc">+</span> </span>
+<span id="cb189-24"><a href="multilevel-models.html#cb189-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb189-25"><a href="multilevel-models.html#cb189-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb189-26"><a href="multilevel-models.html#cb189-26" aria-hidden="true" tabindex="-1"></a>  theme<span class="fl">.1</span> <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;&quot;</span>) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">&quot;NEM&quot;</span>) <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;(b2)&quot;</span>)</span>
+<span id="cb189-27"><a href="multilevel-models.html#cb189-27" aria-hidden="true" tabindex="-1"></a>abs2.mean <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> music.lev2,</span>
+<span id="cb189-28"><a href="multilevel-models.html#cb189-28" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">aes</span>(<span class="at">x =</span> mpqab, <span class="at">y =</span> meanbysubj)) <span class="sc">+</span></span>
+<span id="cb189-29"><a href="multilevel-models.html#cb189-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb189-30"><a href="multilevel-models.html#cb189-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb189-31"><a href="multilevel-models.html#cb189-31" aria-hidden="true" tabindex="-1"></a>  theme<span class="fl">.1</span> <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb189-32"><a href="multilevel-models.html#cb189-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Absorption&quot;</span>) <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">title=</span><span class="st">&quot;(c2)&quot;</span>)</span>
+<span id="cb189-33"><a href="multilevel-models.html#cb189-33" aria-hidden="true" tabindex="-1"></a>mli.scatmat1 <span class="ot">&lt;-</span> <span class="fu">grid.arrange</span>(pem2.all, nem2.all, abs2.all,</span>
+<span id="cb189-34"><a href="multilevel-models.html#cb189-34" aria-hidden="true" tabindex="-1"></a>  pem2.mean, nem2.mean, abs2.mean, <span class="at">ncol =</span> <span class="dv">3</span>)</span></code></pre></div>
 <p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-110-1.png" width="768" /></p>
-<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb190-1"><a href="multilevel-models.html#cb190-1" tabindex="-1"></a><span class="fu">grid.arrange</span>(pem2.all, nem2.all, abs2.all,</span>
-<span id="cb190-2"><a href="multilevel-models.html#cb190-2" tabindex="-1"></a>  pem2.mean, nem2.mean, abs2.mean, <span class="at">ncol =</span> <span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb190-1"><a href="multilevel-models.html#cb190-1" aria-hidden="true" tabindex="-1"></a><span class="fu">grid.arrange</span>(pem2.all, nem2.all, abs2.all,</span>
+<span id="cb190-2"><a href="multilevel-models.html#cb190-2" aria-hidden="true" tabindex="-1"></a>  pem2.mean, nem2.mean, abs2.mean, <span class="at">ncol =</span> <span class="dv">3</span>)</span></code></pre></div>
 <p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-111-1.png" width="768" /></p>
 </div>
 </div>
@@ -1082,7 +1089,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="model-notation" class="section level3 hasAnchor" number="3.2.1">
 <h3><span class="header-section-number">3.2.1</span> Model Notation<a href="multilevel-models.html#model-notation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Let <span class="math inline">\(Y_{ij}\)</span> be the negative affect (<code>na</code>) score of the <span class="math inline">\(i^{th}\)</span> subject before performance <span class="math inline">\(j\)</span>.</p>
-<div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb191-1"><a href="multilevel-models.html#cb191-1" tabindex="-1"></a><span class="fu">head</span>(music)</span></code></pre></div>
+<div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb191-1"><a href="multilevel-models.html#cb191-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(music)</span></code></pre></div>
 <pre><code>##   X id diary previous   perform_type      memory           audience pa na age
 ## 1 1  1     1        0           Solo Unspecified         Instructor 40 11  18
 ## 2 2  1     2        1 Large Ensemble      Memory Public Performance 33 19  18
@@ -1113,9 +1120,9 @@ Y_{ij} &amp; = \alpha_{0}+\alpha_{1}\textrm{Orch}_{i}+\beta_{0}\textrm{LargeEns}
 </div>
 <div id="llsr-model-output" class="section level3 hasAnchor" number="3.2.3">
 <h3><span class="header-section-number">3.2.3</span> LLSR Model Output<a href="multilevel-models.html#llsr-model-output" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb193-1"><a href="multilevel-models.html#cb193-1" tabindex="-1"></a><span class="co"># Linear least square regression model with LINE conditions</span></span>
-<span id="cb193-2"><a href="multilevel-models.html#cb193-2" tabindex="-1"></a>model0 <span class="ot">&lt;-</span> <span class="fu">lm</span>(na <span class="sc">~</span> orch <span class="sc">+</span> large <span class="sc">+</span> orch<span class="sc">:</span>large, <span class="at">data =</span> music)</span>
-<span id="cb193-3"><a href="multilevel-models.html#cb193-3" tabindex="-1"></a><span class="fu">summary</span>(model0)</span></code></pre></div>
+<div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb193-1"><a href="multilevel-models.html#cb193-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Linear least square regression model with LINE conditions</span></span>
+<span id="cb193-2"><a href="multilevel-models.html#cb193-2" aria-hidden="true" tabindex="-1"></a>model0 <span class="ot">&lt;-</span> <span class="fu">lm</span>(na <span class="sc">~</span> orch <span class="sc">+</span> large <span class="sc">+</span> orch<span class="sc">:</span>large, <span class="at">data =</span> music)</span>
+<span id="cb193-3"><a href="multilevel-models.html#cb193-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model0)</span></code></pre></div>
 <pre><code>
 Call:
 lm(formula = na ~ orch + large + orch:large, data = music)
@@ -1164,8 +1171,8 @@ Y_{ij} &amp; = \alpha_{0}+\alpha_{1}\textrm{Orch}_{i}+\beta_{0}\textrm{LargeEns}
 <div id="initial-mixed-effects-model-in-r" class="section level3 hasAnchor" number="3.2.6">
 <h3><span class="header-section-number">3.2.6</span> Initial Mixed Effects Model in R<a href="multilevel-models.html#initial-mixed-effects-model-in-r" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>We fit the model using the <code>lmer()</code> function in the <code>lme4</code> package. If the the <code>lmerTest</code> package is loaded, approximate p-values are returned. These are approximate, because the exact distribution of the t-statistics is unknown. Satterthwaite showed that these t-statistics approximately follow t-distributions, with non-integer degrees of freedom.</p>
-<div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb195-1"><a href="multilevel-models.html#cb195-1" tabindex="-1"></a>model1 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(<span class="at">data=</span>music, na <span class="sc">~</span> orch <span class="sc">+</span> large <span class="sc">+</span> orch<span class="sc">:</span>large <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> id), <span class="at">REML=</span><span class="cn">TRUE</span>)</span>
-<span id="cb195-2"><a href="multilevel-models.html#cb195-2" tabindex="-1"></a><span class="fu">summary</span>(model1)</span></code></pre></div>
+<div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb195-1"><a href="multilevel-models.html#cb195-1" aria-hidden="true" tabindex="-1"></a>model1 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(<span class="at">data=</span>music, na <span class="sc">~</span> orch <span class="sc">+</span> large <span class="sc">+</span> orch<span class="sc">:</span>large <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> id), <span class="at">REML=</span><span class="cn">TRUE</span>)</span>
+<span id="cb195-2"><a href="multilevel-models.html#cb195-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model1)</span></code></pre></div>
 <pre><code>Linear mixed model fit by REML. t-tests use Satterthwaite&#39;s method [
 lmerModLmerTest]
 Formula: na ~ orch + large + orch:large + (1 | id)
@@ -1235,8 +1242,8 @@ Y_{ij} &amp; = \alpha_{0}+\alpha\textrm{Orch}_{i}+\beta\textrm{LargeEns}_{ij} + 
 \end{align*}
 \]</span></p>
 <p>where <span class="math inline">\(u_i \sim\mathcal{N}(0,\sigma_u^2)\)</span>, and <span class="math inline">\(\epsilon_{ij} \sim\mathcal{N}(0,\sigma^2)\)</span>. We assume <span class="math inline">\(u_i\)</span> and <span class="math inline">\(\epsilon_{ij}\)</span> are independent.</p>
-<div class="sourceCode" id="cb197"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb197-1"><a href="multilevel-models.html#cb197-1" tabindex="-1"></a>model1b <span class="ot">&lt;-</span> <span class="fu">lmer</span>(<span class="at">data=</span>music, na <span class="sc">~</span> orch <span class="sc">+</span> large  <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> id), <span class="at">REML=</span><span class="cn">TRUE</span>)</span>
-<span id="cb197-2"><a href="multilevel-models.html#cb197-2" tabindex="-1"></a><span class="fu">summary</span>(model1b)</span></code></pre></div>
+<div class="sourceCode" id="cb197"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb197-1"><a href="multilevel-models.html#cb197-1" aria-hidden="true" tabindex="-1"></a>model1b <span class="ot">&lt;-</span> <span class="fu">lmer</span>(<span class="at">data=</span>music, na <span class="sc">~</span> orch <span class="sc">+</span> large  <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> id), <span class="at">REML=</span><span class="cn">TRUE</span>)</span>
+<span id="cb197-2"><a href="multilevel-models.html#cb197-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model1b)</span></code></pre></div>
 <pre><code>Linear mixed model fit by REML. t-tests use Satterthwaite&#39;s method [
 lmerModLmerTest]
 Formula: na ~ orch + large + (1 | id)
@@ -1297,12 +1304,12 @@ large -0.182 -0.077</code></pre>
 <p>The model assumes that the difference in negative affect, when performing in an ensemble compared to performing a solo or in a small ensemble is constant accross musicians. This difference can be estimated using fixed effects (e.g. <span class="math inline">\(\beta\)</span>).</p>
 <p>Alternatively, we might want to build a model that allows differences in negative affect between solos/small ensemble performances and large ensemble performances to vary randomly between performers.</p>
 <p>Recall the lattice plot:</p>
-<div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb199-1"><a href="multilevel-models.html#cb199-1" tabindex="-1"></a><span class="co"># Lattice plot for NA vs. Performance Type</span></span>
-<span id="cb199-2"><a href="multilevel-models.html#cb199-2" tabindex="-1"></a><span class="fu">ggplot</span>(music,<span class="fu">aes</span>(<span class="at">x=</span>large,<span class="at">y=</span>na)) <span class="sc">+</span> theme<span class="fl">.1</span> <span class="sc">+</span> </span>
-<span id="cb199-3"><a href="multilevel-models.html#cb199-3" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">&quot;lm&quot;</span>,<span class="at">color=</span><span class="st">&quot;black&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb199-4"><a href="multilevel-models.html#cb199-4" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>id,<span class="at">ncol=</span><span class="dv">5</span>) <span class="sc">+</span>   </span>
-<span id="cb199-5"><a href="multilevel-models.html#cb199-5" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">strip.text.x=</span><span class="fu">element_blank</span>()) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="dv">10</span>,<span class="dv">35</span>) <span class="sc">+</span></span>
-<span id="cb199-6"><a href="multilevel-models.html#cb199-6" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Large Ensemble Performance&quot;</span>,<span class="at">y=</span><span class="st">&quot;Negative Affect&quot;</span>) </span></code></pre></div>
+<div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb199-1"><a href="multilevel-models.html#cb199-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Lattice plot for NA vs. Performance Type</span></span>
+<span id="cb199-2"><a href="multilevel-models.html#cb199-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(music,<span class="fu">aes</span>(<span class="at">x=</span>large,<span class="at">y=</span>na)) <span class="sc">+</span> theme<span class="fl">.1</span> <span class="sc">+</span> </span>
+<span id="cb199-3"><a href="multilevel-models.html#cb199-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">&quot;lm&quot;</span>,<span class="at">color=</span><span class="st">&quot;black&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb199-4"><a href="multilevel-models.html#cb199-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>id,<span class="at">ncol=</span><span class="dv">5</span>) <span class="sc">+</span>   </span>
+<span id="cb199-5"><a href="multilevel-models.html#cb199-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">strip.text.x=</span><span class="fu">element_blank</span>()) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="dv">10</span>,<span class="dv">35</span>) <span class="sc">+</span></span>
+<span id="cb199-6"><a href="multilevel-models.html#cb199-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Large Ensemble Performance&quot;</span>,<span class="at">y=</span><span class="st">&quot;Negative Affect&quot;</span>) </span></code></pre></div>
 <p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-116-1.png" width="768" /></p>
 </div>
 <div id="illustration-of-previous-model" class="section level3 hasAnchor" number="3.3.2">
@@ -1396,8 +1403,8 @@ Y_{ij} &amp; = [\alpha_{0}+\alpha\textrm{Orch}_{i}+\beta\textrm{LargeEns}_{ij}]
 <div id="random-slopes-model-in-r" class="section level3 hasAnchor" number="3.3.7">
 <h3><span class="header-section-number">3.3.7</span> Random Slopes Model in R<a href="multilevel-models.html#random-slopes-model-in-r" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>To fit the random slopes model in R, we write <code>(large | id)</code>, instead of <code>(1 | id)</code>.</p>
-<div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb200-1"><a href="multilevel-models.html#cb200-1" tabindex="-1"></a>model2b <span class="ot">&lt;-</span> <span class="fu">lmer</span>(<span class="at">data=</span>music, na <span class="sc">~</span> orch <span class="sc">+</span> large  <span class="sc">+</span> (large <span class="sc">|</span> id), <span class="at">REML=</span><span class="cn">TRUE</span>)</span>
-<span id="cb200-2"><a href="multilevel-models.html#cb200-2" tabindex="-1"></a><span class="fu">summary</span>(model2b)</span></code></pre></div>
+<div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb200-1"><a href="multilevel-models.html#cb200-1" aria-hidden="true" tabindex="-1"></a>model2b <span class="ot">&lt;-</span> <span class="fu">lmer</span>(<span class="at">data=</span>music, na <span class="sc">~</span> orch <span class="sc">+</span> large  <span class="sc">+</span> (large <span class="sc">|</span> id), <span class="at">REML=</span><span class="cn">TRUE</span>)</span>
+<span id="cb200-2"><a href="multilevel-models.html#cb200-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model2b)</span></code></pre></div>
 <pre><code>Linear mixed model fit by REML. t-tests use Satterthwaite&#39;s method [
 lmerModLmerTest]
 Formula: na ~ orch + large + (large | id)
@@ -1458,11 +1465,11 @@ large -0.253 -0.102</code></pre>
 <div id="model-comparisons" class="section level3 hasAnchor" number="3.3.9">
 <h3><span class="header-section-number">3.3.9</span> Model Comparisons<a href="multilevel-models.html#model-comparisons" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>We can compare the models using AIC and BIC.</p>
-<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb202-1"><a href="multilevel-models.html#cb202-1" tabindex="-1"></a><span class="fu">AIC</span>(model2b, model1b)</span></code></pre></div>
+<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb202-1"><a href="multilevel-models.html#cb202-1" aria-hidden="true" tabindex="-1"></a><span class="fu">AIC</span>(model2b, model1b)</span></code></pre></div>
 <pre><code>##         df      AIC
 ## model2b  7 3004.667
 ## model1b  5 3001.200</code></pre>
-<div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb204-1"><a href="multilevel-models.html#cb204-1" tabindex="-1"></a><span class="fu">BIC</span>(model2b, model1b)</span></code></pre></div>
+<div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb204-1"><a href="multilevel-models.html#cb204-1" aria-hidden="true" tabindex="-1"></a><span class="fu">BIC</span>(model2b, model1b)</span></code></pre></div>
 <pre><code>##         df      BIC
 ## model2b  7 3034.127
 ## model1b  5 3022.243</code></pre>
@@ -1500,8 +1507,8 @@ Y_{ij} &amp; = [\alpha_{0}+\alpha_1\textrm{Orch}_{i}+\beta_0\textrm{LargeEns}_{i
 </div>
 <div id="random-slopes-model-with-interaction-in-r" class="section level3 hasAnchor" number="3.3.11">
 <h3><span class="header-section-number">3.3.11</span> Random Slopes Model with Interaction in R<a href="multilevel-models.html#random-slopes-model-with-interaction-in-r" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb206"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb206-1"><a href="multilevel-models.html#cb206-1" tabindex="-1"></a>model2 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(<span class="at">data=</span>music, na <span class="sc">~</span> orch <span class="sc">+</span> large <span class="sc">+</span> orch<span class="sc">:</span>large <span class="sc">+</span> (large <span class="sc">|</span> id), <span class="at">REML=</span><span class="cn">TRUE</span>)</span>
-<span id="cb206-2"><a href="multilevel-models.html#cb206-2" tabindex="-1"></a><span class="fu">summary</span>(model2)</span></code></pre></div>
+<div class="sourceCode" id="cb206"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb206-1"><a href="multilevel-models.html#cb206-1" aria-hidden="true" tabindex="-1"></a>model2 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(<span class="at">data=</span>music, na <span class="sc">~</span> orch <span class="sc">+</span> large <span class="sc">+</span> orch<span class="sc">:</span>large <span class="sc">+</span> (large <span class="sc">|</span> id), <span class="at">REML=</span><span class="cn">TRUE</span>)</span>
+<span id="cb206-2"><a href="multilevel-models.html#cb206-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model2)</span></code></pre></div>
 <pre><code>Linear mixed model fit by REML. t-tests use Satterthwaite&#39;s method [
 lmerModLmerTest]
 Formula: na ~ orch + large + orch:large + (large | id)
@@ -1569,9 +1576,9 @@ where <span class="math inline">\(u_i\sim N(0, \sigma^2_u)\)</span> and <span cl
 </div>
 <div id="unconditional-means-model-in-r" class="section level3 hasAnchor" number="3.4.2">
 <h3><span class="header-section-number">3.4.2</span> Unconditional Means Model in R<a href="multilevel-models.html#unconditional-means-model-in-r" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb208"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb208-1"><a href="multilevel-models.html#cb208-1" tabindex="-1"></a><span class="co">#Model A (Unconditional means model)</span></span>
-<span id="cb208-2"><a href="multilevel-models.html#cb208-2" tabindex="-1"></a>model.a <span class="ot">&lt;-</span> <span class="fu">lmer</span>(na <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> id), <span class="at">REML =</span> <span class="cn">TRUE</span>, <span class="at">data =</span> music)</span>
-<span id="cb208-3"><a href="multilevel-models.html#cb208-3" tabindex="-1"></a><span class="fu">summary</span>(model.a)</span></code></pre></div>
+<div class="sourceCode" id="cb208"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb208-1"><a href="multilevel-models.html#cb208-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Model A (Unconditional means model)</span></span>
+<span id="cb208-2"><a href="multilevel-models.html#cb208-2" aria-hidden="true" tabindex="-1"></a>model.a <span class="ot">&lt;-</span> <span class="fu">lmer</span>(na <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> id), <span class="at">REML =</span> <span class="cn">TRUE</span>, <span class="at">data =</span> music)</span>
+<span id="cb208-3"><a href="multilevel-models.html#cb208-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model.a)</span></code></pre></div>
 <pre><code>Linear mixed model fit by REML. t-tests use Satterthwaite&#39;s method [
 lmerModLmerTest]
 Formula: na ~ 1 + (1 | id)
@@ -1625,9 +1632,9 @@ Y_{ij} &amp; = [\alpha_{0}+\alpha_{1}\textrm{Orch}_{i}+\alpha_{2}\textrm{MPQnem}
 \end{align*}
 \]</span>
 where error terms are defined as before.</p>
-<div class="sourceCode" id="cb210"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb210-1"><a href="multilevel-models.html#cb210-1" tabindex="-1"></a><span class="co">#Add negative emotionality as second L2 covariate</span></span>
-<span id="cb210-2"><a href="multilevel-models.html#cb210-2" tabindex="-1"></a>model3 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(na <span class="sc">~</span> orch <span class="sc">+</span> mpqnem <span class="sc">+</span> large  <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> id), <span class="at">data =</span> music, <span class="at">REML=</span><span class="cn">TRUE</span>)</span>
-<span id="cb210-3"><a href="multilevel-models.html#cb210-3" tabindex="-1"></a><span class="fu">summary</span>(model3)</span></code></pre></div>
+<div class="sourceCode" id="cb210"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb210-1"><a href="multilevel-models.html#cb210-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Add negative emotionality as second L2 covariate</span></span>
+<span id="cb210-2"><a href="multilevel-models.html#cb210-2" aria-hidden="true" tabindex="-1"></a>model3 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(na <span class="sc">~</span> orch <span class="sc">+</span> mpqnem <span class="sc">+</span> large  <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> id), <span class="at">data =</span> music, <span class="at">REML=</span><span class="cn">TRUE</span>)</span>
+<span id="cb210-3"><a href="multilevel-models.html#cb210-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model3)</span></code></pre></div>
 <pre><code>Linear mixed model fit by REML. t-tests use Satterthwaite&#39;s method [
 lmerModLmerTest]
 Formula: na ~ orch + mpqnem + large + (1 | id)
@@ -1663,11 +1670,11 @@ large  -0.031 -0.079 -0.073</code></pre>
 <h3><span class="header-section-number">3.5.1</span> Centering Covariates<a href="multilevel-models.html#centering-covariates" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>It makes no sense to draw conclusions about performance anxiety levels for subjects with MPQNEM scores of 0 at baseline (as in <span class="math inline">\(\hat{\beta}_{0}\)</span>), since the minimum NEM composite score among subjects in this study was 11.
 We subtract the mean, so that a value of 0 now correspons to the average MPQnem.</p>
-<div class="sourceCode" id="cb212"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb212-1"><a href="multilevel-models.html#cb212-1" tabindex="-1"></a>music <span class="ot">&lt;-</span> music <span class="sc">%&gt;%</span></span>
-<span id="cb212-2"><a href="multilevel-models.html#cb212-2" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">cmpqnem =</span> mpqnem <span class="sc">-</span> <span class="fu">mean</span>(mpqnem))</span></code></pre></div>
-<div class="sourceCode" id="cb213"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb213-1"><a href="multilevel-models.html#cb213-1" tabindex="-1"></a><span class="co"># Model E (Center baseline NEM in Model D)</span></span>
-<span id="cb213-2"><a href="multilevel-models.html#cb213-2" tabindex="-1"></a>model3c <span class="ot">&lt;-</span> <span class="fu">lmer</span>(na <span class="sc">~</span> orch <span class="sc">+</span> cmpqnem <span class="sc">+</span> large <span class="sc">+</span>  (<span class="dv">1</span> <span class="sc">|</span> id),  <span class="at">data =</span> music, <span class="at">REML=</span><span class="cn">TRUE</span>)</span>
-<span id="cb213-3"><a href="multilevel-models.html#cb213-3" tabindex="-1"></a><span class="fu">summary</span>(model3c)</span></code></pre></div>
+<div class="sourceCode" id="cb212"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb212-1"><a href="multilevel-models.html#cb212-1" aria-hidden="true" tabindex="-1"></a>music <span class="ot">&lt;-</span> music <span class="sc">%&gt;%</span></span>
+<span id="cb212-2"><a href="multilevel-models.html#cb212-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">cmpqnem =</span> mpqnem <span class="sc">-</span> <span class="fu">mean</span>(mpqnem))</span></code></pre></div>
+<div class="sourceCode" id="cb213"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb213-1"><a href="multilevel-models.html#cb213-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Model E (Center baseline NEM in Model D)</span></span>
+<span id="cb213-2"><a href="multilevel-models.html#cb213-2" aria-hidden="true" tabindex="-1"></a>model3c <span class="ot">&lt;-</span> <span class="fu">lmer</span>(na <span class="sc">~</span> orch <span class="sc">+</span> cmpqnem <span class="sc">+</span> large <span class="sc">+</span>  (<span class="dv">1</span> <span class="sc">|</span> id),  <span class="at">data =</span> music, <span class="at">REML=</span><span class="cn">TRUE</span>)</span>
+<span id="cb213-3"><a href="multilevel-models.html#cb213-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model3c)</span></code></pre></div>
 <pre><code>Linear mixed model fit by REML. t-tests use Satterthwaite&#39;s method [
 lmerModLmerTest]
 Formula: na ~ orch + cmpqnem + large + (1 | id)
@@ -1773,23 +1780,23 @@ Y_{ij} &amp; = [\alpha_{0}+\alpha_{1}\textrm{mpqpem}_{i} + \alpha_{2}\textrm{mpq
 </div>
 <div id="more-data-wrangling-1" class="section level3 hasAnchor" number="3.5.3">
 <h3><span class="header-section-number">3.5.3</span> More Data Wrangling<a href="multilevel-models.html#more-data-wrangling-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb215"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb215-1"><a href="multilevel-models.html#cb215-1" tabindex="-1"></a><span class="co"># Add new indicators to music data set</span></span>
-<span id="cb215-2"><a href="multilevel-models.html#cb215-2" tabindex="-1"></a>music <span class="ot">&lt;-</span> music <span class="sc">%&gt;%</span></span>
-<span id="cb215-3"><a href="multilevel-models.html#cb215-3" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">students =</span> <span class="fu">ifelse</span>(audience<span class="sc">==</span><span class="st">&quot;Student(s)&quot;</span>,<span class="dv">1</span>,<span class="dv">0</span>),</span>
-<span id="cb215-4"><a href="multilevel-models.html#cb215-4" tabindex="-1"></a>         <span class="at">juried =</span> <span class="fu">ifelse</span>(audience<span class="sc">==</span><span class="st">&quot;Juried Recital&quot;</span>,<span class="dv">1</span>,<span class="dv">0</span>),</span>
-<span id="cb215-5"><a href="multilevel-models.html#cb215-5" tabindex="-1"></a>         <span class="at">public =</span> <span class="fu">ifelse</span>(audience<span class="sc">==</span><span class="st">&quot;Public Performance&quot;</span>,<span class="dv">1</span>,<span class="dv">0</span>),</span>
-<span id="cb215-6"><a href="multilevel-models.html#cb215-6" tabindex="-1"></a>         <span class="at">solo =</span> <span class="fu">ifelse</span>(perform_type<span class="sc">==</span><span class="st">&quot;Solo&quot;</span>,<span class="dv">1</span>,<span class="dv">0</span>),</span>
-<span id="cb215-7"><a href="multilevel-models.html#cb215-7" tabindex="-1"></a>         <span class="at">memory1 =</span> <span class="fu">ifelse</span>(memory<span class="sc">==</span><span class="st">&quot;Memory&quot;</span>,<span class="dv">1</span>,<span class="dv">0</span>),</span>
-<span id="cb215-8"><a href="multilevel-models.html#cb215-8" tabindex="-1"></a>         <span class="at">female =</span> <span class="fu">ifelse</span>(gender<span class="sc">==</span><span class="st">&quot;Female&quot;</span>,<span class="dv">1</span>,<span class="dv">0</span>),</span>
-<span id="cb215-9"><a href="multilevel-models.html#cb215-9" tabindex="-1"></a>         <span class="at">vocal =</span> <span class="fu">ifelse</span>(instrument<span class="sc">==</span><span class="st">&quot;voice&quot;</span>,<span class="dv">1</span>,<span class="dv">0</span>) )</span></code></pre></div>
+<div class="sourceCode" id="cb215"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb215-1"><a href="multilevel-models.html#cb215-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Add new indicators to music data set</span></span>
+<span id="cb215-2"><a href="multilevel-models.html#cb215-2" aria-hidden="true" tabindex="-1"></a>music <span class="ot">&lt;-</span> music <span class="sc">%&gt;%</span></span>
+<span id="cb215-3"><a href="multilevel-models.html#cb215-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">students =</span> <span class="fu">ifelse</span>(audience<span class="sc">==</span><span class="st">&quot;Student(s)&quot;</span>,<span class="dv">1</span>,<span class="dv">0</span>),</span>
+<span id="cb215-4"><a href="multilevel-models.html#cb215-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">juried =</span> <span class="fu">ifelse</span>(audience<span class="sc">==</span><span class="st">&quot;Juried Recital&quot;</span>,<span class="dv">1</span>,<span class="dv">0</span>),</span>
+<span id="cb215-5"><a href="multilevel-models.html#cb215-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">public =</span> <span class="fu">ifelse</span>(audience<span class="sc">==</span><span class="st">&quot;Public Performance&quot;</span>,<span class="dv">1</span>,<span class="dv">0</span>),</span>
+<span id="cb215-6"><a href="multilevel-models.html#cb215-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">solo =</span> <span class="fu">ifelse</span>(perform_type<span class="sc">==</span><span class="st">&quot;Solo&quot;</span>,<span class="dv">1</span>,<span class="dv">0</span>),</span>
+<span id="cb215-7"><a href="multilevel-models.html#cb215-7" aria-hidden="true" tabindex="-1"></a>         <span class="at">memory1 =</span> <span class="fu">ifelse</span>(memory<span class="sc">==</span><span class="st">&quot;Memory&quot;</span>,<span class="dv">1</span>,<span class="dv">0</span>),</span>
+<span id="cb215-8"><a href="multilevel-models.html#cb215-8" aria-hidden="true" tabindex="-1"></a>         <span class="at">female =</span> <span class="fu">ifelse</span>(gender<span class="sc">==</span><span class="st">&quot;Female&quot;</span>,<span class="dv">1</span>,<span class="dv">0</span>),</span>
+<span id="cb215-9"><a href="multilevel-models.html#cb215-9" aria-hidden="true" tabindex="-1"></a>         <span class="at">vocal =</span> <span class="fu">ifelse</span>(instrument<span class="sc">==</span><span class="st">&quot;voice&quot;</span>,<span class="dv">1</span>,<span class="dv">0</span>) )</span></code></pre></div>
 </div>
 <div id="fitting-model-a" class="section level3 hasAnchor" number="3.5.4">
 <h3><span class="header-section-number">3.5.4</span> Fitting Model A<a href="multilevel-models.html#fitting-model-a" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb216"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb216-1"><a href="multilevel-models.html#cb216-1" tabindex="-1"></a>modelA <span class="ot">&lt;-</span> <span class="fu">lmer</span>(na <span class="sc">~</span> previous <span class="sc">+</span> students <span class="sc">+</span> juried <span class="sc">+</span> </span>
-<span id="cb216-2"><a href="multilevel-models.html#cb216-2" tabindex="-1"></a>    public <span class="sc">+</span> solo <span class="sc">+</span> mpqpem <span class="sc">+</span> mpqab <span class="sc">+</span> orch <span class="sc">+</span> mpqnem <span class="sc">+</span> </span>
-<span id="cb216-3"><a href="multilevel-models.html#cb216-3" tabindex="-1"></a>    mpqnem<span class="sc">:</span>solo <span class="sc">+</span> (previous <span class="sc">+</span> students <span class="sc">+</span> juried <span class="sc">+</span> </span>
-<span id="cb216-4"><a href="multilevel-models.html#cb216-4" tabindex="-1"></a>    public <span class="sc">+</span> solo <span class="sc">|</span> id), <span class="at">data =</span> music, <span class="at">REML=</span><span class="cn">TRUE</span>)</span>
-<span id="cb216-5"><a href="multilevel-models.html#cb216-5" tabindex="-1"></a><span class="fu">summary</span>(modelA)</span></code></pre></div>
+<div class="sourceCode" id="cb216"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb216-1"><a href="multilevel-models.html#cb216-1" aria-hidden="true" tabindex="-1"></a>modelA <span class="ot">&lt;-</span> <span class="fu">lmer</span>(na <span class="sc">~</span> previous <span class="sc">+</span> students <span class="sc">+</span> juried <span class="sc">+</span> </span>
+<span id="cb216-2"><a href="multilevel-models.html#cb216-2" aria-hidden="true" tabindex="-1"></a>    public <span class="sc">+</span> solo <span class="sc">+</span> mpqpem <span class="sc">+</span> mpqab <span class="sc">+</span> orch <span class="sc">+</span> mpqnem <span class="sc">+</span> </span>
+<span id="cb216-3"><a href="multilevel-models.html#cb216-3" aria-hidden="true" tabindex="-1"></a>    mpqnem<span class="sc">:</span>solo <span class="sc">+</span> (previous <span class="sc">+</span> students <span class="sc">+</span> juried <span class="sc">+</span> </span>
+<span id="cb216-4"><a href="multilevel-models.html#cb216-4" aria-hidden="true" tabindex="-1"></a>    public <span class="sc">+</span> solo <span class="sc">|</span> id), <span class="at">data =</span> music, <span class="at">REML=</span><span class="cn">TRUE</span>)</span>
+<span id="cb216-5"><a href="multilevel-models.html#cb216-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(modelA)</span></code></pre></div>
 <pre><code>Linear mixed model fit by REML. t-tests use Satterthwaite&#39;s method [
 lmerModLmerTest]
 Formula: na ~ previous + students + juried + public + solo + mpqpem +  
@@ -1869,10 +1876,10 @@ Y_{ij} &amp; = [\alpha_{0}+\alpha_{1}\textrm{mpqpem}_{i} + \alpha_{2}\textrm{mpq
 </div>
 <div id="fitting-model-b-in-r" class="section level3 hasAnchor" number="3.5.6">
 <h3><span class="header-section-number">3.5.6</span> Fitting Model B in R<a href="multilevel-models.html#fitting-model-b-in-r" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb218"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb218-1"><a href="multilevel-models.html#cb218-1" tabindex="-1"></a>modelB <span class="ot">&lt;-</span> <span class="fu">lmer</span>(na <span class="sc">~</span> previous <span class="sc">+</span> students <span class="sc">+</span> juried <span class="sc">+</span> </span>
-<span id="cb218-2"><a href="multilevel-models.html#cb218-2" tabindex="-1"></a>    public <span class="sc">+</span> solo <span class="sc">+</span> mpqpem <span class="sc">+</span> mpqab <span class="sc">+</span> orch <span class="sc">+</span> mpqnem <span class="sc">+</span> </span>
-<span id="cb218-3"><a href="multilevel-models.html#cb218-3" tabindex="-1"></a>    mpqnem<span class="sc">:</span>solo <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> id), <span class="at">data =</span> music, <span class="at">REML=</span><span class="cn">TRUE</span>)</span>
-<span id="cb218-4"><a href="multilevel-models.html#cb218-4" tabindex="-1"></a><span class="fu">summary</span>(modelB)</span></code></pre></div>
+<div class="sourceCode" id="cb218"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb218-1"><a href="multilevel-models.html#cb218-1" aria-hidden="true" tabindex="-1"></a>modelB <span class="ot">&lt;-</span> <span class="fu">lmer</span>(na <span class="sc">~</span> previous <span class="sc">+</span> students <span class="sc">+</span> juried <span class="sc">+</span> </span>
+<span id="cb218-2"><a href="multilevel-models.html#cb218-2" aria-hidden="true" tabindex="-1"></a>    public <span class="sc">+</span> solo <span class="sc">+</span> mpqpem <span class="sc">+</span> mpqab <span class="sc">+</span> orch <span class="sc">+</span> mpqnem <span class="sc">+</span> </span>
+<span id="cb218-3"><a href="multilevel-models.html#cb218-3" aria-hidden="true" tabindex="-1"></a>    mpqnem<span class="sc">:</span>solo <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> id), <span class="at">data =</span> music, <span class="at">REML=</span><span class="cn">TRUE</span>)</span>
+<span id="cb218-4"><a href="multilevel-models.html#cb218-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(modelB)</span></code></pre></div>
 <pre><code>Linear mixed model fit by REML. t-tests use Satterthwaite&#39;s method [
 lmerModLmerTest]
 Formula: na ~ previous + students + juried + public + solo + mpqpem +  
@@ -1930,11 +1937,11 @@ mpqab
 orch              
 mpqnem            
 solo:mpqnem -0.632</code></pre>
-<div class="sourceCode" id="cb220"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb220-1"><a href="multilevel-models.html#cb220-1" tabindex="-1"></a><span class="fu">AIC</span>(modelA, modelB)</span></code></pre></div>
+<div class="sourceCode" id="cb220"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb220-1"><a href="multilevel-models.html#cb220-1" aria-hidden="true" tabindex="-1"></a><span class="fu">AIC</span>(modelA, modelB)</span></code></pre></div>
 <pre><code>##        df      AIC
 ## modelA 33 2948.349
 ## modelB 13 2946.328</code></pre>
-<div class="sourceCode" id="cb222"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb222-1"><a href="multilevel-models.html#cb222-1" tabindex="-1"></a><span class="fu">BIC</span>(modelA, modelB)</span></code></pre></div>
+<div class="sourceCode" id="cb222"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb222-1"><a href="multilevel-models.html#cb222-1" aria-hidden="true" tabindex="-1"></a><span class="fu">BIC</span>(modelA, modelB)</span></code></pre></div>
 <pre><code>##        df      BIC
 ## modelA 33 3087.232
 ## modelB 13 3001.040</code></pre>
@@ -1949,10 +1956,10 @@ Y_{ij} &amp; = [\alpha_{0}+\alpha_{1}\textrm{mpqpem}_{i} + \alpha_{2}\textrm{mpq
 &amp; +\beta_{0}\textrm{previous}_{ij}  + \gamma_{0}\textrm{students} + \delta_{0}\textrm{juried}_{ij} +  \varepsilon_{0}\textrm{public} + \zeta_{0}\textrm{solo}_{ij} +\zeta_{1}\textrm{mpqnem}_{i}\textrm{solo}_{ij}] \\ &amp;  +  [u_{i} +\epsilon_{ij} ]
 \end{align*}
 \]</span></p>
-<div class="sourceCode" id="cb224"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb224-1"><a href="multilevel-models.html#cb224-1" tabindex="-1"></a>modelC <span class="ot">&lt;-</span> <span class="fu">lmer</span>(na <span class="sc">~</span> previous <span class="sc">+</span> students <span class="sc">+</span> juried <span class="sc">+</span> </span>
-<span id="cb224-2"><a href="multilevel-models.html#cb224-2" tabindex="-1"></a>    public <span class="sc">+</span> solo <span class="sc">+</span> mpqpem <span class="sc">+</span> mpqnem <span class="sc">+</span> </span>
-<span id="cb224-3"><a href="multilevel-models.html#cb224-3" tabindex="-1"></a>    mpqnem<span class="sc">:</span>solo <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> id), <span class="at">data =</span> music, <span class="at">REML=</span><span class="cn">TRUE</span>)</span>
-<span id="cb224-4"><a href="multilevel-models.html#cb224-4" tabindex="-1"></a><span class="fu">summary</span>(modelC)</span></code></pre></div>
+<div class="sourceCode" id="cb224"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb224-1"><a href="multilevel-models.html#cb224-1" aria-hidden="true" tabindex="-1"></a>modelC <span class="ot">&lt;-</span> <span class="fu">lmer</span>(na <span class="sc">~</span> previous <span class="sc">+</span> students <span class="sc">+</span> juried <span class="sc">+</span> </span>
+<span id="cb224-2"><a href="multilevel-models.html#cb224-2" aria-hidden="true" tabindex="-1"></a>    public <span class="sc">+</span> solo <span class="sc">+</span> mpqpem <span class="sc">+</span> mpqnem <span class="sc">+</span> </span>
+<span id="cb224-3"><a href="multilevel-models.html#cb224-3" aria-hidden="true" tabindex="-1"></a>    mpqnem<span class="sc">:</span>solo <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> id), <span class="at">data =</span> music, <span class="at">REML=</span><span class="cn">TRUE</span>)</span>
+<span id="cb224-4"><a href="multilevel-models.html#cb224-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(modelC)</span></code></pre></div>
 <pre><code>Linear mixed model fit by REML. t-tests use Satterthwaite&#39;s method [
 lmerModLmerTest]
 Formula: na ~ previous + students + juried + public + solo + mpqpem +  
@@ -1998,11 +2005,11 @@ solo:mpqnem  0.343  0.067  0.040  0.005  0.052 -0.915  0.016 -0.587</code></pre>
 </div>
 <div id="aic-and-bic-comparisons-for-models-b-and-c" class="section level3 hasAnchor" number="3.5.8">
 <h3><span class="header-section-number">3.5.8</span> AIC and BIC Comparisons for Models B and C<a href="multilevel-models.html#aic-and-bic-comparisons-for-models-b-and-c" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb226-1"><a href="multilevel-models.html#cb226-1" tabindex="-1"></a><span class="fu">AIC</span>(modelB, modelC)</span></code></pre></div>
+<div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb226-1"><a href="multilevel-models.html#cb226-1" aria-hidden="true" tabindex="-1"></a><span class="fu">AIC</span>(modelB, modelC)</span></code></pre></div>
 <pre><code>##        df      AIC
 ## modelB 13 2946.328
 ## modelC 11 2953.082</code></pre>
-<div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb228-1"><a href="multilevel-models.html#cb228-1" tabindex="-1"></a><span class="fu">BIC</span>(modelB, modelC)</span></code></pre></div>
+<div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb228-1"><a href="multilevel-models.html#cb228-1" aria-hidden="true" tabindex="-1"></a><span class="fu">BIC</span>(modelB, modelC)</span></code></pre></div>
 <pre><code>##        df      BIC
 ## modelB 13 3001.040
 ## modelC 11 2999.377</code></pre>
@@ -2012,9 +2019,9 @@ solo:mpqnem  0.343  0.067  0.040  0.005  0.052 -0.915  0.016 -0.587</code></pre>
 <h3><span class="header-section-number">3.5.9</span> Likelihood Ratio Test<a href="multilevel-models.html#likelihood-ratio-test" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Since all of the fixed effects in Model C also appear in Model B, (Model C is a nested version of Model B), we can use a <strong>likelihood ratio test</strong> (drop in deviance test), which is similar to the ANOVA F-Test, to compare the models.</p>
 <p>When using mixed effects models, the test statistic for this goodness of fit test follows a <span class="math inline">\(\chi^2\)</span> distribution, rather than an F-distribution, so we use <code>test = "Chisq"</code>.</p>
-<div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb230-1"><a href="multilevel-models.html#cb230-1" tabindex="-1"></a><span class="co"># anova() automatically uses ML for LRT tests</span></span>
-<span id="cb230-2"><a href="multilevel-models.html#cb230-2" tabindex="-1"></a>drop_in_dev <span class="ot">&lt;-</span> <span class="fu">anova</span>(modelB, modelC, <span class="at">test =</span> <span class="st">&quot;Chisq&quot;</span>)</span>
-<span id="cb230-3"><a href="multilevel-models.html#cb230-3" tabindex="-1"></a>drop_in_dev</span></code></pre></div>
+<div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb230-1"><a href="multilevel-models.html#cb230-1" aria-hidden="true" tabindex="-1"></a><span class="co"># anova() automatically uses ML for LRT tests</span></span>
+<span id="cb230-2"><a href="multilevel-models.html#cb230-2" aria-hidden="true" tabindex="-1"></a>drop_in_dev <span class="ot">&lt;-</span> <span class="fu">anova</span>(modelB, modelC, <span class="at">test =</span> <span class="st">&quot;Chisq&quot;</span>)</span>
+<span id="cb230-3"><a href="multilevel-models.html#cb230-3" aria-hidden="true" tabindex="-1"></a>drop_in_dev</span></code></pre></div>
 <pre><code>Data: music
 Models:
 modelC: na ~ previous + students + juried + public + solo + mpqpem + mpqnem + mpqnem:solo + (1 | id)
@@ -2029,7 +2036,7 @@ Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&
 </div>
 <div id="final-conclusions" class="section level3 hasAnchor" number="3.5.10">
 <h3><span class="header-section-number">3.5.10</span> Final Conclusions<a href="multilevel-models.html#final-conclusions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb232"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb232-1"><a href="multilevel-models.html#cb232-1" tabindex="-1"></a><span class="fu">summary</span>(modelB)</span></code></pre></div>
+<div class="sourceCode" id="cb232"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb232-1"><a href="multilevel-models.html#cb232-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(modelB)</span></code></pre></div>
 <pre><code>## Linear mixed model fit by REML. t-tests use Satterthwaite&#39;s method [
 ## lmerModLmerTest]
 ## Formula: na ~ previous + students + juried + public + solo + mpqpem +  
@@ -2108,9 +2115,78 @@ Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&
 </ul>
 </div>
 </div>
-<div id="conceptual-questions" class="section level2 hasAnchor" number="3.6">
-<h2><span class="header-section-number">3.6</span> Conceptual Questions<a href="multilevel-models.html#conceptual-questions" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>We now model performance anxiety, measured by <code>na</code> using the following model:</p>
+<div id="practice-questions-2" class="section level2 hasAnchor" number="3.6">
+<h2><span class="header-section-number">3.6</span> Practice Questions<a href="multilevel-models.html#practice-questions-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>We analyze simulated data pertaining to the effectiveness of a nutrition and training program for beginning adult runners. In a group of 16 beginner runners, eight were randomly assigned to participate in the program, while the other eight prepared and trained on their own. Before starting the program, the runners ran five kilometers (3.1 miles), and their average mile pace (minutes it took to run 1 mile) was recorded. The runners were again timed running the same distance after one, two, and three weeks of training. Researchers are interested in determining whether runners who participate in the program gain speed faster than those training on their own.</p>
+<p>The dataset includes the following variables.</p>
+<p><code>Id</code> - runner’s ID number<br />
+<code>Week</code> - number of weeks since starting training (0,1,2,3)<br />
+<code>Age18</code> - runner’s age in years over 18<br />
+<code>Program</code> - was the runner in the training and nutrition program (0=no, 1=yes)<br />
+<code>Pace</code> - average amount of time it takes to run one mile (in minutes per mile)</p>
+<p>The first 10 rows of the dataset are shown in the R output below.</p>
+<div class="sourceCode" id="cb234"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb234-1"><a href="multilevel-models.html#cb234-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(Runners, <span class="dv">10</span>)</span></code></pre></div>
+<pre><code>##    Id Week Age18 Program  Pace
+## 1   1    0    15       0  7.48
+## 2   1    1    15       0  8.20
+## 3   1    2    15       0  6.88
+## 4   1    3    15       0  7.22
+## 5   2    0    22       1 11.36
+## 6   2    1    22       1  9.48
+## 7   2    2    22       1  8.66
+## 8   2    3    22       1  8.15
+## 9   3    0    15       0  8.36
+## 10  3    1    15       0  8.27</code></pre>
+<div id="identify-the-levels-of-a-two-level-experiment-and-the-observational-units-and-variables-at-each-level." class="section level3 unnumbered hasAnchor">
+<h3>12. Identify the levels of a two-level experiment and the observational units and variables at each level.<a href="multilevel-models.html#identify-the-levels-of-a-two-level-experiment-and-the-observational-units-and-variables-at-each-level." class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Identify the levels of the runners dataset and the observational units and variables at each level.</p>
+</div>
+<div id="interpret-random-slopes-intercepts-error-terms-and-their-estimated-variances-and-correlations-in-linear-mixed-effects-models." class="section level3 unnumbered hasAnchor">
+<h3>13. Interpret random slopes, intercepts, error terms and their estimated variances and correlations in linear mixed effects models.<a href="multilevel-models.html#interpret-random-slopes-intercepts-error-terms-and-their-estimated-variances-and-correlations-in-linear-mixed-effects-models." class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><strong>Question 1:</strong></p>
+<p>A linear mixed effects model is fit to the runners data.</p>
+<div class="sourceCode" id="cb236"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb236-1"><a href="multilevel-models.html#cb236-1" aria-hidden="true" tabindex="-1"></a>M1 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(<span class="at">data=</span>Runners, Pace <span class="sc">~</span>  Age18 <span class="sc">+</span> Program  <span class="sc">+</span>  Week <span class="sc">+</span> Program<span class="sc">:</span>Week <span class="sc">+</span> (Week<span class="sc">|</span>Id)) </span>
+<span id="cb236-2"><a href="multilevel-models.html#cb236-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(M1)</span></code></pre></div>
+<pre><code>## Linear mixed model fit by REML. t-tests use Satterthwaite&#39;s method [
+## lmerModLmerTest]
+## Formula: Pace ~ Age18 + Program + Week + Program:Week + (Week | Id)
+##    Data: Runners
+## 
+## REML criterion at convergence: 162.6
+## 
+## Scaled residuals: 
+##      Min       1Q   Median       3Q      Max 
+## -1.84943 -0.45934 -0.05624  0.43061  1.51050 
+## 
+## Random effects:
+##  Groups   Name        Variance Std.Dev. Corr 
+##  Id       (Intercept) 1.1944   1.0929        
+##           Week        0.1404   0.3747   -0.67
+##  Residual             0.2847   0.5336        
+## Number of obs: 64, groups:  Id, 16
+## 
+## Fixed effects:
+##              Estimate Std. Error       df t value    Pr(&gt;|t|)    
+## (Intercept)   8.13810    0.94794 15.21527   8.585 0.000000321 ***
+## Age18         0.01268    0.04795 13.00001   0.265     0.79551    
+## Program       1.28163    0.59028 12.51272   2.171     0.04980 *  
+## Week          0.17263    0.15706 14.00008   1.099     0.29025    
+## Program:Week -0.78713    0.22211 14.00008  -3.544     0.00324 ** 
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Correlation of Fixed Effects:
+##             (Intr) Age18  Progrm Week  
+## Age18       -0.898                     
+## Program     -0.311  0.000              
+## Week        -0.302  0.000  0.485       
+## Program:Wek  0.214  0.000 -0.686 -0.707</code></pre>
+<ol style="list-style-type: lower-alpha">
+<li><p>Give the estimates of <span class="math inline">\(\sigma_u\)</span>, <span class="math inline">\(\sigma_v\)</span>, and <span class="math inline">\(\sigma\)</span>, and <span class="math inline">\(\rho_{uv}\)</span>, and interpret each in context.</p></li>
+<li><p>What are the units on the estimates of <span class="math inline">\(\sigma_u\)</span>, <span class="math inline">\(\sigma_v\)</span>, and <span class="math inline">\(\sigma\)</span>, and <span class="math inline">\(\rho_{uv}\)</span>? What does this tell us about which of these are and aren’t comparable?</p></li>
+</ol>
+<p><strong>Question 2:</strong></p>
+<p>Continuing with the musicians example referenced in the chapter, we now model performance anxiety, measured by <code>na</code> using the following model:</p>
 <p><span class="math display">\[
 \begin{align*}
 Y_{ij} &amp; = [\alpha_{0}+\alpha_{1}\textrm{Years_Study}_{i}+\beta_{0}\textrm{Juried}_{ij}+\beta_{1}\textrm{Years_Study}_{i}\textrm{Juried}_{ij}] \\
@@ -2134,8 +2210,8 @@ Y_{ij} &amp; = [\alpha_{0}+\alpha_{1}\textrm{Years_Study}_{i}+\beta_{0}\textrm{J
 \end{equation*}
 \]</span></p>
 <p>R output for the model is shown below.</p>
-<div class="sourceCode" id="cb234"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb234-1"><a href="multilevel-models.html#cb234-1" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">lmer</span>(<span class="at">data=</span>music, na <span class="sc">~</span> years_study <span class="sc">+</span> juried <span class="sc">+</span> years_study<span class="sc">:</span>juried </span>
-<span id="cb234-2"><a href="multilevel-models.html#cb234-2" tabindex="-1"></a>             <span class="sc">+</span> (juried<span class="sc">|</span>id)), <span class="at">REML=</span><span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb238"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb238-1"><a href="multilevel-models.html#cb238-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">lmer</span>(<span class="at">data=</span>music, na <span class="sc">~</span> years_study <span class="sc">+</span> juried <span class="sc">+</span> years_study<span class="sc">:</span>juried </span>
+<span id="cb238-2"><a href="multilevel-models.html#cb238-2" aria-hidden="true" tabindex="-1"></a>             <span class="sc">+</span> (juried<span class="sc">|</span>id)), <span class="at">REML=</span><span class="cn">TRUE</span>)</span></code></pre></div>
 <pre><code>## Linear mixed model fit by REML. t-tests use Satterthwaite&#39;s method [
 ## lmerModLmerTest]
 ## Formula: na ~ years_study + juried + years_study:juried + (juried | id)
@@ -2168,10 +2244,10 @@ Y_{ij} &amp; = [\alpha_{0}+\alpha_{1}\textrm{Years_Study}_{i}+\beta_{0}\textrm{J
 ## years_study -0.894              
 ## juried      -0.188  0.163       
 ## yrs_stdy:jr  0.152 -0.163 -0.880</code></pre>
-<ol style="list-style-type: decimal">
+<ol style="list-style-type: lower-alpha">
 <li>Explain in words what we should conclude from each of the following facts:</li>
 </ol>
-<ol style="list-style-type: lower-alpha">
+<ol style="list-style-type: lower-roman">
 <li><span class="math inline">\(\hat{\beta_0}\)</span> is positive and the associated p-value is small.<br />
 </li>
 <li><span class="math inline">\(\hat{\beta_1}\)</span> is negative and the associated p-value is large.<br />
@@ -2182,18 +2258,10 @@ Y_{ij} &amp; = [\alpha_{0}+\alpha_{1}\textrm{Years_Study}_{i}+\beta_{0}\textrm{J
 </li>
 <li><span class="math inline">\(\hat{\rho}_{uv}\)</span> is slightly negative</li>
 </ol>
-<p><strong>Answers</strong></p>
-<ol style="list-style-type: lower-alpha">
-<li><p>There is evidence that expected performance anxiety for musicians with no prior years of study is higher when giving a juried performance than a non-juried one.</p></li>
-<li><p>While the gap in performance anxiety between juried and non-juried performances may decrease with a musician’s years of study, it is plausible that this gap does not change at all.</p></li>
-<li><p>There is more variability in residuals for performance anxiety between performances of the same type (juried or non-juried) by the same performer than there is in average residuals between different performers for non-juried performances, after accounting for years of study and whether the performance was juried.</p></li>
-<li><p>After accounting for years of study and whether the performance was juried, variation in average residuals between different performers, for non-juried performances, is about the same as variation in change in performance anxiety for juried vs non-juried performances between individuals.</p></li>
-<li><p>After accounting for years of study and whether the performance ws juried, people who experience higher than expected performance anxiety for nonjuried performances have less increase in anxiety (maybe even decrease) when playing in a juried performance.</p></li>
-</ol>
-<ol start="2" style="list-style-type: decimal">
+<ol start="2" style="list-style-type: lower-alpha">
 <li>Explain in words what it would mean if the model parameter was equal to zero.</li>
 </ol>
-<ol style="list-style-type: lower-alpha">
+<ol style="list-style-type: lower-roman">
 <li><span class="math inline">\(\alpha_0\)</span><br />
 </li>
 <li><span class="math inline">\(\alpha_1\)</span><br />
@@ -2210,28 +2278,155 @@ Y_{ij} &amp; = [\alpha_{0}+\alpha_{1}\textrm{Years_Study}_{i}+\beta_{0}\textrm{J
 </li>
 <li><span class="math inline">\(\rho_{uv}\)</span></li>
 </ol>
-<p><strong>Solution</strong></p>
+</div>
+<div id="determine-whether-it-is-appropriate-to-add-a-random-slope-term-to-a-model-in-a-given-context." class="section level3 unnumbered hasAnchor">
+<h3>14. Determine whether it is appropriate to add a random slope term to a model in a given context.<a href="multilevel-models.html#determine-whether-it-is-appropriate-to-add-a-random-slope-term-to-a-model-in-a-given-context." class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Continue with the runners example in Question 13 Part 1.</p>
 <ol style="list-style-type: lower-alpha">
-<li><p><span class="math inline">\(\alpha_0 =0\)</span> would imply that the average performance anxiety score for a musician with no prior study in a non-juried performance is 0.</p></li>
-<li><p><span class="math inline">\(\alpha_1=0\)</span> would imply that for non-juried performances, average performance anxiety does not change as the muscician gains more years of study.</p></li>
-<li><p><span class="math inline">\(\beta_0=0\)</span> would imply that a musician with no prior years of study has no difference, on average, between performance anxiety scores when playing in a juried performance, compared to a non-juried one.</p></li>
-<li><p><span class="math inline">\(\beta_1=0\)</span> would imply that on average, the difference in a musician’s performance anxiety scores in juried performances compared to non-juried ones stays the same, regardless of how many prior years of study the musician has.</p></li>
-<li><p><span class="math inline">\(\sigma_u=0\)</span> would imply that all musicians with the same amount of prior study would have the same average performance anxiety score in their non-juried performances.</p></li>
-<li><p><span class="math inline">\(\sigma_v=0\)</span> would imply that all musicians with the same amount of prior study would, on average, have the same change in performance anxiety between juried and non-juried performances.</p></li>
-<li><p><span class="math inline">\(\sigma=0\)</span> would imply that all performances of the same type (juried vs nonjuried), that are given by musicians with the same amount of prior study would have the same performance anxiety scores.</p></li>
-<li><p><span class="math inline">\(\rho_{uv}=0\)</span> would imply that after accounting for age and whether a performance is juried, there is no relationship between a performer’s average performance anxiety in a non-juried performance, and their change in performance anxiety between juried and non-juried performances. (Another way to say is that, after accounting for years of prior study and type of performance, a musician who has a higher than expected performance anxiety score in non-juried performances is not expected to have any bigger, or smaller, change when playing in a juried performance than a musician who has lower than expected performance anxiety in a non-juried performance).</p></li>
+<li>The lattice plots below show each runner’s pace each week, faceted by whether or not they were in the program. Do the plots suggest that a random slope term should be added to the model? Justify your answer.</li>
 </ol>
-<ol start="3" style="list-style-type: decimal">
-<li>Now consider a model with no interaction term.</li>
+<div class="sourceCode" id="cb240"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb240-1"><a href="multilevel-models.html#cb240-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Lattice plot for NA vs. Performance Type</span></span>
+<span id="cb240-2"><a href="multilevel-models.html#cb240-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(Runners,<span class="fu">aes</span>(<span class="at">x=</span>Week,<span class="at">y=</span>Pace)) <span class="sc">+</span> theme<span class="fl">.1</span> <span class="sc">+</span> </span>
+<span id="cb240-3"><a href="multilevel-models.html#cb240-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">&quot;lm&quot;</span>,<span class="at">color=</span><span class="st">&quot;black&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb240-4"><a href="multilevel-models.html#cb240-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(Program<span class="sc">~</span>Id) <span class="sc">+</span>   </span>
+<span id="cb240-5"><a href="multilevel-models.html#cb240-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">strip.text.x=</span><span class="fu">element_blank</span>()) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="dv">0</span>,<span class="dv">15</span>) <span class="sc">+</span></span>
+<span id="cb240-6"><a href="multilevel-models.html#cb240-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Week&quot;</span>,<span class="at">y=</span><span class="st">&quot;Pace&quot;</span>) </span></code></pre></div>
+<p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-139-1.png" width="768" /></p>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>We consider models with and without random slope terms. AIC and BIC for both models are shown below. Based on these results should a random slope term be included in the model?</li>
 </ol>
+<div class="sourceCode" id="cb241"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb241-1"><a href="multilevel-models.html#cb241-1" aria-hidden="true" tabindex="-1"></a>M1 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(<span class="at">data=</span>Runners, Pace <span class="sc">~</span>  Age18 <span class="sc">+</span> Program  <span class="sc">+</span>  Week <span class="sc">+</span> Program<span class="sc">:</span>Week <span class="sc">+</span> (Week<span class="sc">|</span>Id)) </span>
+<span id="cb241-2"><a href="multilevel-models.html#cb241-2" aria-hidden="true" tabindex="-1"></a>M2 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(<span class="at">data=</span>Runners, Pace <span class="sc">~</span>  Age18 <span class="sc">+</span> Program  <span class="sc">+</span>  Week <span class="sc">+</span> Program<span class="sc">:</span>Week <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>Id)) </span>
+<span id="cb241-3"><a href="multilevel-models.html#cb241-3" aria-hidden="true" tabindex="-1"></a><span class="fu">AIC</span>(M1, M2)</span></code></pre></div>
+<pre><code>##    df      AIC
+## M1  9 180.5843
+## M2  7 185.2592</code></pre>
+<div class="sourceCode" id="cb243"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb243-1"><a href="multilevel-models.html#cb243-1" aria-hidden="true" tabindex="-1"></a><span class="fu">BIC</span>(M1, M2)</span></code></pre></div>
+<pre><code>##    df      BIC
+## M1  9 200.0142
+## M2  7 200.3714</code></pre>
+</div>
+<div id="distinguish-between-random-slope-terms-and-interactions-terms-and-explain-what-the-inclusionexclusion-of-each-in-a-lme-model-says-about-our-assumptions-regarding-the-nature-of-our-data." class="section level3 unnumbered hasAnchor">
+<h3>15. Distinguish between random slope terms and interactions terms and explain what the inclusion/exclusion of each in a LME model says about our assumptions regarding the nature of our data.<a href="multilevel-models.html#distinguish-between-random-slope-terms-and-interactions-terms-and-explain-what-the-inclusionexclusion-of-each-in-a-lme-model-says-about-our-assumptions-regarding-the-nature-of-our-data." class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Continue with the runners example in Question 13 Part 1.</p>
+<ol style="list-style-type: lower-alpha">
+<li><p>Suppose that two runners are the same age and both participate in the program and that runner #1 runs at a faster pace (less time per mile) than runner #2 in the first run (prior to starting training). Based on the model, which runner’s time should we expect to change more from the first run to the second? Cite a specific value from the R output to justify your answer.</p></li>
+<li><p>Suppose that two runners are the same age and one participates in the program and the other doesn’t. Based on the model, which runner’s time should we expect to change more from the first run to the second? Cite a specific value from the R output to justify your answer.</p></li>
+</ol>
+</div>
+<div id="calculate-expected-responses-and-expected-changes-associated-with-fixed-effects-in-a-lme-model.-if-it-is-not-possible-to-calculate-the-quantity-explain-why." class="section level3 unnumbered hasAnchor">
+<h3>16. Calculate expected responses and expected changes associated with fixed effects in a LME model. If it is not possible to calculate the quantity, explain why.<a href="multilevel-models.html#calculate-expected-responses-and-expected-changes-associated-with-fixed-effects-in-a-lme-model.-if-it-is-not-possible-to-calculate-the-quantity-explain-why." class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Continue with the runners example in Question 13 Part 1.</p>
+<p>Calculate the following quantities:</p>
+<ol style="list-style-type: lower-alpha">
+<li>Expected pace in week 3 for a 20-year old who participates in the program.<br />
+</li>
+<li>Difference in expected paces in week 3 between a 20-year old who participates in the program and a 20-year old who does not.<br />
+</li>
+<li>Expected difference in pace between a two people who participate in the program, in the same week, assuming one is five years older than the other.<br />
+</li>
+<li>Expected difference in pace between a person who participates in the program and a person of the same age, who does not participate, assuming they ran in the same week.<br />
+</li>
+<li>Expected weekly change in pace for runners who are in the program, assuming age is held constant.<br />
+</li>
+<li>Expected weekly change in pace for runners who are not in the program, assuming age is held constant.</li>
+</ol>
+</div>
+<div id="write-equations-for-linear-mixed-effects-models-in-mathematical-notation-including-assumptions-about-distributions-of-random-effects-and-error-terms." class="section level3 unnumbered hasAnchor">
+<h3>17. Write equations for linear mixed effects models in mathematical notation, including assumptions about distributions of random effects and error terms.<a href="multilevel-models.html#write-equations-for-linear-mixed-effects-models-in-mathematical-notation-including-assumptions-about-distributions-of-random-effects-and-error-terms." class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Continue with the runners example in Question 13 Part 1.</p>
+<p>Let <span class="math inline">\(Y_{ij}\)</span> represent the pace of runner <span class="math inline">\(i\)</span> after <span class="math inline">\(j\)</span> weeks of training. Write the mathematical form of each of the following models, including assumption about random effects and error terms.</p>
+<div class="sourceCode" id="cb245"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb245-1"><a href="multilevel-models.html#cb245-1" aria-hidden="true" tabindex="-1"></a>M1 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(<span class="at">data=</span>Runners, Pace <span class="sc">~</span>  Age18 <span class="sc">+</span> Program  <span class="sc">+</span>  Week <span class="sc">+</span> (Week<span class="sc">|</span>Id)) </span></code></pre></div>
+<div class="sourceCode" id="cb246"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb246-1"><a href="multilevel-models.html#cb246-1" aria-hidden="true" tabindex="-1"></a>M2 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(<span class="at">data=</span>Runners, Pace <span class="sc">~</span>  Age18 <span class="sc">+</span> Program  <span class="sc">+</span>  Week <span class="sc">+</span> Program<span class="sc">:</span>Week <span class="sc">+</span> (Week<span class="sc">|</span>Id)) </span></code></pre></div>
+<!--
+
+We fit a linear mixed effects model of the form
+
+$Y_{ij}  = \alpha_{0}+\alpha_{1}\textrm{Age18}_{i}+\alpha_{2}\textrm{Program}_{i}+\beta_{1}\textrm{Week}_{ij} + u_{i}+v_{i}\textrm{Week}_{ij}+\epsilon_{ij}$, 
+
+
+     where 
+$\epsilon_{ij}\sim N(0,\sigma^2)$, and 
+\[
+\left[ \begin{array}{c}
+            u_{i} \\ v_{i}
+          \end{array}  \right] \sim N \left( \left[
+          \begin{array}{c}
+            0 \\ 0
+          \end{array} \right], \left[
+          \begin{array}{cc}
+            \sigma_{u}^{2} & \rho_{uv}\sigma_{u}\sigma_v \\
+            \rho_{uv}\sigma_{u}\sigma_v & \sigma_{v}^{2}
+          \end{array} \right] \right) 
+\]
+
+-->
+<div class="sourceCode" id="cb247"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb247-1"><a href="multilevel-models.html#cb247-1" aria-hidden="true" tabindex="-1"></a>M3 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(<span class="at">data=</span>Runners, Pace <span class="sc">~</span>  Age18 <span class="sc">+</span> Program  <span class="sc">+</span>  Week <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>Id)) </span></code></pre></div>
+<div class="sourceCode" id="cb248"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb248-1"><a href="multilevel-models.html#cb248-1" aria-hidden="true" tabindex="-1"></a>M4 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data=</span>Runners, Pace <span class="sc">~</span>  Age18 <span class="sc">+</span> Program  <span class="sc">+</span>  Week </span></code></pre></div>
+</div>
+<div id="give-examples-of-values-of-the-response-variable-that-would-satisfy-given-conditions-about-parameters-in-a-lme-model-for-example-sigma_usigma." class="section level3 unnumbered hasAnchor">
+<h3>18. Give examples of values of the response variable that would satisfy given conditions about parameters in a LME model (for example (<span class="math inline">\(\sigma_u&gt;\sigma\)</span>)).<a href="multilevel-models.html#give-examples-of-values-of-the-response-variable-that-would-satisfy-given-conditions-about-parameters-in-a-lme-model-for-example-sigma_usigma." class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Researchers are interested in estimating the average weight of a particular species of fish. They visit three different lakes and collect samples of four fish from each lake, and weigh each fish on a scale.</p>
+<p>Let <span class="math inline">\(Y_{ij}\)</span> represent the weight (in lbs) of fish <span class="math inline">\(j\)</span> in lake <span class="math inline">\(i\)</span>. A possible model is:</p>
+<p><span class="math display">\[
+Y_{ij}  = \alpha_{0} + u_{i} + \epsilon_{ij},
+\]</span></p>
+<p>where <span class="math inline">\(u_i\sim N(0, \sigma^2_u)\)</span>, and <span class="math inline">\(\epsilon_{ij}\sim N(0, \sigma^2)\)</span>.</p>
+<p><strong>Fill in values for weights of individual fish in a way that would be consistent with the model parameters described. There are many different correct ways to do this.</strong></p>
+<p>Notes:</p>
+<ol style="list-style-type: decimal">
+<li>You may use integer values.<br />
+</li>
+<li>You may assume that the fish described weigh somewhere around 10 lbs on average. (You don’t need to make your answers average out to exactly 10, but this is meant to give you a general idea of the size of the numbers you might write.)</li>
+</ol>
+<ol style="list-style-type: lower-alpha">
+<li><span class="math inline">\(\sigma_u &gt; 0\)</span>, <span class="math inline">\(\sigma = 0\)</span></li>
+</ol>
+<p><img src="Lakes1.png" width="100%" /></p>
+<ol start="2" style="list-style-type: lower-alpha">
+<li><span class="math inline">\(\sigma_u = 0\)</span>, <span class="math inline">\(\sigma &gt; 0\)</span></li>
+</ol>
+<p><img src="Lakes1.png" width="100%" /></p>
+<p>Now, suppose there are two different species of fish, striped fish (the left two fish in each lake), and smiley fish (the right two fish in each lake. We use a model with an indicator variable <code>StripedSpecies</code> indicating whether or not the fish is of the striped species, as an explanatory variable.</p>
+<p>The model is:</p>
+<p><span class="math display">\[
+Y_{ij} = \alpha_{0} + \alpha_1\text{StripedSpecies}_{ij} + u_{i} + v_i\text{StripedSpecies}_{ij} + \epsilon_{ij},
+\]</span></p>
+<p>where <span class="math inline">\(\epsilon_{ij}\sim N(0,\sigma^2)\)</span> and</p>
+<p><span class="math display">\[
+\left[ \begin{array}{c}
+            u_{i} \\ v_{i}
+          \end{array}  \right] \sim N \left( \left[
+          \begin{array}{c}
+            0 \\ 0
+          \end{array} \right], \left[
+          \begin{array}{cc}
+            \sigma_{u}^{2} &amp; \\
+            \rho_{uv}\sigma_{u}\sigma_{v} &amp; \sigma_{v}^{2}
+          \end{array} \right] \right) .
+\]</span></p>
+<p><strong>Fill in values for weights of individual fish in a way that would be consistent with the model parameters described. There are many different correct ways to do this.</strong></p>
+<p>You may continue to follow the guidance in Notes 1 and 2.</p>
+<ol start="3" style="list-style-type: lower-alpha">
+<li><span class="math inline">\(\alpha_1=2\)</span>, <span class="math inline">\(\sigma_u &gt; 0\)</span>, <span class="math inline">\(\sigma_v = 0\)</span>, <span class="math inline">\(\sigma = 0\)</span></li>
+</ol>
+<p><img src="Lakes2.png" width="100%" /></p>
+<ol start="4" style="list-style-type: lower-alpha">
+<li><span class="math inline">\(\alpha_1=2\)</span>, <span class="math inline">\(\sigma_u = 0\)</span>, <span class="math inline">\(\sigma_v &gt; 0\)</span>, <span class="math inline">\(\sigma = 0\)</span>.</li>
+</ol>
+<p><img src="Lakes2.png" width="100%" height="150%" /></p>
+</div>
+<div id="draw-lattice-or-spaghetti-plots-that-are-consistent-with-given-conditions-involving-parameters-in-a-lme-model." class="section level3 unnumbered hasAnchor">
+<h3>22. Draw lattice (or spaghetti) plots that are consistent with given conditions involving parameters in a LME model.<a href="multilevel-models.html#draw-lattice-or-spaghetti-plots-that-are-consistent-with-given-conditions-involving-parameters-in-a-lme-model." class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Returning to the musician data consider a model with no interaction term.</p>
 <p><span class="math display">\[
 \begin{align*}
 Y_{ij} &amp; = [\alpha_{0}+\alpha_{1}\textrm{Years_Study}_{i}+\beta_{0}\textrm{Juried}_{ij}] \\
 &amp; \textrm{} + [u_{i}+v_{i}\textrm{Juried}_{ij}+\epsilon_{ij}]
 \end{align*}
 \]</span></p>
-<p>Sketch lattice plots, with <code>juried</code> on the x-axis and <code>na</code> on the y-axis, for 5 different musicians that illustrate each of the following scenarios:</p>
-<ol style="list-style-type: lower-alpha">
+<p>Sketch lattice plots, with <code>juried</code> on the x-axis and <code>na</code> on the y-axis, for 5 different musicians that illustrate each of the following scenarios. If any are impossible, explain why:</p>
+<ol style="list-style-type: lower-roman">
 <li><span class="math inline">\(\beta_0 &gt; 0\)</span>, <span class="math inline">\(\sigma_u\)</span> is large, and <span class="math inline">\(\sigma_v\)</span> is small<br />
 </li>
 <li><span class="math inline">\(\beta_0 &gt; 0\)</span>, <span class="math inline">\(\sigma_u\)</span> is small, and <span class="math inline">\(\sigma_v\)</span> is large<br />
@@ -2239,9 +2434,57 @@ Y_{ij} &amp; = [\alpha_{0}+\alpha_{1}\textrm{Years_Study}_{i}+\beta_{0}\textrm{J
 <li><span class="math inline">\(\beta_0 &gt; 0\)</span>, <span class="math inline">\(\rho_{uv} &gt; 0\)</span><br />
 </li>
 <li><span class="math inline">\(\beta_0 &gt; 0\)</span>, <span class="math inline">\(\rho_{uv} &lt; 0\)</span></li>
-<li><span class="math inline">\(\beta_0 &lt; 0\)</span>, <span class="math inline">\(\rho_{uv} &lt; 0\)</span></li>
+<li><span class="math inline">\(\beta_0 &lt; 0\)</span>, <span class="math inline">\(\rho_{uv} &lt; 0\)</span><br />
+</li>
+<li><span class="math inline">\(\beta_0 &gt; 0\)</span>, <span class="math inline">\(\sigma_v = 0\)</span>, <span class="math inline">\(\sigma_u &gt; 0\)</span><br />
+</li>
+<li><span class="math inline">\(\beta_0 &gt; 0\)</span>, <span class="math inline">\(\sigma_v &gt; 0\)</span>, <span class="math inline">\(\sigma_u &gt; 0\)</span>, <span class="math inline">\(\rho_{uv}=0\)</span><br />
+</li>
+<li><span class="math inline">\(\beta_0 &gt; 0\)</span>, <span class="math inline">\(\sigma_v = 0\)</span>, <span class="math inline">\(\sigma_u &gt; 0\)</span>, <span class="math inline">\(\rho_{uv} &gt; 0\)</span></li>
 </ol>
+</div>
+<div id="answer-research-questions-related-to-fixed-and-random-effects-in-a-study-given-output-from-lme-models." class="section level3 unnumbered hasAnchor">
+<h3>23. Answer research questions related to fixed and random effects in a study given output from LME models.<a href="multilevel-models.html#answer-research-questions-related-to-fixed-and-random-effects-in-a-study-given-output-from-lme-models." class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ol style="list-style-type: lower-alpha">
+<li><p>Notice that the estimate associated with <code>program</code> is a very small and the associated p-value is very large. Explain why it would be incorrect to conclude from these values that the program has little effect on running pace. In your answer, explain specifically what this estimate tells us, and why it is not a good measure the effectiveness of the program.</p></li>
+<li><p>Cite a value from the R output that can used to assess the effectiveness of the program. Is there evidence that participating in the program helps runners run faster than training on their own? Justify your answer.</p></li>
+</ol>
+<!--
+**Answers**
 
+a)  There is evidence that expected performance anxiety for musicians with no prior years of study is higher when giving a juried performance than a non-juried one. 
+
+b)  While the gap in performance anxiety between juried and non-juried performances may decrease with a musician's years of study, it is plausible that this gap does not change at all.      
+
+c)  There is more variability in residuals for performance anxiety between performances of the same type (juried or non-juried) by the same performer than there is in average residuals between different performers for non-juried performances, after accounting for years of study and whether the performance was juried.    
+
+d)  After accounting for years of study and whether the performance was juried, variation in average residuals between different performers, for non-juried performances, is about the same as variation in change in performance anxiety for juried vs non-juried performances between individuals. 
+
+e)  After accounting for years of study and whether the performance ws juried, people who experience higher than expected performance anxiety for nonjuried performances have less increase in anxiety (maybe even decrease) when playing in a juried performance.
+
+-->
+<!--
+**Solution**
+
+a. $\alpha_0 =0$ would imply that the average performance anxiety score for a musician with no prior study in a non-juried performance is 0.  
+
+b. $\alpha_1=0$ would imply that for non-juried performances, average performance anxiety does not change as the muscician gains more years of study.
+
+c. $\beta_0=0$ would imply that a musician with no prior years of study has no difference, on average, between performance anxiety scores when playing in a juried performance, compared to a non-juried one. 
+
+d. $\beta_1=0$ would imply that on average, the difference in a musician's performance anxiety scores in juried performances compared to non-juried ones stays the same, regardless of how many prior years of study the musician has.   
+
+e. $\sigma_u=0$ would imply that all musicians with the same amount of prior study would have the same average performance anxiety score in their non-juried performances. 
+
+f. $\sigma_v=0$ would imply that all musicians with the same amount of prior study would, on average, have the same change in performance anxiety between juried and non-juried performances.   
+
+g. $\sigma=0$ would imply that all performances of the same type (juried vs nonjuried), that are given by musicians with the same amount of prior study would have the same performance anxiety scores.  
+
+h. $\rho_{uv}=0$ would imply that after accounting for age and whether a performance is juried, there is no relationship between a performer's average performance anxiety in a non-juried performance, and their change in performance anxiety between juried and non-juried performances. (Another way to say is that, after accounting for years of prior study and type of performance, a musician who has a higher than expected performance anxiety score in non-juried performances is not expected to have any bigger, or smaller, change when playing in a juried performance than a musician who has lower than expected performance anxiety in a non-juried performance).  
+
+-->
+
+</div>
 </div>
 </div>
             </section>

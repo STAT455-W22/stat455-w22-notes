@@ -14,7 +14,7 @@ fig:unnamed-chunk-80
 fig:unnamed-chunk-82
 fig:unnamed-chunk-83
 fig:unnamed-chunk-85
-fig:unnamed-chunk-174
+fig:unnamed-chunk-187
 fig:philippinesmap
 fig:OLSpois
 fig:totalPoisByAge
@@ -163,7 +163,7 @@ one-more-possible-model
 aic-and-bic-comparisons-for-models-b-and-c
 likelihood-ratio-test
 final-conclusions
-conceptual-questions
+practice-questions-2
 longitudinal-data
 charter-schools-exploratory-analysis
 data
