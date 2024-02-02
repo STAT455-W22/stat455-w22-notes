@@ -1037,3 +1037,232 @@ $$
 * If researchers are interested in predicted random effects and estimated variance components in addition to estimated fixed effects, then choice of covariance structure can make a big difference.
         -For example, if researchers are interested in drawing conclusions about particular schools rather than charter schools in general, they may more carefully model the covariance structure in this study.
 
+## Practice Problems
+
+In a study comparing different brands of dog food, a sample of 47 puppies were randomly assigned to either Brand A or Brand B. Dogs were fed the same amount each day and their weights were recorded once per month from ages 2 months through 4 months. None of the puppies in the study were from the same litter, and they lived in different homes. The data include:  
+
+* `BrandB` - the brand of food the dog is fed (0=A, 1=B)    
+* `MotherLarge` - is the mother a large dog (60 lbs or more)? (1=yes, 0=no)      
+* `Month` - the month the measurement. This is 2 less than the puppy's age in months.    
+* `Exercise` - the average number of minutes of exercise the dog got per day in the month the measurement was taken      
+* `Weight` - the puppy's weight in lbs.     
+
+The first 10 rows of the dataset are shown in the R output. 
+
+```{r, echo=FALSE, include=FALSE}
+set.seed(01282922)
+
+N <- 47
+Exercise <- rnorm(N, 60, 30)
+Brand <-sample(0:1, N, replace=TRUE)
+Exercise[Exercise<0] <- 0 
+Exercise[Exercise>120] <- (Exercise[Exercise>120] +120)/2
+Exercise <- round(Exercise,0)
+MotherLarge <- rbinom(N, 1, 0.45)
+Exercise.1 <- round(Exercise + rnorm(N, 0, 2), 0)
+Exercise.2 <- round(Exercise + rnorm(N, 0, 2), 0)
+Exercise.3 <- round(Exercise + rnorm(N, 0, 2), 0)
+Exercise.4 <- round(Exercise + rnorm(N, 0, 2), 0)
+Exercise.1[Exercise.1<0] <- 0 
+Exercise.1[Exercise.1>120] <- (Exercise.1[Exercise.1>120] +120)/2
+Exercise.2[Exercise.2<0] <- 0 
+Exercise.2[Exercise.2>120] <- (Exercise.2[Exercise.2>120] +120)/2
+Exercise.3[Exercise.3<0] <- 0 
+Exercise.3[Exercise.3>120] <- (Exercise.3[Exercise.3>120] +120)/2
+Exercise.4[Exercise.4<0] <- 0 
+Exercise.4[Exercise.4>120] <- (Exercise.4[Exercise.4>120] +120)/2
+
+id <- 1:N
+
+Intercept <- rnorm(N, 15 + 20*MotherLarge, 8) 
+Intercept[Intercept<5] <- 5
+Diff <- rnorm(N, 0, 3) + Intercept/7
+Diff[Diff<2] <- 2
+
+Weight.1 <- round(Intercept + rnorm(N, 0, 5),0) - Exercise.1/60
+Weight.2 <- round(Weight.1 + rnorm(N, 0, 5) + Diff,0) - Exercise.2/60
+Weight.3 <- round(Weight.2  + rnorm(N, 0, 5) + Diff,0) - Exercise.3/60
+Weight.4 <- round(Weight.3  + rnorm(N, 0, 5) + Diff,0) - Exercise.4/60
+
+
+DogGrowth <- data.frame(id, Brand, MotherLarge, Exercise.1, Exercise.2, Exercise.3, Exercise.4, Weight.1, Weight.2, Weight.3, Weight.4)
+DogGrowth <- DogGrowth %>% pivot_longer(Exercise.1:Weight.4)  %>% separate(name, sep="\\.", into=c("Variable","Month"))
+Weight <- (DogGrowth %>% filter(Variable=="Weight"))$value
+DogGrowth <- data.frame(DogGrowth %>% pivot_wider(names_from = Variable, values_from = c("value"), names_repair = "minimal")) 
+DogGrowth$Weight <- Weight
+DogGrowth$Weight[DogGrowth$Weight<5] <- 5
+DogGrowth$Weight <- round(DogGrowth$Weight,0)
+DogGrowth$Month <- as.numeric(DogGrowth$Month)-1
+names(DogGrowth)[names(DogGrowth) == "Brand"] <- "BrandB"
+DogGrowth <- DogGrowth %>% filter(Month<=2)
+
+head(DogGrowth, 10)
+```
+
+We fit a linear mixed effects model of the form
+
+$Y_{ij}  = \alpha_{0}+\alpha_{1}\textrm{BrandB}_{i}+\beta_{0}\textrm{Month}_{ij}+\beta_{1}\textrm{Exercise}_{ij}+ \beta_{2}\textrm{Month}_{ij}\textrm{BrandB}_{i} + u_{i}+v_{i}\textrm{Month}_{ij}+\epsilon_{ij}$, 
+
+
+     where 
+$\epsilon_{ij}\sim N(0,\sigma^2)$, and 
+\[
+\left[ \begin{array}{c}
+            u_{i} \\ v_{i}
+          \end{array}  \right] \sim N \left( \left[
+          \begin{array}{c}
+            0 \\ 0
+          \end{array} \right], \left[
+          \begin{array}{cc}
+            \sigma_{u}^{2} & \rho_{uv}\sigma_{u}\sigma_v \\
+            \rho_{uv}\sigma_{u}\sigma_v & \sigma_{v}^{2}
+          \end{array} \right] \right) 
+\]
+
+The R output is given in the output pages.   
+
+```{r}
+M1 <- lmer(data=DogGrowth, Weight ~ BrandB + Month + Exercise +  Month:BrandB + (Month|id)) 
+summary(M1)
+```
+
+R output for an unconditional means model is also shown below.  
+
+```{r}
+M2 <- lmer(data=DogGrowth, Weight ~ 1 + (1|id)) 
+summary(M2)
+```
+
+### 20. Compare and contrast the assumptions associated with linear, quadratic, and piecewise linear longitudinal models and determine which is most appropriate in a given context.  {-}         
+
+Suppose a researcher wants to investigate whether puppies gain weight faster between two and three months, or between three and four months of age. Could model M1 be used to investigate this question? If so, explain what information in the model output can help us answer it. If not, explain why not and suggest a different model that could help us investigate this question.   
+
+### 21. Calculate and interpret intraclass correlation coefficient.   {-}     
+
+Calculate and interpret the intraclass coefficient.     
+
+
+### 23. Answer research questions related to fixed and random effects in a study given output from LME models.    {-}     
+
+a) Suppose two puppies get the same amount of exercise and are both two months old (`month=0`). If Puppy #1 is on Brand A and Puppy #2 is on Brand B, which  should we expect to weigh more?         
+
+b) If two puppies weigh the same amount when they are two months old, Puppy #1 is fed brand A food, and Puppy #2 is fed brand B food, which puppy should we expect to gain more weight in the next month?     
+
+
+
+### 22. Draw lattice (or spaghetti) plots that are consistent with given conditions involving parameters in a LME model.    {-}    
+
+### Continuing with the dogs example in Question 4, suppose we fit a model of the form
+
+\[
+Y_{ij}  = [\alpha_{0}+\alpha_{1}\textrm{BrandB}_{i}+\beta_{0}\textrm{Month}_{ij}] 
+  \textrm{} + [u_{i}+v_{i}\textrm{Month}_{ij}+\epsilon_{ij}],
+\]
+
+where 
+$\epsilon_{ij}\sim N(0,\sigma^2)$, and 
+\[
+\left[ \begin{array}{c}
+            u_{i} \\ v_{i}
+          \end{array}  \right] \sim N \left( \left[
+          \begin{array}{c}
+            0 \\ 0
+          \end{array} \right], \left[
+          \begin{array}{cc}
+            \sigma_{u}^{2} & \rho_{uv}\sigma_{u}\sigma_v \\
+            \rho_{uv}\sigma_{u}\sigma_v & \sigma_{v}^{2}
+          \end{array} \right] \right) 
+\]
+
+
+Sketch a lattice (or spaghetti) plots to illustrate each of the following hypothetical scenarios. Assume the dogs in your plots are on the same brand of food.    
+
+a) $\beta_0 > 0$, $\rho_{uv} > 0$    
+
+b) $\beta_0 < 0$, $\rho_{uv} < 0$    
+
+c) $\beta_0 > 0$, $\rho_{uv}\approx 0$,  $\sigma_v$ is much greater than $\sigma_u$ 
+
+
+### 24. Sketch either a set of scatterplots corresponding to a given variance-covariance matrix, or estimate the values in a variance-covariance matrix, given a set of scatterplots.     {-}    
+
+Consider a longitudinal study involving four observations on the same units, taken over four consecutive weeks. Let $Y_{ij}$ represent the measurement on observational unit $i$ at time point $j$. Shown below are 3 different correlation matrices 
+
+$\text{Corr}(Y_{i0},Y_{i1},Y_{i2},Y_{i3})$ between observations in weeks 0, 1, 2, and 3. For each matrix (A)-(D), sketch graphs showing the relationship between the indicated variables, on the grids below.  (10 points)
+
+A) $\left[
+          \begin{array}{cccc}
+            1 & 0.9 & 0.9 & 0.9  \\
+            0.9 & 1 & 0.9 & 0.9 \\
+            0.9 & 0.9 & 1 & 0.9 \\
+            0.9 & 0.9 & 0.9 & 1
+          \end{array} \right]$ B) $\left[
+          \begin{array}{cccc}
+            1 & 0.9 & 0.9^2 & 0.9^3  \\
+            0.9 & 1 & 0.9^2 & 0.9 \\
+            0.9^2 & 0.9 & 1 & 0.9 \\
+            0.9^3 & 0.9^2 & 0.9 & 1
+          \end{array} \right]$ C) $\left[
+          \begin{array}{cccc}
+            1 & 0.9 & 0 & 0  \\
+            0.9 & 1 & 0.9 & 0 \\
+            0 & 0.9 & 1 & 0.9 \\
+            0 & 0 & 0.9 & 1
+          \end{array} \right]$ D) $\left[
+          \begin{array}{cccc}
+            1 & 0 & 0 & 0  \\
+            0 & 1 & 0 & 0 \\
+            0 & 0 & 1 & 0 \\
+            0 & 0 & 0 & 1
+          \end{array} \right]$
+
+
+
+(A) 
+```{r, echo=FALSE, out.width = '75%'}
+knitr::include_graphics("Grid2.png")
+```
+
+(B) 
+```{r, echo=FALSE, out.width = '75%'}
+knitr::include_graphics("Grid2.png")
+```
+
+(C) 
+```{r, echo=FALSE, out.width = '75%'}
+knitr::include_graphics("Grid2.png")
+```
+
+
+(D) 
+```{r, echo=FALSE, out.width = '75%'}
+knitr::include_graphics("Grid2.png")
+```
+
+
+### 25. Explain, in words, what a variance-covariance matrix says about our assumptions regarding the structure of data.    {-}    
+
+In the context of the dogs study, explain what each of the following models would say about the relationship between dogs weights from one month to the next.   
+
+a) Independent    
+b) Compound symmetric          
+c) Unstructured      
+d) Linear mixed effects     
+e) Autoregressive     
+
+
+### 26. Interpret the variance and correlation parameters $\sigma^2$ and $\phi$ in a first-order autoregressive (AR-1) model.   {-}     
+
+
+Question to come...
+
+```{r, include=FALSE, eval=FALSE}
+AR1 <- gls(Weight ~ Month + (Month|id), data=DogGrowth,
+    correlation = corAR1(form = ~ Month | id))
+```
+
+
+```{r, include=FALSE, eval=FALSE}
+AR1 <- gls(Weight ~ BrandB  + Month + Exercise +  Month:BrandB+ (Month|id), data=DogGrowth,
+    correlation = corAR1(form = ~ Month | id))
+```
