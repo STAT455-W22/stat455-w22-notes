@@ -14,7 +14,7 @@ fig:unnamed-chunk-80
 fig:unnamed-chunk-82
 fig:unnamed-chunk-83
 fig:unnamed-chunk-85
-fig:unnamed-chunk-196
+fig:unnamed-chunk-195
 fig:philippinesmap
 fig:OLSpois
 fig:totalPoisByAge

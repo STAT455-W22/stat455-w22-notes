@@ -779,7 +779,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb410-19"><a href="logistic-regression.html#cb410-19" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Median Income&quot;</span>) <span class="sc">+</span></span>
 <span id="cb410-20"><a href="logistic-regression.html#cb410-20" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Percent Voting for Biden&quot;</span>) <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">legend.position=</span><span class="st">&quot;none&quot;</span>)</span>
 <span id="cb410-21"><a href="logistic-regression.html#cb410-21" tabindex="-1"></a><span class="fu">grid.arrange</span>(P1, P2, P3, P4, P5, <span class="at">nrow=</span><span class="dv">3</span>) <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">legend.position=</span><span class="st">&quot;none&quot;</span>)</span></code></pre></div>
-<p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-255-1.png" width="1152" /></p>
+<p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-254-1.png" width="1152" /></p>
 <pre><code>## NULL</code></pre>
 </div>
 <div id="correlation-between-explanatory-variables" class="section level3 hasAnchor" number="7.1.4">
@@ -787,7 +787,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb412"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb412-1"><a href="logistic-regression.html#cb412-1" tabindex="-1"></a>select <span class="ot">&lt;-</span> dplyr<span class="sc">::</span>select</span>
 <span id="cb412-2"><a href="logistic-regression.html#cb412-2" tabindex="-1"></a>C <span class="ot">&lt;-</span> <span class="fu">cor</span>(Wisconsin <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="st">&quot;College&quot;</span>, <span class="st">&quot;Unemployment&quot;</span>, <span class="st">&quot;WhitePct&quot;</span>, <span class="st">&quot;COVID_DeathRate&quot;</span>, <span class="st">&quot;Income&quot;</span>))</span>
 <span id="cb412-3"><a href="logistic-regression.html#cb412-3" tabindex="-1"></a>P <span class="ot">&lt;-</span> <span class="fu">corrplot</span>(C, <span class="at">method=</span><span class="st">&quot;number&quot;</span>)</span></code></pre></div>
-<p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-256-1.png" width="960" /></p>
+<p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-255-1.png" width="960" /></p>
 <p>While there is some correlation between the explanatory variables, none of the correlations are strong enough to raise concerns about multicollinearity, so we’ll use all of them in our model.</p>
 </div>
 <div id="modeling-number-of-votes" class="section level3 hasAnchor" number="7.1.5">
@@ -821,14 +821,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb413-2"><a href="logistic-regression.html#cb413-2" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y)) <span class="sc">+</span> <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">&quot;identity&quot;</span>, <span class="at">col =</span> <span class="st">&quot;white&quot;</span>, <span class="at">fill =</span> <span class="st">&quot;blue&quot;</span>) <span class="sc">+</span> </span>
 <span id="cb413-3"><a href="logistic-regression.html#cb413-3" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">expand =</span> <span class="fu">c</span>(<span class="fl">0.01</span>, <span class="dv">0</span>)) <span class="sc">+</span> <span class="fu">scale_x_continuous</span>(<span class="at">breaks=</span>(<span class="dv">0</span><span class="sc">:</span><span class="dv">4</span>)) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">&quot;x&quot;</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="fu">expression</span>(<span class="fu">paste</span>(<span class="st">&quot;p(x|&quot;</span>, p, <span class="st">&quot;)&quot;</span>))) <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">&quot;n=4, p=0.6&quot;</span>) <span class="sc">+</span> <span class="fu">theme_bw</span>() <span class="sc">+</span> </span>
 <span id="cb413-4"><a href="logistic-regression.html#cb413-4" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="fu">rel</span>(<span class="fl">1.2</span>), <span class="at">vjust =</span> <span class="fl">1.5</span>))</span></code></pre></div>
-<p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-257-1.png" width="576" /></p>
+<p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-256-1.png" width="576" /></p>
 <p>Mean = <span class="math inline">\(0.6 \times 4=2.4\)</span></p>
 <p>Variance = <span class="math inline">\(4\times 0.6 \times 0.4=0.96\)</span></p>
 </div>
 <div id="more-binomial-distributions" class="section level3 hasAnchor" number="7.1.8">
 <h3><span class="header-section-number">7.1.8</span> More Binomial Distributions<a href="logistic-regression.html#more-binomial-distributions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>We plot binomial distributions with <span class="math inline">\(n=10\)</span>, <span class="math inline">\(p=0.25, 0.6, 0.9\)</span></p>
-<p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-258-1.png" width="960" /></p>
+<p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-257-1.png" width="960" /></p>
 </div>
 <div id="connecting-expected-response-to-explatory-variables-1" class="section level3 hasAnchor" number="7.1.9">
 <h3><span class="header-section-number">7.1.9</span> Connecting Expected Response to Explatory Variables<a href="logistic-regression.html#connecting-expected-response-to-explatory-variables-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -845,7 +845,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb414-11"><a href="logistic-regression.html#cb414-11" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> </span>
 <span id="cb414-12"><a href="logistic-regression.html#cb414-12" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> dat, <span class="fu">aes</span>(x, y)) <span class="sc">+</span></span>
 <span id="cb414-13"><a href="logistic-regression.html#cb414-13" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span> dat2, <span class="fu">aes</span>(x, y, <span class="at">linetype =</span> <span class="st">`</span><span class="at">Regression model</span><span class="st">`</span>))  <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;p&quot;</span>)</span></code></pre></div>
-<p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-259-1.png" width="576" /></p>
+<p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-258-1.png" width="576" /></p>
 <p>Let <span class="math inline">\(p_i\)</span> represent the probability that a voter in county <span class="math inline">\(i\)</span> votes for Biden.</p>
 <p>We want to connect <span class="math inline">\(p_i\)</span> to our explanatory variables.</p>
 <p>Assuming</p>
@@ -1088,7 +1088,7 @@ Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&
 <div id="deviance-residual-plot" class="section level3 hasAnchor" number="7.2.9">
 <h3><span class="header-section-number">7.2.9</span> Deviance Residual Plot<a href="logistic-regression.html#deviance-residual-plot" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>We plot deviance residuals against the predicted values and against our explanatory variables to test for lack of fit.</p>
-<p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-265-1.png" width="60%" style="display: block; margin: auto;" /></p>
+<p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-264-1.png" width="60%" style="display: block; margin: auto;" /></p>
 <p><img src="Stat-455-Notes_files/figure-html/resid-1.png" width="960" style="display: block; margin: auto;" /></p>
 </div>
 <div id="llsr-vs-binomial-logistic-regression" class="section level3 hasAnchor" number="7.2.10">
@@ -1162,7 +1162,7 @@ Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&
 <span id="cb426-8"><a href="logistic-regression.html#cb426-8" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;possible values of p&quot;</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;Likelihood&quot;</span>) <span class="sc">+</span> </span>
 <span id="cb426-9"><a href="logistic-regression.html#cb426-9" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">&quot;Likelihood function for Curry&#39;s shots&quot;</span>) </span>
 <span id="cb426-10"><a href="logistic-regression.html#cb426-10" tabindex="-1"></a>plot <span class="sc">+</span> <span class="fu">xlim</span>(<span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))</span></code></pre></div>
-<p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-266-1.png" width="576" /></p>
+<p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-265-1.png" width="576" /></p>
 <p>It looks like the most likely value of <span class="math inline">\(p\)</span> is around 0.4.</p>
 <p>We’ll write a function in R to calculate the value of <span class="math inline">\(p\)</span> that maximizes the function.</p>
 </div>
@@ -1221,7 +1221,7 @@ Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&
 <span id="cb430-7"><a href="logistic-regression.html#cb430-7" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;possible values of beta_0&quot;</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;Likelihood&quot;</span>) <span class="sc">+</span> </span>
 <span id="cb430-8"><a href="logistic-regression.html#cb430-8" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">&quot;Likelihood function for Curry&#39;s shots&quot;</span>) </span>
 <span id="cb430-9"><a href="logistic-regression.html#cb430-9" tabindex="-1"></a>plot <span class="sc">+</span> <span class="fu">xlim</span>(<span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>))</span></code></pre></div>
-<p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-269-1.png" width="576" /></p>
+<p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-268-1.png" width="576" /></p>
 </div>
 <div id="numerical-maximization-1" class="section level3 hasAnchor" number="7.3.10">
 <h3><span class="header-section-number">7.3.10</span> Numerical Maximization<a href="logistic-regression.html#numerical-maximization-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -1403,7 +1403,7 @@ p_A^{101}(1-p_A)^{165}\]</span></p>
 <div id="distribution-of-number-of-drinks" class="section level3 hasAnchor" number="7.4.3">
 <h3><span class="header-section-number">7.4.3</span> Distribution of Number of Drinks<a href="logistic-regression.html#distribution-of-number-of-drinks" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="sourceCode" id="cb445"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb445-1"><a href="logistic-regression.html#cb445-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>drinks, <span class="fu">aes</span>(<span class="at">x=</span>drinks)) <span class="sc">+</span> <span class="fu">geom_histogram</span>() <span class="sc">+</span> <span class="fu">facet_wrap</span>(<span class="sc">~</span>firstYear)</span></code></pre></div>
-<p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-278-1.png" width="576" /></p>
+<p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-277-1.png" width="576" /></p>
 <div class="sourceCode" id="cb446"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb446-1"><a href="logistic-regression.html#cb446-1" tabindex="-1"></a>drinks <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(firstYear) <span class="sc">%&gt;%</span> <span class="fu">summarize</span>(<span class="at">mean_drinks=</span><span class="fu">mean</span>(drinks), </span>
 <span id="cb446-2"><a href="logistic-regression.html#cb446-2" tabindex="-1"></a>                                             <span class="at">prop_zero =</span> <span class="fu">mean</span>(drinks<span class="sc">==</span><span class="dv">0</span>), </span>
 <span id="cb446-3"><a href="logistic-regression.html#cb446-3" tabindex="-1"></a>                                             <span class="at">n=</span><span class="fu">n</span>())</span></code></pre></div>
@@ -1425,7 +1425,7 @@ p_A^{101}(1-p_A)^{165}\]</span></p>
 <span id="cb448-8"><a href="logistic-regression.html#cb448-8" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> drinks)) <span class="sc">+</span> <span class="fu">facet_wrap</span>(<span class="sc">~</span>off.campus, <span class="at">nrow=</span><span class="dv">2</span>) <span class="sc">+</span></span>
 <span id="cb448-9"><a href="logistic-regression.html#cb448-9" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Drinking by On/Off Campus&quot;</span>) </span>
 <span id="cb448-10"><a href="logistic-regression.html#cb448-10" tabindex="-1"></a><span class="fu">grid.arrange</span>(p1, p2, p3, <span class="at">nrow=</span><span class="dv">1</span>)</span></code></pre></div>
-<p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-280-1.png" width="960" /></p>
+<p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-279-1.png" width="960" /></p>
 </div>
 <div id="proportion-of-drinkers" class="section level3 hasAnchor" number="7.4.5">
 <h3><span class="header-section-number">7.4.5</span> Proportion of Drinkers<a href="logistic-regression.html#proportion-of-drinkers" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -1441,12 +1441,12 @@ p_A^{101}(1-p_A)^{165}\]</span></p>
 <span id="cb449-8"><a href="logistic-regression.html#cb449-8" tabindex="-1"></a>  <span class="fu">stat_count</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> off.campus, <span class="at">fill=</span>drinks<span class="sc">&gt;</span><span class="dv">0</span>), <span class="at">position=</span><span class="st">&quot;fill&quot;</span> ) <span class="sc">+</span> </span>
 <span id="cb449-9"><a href="logistic-regression.html#cb449-9" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Drinking by On/Off Campus&quot;</span>) </span>
 <span id="cb449-10"><a href="logistic-regression.html#cb449-10" tabindex="-1"></a><span class="fu">grid.arrange</span>(p1, p2, p3, <span class="at">nrow=</span><span class="dv">3</span>)</span></code></pre></div>
-<p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-281-1.png" width="960" /></p>
+<p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-280-1.png" width="960" /></p>
 </div>
 <div id="modeling-drinks" class="section level3 hasAnchor" number="7.4.6">
 <h3><span class="header-section-number">7.4.6</span> Modeling Drinks<a href="logistic-regression.html#modeling-drinks" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>A Poisson distribution seems like a good choice for modeling drinks, since they are a count, and there is no fixed number of “attempts”, as in a binomial distribution.</p>
-<p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-282-1.png" width="960" /></p>
+<p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-281-1.png" width="960" /></p>
 <p>Expected Proportion of Zeros:</p>
 <div class="sourceCode" id="cb450"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb450-1"><a href="logistic-regression.html#cb450-1" tabindex="-1"></a><span class="fu">dpois</span>(<span class="dv">0</span>, <span class="fl">2.41</span>)</span></code></pre></div>
 <pre><code>## [1] 0.08981529</code></pre>
@@ -1530,7 +1530,7 @@ P(Y=y) &amp;= P(\text{Person drinks and drinks y drinks in a weekend})\\
 </div>
 <div id="examples-of-zip-pmfs" class="section level3 hasAnchor" number="7.4.11">
 <h3><span class="header-section-number">7.4.11</span> Examples of ZIP PMF’s<a href="logistic-regression.html#examples-of-zip-pmfs" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-285-1.png" width="960" /></p>
+<p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-284-1.png" width="960" /></p>
 <p>Mean: (<span class="math inline">\((1-p)\lambda\)</span>)</p>
 <p>Variance: (<span class="math inline">\((1-p)\lambda(1+p\lambda)\)</span>)</p>
 </div>
