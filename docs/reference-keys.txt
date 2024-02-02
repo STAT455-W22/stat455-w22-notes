@@ -217,7 +217,6 @@ ar1-model-on-schools-data
 non-longitudinal-multilevel-models
 final-thoughts-regarding-covariance-structures
 practice-problems
-continuing-with-the-dogs-example-in-question-4-suppose-we-fit-a-model-of-the-form
 data-with-three-or-more-levels
 three-level-plants-experiment
 experimental-design

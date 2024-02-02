@@ -1152,7 +1152,7 @@ b) If two puppies weigh the same amount when they are two months old, Puppy #1 i
 
 ### 22. Draw lattice (or spaghetti) plots that are consistent with given conditions involving parameters in a LME model.    {-}    
 
-### Continuing with the dogs example in Question 4, suppose we fit a model of the form
+Continuing with the dogs example in Question 4, suppose we fit a model of the form
 
 \[
 Y_{ij}  = [\alpha_{0}+\alpha_{1}\textrm{BrandB}_{i}+\beta_{0}\textrm{Month}_{ij}] 
