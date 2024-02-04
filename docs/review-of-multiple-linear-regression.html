@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 1 Review of Multiple Linear Regression | Stat 455: Advanced Statistical Modeling Notes</title>
   <meta name="description" content="Chapter 1 Review of Multiple Linear Regression | Stat 455: Advanced Statistical Modeling Notes" />
-  <meta name="generator" content="bookdown 0.37 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.31 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 1 Review of Multiple Linear Regression | Stat 455: Advanced Statistical Modeling Notes" />
   <meta property="og:type" content="book" />
@@ -22,7 +22,7 @@
 
 
 
-<meta name="date" content="2024-02-02" />
+<meta name="date" content="2024-02-03" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -120,10 +120,6 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
-<style type="text/css">
-  
-  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -678,17 +674,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>Analyze data using linear least squares regression in R.</p></li>
 </ol>
 <p>This chapter provides an outline of Sections 1.4-1.7 of <a href="https://bookdown.org/roback/bookdown-BeyondMLR/">Beyond Multiple Linear Regression</a> by Roback and Legler. Much of the text is either directly from the book, or lightly modified/summarized. Most of the code originates from the book’s <a href="https://github.com/proback/BeyondMLR">Github repository</a>.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="review-of-multiple-linear-regression.html#cb1-1" tabindex="-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">echo =</span> <span class="cn">TRUE</span>, <span class="at">message=</span><span class="cn">FALSE</span>, <span class="at">warning=</span><span class="cn">FALSE</span>, <span class="at">fig.height =</span> <span class="dv">3</span>, <span class="at">fig.width =</span> <span class="dv">6</span>)</span>
-<span id="cb1-2"><a href="review-of-multiple-linear-regression.html#cb1-2" tabindex="-1"></a><span class="co"># Packages required for Chapter 1</span></span>
-<span id="cb1-3"><a href="review-of-multiple-linear-regression.html#cb1-3" tabindex="-1"></a><span class="fu">library</span>(knitr) </span>
-<span id="cb1-4"><a href="review-of-multiple-linear-regression.html#cb1-4" tabindex="-1"></a><span class="fu">library</span>(gridExtra)</span>
-<span id="cb1-5"><a href="review-of-multiple-linear-regression.html#cb1-5" tabindex="-1"></a><span class="fu">library</span>(GGally)</span>
-<span id="cb1-6"><a href="review-of-multiple-linear-regression.html#cb1-6" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span>
-<span id="cb1-7"><a href="review-of-multiple-linear-regression.html#cb1-7" tabindex="-1"></a><span class="fu">library</span>(jtools)</span>
-<span id="cb1-8"><a href="review-of-multiple-linear-regression.html#cb1-8" tabindex="-1"></a><span class="fu">library</span>(rsample)</span>
-<span id="cb1-9"><a href="review-of-multiple-linear-regression.html#cb1-9" tabindex="-1"></a><span class="fu">library</span>(broom)</span>
-<span id="cb1-10"><a href="review-of-multiple-linear-regression.html#cb1-10" tabindex="-1"></a><span class="fu">library</span>(tidyverse)    </span>
-<span id="cb1-11"><a href="review-of-multiple-linear-regression.html#cb1-11" tabindex="-1"></a><span class="fu">library</span>(ggformula)</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="review-of-multiple-linear-regression.html#cb1-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">echo =</span> <span class="cn">TRUE</span>, <span class="at">message=</span><span class="cn">FALSE</span>, <span class="at">warning=</span><span class="cn">FALSE</span>, <span class="at">fig.height =</span> <span class="dv">3</span>, <span class="at">fig.width =</span> <span class="dv">6</span>)</span>
+<span id="cb1-2"><a href="review-of-multiple-linear-regression.html#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Packages required for Chapter 1</span></span>
+<span id="cb1-3"><a href="review-of-multiple-linear-regression.html#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr) </span>
+<span id="cb1-4"><a href="review-of-multiple-linear-regression.html#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gridExtra)</span>
+<span id="cb1-5"><a href="review-of-multiple-linear-regression.html#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(GGally)</span>
+<span id="cb1-6"><a href="review-of-multiple-linear-regression.html#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span>
+<span id="cb1-7"><a href="review-of-multiple-linear-regression.html#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(jtools)</span>
+<span id="cb1-8"><a href="review-of-multiple-linear-regression.html#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rsample)</span>
+<span id="cb1-9"><a href="review-of-multiple-linear-regression.html#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(broom)</span>
+<span id="cb1-10"><a href="review-of-multiple-linear-regression.html#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)    </span>
+<span id="cb1-11"><a href="review-of-multiple-linear-regression.html#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggformula)</span></code></pre></div>
 <div id="exploratory-data-analysis" class="section level2 hasAnchor" number="1.1">
 <h2><span class="header-section-number">1.1</span> Exploratory Data Analysis<a href="review-of-multiple-linear-regression.html#exploratory-data-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div id="kentucky-derby-data" class="section level3 hasAnchor" number="1.1.1">
@@ -709,8 +705,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>We would like to use least squares linear regression techniques to model the speed of the winning horse as a function of track condition, field size, and trends over time.</p>
 <p><strong>Sample and Population</strong></p>
 <p>Statistics are often used to generalize conclusions from a sample to a larger population. In this scenario, it’s not immediately clear what a larger population of interest might be. The Kentucky Derby is run only once each year, and we have results for all years between 1896 and 2017. We could imagine, however, that even if the same horses were to run the race multiple times, even under the same track conditions, their times might vary from one race to the next. Thus, we can think of the larger population as being all races that might have been run with the same horses, under similar conditions.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="review-of-multiple-linear-regression.html#cb2-1" tabindex="-1"></a>derby.df <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;https://raw.githubusercontent.com/proback/BeyondMLR/master/data/derbyplus.csv&quot;</span>)</span>
-<span id="cb2-2"><a href="review-of-multiple-linear-regression.html#cb2-2" tabindex="-1"></a><span class="fu">head</span>(derby.df)</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="review-of-multiple-linear-regression.html#cb2-1" aria-hidden="true" tabindex="-1"></a>derby.df <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;https://raw.githubusercontent.com/proback/BeyondMLR/master/data/derbyplus.csv&quot;</span>)</span>
+<span id="cb2-2"><a href="review-of-multiple-linear-regression.html#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(derby.df)</span></code></pre></div>
 <pre><code>##   year        winner condition speed starters
 ## 1 1896     Ben Brush      good 51.66        8
 ## 2 1897    Typhoon II      slow 49.81        6
@@ -725,15 +721,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 * indicator (0-1) variables for whether the track was in fast or good condition<br />
 * a factor variable (<code>fastfactor</code>) telling whether or not the track was fast<br />
 * a variable giving years since 1896 (<code>yearnew</code>)</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="review-of-multiple-linear-regression.html#cb4-1" tabindex="-1"></a>derby.df <span class="ot">&lt;-</span> derby.df <span class="sc">%&gt;%</span></span>
-<span id="cb4-2"><a href="review-of-multiple-linear-regression.html#cb4-2" tabindex="-1"></a>  <span class="fu">mutate</span>( <span class="at">fast =</span> <span class="fu">ifelse</span>(condition<span class="sc">==</span><span class="st">&quot;fast&quot;</span>,<span class="dv">1</span>,<span class="dv">0</span>), </span>
-<span id="cb4-3"><a href="review-of-multiple-linear-regression.html#cb4-3" tabindex="-1"></a>          <span class="at">good =</span> <span class="fu">ifelse</span>(condition<span class="sc">==</span><span class="st">&quot;good&quot;</span>,<span class="dv">1</span>,<span class="dv">0</span>),</span>
-<span id="cb4-4"><a href="review-of-multiple-linear-regression.html#cb4-4" tabindex="-1"></a>          <span class="at">yearnew =</span> year <span class="sc">-</span> <span class="dv">1896</span>,</span>
-<span id="cb4-5"><a href="review-of-multiple-linear-regression.html#cb4-5" tabindex="-1"></a>          <span class="at">fastfactor =</span> <span class="fu">ifelse</span>(fast <span class="sc">==</span> <span class="dv">0</span>, <span class="st">&quot;not fast&quot;</span>, <span class="st">&quot;fast&quot;</span>))</span>
-<span id="cb4-6"><a href="review-of-multiple-linear-regression.html#cb4-6" tabindex="-1"></a>table1 <span class="ot">&lt;-</span> derby.df <span class="sc">%&gt;%</span></span>
-<span id="cb4-7"><a href="review-of-multiple-linear-regression.html#cb4-7" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">row_number</span>() <span class="sc">&lt;</span> <span class="dv">6</span> <span class="sc">|</span> <span class="fu">row_number</span>() <span class="sc">&gt;</span> <span class="dv">117</span>)</span>
-<span id="cb4-8"><a href="review-of-multiple-linear-regression.html#cb4-8" tabindex="-1"></a><span class="fu">kable</span>(table1, <span class="at">booktabs=</span>T,<span class="at">caption=</span><span class="st">&quot;The first five and the last five observations from the Kentucky Derby case study.&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb4-9"><a href="review-of-multiple-linear-regression.html#cb4-9" tabindex="-1"></a>  <span class="fu">kable_styling</span>(<span class="at">latex_options =</span> <span class="st">&quot;scale_down&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="review-of-multiple-linear-regression.html#cb4-1" aria-hidden="true" tabindex="-1"></a>derby.df <span class="ot">&lt;-</span> derby.df <span class="sc">%&gt;%</span></span>
+<span id="cb4-2"><a href="review-of-multiple-linear-regression.html#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>( <span class="at">fast =</span> <span class="fu">ifelse</span>(condition<span class="sc">==</span><span class="st">&quot;fast&quot;</span>,<span class="dv">1</span>,<span class="dv">0</span>), </span>
+<span id="cb4-3"><a href="review-of-multiple-linear-regression.html#cb4-3" aria-hidden="true" tabindex="-1"></a>          <span class="at">good =</span> <span class="fu">ifelse</span>(condition<span class="sc">==</span><span class="st">&quot;good&quot;</span>,<span class="dv">1</span>,<span class="dv">0</span>),</span>
+<span id="cb4-4"><a href="review-of-multiple-linear-regression.html#cb4-4" aria-hidden="true" tabindex="-1"></a>          <span class="at">yearnew =</span> year <span class="sc">-</span> <span class="dv">1896</span>,</span>
+<span id="cb4-5"><a href="review-of-multiple-linear-regression.html#cb4-5" aria-hidden="true" tabindex="-1"></a>          <span class="at">fastfactor =</span> <span class="fu">ifelse</span>(fast <span class="sc">==</span> <span class="dv">0</span>, <span class="st">&quot;not fast&quot;</span>, <span class="st">&quot;fast&quot;</span>))</span>
+<span id="cb4-6"><a href="review-of-multiple-linear-regression.html#cb4-6" aria-hidden="true" tabindex="-1"></a>table1 <span class="ot">&lt;-</span> derby.df <span class="sc">%&gt;%</span></span>
+<span id="cb4-7"><a href="review-of-multiple-linear-regression.html#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">row_number</span>() <span class="sc">&lt;</span> <span class="dv">6</span> <span class="sc">|</span> <span class="fu">row_number</span>() <span class="sc">&gt;</span> <span class="dv">117</span>)</span>
+<span id="cb4-8"><a href="review-of-multiple-linear-regression.html#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(table1, <span class="at">booktabs=</span>T,<span class="at">caption=</span><span class="st">&quot;The first five and the last five observations from the Kentucky Derby case study.&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb4-9"><a href="review-of-multiple-linear-regression.html#cb4-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>(<span class="at">latex_options =</span> <span class="st">&quot;scale_down&quot;</span>)</span></code></pre></div>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
 <span id="tab:unnamed-chunk-1">Table 1.1: </span>The first five and the last five observations from the Kentucky Derby case study.
@@ -1066,16 +1062,16 @@ fast
 <div id="univariate-graphical-summaries" class="section level3 hasAnchor" number="1.1.3">
 <h3><span class="header-section-number">1.1.3</span> Univariate Graphical Summaries<a href="review-of-multiple-linear-regression.html#univariate-graphical-summaries" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Distributions of winning speeds and number of starters</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="review-of-multiple-linear-regression.html#cb5-1" tabindex="-1"></a><span class="co"># EDA graphs</span></span>
-<span id="cb5-2"><a href="review-of-multiple-linear-regression.html#cb5-2" tabindex="-1"></a>speed_hist <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> derby.df, <span class="fu">aes</span>(<span class="at">x =</span> speed)) <span class="sc">+</span> </span>
-<span id="cb5-3"><a href="review-of-multiple-linear-regression.html#cb5-3" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="fl">0.5</span>, <span class="at">fill =</span> <span class="st">&quot;white&quot;</span>,</span>
-<span id="cb5-4"><a href="review-of-multiple-linear-regression.html#cb5-4" tabindex="-1"></a>                 <span class="at">color =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb5-5"><a href="review-of-multiple-linear-regression.html#cb5-5" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Winning speed (ft/s)&quot;</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;Frequency&quot;</span>) <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">title=</span><span class="st">&quot;(a)&quot;</span>)</span>
-<span id="cb5-6"><a href="review-of-multiple-linear-regression.html#cb5-6" tabindex="-1"></a>starters_hist <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> derby.df, <span class="fu">aes</span>(<span class="at">x =</span> starters)) <span class="sc">+</span> </span>
-<span id="cb5-7"><a href="review-of-multiple-linear-regression.html#cb5-7" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">3</span>, <span class="at">fill =</span> <span class="st">&quot;white&quot;</span>,</span>
-<span id="cb5-8"><a href="review-of-multiple-linear-regression.html#cb5-8" tabindex="-1"></a>                 <span class="at">color =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb5-9"><a href="review-of-multiple-linear-regression.html#cb5-9" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Number of starters&quot;</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;Frequency&quot;</span>) <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">title=</span><span class="st">&quot;(b)&quot;</span>)</span>
-<span id="cb5-10"><a href="review-of-multiple-linear-regression.html#cb5-10" tabindex="-1"></a><span class="fu">grid.arrange</span>(speed_hist, starters_hist, <span class="at">ncol =</span> <span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="review-of-multiple-linear-regression.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># EDA graphs</span></span>
+<span id="cb5-2"><a href="review-of-multiple-linear-regression.html#cb5-2" aria-hidden="true" tabindex="-1"></a>speed_hist <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> derby.df, <span class="fu">aes</span>(<span class="at">x =</span> speed)) <span class="sc">+</span> </span>
+<span id="cb5-3"><a href="review-of-multiple-linear-regression.html#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="fl">0.5</span>, <span class="at">fill =</span> <span class="st">&quot;white&quot;</span>,</span>
+<span id="cb5-4"><a href="review-of-multiple-linear-regression.html#cb5-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">color =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb5-5"><a href="review-of-multiple-linear-regression.html#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Winning speed (ft/s)&quot;</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;Frequency&quot;</span>) <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">title=</span><span class="st">&quot;(a)&quot;</span>)</span>
+<span id="cb5-6"><a href="review-of-multiple-linear-regression.html#cb5-6" aria-hidden="true" tabindex="-1"></a>starters_hist <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> derby.df, <span class="fu">aes</span>(<span class="at">x =</span> starters)) <span class="sc">+</span> </span>
+<span id="cb5-7"><a href="review-of-multiple-linear-regression.html#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">3</span>, <span class="at">fill =</span> <span class="st">&quot;white&quot;</span>,</span>
+<span id="cb5-8"><a href="review-of-multiple-linear-regression.html#cb5-8" aria-hidden="true" tabindex="-1"></a>                 <span class="at">color =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb5-9"><a href="review-of-multiple-linear-regression.html#cb5-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Number of starters&quot;</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;Frequency&quot;</span>) <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">title=</span><span class="st">&quot;(b)&quot;</span>)</span>
+<span id="cb5-10"><a href="review-of-multiple-linear-regression.html#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="fu">grid.arrange</span>(speed_hist, starters_hist, <span class="at">ncol =</span> <span class="dv">2</span>)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:twohist"></span>
 <img src="Stat-455-Notes_files/figure-html/twohist-1.png" alt="Histograms of key continuous variables.  Plot (a) shows winning speeds, while plot (b) shows the number of starters." width="90%" />
 <p class="caption">
@@ -1086,9 +1082,9 @@ Figure 1.1: Histograms of key continuous variables. Plot (a) shows winning speed
 <div id="bivariate-graphical-summaries" class="section level3 hasAnchor" number="1.1.4">
 <h3><span class="header-section-number">1.1.4</span> Bivariate Graphical Summaries<a href="review-of-multiple-linear-regression.html#bivariate-graphical-summaries" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The <code>ggpairs</code> function creates a scatterplot matrix displaying relationships between all pairs of variables.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="review-of-multiple-linear-regression.html#cb6-1" tabindex="-1"></a>gg <span class="ot">&lt;-</span> <span class="fu">ggpairs</span>(<span class="at">data =</span> derby.df, </span>
-<span id="cb6-2"><a href="review-of-multiple-linear-regression.html#cb6-2" tabindex="-1"></a>              <span class="at">columns =</span> <span class="fu">c</span>(<span class="st">&quot;condition&quot;</span>, <span class="st">&quot;year&quot;</span>, <span class="st">&quot;starters&quot;</span>, <span class="st">&quot;speed&quot;</span>))</span>
-<span id="cb6-3"><a href="review-of-multiple-linear-regression.html#cb6-3" tabindex="-1"></a>gg</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="review-of-multiple-linear-regression.html#cb6-1" aria-hidden="true" tabindex="-1"></a>gg <span class="ot">&lt;-</span> <span class="fu">ggpairs</span>(<span class="at">data =</span> derby.df, </span>
+<span id="cb6-2"><a href="review-of-multiple-linear-regression.html#cb6-2" aria-hidden="true" tabindex="-1"></a>              <span class="at">columns =</span> <span class="fu">c</span>(<span class="st">&quot;condition&quot;</span>, <span class="st">&quot;year&quot;</span>, <span class="st">&quot;starters&quot;</span>, <span class="st">&quot;speed&quot;</span>))</span>
+<span id="cb6-3"><a href="review-of-multiple-linear-regression.html#cb6-3" aria-hidden="true" tabindex="-1"></a>gg</span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:bivariate"></span>
 <img src="Stat-455-Notes_files/figure-html/bivariate-1.png" alt="Relationships between pairs of variables in the Kentucky Derby data set." width="90%" />
 <p class="caption">
@@ -1099,10 +1095,10 @@ Figure 1.2: Relationships between pairs of variables in the Kentucky Derby data 
 <li>We see evidence of higher speeds on fast tracks and also a tendency for recent years to have more fast conditions.</li>
 </ul>
 <p>We examine how winning speeds have changed over time, when the track is fast and when it is not fast.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="review-of-multiple-linear-regression.html#cb7-1" tabindex="-1"></a><span class="co"># Coded scatterplot</span></span>
-<span id="cb7-2"><a href="review-of-multiple-linear-regression.html#cb7-2" tabindex="-1"></a><span class="fu">ggplot</span>(derby.df, <span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> speed, <span class="at">colour =</span> fastfactor)) <span class="sc">+</span></span>
-<span id="cb7-3"><a href="review-of-multiple-linear-regression.html#cb7-3" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">shape =</span> fastfactor)) <span class="sc">+</span></span>
-<span id="cb7-4"><a href="review-of-multiple-linear-regression.html#cb7-4" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="fu">aes</span>(<span class="at">linetype =</span> fastfactor), <span class="at">method =</span> lm, <span class="at">se =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="review-of-multiple-linear-regression.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Coded scatterplot</span></span>
+<span id="cb7-2"><a href="review-of-multiple-linear-regression.html#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(derby.df, <span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> speed, <span class="at">colour =</span> fastfactor)) <span class="sc">+</span></span>
+<span id="cb7-3"><a href="review-of-multiple-linear-regression.html#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">shape =</span> fastfactor)) <span class="sc">+</span></span>
+<span id="cb7-4"><a href="review-of-multiple-linear-regression.html#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="fu">aes</span>(<span class="at">linetype =</span> fastfactor), <span class="at">method =</span> lm, <span class="at">se =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:codeds"></span>
 <img src="Stat-455-Notes_files/figure-html/codeds-1.png" alt="Linear trends in winning speeds over time, presented separately for fast conditions vs. good or slow conditions." width="90%" />
 <p class="caption">
@@ -1127,8 +1123,8 @@ Y_{i}=\beta_{0}+\beta_{1}\textrm{Yearnew}_{i}+\epsilon_{i} \quad \textrm{where} 
 <div id="first-model-r-output" class="section level3 hasAnchor" number="1.2.2">
 <h3><span class="header-section-number">1.2.2</span> First Model R Output<a href="review-of-multiple-linear-regression.html#first-model-r-output" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>We fit the model in R.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="review-of-multiple-linear-regression.html#cb8-1" tabindex="-1"></a>model2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(speed <span class="sc">~</span> yearnew, <span class="at">data =</span> derby.df)</span>
-<span id="cb8-2"><a href="review-of-multiple-linear-regression.html#cb8-2" tabindex="-1"></a><span class="fu">summary</span>(model2)</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="review-of-multiple-linear-regression.html#cb8-1" aria-hidden="true" tabindex="-1"></a>model2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(speed <span class="sc">~</span> yearnew, <span class="at">data =</span> derby.df)</span>
+<span id="cb8-2"><a href="review-of-multiple-linear-regression.html#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model2)</span></code></pre></div>
 <pre><code>
 Call:
 lm(formula = speed ~ yearnew, data = derby.df)
@@ -1246,12 +1242,12 @@ F=\frac{\frac{SST - SSR}{p}}{\frac{SSR}{n-(p+1)}}
 <ul>
 <li>SSR is:</li>
 </ul>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="review-of-multiple-linear-regression.html#cb10-1" tabindex="-1"></a><span class="fu">sum</span>(model2<span class="sc">$</span>residuals<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="review-of-multiple-linear-regression.html#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(model2<span class="sc">$</span>residuals<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div>
 <pre><code>## [1] 97.8993</code></pre>
 <ul>
 <li>SST is:</li>
 </ul>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="review-of-multiple-linear-regression.html#cb12-1" tabindex="-1"></a><span class="fu">sum</span>((derby.df<span class="sc">$</span>speed <span class="sc">-</span> <span class="fu">mean</span>(derby.df<span class="sc">$</span>speed))<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="review-of-multiple-linear-regression.html#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>((derby.df<span class="sc">$</span>speed <span class="sc">-</span> <span class="fu">mean</span>(derby.df<span class="sc">$</span>speed))<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div>
 <pre><code>## [1] 201.1791</code></pre>
 <ul>
 <li>The residual standard error <span class="math inline">\(s\)</span> is our estimate of <span class="math inline">\(\sigma\)</span>, the standard deviation in winning speeds among races run in the same year.</li>
@@ -1274,9 +1270,9 @@ F=\frac{\frac{SST - SSR}{p}}{\frac{SSR}{n-(p+1)}} = \frac{\frac{201.1791 - 97.89
 \]</span></p>
 <p>This F-statistic is associated with 1 and 120 degrees of freedom.</p>
 <p>To obtain the standard error estimates for <span class="math inline">\(b_0\)</span> and <span class="math inline">\(b_1\)</span>, we need to calculate <span class="math inline">\(\bar{x}\)</span> and <span class="math inline">\(\sum(x_i-\bar{x})^2\)</span>, where <span class="math inline">\(x\)</span> represents the explanatory variable, <span class="math inline">\(\text{YearNew}\)</span>.</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="review-of-multiple-linear-regression.html#cb14-1" tabindex="-1"></a><span class="fu">mean</span>(derby.df<span class="sc">$</span>yearnew)</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="review-of-multiple-linear-regression.html#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(derby.df<span class="sc">$</span>yearnew)</span></code></pre></div>
 <pre><code>## [1] 60.5</code></pre>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="review-of-multiple-linear-regression.html#cb16-1" tabindex="-1"></a><span class="fu">sum</span>((derby.df<span class="sc">$</span>yearnew<span class="sc">-</span><span class="fu">mean</span>(derby.df<span class="sc">$</span>yearnew))<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="review-of-multiple-linear-regression.html#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>((derby.df<span class="sc">$</span>yearnew<span class="sc">-</span><span class="fu">mean</span>(derby.df<span class="sc">$</span>yearnew))<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div>
 <pre><code>## [1] 151310.5</code></pre>
 <p><span class="math display">\[
 SE(b_0)=s\sqrt{\frac{1}{n}+\frac{\bar{x}^2}{\sum(x_i-\bar{x})^2}} = 0.9032317\sqrt{\frac{1}{122} + \frac{60.5^2}{151310.5} } = 0.1625
@@ -1294,26 +1290,26 @@ SE(b_1)=\sqrt{\frac{s^2}{\sum(x_i-\bar{x})^2}}=\sqrt{\frac{0.9032^2}{151310.5}} 
 <p><strong>Null Hypothesis:</strong> There is no relationship between year and average winning speed, i.e., average winning speed does not change over time among all races that might have been run by these horses under similar conditions. (<span class="math inline">\(\beta_1=0\)</span>).</p>
 <p><strong>Alternative Hypothesis:</strong> There is a relationship between year and average winning speed, i.e., average winning speed does change over time among all races that might have been run by these horses under similar conditions. (<span class="math inline">\(\beta_1 \neq 0\)</span>).</p>
 <p><strong>Test Statistic</strong>: <span class="math inline">\(t=\frac{{b_j}}{\text{SE}(b_j)} = \frac{-0.02612601}{0.002322013} = 11.25\)</span></p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="review-of-multiple-linear-regression.html#cb18-1" tabindex="-1"></a>ts<span class="ot">=</span><span class="fl">11.25145</span></span>
-<span id="cb18-2"><a href="review-of-multiple-linear-regression.html#cb18-2" tabindex="-1"></a><span class="fu">gf_dist</span>(<span class="st">&quot;t&quot;</span>, <span class="at">df=</span><span class="dv">120</span>, <span class="at">geom =</span> <span class="st">&quot;area&quot;</span>, <span class="at">fill =</span> <span class="sc">~</span> (<span class="fu">abs</span>(x)<span class="sc">&gt;</span> <span class="fu">abs</span>(ts)), <span class="at">show.legend=</span><span class="cn">FALSE</span>) <span class="sc">+</span> <span class="fu">geom_vline</span>(<span class="at">xintercept=</span><span class="fu">c</span>(ts, <span class="sc">-</span>ts), <span class="at">color=</span><span class="st">&quot;red&quot;</span>)  <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">&quot;t&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="review-of-multiple-linear-regression.html#cb18-1" aria-hidden="true" tabindex="-1"></a>ts<span class="ot">=</span><span class="fl">11.25145</span></span>
+<span id="cb18-2"><a href="review-of-multiple-linear-regression.html#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">gf_dist</span>(<span class="st">&quot;t&quot;</span>, <span class="at">df=</span><span class="dv">120</span>, <span class="at">geom =</span> <span class="st">&quot;area&quot;</span>, <span class="at">fill =</span> <span class="sc">~</span> (<span class="fu">abs</span>(x)<span class="sc">&gt;</span> <span class="fu">abs</span>(ts)), <span class="at">show.legend=</span><span class="cn">FALSE</span>) <span class="sc">+</span> <span class="fu">geom_vline</span>(<span class="at">xintercept=</span><span class="fu">c</span>(ts, <span class="sc">-</span>ts), <span class="at">color=</span><span class="st">&quot;red&quot;</span>)  <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">&quot;t&quot;</span>)</span></code></pre></div>
 <p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-6-1.png" width="768" /></p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="review-of-multiple-linear-regression.html#cb19-1" tabindex="-1"></a><span class="dv">2</span><span class="sc">*</span><span class="fu">pt</span>(<span class="sc">-</span><span class="fu">abs</span>(ts), <span class="at">df=</span><span class="dv">120</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="review-of-multiple-linear-regression.html#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span><span class="sc">*</span><span class="fu">pt</span>(<span class="sc">-</span><span class="fu">abs</span>(ts), <span class="at">df=</span><span class="dv">120</span>)</span></code></pre></div>
 <pre><code>## [1] 1.716807e-20</code></pre>
 <p>The tiny p-value provides strong evidence of a relationship between year and winning speed. Kentucky Derby winners do indeed appear to be getting faster over time.</p>
 </div>
 <div id="checking-model-assumptions" class="section level3 hasAnchor" number="1.2.4">
 <h3><span class="header-section-number">1.2.4</span> Checking Model Assumptions<a href="review-of-multiple-linear-regression.html#checking-model-assumptions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="review-of-multiple-linear-regression.html#cb21-1" tabindex="-1"></a><span class="co"># Residual diagnostics for Model 2</span></span>
-<span id="cb21-2"><a href="review-of-multiple-linear-regression.html#cb21-2" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mar=</span><span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">4</span>,<span class="dv">4</span>,<span class="dv">4</span>))</span>
-<span id="cb21-3"><a href="review-of-multiple-linear-regression.html#cb21-3" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span>
-<span id="cb21-4"><a href="review-of-multiple-linear-regression.html#cb21-4" tabindex="-1"></a><span class="fu">plot</span>(model2)</span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="review-of-multiple-linear-regression.html#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Residual diagnostics for Model 2</span></span>
+<span id="cb21-2"><a href="review-of-multiple-linear-regression.html#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mar=</span><span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">4</span>,<span class="dv">4</span>,<span class="dv">4</span>))</span>
+<span id="cb21-3"><a href="review-of-multiple-linear-regression.html#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span>
+<span id="cb21-4"><a href="review-of-multiple-linear-regression.html#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(model2)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:resid2"></span>
 <img src="Stat-455-Notes_files/figure-html/resid2-1.png" alt="Residual plots for Model 2." width="90%" />
 <p class="caption">
 Figure 1.4: Residual plots for Model 2.
 </p>
 </div>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="review-of-multiple-linear-regression.html#cb22-1" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="review-of-multiple-linear-regression.html#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</span></code></pre></div>
 <p>The residual plots help tell us what trends/relationships our model is missing, or leaving unexplained.</p>
 <ul>
 <li>The upper left plot, Residuals vs. Fitted, can be used to check the Linearity assumption. Residuals should be patternless around Y = 0; if not, there is a pattern in the data that is currently unaccounted for.<br />
@@ -1334,24 +1330,24 @@ Y_{i}=\beta_{0}+\beta_{1}\textrm{Yearnew}_{i}+\beta_{2}\textrm{Yearnew}^2_{i}+\e
 </div>
 <div id="quadratic-model-in-r" class="section level3 hasAnchor" number="1.2.6">
 <h3><span class="header-section-number">1.2.6</span> Quadratic Model in R<a href="review-of-multiple-linear-regression.html#quadratic-model-in-r" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="review-of-multiple-linear-regression.html#cb23-1" tabindex="-1"></a>derby.df <span class="ot">&lt;-</span> <span class="fu">mutate</span>(derby.df, <span class="at">yearnew2 =</span> yearnew<span class="sc">^</span><span class="dv">2</span>)</span>
-<span id="cb23-2"><a href="review-of-multiple-linear-regression.html#cb23-2" tabindex="-1"></a>model2q <span class="ot">&lt;-</span> <span class="fu">lm</span>(speed <span class="sc">~</span> yearnew <span class="sc">+</span> yearnew2, <span class="at">data =</span> derby.df)</span></code></pre></div>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="review-of-multiple-linear-regression.html#cb24-1" tabindex="-1"></a><span class="fu">coef</span>(<span class="fu">summary</span>(model2q))</span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="review-of-multiple-linear-regression.html#cb23-1" aria-hidden="true" tabindex="-1"></a>derby.df <span class="ot">&lt;-</span> <span class="fu">mutate</span>(derby.df, <span class="at">yearnew2 =</span> yearnew<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb23-2"><a href="review-of-multiple-linear-regression.html#cb23-2" aria-hidden="true" tabindex="-1"></a>model2q <span class="ot">&lt;-</span> <span class="fu">lm</span>(speed <span class="sc">~</span> yearnew <span class="sc">+</span> yearnew2, <span class="at">data =</span> derby.df)</span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="review-of-multiple-linear-regression.html#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(<span class="fu">summary</span>(model2q))</span></code></pre></div>
 <pre><code>##                  Estimate   Std. Error    t value      Pr(&gt;|t|)
 ## (Intercept) 50.5874565658 2.081705e-01 243.009695 2.615174e-162
 ## yearnew      0.0761728163 7.950413e-03   9.580989  1.838874e-16
 ## yearnew2    -0.0004136099 6.358703e-05  -6.504628  1.920684e-09</code></pre>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="review-of-multiple-linear-regression.html#cb26-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot; R squared = &quot;</span>, <span class="fu">summary</span>(model2q)<span class="sc">$</span>r.squared, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>, </span>
-<span id="cb26-2"><a href="review-of-multiple-linear-regression.html#cb26-2" tabindex="-1"></a>    <span class="st">&quot;Residual standard error = &quot;</span>, <span class="fu">summary</span>(model2q)<span class="sc">$</span>sigma)</span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="review-of-multiple-linear-regression.html#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot; R squared = &quot;</span>, <span class="fu">summary</span>(model2q)<span class="sc">$</span>r.squared, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>, </span>
+<span id="cb26-2"><a href="review-of-multiple-linear-regression.html#cb26-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;Residual standard error = &quot;</span>, <span class="fu">summary</span>(model2q)<span class="sc">$</span>sigma)</span></code></pre></div>
 <pre><code>##  R squared =  0.6410103 
 ##  Residual standard error =  0.7790385</code></pre>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="review-of-multiple-linear-regression.html#cb28-1" tabindex="-1"></a><span class="co"># Fitted models for Model 2 and Model 2Q</span></span>
-<span id="cb28-2"><a href="review-of-multiple-linear-regression.html#cb28-2" tabindex="-1"></a><span class="fu">ggplot</span>(derby.df, <span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> speed)) <span class="sc">+</span></span>
-<span id="cb28-3"><a href="review-of-multiple-linear-regression.html#cb28-3" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb28-4"><a href="review-of-multiple-linear-regression.html#cb28-4" tabindex="-1"></a>  <span class="fu">stat_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="at">formula =</span> y <span class="sc">~</span> x, </span>
-<span id="cb28-5"><a href="review-of-multiple-linear-regression.html#cb28-5" tabindex="-1"></a>              <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">linetype =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb28-6"><a href="review-of-multiple-linear-regression.html#cb28-6" tabindex="-1"></a>  <span class="fu">stat_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="at">formula =</span> y <span class="sc">~</span> x <span class="sc">+</span> <span class="fu">I</span>(x<span class="sc">^</span><span class="dv">2</span>), </span>
-<span id="cb28-7"><a href="review-of-multiple-linear-regression.html#cb28-7" tabindex="-1"></a>              <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">linetype =</span> <span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="review-of-multiple-linear-regression.html#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fitted models for Model 2 and Model 2Q</span></span>
+<span id="cb28-2"><a href="review-of-multiple-linear-regression.html#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(derby.df, <span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> speed)) <span class="sc">+</span></span>
+<span id="cb28-3"><a href="review-of-multiple-linear-regression.html#cb28-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb28-4"><a href="review-of-multiple-linear-regression.html#cb28-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="at">formula =</span> y <span class="sc">~</span> x, </span>
+<span id="cb28-5"><a href="review-of-multiple-linear-regression.html#cb28-5" aria-hidden="true" tabindex="-1"></a>              <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">linetype =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb28-6"><a href="review-of-multiple-linear-regression.html#cb28-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="at">formula =</span> y <span class="sc">~</span> x <span class="sc">+</span> <span class="fu">I</span>(x<span class="sc">^</span><span class="dv">2</span>), </span>
+<span id="cb28-7"><a href="review-of-multiple-linear-regression.html#cb28-7" aria-hidden="true" tabindex="-1"></a>              <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">linetype =</span> <span class="dv">2</span>)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:models2and2q"></span>
 <img src="Stat-455-Notes_files/figure-html/models2and2q-1.png" alt="Linear (solid) vs. quadratic (dashed) fit." width="90%" />
 <p class="caption">
@@ -1366,17 +1362,17 @@ Figure 1.5: Linear (solid) vs. quadratic (dashed) fit.
 </div>
 <div id="quadratic-model-residual-plots" class="section level3 hasAnchor" number="1.2.7">
 <h3><span class="header-section-number">1.2.7</span> Quadratic Model Residual Plots<a href="review-of-multiple-linear-regression.html#quadratic-model-residual-plots" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="review-of-multiple-linear-regression.html#cb29-1" tabindex="-1"></a><span class="co"># Residual diagnostics for Model 2</span></span>
-<span id="cb29-2"><a href="review-of-multiple-linear-regression.html#cb29-2" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mar=</span><span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">4</span>,<span class="dv">4</span>,<span class="dv">4</span>))</span>
-<span id="cb29-3"><a href="review-of-multiple-linear-regression.html#cb29-3" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span>
-<span id="cb29-4"><a href="review-of-multiple-linear-regression.html#cb29-4" tabindex="-1"></a><span class="fu">plot</span>(model2q)</span></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="review-of-multiple-linear-regression.html#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Residual diagnostics for Model 2</span></span>
+<span id="cb29-2"><a href="review-of-multiple-linear-regression.html#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mar=</span><span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">4</span>,<span class="dv">4</span>,<span class="dv">4</span>))</span>
+<span id="cb29-3"><a href="review-of-multiple-linear-regression.html#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span>
+<span id="cb29-4"><a href="review-of-multiple-linear-regression.html#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(model2q)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:resid2q"></span>
 <img src="Stat-455-Notes_files/figure-html/resid2q-1.png" alt="Residual plots for Model 2Q." width="90%" />
 <p class="caption">
 Figure 1.6: Residual plots for Model 2Q.
 </p>
 </div>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="review-of-multiple-linear-regression.html#cb30-1" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="review-of-multiple-linear-regression.html#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</span></code></pre></div>
 <p>The quadratic trend in the residual vs fitted plot has disappeared, as the quadratic relationship is now explained in our model.</p>
 </div>
 </div>
@@ -1394,14 +1390,14 @@ Y_{i}=\beta_{0}+\beta_{1}\textrm{Yearnew}_{i}+\beta_{2}\textrm{Fast}_{i}+\epsilo
 </div>
 <div id="multiple-regression-model-in-r" class="section level3 hasAnchor" number="1.3.2">
 <h3><span class="header-section-number">1.3.2</span> Multiple Regression Model in R<a href="review-of-multiple-linear-regression.html#multiple-regression-model-in-r" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="review-of-multiple-linear-regression.html#cb31-1" tabindex="-1"></a>model4 <span class="ot">&lt;-</span> <span class="fu">lm</span>(speed <span class="sc">~</span> yearnew <span class="sc">+</span> fast, <span class="at">data =</span> derby.df)</span></code></pre></div>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="review-of-multiple-linear-regression.html#cb32-1" tabindex="-1"></a><span class="fu">coef</span>(<span class="fu">summary</span>(model4))</span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="review-of-multiple-linear-regression.html#cb31-1" aria-hidden="true" tabindex="-1"></a>model4 <span class="ot">&lt;-</span> <span class="fu">lm</span>(speed <span class="sc">~</span> yearnew <span class="sc">+</span> fast, <span class="at">data =</span> derby.df)</span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="review-of-multiple-linear-regression.html#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(<span class="fu">summary</span>(model4))</span></code></pre></div>
 <pre><code>##                Estimate  Std. Error    t value      Pr(&gt;|t|)
 ## (Intercept) 50.91782155 0.154601703 329.348388 5.360308e-178
 ## yearnew      0.02258276 0.001918849  11.768907  1.116763e-21
 ## fast         1.22684588 0.150721259   8.139833  4.393084e-13</code></pre>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="review-of-multiple-linear-regression.html#cb34-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot; R squared = &quot;</span>, <span class="fu">summary</span>(model4)<span class="sc">$</span>r.squared, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>, </span>
-<span id="cb34-2"><a href="review-of-multiple-linear-regression.html#cb34-2" tabindex="-1"></a>    <span class="st">&quot;Residual standard error = &quot;</span>, <span class="fu">summary</span>(model4)<span class="sc">$</span>sigma)</span></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="review-of-multiple-linear-regression.html#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot; R squared = &quot;</span>, <span class="fu">summary</span>(model4)<span class="sc">$</span>r.squared, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>, </span>
+<span id="cb34-2"><a href="review-of-multiple-linear-regression.html#cb34-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;Residual standard error = &quot;</span>, <span class="fu">summary</span>(model4)<span class="sc">$</span>sigma)</span></code></pre></div>
 <pre><code>##  R squared =  0.6874141 
 ##  Residual standard error =  0.7269468</code></pre>
 <p><strong>Interpretations:</strong></p>
@@ -1419,7 +1415,7 @@ This yearly effect is also smaller than the 0.026 ft/s per year we estimated the
 <p><strong>Confidence Intervals for <span class="math inline">\(\beta_0, \beta_1, \beta_2\)</span>.</strong></p>
 <p>Under LINE assumptions, a confidence interval for <span class="math inline">\(\beta_j\)</span> is given by <span class="math inline">\(\hat{\beta_j} \pm t_{(n-p), (1-\alpha/2)}^* \text{SE}(\beta_j)\)</span>,</p>
 <p>where <span class="math inline">\(t_{(n-p), (1-\alpha/2)}^*\)</span> represents the <span class="math inline">\((1-\alpha/2)\)</span> quantile of a t-distribution with <span class="math inline">\(n-p\)</span> degrees of freedom, <span class="math inline">\(\alpha\)</span> represents the level of significance (e.g. 0.05 for a 95% CI), and <span class="math inline">\(p\)</span> represents the number of parameters <span class="math inline">\(\beta_0, \beta_1, \ldots...\)</span></p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="review-of-multiple-linear-regression.html#cb36-1" tabindex="-1"></a><span class="fu">confint</span>(model4)</span></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="review-of-multiple-linear-regression.html#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(model4)</span></code></pre></div>
 <pre><code>##                   2.5 %      97.5 %
 ## (Intercept) 50.61169473 51.22394836
 ## yearnew      0.01878324  0.02638227
@@ -1431,8 +1427,8 @@ This yearly effect is also smaller than the 0.026 ft/s per year we estimated the
 <li>We can be 95% confident that average winning speeds under fast conditions are between 0.93 and 1.53 ft/s higher than under non-fast conditions, after accounting for the effect of year.</li>
 </ul>
 <p>To make a prediction for a new case, such as the winning speed in 2017, we use a prediction interval:</p>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="review-of-multiple-linear-regression.html#cb38-1" tabindex="-1"></a>new.data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">yearnew =</span> <span class="dv">2017</span> <span class="sc">-</span> <span class="dv">1896</span>, <span class="at">fast =</span> <span class="dv">1</span>) </span>
-<span id="cb38-2"><a href="review-of-multiple-linear-regression.html#cb38-2" tabindex="-1"></a><span class="fu">predict</span>(model4, <span class="at">new =</span> new.data, <span class="at">interval =</span> <span class="st">&quot;prediction&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="review-of-multiple-linear-regression.html#cb38-1" aria-hidden="true" tabindex="-1"></a>new.data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">yearnew =</span> <span class="dv">2017</span> <span class="sc">-</span> <span class="dv">1896</span>, <span class="at">fast =</span> <span class="dv">1</span>) </span>
+<span id="cb38-2"><a href="review-of-multiple-linear-regression.html#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(model4, <span class="at">new =</span> new.data, <span class="at">interval =</span> <span class="st">&quot;prediction&quot;</span>)</span></code></pre></div>
 <pre><code>       fit     lwr      upr
 1 54.87718 53.4143 56.34006</code></pre>
 <ul>
@@ -1444,17 +1440,17 @@ This yearly effect is also smaller than the 0.026 ft/s per year we estimated the
 <h3><span class="header-section-number">1.3.4</span> Slopes for Fast, non-Fast Tracks<a href="review-of-multiple-linear-regression.html#slopes-for-fast-non-fast-tracks" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>In model4, we assume that the expected rate of change in winning speed over time is the same, regardless of whether the track is fast or not. In either case, it is given by <span class="math inline">\(\beta_1\)</span>.</p>
 <p>Thus, Model 4 produces a picture that looks like this:</p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="review-of-multiple-linear-regression.html#cb40-1" tabindex="-1"></a>equation1 <span class="ot">&lt;-</span> <span class="cf">function</span>(x){<span class="fu">coef</span>(model4)[<span class="dv">2</span>]<span class="sc">*</span>x<span class="sc">+</span><span class="fu">coef</span>(model4)[<span class="dv">1</span>]}</span>
-<span id="cb40-2"><a href="review-of-multiple-linear-regression.html#cb40-2" tabindex="-1"></a>equation2  <span class="ot">&lt;-</span> <span class="cf">function</span>(x){<span class="fu">coef</span>(model4)[<span class="dv">2</span>]<span class="sc">*</span>x<span class="sc">+</span><span class="fu">coef</span>(model4)[<span class="dv">1</span>]<span class="sc">+</span><span class="fu">coef</span>(model4)[<span class="dv">3</span>]}</span>
-<span id="cb40-3"><a href="review-of-multiple-linear-regression.html#cb40-3" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>derby.df, <span class="fu">aes</span>(<span class="at">x=</span>yearnew, <span class="at">y=</span>speed, <span class="at">color=</span>fastfactor)) <span class="sc">+</span> <span class="fu">geom_point</span>()<span class="sc">+</span></span>
-<span id="cb40-4"><a href="review-of-multiple-linear-regression.html#cb40-4" tabindex="-1"></a>        <span class="fu">stat_function</span>(<span class="at">fun=</span>equation1,<span class="at">geom=</span><span class="st">&quot;line&quot;</span>,<span class="at">color=</span>scales<span class="sc">::</span><span class="fu">hue_pal</span>()(<span class="dv">3</span>)[<span class="dv">3</span>]) <span class="sc">+</span></span>
-<span id="cb40-5"><a href="review-of-multiple-linear-regression.html#cb40-5" tabindex="-1"></a>        <span class="fu">stat_function</span>(<span class="at">fun=</span>equation2,<span class="at">geom=</span><span class="st">&quot;line&quot;</span>,<span class="at">color=</span>scales<span class="sc">::</span><span class="fu">hue_pal</span>()(<span class="dv">3</span>)[<span class="dv">1</span>]) </span></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="review-of-multiple-linear-regression.html#cb40-1" aria-hidden="true" tabindex="-1"></a>equation1 <span class="ot">&lt;-</span> <span class="cf">function</span>(x){<span class="fu">coef</span>(model4)[<span class="dv">2</span>]<span class="sc">*</span>x<span class="sc">+</span><span class="fu">coef</span>(model4)[<span class="dv">1</span>]}</span>
+<span id="cb40-2"><a href="review-of-multiple-linear-regression.html#cb40-2" aria-hidden="true" tabindex="-1"></a>equation2  <span class="ot">&lt;-</span> <span class="cf">function</span>(x){<span class="fu">coef</span>(model4)[<span class="dv">2</span>]<span class="sc">*</span>x<span class="sc">+</span><span class="fu">coef</span>(model4)[<span class="dv">1</span>]<span class="sc">+</span><span class="fu">coef</span>(model4)[<span class="dv">3</span>]}</span>
+<span id="cb40-3"><a href="review-of-multiple-linear-regression.html#cb40-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>derby.df, <span class="fu">aes</span>(<span class="at">x=</span>yearnew, <span class="at">y=</span>speed, <span class="at">color=</span>fastfactor)) <span class="sc">+</span> <span class="fu">geom_point</span>()<span class="sc">+</span></span>
+<span id="cb40-4"><a href="review-of-multiple-linear-regression.html#cb40-4" aria-hidden="true" tabindex="-1"></a>        <span class="fu">stat_function</span>(<span class="at">fun=</span>equation1,<span class="at">geom=</span><span class="st">&quot;line&quot;</span>,<span class="at">color=</span>scales<span class="sc">::</span><span class="fu">hue_pal</span>()(<span class="dv">3</span>)[<span class="dv">3</span>]) <span class="sc">+</span></span>
+<span id="cb40-5"><a href="review-of-multiple-linear-regression.html#cb40-5" aria-hidden="true" tabindex="-1"></a>        <span class="fu">stat_function</span>(<span class="at">fun=</span>equation2,<span class="at">geom=</span><span class="st">&quot;line&quot;</span>,<span class="at">color=</span>scales<span class="sc">::</span><span class="fu">hue_pal</span>()(<span class="dv">3</span>)[<span class="dv">1</span>]) </span></code></pre></div>
 <p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-11-1.png" width="768" /></p>
 <p>Recall, however, that the data suggested that speeds have increased more rapidly for tracks that are not fast.</p>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="review-of-multiple-linear-regression.html#cb41-1" tabindex="-1"></a><span class="co"># Coded scatterplot</span></span>
-<span id="cb41-2"><a href="review-of-multiple-linear-regression.html#cb41-2" tabindex="-1"></a><span class="fu">ggplot</span>(derby.df, <span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> speed, <span class="at">colour =</span> fastfactor)) <span class="sc">+</span></span>
-<span id="cb41-3"><a href="review-of-multiple-linear-regression.html#cb41-3" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">shape =</span> fastfactor)) <span class="sc">+</span></span>
-<span id="cb41-4"><a href="review-of-multiple-linear-regression.html#cb41-4" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="fu">aes</span>(<span class="at">linetype =</span> fastfactor), <span class="at">method =</span> lm, <span class="at">se =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="review-of-multiple-linear-regression.html#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Coded scatterplot</span></span>
+<span id="cb41-2"><a href="review-of-multiple-linear-regression.html#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(derby.df, <span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> speed, <span class="at">colour =</span> fastfactor)) <span class="sc">+</span></span>
+<span id="cb41-3"><a href="review-of-multiple-linear-regression.html#cb41-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">shape =</span> fastfactor)) <span class="sc">+</span></span>
+<span id="cb41-4"><a href="review-of-multiple-linear-regression.html#cb41-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="fu">aes</span>(<span class="at">linetype =</span> fastfactor), <span class="at">method =</span> lm, <span class="at">se =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-12"></span>
 <img src="Stat-455-Notes_files/figure-html/unnamed-chunk-12-1.png" alt="Linear trends in winning speeds over time, presented separately for fast conditions vs. good or slow conditions." width="90%" />
 <p class="caption">
@@ -1477,16 +1473,16 @@ Y_{i}&amp;= \beta_{0}+\beta_{1}\textrm{Yearnew}_{i}+\beta_{2}\textrm{Fast}_{i} \
 ### Interaction Model Estimates</p>
 <p>LLSR provides the following parameter estimates:</p>
 <p>We can do this using either of the following commands</p>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="review-of-multiple-linear-regression.html#cb42-1" tabindex="-1"></a>model5 <span class="ot">&lt;-</span> <span class="fu">lm</span>(speed <span class="sc">~</span> yearnew <span class="sc">+</span> fast <span class="sc">+</span> yearnew<span class="sc">:</span>fast, <span class="at">data=</span>derby.df)</span>
-<span id="cb42-2"><a href="review-of-multiple-linear-regression.html#cb42-2" tabindex="-1"></a>model5 <span class="ot">&lt;-</span> <span class="fu">lm</span>(speed <span class="sc">~</span>  yearnew<span class="sc">*</span>fast, <span class="at">data=</span>derby.df)</span></code></pre></div>
-<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="review-of-multiple-linear-regression.html#cb43-1" tabindex="-1"></a><span class="fu">coef</span>(<span class="fu">summary</span>(model5))</span></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="review-of-multiple-linear-regression.html#cb42-1" aria-hidden="true" tabindex="-1"></a>model5 <span class="ot">&lt;-</span> <span class="fu">lm</span>(speed <span class="sc">~</span> yearnew <span class="sc">+</span> fast <span class="sc">+</span> yearnew<span class="sc">:</span>fast, <span class="at">data=</span>derby.df)</span>
+<span id="cb42-2"><a href="review-of-multiple-linear-regression.html#cb42-2" aria-hidden="true" tabindex="-1"></a>model5 <span class="ot">&lt;-</span> <span class="fu">lm</span>(speed <span class="sc">~</span>  yearnew<span class="sc">*</span>fast, <span class="at">data=</span>derby.df)</span></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="review-of-multiple-linear-regression.html#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(<span class="fu">summary</span>(model5))</span></code></pre></div>
 <pre><code>##                 Estimate  Std. Error    t value      Pr(&gt;|t|)
 ## (Intercept)  50.52862926 0.205072338 246.394174 6.988530e-162
 ## yearnew       0.03075099 0.003470967   8.859489  9.838736e-15
 ## fast          1.83352259 0.262174513   6.993520  1.729697e-10
 ## yearnew:fast -0.01149034 0.004116733  -2.791129  6.127912e-03</code></pre>
-<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="review-of-multiple-linear-regression.html#cb45-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot; R squared = &quot;</span>, <span class="fu">summary</span>(model5)<span class="sc">$</span>r.squared, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>, </span>
-<span id="cb45-2"><a href="review-of-multiple-linear-regression.html#cb45-2" tabindex="-1"></a>    <span class="st">&quot;Residual standard error = &quot;</span>, <span class="fu">summary</span>(model5)<span class="sc">$</span>sigma)</span></code></pre></div>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="review-of-multiple-linear-regression.html#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot; R squared = &quot;</span>, <span class="fu">summary</span>(model5)<span class="sc">$</span>r.squared, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>, </span>
+<span id="cb45-2"><a href="review-of-multiple-linear-regression.html#cb45-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;Residual standard error = &quot;</span>, <span class="fu">summary</span>(model5)<span class="sc">$</span>sigma)</span></code></pre></div>
 <pre><code>##  R squared =  0.7067731 
 ##  Residual standard error =  0.7070536</code></pre>
 </div>
@@ -1582,23 +1578,23 @@ Y_{i}&amp;=\beta_{0}+\beta_{1}\textrm{Yearnew}_{i}+\beta_{2}\textrm{Yearnew}^2_{
 <div id="mlr-models-fit-in-r" class="section level3 hasAnchor" number="1.4.4">
 <h3><span class="header-section-number">1.4.4</span> MLR Models Fit in R<a href="review-of-multiple-linear-regression.html#mlr-models-fit-in-r" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>We fit each model in R.</p>
-<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="review-of-multiple-linear-regression.html#cb47-1" tabindex="-1"></a>model0A <span class="ot">&lt;-</span> <span class="fu">lm</span>(speed <span class="sc">~</span> yearnew <span class="sc">+</span> yearnew2 , <span class="at">data =</span> derby.df)</span>
-<span id="cb47-2"><a href="review-of-multiple-linear-regression.html#cb47-2" tabindex="-1"></a>model0B <span class="ot">&lt;-</span> <span class="fu">lm</span>(speed <span class="sc">~</span> yearnew <span class="sc">+</span> yearnew2 <span class="sc">+</span> fast <span class="sc">+</span> good <span class="sc">+</span> starters, <span class="at">data =</span> derby.df)</span>
-<span id="cb47-3"><a href="review-of-multiple-linear-regression.html#cb47-3" tabindex="-1"></a>model0C <span class="ot">&lt;-</span> <span class="fu">lm</span>(speed <span class="sc">~</span> yearnew <span class="sc">+</span> yearnew2 <span class="sc">+</span> fast <span class="sc">+</span> good <span class="sc">+</span> starters <span class="sc">+</span> </span>
-<span id="cb47-4"><a href="review-of-multiple-linear-regression.html#cb47-4" tabindex="-1"></a>                yearnew<span class="sc">:</span>fast <span class="sc">+</span> yearnew<span class="sc">:</span>good <span class="sc">+</span> yearnew2<span class="sc">:</span>fast <span class="sc">+</span> </span>
-<span id="cb47-5"><a href="review-of-multiple-linear-regression.html#cb47-5" tabindex="-1"></a>                yearnew2<span class="sc">:</span>good, <span class="at">data =</span> derby.df)</span></code></pre></div>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="review-of-multiple-linear-regression.html#cb47-1" aria-hidden="true" tabindex="-1"></a>model0A <span class="ot">&lt;-</span> <span class="fu">lm</span>(speed <span class="sc">~</span> yearnew <span class="sc">+</span> yearnew2 , <span class="at">data =</span> derby.df)</span>
+<span id="cb47-2"><a href="review-of-multiple-linear-regression.html#cb47-2" aria-hidden="true" tabindex="-1"></a>model0B <span class="ot">&lt;-</span> <span class="fu">lm</span>(speed <span class="sc">~</span> yearnew <span class="sc">+</span> yearnew2 <span class="sc">+</span> fast <span class="sc">+</span> good <span class="sc">+</span> starters, <span class="at">data =</span> derby.df)</span>
+<span id="cb47-3"><a href="review-of-multiple-linear-regression.html#cb47-3" aria-hidden="true" tabindex="-1"></a>model0C <span class="ot">&lt;-</span> <span class="fu">lm</span>(speed <span class="sc">~</span> yearnew <span class="sc">+</span> yearnew2 <span class="sc">+</span> fast <span class="sc">+</span> good <span class="sc">+</span> starters <span class="sc">+</span> </span>
+<span id="cb47-4"><a href="review-of-multiple-linear-regression.html#cb47-4" aria-hidden="true" tabindex="-1"></a>                yearnew<span class="sc">:</span>fast <span class="sc">+</span> yearnew<span class="sc">:</span>good <span class="sc">+</span> yearnew2<span class="sc">:</span>fast <span class="sc">+</span> </span>
+<span id="cb47-5"><a href="review-of-multiple-linear-regression.html#cb47-5" aria-hidden="true" tabindex="-1"></a>                yearnew2<span class="sc">:</span>good, <span class="at">data =</span> derby.df)</span></code></pre></div>
 </div>
 <div id="model-0a-output" class="section level3 hasAnchor" number="1.4.5">
 <h3><span class="header-section-number">1.4.5</span> Model 0A Output<a href="review-of-multiple-linear-regression.html#model-0a-output" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="review-of-multiple-linear-regression.html#cb48-1" tabindex="-1"></a><span class="fu">coef</span>(<span class="fu">summary</span>(model0A)) <span class="sc">%&gt;%</span> <span class="fu">round</span>(<span class="dv">6</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="review-of-multiple-linear-regression.html#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(<span class="fu">summary</span>(model0A)) <span class="sc">%&gt;%</span> <span class="fu">round</span>(<span class="dv">6</span>)</span></code></pre></div>
 <pre><code>##              Estimate Std. Error    t value Pr(&gt;|t|)
 ## (Intercept) 50.587457   0.208171 243.009695        0
 ## yearnew      0.076173   0.007950   9.580989        0
 ## yearnew2    -0.000414   0.000064  -6.504628        0</code></pre>
-<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="review-of-multiple-linear-regression.html#cb50-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot; R squared = &quot;</span>, <span class="fu">summary</span>(model0A)<span class="sc">$</span>r.squared, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>, </span>
-<span id="cb50-2"><a href="review-of-multiple-linear-regression.html#cb50-2" tabindex="-1"></a>    <span class="st">&quot; Adjusted R squared = &quot;</span>, <span class="fu">summary</span>(model0A)<span class="sc">$</span>adj.r.squared, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>,</span>
-<span id="cb50-3"><a href="review-of-multiple-linear-regression.html#cb50-3" tabindex="-1"></a>    <span class="st">&quot;Residual standard error = &quot;</span>, <span class="fu">summary</span>(model0A)<span class="sc">$</span>sigma, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>,</span>
-<span id="cb50-4"><a href="review-of-multiple-linear-regression.html#cb50-4" tabindex="-1"></a><span class="st">&quot;AIC = &quot;</span>, <span class="fu">AIC</span>(model0A))</span></code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="review-of-multiple-linear-regression.html#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot; R squared = &quot;</span>, <span class="fu">summary</span>(model0A)<span class="sc">$</span>r.squared, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>, </span>
+<span id="cb50-2"><a href="review-of-multiple-linear-regression.html#cb50-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot; Adjusted R squared = &quot;</span>, <span class="fu">summary</span>(model0A)<span class="sc">$</span>adj.r.squared, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>,</span>
+<span id="cb50-3"><a href="review-of-multiple-linear-regression.html#cb50-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;Residual standard error = &quot;</span>, <span class="fu">summary</span>(model0A)<span class="sc">$</span>sigma, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>,</span>
+<span id="cb50-4"><a href="review-of-multiple-linear-regression.html#cb50-4" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;AIC = &quot;</span>, <span class="fu">AIC</span>(model0A))</span></code></pre></div>
 <pre><code>##  R squared =  0.6410103 
 ##   Adjusted R squared =  0.6349769 
 ##  Residual standard error =  0.7790385 
@@ -1606,7 +1602,7 @@ Y_{i}&amp;=\beta_{0}+\beta_{1}\textrm{Yearnew}_{i}+\beta_{2}\textrm{Yearnew}^2_{
 </div>
 <div id="model-0b-output" class="section level3 hasAnchor" number="1.4.6">
 <h3><span class="header-section-number">1.4.6</span> Model 0B Output<a href="review-of-multiple-linear-regression.html#model-0b-output" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="review-of-multiple-linear-regression.html#cb52-1" tabindex="-1"></a><span class="fu">coef</span>(<span class="fu">summary</span>(model0B))<span class="sc">%&gt;%</span> <span class="fu">round</span>(<span class="dv">6</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="review-of-multiple-linear-regression.html#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(<span class="fu">summary</span>(model0B))<span class="sc">%&gt;%</span> <span class="fu">round</span>(<span class="dv">6</span>)</span></code></pre></div>
 <pre><code>##              Estimate Std. Error    t value Pr(&gt;|t|)
 ## (Intercept) 50.020315   0.194646 256.980337 0.000000
 ## yearnew      0.070034   0.006130  11.423908 0.000000
@@ -1614,10 +1610,10 @@ Y_{i}&amp;=\beta_{0}+\beta_{1}\textrm{Yearnew}_{i}+\beta_{2}\textrm{Yearnew}^2_{
 ## fast         1.392666   0.130520  10.670102 0.000000
 ## good         0.915698   0.207677   4.409248 0.000023
 ## starters    -0.025284   0.013602  -1.858827 0.065586</code></pre>
-<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="review-of-multiple-linear-regression.html#cb54-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot; R squared = &quot;</span>, <span class="fu">summary</span>(model0B)<span class="sc">$</span>r.squared, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>, </span>
-<span id="cb54-2"><a href="review-of-multiple-linear-regression.html#cb54-2" tabindex="-1"></a>        <span class="st">&quot; Adjusted R squared = &quot;</span>, <span class="fu">summary</span>(model0B)<span class="sc">$</span>adj.r.squared, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>,</span>
-<span id="cb54-3"><a href="review-of-multiple-linear-regression.html#cb54-3" tabindex="-1"></a>    <span class="st">&quot;Residual standard error = &quot;</span>, <span class="fu">summary</span>(model0B)<span class="sc">$</span>sigma,<span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>,</span>
-<span id="cb54-4"><a href="review-of-multiple-linear-regression.html#cb54-4" tabindex="-1"></a><span class="st">&quot;AIC = &quot;</span>, <span class="fu">AIC</span>(model0B))</span></code></pre></div>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="review-of-multiple-linear-regression.html#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot; R squared = &quot;</span>, <span class="fu">summary</span>(model0B)<span class="sc">$</span>r.squared, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>, </span>
+<span id="cb54-2"><a href="review-of-multiple-linear-regression.html#cb54-2" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot; Adjusted R squared = &quot;</span>, <span class="fu">summary</span>(model0B)<span class="sc">$</span>adj.r.squared, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>,</span>
+<span id="cb54-3"><a href="review-of-multiple-linear-regression.html#cb54-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;Residual standard error = &quot;</span>, <span class="fu">summary</span>(model0B)<span class="sc">$</span>sigma,<span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>,</span>
+<span id="cb54-4"><a href="review-of-multiple-linear-regression.html#cb54-4" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;AIC = &quot;</span>, <span class="fu">AIC</span>(model0B))</span></code></pre></div>
 <pre><code>##  R squared =  0.8266716 
 ##   Adjusted R squared =  0.8192006 
 ##  Residual standard error =  0.5482735 
@@ -1625,7 +1621,7 @@ Y_{i}&amp;=\beta_{0}+\beta_{1}\textrm{Yearnew}_{i}+\beta_{2}\textrm{Yearnew}^2_{
 </div>
 <div id="model-0c-output" class="section level3 hasAnchor" number="1.4.7">
 <h3><span class="header-section-number">1.4.7</span> Model 0C Output<a href="review-of-multiple-linear-regression.html#model-0c-output" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="review-of-multiple-linear-regression.html#cb56-1" tabindex="-1"></a><span class="fu">coef</span>(<span class="fu">summary</span>(model0C))<span class="sc">%&gt;%</span> <span class="fu">round</span>(<span class="dv">6</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="review-of-multiple-linear-regression.html#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(<span class="fu">summary</span>(model0C))<span class="sc">%&gt;%</span> <span class="fu">round</span>(<span class="dv">6</span>)</span></code></pre></div>
 <pre><code>##                Estimate Std. Error    t value Pr(&gt;|t|)
 ## (Intercept)   49.703525   0.296614 167.569982 0.000000
 ## yearnew        0.068568   0.013167   5.207395 0.000001
@@ -1637,10 +1633,10 @@ Y_{i}&amp;=\beta_{0}+\beta_{1}\textrm{Yearnew}_{i}+\beta_{2}\textrm{Yearnew}^2_{
 ## yearnew:good  -0.031672   0.021548  -1.469858 0.144404
 ## yearnew2:fast -0.000128   0.000114  -1.124264 0.263305
 ## yearnew2:good  0.000249   0.000213   1.168083 0.245254</code></pre>
-<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="review-of-multiple-linear-regression.html#cb58-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot; R squared = &quot;</span>, <span class="fu">summary</span>(model0C)<span class="sc">$</span>r.squared, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>, </span>
-<span id="cb58-2"><a href="review-of-multiple-linear-regression.html#cb58-2" tabindex="-1"></a>        <span class="st">&quot; Adjusted R squared = &quot;</span>, <span class="fu">summary</span>(model0C)<span class="sc">$</span>adj.r.squared, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>,</span>
-<span id="cb58-3"><a href="review-of-multiple-linear-regression.html#cb58-3" tabindex="-1"></a>    <span class="st">&quot;Residual standard error = &quot;</span>, <span class="fu">summary</span>(model0C)<span class="sc">$</span>sigma, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>,</span>
-<span id="cb58-4"><a href="review-of-multiple-linear-regression.html#cb58-4" tabindex="-1"></a><span class="st">&quot;AIC = &quot;</span>, <span class="fu">AIC</span>(model0C))</span></code></pre></div>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="review-of-multiple-linear-regression.html#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot; R squared = &quot;</span>, <span class="fu">summary</span>(model0C)<span class="sc">$</span>r.squared, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>, </span>
+<span id="cb58-2"><a href="review-of-multiple-linear-regression.html#cb58-2" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot; Adjusted R squared = &quot;</span>, <span class="fu">summary</span>(model0C)<span class="sc">$</span>adj.r.squared, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>,</span>
+<span id="cb58-3"><a href="review-of-multiple-linear-regression.html#cb58-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;Residual standard error = &quot;</span>, <span class="fu">summary</span>(model0C)<span class="sc">$</span>sigma, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>,</span>
+<span id="cb58-4"><a href="review-of-multiple-linear-regression.html#cb58-4" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;AIC = &quot;</span>, <span class="fu">AIC</span>(model0C))</span></code></pre></div>
 <pre><code>##  R squared =  0.8498007 
 ##   Adjusted R squared =  0.8377311 
 ##  Residual standard error =  0.5194172 
@@ -1665,8 +1661,8 @@ Alternative Hypothesis: Larger model better explains variability in the response
 F = \frac{\frac{\text{SSR}_{\text{Reduced}}-\text{SSR}_{\text{Full}}}{p-q}}{\frac{\text{SSR}_{\text{Full}}}{n-p}}
 \]</span></p>
 <p>When the null hypothesis is true, this statistic follows an F-distribution with <span class="math inline">\(p-q\)</span> and <span class="math inline">\(n-p\)</span> degrees of freedom.</p>
-<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="review-of-multiple-linear-regression.html#cb60-1" tabindex="-1"></a><span class="co"># Compare model0A and model0B</span></span>
-<span id="cb60-2"><a href="review-of-multiple-linear-regression.html#cb60-2" tabindex="-1"></a><span class="fu">anova</span>(model0A, model0B, <span class="at">test =</span> <span class="st">&quot;F&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="review-of-multiple-linear-regression.html#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compare model0A and model0B</span></span>
+<span id="cb60-2"><a href="review-of-multiple-linear-regression.html#cb60-2" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(model0A, model0B, <span class="at">test =</span> <span class="st">&quot;F&quot;</span>)</span></code></pre></div>
 <pre><code>Analysis of Variance Table
 
 Model 1: speed ~ yearnew + yearnew2
@@ -1677,8 +1673,8 @@ Model 2: speed ~ yearnew + yearnew2 + fast + good + starters
 ---
 Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <p>There is very strong evidence that track condition and number of starters help explain variability in winning speed.</p>
-<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="review-of-multiple-linear-regression.html#cb62-1" tabindex="-1"></a><span class="co"># Compare model0A and model0B</span></span>
-<span id="cb62-2"><a href="review-of-multiple-linear-regression.html#cb62-2" tabindex="-1"></a><span class="fu">anova</span>(model0B, model0C, <span class="at">test =</span> <span class="st">&quot;F&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="review-of-multiple-linear-regression.html#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compare model0A and model0B</span></span>
+<span id="cb62-2"><a href="review-of-multiple-linear-regression.html#cb62-2" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(model0B, model0C, <span class="at">test =</span> <span class="st">&quot;F&quot;</span>)</span></code></pre></div>
 <pre><code>Analysis of Variance Table
 
 Model 1: speed ~ yearnew + yearnew2 + fast + good + starters
@@ -1701,20 +1697,20 @@ Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&
 <h3><span class="header-section-number">1.4.10</span> Final Model Residual Plots<a href="review-of-multiple-linear-regression.html#final-model-residual-plots" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>We’ll go with model B.</p>
 <p>We use residual plots to check model assumptions.</p>
-<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="review-of-multiple-linear-regression.html#cb64-1" tabindex="-1"></a><span class="co"># Residual diagnostics for Model B</span></span>
-<span id="cb64-2"><a href="review-of-multiple-linear-regression.html#cb64-2" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mar=</span><span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">4</span>,<span class="dv">4</span>,<span class="dv">4</span>))</span>
-<span id="cb64-3"><a href="review-of-multiple-linear-regression.html#cb64-3" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span>
-<span id="cb64-4"><a href="review-of-multiple-linear-regression.html#cb64-4" tabindex="-1"></a><span class="fu">plot</span>(model0B)</span></code></pre></div>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="review-of-multiple-linear-regression.html#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Residual diagnostics for Model B</span></span>
+<span id="cb64-2"><a href="review-of-multiple-linear-regression.html#cb64-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mar=</span><span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">4</span>,<span class="dv">4</span>,<span class="dv">4</span>))</span>
+<span id="cb64-3"><a href="review-of-multiple-linear-regression.html#cb64-3" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span>
+<span id="cb64-4"><a href="review-of-multiple-linear-regression.html#cb64-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(model0B)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-20"></span>
 <img src="Stat-455-Notes_files/figure-html/unnamed-chunk-20-1.png" alt="Residual plots for Model 0B." width="90%" />
 <p class="caption">
 Figure 1.8: Residual plots for Model 0B.
 </p>
 </div>
-<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="review-of-multiple-linear-regression.html#cb65-1" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="review-of-multiple-linear-regression.html#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</span></code></pre></div>
 <p>There do not appear to be any major model violations.</p>
 <p>Model B Coefficients Table:</p>
-<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="review-of-multiple-linear-regression.html#cb66-1" tabindex="-1"></a><span class="fu">coef</span>(<span class="fu">summary</span>(model0B))<span class="sc">%&gt;%</span> <span class="fu">round</span>(<span class="dv">6</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="review-of-multiple-linear-regression.html#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(<span class="fu">summary</span>(model0B))<span class="sc">%&gt;%</span> <span class="fu">round</span>(<span class="dv">6</span>)</span></code></pre></div>
 <pre><code>##              Estimate Std. Error    t value Pr(&gt;|t|)
 ## (Intercept) 50.020315   0.194646 256.980337 0.000000
 ## yearnew      0.070034   0.006130  11.423908 0.000000
@@ -1722,10 +1718,10 @@ Figure 1.8: Residual plots for Model 0B.
 ## fast         1.392666   0.130520  10.670102 0.000000
 ## good         0.915698   0.207677   4.409248 0.000023
 ## starters    -0.025284   0.013602  -1.858827 0.065586</code></pre>
-<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="review-of-multiple-linear-regression.html#cb68-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot; R squared = &quot;</span>, <span class="fu">summary</span>(model0B)<span class="sc">$</span>r.squared, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>, </span>
-<span id="cb68-2"><a href="review-of-multiple-linear-regression.html#cb68-2" tabindex="-1"></a>        <span class="st">&quot; Adjusted R squared = &quot;</span>, <span class="fu">summary</span>(model0B)<span class="sc">$</span>adj.r.squared, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>,</span>
-<span id="cb68-3"><a href="review-of-multiple-linear-regression.html#cb68-3" tabindex="-1"></a>    <span class="st">&quot;Residual standard error = &quot;</span>, <span class="fu">summary</span>(model0B)<span class="sc">$</span>sigma,<span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>,</span>
-<span id="cb68-4"><a href="review-of-multiple-linear-regression.html#cb68-4" tabindex="-1"></a><span class="st">&quot;AIC = &quot;</span>, <span class="fu">AIC</span>(model0B))</span></code></pre></div>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="review-of-multiple-linear-regression.html#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot; R squared = &quot;</span>, <span class="fu">summary</span>(model0B)<span class="sc">$</span>r.squared, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>, </span>
+<span id="cb68-2"><a href="review-of-multiple-linear-regression.html#cb68-2" aria-hidden="true" tabindex="-1"></a>        <span class="st">&quot; Adjusted R squared = &quot;</span>, <span class="fu">summary</span>(model0B)<span class="sc">$</span>adj.r.squared, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>,</span>
+<span id="cb68-3"><a href="review-of-multiple-linear-regression.html#cb68-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;Residual standard error = &quot;</span>, <span class="fu">summary</span>(model0B)<span class="sc">$</span>sigma,<span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>,</span>
+<span id="cb68-4"><a href="review-of-multiple-linear-regression.html#cb68-4" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;AIC = &quot;</span>, <span class="fu">AIC</span>(model0B))</span></code></pre></div>
 <pre><code>##  R squared =  0.8266716 
 ##   Adjusted R squared =  0.8192006 
 ##  Residual standard error =  0.5482735 
@@ -1738,9 +1734,9 @@ Figure 1.8: Residual plots for Model 0B.
 * The better the condition of the track, the faster the horses tend to run<br />
 * larger field, with more starters, is associated with slower winning times</p>
 <p>Notice this last conclusion appears contradictory to our exploratory data analysis, which showed a positive relationship between starters and speed.</p>
-<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="review-of-multiple-linear-regression.html#cb70-1" tabindex="-1"></a>gg <span class="ot">&lt;-</span> <span class="fu">ggpairs</span>(<span class="at">data =</span> derby.df, </span>
-<span id="cb70-2"><a href="review-of-multiple-linear-regression.html#cb70-2" tabindex="-1"></a>              <span class="at">columns =</span> <span class="fu">c</span>(<span class="st">&quot;condition&quot;</span>, <span class="st">&quot;year&quot;</span>, <span class="st">&quot;starters&quot;</span>, <span class="st">&quot;speed&quot;</span>))</span>
-<span id="cb70-3"><a href="review-of-multiple-linear-regression.html#cb70-3" tabindex="-1"></a>gg</span></code></pre></div>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="review-of-multiple-linear-regression.html#cb70-1" aria-hidden="true" tabindex="-1"></a>gg <span class="ot">&lt;-</span> <span class="fu">ggpairs</span>(<span class="at">data =</span> derby.df, </span>
+<span id="cb70-2"><a href="review-of-multiple-linear-regression.html#cb70-2" aria-hidden="true" tabindex="-1"></a>              <span class="at">columns =</span> <span class="fu">c</span>(<span class="st">&quot;condition&quot;</span>, <span class="st">&quot;year&quot;</span>, <span class="st">&quot;starters&quot;</span>, <span class="st">&quot;speed&quot;</span>))</span>
+<span id="cb70-3"><a href="review-of-multiple-linear-regression.html#cb70-3" aria-hidden="true" tabindex="-1"></a>gg</span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-22"></span>
 <img src="Stat-455-Notes_files/figure-html/unnamed-chunk-22-1.png" alt="Relationships between pairs of variables in the Kentucky Derby data set." width="90%" />
 <p class="caption">
@@ -1776,12 +1772,12 @@ Figure 1.9: Relationships between pairs of variables in the Kentucky Derby data 
 <p>In April, 2014, website FiveThirtyEight published the article, “The Dollar-And-Cents Case Against Hollywood’s Exclusion of Women” (Hickey 2014).</p>
 <p>Using their data, we’ll analyze returns on investment for a sample of 300 films released between 1990 and 2013 based on the Bechdel test. The test, developed by cartoonist Alison Bechdel, measures gender bias in films by checking if a film meets three criteria:</p>
 <p>there are at least two named women in the picture they have a conversation with each other at some point that conversation isn’t about a male character While the test is not a perfect metric of gender bias, data from it does allow for statistical analysis. In the FiveThirtyEight article, they find that, “passing the Bechdel test had no effect on the film’s return on investment.” Their data can be found in bechdel.csv.</p>
-<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="review-of-multiple-linear-regression.html#cb71-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">01052024</span>)</span>
-<span id="cb71-2"><a href="review-of-multiple-linear-regression.html#cb71-2" tabindex="-1"></a>Bechdel <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;https://raw.githubusercontent.com/proback/BeyondMLR/master/data/bechdel.csv&quot;</span>)</span>
-<span id="cb71-3"><a href="review-of-multiple-linear-regression.html#cb71-3" tabindex="-1"></a>Bechdel <span class="ot">&lt;-</span> Bechdel <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">yearsince1990 =</span> year<span class="dv">-1990</span>)</span>
-<span id="cb71-4"><a href="review-of-multiple-linear-regression.html#cb71-4" tabindex="-1"></a>Bechdel <span class="ot">&lt;-</span> Bechdel <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(totalROI) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(yearsince1990) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(pass) )</span>
-<span id="cb71-5"><a href="review-of-multiple-linear-regression.html#cb71-5" tabindex="-1"></a>Bechdel <span class="ot">&lt;-</span> Bechdel[<span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(Bechdel), <span class="dv">300</span>), ]</span>
-<span id="cb71-6"><a href="review-of-multiple-linear-regression.html#cb71-6" tabindex="-1"></a><span class="fu">head</span>(Bechdel)</span></code></pre></div>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="review-of-multiple-linear-regression.html#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">01052024</span>)</span>
+<span id="cb71-2"><a href="review-of-multiple-linear-regression.html#cb71-2" aria-hidden="true" tabindex="-1"></a>Bechdel <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;https://raw.githubusercontent.com/proback/BeyondMLR/master/data/bechdel.csv&quot;</span>)</span>
+<span id="cb71-3"><a href="review-of-multiple-linear-regression.html#cb71-3" aria-hidden="true" tabindex="-1"></a>Bechdel <span class="ot">&lt;-</span> Bechdel <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">yearsince1990 =</span> year<span class="dv">-1990</span>)</span>
+<span id="cb71-4"><a href="review-of-multiple-linear-regression.html#cb71-4" aria-hidden="true" tabindex="-1"></a>Bechdel <span class="ot">&lt;-</span> Bechdel <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(totalROI) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(yearsince1990) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(pass) )</span>
+<span id="cb71-5"><a href="review-of-multiple-linear-regression.html#cb71-5" aria-hidden="true" tabindex="-1"></a>Bechdel <span class="ot">&lt;-</span> Bechdel[<span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(Bechdel), <span class="dv">300</span>), ]</span>
+<span id="cb71-6"><a href="review-of-multiple-linear-regression.html#cb71-6" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(Bechdel)</span></code></pre></div>
 <pre><code>## # A tibble: 6 × 11
 ##   title    year  pass budget totalGross domGross intGross totalROI domROI intROI
 ##   &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;      &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
@@ -1797,9 +1793,9 @@ Figure 1.9: Relationships between pairs of variables in the Kentucky Derby data 
 pass = 1 if the film passes the Bechdel test, 0 otherwise<br />
 totalROI = total return on investment (total gross divided by budget)</p>
 <p>We model total return on investment, using years since 1990 and whether or not the film passed the Bechdel test as explanatory variables.</p>
-<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="review-of-multiple-linear-regression.html#cb73-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>Bechdel, <span class="fu">aes</span>(<span class="at">x=</span>yearsince1990, <span class="at">y=</span>totalROI, <span class="at">color=</span><span class="fu">factor</span>(pass))) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">stat_smooth</span>(<span class="at">method=</span><span class="st">&quot;lm&quot;</span>, <span class="at">se=</span><span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="review-of-multiple-linear-regression.html#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>Bechdel, <span class="fu">aes</span>(<span class="at">x=</span>yearsince1990, <span class="at">y=</span>totalROI, <span class="at">color=</span><span class="fu">factor</span>(pass))) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">stat_smooth</span>(<span class="at">method=</span><span class="st">&quot;lm&quot;</span>, <span class="at">se=</span><span class="cn">FALSE</span>)</span></code></pre></div>
 <p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-24-1.png" width="576" /></p>
-<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="review-of-multiple-linear-regression.html#cb74-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>Bechdel, <span class="fu">aes</span>(<span class="at">x=</span>yearsince1990, <span class="at">y=</span><span class="fu">log</span>(domROI), <span class="at">color=</span><span class="fu">factor</span>(pass))) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">stat_smooth</span>(<span class="at">method=</span><span class="st">&quot;lm&quot;</span>, <span class="at">se=</span><span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="review-of-multiple-linear-regression.html#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>Bechdel, <span class="fu">aes</span>(<span class="at">x=</span>yearsince1990, <span class="at">y=</span><span class="fu">log</span>(domROI), <span class="at">color=</span><span class="fu">factor</span>(pass))) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">stat_smooth</span>(<span class="at">method=</span><span class="st">&quot;lm&quot;</span>, <span class="at">se=</span><span class="cn">FALSE</span>)</span></code></pre></div>
 <p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-25-1.png" width="576" /></p>
 <p>We consider three different models:</p>
 <p><strong>M1:</strong></p>
@@ -1814,8 +1810,8 @@ totalROI = total return on investment (total gross divided by budget)</p>
 <p><span class="math display">\[
 \text{log(ROI)}_{i}=\beta_{0}+\beta_{1}\textrm{YearSince1990}_{i}+\beta_{2}\textrm{Pass}_{i}+\epsilon_{i} \quad \textrm{where} \quad \epsilon_{i}\sim \textrm{N}(0,\sigma^2).
 \]</span></p>
-<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="review-of-multiple-linear-regression.html#cb75-1" tabindex="-1"></a>M1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data=</span>Bechdel, totalROI <span class="sc">~</span> yearsince1990 <span class="sc">+</span> pass)</span>
-<span id="cb75-2"><a href="review-of-multiple-linear-regression.html#cb75-2" tabindex="-1"></a><span class="fu">summary</span>(M1)</span></code></pre></div>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="review-of-multiple-linear-regression.html#cb75-1" aria-hidden="true" tabindex="-1"></a>M1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data=</span>Bechdel, totalROI <span class="sc">~</span> yearsince1990 <span class="sc">+</span> pass)</span>
+<span id="cb75-2"><a href="review-of-multiple-linear-regression.html#cb75-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(M1)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = totalROI ~ yearsince1990 + pass, data = Bechdel)
@@ -1835,8 +1831,8 @@ totalROI = total return on investment (total gross divided by budget)</p>
 ## Residual standard error: 9.767 on 297 degrees of freedom
 ## Multiple R-squared:  0.01615,    Adjusted R-squared:  0.009521 
 ## F-statistic: 2.437 on 2 and 297 DF,  p-value: 0.08916</code></pre>
-<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="review-of-multiple-linear-regression.html#cb77-1" tabindex="-1"></a>M2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data=</span>Bechdel, totalROI <span class="sc">~</span> yearsince1990 <span class="sc">*</span> pass)</span>
-<span id="cb77-2"><a href="review-of-multiple-linear-regression.html#cb77-2" tabindex="-1"></a><span class="fu">summary</span>(M2)</span></code></pre></div>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="review-of-multiple-linear-regression.html#cb77-1" aria-hidden="true" tabindex="-1"></a>M2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data=</span>Bechdel, totalROI <span class="sc">~</span> yearsince1990 <span class="sc">*</span> pass)</span>
+<span id="cb77-2"><a href="review-of-multiple-linear-regression.html#cb77-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(M2)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = totalROI ~ yearsince1990 * pass, data = Bechdel)
@@ -1857,8 +1853,8 @@ totalROI = total return on investment (total gross divided by budget)</p>
 ## Residual standard error: 9.78 on 296 degrees of freedom
 ## Multiple R-squared:  0.01677,    Adjusted R-squared:  0.006806 
 ## F-statistic: 1.683 on 3 and 296 DF,  p-value: 0.1707</code></pre>
-<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="review-of-multiple-linear-regression.html#cb79-1" tabindex="-1"></a>M3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data=</span>Bechdel, <span class="fu">log</span>(totalROI) <span class="sc">~</span> yearsince1990 <span class="sc">+</span> pass)</span>
-<span id="cb79-2"><a href="review-of-multiple-linear-regression.html#cb79-2" tabindex="-1"></a><span class="fu">summary</span>(M3)</span></code></pre></div>
+<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="review-of-multiple-linear-regression.html#cb79-1" aria-hidden="true" tabindex="-1"></a>M3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data=</span>Bechdel, <span class="fu">log</span>(totalROI) <span class="sc">~</span> yearsince1990 <span class="sc">+</span> pass)</span>
+<span id="cb79-2"><a href="review-of-multiple-linear-regression.html#cb79-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(M3)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = log(totalROI) ~ yearsince1990 + pass, data = Bechdel)
@@ -1878,7 +1874,7 @@ totalROI = total return on investment (total gross divided by budget)</p>
 ## Residual standard error: 1.228 on 297 degrees of freedom
 ## Multiple R-squared:  0.009579,   Adjusted R-squared:  0.002909 
 ## F-statistic: 1.436 on 2 and 297 DF,  p-value: 0.2395</code></pre>
-<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="review-of-multiple-linear-regression.html#cb81-1" tabindex="-1"></a><span class="fu">exp</span>(M3<span class="sc">$</span>coefficients)</span></code></pre></div>
+<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="review-of-multiple-linear-regression.html#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(M3<span class="sc">$</span>coefficients)</span></code></pre></div>
 <pre><code>##   (Intercept) yearsince1990          pass 
 ##     2.7471823     0.9914196     1.2380549</code></pre>
 <p><strong>For each of the three models interpret each of the following quantities in the context of the variables in the problem:</strong></p>
@@ -1924,15 +1920,15 @@ totalROI = total return on investment (total gross divided by budget)</p>
 <div id="calculate-standard-errors-t-statistics-residual-standard-error-r2-and-f-statistics-in-a-llsr-models-r-output." class="section level3 unnumbered hasAnchor">
 <h3>4. Calculate standard errors, t-statistics, residual standard error, <span class="math inline">\(R^2\)</span>, and F-statistics in a LLSR model’s R output.<a href="review-of-multiple-linear-regression.html#calculate-standard-errors-t-statistics-residual-standard-error-r2-and-f-statistics-in-a-llsr-models-r-output." class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Some relevant R output is shown below.</p>
-<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="review-of-multiple-linear-regression.html#cb83-1" tabindex="-1"></a><span class="fu">dim</span>(Bechdel)</span></code></pre></div>
+<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="review-of-multiple-linear-regression.html#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(Bechdel)</span></code></pre></div>
 <pre><code>## [1] 300  11</code></pre>
-<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="review-of-multiple-linear-regression.html#cb85-1" tabindex="-1"></a><span class="fu">sum</span>((Bechdel<span class="sc">$</span>totalROI<span class="sc">-</span><span class="fu">mean</span>(Bechdel<span class="sc">$</span>totalROI))<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="review-of-multiple-linear-regression.html#cb85-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>((Bechdel<span class="sc">$</span>totalROI<span class="sc">-</span><span class="fu">mean</span>(Bechdel<span class="sc">$</span>totalROI))<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div>
 <pre><code>## [1] 28795.01</code></pre>
-<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="review-of-multiple-linear-regression.html#cb87-1" tabindex="-1"></a><span class="fu">mean</span>(Bechdel<span class="sc">$</span>yearsince1990)</span></code></pre></div>
+<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="review-of-multiple-linear-regression.html#cb87-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(Bechdel<span class="sc">$</span>yearsince1990)</span></code></pre></div>
 <pre><code>## [1] 14.73667</code></pre>
-<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="review-of-multiple-linear-regression.html#cb89-1" tabindex="-1"></a><span class="fu">sum</span>((Bechdel<span class="sc">$</span>yearsince1990<span class="sc">-</span><span class="fu">mean</span>(Bechdel<span class="sc">$</span>yearsince1990))<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="review-of-multiple-linear-regression.html#cb89-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>((Bechdel<span class="sc">$</span>yearsince1990<span class="sc">-</span><span class="fu">mean</span>(Bechdel<span class="sc">$</span>yearsince1990))<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div>
 <pre><code>## [1] 10590.2</code></pre>
-<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="review-of-multiple-linear-regression.html#cb91-1" tabindex="-1"></a>Bechdel <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(pass) <span class="sc">%&gt;%</span> <span class="fu">summarize</span>(<span class="at">meanROI =</span> <span class="fu">mean</span>(totalROI), <span class="at">n=</span><span class="fu">n</span>())</span></code></pre></div>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="review-of-multiple-linear-regression.html#cb91-1" aria-hidden="true" tabindex="-1"></a>Bechdel <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(pass) <span class="sc">%&gt;%</span> <span class="fu">summarize</span>(<span class="at">meanROI =</span> <span class="fu">mean</span>(totalROI), <span class="at">n=</span><span class="fu">n</span>())</span></code></pre></div>
 <pre><code>## # A tibble: 2 × 3
 ##    pass meanROI     n
 ##   &lt;dbl&gt;   &lt;dbl&gt; &lt;int&gt;
@@ -1943,8 +1939,8 @@ totalROI = total return on investment (total gross divided by budget)</p>
 <p><span class="math display">\[
 \text{ROI}_{i}=\beta_{0}+\beta_{1}\textrm{YearSince1990}_{i} +\epsilon_{i} \quad \textrm{where} \quad \epsilon_{i}\sim \textrm{N}(0,\sigma^2).
 \]</span></p>
-<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="review-of-multiple-linear-regression.html#cb93-1" tabindex="-1"></a>M4 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data=</span>Bechdel, totalROI <span class="sc">~</span> yearsince1990)</span>
-<span id="cb93-2"><a href="review-of-multiple-linear-regression.html#cb93-2" tabindex="-1"></a><span class="fu">summary</span>(M4)</span></code></pre></div>
+<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="review-of-multiple-linear-regression.html#cb93-1" aria-hidden="true" tabindex="-1"></a>M4 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data=</span>Bechdel, totalROI <span class="sc">~</span> yearsince1990)</span>
+<span id="cb93-2"><a href="review-of-multiple-linear-regression.html#cb93-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(M4)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = totalROI ~ yearsince1990, data = Bechdel)
@@ -1963,14 +1959,14 @@ totalROI = total return on investment (total gross divided by budget)</p>
 ## Residual standard error: 9.804 on 298 degrees of freedom
 ## Multiple R-squared:  0.005274,   Adjusted R-squared:  0.001936 
 ## F-statistic:  1.58 on 1 and 298 DF,  p-value: 0.2097</code></pre>
-<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="review-of-multiple-linear-regression.html#cb95-1" tabindex="-1"></a><span class="fu">sum</span>(M4<span class="sc">$</span>residuals<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="review-of-multiple-linear-regression.html#cb95-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(M4<span class="sc">$</span>residuals<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div>
 <pre><code>## [1] 28643.13</code></pre>
 <p><strong>M5</strong></p>
 <p><span class="math display">\[
 \text{ROI}_{i}=\beta_{0}+\beta_{1}\textrm{Pass}_{i}+\epsilon_{i} \quad \textrm{where} \quad \epsilon_{i}\sim \textrm{N}(0,\sigma^2).
 \]</span></p>
-<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="review-of-multiple-linear-regression.html#cb97-1" tabindex="-1"></a>M5 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data=</span>Bechdel, totalROI <span class="sc">~</span> pass)</span>
-<span id="cb97-2"><a href="review-of-multiple-linear-regression.html#cb97-2" tabindex="-1"></a><span class="fu">summary</span>(M5)</span></code></pre></div>
+<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="review-of-multiple-linear-regression.html#cb97-1" aria-hidden="true" tabindex="-1"></a>M5 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data=</span>Bechdel, totalROI <span class="sc">~</span> pass)</span>
+<span id="cb97-2"><a href="review-of-multiple-linear-regression.html#cb97-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(M5)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = totalROI ~ pass, data = Bechdel)
@@ -1989,7 +1985,7 @@ totalROI = total return on investment (total gross divided by budget)</p>
 ## Residual standard error: 9.773 on 298 degrees of freedom
 ## Multiple R-squared:  0.01158,    Adjusted R-squared:  0.008262 
 ## F-statistic: 3.491 on 1 and 298 DF,  p-value: 0.06269</code></pre>
-<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="review-of-multiple-linear-regression.html#cb99-1" tabindex="-1"></a><span class="fu">sum</span>(M5<span class="sc">$</span>residuals<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="review-of-multiple-linear-regression.html#cb99-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(M5<span class="sc">$</span>residuals<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div>
 <pre><code>## [1] 28461.6</code></pre>
 <p><strong>a) For model M4, show how to calculate each of the following quantities that appear in the model summary output, using the information given.</strong></p>
 <ul>
@@ -2033,7 +2029,7 @@ totalROI = total return on investment (total gross divided by budget)</p>
 <div id="interpret-standard-errors-t-statistics-residual-standard-error-r2-and-f-statistics-in-a-llsr-models-r-output." class="section level3 unnumbered hasAnchor">
 <h3>5. Interpret standard errors, t-statistics, residual standard error, <span class="math inline">\(R^2\)</span>, and F-statistics in a LLSR model’s R output.<a href="review-of-multiple-linear-regression.html#interpret-standard-errors-t-statistics-residual-standard-error-r2-and-f-statistics-in-a-llsr-models-r-output." class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><strong>Refer again to the output for Model M1</strong></p>
-<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="review-of-multiple-linear-regression.html#cb101-1" tabindex="-1"></a><span class="fu">summary</span>(M1)</span></code></pre></div>
+<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="review-of-multiple-linear-regression.html#cb101-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(M1)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = totalROI ~ yearsince1990 + pass, data = Bechdel)
@@ -2081,15 +2077,15 @@ totalROI = total return on investment (total gross divided by budget)</p>
 <p><span class="math display">\[\text{Y}_i = \beta_0 + \beta_1X_1+\beta_2X_2 + \epsilon_i, \text{ where } \epsilon_i\sim\mathcal{N}(0, \sigma^2)
 \]</span></p>
 <p>Histograms of the explanatory variables and their standard deviations are shown below.</p>
-<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="review-of-multiple-linear-regression.html#cb103-1" tabindex="-1"></a>P1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data=</span>df, <span class="fu">aes</span>(<span class="at">x=</span>X1)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">fill=</span><span class="st">&quot;blue&quot;</span>) <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">&quot;Distribution of X1&quot;</span>)</span>
-<span id="cb103-2"><a href="review-of-multiple-linear-regression.html#cb103-2" tabindex="-1"></a>P2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data=</span>df, <span class="fu">aes</span>(<span class="at">x=</span>X2)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">fill=</span><span class="st">&quot;blue&quot;</span>) <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">&quot;Distribution of X2&quot;</span>)</span>
-<span id="cb103-3"><a href="review-of-multiple-linear-regression.html#cb103-3" tabindex="-1"></a>P3 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data=</span>df, <span class="fu">aes</span>(<span class="at">x=</span>Y)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">fill=</span><span class="st">&quot;blue&quot;</span>) <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">&quot;Distribution of Y&quot;</span>)</span>
-<span id="cb103-4"><a href="review-of-multiple-linear-regression.html#cb103-4" tabindex="-1"></a><span class="fu">grid.arrange</span>(P1, P2, <span class="at">ncol=</span><span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="review-of-multiple-linear-regression.html#cb103-1" aria-hidden="true" tabindex="-1"></a>P1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data=</span>df, <span class="fu">aes</span>(<span class="at">x=</span>X1)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">fill=</span><span class="st">&quot;blue&quot;</span>) <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">&quot;Distribution of X1&quot;</span>)</span>
+<span id="cb103-2"><a href="review-of-multiple-linear-regression.html#cb103-2" aria-hidden="true" tabindex="-1"></a>P2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data=</span>df, <span class="fu">aes</span>(<span class="at">x=</span>X2)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">fill=</span><span class="st">&quot;blue&quot;</span>) <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">&quot;Distribution of X2&quot;</span>)</span>
+<span id="cb103-3"><a href="review-of-multiple-linear-regression.html#cb103-3" aria-hidden="true" tabindex="-1"></a>P3 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data=</span>df, <span class="fu">aes</span>(<span class="at">x=</span>Y)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">fill=</span><span class="st">&quot;blue&quot;</span>) <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">&quot;Distribution of Y&quot;</span>)</span>
+<span id="cb103-4"><a href="review-of-multiple-linear-regression.html#cb103-4" aria-hidden="true" tabindex="-1"></a><span class="fu">grid.arrange</span>(P1, P2, <span class="at">ncol=</span><span class="dv">1</span>)</span></code></pre></div>
 <p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-41-1.png" width="576" /></p>
 <p>The standard deviations of the two explanatory variables are shown below.</p>
-<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="review-of-multiple-linear-regression.html#cb104-1" tabindex="-1"></a><span class="fu">sd</span>(X1)</span></code></pre></div>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="review-of-multiple-linear-regression.html#cb104-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(X1)</span></code></pre></div>
 <pre><code>## [1] 4.940104</code></pre>
-<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="review-of-multiple-linear-regression.html#cb106-1" tabindex="-1"></a><span class="fu">sd</span>(X2)</span></code></pre></div>
+<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="review-of-multiple-linear-regression.html#cb106-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(X2)</span></code></pre></div>
 <pre><code>## [1] 16.87209</code></pre>
 <p>Notice that there is much more variability in the distribution of <span class="math inline">\(X2\)</span> than <span class="math inline">\(X1\)</span>. Explain why this is not a violation of the constant variance assumption in a LLSR model. In your answer state clearly what the constant variance assumption says and explain why it is not necessarily violated in this situation.</p>
 
