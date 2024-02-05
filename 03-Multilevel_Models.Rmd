@@ -1321,12 +1321,12 @@ Runners <- data.frame(Id, Week, Age18, Program, Pace)
 head(Runners, 10)
 ```
 
-### 12. Identify the levels of a two-level experiment and the observational units and variables at each level.    
+### 12. Identify the levels of a two-level experiment and the observational units and variables at each level.    {-}
 
 Identify the levels of the runners dataset and the observational units and variables at each level.   
 
 
-### 13. Interpret random slopes, intercepts, error terms and their estimated variances and correlations in linear mixed effects models.   
+### 13. Interpret random slopes, intercepts, error terms and their estimated variances and correlations in linear mixed effects models.       {-}
 
 **Question 1:**
 
@@ -1398,7 +1398,7 @@ vii. $\sigma$
 viii. $\rho_{uv}$      
 
 
-### 14. Determine whether it is appropriate to add a random slope term to a model in a given context. 
+### 14. Determine whether it is appropriate to add a random slope term to a model in a given context.     {-}
 
 Continue with the runners example in Question 13 Part 1. 
 
@@ -1424,7 +1424,7 @@ AIC(M1, M2)
 BIC(M1, M2)
 ```
 
-### 15. Distinguish between random slope terms and interactions terms and explain what the inclusion/exclusion of each in a LME model says about our assumptions regarding the nature of our data. 
+### 15. Distinguish between random slope terms and interactions terms and explain what the inclusion/exclusion of each in a LME model says about our assumptions regarding the nature of our data.     {-}
 
 Continue with the runners example in Question 13 Part 1. 
 
@@ -1432,7 +1432,7 @@ a) Suppose that two runners are the same age and both participate in the program
 
 b) Suppose that two runners are the same age and one participates in the program and the other doesn't. Based on the model, which runner's time should we expect to change more from the first run to the second? Cite a specific value from the R output to justify your answer.      
 
-### 16. Calculate expected responses and expected changes associated with fixed effects in a LME model. If it is not possible to calculate the quantity, explain why.     
+### 16. Calculate expected responses and expected changes associated with fixed effects in a LME model. If it is not possible to calculate the quantity, explain why.         {-}
 
 Continue with the runners example in Question 13 Part 1. 
 
@@ -1445,7 +1445,7 @@ e) Expected weekly change in pace for runners who are in the program, assuming a
 f) Expected weekly change in pace for runners who are not in the program, assuming age is held constant.    
 
 
-### 17. Write equations for linear mixed effects models in mathematical notation, including assumptions about distributions of random effects and error terms. 
+### 17. Write equations for linear mixed effects models in mathematical notation, including assumptions about distributions of random effects and error terms.     {-}
 
 Continue with the runners example in Question 13 Part 1. 
 
@@ -1492,7 +1492,7 @@ M4 <- lm(data=Runners, Pace ~  Age18 + Program  +  Week
 ```
 
 
-### 18. Give examples of values of the response variable that would satisfy given conditions about parameters in a LME model (for example ($\sigma_u>\sigma$)).     
+### 18. Give examples of values of the response variable that would satisfy given conditions about parameters in a LME model (for example ($\sigma_u>\sigma$)).         {-}
 
 Researchers are interested in estimating the average weight of a particular species of fish. They visit three different lakes and collect samples of four fish from each lake, and weigh each fish on a scale. 
 
@@ -1572,7 +1572,7 @@ knitr::include_graphics("Lakes2.png")
 
 
 
-### 22. Draw lattice (or spaghetti) plots that are consistent with given conditions involving parameters in a LME model.
+### 22. Draw lattice (or spaghetti) plots that are consistent with given conditions involving parameters in a LME model.       {-}
 
 Returning to the musician data consider a model with no interaction term. 
 
@@ -1594,9 +1594,9 @@ vi. $\beta_0 > 0$, $\sigma_v = 0$, $\sigma_u > 0$
 vii. $\beta_0 > 0$, $\sigma_v > 0$, $\sigma_u > 0$, $\rho_{uv}=0$      
 viii. $\beta_0 > 0$, $\sigma_v = 0$, $\sigma_u > 0$, $\rho_{uv} > 0$       
 
-### 23. Answer research questions related to fixed and random effects in a study given output from LME models.
+### 23. Answer research questions related to fixed and random effects in a study given output from LME models.       {-}
 
-a) Notice that the estimate associated with `program` is a very small and the associated p-value is very large. Explain why it would be incorrect to conclude from these values that the program has little effect on running pace. In your answer, explain specifically what this estimate tells us, and why it is not a good measure the effectiveness of the program.  
+a) Explain why it would be incorrect to assess the effectiveness of the program based on the estimate and p-value on the line `program`. In your answer, explain specifically what this estimate tells us, and why it is not a good measure the effectiveness of the program.  
 
 
 b) Cite a value from the R output that can used to assess the effectiveness of the program. Is there evidence that participating in the program helps runners run faster than training on their own? Justify your answer.    

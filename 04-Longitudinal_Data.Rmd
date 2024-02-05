@@ -1255,7 +1255,7 @@ e) Autoregressive
 A first-order autoregressive model with the same fixed effects as Model M1 is fit to the dogs data. The R output is shown below. 
 
 
-```{r}
+```{r, include=FALSE, eval=FALSE}
 AR1 <- gls(Weight ~ BrandB + Month + Exercise +  Month:BrandB , data=DogGrowth, correlation = corAR1(form = ~ Month | id))
 summary(AR1)
 ```

@@ -164,15 +164,6 @@ aic-and-bic-comparisons-for-models-b-and-c
 likelihood-ratio-test
 final-conclusions
 practice-questions-2
-identify-the-levels-of-a-two-level-experiment-and-the-observational-units-and-variables-at-each-level.
-interpret-random-slopes-intercepts-error-terms-and-their-estimated-variances-and-correlations-in-linear-mixed-effects-models.
-determine-whether-it-is-appropriate-to-add-a-random-slope-term-to-a-model-in-a-given-context.
-distinguish-between-random-slope-terms-and-interactions-terms-and-explain-what-the-inclusionexclusion-of-each-in-a-lme-model-says-about-our-assumptions-regarding-the-nature-of-our-data.
-calculate-expected-responses-and-expected-changes-associated-with-fixed-effects-in-a-lme-model.-if-it-is-not-possible-to-calculate-the-quantity-explain-why.
-write-equations-for-linear-mixed-effects-models-in-mathematical-notation-including-assumptions-about-distributions-of-random-effects-and-error-terms.
-give-examples-of-values-of-the-response-variable-that-would-satisfy-given-conditions-about-parameters-in-a-lme-model-for-example-sigma_usigma.
-draw-lattice-or-spaghetti-plots-that-are-consistent-with-given-conditions-involving-parameters-in-a-lme-model.
-answer-research-questions-related-to-fixed-and-random-effects-in-a-study-given-output-from-lme-models.
 longitudinal-data
 charter-schools-exploratory-analysis
 data
