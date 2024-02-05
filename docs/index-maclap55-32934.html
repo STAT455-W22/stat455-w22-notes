@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Stat 455: Advanced Statistical Modeling Notes</title>
+  <meta name="description" content="Stat 455: Advanced Statistical Modeling Notes" />
+  <meta name="generator" content="bookdown 0.37 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Stat 455: Advanced Statistical Modeling Notes" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Stat 455: Advanced Statistical Modeling Notes" />
+  
+  
+  
+
+
+
+<meta name="date" content="2024-02-05" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+
+<link rel="next" href="review-of-multiple-linear-regression.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Stat 455 Notes</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html"><i class="fa fa-check"></i><b>1</b> Review of Multiple Linear Regression</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#exploratory-data-analysis"><i class="fa fa-check"></i><b>1.1</b> Exploratory Data Analysis</a>
+<ul>
+<li class="chapter" data-level="1.1.1" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#kentucky-derby-data"><i class="fa fa-check"></i><b>1.1.1</b> Kentucky Derby Data</a></li>
+<li class="chapter" data-level="1.1.2" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#some-data-wrangling"><i class="fa fa-check"></i><b>1.1.2</b> Some Data Wrangling</a></li>
+<li class="chapter" data-level="1.1.3" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#univariate-graphical-summaries"><i class="fa fa-check"></i><b>1.1.3</b> Univariate Graphical Summaries</a></li>
+<li class="chapter" data-level="1.1.4" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#bivariate-graphical-summaries"><i class="fa fa-check"></i><b>1.1.4</b> Bivariate Graphical Summaries</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#simple-linear-regression-model"><i class="fa fa-check"></i><b>1.2</b> Simple Linear Regression Model</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#model-for-winning-time-and-year"><i class="fa fa-check"></i><b>1.2.1</b> Model for Winning Time and Year</a></li>
+<li class="chapter" data-level="1.2.2" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#first-model-r-output"><i class="fa fa-check"></i><b>1.2.2</b> First Model R Output</a></li>
+<li class="chapter" data-level="1.2.3" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#calculations-in-slr"><i class="fa fa-check"></i><b>1.2.3</b> Calculations in SLR</a></li>
+<li class="chapter" data-level="1.2.4" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#checking-model-assumptions"><i class="fa fa-check"></i><b>1.2.4</b> Checking Model Assumptions</a></li>
+<li class="chapter" data-level="1.2.5" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#quadratic-term-for-year"><i class="fa fa-check"></i><b>1.2.5</b> Quadratic Term for Year</a></li>
+<li class="chapter" data-level="1.2.6" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#quadratic-model-in-r"><i class="fa fa-check"></i><b>1.2.6</b> Quadratic Model in R</a></li>
+<li class="chapter" data-level="1.2.7" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#quadratic-model-residual-plots"><i class="fa fa-check"></i><b>1.2.7</b> Quadratic Model Residual Plots</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#multiple-linear-regression-with-two-predictors"><i class="fa fa-check"></i><b>1.3</b> Multiple Linear Regression with Two Predictors</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#model-with-year-and-fast-track"><i class="fa fa-check"></i><b>1.3.1</b> Model with Year and Fast Track</a></li>
+<li class="chapter" data-level="1.3.2" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#multiple-regression-model-in-r"><i class="fa fa-check"></i><b>1.3.2</b> Multiple Regression Model in R</a></li>
+<li class="chapter" data-level="1.3.3" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#confidence-intervals-from-mlr-model"><i class="fa fa-check"></i><b>1.3.3</b> Confidence Intervals from MLR Model</a></li>
+<li class="chapter" data-level="1.3.4" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#slopes-for-fast-non-fast-tracks"><i class="fa fa-check"></i><b>1.3.4</b> Slopes for Fast, non-Fast Tracks</a></li>
+<li class="chapter" data-level="1.3.5" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#mlr-model-with-interaction"><i class="fa fa-check"></i><b>1.3.5</b> MLR Model with Interaction</a></li>
+<li class="chapter" data-level="1.3.6" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#model-equations-for-fast-non-fast-tracks"><i class="fa fa-check"></i><b>1.3.6</b> Model Equations for Fast, Non-Fast Tracks</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#building-a-multiple-linear-regression-model"><i class="fa fa-check"></i><b>1.4</b> Building a Multiple Linear Regression Model</a>
+<ul>
+<li class="chapter" data-level="1.4.1" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#model-building-considerations"><i class="fa fa-check"></i><b>1.4.1</b> Model Building Considerations</a></li>
+<li class="chapter" data-level="1.4.2" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#model-diagnostics"><i class="fa fa-check"></i><b>1.4.2</b> Model Diagnostics</a></li>
+<li class="chapter" data-level="1.4.3" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#three-possible-models"><i class="fa fa-check"></i><b>1.4.3</b> Three Possible Models</a></li>
+<li class="chapter" data-level="1.4.4" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#mlr-models-fit-in-r"><i class="fa fa-check"></i><b>1.4.4</b> MLR Models Fit in R</a></li>
+<li class="chapter" data-level="1.4.5" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#model-0a-output"><i class="fa fa-check"></i><b>1.4.5</b> Model 0A Output</a></li>
+<li class="chapter" data-level="1.4.6" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#model-0b-output"><i class="fa fa-check"></i><b>1.4.6</b> Model 0B Output</a></li>
+<li class="chapter" data-level="1.4.7" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#model-0c-output"><i class="fa fa-check"></i><b>1.4.7</b> Model 0C Output</a></li>
+<li class="chapter" data-level="1.4.8" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#goodness-of-fit-tests"><i class="fa fa-check"></i><b>1.4.8</b> Goodness of Fit Tests</a></li>
+<li class="chapter" data-level="1.4.9" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#anova-f-statistic"><i class="fa fa-check"></i><b>1.4.9</b> ANOVA F-Statistic</a></li>
+<li class="chapter" data-level="1.4.10" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#final-model-residual-plots"><i class="fa fa-check"></i><b>1.4.10</b> Final Model Residual Plots</a></li>
+<li class="chapter" data-level="1.4.11" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#overall-conclusions"><i class="fa fa-check"></i><b>1.4.11</b> Overall Conclusions</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#practice-questions"><i class="fa fa-check"></i><b>1.5</b> Practice Questions</a>
+<ul>
+<li class="chapter" data-level="" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#identify-violations-of-linear-least-squares-regression-llsr-assumptions-based-on-descriptions-of-data-collection."><i class="fa fa-check"></i>1. Identify violations of linear least squares regression (LLSR) assumptions based on descriptions of data collection.</a></li>
+<li class="chapter" data-level="" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#interpret-parameter-estimates-in-llsr-models-including-models-with-transformations-andor-interactions."><i class="fa fa-check"></i>2. Interpret parameter estimates in LLSR models, including models with transformations and/or interactions.</a></li>
+<li class="chapter" data-level="" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#calculate-expected-responses-and-expected-changes-associated-with-explanatory-variables-in-a-llsr-model."><i class="fa fa-check"></i>3. Calculate expected responses and expected changes associated with explanatory variables in a LLSR model.</a></li>
+<li class="chapter" data-level="" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#calculate-standard-errors-t-statistics-residual-standard-error-r2-and-f-statistics-in-a-llsr-models-r-output."><i class="fa fa-check"></i>4. Calculate standard errors, t-statistics, residual standard error, <span class="math inline">\(R^2\)</span>, and F-statistics in a LLSR model’s R output.</a></li>
+<li class="chapter" data-level="" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#interpret-standard-errors-t-statistics-residual-standard-error-r2-and-f-statistics-in-a-llsr-models-r-output."><i class="fa fa-check"></i>5. Interpret standard errors, t-statistics, residual standard error, <span class="math inline">\(R^2\)</span>, and F-statistics in a LLSR model’s R output.</a></li>
+<li class="chapter" data-level="1.5.1" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#practice-advanced-tasks"><i class="fa fa-check"></i><b>1.5.1</b> Practice Advanced Tasks</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html"><i class="fa fa-check"></i><b>2</b> Introduction to Correlated Data</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#introduction-to-correlated-data-1"><i class="fa fa-check"></i><b>2.1</b> Introduction to Correlated Data</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#weight-gain-in-mice-experiment-design-1"><i class="fa fa-check"></i><b>2.1.1</b> Weight Gain in Mice: Experiment Design #1</a></li>
+<li class="chapter" data-level="2.1.2" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#mice-experiment-1-data"><i class="fa fa-check"></i><b>2.1.2</b> Mice Experiment 1 Data</a></li>
+<li class="chapter" data-level="2.1.3" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#a-naive-graphical-analysis"><i class="fa fa-check"></i><b>2.1.3</b> A Naive Graphical Analysis</a></li>
+<li class="chapter" data-level="2.1.4" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#a-more-informed-graphical-analysis"><i class="fa fa-check"></i><b>2.1.4</b> A More Informed Graphical Analysis</a></li>
+<li class="chapter" data-level="2.1.5" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#table-of-mean-weight-by-diet"><i class="fa fa-check"></i><b>2.1.5</b> Table of Mean Weight By Diet</a></li>
+<li class="chapter" data-level="2.1.6" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#table-of-mean-weight-by-diet-and-litter"><i class="fa fa-check"></i><b>2.1.6</b> Table of Mean Weight By Diet and Litter</a></li>
+<li class="chapter" data-level="2.1.7" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#assessing-evidence-of-differences"><i class="fa fa-check"></i><b>2.1.7</b> Assessing Evidence of Differences</a></li>
+<li class="chapter" data-level="2.1.8" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#an-improper-statistical-analysis"><i class="fa fa-check"></i><b>2.1.8</b> An Improper Statistical Analysis</a></li>
+<li class="chapter" data-level="2.1.9" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#a-more-appropriate-statistical-analysis"><i class="fa fa-check"></i><b>2.1.9</b> A More Appropriate Statistical Analysis</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#linear-mixed-effects-models"><i class="fa fa-check"></i><b>2.2</b> Linear Mixed Effects Models</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#llsr-model-for-mice-experiment"><i class="fa fa-check"></i><b>2.2.1</b> LLSR Model for Mice Experiment</a></li>
+<li class="chapter" data-level="2.2.2" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#model-accounting-for-correlation"><i class="fa fa-check"></i><b>2.2.2</b> Model Accounting For Correlation</a></li>
+<li class="chapter" data-level="2.2.3" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#questions-of-interest"><i class="fa fa-check"></i><b>2.2.3</b> Questions of Interest</a></li>
+<li class="chapter" data-level="2.2.4" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#fixed-and-random-effects"><i class="fa fa-check"></i><b>2.2.4</b> Fixed and Random Effects</a></li>
+<li class="chapter" data-level="2.2.5" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#fitting-the-model-in-r"><i class="fa fa-check"></i><b>2.2.5</b> Fitting the Model in R</a></li>
+<li class="chapter" data-level="2.2.6" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#why-not-fixed-effect-for-litter"><i class="fa fa-check"></i><b>2.2.6</b> Why Not Fixed Effect for Litter?</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#a-second-mice-experiment"><i class="fa fa-check"></i><b>2.3</b> A Second Mice Experiment</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#weight-gain-in-mice-experiment-2"><i class="fa fa-check"></i><b>2.3.1</b> Weight Gain in Mice: Experiment 2</a></li>
+<li class="chapter" data-level="2.3.2" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#mice-experiment-2-data"><i class="fa fa-check"></i><b>2.3.2</b> Mice Experiment 2 Data</a></li>
+<li class="chapter" data-level="2.3.3" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#a-naive-graphical-analysis-for-experiment-2"><i class="fa fa-check"></i><b>2.3.3</b> A Naive Graphical Analysis for Experiment 2</a></li>
+<li class="chapter" data-level="2.3.4" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#a-more-informed-graphical-analysis-for-experiment-2"><i class="fa fa-check"></i><b>2.3.4</b> A More Informed Graphical Analysis for Experiment 2</a></li>
+<li class="chapter" data-level="2.3.5" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#table-of-mean-weight-by-diet-for-experiment-2"><i class="fa fa-check"></i><b>2.3.5</b> Table of Mean Weight By Diet for Experiment 2</a></li>
+<li class="chapter" data-level="2.3.6" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#table-comparing-litters-means-by-diet-for-experiment-2"><i class="fa fa-check"></i><b>2.3.6</b> Table Comparing Litters Means by Diet for Experiment 2</a></li>
+<li class="chapter" data-level="2.3.7" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#an-inappropriate-model-for-the-second-design"><i class="fa fa-check"></i><b>2.3.7</b> An Inappropriate Model for the Second Design</a></li>
+<li class="chapter" data-level="2.3.8" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#a-more-appropriate-model-for-experiment-2"><i class="fa fa-check"></i><b>2.3.8</b> A More Appropriate Model for Experiment 2</a></li>
+<li class="chapter" data-level="2.3.9" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#model-for-litter-means"><i class="fa fa-check"></i><b>2.3.9</b> Model for Litter Means</a></li>
+<li class="chapter" data-level="2.3.10" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#fixed-effect-for-litter-in-experiment-2"><i class="fa fa-check"></i><b>2.3.10</b> Fixed Effect for Litter in Experiment 2</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#a-multilevel-experiment"><i class="fa fa-check"></i><b>2.4</b> A Multilevel Experiment</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#experiment-2-illustration"><i class="fa fa-check"></i><b>2.4.1</b> Experiment 2 Illustration</a></li>
+<li class="chapter" data-level="2.4.2" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#experiment-with-variables-assigned-at-different-levels"><i class="fa fa-check"></i><b>2.4.2</b> Experiment with Variables Assigned at Different Levels</a></li>
+<li class="chapter" data-level="2.4.3" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#experiment-3-data"><i class="fa fa-check"></i><b>2.4.3</b> Experiment 3 Data</a></li>
+<li class="chapter" data-level="2.4.4" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#graphical-analysis-for-experiment-3"><i class="fa fa-check"></i><b>2.4.4</b> Graphical Analysis for Experiment 3</a></li>
+<li class="chapter" data-level="2.4.5" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#an-inappropriate-model-for-the-3rd-design"><i class="fa fa-check"></i><b>2.4.5</b> An Inappropriate Model for the 3rd Design</a></li>
+<li class="chapter" data-level="2.4.6" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#a-more-appropriate-model-for-experiment-3"><i class="fa fa-check"></i><b>2.4.6</b> A More Appropriate Model for Experiment 3</a></li>
+<li class="chapter" data-level="2.4.7" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#comparison-of-llsr-and-lme-models"><i class="fa fa-check"></i><b>2.4.7</b> Comparison of LLSR and LME Models</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#practice-questions-1"><i class="fa fa-check"></i><b>2.5</b> Practice Questions</a>
+<ul>
+<li class="chapter" data-level="" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#identify-the-response-variable-and-fixed-and-random-effects-associated-with-a-given-set-of-data."><i class="fa fa-check"></i>7. Identify the response variable and fixed and random effects associated with a given set of data.</a></li>
+<li class="chapter" data-level="" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#interpret-variance-component-estimates-sigma-and-sigma_u-in-linear-mixed-effects-lme-models."><i class="fa fa-check"></i>8. Interpret variance component estimates (<span class="math inline">\(\sigma\)</span> and <span class="math inline">\(\sigma_u\)</span>) in linear mixed effects (LME) models.</a></li>
+<li class="chapter" data-level="" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#determine-how-standard-errors-in-a-lme-model-would-compare-to-the-standard-errors-we-would-get-if-we-used-a-llsr-model-on-the-same-data."><i class="fa fa-check"></i>10. Determine how standard errors in a LME model would compare to the standard errors we would get if we used a LLSR model on the same data.</a></li>
+<li class="chapter" data-level="" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#determine-how-changes-in-sample-size-andor-experimental-design-will-impact-standard-errors-confidence-intervals-and-p-values-in-a-lme-model."><i class="fa fa-check"></i>11. Determine how changes in sample size and/or experimental design will impact standard errors, confidence intervals, and p-values in a LME model.</a></li>
+<li class="chapter" data-level="" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#compare-the-size-of-different-variance-component-estimates-given-a-lme-model-and-a-small-set-of-data-i.e.-say-whether-sigma_u-or-sigma-will-be-larger."><i class="fa fa-check"></i>9. Compare the size of different variance component estimates given a LME model and a small set of data (i.e. say whether <span class="math inline">\(\sigma_u\)</span>, or <span class="math inline">\(\sigma\)</span> will be larger).</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="multilevel-models.html"><a href="multilevel-models.html"><i class="fa fa-check"></i><b>3</b> Multilevel Models</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="multilevel-models.html"><a href="multilevel-models.html#music-performance-anxiety-study-data-and-exploratory-analysis"><i class="fa fa-check"></i><b>3.1</b> Music Performance Anxiety Study: Data and Exploratory Analysis</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="multilevel-models.html"><a href="multilevel-models.html#description-of-the-study"><i class="fa fa-check"></i><b>3.1.1</b> Description of the Study</a></li>
+<li class="chapter" data-level="3.1.2" data-path="multilevel-models.html"><a href="multilevel-models.html#variables"><i class="fa fa-check"></i><b>3.1.2</b> Variables</a></li>
+<li class="chapter" data-level="3.1.3" data-path="multilevel-models.html"><a href="multilevel-models.html#the-data"><i class="fa fa-check"></i><b>3.1.3</b> The Data</a></li>
+<li class="chapter" data-level="3.1.4" data-path="multilevel-models.html"><a href="multilevel-models.html#some-data-wrangling-1"><i class="fa fa-check"></i><b>3.1.4</b> Some Data Wrangling</a></li>
+<li class="chapter" data-level="3.1.5" data-path="multilevel-models.html"><a href="multilevel-models.html#multilevel-structure"><i class="fa fa-check"></i><b>3.1.5</b> Multilevel Structure</a></li>
+<li class="chapter" data-level="3.1.6" data-path="multilevel-models.html"><a href="multilevel-models.html#questions-of-interest-1"><i class="fa fa-check"></i><b>3.1.6</b> Questions of Interest</a></li>
+<li class="chapter" data-level="3.1.7" data-path="multilevel-models.html"><a href="multilevel-models.html#number-of-performances-by-musician"><i class="fa fa-check"></i><b>3.1.7</b> Number of Performances by Musician</a></li>
+<li class="chapter" data-level="3.1.8" data-path="multilevel-models.html"><a href="multilevel-models.html#number-of-performances-of-each-type"><i class="fa fa-check"></i><b>3.1.8</b> Number of Performances of Each Type</a></li>
+<li class="chapter" data-level="3.1.9" data-path="multilevel-models.html"><a href="multilevel-models.html#distribution-of-negative-affect-for-all-performances"><i class="fa fa-check"></i><b>3.1.9</b> Distribution of Negative Affect for All Performances</a></li>
+<li class="chapter" data-level="3.1.10" data-path="multilevel-models.html"><a href="multilevel-models.html#distribution-of-average-negative-affect-for-each-musician"><i class="fa fa-check"></i><b>3.1.10</b> Distribution of Average Negative Affect for each Musician</a></li>
+<li class="chapter" data-level="3.1.11" data-path="multilevel-models.html"><a href="multilevel-models.html#distribution-of-level-two-covariates"><i class="fa fa-check"></i><b>3.1.11</b> Distribution of Level Two Covariates</a></li>
+<li class="chapter" data-level="3.1.12" data-path="multilevel-models.html"><a href="multilevel-models.html#distributions-of-nem-pem-absorption"><i class="fa fa-check"></i><b>3.1.12</b> Distributions of NEM, PEM, Absorption</a></li>
+<li class="chapter" data-level="3.1.13" data-path="multilevel-models.html"><a href="multilevel-models.html#negative-affect-by-performance-type-audience-type-and-previous-performances"><i class="fa fa-check"></i><b>3.1.13</b> Negative Affect by Performance Type, Audience Type, and Previous Performances</a></li>
+<li class="chapter" data-level="3.1.14" data-path="multilevel-models.html"><a href="multilevel-models.html#lattice-plot-for-negative-affect-by-performance-type"><i class="fa fa-check"></i><b>3.1.14</b> Lattice Plot for Negative Affect by Performance Type</a></li>
+<li class="chapter" data-level="3.1.15" data-path="multilevel-models.html"><a href="multilevel-models.html#lattice-plot-for-negative-affect-by-audience-type"><i class="fa fa-check"></i><b>3.1.15</b> Lattice Plot for Negative Affect by Audience Type</a></li>
+<li class="chapter" data-level="3.1.16" data-path="multilevel-models.html"><a href="multilevel-models.html#lattice-plot-for-previous-performances-vs-negative-affect"><i class="fa fa-check"></i><b>3.1.16</b> Lattice Plot for Previous Performances vs Negative Affect</a></li>
+<li class="chapter" data-level="3.1.17" data-path="multilevel-models.html"><a href="multilevel-models.html#negative-affect-by-instrument-type"><i class="fa fa-check"></i><b>3.1.17</b> Negative Affect by Instrument Type</a></li>
+<li class="chapter" data-level="3.1.18" data-path="multilevel-models.html"><a href="multilevel-models.html#more-data-wrangling"><i class="fa fa-check"></i><b>3.1.18</b> More Data Wrangling</a></li>
+<li class="chapter" data-level="3.1.19" data-path="multilevel-models.html"><a href="multilevel-models.html#lattice-plot-for-large-ensemble-effect"><i class="fa fa-check"></i><b>3.1.19</b> Lattice Plot for Large Ensemble Effect</a></li>
+<li class="chapter" data-level="3.1.20" data-path="multilevel-models.html"><a href="multilevel-models.html#boxplots-for-orchestral-instrument-effect"><i class="fa fa-check"></i><b>3.1.20</b> Boxplots for Orchestral Instrument Effect</a></li>
+<li class="chapter" data-level="3.1.21" data-path="multilevel-models.html"><a href="multilevel-models.html#negative-affect-by-pem-nem-absorption"><i class="fa fa-check"></i><b>3.1.21</b> Negative Affect by PEM, NEM, Absorption</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="multilevel-models.html"><a href="multilevel-models.html#modeling-the-musician-data"><i class="fa fa-check"></i><b>3.2</b> Modeling the Musician Data</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="multilevel-models.html"><a href="multilevel-models.html#model-notation"><i class="fa fa-check"></i><b>3.2.1</b> Model Notation</a></li>
+<li class="chapter" data-level="3.2.2" data-path="multilevel-models.html"><a href="multilevel-models.html#llsr-model-clearly-inappropriate"><i class="fa fa-check"></i><b>3.2.2</b> LLSR Model (Clearly inappropriate)</a></li>
+<li class="chapter" data-level="3.2.3" data-path="multilevel-models.html"><a href="multilevel-models.html#llsr-model-output"><i class="fa fa-check"></i><b>3.2.3</b> LLSR Model Output</a></li>
+<li class="chapter" data-level="3.2.4" data-path="multilevel-models.html"><a href="multilevel-models.html#random-vs.-fixed-effects"><i class="fa fa-check"></i><b>3.2.4</b> Random vs. Fixed Effects</a></li>
+<li class="chapter" data-level="3.2.5" data-path="multilevel-models.html"><a href="multilevel-models.html#an-initial-linear-mixed-effect-model"><i class="fa fa-check"></i><b>3.2.5</b> An Initial Linear Mixed Effect Model</a></li>
+<li class="chapter" data-level="3.2.6" data-path="multilevel-models.html"><a href="multilevel-models.html#initial-mixed-effects-model-in-r"><i class="fa fa-check"></i><b>3.2.6</b> Initial Mixed Effects Model in R</a></li>
+<li class="chapter" data-level="3.2.7" data-path="multilevel-models.html"><a href="multilevel-models.html#mixed-effects-model-interpretations"><i class="fa fa-check"></i><b>3.2.7</b> Mixed Effects Model Interpretations</a></li>
+<li class="chapter" data-level="3.2.8" data-path="multilevel-models.html"><a href="multilevel-models.html#mixed-effects-model-without-interaction"><i class="fa fa-check"></i><b>3.2.8</b> Mixed Effects Model Without Interaction</a></li>
+<li class="chapter" data-level="3.2.9" data-path="multilevel-models.html"><a href="multilevel-models.html#interpretations-for-model-without-interaction"><i class="fa fa-check"></i><b>3.2.9</b> Interpretations for Model without Interaction</a></li>
+<li class="chapter" data-level="3.2.10" data-path="multilevel-models.html"><a href="multilevel-models.html#assumptions-in-first-mixed-effects-model"><i class="fa fa-check"></i><b>3.2.10</b> Assumptions in First Mixed Effects Model</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="multilevel-models.html"><a href="multilevel-models.html#random-slopes-model"><i class="fa fa-check"></i><b>3.3</b> Random Slopes Model</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="multilevel-models.html"><a href="multilevel-models.html#differences-in-large-vs-smallsolo"><i class="fa fa-check"></i><b>3.3.1</b> Differences in Large vs Small/Solo</a></li>
+<li class="chapter" data-level="3.3.2" data-path="multilevel-models.html"><a href="multilevel-models.html#illustration-of-previous-model"><i class="fa fa-check"></i><b>3.3.2</b> Illustration of Previous Model</a></li>
+<li class="chapter" data-level="3.3.3" data-path="multilevel-models.html"><a href="multilevel-models.html#illustration-of-new-random-slopes-model"><i class="fa fa-check"></i><b>3.3.3</b> Illustration of New (Random Slopes) Model</a></li>
+<li class="chapter" data-level="3.3.4" data-path="multilevel-models.html"><a href="multilevel-models.html#random-slopes-model-1"><i class="fa fa-check"></i><b>3.3.4</b> Random Slopes Model</a></li>
+<li class="chapter" data-level="3.3.5" data-path="multilevel-models.html"><a href="multilevel-models.html#specifying-distribution-of-random-effects"><i class="fa fa-check"></i><b>3.3.5</b> Specifying Distribution of Random Effects</a></li>
+<li class="chapter" data-level="3.3.6" data-path="multilevel-models.html"><a href="multilevel-models.html#random-slopes-model-with-error-term-distributions"><i class="fa fa-check"></i><b>3.3.6</b> Random Slopes Model with Error Term Distributions</a></li>
+<li class="chapter" data-level="3.3.7" data-path="multilevel-models.html"><a href="multilevel-models.html#random-slopes-model-in-r"><i class="fa fa-check"></i><b>3.3.7</b> Random Slopes Model in R</a></li>
+<li class="chapter" data-level="3.3.8" data-path="multilevel-models.html"><a href="multilevel-models.html#more-on-interpreting-parameters"><i class="fa fa-check"></i><b>3.3.8</b> More on Interpreting Parameters</a></li>
+<li class="chapter" data-level="3.3.9" data-path="multilevel-models.html"><a href="multilevel-models.html#model-comparisons"><i class="fa fa-check"></i><b>3.3.9</b> Model Comparisons</a></li>
+<li class="chapter" data-level="3.3.10" data-path="multilevel-models.html"><a href="multilevel-models.html#random-slopes-model-with-interaction"><i class="fa fa-check"></i><b>3.3.10</b> Random Slopes Model with Interaction</a></li>
+<li class="chapter" data-level="3.3.11" data-path="multilevel-models.html"><a href="multilevel-models.html#random-slopes-model-with-interaction-in-r"><i class="fa fa-check"></i><b>3.3.11</b> Random Slopes Model with Interaction in R</a></li>
+<li class="chapter" data-level="3.3.12" data-path="multilevel-models.html"><a href="multilevel-models.html#random-slope-vs-interaction-term"><i class="fa fa-check"></i><b>3.3.12</b> Random Slope vs Interaction Term</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="multilevel-models.html"><a href="multilevel-models.html#unconditional-means-model"><i class="fa fa-check"></i><b>3.4</b> Unconditional Means Model</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="multilevel-models.html"><a href="multilevel-models.html#unconditional-means-model-formulation"><i class="fa fa-check"></i><b>3.4.1</b> Unconditional Means Model Formulation</a></li>
+<li class="chapter" data-level="3.4.2" data-path="multilevel-models.html"><a href="multilevel-models.html#unconditional-means-model-in-r"><i class="fa fa-check"></i><b>3.4.2</b> Unconditional Means Model in R</a></li>
+<li class="chapter" data-level="3.4.3" data-path="multilevel-models.html"><a href="multilevel-models.html#unconditional-means-model-interpretations"><i class="fa fa-check"></i><b>3.4.3</b> Unconditional Means Model Interpretations</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="multilevel-models.html"><a href="multilevel-models.html#building-a-multilevel-model"><i class="fa fa-check"></i><b>3.5</b> Building A Multilevel Model</a>
+<ul>
+<li class="chapter" data-level="3.5.1" data-path="multilevel-models.html"><a href="multilevel-models.html#centering-covariates"><i class="fa fa-check"></i><b>3.5.1</b> Centering Covariates</a></li>
+<li class="chapter" data-level="3.5.2" data-path="multilevel-models.html"><a href="multilevel-models.html#a-possible-final-model"><i class="fa fa-check"></i><b>3.5.2</b> A Possible Final Model</a></li>
+<li class="chapter" data-level="3.5.3" data-path="multilevel-models.html"><a href="multilevel-models.html#more-data-wrangling-1"><i class="fa fa-check"></i><b>3.5.3</b> More Data Wrangling</a></li>
+<li class="chapter" data-level="3.5.4" data-path="multilevel-models.html"><a href="multilevel-models.html#fitting-model-a"><i class="fa fa-check"></i><b>3.5.4</b> Fitting Model A</a></li>
+<li class="chapter" data-level="3.5.5" data-path="multilevel-models.html"><a href="multilevel-models.html#a-model-without-random-slopes"><i class="fa fa-check"></i><b>3.5.5</b> A Model Without Random Slopes</a></li>
+<li class="chapter" data-level="3.5.6" data-path="multilevel-models.html"><a href="multilevel-models.html#fitting-model-b-in-r"><i class="fa fa-check"></i><b>3.5.6</b> Fitting Model B in R</a></li>
+<li class="chapter" data-level="3.5.7" data-path="multilevel-models.html"><a href="multilevel-models.html#one-more-possible-model"><i class="fa fa-check"></i><b>3.5.7</b> One More Possible Model</a></li>
+<li class="chapter" data-level="3.5.8" data-path="multilevel-models.html"><a href="multilevel-models.html#aic-and-bic-comparisons-for-models-b-and-c"><i class="fa fa-check"></i><b>3.5.8</b> AIC and BIC Comparisons for Models B and C</a></li>
+<li class="chapter" data-level="3.5.9" data-path="multilevel-models.html"><a href="multilevel-models.html#likelihood-ratio-test"><i class="fa fa-check"></i><b>3.5.9</b> Likelihood Ratio Test</a></li>
+<li class="chapter" data-level="3.5.10" data-path="multilevel-models.html"><a href="multilevel-models.html#final-conclusions"><i class="fa fa-check"></i><b>3.5.10</b> Final Conclusions</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="multilevel-models.html"><a href="multilevel-models.html#practice-questions-2"><i class="fa fa-check"></i><b>3.6</b> Practice Questions</a>
+<ul>
+<li class="chapter" data-level="" data-path="multilevel-models.html"><a href="multilevel-models.html#identify-the-levels-of-a-two-level-experiment-and-the-observational-units-and-variables-at-each-level."><i class="fa fa-check"></i>12. Identify the levels of a two-level experiment and the observational units and variables at each level.</a></li>
+<li class="chapter" data-level="" data-path="multilevel-models.html"><a href="multilevel-models.html#interpret-random-slopes-intercepts-error-terms-and-their-estimated-variances-and-correlations-in-linear-mixed-effects-models."><i class="fa fa-check"></i>13. Interpret random slopes, intercepts, error terms and their estimated variances and correlations in linear mixed effects models.</a></li>
+<li class="chapter" data-level="" data-path="multilevel-models.html"><a href="multilevel-models.html#determine-whether-it-is-appropriate-to-add-a-random-slope-term-to-a-model-in-a-given-context."><i class="fa fa-check"></i>14. Determine whether it is appropriate to add a random slope term to a model in a given context.</a></li>
+<li class="chapter" data-level="" data-path="multilevel-models.html"><a href="multilevel-models.html#distinguish-between-random-slope-terms-and-interactions-terms-and-explain-what-the-inclusionexclusion-of-each-in-a-lme-model-says-about-our-assumptions-regarding-the-nature-of-our-data."><i class="fa fa-check"></i>15. Distinguish between random slope terms and interactions terms and explain what the inclusion/exclusion of each in a LME model says about our assumptions regarding the nature of our data.</a></li>
+<li class="chapter" data-level="" data-path="multilevel-models.html"><a href="multilevel-models.html#calculate-expected-responses-and-expected-changes-associated-with-fixed-effects-in-a-lme-model.-if-it-is-not-possible-to-calculate-the-quantity-explain-why."><i class="fa fa-check"></i>16. Calculate expected responses and expected changes associated with fixed effects in a LME model. If it is not possible to calculate the quantity, explain why.</a></li>
+<li class="chapter" data-level="" data-path="multilevel-models.html"><a href="multilevel-models.html#write-equations-for-linear-mixed-effects-models-in-mathematical-notation-including-assumptions-about-distributions-of-random-effects-and-error-terms."><i class="fa fa-check"></i>17. Write equations for linear mixed effects models in mathematical notation, including assumptions about distributions of random effects and error terms.</a></li>
+<li class="chapter" data-level="" data-path="multilevel-models.html"><a href="multilevel-models.html#give-examples-of-values-of-the-response-variable-that-would-satisfy-given-conditions-about-parameters-in-a-lme-model-for-example-sigma_usigma."><i class="fa fa-check"></i>18. Give examples of values of the response variable that would satisfy given conditions about parameters in a LME model (for example (<span class="math inline">\(\sigma_u&gt;\sigma\)</span>)).</a></li>
+<li class="chapter" data-level="" data-path="multilevel-models.html"><a href="multilevel-models.html#draw-lattice-or-spaghetti-plots-that-are-consistent-with-given-conditions-involving-parameters-in-a-lme-model."><i class="fa fa-check"></i>22. Draw lattice (or spaghetti) plots that are consistent with given conditions involving parameters in a LME model.</a></li>
+<li class="chapter" data-level="" data-path="multilevel-models.html"><a href="multilevel-models.html#answer-research-questions-related-to-fixed-and-random-effects-in-a-study-given-output-from-lme-models."><i class="fa fa-check"></i>23. Answer research questions related to fixed and random effects in a study given output from LME models.</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="longitudinal-data.html"><a href="longitudinal-data.html"><i class="fa fa-check"></i><b>4</b> Longitudinal Data</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="longitudinal-data.html"><a href="longitudinal-data.html#charter-schools-exploratory-analysis"><i class="fa fa-check"></i><b>4.1</b> Charter Schools Exploratory Analysis</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="longitudinal-data.html"><a href="longitudinal-data.html#data"><i class="fa fa-check"></i><b>4.1.1</b> Data Organization</a></li>
+<li class="chapter" data-level="4.1.2" data-path="longitudinal-data.html"><a href="longitudinal-data.html#missing-data"><i class="fa fa-check"></i><b>4.1.2</b> Missing Data</a></li>
+<li class="chapter" data-level="4.1.3" data-path="longitudinal-data.html"><a href="longitudinal-data.html#convert-to-tidy-form"><i class="fa fa-check"></i><b>4.1.3</b> Convert to Tidy Form</a></li>
+<li class="chapter" data-level="4.1.4" data-path="longitudinal-data.html"><a href="longitudinal-data.html#exploratory-analyses-for-general-multilevel-models"><i class="fa fa-check"></i><b>4.1.4</b> Exploratory Analyses for General Multilevel Models</a></li>
+<li class="chapter" data-level="4.1.5" data-path="longitudinal-data.html"><a href="longitudinal-data.html#exploratory-analyses-for-longitudinal-data"><i class="fa fa-check"></i><b>4.1.5</b> Exploratory Analyses for Longitudinal Data</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="longitudinal-data.html"><a href="longitudinal-data.html#multilevel-longitudinal-models"><i class="fa fa-check"></i><b>4.2</b> Multilevel Longitudinal Models</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="longitudinal-data.html"><a href="longitudinal-data.html#unconditional-means-model-1"><i class="fa fa-check"></i><b>4.2.1</b> Unconditional Means Model</a></li>
+<li class="chapter" data-level="4.2.2" data-path="longitudinal-data.html"><a href="longitudinal-data.html#interpretations-in-unconditional-means-model"><i class="fa fa-check"></i><b>4.2.2</b> Interpretations in Unconditional Means Model</a></li>
+<li class="chapter" data-level="4.2.3" data-path="longitudinal-data.html"><a href="longitudinal-data.html#intraclass-correlation-coefficient"><i class="fa fa-check"></i><b>4.2.3</b> Intraclass Correlation Coefficient:</a></li>
+<li class="chapter" data-level="4.2.4" data-path="longitudinal-data.html"><a href="longitudinal-data.html#unconditional-growth-model"><i class="fa fa-check"></i><b>4.2.4</b> Unconditional Growth Model</a></li>
+<li class="chapter" data-level="4.2.5" data-path="longitudinal-data.html"><a href="longitudinal-data.html#interpretations-in-unconditional-growth-model"><i class="fa fa-check"></i><b>4.2.5</b> Interpretations in Unconditional Growth Model</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="longitudinal-data.html"><a href="longitudinal-data.html#quadratic-and-piecewise-linear-models"><i class="fa fa-check"></i><b>4.3</b> Quadratic and Piecewise Linear Models</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="longitudinal-data.html"><a href="longitudinal-data.html#quadratic-trend-over-time"><i class="fa fa-check"></i><b>4.3.1</b> Quadratic Trend over Time</a></li>
+<li class="chapter" data-level="4.3.2" data-path="longitudinal-data.html"><a href="longitudinal-data.html#quadratic-model"><i class="fa fa-check"></i><b>4.3.2</b> Quadratic Model</a></li>
+<li class="chapter" data-level="4.3.3" data-path="longitudinal-data.html"><a href="longitudinal-data.html#quadratic-model-in-r-1"><i class="fa fa-check"></i><b>4.3.3</b> Quadratic Model in R</a></li>
+<li class="chapter" data-level="4.3.4" data-path="longitudinal-data.html"><a href="longitudinal-data.html#estimated-response-curve"><i class="fa fa-check"></i><b>4.3.4</b> Estimated Response Curve</a></li>
+<li class="chapter" data-level="4.3.5" data-path="longitudinal-data.html"><a href="longitudinal-data.html#linear-and-quadratic-error-terms"><i class="fa fa-check"></i><b>4.3.5</b> Linear and Quadratic Error Terms</a></li>
+<li class="chapter" data-level="4.3.6" data-path="longitudinal-data.html"><a href="longitudinal-data.html#model-with-many-random-terms-in-r"><i class="fa fa-check"></i><b>4.3.6</b> Model with Many Random Terms in R</a></li>
+<li class="chapter" data-level="4.3.7" data-path="longitudinal-data.html"><a href="longitudinal-data.html#only-a-linear-random-term"><i class="fa fa-check"></i><b>4.3.7</b> Only a Linear Random Term</a></li>
+<li class="chapter" data-level="4.3.8" data-path="longitudinal-data.html"><a href="longitudinal-data.html#comments-on-random-terms"><i class="fa fa-check"></i><b>4.3.8</b> Comments on Random Terms</a></li>
+<li class="chapter" data-level="4.3.9" data-path="longitudinal-data.html"><a href="longitudinal-data.html#model-comparison"><i class="fa fa-check"></i><b>4.3.9</b> Model Comparison</a></li>
+<li class="chapter" data-level="4.3.10" data-path="longitudinal-data.html"><a href="longitudinal-data.html#piecewise-linear-model"><i class="fa fa-check"></i><b>4.3.10</b> Piecewise Linear Model</a></li>
+<li class="chapter" data-level="4.3.11" data-path="longitudinal-data.html"><a href="longitudinal-data.html#piecewise-model-equation"><i class="fa fa-check"></i><b>4.3.11</b> Piecewise Model Equation</a></li>
+<li class="chapter" data-level="4.3.12" data-path="longitudinal-data.html"><a href="longitudinal-data.html#estimated-response-curve-1"><i class="fa fa-check"></i><b>4.3.12</b> Estimated Response Curve</a></li>
+<li class="chapter" data-level="4.3.13" data-path="longitudinal-data.html"><a href="longitudinal-data.html#comparing-quadratic-and-piecewise-models"><i class="fa fa-check"></i><b>4.3.13</b> Comparing Quadratic and Piecewise Models</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="longitudinal-data.html"><a href="longitudinal-data.html#model-for-school-type"><i class="fa fa-check"></i><b>4.4</b> Model for School Type</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="longitudinal-data.html"><a href="longitudinal-data.html#uncontrolled-effects-of-school-type"><i class="fa fa-check"></i><b>4.4.1</b> Uncontrolled Effects of School Type</a></li>
+<li class="chapter" data-level="4.4.2" data-path="longitudinal-data.html"><a href="longitudinal-data.html#interpretations-for-school-type-model"><i class="fa fa-check"></i><b>4.4.2</b> Interpretations for School Type Model</a></li>
+<li class="chapter" data-level="4.4.3" data-path="longitudinal-data.html"><a href="longitudinal-data.html#illustration"><i class="fa fa-check"></i><b>4.4.3</b> Illustration</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="longitudinal-data.html"><a href="longitudinal-data.html#covariance-structure-among-observations"><i class="fa fa-check"></i><b>4.5</b> Covariance Structure among Observations</a>
+<ul>
+<li class="chapter" data-level="4.5.1" data-path="longitudinal-data.html"><a href="longitudinal-data.html#standard-covariance-structure"><i class="fa fa-check"></i><b>4.5.1</b> Standard Covariance Structure</a></li>
+<li class="chapter" data-level="4.5.2" data-path="longitudinal-data.html"><a href="longitudinal-data.html#derivation-of-vary_i1-optional"><i class="fa fa-check"></i><b>4.5.2</b> Derivation of <span class="math inline">\(Var(Y_{i1})\)</span> (optional)</a></li>
+<li class="chapter" data-level="4.5.3" data-path="longitudinal-data.html"><a href="longitudinal-data.html#interpretations-of-vary_i1-and-covy_ij-y_ik"><i class="fa fa-check"></i><b>4.5.3</b> Interpretations of <span class="math inline">\(Var(Y_{i1})\)</span> and <span class="math inline">\(Cov(Y_{ij}, Y_{ik})\)</span></a></li>
+<li class="chapter" data-level="4.5.4" data-path="longitudinal-data.html"><a href="longitudinal-data.html#variance-and-covariance-estimates"><i class="fa fa-check"></i><b>4.5.4</b> Variance and Covariance Estimates</a></li>
+<li class="chapter" data-level="4.5.5" data-path="longitudinal-data.html"><a href="longitudinal-data.html#alternative-covariance-structure---uncorrelated"><i class="fa fa-check"></i><b>4.5.5</b> Alternative Covariance Structure - Uncorrelated</a></li>
+<li class="chapter" data-level="4.5.6" data-path="longitudinal-data.html"><a href="longitudinal-data.html#alternative-covariance-structure---unstructured"><i class="fa fa-check"></i><b>4.5.6</b> Alternative Covariance Structure - Unstructured</a></li>
+<li class="chapter" data-level="4.5.7" data-path="longitudinal-data.html"><a href="longitudinal-data.html#alternative-covariance-structure---compound-symmetry"><i class="fa fa-check"></i><b>4.5.7</b> Alternative Covariance Structure - Compound Symmetry</a></li>
+<li class="chapter" data-level="4.5.8" data-path="longitudinal-data.html"><a href="longitudinal-data.html#alternative-covariance-structure---autogregressive"><i class="fa fa-check"></i><b>4.5.8</b> Alternative Covariance Structure - Autogregressive</a></li>
+<li class="chapter" data-level="4.5.9" data-path="longitudinal-data.html"><a href="longitudinal-data.html#ar1-model-on-schools-data"><i class="fa fa-check"></i><b>4.5.9</b> AR(1) Model on Schools Data</a></li>
+<li class="chapter" data-level="4.5.10" data-path="longitudinal-data.html"><a href="longitudinal-data.html#non-longitudinal-multilevel-models"><i class="fa fa-check"></i><b>4.5.10</b> Non-longitudinal Multilevel Models</a></li>
+<li class="chapter" data-level="4.5.11" data-path="longitudinal-data.html"><a href="longitudinal-data.html#final-thoughts-regarding-covariance-structures"><i class="fa fa-check"></i><b>4.5.11</b> Final Thoughts Regarding Covariance Structures</a></li>
+</ul></li>
+<li class="chapter" data-level="4.6" data-path="longitudinal-data.html"><a href="longitudinal-data.html#practice-problems"><i class="fa fa-check"></i><b>4.6</b> Practice Problems</a>
+<ul>
+<li class="chapter" data-level="" data-path="longitudinal-data.html"><a href="longitudinal-data.html#compare-and-contrast-the-assumptions-associated-with-linear-quadratic-and-piecewise-linear-longitudinal-models-and-determine-which-is-most-appropriate-in-a-given-context."><i class="fa fa-check"></i>20. Compare and contrast the assumptions associated with linear, quadratic, and piecewise linear longitudinal models and determine which is most appropriate in a given context.</a></li>
+<li class="chapter" data-level="" data-path="longitudinal-data.html"><a href="longitudinal-data.html#calculate-and-interpret-intraclass-correlation-coefficient."><i class="fa fa-check"></i>21. Calculate and interpret intraclass correlation coefficient.</a></li>
+<li class="chapter" data-level="" data-path="longitudinal-data.html"><a href="longitudinal-data.html#answer-research-questions-related-to-fixed-and-random-effects-in-a-study-given-output-from-lme-models.-1"><i class="fa fa-check"></i>23. Answer research questions related to fixed and random effects in a study given output from LME models.</a></li>
+<li class="chapter" data-level="" data-path="longitudinal-data.html"><a href="longitudinal-data.html#draw-lattice-or-spaghetti-plots-that-are-consistent-with-given-conditions-involving-parameters-in-a-lme-model.-1"><i class="fa fa-check"></i>22. Draw lattice (or spaghetti) plots that are consistent with given conditions involving parameters in a LME model.</a></li>
+<li class="chapter" data-level="" data-path="longitudinal-data.html"><a href="longitudinal-data.html#sketch-either-a-set-of-scatterplots-corresponding-to-a-given-variance-covariance-matrix-or-estimate-the-values-in-a-variance-covariance-matrix-given-a-set-of-scatterplots."><i class="fa fa-check"></i>24. Sketch either a set of scatterplots corresponding to a given variance-covariance matrix, or estimate the values in a variance-covariance matrix, given a set of scatterplots.</a></li>
+<li class="chapter" data-level="" data-path="longitudinal-data.html"><a href="longitudinal-data.html#explain-in-words-what-a-variance-covariance-matrix-says-about-our-assumptions-regarding-the-structure-of-data."><i class="fa fa-check"></i>25. Explain, in words, what a variance-covariance matrix says about our assumptions regarding the structure of data.</a></li>
+<li class="chapter" data-level="" data-path="longitudinal-data.html"><a href="longitudinal-data.html#interpret-the-variance-and-correlation-parameters-sigma2-and-phi-in-a-first-order-autoregressive-ar-1-model."><i class="fa fa-check"></i>26. Interpret the variance and correlation parameters <span class="math inline">\(\sigma^2\)</span> and <span class="math inline">\(\phi\)</span> in a first-order autoregressive (AR-1) model.</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="data-with-three-or-more-levels.html"><a href="data-with-three-or-more-levels.html"><i class="fa fa-check"></i><b>5</b> Data with Three or More Levels</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="data-with-three-or-more-levels.html"><a href="data-with-three-or-more-levels.html#three-level-plants-experiment"><i class="fa fa-check"></i><b>5.1</b> Three-Level Plants Experiment</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="data-with-three-or-more-levels.html"><a href="data-with-three-or-more-levels.html#experimental-design"><i class="fa fa-check"></i><b>5.1.1</b> Experimental Design</a></li>
+<li class="chapter" data-level="5.1.2" data-path="data-with-three-or-more-levels.html"><a href="data-with-three-or-more-levels.html#the-data-1"><i class="fa fa-check"></i><b>5.1.2</b> The Data</a></li>
+<li class="chapter" data-level="5.1.3" data-path="data-with-three-or-more-levels.html"><a href="data-with-three-or-more-levels.html#questions"><i class="fa fa-check"></i><b>5.1.3</b> Questions</a></li>
+<li class="chapter" data-level="5.1.4" data-path="data-with-three-or-more-levels.html"><a href="data-with-three-or-more-levels.html#three-level-model"><i class="fa fa-check"></i><b>5.1.4</b> Three Level Model</a></li>
+<li class="chapter" data-level="5.1.5" data-path="data-with-three-or-more-levels.html"><a href="data-with-three-or-more-levels.html#r-implementation-of-three-level-model"><i class="fa fa-check"></i><b>5.1.5</b> R Implementation of Three Level Model</a></li>
+<li class="chapter" data-level="5.1.6" data-path="data-with-three-or-more-levels.html"><a href="data-with-three-or-more-levels.html#inappropriate-llsr-model"><i class="fa fa-check"></i><b>5.1.6</b> Inappropriate LLSR Model</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="data-with-three-or-more-levels.html"><a href="data-with-three-or-more-levels.html#three-level-model-with-random-slopes"><i class="fa fa-check"></i><b>5.2</b> Three-Level Model with Random Slopes</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="data-with-three-or-more-levels.html"><a href="data-with-three-or-more-levels.html#random-slope-for-phenoa"><i class="fa fa-check"></i><b>5.2.1</b> Random Slope for PhenoA</a></li>
+<li class="chapter" data-level="5.2.2" data-path="data-with-three-or-more-levels.html"><a href="data-with-three-or-more-levels.html#r-output-for-random-slope-for-phenoa"><i class="fa fa-check"></i><b>5.2.2</b> R Output for Random Slope for PhenoA</a></li>
+<li class="chapter" data-level="5.2.3" data-path="data-with-three-or-more-levels.html"><a href="data-with-three-or-more-levels.html#random-slope-for-fert"><i class="fa fa-check"></i><b>5.2.3</b> Random Slope for Fert</a></li>
+<li class="chapter" data-level="5.2.4" data-path="data-with-three-or-more-levels.html"><a href="data-with-three-or-more-levels.html#r-output-for-random-slope-for-fert"><i class="fa fa-check"></i><b>5.2.4</b> R Output for Random Slope for Fert</a></li>
+<li class="chapter" data-level="5.2.5" data-path="data-with-three-or-more-levels.html"><a href="data-with-three-or-more-levels.html#boundary-constraints"><i class="fa fa-check"></i><b>5.2.5</b> Boundary Constraints</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="data-with-three-or-more-levels.html"><a href="data-with-three-or-more-levels.html#longitudinal-component-to-plants-data"><i class="fa fa-check"></i><b>5.3</b> Longitudinal Component to Plants Data</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="data-with-three-or-more-levels.html"><a href="data-with-three-or-more-levels.html#repeated-measures-over-time"><i class="fa fa-check"></i><b>5.3.1</b> Repeated Measures over Time</a></li>
+<li class="chapter" data-level="5.3.2" data-path="data-with-three-or-more-levels.html"><a href="data-with-three-or-more-levels.html#levels-and-variables"><i class="fa fa-check"></i><b>5.3.2</b> Levels and Variables</a></li>
+<li class="chapter" data-level="5.3.3" data-path="data-with-three-or-more-levels.html"><a href="data-with-three-or-more-levels.html#model-for-longitudinal-plants-study"><i class="fa fa-check"></i><b>5.3.3</b> Model for Longitudinal Plants Study</a></li>
+<li class="chapter" data-level="5.3.4" data-path="data-with-three-or-more-levels.html"><a href="data-with-three-or-more-levels.html#r-output-for-longitudinal-model"><i class="fa fa-check"></i><b>5.3.4</b> R Output for Longitudinal Model</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="data-with-three-or-more-levels.html"><a href="data-with-three-or-more-levels.html#four-level-longitudinal-model-with-random-slopes"><i class="fa fa-check"></i><b>5.4</b> Four-Level Longitudinal Model with Random Slopes</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="data-with-three-or-more-levels.html"><a href="data-with-three-or-more-levels.html#random-slope-for-time"><i class="fa fa-check"></i><b>5.4.1</b> Random Slope for Time</a></li>
+<li class="chapter" data-level="5.4.2" data-path="data-with-three-or-more-levels.html"><a href="data-with-three-or-more-levels.html#more-random-slope-terms"><i class="fa fa-check"></i><b>5.4.2</b> More Random Slope Terms</a></li>
+<li class="chapter" data-level="5.4.3" data-path="data-with-three-or-more-levels.html"><a href="data-with-three-or-more-levels.html#additional-random-slopes"><i class="fa fa-check"></i><b>5.4.3</b> Additional Random Slopes</a></li>
+<li class="chapter" data-level="5.4.4" data-path="data-with-three-or-more-levels.html"><a href="data-with-three-or-more-levels.html#r---model-with-additional-random-slopes"><i class="fa fa-check"></i><b>5.4.4</b> R - Model with Additional Random Slopes</a></li>
+<li class="chapter" data-level="5.4.5" data-path="data-with-three-or-more-levels.html"><a href="data-with-three-or-more-levels.html#when-not-to-add-random-slopes"><i class="fa fa-check"></i><b>5.4.5</b> When Not to Add Random Slopes</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="poisson-regression.html"><a href="poisson-regression.html"><i class="fa fa-check"></i><b>6</b> Poisson Regression</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="poisson-regression.html"><a href="poisson-regression.html#modeling-counts"><i class="fa fa-check"></i><b>6.1</b> Modeling Counts</a>
+<ul>
+<li class="chapter" data-level="6.1.1" data-path="poisson-regression.html"><a href="poisson-regression.html#case-study-household-size-in-the-philippines"><i class="fa fa-check"></i><b>6.1.1</b> Case Study: Household Size in the Philippines</a></li>
+<li class="chapter" data-level="6.1.2" data-path="poisson-regression.html"><a href="poisson-regression.html#map-of-the-philippines"><i class="fa fa-check"></i><b>6.1.2</b> Map of the Philippines</a></li>
+<li class="chapter" data-level="6.1.3" data-path="poisson-regression.html"><a href="poisson-regression.html#questions-of-interest-2"><i class="fa fa-check"></i><b>6.1.3</b> Questions of Interest</a></li>
+<li class="chapter" data-level="6.1.4" data-path="poisson-regression.html"><a href="poisson-regression.html#the-data-2"><i class="fa fa-check"></i><b>6.1.4</b> The Data</a></li>
+<li class="chapter" data-level="6.1.5" data-path="poisson-regression.html"><a href="poisson-regression.html#first-5-rows"><i class="fa fa-check"></i><b>6.1.5</b> First 5 Rows</a></li>
+<li class="chapter" data-level="6.1.6" data-path="poisson-regression.html"><a href="poisson-regression.html#household-size-by-region"><i class="fa fa-check"></i><b>6.1.6</b> Household Size by Region</a></li>
+<li class="chapter" data-level="6.1.7" data-path="poisson-regression.html"><a href="poisson-regression.html#household-size-by-region-plots"><i class="fa fa-check"></i><b>6.1.7</b> Household Size by Region Plots</a></li>
+<li class="chapter" data-level="6.1.8" data-path="poisson-regression.html"><a href="poisson-regression.html#modeling-household-size"><i class="fa fa-check"></i><b>6.1.8</b> Modeling Household Size</a></li>
+<li class="chapter" data-level="6.1.9" data-path="poisson-regression.html"><a href="poisson-regression.html#inappropriate-llsr-model-1"><i class="fa fa-check"></i><b>6.1.9</b> Inappropriate LLSR Model</a></li>
+<li class="chapter" data-level="6.1.10" data-path="poisson-regression.html"><a href="poisson-regression.html#llsr-model-r-output"><i class="fa fa-check"></i><b>6.1.10</b> LLSR Model R Output</a></li>
+<li class="chapter" data-level="6.1.11" data-path="poisson-regression.html"><a href="poisson-regression.html#llsr-assumptions"><i class="fa fa-check"></i><b>6.1.11</b> LLSR Assumptions</a></li>
+<li class="chapter" data-level="6.1.12" data-path="poisson-regression.html"><a href="poisson-regression.html#distribution-in-visayas-region"><i class="fa fa-check"></i><b>6.1.12</b> Distribution in Visayas Region</a></li>
+<li class="chapter" data-level="6.1.13" data-path="poisson-regression.html"><a href="poisson-regression.html#normal-quantile-quantile-plot"><i class="fa fa-check"></i><b>6.1.13</b> Normal Quantile Quantile Plot</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="poisson-regression.html"><a href="poisson-regression.html#poisson-regression-models"><i class="fa fa-check"></i><b>6.2</b> Poisson Regression Models</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="poisson-regression.html"><a href="poisson-regression.html#the-poisson-distribution"><i class="fa fa-check"></i><b>6.2.1</b> The Poisson Distribution</a></li>
+<li class="chapter" data-level="6.2.2" data-path="poisson-regression.html"><a href="poisson-regression.html#poisson-distribution-for-lambda1"><i class="fa fa-check"></i><b>6.2.2</b> Poisson Distribution for <span class="math inline">\(\lambda=1\)</span></a></li>
+<li class="chapter" data-level="6.2.3" data-path="poisson-regression.html"><a href="poisson-regression.html#poisson-distribution-for-lambdain135"><i class="fa fa-check"></i><b>6.2.3</b> Poisson Distribution for <span class="math inline">\(\lambda\in\{1,3,5\}\)</span></a></li>
+<li class="chapter" data-level="6.2.4" data-path="poisson-regression.html"><a href="poisson-regression.html#connecting-expected-response-to-explatory-variables"><i class="fa fa-check"></i><b>6.2.4</b> Connecting Expected Response to Explatory Variables</a></li>
+<li class="chapter" data-level="6.2.5" data-path="poisson-regression.html"><a href="poisson-regression.html#poisson-regression-assumptions"><i class="fa fa-check"></i><b>6.2.5</b> Poisson Regression Assumptions</a></li>
+<li class="chapter" data-level="6.2.6" data-path="poisson-regression.html"><a href="poisson-regression.html#poisson-regression-illustration"><i class="fa fa-check"></i><b>6.2.6</b> Poisson Regression Illustration</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="poisson-regression.html"><a href="poisson-regression.html#poisson-model-for-household-size"><i class="fa fa-check"></i><b>6.3</b> Poisson Model for Household Size</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="poisson-regression.html"><a href="poisson-regression.html#poisson-regression-model-for-location"><i class="fa fa-check"></i><b>6.3.1</b> Poisson Regression Model for Location</a></li>
+<li class="chapter" data-level="6.3.2" data-path="poisson-regression.html"><a href="poisson-regression.html#interpreting-model-parameters-in-poisson-regression"><i class="fa fa-check"></i><b>6.3.2</b> Interpreting Model Parameters in Poisson Regression</a></li>
+<li class="chapter" data-level="6.3.3" data-path="poisson-regression.html"><a href="poisson-regression.html#wald-based-confidence-intervals-for-difference"><i class="fa fa-check"></i><b>6.3.3</b> Wald-Based Confidence Intervals for Difference</a></li>
+<li class="chapter" data-level="6.3.4" data-path="poisson-regression.html"><a href="poisson-regression.html#mean-variance-assumption"><i class="fa fa-check"></i><b>6.3.4</b> Mean = Variance Assumption</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="poisson-regression.html"><a href="poisson-regression.html#poisson-model-with-multiple-explanatory-variables"><i class="fa fa-check"></i><b>6.4</b> Poisson Model with Multiple Explanatory Variables</a>
+<ul>
+<li class="chapter" data-level="6.4.1" data-path="poisson-regression.html"><a href="poisson-regression.html#accounting-for-age-of-head-of-household"><i class="fa fa-check"></i><b>6.4.1</b> Accounting for Age of Head of Household</a></li>
+<li class="chapter" data-level="6.4.2" data-path="poisson-regression.html"><a href="poisson-regression.html#r-output-for-model-with-age"><i class="fa fa-check"></i><b>6.4.2</b> R Output for Model with Age</a></li>
+<li class="chapter" data-level="6.4.3" data-path="poisson-regression.html"><a href="poisson-regression.html#interpreting-coefficients-for-numeric-explanatory-variable"><i class="fa fa-check"></i><b>6.4.3</b> Interpreting Coefficients for Numeric Explanatory Variable</a></li>
+<li class="chapter" data-level="6.4.4" data-path="poisson-regression.html"><a href="poisson-regression.html#mean-variance-assumption-1"><i class="fa fa-check"></i><b>6.4.4</b> Mean = Variance Assumption</a></li>
+</ul></li>
+<li class="chapter" data-level="6.5" data-path="poisson-regression.html"><a href="poisson-regression.html#deviance-and-model-comparison"><i class="fa fa-check"></i><b>6.5</b> Deviance and Model Comparison</a>
+<ul>
+<li class="chapter" data-level="6.5.1" data-path="poisson-regression.html"><a href="poisson-regression.html#accounting-for-nonlinear-trend"><i class="fa fa-check"></i><b>6.5.1</b> Accounting for Nonlinear Trend</a></li>
+<li class="chapter" data-level="6.5.2" data-path="poisson-regression.html"><a href="poisson-regression.html#quadratic-poisson-regresson-model"><i class="fa fa-check"></i><b>6.5.2</b> Quadratic Poisson Regresson Model</a></li>
+<li class="chapter" data-level="6.5.3" data-path="poisson-regression.html"><a href="poisson-regression.html#residuals-for-poisson-models"><i class="fa fa-check"></i><b>6.5.3</b> Residuals for Poisson Models</a></li>
+<li class="chapter" data-level="6.5.4" data-path="poisson-regression.html"><a href="poisson-regression.html#plot-of-deviance-residuals-for-first-order-poisson-model"><i class="fa fa-check"></i><b>6.5.4</b> Plot of Deviance Residuals for First-Order Poisson Model</a></li>
+<li class="chapter" data-level="6.5.5" data-path="poisson-regression.html"><a href="poisson-regression.html#plot-of-deviance-residuals-for-quadratic-poisson-model"><i class="fa fa-check"></i><b>6.5.5</b> Plot of Deviance Residuals for Quadratic Poisson Model</a></li>
+<li class="chapter" data-level="6.5.6" data-path="poisson-regression.html"><a href="poisson-regression.html#residual-deviance-for-a-model"><i class="fa fa-check"></i><b>6.5.6</b> Residual Deviance for a Model</a></li>
+<li class="chapter" data-level="6.5.7" data-path="poisson-regression.html"><a href="poisson-regression.html#drop-in-deviance-test"><i class="fa fa-check"></i><b>6.5.7</b> Drop-in-Deviance Test</a></li>
+<li class="chapter" data-level="6.5.8" data-path="poisson-regression.html"><a href="poisson-regression.html#drop-in-deviance-test-1"><i class="fa fa-check"></i><b>6.5.8</b> Drop-in-Deviance Test</a></li>
+<li class="chapter" data-level="6.5.9" data-path="poisson-regression.html"><a href="poisson-regression.html#visual-of-chi2-test"><i class="fa fa-check"></i><b>6.5.9</b> Visual of <span class="math inline">\(\chi^2\)</span> Test</a></li>
+<li class="chapter" data-level="6.5.10" data-path="poisson-regression.html"><a href="poisson-regression.html#adding-roofing-material-to-model"><i class="fa fa-check"></i><b>6.5.10</b> Adding Roofing Material to Model</a></li>
+<li class="chapter" data-level="6.5.11" data-path="poisson-regression.html"><a href="poisson-regression.html#visual-of-chi2-test-for-roof"><i class="fa fa-check"></i><b>6.5.11</b> Visual of <span class="math inline">\(\chi^2\)</span> Test for Roof</a></li>
+<li class="chapter" data-level="6.5.12" data-path="poisson-regression.html"><a href="poisson-regression.html#goodness-of-fit"><i class="fa fa-check"></i><b>6.5.12</b> Goodness-of-Fit</a></li>
+</ul></li>
+<li class="chapter" data-level="6.6" data-path="poisson-regression.html"><a href="poisson-regression.html#overdisperson"><i class="fa fa-check"></i><b>6.6</b> Overdisperson</a>
+<ul>
+<li class="chapter" data-level="6.6.1" data-path="poisson-regression.html"><a href="poisson-regression.html#quasi-poisson-model"><i class="fa fa-check"></i><b>6.6.1</b> Quasi-Poisson Model</a></li>
+<li class="chapter" data-level="6.6.2" data-path="poisson-regression.html"><a href="poisson-regression.html#quasi-poisson-model-in-r"><i class="fa fa-check"></i><b>6.6.2</b> Quasi-Poisson Model in R</a></li>
+<li class="chapter" data-level="6.6.3" data-path="poisson-regression.html"><a href="poisson-regression.html#standard-errors-in-quasi-poisson-model"><i class="fa fa-check"></i><b>6.6.3</b> Standard Errors in Quasi-Poisson Model</a></li>
+<li class="chapter" data-level="6.6.4" data-path="poisson-regression.html"><a href="poisson-regression.html#drop-in-deviance-tests-for-quasi-poisson-model"><i class="fa fa-check"></i><b>6.6.4</b> Drop-in-Deviance Tests for Quasi-Poisson Model</a></li>
+<li class="chapter" data-level="6.6.5" data-path="poisson-regression.html"><a href="poisson-regression.html#first-vs-second-order-quasi-poisson-models"><i class="fa fa-check"></i><b>6.6.5</b> First vs Second Order Quasi-Poisson Models</a></li>
+</ul></li>
+<li class="chapter" data-level="6.7" data-path="poisson-regression.html"><a href="poisson-regression.html#offsets-in-poisson-regression"><i class="fa fa-check"></i><b>6.7</b> Offsets in Poisson Regression</a>
+<ul>
+<li class="chapter" data-level="6.7.1" data-path="poisson-regression.html"><a href="poisson-regression.html#case-study-campus-crime"><i class="fa fa-check"></i><b>6.7.1</b> Case Study: Campus Crime</a></li>
+<li class="chapter" data-level="6.7.2" data-path="poisson-regression.html"><a href="poisson-regression.html#distribution-of-number-of-crimes"><i class="fa fa-check"></i><b>6.7.2</b> Distribution of Number of Crimes</a></li>
+<li class="chapter" data-level="6.7.3" data-path="poisson-regression.html"><a href="poisson-regression.html#crimes-by-type-of-institution-and-region"><i class="fa fa-check"></i><b>6.7.3</b> Crimes by Type of Institution and Region</a></li>
+<li class="chapter" data-level="6.7.4" data-path="poisson-regression.html"><a href="poisson-regression.html#accounting-for-enrollment"><i class="fa fa-check"></i><b>6.7.4</b> Accounting for Enrollment</a></li>
+<li class="chapter" data-level="6.7.5" data-path="poisson-regression.html"><a href="poisson-regression.html#offset-in-r"><i class="fa fa-check"></i><b>6.7.5</b> Offset in R</a></li>
+<li class="chapter" data-level="6.7.6" data-path="poisson-regression.html"><a href="poisson-regression.html#model-with-interaction"><i class="fa fa-check"></i><b>6.7.6</b> Model with Interaction</a></li>
+<li class="chapter" data-level="6.7.7" data-path="poisson-regression.html"><a href="poisson-regression.html#drop-in-deviance-test-for-interaction"><i class="fa fa-check"></i><b>6.7.7</b> Drop-in-Deviance Test for Interaction</a></li>
+<li class="chapter" data-level="6.7.8" data-path="poisson-regression.html"><a href="poisson-regression.html#goodness-of-fit-test"><i class="fa fa-check"></i><b>6.7.8</b> Goodness of Fit Test</a></li>
+<li class="chapter" data-level="6.7.9" data-path="poisson-regression.html"><a href="poisson-regression.html#quasi-poisson-model-1"><i class="fa fa-check"></i><b>6.7.9</b> Quasi-Poisson Model</a></li>
+<li class="chapter" data-level="6.7.10" data-path="poisson-regression.html"><a href="poisson-regression.html#test-for-interaction"><i class="fa fa-check"></i><b>6.7.10</b> Test for Interaction</a></li>
+</ul></li>
+<li class="chapter" data-level="6.8" data-path="poisson-regression.html"><a href="poisson-regression.html#summaries"><i class="fa fa-check"></i><b>6.8</b> Summaries</a>
+<ul>
+<li class="chapter" data-level="6.8.1" data-path="poisson-regression.html"><a href="poisson-regression.html#llsr-vs.-poisson-regression-comparison"><i class="fa fa-check"></i><b>6.8.1</b> LLSR vs. Poisson Regression Comparison</a></li>
+<li class="chapter" data-level="6.8.2" data-path="poisson-regression.html"><a href="poisson-regression.html#poisson-vs-quasi-poisson-inference"><i class="fa fa-check"></i><b>6.8.2</b> Poisson vs Quasi-Poisson Inference</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="logistic-regression.html"><a href="logistic-regression.html"><i class="fa fa-check"></i><b>7</b> Logistic Regression</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="logistic-regression.html"><a href="logistic-regression.html#binomial-logistic-regression"><i class="fa fa-check"></i><b>7.1</b> Binomial Logistic Regression</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="logistic-regression.html"><a href="logistic-regression.html#binary-response-data"><i class="fa fa-check"></i><b>7.1.1</b> Binary Response Data</a></li>
+<li class="chapter" data-level="7.1.2" data-path="logistic-regression.html"><a href="logistic-regression.html#binomial-response-data"><i class="fa fa-check"></i><b>7.1.2</b> Binomial Response Data</a></li>
+<li class="chapter" data-level="7.1.3" data-path="logistic-regression.html"><a href="logistic-regression.html#wisconsin-election-data"><i class="fa fa-check"></i><b>7.1.3</b> 2020 Wisconsin Election Data</a></li>
+<li class="chapter" data-level="7.1.4" data-path="logistic-regression.html"><a href="logistic-regression.html#correlation-between-explanatory-variables"><i class="fa fa-check"></i><b>7.1.4</b> Correlation Between Explanatory Variables</a></li>
+<li class="chapter" data-level="7.1.5" data-path="logistic-regression.html"><a href="logistic-regression.html#modeling-number-of-votes"><i class="fa fa-check"></i><b>7.1.5</b> Modeling Number of Votes</a></li>
+<li class="chapter" data-level="7.1.6" data-path="logistic-regression.html"><a href="logistic-regression.html#the-binomial-distribution"><i class="fa fa-check"></i><b>7.1.6</b> The Binomial Distribution</a></li>
+<li class="chapter" data-level="7.1.7" data-path="logistic-regression.html"><a href="logistic-regression.html#binomial-distribution-for-n4-p0.6"><i class="fa fa-check"></i><b>7.1.7</b> Binomial Distribution for <span class="math inline">\(n=4, p=0.6\)</span></a></li>
+<li class="chapter" data-level="7.1.8" data-path="logistic-regression.html"><a href="logistic-regression.html#more-binomial-distributions"><i class="fa fa-check"></i><b>7.1.8</b> More Binomial Distributions</a></li>
+<li class="chapter" data-level="7.1.9" data-path="logistic-regression.html"><a href="logistic-regression.html#connecting-expected-response-to-explatory-variables-1"><i class="fa fa-check"></i><b>7.1.9</b> Connecting Expected Response to Explatory Variables</a></li>
+<li class="chapter" data-level="7.1.10" data-path="logistic-regression.html"><a href="logistic-regression.html#odds-and-odds-ratio"><i class="fa fa-check"></i><b>7.1.10</b> Odds and Odds Ratio</a></li>
+<li class="chapter" data-level="7.1.11" data-path="logistic-regression.html"><a href="logistic-regression.html#interpreting-regression-coefficients"><i class="fa fa-check"></i><b>7.1.11</b> Interpreting Regression Coefficients</a></li>
+<li class="chapter" data-level="7.1.12" data-path="logistic-regression.html"><a href="logistic-regression.html#binomial-logistic-regression-assumptions"><i class="fa fa-check"></i><b>7.1.12</b> Binomial Logistic Regression Assumptions</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="logistic-regression.html"><a href="logistic-regression.html#model-for-wisconsin-vote"><i class="fa fa-check"></i><b>7.2</b> Model for Wisconsin Vote</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="logistic-regression.html"><a href="logistic-regression.html#an-initial-model"><i class="fa fa-check"></i><b>7.2.1</b> An Initial Model</a></li>
+<li class="chapter" data-level="7.2.2" data-path="logistic-regression.html"><a href="logistic-regression.html#checking-linearity-assumption"><i class="fa fa-check"></i><b>7.2.2</b> Checking Linearity Assumption</a></li>
+<li class="chapter" data-level="7.2.3" data-path="logistic-regression.html"><a href="logistic-regression.html#overdispersion-in-binomial-counts"><i class="fa fa-check"></i><b>7.2.3</b> Overdispersion in Binomial Counts</a></li>
+<li class="chapter" data-level="7.2.4" data-path="logistic-regression.html"><a href="logistic-regression.html#residuals-for-binomial-logistic-regression"><i class="fa fa-check"></i><b>7.2.4</b> Residuals for Binomial Logistic Regression</a></li>
+<li class="chapter" data-level="7.2.5" data-path="logistic-regression.html"><a href="logistic-regression.html#quasi-binomial-model"><i class="fa fa-check"></i><b>7.2.5</b> Quasi-Binomial Model</a></li>
+<li class="chapter" data-level="7.2.6" data-path="logistic-regression.html"><a href="logistic-regression.html#model-with-all-explanatory-variables"><i class="fa fa-check"></i><b>7.2.6</b> Model with All Explanatory Variables</a></li>
+<li class="chapter" data-level="7.2.7" data-path="logistic-regression.html"><a href="logistic-regression.html#tests-for-significance-of-model-coefficients"><i class="fa fa-check"></i><b>7.2.7</b> Tests for Significance of Model Coefficients</a></li>
+<li class="chapter" data-level="7.2.8" data-path="logistic-regression.html"><a href="logistic-regression.html#drop-in-deviance-test-2"><i class="fa fa-check"></i><b>7.2.8</b> Drop in Deviance Test</a></li>
+<li class="chapter" data-level="7.2.9" data-path="logistic-regression.html"><a href="logistic-regression.html#deviance-residual-plot"><i class="fa fa-check"></i><b>7.2.9</b> Deviance Residual Plot</a></li>
+<li class="chapter" data-level="7.2.10" data-path="logistic-regression.html"><a href="logistic-regression.html#llsr-vs-binomial-logistic-regression"><i class="fa fa-check"></i><b>7.2.10</b> LLSR vs Binomial Logistic Regression</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="logistic-regression.html"><a href="logistic-regression.html#maximum-likelihood-estimation"><i class="fa fa-check"></i><b>7.3</b> Maximum Likelihood Estimation</a>
+<ul>
+<li class="chapter" data-level="7.3.1" data-path="logistic-regression.html"><a href="logistic-regression.html#parameter-estimation"><i class="fa fa-check"></i><b>7.3.1</b> Parameter Estimation</a></li>
+<li class="chapter" data-level="7.3.2" data-path="logistic-regression.html"><a href="logistic-regression.html#steph-curry-3-point-shooting"><i class="fa fa-check"></i><b>7.3.2</b> Steph Curry 3-Point Shooting</a></li>
+<li class="chapter" data-level="7.3.3" data-path="logistic-regression.html"><a href="logistic-regression.html#model-for-currys-shooting"><i class="fa fa-check"></i><b>7.3.3</b> Model for Curry’s Shooting</a></li>
+<li class="chapter" data-level="7.3.4" data-path="logistic-regression.html"><a href="logistic-regression.html#likelihood-function"><i class="fa fa-check"></i><b>7.3.4</b> Likelihood Function</a></li>
+<li class="chapter" data-level="7.3.5" data-path="logistic-regression.html"><a href="logistic-regression.html#plotting-likelihood-function"><i class="fa fa-check"></i><b>7.3.5</b> Plotting Likelihood Function</a></li>
+<li class="chapter" data-level="7.3.6" data-path="logistic-regression.html"><a href="logistic-regression.html#numerical-maximization"><i class="fa fa-check"></i><b>7.3.6</b> Numerical Maximization</a></li>
+<li class="chapter" data-level="7.3.7" data-path="logistic-regression.html"><a href="logistic-regression.html#mle-using-calculus"><i class="fa fa-check"></i><b>7.3.7</b> MLE Using Calculus</a></li>
+<li class="chapter" data-level="7.3.8" data-path="logistic-regression.html"><a href="logistic-regression.html#likelihood-in-a-logistic-regression-model"><i class="fa fa-check"></i><b>7.3.8</b> Likelihood in a Logistic Regression Model</a></li>
+<li class="chapter" data-level="7.3.9" data-path="logistic-regression.html"><a href="logistic-regression.html#plot-of-likelihood-function"><i class="fa fa-check"></i><b>7.3.9</b> Plot of Likelihood Function</a></li>
+<li class="chapter" data-level="7.3.10" data-path="logistic-regression.html"><a href="logistic-regression.html#numerical-maximization-1"><i class="fa fa-check"></i><b>7.3.10</b> Numerical Maximization</a></li>
+<li class="chapter" data-level="7.3.11" data-path="logistic-regression.html"><a href="logistic-regression.html#comparison-to-r-output"><i class="fa fa-check"></i><b>7.3.11</b> Comparison to R Output</a></li>
+<li class="chapter" data-level="7.3.12" data-path="logistic-regression.html"><a href="logistic-regression.html#model-for-homeaway"><i class="fa fa-check"></i><b>7.3.12</b> Model for Home/Away</a></li>
+<li class="chapter" data-level="7.3.13" data-path="logistic-regression.html"><a href="logistic-regression.html#numerical-optimization"><i class="fa fa-check"></i><b>7.3.13</b> Numerical Optimization</a></li>
+<li class="chapter" data-level="7.3.14" data-path="logistic-regression.html"><a href="logistic-regression.html#comparison-to-r-output-1"><i class="fa fa-check"></i><b>7.3.14</b> Comparison to R Output</a></li>
+<li class="chapter" data-level="7.3.15" data-path="logistic-regression.html"><a href="logistic-regression.html#applications-of-likelihood"><i class="fa fa-check"></i><b>7.3.15</b> Applications of Likelihood</a></li>
+<li class="chapter" data-level="7.3.16" data-path="logistic-regression.html"><a href="logistic-regression.html#summary-maximum-likelihood-estimation"><i class="fa fa-check"></i><b>7.3.16</b> Summary Maximum Likelihood Estimation</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="logistic-regression.html"><a href="logistic-regression.html#zero-inflated-poisson-model"><i class="fa fa-check"></i><b>7.4</b> Zero-Inflated Poisson Model</a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="logistic-regression.html"><a href="logistic-regression.html#case-study-weekend-drinking"><i class="fa fa-check"></i><b>7.4.1</b> Case Study: Weekend Drinking</a></li>
+<li class="chapter" data-level="7.4.2" data-path="logistic-regression.html"><a href="logistic-regression.html#questions-of-interest-3"><i class="fa fa-check"></i><b>7.4.2</b> Questions of Interest</a></li>
+<li class="chapter" data-level="7.4.3" data-path="logistic-regression.html"><a href="logistic-regression.html#distribution-of-number-of-drinks"><i class="fa fa-check"></i><b>7.4.3</b> Distribution of Number of Drinks</a></li>
+<li class="chapter" data-level="7.4.4" data-path="logistic-regression.html"><a href="logistic-regression.html#number-of-drinks-comparisons"><i class="fa fa-check"></i><b>7.4.4</b> Number of Drinks Comparisons</a></li>
+<li class="chapter" data-level="7.4.5" data-path="logistic-regression.html"><a href="logistic-regression.html#proportion-of-drinkers"><i class="fa fa-check"></i><b>7.4.5</b> Proportion of Drinkers</a></li>
+<li class="chapter" data-level="7.4.6" data-path="logistic-regression.html"><a href="logistic-regression.html#modeling-drinks"><i class="fa fa-check"></i><b>7.4.6</b> Modeling Drinks</a></li>
+<li class="chapter" data-level="7.4.7" data-path="logistic-regression.html"><a href="logistic-regression.html#explaining-the-large-number-of-zeros"><i class="fa fa-check"></i><b>7.4.7</b> Explaining the Large Number of Zeros</a></li>
+<li class="chapter" data-level="7.4.8" data-path="logistic-regression.html"><a href="logistic-regression.html#zero-inflated-poisson-model-1"><i class="fa fa-check"></i><b>7.4.8</b> Zero-Inflated Poisson Model</a></li>
+<li class="chapter" data-level="7.4.9" data-path="logistic-regression.html"><a href="logistic-regression.html#developing-the-zero-inflated-poisson-model"><i class="fa fa-check"></i><b>7.4.9</b> Developing the Zero-Inflated Poisson Model</a></li>
+<li class="chapter" data-level="7.4.10" data-path="logistic-regression.html"><a href="logistic-regression.html#deriving-the-zip-pmf"><i class="fa fa-check"></i><b>7.4.10</b> Deriving the ZIP PMF</a></li>
+<li class="chapter" data-level="7.4.11" data-path="logistic-regression.html"><a href="logistic-regression.html#examples-of-zip-pmfs"><i class="fa fa-check"></i><b>7.4.11</b> Examples of ZIP PMF’s</a></li>
+<li class="chapter" data-level="7.4.12" data-path="logistic-regression.html"><a href="logistic-regression.html#zip-model"><i class="fa fa-check"></i><b>7.4.12</b> ZIP Model</a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="logistic-regression.html"><a href="logistic-regression.html#model-for-drinks-data"><i class="fa fa-check"></i><b>7.5</b> Model for Drinks Data</a>
+<ul>
+<li class="chapter" data-level="7.5.1" data-path="logistic-regression.html"><a href="logistic-regression.html#zip-for-drinks-data"><i class="fa fa-check"></i><b>7.5.1</b> ZIP for Drinks Data</a></li>
+<li class="chapter" data-level="7.5.2" data-path="logistic-regression.html"><a href="logistic-regression.html#zip-model-in-r"><i class="fa fa-check"></i><b>7.5.2</b> ZIP Model in R</a></li>
+<li class="chapter" data-level="7.5.3" data-path="logistic-regression.html"><a href="logistic-regression.html#residual-plot"><i class="fa fa-check"></i><b>7.5.3</b> Residual Plot</a></li>
+<li class="chapter" data-level="7.5.4" data-path="logistic-regression.html"><a href="logistic-regression.html#limitations"><i class="fa fa-check"></i><b>7.5.4</b> Limitations</a></li>
+<li class="chapter" data-level="7.5.5" data-path="logistic-regression.html"><a href="logistic-regression.html#final-thoughts-on-zero-inflated-models"><i class="fa fa-check"></i><b>7.5.5</b> Final Thoughts on Zero-Inflated Models</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="multilevel-generalized-linear-models.html"><a href="multilevel-generalized-linear-models.html"><i class="fa fa-check"></i><b>8</b> Multilevel Generalized Linear Models</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="multilevel-generalized-linear-models.html"><a href="multilevel-generalized-linear-models.html#basketball-referees-dataset"><i class="fa fa-check"></i><b>8.1</b> Basketball Referees Dataset</a>
+<ul>
+<li class="chapter" data-level="8.1.1" data-path="multilevel-generalized-linear-models.html"><a href="multilevel-generalized-linear-models.html#data-overview"><i class="fa fa-check"></i><b>8.1.1</b> Data Overview</a></li>
+<li class="chapter" data-level="8.1.2" data-path="multilevel-generalized-linear-models.html"><a href="multilevel-generalized-linear-models.html#histograms-for-level-one-covariates"><i class="fa fa-check"></i><b>8.1.2</b> Histograms for Level One Covariates</a></li>
+<li class="chapter" data-level="8.1.3" data-path="multilevel-generalized-linear-models.html"><a href="multilevel-generalized-linear-models.html#average-fouls-by-team"><i class="fa fa-check"></i><b>8.1.3</b> Average Fouls by Team</a></li>
+<li class="chapter" data-level="8.1.4" data-path="multilevel-generalized-linear-models.html"><a href="multilevel-generalized-linear-models.html#examining-bivariate-relationships"><i class="fa fa-check"></i><b>8.1.4</b> Examining Bivariate Relationships</a></li>
+<li class="chapter" data-level="8.1.5" data-path="multilevel-generalized-linear-models.html"><a href="multilevel-generalized-linear-models.html#tabular-summary-by-fouling-team"><i class="fa fa-check"></i><b>8.1.5</b> Tabular Summary by Fouling Team</a></li>
+<li class="chapter" data-level="8.1.6" data-path="multilevel-generalized-linear-models.html"><a href="multilevel-generalized-linear-models.html#mosaic-plots"><i class="fa fa-check"></i><b>8.1.6</b> Mosaic Plots</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="multilevel-generalized-linear-models.html"><a href="multilevel-generalized-linear-models.html#multilevel-generalized-linear-model"><i class="fa fa-check"></i><b>8.2</b> Multilevel Generalized Linear Model</a>
+<ul>
+<li class="chapter" data-level="8.2.1" data-path="multilevel-generalized-linear-models.html"><a href="multilevel-generalized-linear-models.html#motivation-for-a-statistical-model"><i class="fa fa-check"></i><b>8.2.1</b> Motivation for a Statistical Model</a></li>
+<li class="chapter" data-level="8.2.2" data-path="multilevel-generalized-linear-models.html"><a href="multilevel-generalized-linear-models.html#a-glm-approach"><i class="fa fa-check"></i><b>8.2.2</b> A GLM Approach</a></li>
+<li class="chapter" data-level="8.2.3" data-path="multilevel-generalized-linear-models.html"><a href="multilevel-generalized-linear-models.html#adding-random-effect-for-game"><i class="fa fa-check"></i><b>8.2.3</b> Adding Random Effect for Game</a></li>
+<li class="chapter" data-level="8.2.4" data-path="multilevel-generalized-linear-models.html"><a href="multilevel-generalized-linear-models.html#two-level-logistic-model"><i class="fa fa-check"></i><b>8.2.4</b> Two Level Logistic Model</a></li>
+<li class="chapter" data-level="8.2.5" data-path="multilevel-generalized-linear-models.html"><a href="multilevel-generalized-linear-models.html#multilevel-glm-in-r"><i class="fa fa-check"></i><b>8.2.5</b> Multilevel GLM in R</a></li>
+<li class="chapter" data-level="8.2.6" data-path="multilevel-generalized-linear-models.html"><a href="multilevel-generalized-linear-models.html#add-random-slope"><i class="fa fa-check"></i><b>8.2.6</b> Add Random Slope</a></li>
+<li class="chapter" data-level="8.2.7" data-path="multilevel-generalized-linear-models.html"><a href="multilevel-generalized-linear-models.html#random-slopes-model-in-r-1"><i class="fa fa-check"></i><b>8.2.7</b> Random Slopes Model in R</a></li>
+<li class="chapter" data-level="8.2.8" data-path="multilevel-generalized-linear-models.html"><a href="multilevel-generalized-linear-models.html#aic-bic-comparison"><i class="fa fa-check"></i><b>8.2.8</b> AIC, BIC Comparison</a></li>
+<li class="chapter" data-level="8.2.9" data-path="multilevel-generalized-linear-models.html"><a href="multilevel-generalized-linear-models.html#random-error-terms"><i class="fa fa-check"></i><b>8.2.9</b> Random Error Terms</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="multilevel-generalized-linear-models.html"><a href="multilevel-generalized-linear-models.html#crossed-random-effects"><i class="fa fa-check"></i><b>8.3</b> Crossed Random Effects</a>
+<ul>
+<li class="chapter" data-level="8.3.1" data-path="multilevel-generalized-linear-models.html"><a href="multilevel-generalized-linear-models.html#random-effects-for-teams"><i class="fa fa-check"></i><b>8.3.1</b> Random Effects for Teams</a></li>
+<li class="chapter" data-level="8.3.2" data-path="multilevel-generalized-linear-models.html"><a href="multilevel-generalized-linear-models.html#crossed-vs-nested-random-effects"><i class="fa fa-check"></i><b>8.3.2</b> Crossed vs Nested Random Effects</a></li>
+<li class="chapter" data-level="8.3.3" data-path="multilevel-generalized-linear-models.html"><a href="multilevel-generalized-linear-models.html#models-for-crossed-random-effects"><i class="fa fa-check"></i><b>8.3.3</b> Models for Crossed Random Effects</a></li>
+<li class="chapter" data-level="8.3.4" data-path="multilevel-generalized-linear-models.html"><a href="multilevel-generalized-linear-models.html#fitting-model-with-crossed-random-effects-in-r"><i class="fa fa-check"></i><b>8.3.4</b> Fitting Model with Crossed Random Effects in R</a></li>
+<li class="chapter" data-level="8.3.5" data-path="multilevel-generalized-linear-models.html"><a href="multilevel-generalized-linear-models.html#more-on-crossed-effects"><i class="fa fa-check"></i><b>8.3.5</b> More on Crossed Effects</a></li>
+<li class="chapter" data-level="8.3.6" data-path="multilevel-generalized-linear-models.html"><a href="multilevel-generalized-linear-models.html#a-final-model-for-examining-referee-bias"><i class="fa fa-check"></i><b>8.3.6</b> A Final Model for Examining Referee Bias</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4" data-path="multilevel-generalized-linear-models.html"><a href="multilevel-generalized-linear-models.html#parametric-bootstrapping"><i class="fa fa-check"></i><b>8.4</b> Parametric Bootstrapping</a>
+<ul>
+<li class="chapter" data-level="8.4.1" data-path="multilevel-generalized-linear-models.html"><a href="multilevel-generalized-linear-models.html#when-and-why-to-bootstrap"><i class="fa fa-check"></i><b>8.4.1</b> When and Why to Bootstrap</a></li>
+<li class="chapter" data-level="8.4.2" data-path="multilevel-generalized-linear-models.html"><a href="multilevel-generalized-linear-models.html#parametric-bootstrap-procedure"><i class="fa fa-check"></i><b>8.4.2</b> Parametric Bootstrap Procedure</a></li>
+<li class="chapter" data-level="8.4.3" data-path="multilevel-generalized-linear-models.html"><a href="multilevel-generalized-linear-models.html#a-simple-example"><i class="fa fa-check"></i><b>8.4.3</b> A Simple Example</a></li>
+<li class="chapter" data-level="8.4.4" data-path="multilevel-generalized-linear-models.html"><a href="multilevel-generalized-linear-models.html#parametric-bootstrap-confidence-intervals"><i class="fa fa-check"></i><b>8.4.4</b> Parametric Bootstrap Confidence Intervals</a></li>
+<li class="chapter" data-level="8.4.5" data-path="multilevel-generalized-linear-models.html"><a href="multilevel-generalized-linear-models.html#model-comparison-tests-with-parametric-bootstrap"><i class="fa fa-check"></i><b>8.4.5</b> Model Comparison Tests with Parametric Bootstrap</a></li>
+<li class="chapter" data-level="8.4.6" data-path="multilevel-generalized-linear-models.html"><a href="multilevel-generalized-linear-models.html#model-comparison-for-kentucky-derby-data"><i class="fa fa-check"></i><b>8.4.6</b> Model Comparison for Kentucky Derby Data</a></li>
+<li class="chapter" data-level="8.4.7" data-path="multilevel-generalized-linear-models.html"><a href="multilevel-generalized-linear-models.html#code-for-boostrap-model-comparison"><i class="fa fa-check"></i><b>8.4.7</b> Code for Boostrap Model Comparison</a></li>
+<li class="chapter" data-level="8.4.8" data-path="multilevel-generalized-linear-models.html"><a href="multilevel-generalized-linear-models.html#simulation-based-f-test"><i class="fa fa-check"></i><b>8.4.8</b> Simulation-Based F-Test</a></li>
+<li class="chapter" data-level="8.4.9" data-path="multilevel-generalized-linear-models.html"><a href="multilevel-generalized-linear-models.html#model-comparison-in-multilevel-glm"><i class="fa fa-check"></i><b>8.4.9</b> Model Comparison in Multilevel GLM</a></li>
+<li class="chapter" data-level="8.4.10" data-path="multilevel-generalized-linear-models.html"><a href="multilevel-generalized-linear-models.html#multilevel-glm-bootstrap-code"><i class="fa fa-check"></i><b>8.4.10</b> Multilevel GLM Bootstrap Code</a></li>
+<li class="chapter" data-level="8.4.11" data-path="multilevel-generalized-linear-models.html"><a href="multilevel-generalized-linear-models.html#simulation-based-chi2-test"><i class="fa fa-check"></i><b>8.4.11</b> Simulation-Based <span class="math inline">\(\chi^2\)</span> Test</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="epilogue.html"><a href="epilogue.html"><i class="fa fa-check"></i><b>9</b> Epilogue</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="epilogue.html"><a href="epilogue.html#further-directions"><i class="fa fa-check"></i><b>9.1</b> Further Directions</a>
+<ul>
+<li class="chapter" data-level="9.1.1" data-path="epilogue.html"><a href="epilogue.html#more-on-glms"><i class="fa fa-check"></i><b>9.1.1</b> More on GLM’s</a></li>
+<li class="chapter" data-level="9.1.2" data-path="epilogue.html"><a href="epilogue.html#models-beyond-glms"><i class="fa fa-check"></i><b>9.1.2</b> Models Beyond GLM’s</a></li>
+<li class="chapter" data-level="9.1.3" data-path="epilogue.html"><a href="epilogue.html#statistics-courses-at-lawrence"><i class="fa fa-check"></i><b>9.1.3</b> Statistics Courses at Lawrence</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Stat 455: Advanced Statistical Modeling Notes</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="header">
+<h1 class="title">Stat 455: Advanced Statistical Modeling Notes</h1>
+<p class="date"><em>2024-02-05</em></p>
+</div>
+<div id="preface" class="section level1 unnumbered hasAnchor">
+<h1>Preface<a href="index.html#preface" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>These notes are written to accompany the text <a href="https://bookdown.org/roback/bookdown-BeyondMLR/">Beyond Multiple Linear Regression</a> by Roback and Legler. Much of the text is either directly from the book, or lightly modified/summarized. Most of the code originates from the book’s <a href="https://github.com/proback/BeyondMLR">Github repository</a>.</p>
+<p>These notes will guide our lectures and class discussion, but they are not sufficient as a stand-alone reference. It is important to complete the reading assignments from the full text by Roback and Legler in addition to studying these notes.</p>
+<p>This work is licensed under a <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.</a></p>
+
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+
+<a href="review-of-multiple-linear-regression.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/STAT455-W22/stat455-w22-notes/edit/master/index.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": "https://github.com/STAT455-W22/stat455-w22-notes/blob/master/index.Rmd",
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

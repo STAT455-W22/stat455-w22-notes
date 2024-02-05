@@ -1,0 +1,1761 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 2 Introduction to Correlated Data | Stat 455: Advanced Statistical Modeling Notes</title>
+  <meta name="description" content="Chapter 2 Introduction to Correlated Data | Stat 455: Advanced Statistical Modeling Notes" />
+  <meta name="generator" content="bookdown 0.37 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 2 Introduction to Correlated Data | Stat 455: Advanced Statistical Modeling Notes" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 2 Introduction to Correlated Data | Stat 455: Advanced Statistical Modeling Notes" />
+  
+  
+  
+
+
+
+<meta name="date" content="2024-02-05" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="review-of-multiple-linear-regression.html"/>
+<link rel="next" href="multilevel-models.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Stat 455 Notes</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html"><i class="fa fa-check"></i><b>1</b> Review of Multiple Linear Regression</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#exploratory-data-analysis"><i class="fa fa-check"></i><b>1.1</b> Exploratory Data Analysis</a>
+<ul>
+<li class="chapter" data-level="1.1.1" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#kentucky-derby-data"><i class="fa fa-check"></i><b>1.1.1</b> Kentucky Derby Data</a></li>
+<li class="chapter" data-level="1.1.2" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#some-data-wrangling"><i class="fa fa-check"></i><b>1.1.2</b> Some Data Wrangling</a></li>
+<li class="chapter" data-level="1.1.3" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#univariate-graphical-summaries"><i class="fa fa-check"></i><b>1.1.3</b> Univariate Graphical Summaries</a></li>
+<li class="chapter" data-level="1.1.4" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#bivariate-graphical-summaries"><i class="fa fa-check"></i><b>1.1.4</b> Bivariate Graphical Summaries</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#simple-linear-regression-model"><i class="fa fa-check"></i><b>1.2</b> Simple Linear Regression Model</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#model-for-winning-time-and-year"><i class="fa fa-check"></i><b>1.2.1</b> Model for Winning Time and Year</a></li>
+<li class="chapter" data-level="1.2.2" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#first-model-r-output"><i class="fa fa-check"></i><b>1.2.2</b> First Model R Output</a></li>
+<li class="chapter" data-level="1.2.3" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#calculations-in-slr"><i class="fa fa-check"></i><b>1.2.3</b> Calculations in SLR</a></li>
+<li class="chapter" data-level="1.2.4" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#checking-model-assumptions"><i class="fa fa-check"></i><b>1.2.4</b> Checking Model Assumptions</a></li>
+<li class="chapter" data-level="1.2.5" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#quadratic-term-for-year"><i class="fa fa-check"></i><b>1.2.5</b> Quadratic Term for Year</a></li>
+<li class="chapter" data-level="1.2.6" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#quadratic-model-in-r"><i class="fa fa-check"></i><b>1.2.6</b> Quadratic Model in R</a></li>
+<li class="chapter" data-level="1.2.7" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#quadratic-model-residual-plots"><i class="fa fa-check"></i><b>1.2.7</b> Quadratic Model Residual Plots</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#multiple-linear-regression-with-two-predictors"><i class="fa fa-check"></i><b>1.3</b> Multiple Linear Regression with Two Predictors</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#model-with-year-and-fast-track"><i class="fa fa-check"></i><b>1.3.1</b> Model with Year and Fast Track</a></li>
+<li class="chapter" data-level="1.3.2" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#multiple-regression-model-in-r"><i class="fa fa-check"></i><b>1.3.2</b> Multiple Regression Model in R</a></li>
+<li class="chapter" data-level="1.3.3" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#confidence-intervals-from-mlr-model"><i class="fa fa-check"></i><b>1.3.3</b> Confidence Intervals from MLR Model</a></li>
+<li class="chapter" data-level="1.3.4" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#slopes-for-fast-non-fast-tracks"><i class="fa fa-check"></i><b>1.3.4</b> Slopes for Fast, non-Fast Tracks</a></li>
+<li class="chapter" data-level="1.3.5" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#mlr-model-with-interaction"><i class="fa fa-check"></i><b>1.3.5</b> MLR Model with Interaction</a></li>
+<li class="chapter" data-level="1.3.6" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#model-equations-for-fast-non-fast-tracks"><i class="fa fa-check"></i><b>1.3.6</b> Model Equations for Fast, Non-Fast Tracks</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#building-a-multiple-linear-regression-model"><i class="fa fa-check"></i><b>1.4</b> Building a Multiple Linear Regression Model</a>
+<ul>
+<li class="chapter" data-level="1.4.1" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#model-building-considerations"><i class="fa fa-check"></i><b>1.4.1</b> Model Building Considerations</a></li>
+<li class="chapter" data-level="1.4.2" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#model-diagnostics"><i class="fa fa-check"></i><b>1.4.2</b> Model Diagnostics</a></li>
+<li class="chapter" data-level="1.4.3" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#three-possible-models"><i class="fa fa-check"></i><b>1.4.3</b> Three Possible Models</a></li>
+<li class="chapter" data-level="1.4.4" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#mlr-models-fit-in-r"><i class="fa fa-check"></i><b>1.4.4</b> MLR Models Fit in R</a></li>
+<li class="chapter" data-level="1.4.5" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#model-0a-output"><i class="fa fa-check"></i><b>1.4.5</b> Model 0A Output</a></li>
+<li class="chapter" data-level="1.4.6" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#model-0b-output"><i class="fa fa-check"></i><b>1.4.6</b> Model 0B Output</a></li>
+<li class="chapter" data-level="1.4.7" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#model-0c-output"><i class="fa fa-check"></i><b>1.4.7</b> Model 0C Output</a></li>
+<li class="chapter" data-level="1.4.8" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#goodness-of-fit-tests"><i class="fa fa-check"></i><b>1.4.8</b> Goodness of Fit Tests</a></li>
+<li class="chapter" data-level="1.4.9" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#anova-f-statistic"><i class="fa fa-check"></i><b>1.4.9</b> ANOVA F-Statistic</a></li>
+<li class="chapter" data-level="1.4.10" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#final-model-residual-plots"><i class="fa fa-check"></i><b>1.4.10</b> Final Model Residual Plots</a></li>
+<li class="chapter" data-level="1.4.11" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#overall-conclusions"><i class="fa fa-check"></i><b>1.4.11</b> Overall Conclusions</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#practice-questions"><i class="fa fa-check"></i><b>1.5</b> Practice Questions</a>
+<ul>
+<li class="chapter" data-level="" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#identify-violations-of-linear-least-squares-regression-llsr-assumptions-based-on-descriptions-of-data-collection."><i class="fa fa-check"></i>1. Identify violations of linear least squares regression (LLSR) assumptions based on descriptions of data collection.</a></li>
+<li class="chapter" data-level="" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#interpret-parameter-estimates-in-llsr-models-including-models-with-transformations-andor-interactions."><i class="fa fa-check"></i>2. Interpret parameter estimates in LLSR models, including models with transformations and/or interactions.</a></li>
+<li class="chapter" data-level="" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#calculate-expected-responses-and-expected-changes-associated-with-explanatory-variables-in-a-llsr-model."><i class="fa fa-check"></i>3. Calculate expected responses and expected changes associated with explanatory variables in a LLSR model.</a></li>
+<li class="chapter" data-level="" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#calculate-standard-errors-t-statistics-residual-standard-error-r2-and-f-statistics-in-a-llsr-models-r-output."><i class="fa fa-check"></i>4. Calculate standard errors, t-statistics, residual standard error, <span class="math inline">\(R^2\)</span>, and F-statistics in a LLSR model’s R output.</a></li>
+<li class="chapter" data-level="" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#interpret-standard-errors-t-statistics-residual-standard-error-r2-and-f-statistics-in-a-llsr-models-r-output."><i class="fa fa-check"></i>5. Interpret standard errors, t-statistics, residual standard error, <span class="math inline">\(R^2\)</span>, and F-statistics in a LLSR model’s R output.</a></li>
+<li class="chapter" data-level="1.5.1" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#practice-advanced-tasks"><i class="fa fa-check"></i><b>1.5.1</b> Practice Advanced Tasks</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html"><i class="fa fa-check"></i><b>2</b> Introduction to Correlated Data</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#introduction-to-correlated-data-1"><i class="fa fa-check"></i><b>2.1</b> Introduction to Correlated Data</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#weight-gain-in-mice-experiment-design-1"><i class="fa fa-check"></i><b>2.1.1</b> Weight Gain in Mice: Experiment Design #1</a></li>
+<li class="chapter" data-level="2.1.2" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#mice-experiment-1-data"><i class="fa fa-check"></i><b>2.1.2</b> Mice Experiment 1 Data</a></li>
+<li class="chapter" data-level="2.1.3" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#a-naive-graphical-analysis"><i class="fa fa-check"></i><b>2.1.3</b> A Naive Graphical Analysis</a></li>
+<li class="chapter" data-level="2.1.4" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#a-more-informed-graphical-analysis"><i class="fa fa-check"></i><b>2.1.4</b> A More Informed Graphical Analysis</a></li>
+<li class="chapter" data-level="2.1.5" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#table-of-mean-weight-by-diet"><i class="fa fa-check"></i><b>2.1.5</b> Table of Mean Weight By Diet</a></li>
+<li class="chapter" data-level="2.1.6" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#table-of-mean-weight-by-diet-and-litter"><i class="fa fa-check"></i><b>2.1.6</b> Table of Mean Weight By Diet and Litter</a></li>
+<li class="chapter" data-level="2.1.7" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#assessing-evidence-of-differences"><i class="fa fa-check"></i><b>2.1.7</b> Assessing Evidence of Differences</a></li>
+<li class="chapter" data-level="2.1.8" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#an-improper-statistical-analysis"><i class="fa fa-check"></i><b>2.1.8</b> An Improper Statistical Analysis</a></li>
+<li class="chapter" data-level="2.1.9" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#a-more-appropriate-statistical-analysis"><i class="fa fa-check"></i><b>2.1.9</b> A More Appropriate Statistical Analysis</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#linear-mixed-effects-models"><i class="fa fa-check"></i><b>2.2</b> Linear Mixed Effects Models</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#llsr-model-for-mice-experiment"><i class="fa fa-check"></i><b>2.2.1</b> LLSR Model for Mice Experiment</a></li>
+<li class="chapter" data-level="2.2.2" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#model-accounting-for-correlation"><i class="fa fa-check"></i><b>2.2.2</b> Model Accounting For Correlation</a></li>
+<li class="chapter" data-level="2.2.3" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#questions-of-interest"><i class="fa fa-check"></i><b>2.2.3</b> Questions of Interest</a></li>
+<li class="chapter" data-level="2.2.4" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#fixed-and-random-effects"><i class="fa fa-check"></i><b>2.2.4</b> Fixed and Random Effects</a></li>
+<li class="chapter" data-level="2.2.5" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#fitting-the-model-in-r"><i class="fa fa-check"></i><b>2.2.5</b> Fitting the Model in R</a></li>
+<li class="chapter" data-level="2.2.6" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#why-not-fixed-effect-for-litter"><i class="fa fa-check"></i><b>2.2.6</b> Why Not Fixed Effect for Litter?</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#a-second-mice-experiment"><i class="fa fa-check"></i><b>2.3</b> A Second Mice Experiment</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#weight-gain-in-mice-experiment-2"><i class="fa fa-check"></i><b>2.3.1</b> Weight Gain in Mice: Experiment 2</a></li>
+<li class="chapter" data-level="2.3.2" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#mice-experiment-2-data"><i class="fa fa-check"></i><b>2.3.2</b> Mice Experiment 2 Data</a></li>
+<li class="chapter" data-level="2.3.3" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#a-naive-graphical-analysis-for-experiment-2"><i class="fa fa-check"></i><b>2.3.3</b> A Naive Graphical Analysis for Experiment 2</a></li>
+<li class="chapter" data-level="2.3.4" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#a-more-informed-graphical-analysis-for-experiment-2"><i class="fa fa-check"></i><b>2.3.4</b> A More Informed Graphical Analysis for Experiment 2</a></li>
+<li class="chapter" data-level="2.3.5" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#table-of-mean-weight-by-diet-for-experiment-2"><i class="fa fa-check"></i><b>2.3.5</b> Table of Mean Weight By Diet for Experiment 2</a></li>
+<li class="chapter" data-level="2.3.6" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#table-comparing-litters-means-by-diet-for-experiment-2"><i class="fa fa-check"></i><b>2.3.6</b> Table Comparing Litters Means by Diet for Experiment 2</a></li>
+<li class="chapter" data-level="2.3.7" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#an-inappropriate-model-for-the-second-design"><i class="fa fa-check"></i><b>2.3.7</b> An Inappropriate Model for the Second Design</a></li>
+<li class="chapter" data-level="2.3.8" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#a-more-appropriate-model-for-experiment-2"><i class="fa fa-check"></i><b>2.3.8</b> A More Appropriate Model for Experiment 2</a></li>
+<li class="chapter" data-level="2.3.9" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#model-for-litter-means"><i class="fa fa-check"></i><b>2.3.9</b> Model for Litter Means</a></li>
+<li class="chapter" data-level="2.3.10" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#fixed-effect-for-litter-in-experiment-2"><i class="fa fa-check"></i><b>2.3.10</b> Fixed Effect for Litter in Experiment 2</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#a-multilevel-experiment"><i class="fa fa-check"></i><b>2.4</b> A Multilevel Experiment</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#experiment-2-illustration"><i class="fa fa-check"></i><b>2.4.1</b> Experiment 2 Illustration</a></li>
+<li class="chapter" data-level="2.4.2" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#experiment-with-variables-assigned-at-different-levels"><i class="fa fa-check"></i><b>2.4.2</b> Experiment with Variables Assigned at Different Levels</a></li>
+<li class="chapter" data-level="2.4.3" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#experiment-3-data"><i class="fa fa-check"></i><b>2.4.3</b> Experiment 3 Data</a></li>
+<li class="chapter" data-level="2.4.4" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#graphical-analysis-for-experiment-3"><i class="fa fa-check"></i><b>2.4.4</b> Graphical Analysis for Experiment 3</a></li>
+<li class="chapter" data-level="2.4.5" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#an-inappropriate-model-for-the-3rd-design"><i class="fa fa-check"></i><b>2.4.5</b> An Inappropriate Model for the 3rd Design</a></li>
+<li class="chapter" data-level="2.4.6" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#a-more-appropriate-model-for-experiment-3"><i class="fa fa-check"></i><b>2.4.6</b> A More Appropriate Model for Experiment 3</a></li>
+<li class="chapter" data-level="2.4.7" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#comparison-of-llsr-and-lme-models"><i class="fa fa-check"></i><b>2.4.7</b> Comparison of LLSR and LME Models</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#practice-questions-1"><i class="fa fa-check"></i><b>2.5</b> Practice Questions</a>
+<ul>
+<li class="chapter" data-level="" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#identify-the-response-variable-and-fixed-and-random-effects-associated-with-a-given-set-of-data."><i class="fa fa-check"></i>7. Identify the response variable and fixed and random effects associated with a given set of data.</a></li>
+<li class="chapter" data-level="" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#interpret-variance-component-estimates-sigma-and-sigma_u-in-linear-mixed-effects-lme-models."><i class="fa fa-check"></i>8. Interpret variance component estimates (<span class="math inline">\(\sigma\)</span> and <span class="math inline">\(\sigma_u\)</span>) in linear mixed effects (LME) models.</a></li>
+<li class="chapter" data-level="" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#determine-how-standard-errors-in-a-lme-model-would-compare-to-the-standard-errors-we-would-get-if-we-used-a-llsr-model-on-the-same-data."><i class="fa fa-check"></i>10. Determine how standard errors in a LME model would compare to the standard errors we would get if we used a LLSR model on the same data.</a></li>
+<li class="chapter" data-level="" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#determine-how-changes-in-sample-size-andor-experimental-design-will-impact-standard-errors-confidence-intervals-and-p-values-in-a-lme-model."><i class="fa fa-check"></i>11. Determine how changes in sample size and/or experimental design will impact standard errors, confidence intervals, and p-values in a LME model.</a></li>
+<li class="chapter" data-level="" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#compare-the-size-of-different-variance-component-estimates-given-a-lme-model-and-a-small-set-of-data-i.e.-say-whether-sigma_u-or-sigma-will-be-larger."><i class="fa fa-check"></i>9. Compare the size of different variance component estimates given a LME model and a small set of data (i.e. say whether <span class="math inline">\(\sigma_u\)</span>, or <span class="math inline">\(\sigma\)</span> will be larger).</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="multilevel-models.html"><a href="multilevel-models.html"><i class="fa fa-check"></i><b>3</b> Multilevel Models</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="multilevel-models.html"><a href="multilevel-models.html#music-performance-anxiety-study-data-and-exploratory-analysis"><i class="fa fa-check"></i><b>3.1</b> Music Performance Anxiety Study: Data and Exploratory Analysis</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="multilevel-models.html"><a href="multilevel-models.html#description-of-the-study"><i class="fa fa-check"></i><b>3.1.1</b> Description of the Study</a></li>
+<li class="chapter" data-level="3.1.2" data-path="multilevel-models.html"><a href="multilevel-models.html#variables"><i class="fa fa-check"></i><b>3.1.2</b> Variables</a></li>
+<li class="chapter" data-level="3.1.3" data-path="multilevel-models.html"><a href="multilevel-models.html#the-data"><i class="fa fa-check"></i><b>3.1.3</b> The Data</a></li>
+<li class="chapter" data-level="3.1.4" data-path="multilevel-models.html"><a href="multilevel-models.html#some-data-wrangling-1"><i class="fa fa-check"></i><b>3.1.4</b> Some Data Wrangling</a></li>
+<li class="chapter" data-level="3.1.5" data-path="multilevel-models.html"><a href="multilevel-models.html#multilevel-structure"><i class="fa fa-check"></i><b>3.1.5</b> Multilevel Structure</a></li>
+<li class="chapter" data-level="3.1.6" data-path="multilevel-models.html"><a href="multilevel-models.html#questions-of-interest-1"><i class="fa fa-check"></i><b>3.1.6</b> Questions of Interest</a></li>
+<li class="chapter" data-level="3.1.7" data-path="multilevel-models.html"><a href="multilevel-models.html#number-of-performances-by-musician"><i class="fa fa-check"></i><b>3.1.7</b> Number of Performances by Musician</a></li>
+<li class="chapter" data-level="3.1.8" data-path="multilevel-models.html"><a href="multilevel-models.html#number-of-performances-of-each-type"><i class="fa fa-check"></i><b>3.1.8</b> Number of Performances of Each Type</a></li>
+<li class="chapter" data-level="3.1.9" data-path="multilevel-models.html"><a href="multilevel-models.html#distribution-of-negative-affect-for-all-performances"><i class="fa fa-check"></i><b>3.1.9</b> Distribution of Negative Affect for All Performances</a></li>
+<li class="chapter" data-level="3.1.10" data-path="multilevel-models.html"><a href="multilevel-models.html#distribution-of-average-negative-affect-for-each-musician"><i class="fa fa-check"></i><b>3.1.10</b> Distribution of Average Negative Affect for each Musician</a></li>
+<li class="chapter" data-level="3.1.11" data-path="multilevel-models.html"><a href="multilevel-models.html#distribution-of-level-two-covariates"><i class="fa fa-check"></i><b>3.1.11</b> Distribution of Level Two Covariates</a></li>
+<li class="chapter" data-level="3.1.12" data-path="multilevel-models.html"><a href="multilevel-models.html#distributions-of-nem-pem-absorption"><i class="fa fa-check"></i><b>3.1.12</b> Distributions of NEM, PEM, Absorption</a></li>
+<li class="chapter" data-level="3.1.13" data-path="multilevel-models.html"><a href="multilevel-models.html#negative-affect-by-performance-type-audience-type-and-previous-performances"><i class="fa fa-check"></i><b>3.1.13</b> Negative Affect by Performance Type, Audience Type, and Previous Performances</a></li>
+<li class="chapter" data-level="3.1.14" data-path="multilevel-models.html"><a href="multilevel-models.html#lattice-plot-for-negative-affect-by-performance-type"><i class="fa fa-check"></i><b>3.1.14</b> Lattice Plot for Negative Affect by Performance Type</a></li>
+<li class="chapter" data-level="3.1.15" data-path="multilevel-models.html"><a href="multilevel-models.html#lattice-plot-for-negative-affect-by-audience-type"><i class="fa fa-check"></i><b>3.1.15</b> Lattice Plot for Negative Affect by Audience Type</a></li>
+<li class="chapter" data-level="3.1.16" data-path="multilevel-models.html"><a href="multilevel-models.html#lattice-plot-for-previous-performances-vs-negative-affect"><i class="fa fa-check"></i><b>3.1.16</b> Lattice Plot for Previous Performances vs Negative Affect</a></li>
+<li class="chapter" data-level="3.1.17" data-path="multilevel-models.html"><a href="multilevel-models.html#negative-affect-by-instrument-type"><i class="fa fa-check"></i><b>3.1.17</b> Negative Affect by Instrument Type</a></li>
+<li class="chapter" data-level="3.1.18" data-path="multilevel-models.html"><a href="multilevel-models.html#more-data-wrangling"><i class="fa fa-check"></i><b>3.1.18</b> More Data Wrangling</a></li>
+<li class="chapter" data-level="3.1.19" data-path="multilevel-models.html"><a href="multilevel-models.html#lattice-plot-for-large-ensemble-effect"><i class="fa fa-check"></i><b>3.1.19</b> Lattice Plot for Large Ensemble Effect</a></li>
+<li class="chapter" data-level="3.1.20" data-path="multilevel-models.html"><a href="multilevel-models.html#boxplots-for-orchestral-instrument-effect"><i class="fa fa-check"></i><b>3.1.20</b> Boxplots for Orchestral Instrument Effect</a></li>
+<li class="chapter" data-level="3.1.21" data-path="multilevel-models.html"><a href="multilevel-models.html#negative-affect-by-pem-nem-absorption"><i class="fa fa-check"></i><b>3.1.21</b> Negative Affect by PEM, NEM, Absorption</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="multilevel-models.html"><a href="multilevel-models.html#modeling-the-musician-data"><i class="fa fa-check"></i><b>3.2</b> Modeling the Musician Data</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="multilevel-models.html"><a href="multilevel-models.html#model-notation"><i class="fa fa-check"></i><b>3.2.1</b> Model Notation</a></li>
+<li class="chapter" data-level="3.2.2" data-path="multilevel-models.html"><a href="multilevel-models.html#llsr-model-clearly-inappropriate"><i class="fa fa-check"></i><b>3.2.2</b> LLSR Model (Clearly inappropriate)</a></li>
+<li class="chapter" data-level="3.2.3" data-path="multilevel-models.html"><a href="multilevel-models.html#llsr-model-output"><i class="fa fa-check"></i><b>3.2.3</b> LLSR Model Output</a></li>
+<li class="chapter" data-level="3.2.4" data-path="multilevel-models.html"><a href="multilevel-models.html#random-vs.-fixed-effects"><i class="fa fa-check"></i><b>3.2.4</b> Random vs. Fixed Effects</a></li>
+<li class="chapter" data-level="3.2.5" data-path="multilevel-models.html"><a href="multilevel-models.html#an-initial-linear-mixed-effect-model"><i class="fa fa-check"></i><b>3.2.5</b> An Initial Linear Mixed Effect Model</a></li>
+<li class="chapter" data-level="3.2.6" data-path="multilevel-models.html"><a href="multilevel-models.html#initial-mixed-effects-model-in-r"><i class="fa fa-check"></i><b>3.2.6</b> Initial Mixed Effects Model in R</a></li>
+<li class="chapter" data-level="3.2.7" data-path="multilevel-models.html"><a href="multilevel-models.html#mixed-effects-model-interpretations"><i class="fa fa-check"></i><b>3.2.7</b> Mixed Effects Model Interpretations</a></li>
+<li class="chapter" data-level="3.2.8" data-path="multilevel-models.html"><a href="multilevel-models.html#mixed-effects-model-without-interaction"><i class="fa fa-check"></i><b>3.2.8</b> Mixed Effects Model Without Interaction</a></li>
+<li class="chapter" data-level="3.2.9" data-path="multilevel-models.html"><a href="multilevel-models.html#interpretations-for-model-without-interaction"><i class="fa fa-check"></i><b>3.2.9</b> Interpretations for Model without Interaction</a></li>
+<li class="chapter" data-level="3.2.10" data-path="multilevel-models.html"><a href="multilevel-models.html#assumptions-in-first-mixed-effects-model"><i class="fa fa-check"></i><b>3.2.10</b> Assumptions in First Mixed Effects Model</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="multilevel-models.html"><a href="multilevel-models.html#random-slopes-model"><i class="fa fa-check"></i><b>3.3</b> Random Slopes Model</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="multilevel-models.html"><a href="multilevel-models.html#differences-in-large-vs-smallsolo"><i class="fa fa-check"></i><b>3.3.1</b> Differences in Large vs Small/Solo</a></li>
+<li class="chapter" data-level="3.3.2" data-path="multilevel-models.html"><a href="multilevel-models.html#illustration-of-previous-model"><i class="fa fa-check"></i><b>3.3.2</b> Illustration of Previous Model</a></li>
+<li class="chapter" data-level="3.3.3" data-path="multilevel-models.html"><a href="multilevel-models.html#illustration-of-new-random-slopes-model"><i class="fa fa-check"></i><b>3.3.3</b> Illustration of New (Random Slopes) Model</a></li>
+<li class="chapter" data-level="3.3.4" data-path="multilevel-models.html"><a href="multilevel-models.html#random-slopes-model-1"><i class="fa fa-check"></i><b>3.3.4</b> Random Slopes Model</a></li>
+<li class="chapter" data-level="3.3.5" data-path="multilevel-models.html"><a href="multilevel-models.html#specifying-distribution-of-random-effects"><i class="fa fa-check"></i><b>3.3.5</b> Specifying Distribution of Random Effects</a></li>
+<li class="chapter" data-level="3.3.6" data-path="multilevel-models.html"><a href="multilevel-models.html#random-slopes-model-with-error-term-distributions"><i class="fa fa-check"></i><b>3.3.6</b> Random Slopes Model with Error Term Distributions</a></li>
+<li class="chapter" data-level="3.3.7" data-path="multilevel-models.html"><a href="multilevel-models.html#random-slopes-model-in-r"><i class="fa fa-check"></i><b>3.3.7</b> Random Slopes Model in R</a></li>
+<li class="chapter" data-level="3.3.8" data-path="multilevel-models.html"><a href="multilevel-models.html#more-on-interpreting-parameters"><i class="fa fa-check"></i><b>3.3.8</b> More on Interpreting Parameters</a></li>
+<li class="chapter" data-level="3.3.9" data-path="multilevel-models.html"><a href="multilevel-models.html#model-comparisons"><i class="fa fa-check"></i><b>3.3.9</b> Model Comparisons</a></li>
+<li class="chapter" data-level="3.3.10" data-path="multilevel-models.html"><a href="multilevel-models.html#random-slopes-model-with-interaction"><i class="fa fa-check"></i><b>3.3.10</b> Random Slopes Model with Interaction</a></li>
+<li class="chapter" data-level="3.3.11" data-path="multilevel-models.html"><a href="multilevel-models.html#random-slopes-model-with-interaction-in-r"><i class="fa fa-check"></i><b>3.3.11</b> Random Slopes Model with Interaction in R</a></li>
+<li class="chapter" data-level="3.3.12" data-path="multilevel-models.html"><a href="multilevel-models.html#random-slope-vs-interaction-term"><i class="fa fa-check"></i><b>3.3.12</b> Random Slope vs Interaction Term</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="multilevel-models.html"><a href="multilevel-models.html#unconditional-means-model"><i class="fa fa-check"></i><b>3.4</b> Unconditional Means Model</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="multilevel-models.html"><a href="multilevel-models.html#unconditional-means-model-formulation"><i class="fa fa-check"></i><b>3.4.1</b> Unconditional Means Model Formulation</a></li>
+<li class="chapter" data-level="3.4.2" data-path="multilevel-models.html"><a href="multilevel-models.html#unconditional-means-model-in-r"><i class="fa fa-check"></i><b>3.4.2</b> Unconditional Means Model in R</a></li>
+<li class="chapter" data-level="3.4.3" data-path="multilevel-models.html"><a href="multilevel-models.html#unconditional-means-model-interpretations"><i class="fa fa-check"></i><b>3.4.3</b> Unconditional Means Model Interpretations</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="multilevel-models.html"><a href="multilevel-models.html#building-a-multilevel-model"><i class="fa fa-check"></i><b>3.5</b> Building A Multilevel Model</a>
+<ul>
+<li class="chapter" data-level="3.5.1" data-path="multilevel-models.html"><a href="multilevel-models.html#centering-covariates"><i class="fa fa-check"></i><b>3.5.1</b> Centering Covariates</a></li>
+<li class="chapter" data-level="3.5.2" data-path="multilevel-models.html"><a href="multilevel-models.html#a-possible-final-model"><i class="fa fa-check"></i><b>3.5.2</b> A Possible Final Model</a></li>
+<li class="chapter" data-level="3.5.3" data-path="multilevel-models.html"><a href="multilevel-models.html#more-data-wrangling-1"><i class="fa fa-check"></i><b>3.5.3</b> More Data Wrangling</a></li>
+<li class="chapter" data-level="3.5.4" data-path="multilevel-models.html"><a href="multilevel-models.html#fitting-model-a"><i class="fa fa-check"></i><b>3.5.4</b> Fitting Model A</a></li>
+<li class="chapter" data-level="3.5.5" data-path="multilevel-models.html"><a href="multilevel-models.html#a-model-without-random-slopes"><i class="fa fa-check"></i><b>3.5.5</b> A Model Without Random Slopes</a></li>
+<li class="chapter" data-level="3.5.6" data-path="multilevel-models.html"><a href="multilevel-models.html#fitting-model-b-in-r"><i class="fa fa-check"></i><b>3.5.6</b> Fitting Model B in R</a></li>
+<li class="chapter" data-level="3.5.7" data-path="multilevel-models.html"><a href="multilevel-models.html#one-more-possible-model"><i class="fa fa-check"></i><b>3.5.7</b> One More Possible Model</a></li>
+<li class="chapter" data-level="3.5.8" data-path="multilevel-models.html"><a href="multilevel-models.html#aic-and-bic-comparisons-for-models-b-and-c"><i class="fa fa-check"></i><b>3.5.8</b> AIC and BIC Comparisons for Models B and C</a></li>
+<li class="chapter" data-level="3.5.9" data-path="multilevel-models.html"><a href="multilevel-models.html#likelihood-ratio-test"><i class="fa fa-check"></i><b>3.5.9</b> Likelihood Ratio Test</a></li>
+<li class="chapter" data-level="3.5.10" data-path="multilevel-models.html"><a href="multilevel-models.html#final-conclusions"><i class="fa fa-check"></i><b>3.5.10</b> Final Conclusions</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="multilevel-models.html"><a href="multilevel-models.html#practice-questions-2"><i class="fa fa-check"></i><b>3.6</b> Practice Questions</a>
+<ul>
+<li class="chapter" data-level="" data-path="multilevel-models.html"><a href="multilevel-models.html#identify-the-levels-of-a-two-level-experiment-and-the-observational-units-and-variables-at-each-level."><i class="fa fa-check"></i>12. Identify the levels of a two-level experiment and the observational units and variables at each level.</a></li>
+<li class="chapter" data-level="" data-path="multilevel-models.html"><a href="multilevel-models.html#interpret-random-slopes-intercepts-error-terms-and-their-estimated-variances-and-correlations-in-linear-mixed-effects-models."><i class="fa fa-check"></i>13. Interpret random slopes, intercepts, error terms and their estimated variances and correlations in linear mixed effects models.</a></li>
+<li class="chapter" data-level="" data-path="multilevel-models.html"><a href="multilevel-models.html#determine-whether-it-is-appropriate-to-add-a-random-slope-term-to-a-model-in-a-given-context."><i class="fa fa-check"></i>14. Determine whether it is appropriate to add a random slope term to a model in a given context.</a></li>
+<li class="chapter" data-level="" data-path="multilevel-models.html"><a href="multilevel-models.html#distinguish-between-random-slope-terms-and-interactions-terms-and-explain-what-the-inclusionexclusion-of-each-in-a-lme-model-says-about-our-assumptions-regarding-the-nature-of-our-data."><i class="fa fa-check"></i>15. Distinguish between random slope terms and interactions terms and explain what the inclusion/exclusion of each in a LME model says about our assumptions regarding the nature of our data.</a></li>
+<li class="chapter" data-level="" data-path="multilevel-models.html"><a href="multilevel-models.html#calculate-expected-responses-and-expected-changes-associated-with-fixed-effects-in-a-lme-model.-if-it-is-not-possible-to-calculate-the-quantity-explain-why."><i class="fa fa-check"></i>16. Calculate expected responses and expected changes associated with fixed effects in a LME model. If it is not possible to calculate the quantity, explain why.</a></li>
+<li class="chapter" data-level="" data-path="multilevel-models.html"><a href="multilevel-models.html#write-equations-for-linear-mixed-effects-models-in-mathematical-notation-including-assumptions-about-distributions-of-random-effects-and-error-terms."><i class="fa fa-check"></i>17. Write equations for linear mixed effects models in mathematical notation, including assumptions about distributions of random effects and error terms.</a></li>
+<li class="chapter" data-level="" data-path="multilevel-models.html"><a href="multilevel-models.html#give-examples-of-values-of-the-response-variable-that-would-satisfy-given-conditions-about-parameters-in-a-lme-model-for-example-sigma_usigma."><i class="fa fa-check"></i>18. Give examples of values of the response variable that would satisfy given conditions about parameters in a LME model (for example (<span class="math inline">\(\sigma_u&gt;\sigma\)</span>)).</a></li>
+<li class="chapter" data-level="" data-path="multilevel-models.html"><a href="multilevel-models.html#draw-lattice-or-spaghetti-plots-that-are-consistent-with-given-conditions-involving-parameters-in-a-lme-model."><i class="fa fa-check"></i>22. Draw lattice (or spaghetti) plots that are consistent with given conditions involving parameters in a LME model.</a></li>
+<li class="chapter" data-level="" data-path="multilevel-models.html"><a href="multilevel-models.html#answer-research-questions-related-to-fixed-and-random-effects-in-a-study-given-output-from-lme-models."><i class="fa fa-check"></i>23. Answer research questions related to fixed and random effects in a study given output from LME models.</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="longitudinal-data.html"><a href="longitudinal-data.html"><i class="fa fa-check"></i><b>4</b> Longitudinal Data</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="longitudinal-data.html"><a href="longitudinal-data.html#charter-schools-exploratory-analysis"><i class="fa fa-check"></i><b>4.1</b> Charter Schools Exploratory Analysis</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="longitudinal-data.html"><a href="longitudinal-data.html#data"><i class="fa fa-check"></i><b>4.1.1</b> Data Organization</a></li>
+<li class="chapter" data-level="4.1.2" data-path="longitudinal-data.html"><a href="longitudinal-data.html#missing-data"><i class="fa fa-check"></i><b>4.1.2</b> Missing Data</a></li>
+<li class="chapter" data-level="4.1.3" data-path="longitudinal-data.html"><a href="longitudinal-data.html#convert-to-tidy-form"><i class="fa fa-check"></i><b>4.1.3</b> Convert to Tidy Form</a></li>
+<li class="chapter" data-level="4.1.4" data-path="longitudinal-data.html"><a href="longitudinal-data.html#exploratory-analyses-for-general-multilevel-models"><i class="fa fa-check"></i><b>4.1.4</b> Exploratory Analyses for General Multilevel Models</a></li>
+<li class="chapter" data-level="4.1.5" data-path="longitudinal-data.html"><a href="longitudinal-data.html#exploratory-analyses-for-longitudinal-data"><i class="fa fa-check"></i><b>4.1.5</b> Exploratory Analyses for Longitudinal Data</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="longitudinal-data.html"><a href="longitudinal-data.html#multilevel-longitudinal-models"><i class="fa fa-check"></i><b>4.2</b> Multilevel Longitudinal Models</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="longitudinal-data.html"><a href="longitudinal-data.html#unconditional-means-model-1"><i class="fa fa-check"></i><b>4.2.1</b> Unconditional Means Model</a></li>
+<li class="chapter" data-level="4.2.2" data-path="longitudinal-data.html"><a href="longitudinal-data.html#interpretations-in-unconditional-means-model"><i class="fa fa-check"></i><b>4.2.2</b> Interpretations in Unconditional Means Model</a></li>
+<li class="chapter" data-level="4.2.3" data-path="longitudinal-data.html"><a href="longitudinal-data.html#intraclass-correlation-coefficient"><i class="fa fa-check"></i><b>4.2.3</b> Intraclass Correlation Coefficient:</a></li>
+<li class="chapter" data-level="4.2.4" data-path="longitudinal-data.html"><a href="longitudinal-data.html#unconditional-growth-model"><i class="fa fa-check"></i><b>4.2.4</b> Unconditional Growth Model</a></li>
+<li class="chapter" data-level="4.2.5" data-path="longitudinal-data.html"><a href="longitudinal-data.html#interpretations-in-unconditional-growth-model"><i class="fa fa-check"></i><b>4.2.5</b> Interpretations in Unconditional Growth Model</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="longitudinal-data.html"><a href="longitudinal-data.html#quadratic-and-piecewise-linear-models"><i class="fa fa-check"></i><b>4.3</b> Quadratic and Piecewise Linear Models</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="longitudinal-data.html"><a href="longitudinal-data.html#quadratic-trend-over-time"><i class="fa fa-check"></i><b>4.3.1</b> Quadratic Trend over Time</a></li>
+<li class="chapter" data-level="4.3.2" data-path="longitudinal-data.html"><a href="longitudinal-data.html#quadratic-model"><i class="fa fa-check"></i><b>4.3.2</b> Quadratic Model</a></li>
+<li class="chapter" data-level="4.3.3" data-path="longitudinal-data.html"><a href="longitudinal-data.html#quadratic-model-in-r-1"><i class="fa fa-check"></i><b>4.3.3</b> Quadratic Model in R</a></li>
+<li class="chapter" data-level="4.3.4" data-path="longitudinal-data.html"><a href="longitudinal-data.html#estimated-response-curve"><i class="fa fa-check"></i><b>4.3.4</b> Estimated Response Curve</a></li>
+<li class="chapter" data-level="4.3.5" data-path="longitudinal-data.html"><a href="longitudinal-data.html#linear-and-quadratic-error-terms"><i class="fa fa-check"></i><b>4.3.5</b> Linear and Quadratic Error Terms</a></li>
+<li class="chapter" data-level="4.3.6" data-path="longitudinal-data.html"><a href="longitudinal-data.html#model-with-many-random-terms-in-r"><i class="fa fa-check"></i><b>4.3.6</b> Model with Many Random Terms in R</a></li>
+<li class="chapter" data-level="4.3.7" data-path="longitudinal-data.html"><a href="longitudinal-data.html#only-a-linear-random-term"><i class="fa fa-check"></i><b>4.3.7</b> Only a Linear Random Term</a></li>
+<li class="chapter" data-level="4.3.8" data-path="longitudinal-data.html"><a href="longitudinal-data.html#comments-on-random-terms"><i class="fa fa-check"></i><b>4.3.8</b> Comments on Random Terms</a></li>
+<li class="chapter" data-level="4.3.9" data-path="longitudinal-data.html"><a href="longitudinal-data.html#model-comparison"><i class="fa fa-check"></i><b>4.3.9</b> Model Comparison</a></li>
+<li class="chapter" data-level="4.3.10" data-path="longitudinal-data.html"><a href="longitudinal-data.html#piecewise-linear-model"><i class="fa fa-check"></i><b>4.3.10</b> Piecewise Linear Model</a></li>
+<li class="chapter" data-level="4.3.11" data-path="longitudinal-data.html"><a href="longitudinal-data.html#piecewise-model-equation"><i class="fa fa-check"></i><b>4.3.11</b> Piecewise Model Equation</a></li>
+<li class="chapter" data-level="4.3.12" data-path="longitudinal-data.html"><a href="longitudinal-data.html#estimated-response-curve-1"><i class="fa fa-check"></i><b>4.3.12</b> Estimated Response Curve</a></li>
+<li class="chapter" data-level="4.3.13" data-path="longitudinal-data.html"><a href="longitudinal-data.html#comparing-quadratic-and-piecewise-models"><i class="fa fa-check"></i><b>4.3.13</b> Comparing Quadratic and Piecewise Models</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="longitudinal-data.html"><a href="longitudinal-data.html#model-for-school-type"><i class="fa fa-check"></i><b>4.4</b> Model for School Type</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="longitudinal-data.html"><a href="longitudinal-data.html#uncontrolled-effects-of-school-type"><i class="fa fa-check"></i><b>4.4.1</b> Uncontrolled Effects of School Type</a></li>
+<li class="chapter" data-level="4.4.2" data-path="longitudinal-data.html"><a href="longitudinal-data.html#interpretations-for-school-type-model"><i class="fa fa-check"></i><b>4.4.2</b> Interpretations for School Type Model</a></li>
+<li class="chapter" data-level="4.4.3" data-path="longitudinal-data.html"><a href="longitudinal-data.html#illustration"><i class="fa fa-check"></i><b>4.4.3</b> Illustration</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="longitudinal-data.html"><a href="longitudinal-data.html#covariance-structure-among-observations"><i class="fa fa-check"></i><b>4.5</b> Covariance Structure among Observations</a>
+<ul>
+<li class="chapter" data-level="4.5.1" data-path="longitudinal-data.html"><a href="longitudinal-data.html#standard-covariance-structure"><i class="fa fa-check"></i><b>4.5.1</b> Standard Covariance Structure</a></li>
+<li class="chapter" data-level="4.5.2" data-path="longitudinal-data.html"><a href="longitudinal-data.html#derivation-of-vary_i1-optional"><i class="fa fa-check"></i><b>4.5.2</b> Derivation of <span class="math inline">\(Var(Y_{i1})\)</span> (optional)</a></li>
+<li class="chapter" data-level="4.5.3" data-path="longitudinal-data.html"><a href="longitudinal-data.html#interpretations-of-vary_i1-and-covy_ij-y_ik"><i class="fa fa-check"></i><b>4.5.3</b> Interpretations of <span class="math inline">\(Var(Y_{i1})\)</span> and <span class="math inline">\(Cov(Y_{ij}, Y_{ik})\)</span></a></li>
+<li class="chapter" data-level="4.5.4" data-path="longitudinal-data.html"><a href="longitudinal-data.html#variance-and-covariance-estimates"><i class="fa fa-check"></i><b>4.5.4</b> Variance and Covariance Estimates</a></li>
+<li class="chapter" data-level="4.5.5" data-path="longitudinal-data.html"><a href="longitudinal-data.html#alternative-covariance-structure---uncorrelated"><i class="fa fa-check"></i><b>4.5.5</b> Alternative Covariance Structure - Uncorrelated</a></li>
+<li class="chapter" data-level="4.5.6" data-path="longitudinal-data.html"><a href="longitudinal-data.html#alternative-covariance-structure---unstructured"><i class="fa fa-check"></i><b>4.5.6</b> Alternative Covariance Structure - Unstructured</a></li>
+<li class="chapter" data-level="4.5.7" data-path="longitudinal-data.html"><a href="longitudinal-data.html#alternative-covariance-structure---compound-symmetry"><i class="fa fa-check"></i><b>4.5.7</b> Alternative Covariance Structure - Compound Symmetry</a></li>
+<li class="chapter" data-level="4.5.8" data-path="longitudinal-data.html"><a href="longitudinal-data.html#alternative-covariance-structure---autogregressive"><i class="fa fa-check"></i><b>4.5.8</b> Alternative Covariance Structure - Autogregressive</a></li>
+<li class="chapter" data-level="4.5.9" data-path="longitudinal-data.html"><a href="longitudinal-data.html#ar1-model-on-schools-data"><i class="fa fa-check"></i><b>4.5.9</b> AR(1) Model on Schools Data</a></li>
+<li class="chapter" data-level="4.5.10" data-path="longitudinal-data.html"><a href="longitudinal-data.html#non-longitudinal-multilevel-models"><i class="fa fa-check"></i><b>4.5.10</b> Non-longitudinal Multilevel Models</a></li>
+<li class="chapter" data-level="4.5.11" data-path="longitudinal-data.html"><a href="longitudinal-data.html#final-thoughts-regarding-covariance-structures"><i class="fa fa-check"></i><b>4.5.11</b> Final Thoughts Regarding Covariance Structures</a></li>
+</ul></li>
+<li class="chapter" data-level="4.6" data-path="longitudinal-data.html"><a href="longitudinal-data.html#practice-problems"><i class="fa fa-check"></i><b>4.6</b> Practice Problems</a>
+<ul>
+<li class="chapter" data-level="" data-path="longitudinal-data.html"><a href="longitudinal-data.html#compare-and-contrast-the-assumptions-associated-with-linear-quadratic-and-piecewise-linear-longitudinal-models-and-determine-which-is-most-appropriate-in-a-given-context."><i class="fa fa-check"></i>20. Compare and contrast the assumptions associated with linear, quadratic, and piecewise linear longitudinal models and determine which is most appropriate in a given context.</a></li>
+<li class="chapter" data-level="" data-path="longitudinal-data.html"><a href="longitudinal-data.html#calculate-and-interpret-intraclass-correlation-coefficient."><i class="fa fa-check"></i>21. Calculate and interpret intraclass correlation coefficient.</a></li>
+<li class="chapter" data-level="" data-path="longitudinal-data.html"><a href="longitudinal-data.html#answer-research-questions-related-to-fixed-and-random-effects-in-a-study-given-output-from-lme-models.-1"><i class="fa fa-check"></i>23. Answer research questions related to fixed and random effects in a study given output from LME models.</a></li>
+<li class="chapter" data-level="" data-path="longitudinal-data.html"><a href="longitudinal-data.html#draw-lattice-or-spaghetti-plots-that-are-consistent-with-given-conditions-involving-parameters-in-a-lme-model.-1"><i class="fa fa-check"></i>22. Draw lattice (or spaghetti) plots that are consistent with given conditions involving parameters in a LME model.</a></li>
+<li class="chapter" data-level="" data-path="longitudinal-data.html"><a href="longitudinal-data.html#sketch-either-a-set-of-scatterplots-corresponding-to-a-given-variance-covariance-matrix-or-estimate-the-values-in-a-variance-covariance-matrix-given-a-set-of-scatterplots."><i class="fa fa-check"></i>24. Sketch either a set of scatterplots corresponding to a given variance-covariance matrix, or estimate the values in a variance-covariance matrix, given a set of scatterplots.</a></li>
+<li class="chapter" data-level="" data-path="longitudinal-data.html"><a href="longitudinal-data.html#explain-in-words-what-a-variance-covariance-matrix-says-about-our-assumptions-regarding-the-structure-of-data."><i class="fa fa-check"></i>25. Explain, in words, what a variance-covariance matrix says about our assumptions regarding the structure of data.</a></li>
+<li class="chapter" data-level="" data-path="longitudinal-data.html"><a href="longitudinal-data.html#interpret-the-variance-and-correlation-parameters-sigma2-and-phi-in-a-first-order-autoregressive-ar-1-model."><i class="fa fa-check"></i>26. Interpret the variance and correlation parameters <span class="math inline">\(\sigma^2\)</span> and <span class="math inline">\(\phi\)</span> in a first-order autoregressive (AR-1) model.</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="data-with-three-or-more-levels.html"><a href="data-with-three-or-more-levels.html"><i class="fa fa-check"></i><b>5</b> Data with Three or More Levels</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="data-with-three-or-more-levels.html"><a href="data-with-three-or-more-levels.html#three-level-plants-experiment"><i class="fa fa-check"></i><b>5.1</b> Three-Level Plants Experiment</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="data-with-three-or-more-levels.html"><a href="data-with-three-or-more-levels.html#experimental-design"><i class="fa fa-check"></i><b>5.1.1</b> Experimental Design</a></li>
+<li class="chapter" data-level="5.1.2" data-path="data-with-three-or-more-levels.html"><a href="data-with-three-or-more-levels.html#the-data-1"><i class="fa fa-check"></i><b>5.1.2</b> The Data</a></li>
+<li class="chapter" data-level="5.1.3" data-path="data-with-three-or-more-levels.html"><a href="data-with-three-or-more-levels.html#questions"><i class="fa fa-check"></i><b>5.1.3</b> Questions</a></li>
+<li class="chapter" data-level="5.1.4" data-path="data-with-three-or-more-levels.html"><a href="data-with-three-or-more-levels.html#three-level-model"><i class="fa fa-check"></i><b>5.1.4</b> Three Level Model</a></li>
+<li class="chapter" data-level="5.1.5" data-path="data-with-three-or-more-levels.html"><a href="data-with-three-or-more-levels.html#r-implementation-of-three-level-model"><i class="fa fa-check"></i><b>5.1.5</b> R Implementation of Three Level Model</a></li>
+<li class="chapter" data-level="5.1.6" data-path="data-with-three-or-more-levels.html"><a href="data-with-three-or-more-levels.html#inappropriate-llsr-model"><i class="fa fa-check"></i><b>5.1.6</b> Inappropriate LLSR Model</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="data-with-three-or-more-levels.html"><a href="data-with-three-or-more-levels.html#three-level-model-with-random-slopes"><i class="fa fa-check"></i><b>5.2</b> Three-Level Model with Random Slopes</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="data-with-three-or-more-levels.html"><a href="data-with-three-or-more-levels.html#random-slope-for-phenoa"><i class="fa fa-check"></i><b>5.2.1</b> Random Slope for PhenoA</a></li>
+<li class="chapter" data-level="5.2.2" data-path="data-with-three-or-more-levels.html"><a href="data-with-three-or-more-levels.html#r-output-for-random-slope-for-phenoa"><i class="fa fa-check"></i><b>5.2.2</b> R Output for Random Slope for PhenoA</a></li>
+<li class="chapter" data-level="5.2.3" data-path="data-with-three-or-more-levels.html"><a href="data-with-three-or-more-levels.html#random-slope-for-fert"><i class="fa fa-check"></i><b>5.2.3</b> Random Slope for Fert</a></li>
+<li class="chapter" data-level="5.2.4" data-path="data-with-three-or-more-levels.html"><a href="data-with-three-or-more-levels.html#r-output-for-random-slope-for-fert"><i class="fa fa-check"></i><b>5.2.4</b> R Output for Random Slope for Fert</a></li>
+<li class="chapter" data-level="5.2.5" data-path="data-with-three-or-more-levels.html"><a href="data-with-three-or-more-levels.html#boundary-constraints"><i class="fa fa-check"></i><b>5.2.5</b> Boundary Constraints</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="data-with-three-or-more-levels.html"><a href="data-with-three-or-more-levels.html#longitudinal-component-to-plants-data"><i class="fa fa-check"></i><b>5.3</b> Longitudinal Component to Plants Data</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="data-with-three-or-more-levels.html"><a href="data-with-three-or-more-levels.html#repeated-measures-over-time"><i class="fa fa-check"></i><b>5.3.1</b> Repeated Measures over Time</a></li>
+<li class="chapter" data-level="5.3.2" data-path="data-with-three-or-more-levels.html"><a href="data-with-three-or-more-levels.html#levels-and-variables"><i class="fa fa-check"></i><b>5.3.2</b> Levels and Variables</a></li>
+<li class="chapter" data-level="5.3.3" data-path="data-with-three-or-more-levels.html"><a href="data-with-three-or-more-levels.html#model-for-longitudinal-plants-study"><i class="fa fa-check"></i><b>5.3.3</b> Model for Longitudinal Plants Study</a></li>
+<li class="chapter" data-level="5.3.4" data-path="data-with-three-or-more-levels.html"><a href="data-with-three-or-more-levels.html#r-output-for-longitudinal-model"><i class="fa fa-check"></i><b>5.3.4</b> R Output for Longitudinal Model</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="data-with-three-or-more-levels.html"><a href="data-with-three-or-more-levels.html#four-level-longitudinal-model-with-random-slopes"><i class="fa fa-check"></i><b>5.4</b> Four-Level Longitudinal Model with Random Slopes</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="data-with-three-or-more-levels.html"><a href="data-with-three-or-more-levels.html#random-slope-for-time"><i class="fa fa-check"></i><b>5.4.1</b> Random Slope for Time</a></li>
+<li class="chapter" data-level="5.4.2" data-path="data-with-three-or-more-levels.html"><a href="data-with-three-or-more-levels.html#more-random-slope-terms"><i class="fa fa-check"></i><b>5.4.2</b> More Random Slope Terms</a></li>
+<li class="chapter" data-level="5.4.3" data-path="data-with-three-or-more-levels.html"><a href="data-with-three-or-more-levels.html#additional-random-slopes"><i class="fa fa-check"></i><b>5.4.3</b> Additional Random Slopes</a></li>
+<li class="chapter" data-level="5.4.4" data-path="data-with-three-or-more-levels.html"><a href="data-with-three-or-more-levels.html#r---model-with-additional-random-slopes"><i class="fa fa-check"></i><b>5.4.4</b> R - Model with Additional Random Slopes</a></li>
+<li class="chapter" data-level="5.4.5" data-path="data-with-three-or-more-levels.html"><a href="data-with-three-or-more-levels.html#when-not-to-add-random-slopes"><i class="fa fa-check"></i><b>5.4.5</b> When Not to Add Random Slopes</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="poisson-regression.html"><a href="poisson-regression.html"><i class="fa fa-check"></i><b>6</b> Poisson Regression</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="poisson-regression.html"><a href="poisson-regression.html#modeling-counts"><i class="fa fa-check"></i><b>6.1</b> Modeling Counts</a>
+<ul>
+<li class="chapter" data-level="6.1.1" data-path="poisson-regression.html"><a href="poisson-regression.html#case-study-household-size-in-the-philippines"><i class="fa fa-check"></i><b>6.1.1</b> Case Study: Household Size in the Philippines</a></li>
+<li class="chapter" data-level="6.1.2" data-path="poisson-regression.html"><a href="poisson-regression.html#map-of-the-philippines"><i class="fa fa-check"></i><b>6.1.2</b> Map of the Philippines</a></li>
+<li class="chapter" data-level="6.1.3" data-path="poisson-regression.html"><a href="poisson-regression.html#questions-of-interest-2"><i class="fa fa-check"></i><b>6.1.3</b> Questions of Interest</a></li>
+<li class="chapter" data-level="6.1.4" data-path="poisson-regression.html"><a href="poisson-regression.html#the-data-2"><i class="fa fa-check"></i><b>6.1.4</b> The Data</a></li>
+<li class="chapter" data-level="6.1.5" data-path="poisson-regression.html"><a href="poisson-regression.html#first-5-rows"><i class="fa fa-check"></i><b>6.1.5</b> First 5 Rows</a></li>
+<li class="chapter" data-level="6.1.6" data-path="poisson-regression.html"><a href="poisson-regression.html#household-size-by-region"><i class="fa fa-check"></i><b>6.1.6</b> Household Size by Region</a></li>
+<li class="chapter" data-level="6.1.7" data-path="poisson-regression.html"><a href="poisson-regression.html#household-size-by-region-plots"><i class="fa fa-check"></i><b>6.1.7</b> Household Size by Region Plots</a></li>
+<li class="chapter" data-level="6.1.8" data-path="poisson-regression.html"><a href="poisson-regression.html#modeling-household-size"><i class="fa fa-check"></i><b>6.1.8</b> Modeling Household Size</a></li>
+<li class="chapter" data-level="6.1.9" data-path="poisson-regression.html"><a href="poisson-regression.html#inappropriate-llsr-model-1"><i class="fa fa-check"></i><b>6.1.9</b> Inappropriate LLSR Model</a></li>
+<li class="chapter" data-level="6.1.10" data-path="poisson-regression.html"><a href="poisson-regression.html#llsr-model-r-output"><i class="fa fa-check"></i><b>6.1.10</b> LLSR Model R Output</a></li>
+<li class="chapter" data-level="6.1.11" data-path="poisson-regression.html"><a href="poisson-regression.html#llsr-assumptions"><i class="fa fa-check"></i><b>6.1.11</b> LLSR Assumptions</a></li>
+<li class="chapter" data-level="6.1.12" data-path="poisson-regression.html"><a href="poisson-regression.html#distribution-in-visayas-region"><i class="fa fa-check"></i><b>6.1.12</b> Distribution in Visayas Region</a></li>
+<li class="chapter" data-level="6.1.13" data-path="poisson-regression.html"><a href="poisson-regression.html#normal-quantile-quantile-plot"><i class="fa fa-check"></i><b>6.1.13</b> Normal Quantile Quantile Plot</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="poisson-regression.html"><a href="poisson-regression.html#poisson-regression-models"><i class="fa fa-check"></i><b>6.2</b> Poisson Regression Models</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="poisson-regression.html"><a href="poisson-regression.html#the-poisson-distribution"><i class="fa fa-check"></i><b>6.2.1</b> The Poisson Distribution</a></li>
+<li class="chapter" data-level="6.2.2" data-path="poisson-regression.html"><a href="poisson-regression.html#poisson-distribution-for-lambda1"><i class="fa fa-check"></i><b>6.2.2</b> Poisson Distribution for <span class="math inline">\(\lambda=1\)</span></a></li>
+<li class="chapter" data-level="6.2.3" data-path="poisson-regression.html"><a href="poisson-regression.html#poisson-distribution-for-lambdain135"><i class="fa fa-check"></i><b>6.2.3</b> Poisson Distribution for <span class="math inline">\(\lambda\in\{1,3,5\}\)</span></a></li>
+<li class="chapter" data-level="6.2.4" data-path="poisson-regression.html"><a href="poisson-regression.html#connecting-expected-response-to-explatory-variables"><i class="fa fa-check"></i><b>6.2.4</b> Connecting Expected Response to Explatory Variables</a></li>
+<li class="chapter" data-level="6.2.5" data-path="poisson-regression.html"><a href="poisson-regression.html#poisson-regression-assumptions"><i class="fa fa-check"></i><b>6.2.5</b> Poisson Regression Assumptions</a></li>
+<li class="chapter" data-level="6.2.6" data-path="poisson-regression.html"><a href="poisson-regression.html#poisson-regression-illustration"><i class="fa fa-check"></i><b>6.2.6</b> Poisson Regression Illustration</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="poisson-regression.html"><a href="poisson-regression.html#poisson-model-for-household-size"><i class="fa fa-check"></i><b>6.3</b> Poisson Model for Household Size</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="poisson-regression.html"><a href="poisson-regression.html#poisson-regression-model-for-location"><i class="fa fa-check"></i><b>6.3.1</b> Poisson Regression Model for Location</a></li>
+<li class="chapter" data-level="6.3.2" data-path="poisson-regression.html"><a href="poisson-regression.html#interpreting-model-parameters-in-poisson-regression"><i class="fa fa-check"></i><b>6.3.2</b> Interpreting Model Parameters in Poisson Regression</a></li>
+<li class="chapter" data-level="6.3.3" data-path="poisson-regression.html"><a href="poisson-regression.html#wald-based-confidence-intervals-for-difference"><i class="fa fa-check"></i><b>6.3.3</b> Wald-Based Confidence Intervals for Difference</a></li>
+<li class="chapter" data-level="6.3.4" data-path="poisson-regression.html"><a href="poisson-regression.html#mean-variance-assumption"><i class="fa fa-check"></i><b>6.3.4</b> Mean = Variance Assumption</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="poisson-regression.html"><a href="poisson-regression.html#poisson-model-with-multiple-explanatory-variables"><i class="fa fa-check"></i><b>6.4</b> Poisson Model with Multiple Explanatory Variables</a>
+<ul>
+<li class="chapter" data-level="6.4.1" data-path="poisson-regression.html"><a href="poisson-regression.html#accounting-for-age-of-head-of-household"><i class="fa fa-check"></i><b>6.4.1</b> Accounting for Age of Head of Household</a></li>
+<li class="chapter" data-level="6.4.2" data-path="poisson-regression.html"><a href="poisson-regression.html#r-output-for-model-with-age"><i class="fa fa-check"></i><b>6.4.2</b> R Output for Model with Age</a></li>
+<li class="chapter" data-level="6.4.3" data-path="poisson-regression.html"><a href="poisson-regression.html#interpreting-coefficients-for-numeric-explanatory-variable"><i class="fa fa-check"></i><b>6.4.3</b> Interpreting Coefficients for Numeric Explanatory Variable</a></li>
+<li class="chapter" data-level="6.4.4" data-path="poisson-regression.html"><a href="poisson-regression.html#mean-variance-assumption-1"><i class="fa fa-check"></i><b>6.4.4</b> Mean = Variance Assumption</a></li>
+</ul></li>
+<li class="chapter" data-level="6.5" data-path="poisson-regression.html"><a href="poisson-regression.html#deviance-and-model-comparison"><i class="fa fa-check"></i><b>6.5</b> Deviance and Model Comparison</a>
+<ul>
+<li class="chapter" data-level="6.5.1" data-path="poisson-regression.html"><a href="poisson-regression.html#accounting-for-nonlinear-trend"><i class="fa fa-check"></i><b>6.5.1</b> Accounting for Nonlinear Trend</a></li>
+<li class="chapter" data-level="6.5.2" data-path="poisson-regression.html"><a href="poisson-regression.html#quadratic-poisson-regresson-model"><i class="fa fa-check"></i><b>6.5.2</b> Quadratic Poisson Regresson Model</a></li>
+<li class="chapter" data-level="6.5.3" data-path="poisson-regression.html"><a href="poisson-regression.html#residuals-for-poisson-models"><i class="fa fa-check"></i><b>6.5.3</b> Residuals for Poisson Models</a></li>
+<li class="chapter" data-level="6.5.4" data-path="poisson-regression.html"><a href="poisson-regression.html#plot-of-deviance-residuals-for-first-order-poisson-model"><i class="fa fa-check"></i><b>6.5.4</b> Plot of Deviance Residuals for First-Order Poisson Model</a></li>
+<li class="chapter" data-level="6.5.5" data-path="poisson-regression.html"><a href="poisson-regression.html#plot-of-deviance-residuals-for-quadratic-poisson-model"><i class="fa fa-check"></i><b>6.5.5</b> Plot of Deviance Residuals for Quadratic Poisson Model</a></li>
+<li class="chapter" data-level="6.5.6" data-path="poisson-regression.html"><a href="poisson-regression.html#residual-deviance-for-a-model"><i class="fa fa-check"></i><b>6.5.6</b> Residual Deviance for a Model</a></li>
+<li class="chapter" data-level="6.5.7" data-path="poisson-regression.html"><a href="poisson-regression.html#drop-in-deviance-test"><i class="fa fa-check"></i><b>6.5.7</b> Drop-in-Deviance Test</a></li>
+<li class="chapter" data-level="6.5.8" data-path="poisson-regression.html"><a href="poisson-regression.html#drop-in-deviance-test-1"><i class="fa fa-check"></i><b>6.5.8</b> Drop-in-Deviance Test</a></li>
+<li class="chapter" data-level="6.5.9" data-path="poisson-regression.html"><a href="poisson-regression.html#visual-of-chi2-test"><i class="fa fa-check"></i><b>6.5.9</b> Visual of <span class="math inline">\(\chi^2\)</span> Test</a></li>
+<li class="chapter" data-level="6.5.10" data-path="poisson-regression.html"><a href="poisson-regression.html#adding-roofing-material-to-model"><i class="fa fa-check"></i><b>6.5.10</b> Adding Roofing Material to Model</a></li>
+<li class="chapter" data-level="6.5.11" data-path="poisson-regression.html"><a href="poisson-regression.html#visual-of-chi2-test-for-roof"><i class="fa fa-check"></i><b>6.5.11</b> Visual of <span class="math inline">\(\chi^2\)</span> Test for Roof</a></li>
+<li class="chapter" data-level="6.5.12" data-path="poisson-regression.html"><a href="poisson-regression.html#goodness-of-fit"><i class="fa fa-check"></i><b>6.5.12</b> Goodness-of-Fit</a></li>
+</ul></li>
+<li class="chapter" data-level="6.6" data-path="poisson-regression.html"><a href="poisson-regression.html#overdisperson"><i class="fa fa-check"></i><b>6.6</b> Overdisperson</a>
+<ul>
+<li class="chapter" data-level="6.6.1" data-path="poisson-regression.html"><a href="poisson-regression.html#quasi-poisson-model"><i class="fa fa-check"></i><b>6.6.1</b> Quasi-Poisson Model</a></li>
+<li class="chapter" data-level="6.6.2" data-path="poisson-regression.html"><a href="poisson-regression.html#quasi-poisson-model-in-r"><i class="fa fa-check"></i><b>6.6.2</b> Quasi-Poisson Model in R</a></li>
+<li class="chapter" data-level="6.6.3" data-path="poisson-regression.html"><a href="poisson-regression.html#standard-errors-in-quasi-poisson-model"><i class="fa fa-check"></i><b>6.6.3</b> Standard Errors in Quasi-Poisson Model</a></li>
+<li class="chapter" data-level="6.6.4" data-path="poisson-regression.html"><a href="poisson-regression.html#drop-in-deviance-tests-for-quasi-poisson-model"><i class="fa fa-check"></i><b>6.6.4</b> Drop-in-Deviance Tests for Quasi-Poisson Model</a></li>
+<li class="chapter" data-level="6.6.5" data-path="poisson-regression.html"><a href="poisson-regression.html#first-vs-second-order-quasi-poisson-models"><i class="fa fa-check"></i><b>6.6.5</b> First vs Second Order Quasi-Poisson Models</a></li>
+</ul></li>
+<li class="chapter" data-level="6.7" data-path="poisson-regression.html"><a href="poisson-regression.html#offsets-in-poisson-regression"><i class="fa fa-check"></i><b>6.7</b> Offsets in Poisson Regression</a>
+<ul>
+<li class="chapter" data-level="6.7.1" data-path="poisson-regression.html"><a href="poisson-regression.html#case-study-campus-crime"><i class="fa fa-check"></i><b>6.7.1</b> Case Study: Campus Crime</a></li>
+<li class="chapter" data-level="6.7.2" data-path="poisson-regression.html"><a href="poisson-regression.html#distribution-of-number-of-crimes"><i class="fa fa-check"></i><b>6.7.2</b> Distribution of Number of Crimes</a></li>
+<li class="chapter" data-level="6.7.3" data-path="poisson-regression.html"><a href="poisson-regression.html#crimes-by-type-of-institution-and-region"><i class="fa fa-check"></i><b>6.7.3</b> Crimes by Type of Institution and Region</a></li>
+<li class="chapter" data-level="6.7.4" data-path="poisson-regression.html"><a href="poisson-regression.html#accounting-for-enrollment"><i class="fa fa-check"></i><b>6.7.4</b> Accounting for Enrollment</a></li>
+<li class="chapter" data-level="6.7.5" data-path="poisson-regression.html"><a href="poisson-regression.html#offset-in-r"><i class="fa fa-check"></i><b>6.7.5</b> Offset in R</a></li>
+<li class="chapter" data-level="6.7.6" data-path="poisson-regression.html"><a href="poisson-regression.html#model-with-interaction"><i class="fa fa-check"></i><b>6.7.6</b> Model with Interaction</a></li>
+<li class="chapter" data-level="6.7.7" data-path="poisson-regression.html"><a href="poisson-regression.html#drop-in-deviance-test-for-interaction"><i class="fa fa-check"></i><b>6.7.7</b> Drop-in-Deviance Test for Interaction</a></li>
+<li class="chapter" data-level="6.7.8" data-path="poisson-regression.html"><a href="poisson-regression.html#goodness-of-fit-test"><i class="fa fa-check"></i><b>6.7.8</b> Goodness of Fit Test</a></li>
+<li class="chapter" data-level="6.7.9" data-path="poisson-regression.html"><a href="poisson-regression.html#quasi-poisson-model-1"><i class="fa fa-check"></i><b>6.7.9</b> Quasi-Poisson Model</a></li>
+<li class="chapter" data-level="6.7.10" data-path="poisson-regression.html"><a href="poisson-regression.html#test-for-interaction"><i class="fa fa-check"></i><b>6.7.10</b> Test for Interaction</a></li>
+</ul></li>
+<li class="chapter" data-level="6.8" data-path="poisson-regression.html"><a href="poisson-regression.html#summaries"><i class="fa fa-check"></i><b>6.8</b> Summaries</a>
+<ul>
+<li class="chapter" data-level="6.8.1" data-path="poisson-regression.html"><a href="poisson-regression.html#llsr-vs.-poisson-regression-comparison"><i class="fa fa-check"></i><b>6.8.1</b> LLSR vs. Poisson Regression Comparison</a></li>
+<li class="chapter" data-level="6.8.2" data-path="poisson-regression.html"><a href="poisson-regression.html#poisson-vs-quasi-poisson-inference"><i class="fa fa-check"></i><b>6.8.2</b> Poisson vs Quasi-Poisson Inference</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="logistic-regression.html"><a href="logistic-regression.html"><i class="fa fa-check"></i><b>7</b> Logistic Regression</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="logistic-regression.html"><a href="logistic-regression.html#binomial-logistic-regression"><i class="fa fa-check"></i><b>7.1</b> Binomial Logistic Regression</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="logistic-regression.html"><a href="logistic-regression.html#binary-response-data"><i class="fa fa-check"></i><b>7.1.1</b> Binary Response Data</a></li>
+<li class="chapter" data-level="7.1.2" data-path="logistic-regression.html"><a href="logistic-regression.html#binomial-response-data"><i class="fa fa-check"></i><b>7.1.2</b> Binomial Response Data</a></li>
+<li class="chapter" data-level="7.1.3" data-path="logistic-regression.html"><a href="logistic-regression.html#wisconsin-election-data"><i class="fa fa-check"></i><b>7.1.3</b> 2020 Wisconsin Election Data</a></li>
+<li class="chapter" data-level="7.1.4" data-path="logistic-regression.html"><a href="logistic-regression.html#correlation-between-explanatory-variables"><i class="fa fa-check"></i><b>7.1.4</b> Correlation Between Explanatory Variables</a></li>
+<li class="chapter" data-level="7.1.5" data-path="logistic-regression.html"><a href="logistic-regression.html#modeling-number-of-votes"><i class="fa fa-check"></i><b>7.1.5</b> Modeling Number of Votes</a></li>
+<li class="chapter" data-level="7.1.6" data-path="logistic-regression.html"><a href="logistic-regression.html#the-binomial-distribution"><i class="fa fa-check"></i><b>7.1.6</b> The Binomial Distribution</a></li>
+<li class="chapter" data-level="7.1.7" data-path="logistic-regression.html"><a href="logistic-regression.html#binomial-distribution-for-n4-p0.6"><i class="fa fa-check"></i><b>7.1.7</b> Binomial Distribution for <span class="math inline">\(n=4, p=0.6\)</span></a></li>
+<li class="chapter" data-level="7.1.8" data-path="logistic-regression.html"><a href="logistic-regression.html#more-binomial-distributions"><i class="fa fa-check"></i><b>7.1.8</b> More Binomial Distributions</a></li>
+<li class="chapter" data-level="7.1.9" data-path="logistic-regression.html"><a href="logistic-regression.html#connecting-expected-response-to-explatory-variables-1"><i class="fa fa-check"></i><b>7.1.9</b> Connecting Expected Response to Explatory Variables</a></li>
+<li class="chapter" data-level="7.1.10" data-path="logistic-regression.html"><a href="logistic-regression.html#odds-and-odds-ratio"><i class="fa fa-check"></i><b>7.1.10</b> Odds and Odds Ratio</a></li>
+<li class="chapter" data-level="7.1.11" data-path="logistic-regression.html"><a href="logistic-regression.html#interpreting-regression-coefficients"><i class="fa fa-check"></i><b>7.1.11</b> Interpreting Regression Coefficients</a></li>
+<li class="chapter" data-level="7.1.12" data-path="logistic-regression.html"><a href="logistic-regression.html#binomial-logistic-regression-assumptions"><i class="fa fa-check"></i><b>7.1.12</b> Binomial Logistic Regression Assumptions</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="logistic-regression.html"><a href="logistic-regression.html#model-for-wisconsin-vote"><i class="fa fa-check"></i><b>7.2</b> Model for Wisconsin Vote</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="logistic-regression.html"><a href="logistic-regression.html#an-initial-model"><i class="fa fa-check"></i><b>7.2.1</b> An Initial Model</a></li>
+<li class="chapter" data-level="7.2.2" data-path="logistic-regression.html"><a href="logistic-regression.html#checking-linearity-assumption"><i class="fa fa-check"></i><b>7.2.2</b> Checking Linearity Assumption</a></li>
+<li class="chapter" data-level="7.2.3" data-path="logistic-regression.html"><a href="logistic-regression.html#overdispersion-in-binomial-counts"><i class="fa fa-check"></i><b>7.2.3</b> Overdispersion in Binomial Counts</a></li>
+<li class="chapter" data-level="7.2.4" data-path="logistic-regression.html"><a href="logistic-regression.html#residuals-for-binomial-logistic-regression"><i class="fa fa-check"></i><b>7.2.4</b> Residuals for Binomial Logistic Regression</a></li>
+<li class="chapter" data-level="7.2.5" data-path="logistic-regression.html"><a href="logistic-regression.html#quasi-binomial-model"><i class="fa fa-check"></i><b>7.2.5</b> Quasi-Binomial Model</a></li>
+<li class="chapter" data-level="7.2.6" data-path="logistic-regression.html"><a href="logistic-regression.html#model-with-all-explanatory-variables"><i class="fa fa-check"></i><b>7.2.6</b> Model with All Explanatory Variables</a></li>
+<li class="chapter" data-level="7.2.7" data-path="logistic-regression.html"><a href="logistic-regression.html#tests-for-significance-of-model-coefficients"><i class="fa fa-check"></i><b>7.2.7</b> Tests for Significance of Model Coefficients</a></li>
+<li class="chapter" data-level="7.2.8" data-path="logistic-regression.html"><a href="logistic-regression.html#drop-in-deviance-test-2"><i class="fa fa-check"></i><b>7.2.8</b> Drop in Deviance Test</a></li>
+<li class="chapter" data-level="7.2.9" data-path="logistic-regression.html"><a href="logistic-regression.html#deviance-residual-plot"><i class="fa fa-check"></i><b>7.2.9</b> Deviance Residual Plot</a></li>
+<li class="chapter" data-level="7.2.10" data-path="logistic-regression.html"><a href="logistic-regression.html#llsr-vs-binomial-logistic-regression"><i class="fa fa-check"></i><b>7.2.10</b> LLSR vs Binomial Logistic Regression</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="logistic-regression.html"><a href="logistic-regression.html#maximum-likelihood-estimation"><i class="fa fa-check"></i><b>7.3</b> Maximum Likelihood Estimation</a>
+<ul>
+<li class="chapter" data-level="7.3.1" data-path="logistic-regression.html"><a href="logistic-regression.html#parameter-estimation"><i class="fa fa-check"></i><b>7.3.1</b> Parameter Estimation</a></li>
+<li class="chapter" data-level="7.3.2" data-path="logistic-regression.html"><a href="logistic-regression.html#steph-curry-3-point-shooting"><i class="fa fa-check"></i><b>7.3.2</b> Steph Curry 3-Point Shooting</a></li>
+<li class="chapter" data-level="7.3.3" data-path="logistic-regression.html"><a href="logistic-regression.html#model-for-currys-shooting"><i class="fa fa-check"></i><b>7.3.3</b> Model for Curry’s Shooting</a></li>
+<li class="chapter" data-level="7.3.4" data-path="logistic-regression.html"><a href="logistic-regression.html#likelihood-function"><i class="fa fa-check"></i><b>7.3.4</b> Likelihood Function</a></li>
+<li class="chapter" data-level="7.3.5" data-path="logistic-regression.html"><a href="logistic-regression.html#plotting-likelihood-function"><i class="fa fa-check"></i><b>7.3.5</b> Plotting Likelihood Function</a></li>
+<li class="chapter" data-level="7.3.6" data-path="logistic-regression.html"><a href="logistic-regression.html#numerical-maximization"><i class="fa fa-check"></i><b>7.3.6</b> Numerical Maximization</a></li>
+<li class="chapter" data-level="7.3.7" data-path="logistic-regression.html"><a href="logistic-regression.html#mle-using-calculus"><i class="fa fa-check"></i><b>7.3.7</b> MLE Using Calculus</a></li>
+<li class="chapter" data-level="7.3.8" data-path="logistic-regression.html"><a href="logistic-regression.html#likelihood-in-a-logistic-regression-model"><i class="fa fa-check"></i><b>7.3.8</b> Likelihood in a Logistic Regression Model</a></li>
+<li class="chapter" data-level="7.3.9" data-path="logistic-regression.html"><a href="logistic-regression.html#plot-of-likelihood-function"><i class="fa fa-check"></i><b>7.3.9</b> Plot of Likelihood Function</a></li>
+<li class="chapter" data-level="7.3.10" data-path="logistic-regression.html"><a href="logistic-regression.html#numerical-maximization-1"><i class="fa fa-check"></i><b>7.3.10</b> Numerical Maximization</a></li>
+<li class="chapter" data-level="7.3.11" data-path="logistic-regression.html"><a href="logistic-regression.html#comparison-to-r-output"><i class="fa fa-check"></i><b>7.3.11</b> Comparison to R Output</a></li>
+<li class="chapter" data-level="7.3.12" data-path="logistic-regression.html"><a href="logistic-regression.html#model-for-homeaway"><i class="fa fa-check"></i><b>7.3.12</b> Model for Home/Away</a></li>
+<li class="chapter" data-level="7.3.13" data-path="logistic-regression.html"><a href="logistic-regression.html#numerical-optimization"><i class="fa fa-check"></i><b>7.3.13</b> Numerical Optimization</a></li>
+<li class="chapter" data-level="7.3.14" data-path="logistic-regression.html"><a href="logistic-regression.html#comparison-to-r-output-1"><i class="fa fa-check"></i><b>7.3.14</b> Comparison to R Output</a></li>
+<li class="chapter" data-level="7.3.15" data-path="logistic-regression.html"><a href="logistic-regression.html#applications-of-likelihood"><i class="fa fa-check"></i><b>7.3.15</b> Applications of Likelihood</a></li>
+<li class="chapter" data-level="7.3.16" data-path="logistic-regression.html"><a href="logistic-regression.html#summary-maximum-likelihood-estimation"><i class="fa fa-check"></i><b>7.3.16</b> Summary Maximum Likelihood Estimation</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="logistic-regression.html"><a href="logistic-regression.html#zero-inflated-poisson-model"><i class="fa fa-check"></i><b>7.4</b> Zero-Inflated Poisson Model</a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="logistic-regression.html"><a href="logistic-regression.html#case-study-weekend-drinking"><i class="fa fa-check"></i><b>7.4.1</b> Case Study: Weekend Drinking</a></li>
+<li class="chapter" data-level="7.4.2" data-path="logistic-regression.html"><a href="logistic-regression.html#questions-of-interest-3"><i class="fa fa-check"></i><b>7.4.2</b> Questions of Interest</a></li>
+<li class="chapter" data-level="7.4.3" data-path="logistic-regression.html"><a href="logistic-regression.html#distribution-of-number-of-drinks"><i class="fa fa-check"></i><b>7.4.3</b> Distribution of Number of Drinks</a></li>
+<li class="chapter" data-level="7.4.4" data-path="logistic-regression.html"><a href="logistic-regression.html#number-of-drinks-comparisons"><i class="fa fa-check"></i><b>7.4.4</b> Number of Drinks Comparisons</a></li>
+<li class="chapter" data-level="7.4.5" data-path="logistic-regression.html"><a href="logistic-regression.html#proportion-of-drinkers"><i class="fa fa-check"></i><b>7.4.5</b> Proportion of Drinkers</a></li>
+<li class="chapter" data-level="7.4.6" data-path="logistic-regression.html"><a href="logistic-regression.html#modeling-drinks"><i class="fa fa-check"></i><b>7.4.6</b> Modeling Drinks</a></li>
+<li class="chapter" data-level="7.4.7" data-path="logistic-regression.html"><a href="logistic-regression.html#explaining-the-large-number-of-zeros"><i class="fa fa-check"></i><b>7.4.7</b> Explaining the Large Number of Zeros</a></li>
+<li class="chapter" data-level="7.4.8" data-path="logistic-regression.html"><a href="logistic-regression.html#zero-inflated-poisson-model-1"><i class="fa fa-check"></i><b>7.4.8</b> Zero-Inflated Poisson Model</a></li>
+<li class="chapter" data-level="7.4.9" data-path="logistic-regression.html"><a href="logistic-regression.html#developing-the-zero-inflated-poisson-model"><i class="fa fa-check"></i><b>7.4.9</b> Developing the Zero-Inflated Poisson Model</a></li>
+<li class="chapter" data-level="7.4.10" data-path="logistic-regression.html"><a href="logistic-regression.html#deriving-the-zip-pmf"><i class="fa fa-check"></i><b>7.4.10</b> Deriving the ZIP PMF</a></li>
+<li class="chapter" data-level="7.4.11" data-path="logistic-regression.html"><a href="logistic-regression.html#examples-of-zip-pmfs"><i class="fa fa-check"></i><b>7.4.11</b> Examples of ZIP PMF’s</a></li>
+<li class="chapter" data-level="7.4.12" data-path="logistic-regression.html"><a href="logistic-regression.html#zip-model"><i class="fa fa-check"></i><b>7.4.12</b> ZIP Model</a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="logistic-regression.html"><a href="logistic-regression.html#model-for-drinks-data"><i class="fa fa-check"></i><b>7.5</b> Model for Drinks Data</a>
+<ul>
+<li class="chapter" data-level="7.5.1" data-path="logistic-regression.html"><a href="logistic-regression.html#zip-for-drinks-data"><i class="fa fa-check"></i><b>7.5.1</b> ZIP for Drinks Data</a></li>
+<li class="chapter" data-level="7.5.2" data-path="logistic-regression.html"><a href="logistic-regression.html#zip-model-in-r"><i class="fa fa-check"></i><b>7.5.2</b> ZIP Model in R</a></li>
+<li class="chapter" data-level="7.5.3" data-path="logistic-regression.html"><a href="logistic-regression.html#residual-plot"><i class="fa fa-check"></i><b>7.5.3</b> Residual Plot</a></li>
+<li class="chapter" data-level="7.5.4" data-path="logistic-regression.html"><a href="logistic-regression.html#limitations"><i class="fa fa-check"></i><b>7.5.4</b> Limitations</a></li>
+<li class="chapter" data-level="7.5.5" data-path="logistic-regression.html"><a href="logistic-regression.html#final-thoughts-on-zero-inflated-models"><i class="fa fa-check"></i><b>7.5.5</b> Final Thoughts on Zero-Inflated Models</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="multilevel-generalized-linear-models.html"><a href="multilevel-generalized-linear-models.html"><i class="fa fa-check"></i><b>8</b> Multilevel Generalized Linear Models</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="multilevel-generalized-linear-models.html"><a href="multilevel-generalized-linear-models.html#basketball-referees-dataset"><i class="fa fa-check"></i><b>8.1</b> Basketball Referees Dataset</a>
+<ul>
+<li class="chapter" data-level="8.1.1" data-path="multilevel-generalized-linear-models.html"><a href="multilevel-generalized-linear-models.html#data-overview"><i class="fa fa-check"></i><b>8.1.1</b> Data Overview</a></li>
+<li class="chapter" data-level="8.1.2" data-path="multilevel-generalized-linear-models.html"><a href="multilevel-generalized-linear-models.html#histograms-for-level-one-covariates"><i class="fa fa-check"></i><b>8.1.2</b> Histograms for Level One Covariates</a></li>
+<li class="chapter" data-level="8.1.3" data-path="multilevel-generalized-linear-models.html"><a href="multilevel-generalized-linear-models.html#average-fouls-by-team"><i class="fa fa-check"></i><b>8.1.3</b> Average Fouls by Team</a></li>
+<li class="chapter" data-level="8.1.4" data-path="multilevel-generalized-linear-models.html"><a href="multilevel-generalized-linear-models.html#examining-bivariate-relationships"><i class="fa fa-check"></i><b>8.1.4</b> Examining Bivariate Relationships</a></li>
+<li class="chapter" data-level="8.1.5" data-path="multilevel-generalized-linear-models.html"><a href="multilevel-generalized-linear-models.html#tabular-summary-by-fouling-team"><i class="fa fa-check"></i><b>8.1.5</b> Tabular Summary by Fouling Team</a></li>
+<li class="chapter" data-level="8.1.6" data-path="multilevel-generalized-linear-models.html"><a href="multilevel-generalized-linear-models.html#mosaic-plots"><i class="fa fa-check"></i><b>8.1.6</b> Mosaic Plots</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="multilevel-generalized-linear-models.html"><a href="multilevel-generalized-linear-models.html#multilevel-generalized-linear-model"><i class="fa fa-check"></i><b>8.2</b> Multilevel Generalized Linear Model</a>
+<ul>
+<li class="chapter" data-level="8.2.1" data-path="multilevel-generalized-linear-models.html"><a href="multilevel-generalized-linear-models.html#motivation-for-a-statistical-model"><i class="fa fa-check"></i><b>8.2.1</b> Motivation for a Statistical Model</a></li>
+<li class="chapter" data-level="8.2.2" data-path="multilevel-generalized-linear-models.html"><a href="multilevel-generalized-linear-models.html#a-glm-approach"><i class="fa fa-check"></i><b>8.2.2</b> A GLM Approach</a></li>
+<li class="chapter" data-level="8.2.3" data-path="multilevel-generalized-linear-models.html"><a href="multilevel-generalized-linear-models.html#adding-random-effect-for-game"><i class="fa fa-check"></i><b>8.2.3</b> Adding Random Effect for Game</a></li>
+<li class="chapter" data-level="8.2.4" data-path="multilevel-generalized-linear-models.html"><a href="multilevel-generalized-linear-models.html#two-level-logistic-model"><i class="fa fa-check"></i><b>8.2.4</b> Two Level Logistic Model</a></li>
+<li class="chapter" data-level="8.2.5" data-path="multilevel-generalized-linear-models.html"><a href="multilevel-generalized-linear-models.html#multilevel-glm-in-r"><i class="fa fa-check"></i><b>8.2.5</b> Multilevel GLM in R</a></li>
+<li class="chapter" data-level="8.2.6" data-path="multilevel-generalized-linear-models.html"><a href="multilevel-generalized-linear-models.html#add-random-slope"><i class="fa fa-check"></i><b>8.2.6</b> Add Random Slope</a></li>
+<li class="chapter" data-level="8.2.7" data-path="multilevel-generalized-linear-models.html"><a href="multilevel-generalized-linear-models.html#random-slopes-model-in-r-1"><i class="fa fa-check"></i><b>8.2.7</b> Random Slopes Model in R</a></li>
+<li class="chapter" data-level="8.2.8" data-path="multilevel-generalized-linear-models.html"><a href="multilevel-generalized-linear-models.html#aic-bic-comparison"><i class="fa fa-check"></i><b>8.2.8</b> AIC, BIC Comparison</a></li>
+<li class="chapter" data-level="8.2.9" data-path="multilevel-generalized-linear-models.html"><a href="multilevel-generalized-linear-models.html#random-error-terms"><i class="fa fa-check"></i><b>8.2.9</b> Random Error Terms</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="multilevel-generalized-linear-models.html"><a href="multilevel-generalized-linear-models.html#crossed-random-effects"><i class="fa fa-check"></i><b>8.3</b> Crossed Random Effects</a>
+<ul>
+<li class="chapter" data-level="8.3.1" data-path="multilevel-generalized-linear-models.html"><a href="multilevel-generalized-linear-models.html#random-effects-for-teams"><i class="fa fa-check"></i><b>8.3.1</b> Random Effects for Teams</a></li>
+<li class="chapter" data-level="8.3.2" data-path="multilevel-generalized-linear-models.html"><a href="multilevel-generalized-linear-models.html#crossed-vs-nested-random-effects"><i class="fa fa-check"></i><b>8.3.2</b> Crossed vs Nested Random Effects</a></li>
+<li class="chapter" data-level="8.3.3" data-path="multilevel-generalized-linear-models.html"><a href="multilevel-generalized-linear-models.html#models-for-crossed-random-effects"><i class="fa fa-check"></i><b>8.3.3</b> Models for Crossed Random Effects</a></li>
+<li class="chapter" data-level="8.3.4" data-path="multilevel-generalized-linear-models.html"><a href="multilevel-generalized-linear-models.html#fitting-model-with-crossed-random-effects-in-r"><i class="fa fa-check"></i><b>8.3.4</b> Fitting Model with Crossed Random Effects in R</a></li>
+<li class="chapter" data-level="8.3.5" data-path="multilevel-generalized-linear-models.html"><a href="multilevel-generalized-linear-models.html#more-on-crossed-effects"><i class="fa fa-check"></i><b>8.3.5</b> More on Crossed Effects</a></li>
+<li class="chapter" data-level="8.3.6" data-path="multilevel-generalized-linear-models.html"><a href="multilevel-generalized-linear-models.html#a-final-model-for-examining-referee-bias"><i class="fa fa-check"></i><b>8.3.6</b> A Final Model for Examining Referee Bias</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4" data-path="multilevel-generalized-linear-models.html"><a href="multilevel-generalized-linear-models.html#parametric-bootstrapping"><i class="fa fa-check"></i><b>8.4</b> Parametric Bootstrapping</a>
+<ul>
+<li class="chapter" data-level="8.4.1" data-path="multilevel-generalized-linear-models.html"><a href="multilevel-generalized-linear-models.html#when-and-why-to-bootstrap"><i class="fa fa-check"></i><b>8.4.1</b> When and Why to Bootstrap</a></li>
+<li class="chapter" data-level="8.4.2" data-path="multilevel-generalized-linear-models.html"><a href="multilevel-generalized-linear-models.html#parametric-bootstrap-procedure"><i class="fa fa-check"></i><b>8.4.2</b> Parametric Bootstrap Procedure</a></li>
+<li class="chapter" data-level="8.4.3" data-path="multilevel-generalized-linear-models.html"><a href="multilevel-generalized-linear-models.html#a-simple-example"><i class="fa fa-check"></i><b>8.4.3</b> A Simple Example</a></li>
+<li class="chapter" data-level="8.4.4" data-path="multilevel-generalized-linear-models.html"><a href="multilevel-generalized-linear-models.html#parametric-bootstrap-confidence-intervals"><i class="fa fa-check"></i><b>8.4.4</b> Parametric Bootstrap Confidence Intervals</a></li>
+<li class="chapter" data-level="8.4.5" data-path="multilevel-generalized-linear-models.html"><a href="multilevel-generalized-linear-models.html#model-comparison-tests-with-parametric-bootstrap"><i class="fa fa-check"></i><b>8.4.5</b> Model Comparison Tests with Parametric Bootstrap</a></li>
+<li class="chapter" data-level="8.4.6" data-path="multilevel-generalized-linear-models.html"><a href="multilevel-generalized-linear-models.html#model-comparison-for-kentucky-derby-data"><i class="fa fa-check"></i><b>8.4.6</b> Model Comparison for Kentucky Derby Data</a></li>
+<li class="chapter" data-level="8.4.7" data-path="multilevel-generalized-linear-models.html"><a href="multilevel-generalized-linear-models.html#code-for-boostrap-model-comparison"><i class="fa fa-check"></i><b>8.4.7</b> Code for Boostrap Model Comparison</a></li>
+<li class="chapter" data-level="8.4.8" data-path="multilevel-generalized-linear-models.html"><a href="multilevel-generalized-linear-models.html#simulation-based-f-test"><i class="fa fa-check"></i><b>8.4.8</b> Simulation-Based F-Test</a></li>
+<li class="chapter" data-level="8.4.9" data-path="multilevel-generalized-linear-models.html"><a href="multilevel-generalized-linear-models.html#model-comparison-in-multilevel-glm"><i class="fa fa-check"></i><b>8.4.9</b> Model Comparison in Multilevel GLM</a></li>
+<li class="chapter" data-level="8.4.10" data-path="multilevel-generalized-linear-models.html"><a href="multilevel-generalized-linear-models.html#multilevel-glm-bootstrap-code"><i class="fa fa-check"></i><b>8.4.10</b> Multilevel GLM Bootstrap Code</a></li>
+<li class="chapter" data-level="8.4.11" data-path="multilevel-generalized-linear-models.html"><a href="multilevel-generalized-linear-models.html#simulation-based-chi2-test"><i class="fa fa-check"></i><b>8.4.11</b> Simulation-Based <span class="math inline">\(\chi^2\)</span> Test</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="epilogue.html"><a href="epilogue.html"><i class="fa fa-check"></i><b>9</b> Epilogue</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="epilogue.html"><a href="epilogue.html#further-directions"><i class="fa fa-check"></i><b>9.1</b> Further Directions</a>
+<ul>
+<li class="chapter" data-level="9.1.1" data-path="epilogue.html"><a href="epilogue.html#more-on-glms"><i class="fa fa-check"></i><b>9.1.1</b> More on GLM’s</a></li>
+<li class="chapter" data-level="9.1.2" data-path="epilogue.html"><a href="epilogue.html#models-beyond-glms"><i class="fa fa-check"></i><b>9.1.2</b> Models Beyond GLM’s</a></li>
+<li class="chapter" data-level="9.1.3" data-path="epilogue.html"><a href="epilogue.html#statistics-courses-at-lawrence"><i class="fa fa-check"></i><b>9.1.3</b> Statistics Courses at Lawrence</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Stat 455: Advanced Statistical Modeling Notes</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="introduction-to-correlated-data" class="section level1 hasAnchor" number="2">
+<h1><span class="header-section-number">Chapter 2</span> Introduction to Correlated Data<a href="introduction-to-correlated-data.html#introduction-to-correlated-data" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p><strong>Chapter 2 Learning Outcomes</strong></p>
+<ol start="6" style="list-style-type: decimal">
+<li><p>Identify the response variable and fixed and random effects associated with a given set of data.</p></li>
+<li><p>Interpret parameter estimates, confidence intervals, and hypothesis tests associated with fixed effects in LME models.</p></li>
+<li><p>Interpret variance component estimates (<span class="math inline">\(\sigma\)</span> and <span class="math inline">\(\sigma_u\)</span>) in linear mixed effects (LME) models.</p></li>
+<li><p>Compare the size of different variance component estimates given a LME model and a small set of data (i.e. say whether <span class="math inline">\(\sigma_u\)</span>, or <span class="math inline">\(\sigma\)</span> will larger).</p></li>
+<li><p>Determine how standard errors in a LME model would compare to the standard errors we would get if we used a LLSR model on the same data.</p></li>
+<li><p>Determine how changes in sample size and/or experimental design will impact standard errors, confidence intervals, and p-values in a LME model.</p></li>
+</ol>
+<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="introduction-to-correlated-data.html#cb108-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb108-2"><a href="introduction-to-correlated-data.html#cb108-2" tabindex="-1"></a><span class="fu">library</span>(lme4)</span>
+<span id="cb108-3"><a href="introduction-to-correlated-data.html#cb108-3" tabindex="-1"></a><span class="fu">library</span>(lmerTest)</span>
+<span id="cb108-4"><a href="introduction-to-correlated-data.html#cb108-4" tabindex="-1"></a><span class="fu">library</span>(knitr)</span></code></pre></div>
+<div id="introduction-to-correlated-data-1" class="section level2 hasAnchor" number="2.1">
+<h2><span class="header-section-number">2.1</span> Introduction to Correlated Data<a href="introduction-to-correlated-data.html#introduction-to-correlated-data-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="weight-gain-in-mice-experiment-design-1" class="section level3 hasAnchor" number="2.1.1">
+<h3><span class="header-section-number">2.1.1</span> Weight Gain in Mice: Experiment Design #1<a href="introduction-to-correlated-data.html#weight-gain-in-mice-experiment-design-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Consider an experiment designed to assess the impact of three different diets on weight gain in mice. We observe six different litters of mice, with six mice in each litter. Within each litter, two mice are randomly assigned to each of the three diets. Researchers recorded the mean weight gain in each mouse over a four-week period.</p>
+<p>Experimental Design 1:</p>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-45"></span>
+<img src="Mice1.png" alt="Mouse Experiment Version 1" width="45%" />
+<p class="caption">
+Figure 2.1: Mouse Experiment Version 1
+</p>
+</div>
+</div>
+<div id="mice-experiment-1-data" class="section level3 hasAnchor" number="2.1.2">
+<h3><span class="header-section-number">2.1.2</span> Mice Experiment 1 Data<a href="introduction-to-correlated-data.html#mice-experiment-1-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The first 10 rows of the dataset look like this:</p>
+<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb109-1"><a href="introduction-to-correlated-data.html#cb109-1" tabindex="-1"></a><span class="fu">head</span>(mice,<span class="dv">10</span>)</span></code></pre></div>
+<pre><code>##    litter diet weight_gain
+## 1       1    A -0.03526041
+## 2       1    B -0.06841666
+## 3       1    C -0.06351305
+## 4       1    A -0.05171452
+## 5       1    B -0.06917391
+## 6       1    C -0.05951775
+## 7       2    A  0.07584083
+## 8       2    B  0.04913527
+## 9       2    C  0.07958384
+## 10      2    A  0.07278071</code></pre>
+</div>
+<div id="a-naive-graphical-analysis" class="section level3 hasAnchor" number="2.1.3">
+<h3><span class="header-section-number">2.1.3</span> A Naive Graphical Analysis<a href="introduction-to-correlated-data.html#a-naive-graphical-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Let’s temporarily ignore the fact that some mice came from the same litter, and treat all observations as independent.</p>
+<p>The plot below shows the weight gain (or loss) for each of the mice, by diet. The red dots and connecting lines show the mean weight gain for each diet.</p>
+<p>The ensuing table shows the mean and standard deviation in weight gain for each of the three diets.</p>
+<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="introduction-to-correlated-data.html#cb111-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>mice, <span class="fu">aes</span>(<span class="at">x=</span><span class="fu">factor</span>(diet), <span class="at">y=</span>weight_gain))  <span class="sc">+</span> <span class="fu">geom_point</span>()  <span class="sc">+</span> </span>
+<span id="cb111-2"><a href="introduction-to-correlated-data.html#cb111-2" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun=</span><span class="st">&quot;mean&quot;</span>, <span class="at">geom=</span><span class="st">&quot;line&quot;</span>, <span class="fu">aes</span>(<span class="at">group=</span><span class="fu">factor</span>(<span class="dv">1</span>)))  <span class="sc">+</span></span>
+<span id="cb111-3"><a href="introduction-to-correlated-data.html#cb111-3" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun=</span><span class="st">&quot;mean&quot;</span>, <span class="at">geom=</span><span class="st">&quot;point&quot;</span>, <span class="at">color=</span><span class="st">&quot;red&quot;</span>, <span class="at">size=</span><span class="dv">2</span>)</span></code></pre></div>
+<p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-48-1.png" width="576" /></p>
+<p><strong>Question:</strong></p>
+<p>Based on this graph, do you think there is evidence of diets have an effect on weight gain in mice? Why or why not?</p>
+</div>
+<div id="a-more-informed-graphical-analysis" class="section level3 hasAnchor" number="2.1.4">
+<h3><span class="header-section-number">2.1.4</span> A More Informed Graphical Analysis<a href="introduction-to-correlated-data.html#a-more-informed-graphical-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>So far, we’ve ignored the fact that some of the mice came from the same litter. Now, let’s take litter into account. The figure below colors the mice by litter.</p>
+<p>The lines represent the average weight gain (or loss) in each litter.</p>
+<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="introduction-to-correlated-data.html#cb112-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>mice, <span class="fu">aes</span>(<span class="at">x=</span><span class="fu">factor</span>(diet), <span class="at">y=</span>weight_gain, <span class="at">color=</span><span class="fu">factor</span>(litter))) <span class="sc">+</span> </span>
+<span id="cb112-2"><a href="introduction-to-correlated-data.html#cb112-2" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span>  <span class="fu">stat_summary</span>(<span class="at">fun=</span><span class="st">&quot;mean&quot;</span>, <span class="at">geom=</span><span class="st">&quot;line&quot;</span>, <span class="fu">aes</span>(<span class="at">group=</span><span class="fu">factor</span>(litter)))</span></code></pre></div>
+<p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-49-1.png" width="576" /></p>
+<p>It may be helpful to examine each litter individually.</p>
+<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb113-1"><a href="introduction-to-correlated-data.html#cb113-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>mice, <span class="fu">aes</span>(<span class="at">x=</span><span class="fu">factor</span>(diet), <span class="at">y=</span>weight_gain, <span class="at">color=</span><span class="fu">factor</span>(litter))) <span class="sc">+</span> </span>
+<span id="cb113-2"><a href="introduction-to-correlated-data.html#cb113-2" tabindex="-1"></a>  <span class="fu">geom_point</span>()  <span class="sc">+</span> </span>
+<span id="cb113-3"><a href="introduction-to-correlated-data.html#cb113-3" tabindex="-1"></a>  <span class="fu">facet_grid</span>(.<span class="sc">~</span>litter, <span class="at">scales =</span> <span class="st">&quot;free&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb113-4"><a href="introduction-to-correlated-data.html#cb113-4" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun=</span><span class="st">&quot;mean&quot;</span>, <span class="at">geom=</span><span class="st">&quot;line&quot;</span>, <span class="fu">aes</span>(<span class="at">group=</span><span class="fu">factor</span>(litter)))</span></code></pre></div>
+<p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-50-1.png" width="576" /></p>
+<p><strong>Question:</strong></p>
+<p>Based on the information about litters, do your thoughts about whether diets have an effect on weight gain in mice change? Does there appear to be stronger evidence of differences between groups? Weaker? Same?</p>
+</div>
+<div id="table-of-mean-weight-by-diet" class="section level3 hasAnchor" number="2.1.5">
+<h3><span class="header-section-number">2.1.5</span> Table of Mean Weight By Diet<a href="introduction-to-correlated-data.html#table-of-mean-weight-by-diet" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="introduction-to-correlated-data.html#cb114-1" tabindex="-1"></a>mouse_groups <span class="ot">&lt;-</span> mice <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(diet)<span class="sc">%&gt;%</span> </span>
+<span id="cb114-2"><a href="introduction-to-correlated-data.html#cb114-2" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">Mean_Weight=</span><span class="fu">mean</span>(weight_gain), <span class="at">SD_Weight =</span> <span class="fu">sd</span>(weight_gain), <span class="at">N=</span><span class="fu">n</span>())</span>
+<span id="cb114-3"><a href="introduction-to-correlated-data.html#cb114-3" tabindex="-1"></a>mouse_groups</span></code></pre></div>
+<pre><code>## # A tibble: 3 × 4
+##   diet  Mean_Weight SD_Weight     N
+##   &lt;chr&gt;       &lt;dbl&gt;     &lt;dbl&gt; &lt;int&gt;
+## 1 A          0.0580    0.0567    12
+## 2 B          0.0340    0.0583    12
+## 3 C          0.0471    0.0612    12</code></pre>
+</div>
+<div id="table-of-mean-weight-by-diet-and-litter" class="section level3 hasAnchor" number="2.1.6">
+<h3><span class="header-section-number">2.1.6</span> Table of Mean Weight By Diet and Litter<a href="introduction-to-correlated-data.html#table-of-mean-weight-by-diet-and-litter" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="introduction-to-correlated-data.html#cb116-1" tabindex="-1"></a>mouse_groups <span class="ot">&lt;-</span> mice <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(diet, litter)<span class="sc">%&gt;%</span> </span>
+<span id="cb116-2"><a href="introduction-to-correlated-data.html#cb116-2" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">Mean_Weight=</span><span class="fu">mean</span>(weight_gain), <span class="at">SD_Weight =</span> <span class="fu">sd</span>(weight_gain), <span class="at">N=</span><span class="fu">n</span>())</span>
+<span id="cb116-3"><a href="introduction-to-correlated-data.html#cb116-3" tabindex="-1"></a>mouse_groups</span></code></pre></div>
+<pre><code>## # A tibble: 18 × 5
+## # Groups:   diet [3]
+##    diet  litter Mean_Weight SD_Weight     N
+##    &lt;chr&gt;  &lt;int&gt;       &lt;dbl&gt;     &lt;dbl&gt; &lt;int&gt;
+##  1 A          1   -0.0435    0.0116       2
+##  2 A          2    0.0743    0.00216      2
+##  3 A          3    0.0192    0.00282      2
+##  4 A          4    0.104     0.00487      2
+##  5 A          5    0.110     0.00145      2
+##  6 A          6    0.0833    0.00721      2
+##  7 B          1   -0.0688    0.000535     2
+##  8 B          2    0.0554    0.00881      2
+##  9 B          3   -0.0108    0.00781      2
+## 10 B          4    0.0731    0.00482      2
+## 11 B          5    0.0873    0.00890      2
+## 12 B          6    0.0682    0.00430      2
+## 13 C          1   -0.0615    0.00283      2
+## 14 C          2    0.0746    0.00711      2
+## 15 C          3    0.000839  0.00489      2
+## 16 C          4    0.0918    0.00638      2
+## 17 C          5    0.0979    0.0214       2
+## 18 C          6    0.0792    0.00310      2</code></pre>
+<p>Since each mouse in a litter received a different treatment, we can use the standard deviations between mice in the same litter to assess the amount of unexplained variability after accounting for litter and diet.</p>
+<p>Notice standard deviations are much smaller when we account for litter. Most of the unexplained variability in the first table is explained when we account for litter.</p>
+<p>When we fail to account for litter, variability thqt can be explained by differences between litters becomes conflated with unexplained variability.</p>
+<p>This causes us to overestimate unexplained variability and makes differences between groups look less meaningful than they really are.</p>
+</div>
+<div id="assessing-evidence-of-differences" class="section level3 hasAnchor" number="2.1.7">
+<h3><span class="header-section-number">2.1.7</span> Assessing Evidence of Differences<a href="introduction-to-correlated-data.html#assessing-evidence-of-differences" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Conceptually, we can assess whether there is evidence of differences between the diets by considering differences in mean weights, relative to the amount of unexplained variability between mice in the same litter and on the same diet.</p>
+<p>Recall that when testing for a difference between two groups, a t-statistic is calculated using the formula</p>
+<p><span class="math display">\[
+t= \frac{\bar{x}_1-\bar{x}_2}{\textrm{SE}(\bar{x}_1-\bar{x}_2)}=\frac{\bar{x}_1-\bar{x}_2}{\sqrt{\frac{s_1^2}{n_1}+\frac{s_2^2}{n_2}}}
+\]</span></p>
+<p>The numerator measures the size of the differences between the groups, and the denominator measures the amount of unexplained variability between individuals in the same group.</p>
+</div>
+<div id="an-improper-statistical-analysis" class="section level3 hasAnchor" number="2.1.8">
+<h3><span class="header-section-number">2.1.8</span> An Improper Statistical Analysis<a href="introduction-to-correlated-data.html#an-improper-statistical-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>We’ve seen graphically, and in table form, how accounting for litter impacts our ability to discern differences between diets. Now, let’s look at how this happens in a statistical model.</p>
+<p>If we ignore the fact that some mice are from the same litter, and wrongly treat them as independent, we might use an ordinary linear least squares regression model.</p>
+<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb118-1"><a href="introduction-to-correlated-data.html#cb118-1" tabindex="-1"></a>M_LLSR <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data=</span>mice, weight_gain<span class="sc">~</span><span class="fu">factor</span>(diet))</span>
+<span id="cb118-2"><a href="introduction-to-correlated-data.html#cb118-2" tabindex="-1"></a><span class="fu">summary</span>(M_LLSR)<span class="sc">$</span>coefficients</span></code></pre></div>
+<pre><code>##                  Estimate Std. Error    t value    Pr(&gt;|t|)
+## (Intercept)    0.05798494 0.01696450  3.4180166 0.001693572
+## factor(diet)B -0.02394185 0.02399142 -0.9979334 0.325573272
+## factor(diet)C -0.01085590 0.02399142 -0.4524907 0.653876252</code></pre>
+<p>The p-values on line 2 is large, indicating that there is not evidence of differences in weight gain between mice on diet 2, and the baseline diet (diet 1).</p>
+<p>The same is true for a comparison of diets 3 and 1, as seen on the third line.</p>
+</div>
+<div id="a-more-appropriate-statistical-analysis" class="section level3 hasAnchor" number="2.1.9">
+<h3><span class="header-section-number">2.1.9</span> A More Appropriate Statistical Analysis<a href="introduction-to-correlated-data.html#a-more-appropriate-statistical-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The following command fits a linear mixed effects model (or multilevel model) that accounts for correlation between mice in the same litter.</p>
+<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="introduction-to-correlated-data.html#cb120-1" tabindex="-1"></a>M_LME <span class="ot">&lt;-</span> <span class="fu">lmer</span>(<span class="at">data=</span>mice, weight_gain<span class="sc">~</span><span class="fu">factor</span>(diet) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> <span class="fu">factor</span>(litter)))</span>
+<span id="cb120-2"><a href="introduction-to-correlated-data.html#cb120-2" tabindex="-1"></a><span class="fu">summary</span>(M_LME)<span class="sc">$</span>coeff</span></code></pre></div>
+<pre><code>##                  Estimate  Std. Error        df   t value          Pr(&gt;|t|)
+## (Intercept)    0.05798494 0.025057550  5.046906  2.314071 0.068074390235216
+## factor(diet)B -0.02394185 0.002962717 28.000001 -8.081043 0.000000008464648
+## factor(diet)C -0.01085590 0.002962717 28.000001 -3.664169 0.001025965505479</code></pre>
+<ul>
+<li>Estimates are unchanged, but standard errors decrease by a factor of almost 10.<br />
+</li>
+<li>t-statistics are now high, and p-values low, indicating differences between the diets</li>
+</ul>
+<p>Just as we saw graphically, and in tables, accounting for differences between litters allows us to accurately quantify unexplained variability, and assess whether there is evidence of differences in weight gain between the diets.</p>
+</div>
+</div>
+<div id="linear-mixed-effects-models" class="section level2 hasAnchor" number="2.2">
+<h2><span class="header-section-number">2.2</span> Linear Mixed Effects Models<a href="introduction-to-correlated-data.html#linear-mixed-effects-models" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="llsr-model-for-mice-experiment" class="section level3 hasAnchor" number="2.2.1">
+<h3><span class="header-section-number">2.2.1</span> LLSR Model for Mice Experiment<a href="introduction-to-correlated-data.html#llsr-model-for-mice-experiment" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Let <span class="math inline">\(Y_{ij}\)</span> denote the weight gain of mouse <span class="math inline">\(j\)</span> in litter <span class="math inline">\(i\)</span>. <span class="math inline">\(j=1,2,\ldots, 6\)</span>, <span class="math inline">\(j=1,2,\ldots, 6\)</span>.</p>
+<p>In an ordinary linear least squares regression model, we assume that:</p>
+<ul>
+<li>each diet has an expected (or average) weight gain<br />
+</li>
+<li>individual mice vary from their expected weights randomly, according to normal distributions with constant variance <span class="math inline">\(\sigma^2\)</span><br />
+</li>
+<li>no two mice are any more or less alike than any others, except for diet (which is not true in this context)</li>
+</ul>
+<p>A model would have the form:</p>
+<p><span class="math display">\[
+Y_{ij}  = \beta_{0}+\beta_{1}\textrm{DietB}_{ij} +\beta_{2}\textrm{DietC}_{ij} + \epsilon_{ij},
+\]</span></p>
+<p>where <span class="math inline">\(\epsilon_{ij} \sim\mathcal{N}(0, \sigma^2)\)</span>.</p>
+<p>Examples:</p>
+<table>
+<colgroup>
+<col width="41%" />
+<col width="6%" />
+<col width="9%" />
+<col width="21%" />
+<col width="20%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th align="left">Diet</th>
+<th align="left">Expected Weight</th>
+<th align="left">Random Deviation</th>
+<th align="left"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Litter 1, Mouse 1</td>
+<td align="left">A</td>
+<td align="left"><span class="math inline">\(\beta_0\)</span></td>
+<td align="left"><span class="math inline">\(\epsilon_{11}\)</span></td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td>Litter 1, Mouse 3</td>
+<td align="left">B</td>
+<td align="left"><span class="math inline">\(\beta_0 + \beta_1\)</span></td>
+<td align="left"><span class="math inline">\(\epsilon_{13}\)</span></td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td>Litter 1, Mouse 5</td>
+<td align="left">C</td>
+<td align="left"><span class="math inline">\(\beta_0 + \beta_2\)</span></td>
+<td align="left"><span class="math inline">\(\epsilon_{15}\)</span></td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td>Litter 2, Mouse 1</td>
+<td align="left">A</td>
+<td align="left"><span class="math inline">\(\beta_0\)</span></td>
+<td align="left"><span class="math inline">\(\epsilon_{21}\)</span></td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td>Litter 2, Mouse 3</td>
+<td align="left">B</td>
+<td align="left"><span class="math inline">\(\beta_0 + \beta_1\)</span></td>
+<td align="left"><span class="math inline">\(\epsilon_{23}\)</span></td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td>Litter 2, Mouse 5</td>
+<td align="left">C</td>
+<td align="left"><span class="math inline">\(\beta_0 + \beta_2\)</span></td>
+<td align="left"><span class="math inline">\(\epsilon_{25}\)</span></td>
+<td align="left"></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="model-accounting-for-correlation" class="section level3 hasAnchor" number="2.2.2">
+<h3><span class="header-section-number">2.2.2</span> Model Accounting For Correlation<a href="introduction-to-correlated-data.html#model-accounting-for-correlation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Let <span class="math inline">\(Y_{ij}\)</span> denote the weight gain of mouse <span class="math inline">\(j\)</span> in litter <span class="math inline">\(i\)</span>. <span class="math inline">\(j=1,2,\ldots, 6\)</span>, <span class="math inline">\(j=1,2,\ldots, 6\)</span>.</p>
+<p>We assume that:</p>
+<ul>
+<li>expected (or average) weight gain differs between diets<br />
+</li>
+<li>individual litters vary from their expected weight randomly, according to normal distributions with constant variance <span class="math inline">\(\sigma^2_l\)</span><br />
+</li>
+<li>within each litter, individual mice vary from their expected weights randomly, according to normal distributions with constant variance <span class="math inline">\(\sigma^2\)</span></li>
+</ul>
+<p>A model would have the form:</p>
+<p><span class="math display">\[
+Y_{ij}  = \beta_{0}+\beta_{1}\textrm{DietB}_{ij} +\beta_{2}\textrm{DietC}_{ij} + l_{i} + \epsilon_{ij},
+\]</span></p>
+<p>where <span class="math inline">\(l_i\sim\mathcal{N}(0, \sigma^2_l)\)</span>, and <span class="math inline">\(\epsilon_{ij} \sim\mathcal{N}(0, \sigma^2)\)</span>.</p>
+<table>
+<colgroup>
+<col width="41%" />
+<col width="6%" />
+<col width="9%" />
+<col width="21%" />
+<col width="20%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th align="left">Diet</th>
+<th align="left">Expected Weight</th>
+<th align="left">Random Deviation</th>
+<th align="left"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Litter 1, Mouse 1</td>
+<td align="left">A</td>
+<td align="left"><span class="math inline">\(\beta_0\)</span></td>
+<td align="left"><span class="math inline">\(l_1 + \epsilon_{11}\)</span></td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td>Litter 1, Mouse 3</td>
+<td align="left">B</td>
+<td align="left"><span class="math inline">\(\beta_0 + \beta_1\)</span></td>
+<td align="left"><span class="math inline">\(l_1 + \epsilon_{13}\)</span></td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td>Litter 1, Mouse 5</td>
+<td align="left">C</td>
+<td align="left"><span class="math inline">\(\beta_0 + \beta_2\)</span></td>
+<td align="left"><span class="math inline">\(l_1 + \epsilon_{15}\)</span></td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td>Litter 2, Mouse 1</td>
+<td align="left">A</td>
+<td align="left"><span class="math inline">\(\beta_0\)</span></td>
+<td align="left"><span class="math inline">\(l_2 + \epsilon_{21}\)</span></td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td>Litter 2, Mouse 3</td>
+<td align="left">B</td>
+<td align="left"><span class="math inline">\(\beta_0 + \beta_1\)</span></td>
+<td align="left"><span class="math inline">\(l_2 + \epsilon_{23}\)</span></td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td>Litter 2, Mouse 5</td>
+<td align="left">C</td>
+<td align="left"><span class="math inline">\(\beta_0 + \beta_2\)</span></td>
+<td align="left"><span class="math inline">\(l_2 + \epsilon_{25}\)</span></td>
+<td align="left"></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="questions-of-interest" class="section level3 hasAnchor" number="2.2.3">
+<h3><span class="header-section-number">2.2.3</span> Questions of Interest<a href="introduction-to-correlated-data.html#questions-of-interest" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The model</p>
+<p><span class="math display">\[
+Y_{ij}  = \beta_{0}+\beta_{1}\textrm{DietB}_{ij} +\beta_{2}\textrm{DietC}_{ij} + l_{i} + \epsilon_{ij},
+\]</span></p>
+<p>where <span class="math inline">\(l_i\sim\mathcal{N}(0, \sigma^2_l)\)</span>, and <span class="math inline">\(\epsilon_{ij} \sim\mathcal{N}(0, \sigma^2)\)</span></p>
+<p>has 5 parameters:</p>
+<ul>
+<li><span class="math inline">\(\beta_0\)</span> - average weight gain for mice on diet A.<br />
+</li>
+<li><span class="math inline">\(\beta_1\)</span> - difference in average weight gain for mice on diet B, compared to to diet A<br />
+</li>
+<li><span class="math inline">\(\beta_2\)</span> - difference in average weight gain for mice on diet C, compared to to diet A<br />
+</li>
+<li><span class="math inline">\(\sigma_l\)</span> - standard deviation in the distribution of differences between litters (i.e. variability explained by litter)<br />
+</li>
+<li><span class="math inline">\(\sigma\)</span> - standard deviation in the distribution of differences between individual mice in the same litter (i.e. unexplained variability)</li>
+</ul>
+<p>Thus, for a mouse on Diet A, the expected weight gain follows a normal distribution with mean <span class="math inline">\(\beta_0\)</span> and variance <span class="math inline">\(\sigma^2_l + \sigma^2\)</span>.</p>
+<p>For a mouse on Diet C, the expected weight gain follows a normal distribution with mean <span class="math inline">\(\beta_0 + \beta_2\)</span> and variance <span class="math inline">\(\sigma^2_l + \sigma^2\)</span></p>
+<p>This is based on the fact that the sum of two independent normal random variables is normal, with mean equal to the sum of the means and variance equal to the sum of the variances.</p>
+</div>
+<div id="fixed-and-random-effects" class="section level3 hasAnchor" number="2.2.4">
+<h3><span class="header-section-number">2.2.4</span> Fixed and Random Effects<a href="introduction-to-correlated-data.html#fixed-and-random-effects" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>In this case, we want to test for whether there are differences in weight gain between the diets.</p>
+<p>There is no reason to test for differences in weight gain between the litters. Differences between these specific litters of mice are not important to us. We’re not interested in drawing conclusions about these specific mice. They’re just a sample of participants, being used to investigate the diets. It’s likely that we’ll never acually see these specific litters of mice beyond this study.</p>
+<p>We still need to account for litter, though, because it helps explain, or account for, variability that would otherwise go unexplained.</p>
+<ul>
+<li>Variables for which we want to investigate differences or relationships are called <strong>fixed effects</strong>. We should build these into the “expectation structure” of the model, using <span class="math inline">\(\beta_j\)</span>’s.<br />
+</li>
+<li>Variables that we are not interested in testing for differences or relationships between, but that we still want to include in our model in order to account for correlation and explain variability are called <strong>random effects.</strong> We should add these to the model as normally distributed error terms.<br />
+</li>
+<li>Accounting for random effects allows us to accurately calculate standard errors associated with fixed effects.<br />
+</li>
+<li>A model that involves both fixed and random effects is called a <strong>linear mixed effects model</strong>.</li>
+</ul>
+</div>
+<div id="fitting-the-model-in-r" class="section level3 hasAnchor" number="2.2.5">
+<h3><span class="header-section-number">2.2.5</span> Fitting the Model in R<a href="introduction-to-correlated-data.html#fitting-the-model-in-r" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>To fit a linear mixed effects model in R, we use the <code>lmer()</code> command that is part of the <code>lme4</code> package. It is also helpful to load the <code>lmerTest</code> package, in order to obtain p-values in the output.</p>
+<p>To add a random effect for a variable add <code>(1 | variable_name)</code> in the model.</p>
+<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="introduction-to-correlated-data.html#cb122-1" tabindex="-1"></a>M_LME <span class="ot">&lt;-</span> <span class="fu">lmer</span>(<span class="at">data=</span>mice, weight_gain<span class="sc">~</span><span class="fu">factor</span>(diet) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> <span class="fu">factor</span>(litter)))</span>
+<span id="cb122-2"><a href="introduction-to-correlated-data.html#cb122-2" tabindex="-1"></a><span class="fu">summary</span>(M_LME)</span></code></pre></div>
+<pre><code>## Linear mixed model fit by REML. t-tests use Satterthwaite&#39;s method [
+## lmerModLmerTest]
+## Formula: weight_gain ~ factor(diet) + (1 | factor(litter))
+##    Data: mice
+## 
+## REML criterion at convergence: -193.7
+## 
+## Scaled residuals: 
+##     Min      1Q  Median      3Q     Max 
+## -2.2468 -0.7088  0.0247  0.6028  1.9280 
+## 
+## Random effects:
+##  Groups         Name        Variance   Std.Dev.
+##  factor(litter) (Intercept) 0.00374095 0.061163
+##  Residual                   0.00005267 0.007257
+## Number of obs: 36, groups:  factor(litter), 6
+## 
+## Fixed effects:
+##                Estimate Std. Error        df t value      Pr(&gt;|t|)    
+## (Intercept)    0.057985   0.025058  5.046906   2.314       0.06807 .  
+## factor(diet)B -0.023942   0.002963 28.000001  -8.081 0.00000000846 ***
+## factor(diet)C -0.010856   0.002963 28.000001  -3.664       0.00103 ** 
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Correlation of Fixed Effects:
+##             (Intr) fct()B
+## factor(dt)B -0.059       
+## factor(dt)C -0.059  0.500</code></pre>
+<p><strong>Estimates and Interpretations</strong></p>
+<ul>
+<li><span class="math inline">\(\beta_0 = 0.058\)</span>: We estimate that average weight gain for Diet A is 0.058 g.<br />
+</li>
+<li><span class="math inline">\(\beta_1 = -0.024\)</span>: We estimate that mice on diet B gain 0.024 g. less than mice on diet A, on average.<br />
+</li>
+<li><span class="math inline">\(\beta_2 = -0.011\)</span>: We estimate that mice on diet C gain 0.011 g. less than mice on diet A, on average.</li>
+</ul>
+<p>The “Random effects” table gives estimates of <span class="math inline">\(\sigma^2_l\)</span> (litters) and <span class="math inline">\(\sigma^2\)</span> (Residual).</p>
+<ul>
+<li><span class="math inline">\(\sigma_l = 0.061\)</span>: We estimate that the standard deviation in differences in weights between litters, after accounting for diet, is 0.061 g.<br />
+</li>
+<li><span class="math inline">\(\sigma = 0.007\)</span>: We estimate that the standard deviation in differences in weights between mice within a litter, after accounting for diet, is 0.007 g.</li>
+</ul>
+<p>There is evidence of differences between the diets.<br />
+There is more variability in weight between different litters than between mice in the same litter, after accounting for diet.</p>
+</div>
+<div id="why-not-fixed-effect-for-litter" class="section level3 hasAnchor" number="2.2.6">
+<h3><span class="header-section-number">2.2.6</span> Why Not Fixed Effect for Litter?<a href="introduction-to-correlated-data.html#why-not-fixed-effect-for-litter" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Why would a model like the following, which uses litter as an expanatory variable in Example 1, not be very useful?</p>
+<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="introduction-to-correlated-data.html#cb124-1" tabindex="-1"></a>M_fixed_litter <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data=</span>mice, weight_gain<span class="sc">~</span> <span class="fu">factor</span>(diet) <span class="sc">+</span> <span class="fu">factor</span>(litter))</span>
+<span id="cb124-2"><a href="introduction-to-correlated-data.html#cb124-2" tabindex="-1"></a><span class="fu">summary</span>(M_fixed_litter)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = weight_gain ~ factor(diet) + factor(litter), data = mice)
+## 
+## Residuals:
+##        Min         1Q     Median         3Q        Max 
+## -0.0164273 -0.0051744  0.0001942  0.0044281  0.0138701 
+## 
+## Coefficients:
+##                  Estimate Std. Error t value             Pr(&gt;|t|)    
+## (Intercept)     -0.046333   0.003421 -13.544   0.0000000000000815 ***
+## factor(diet)B   -0.023942   0.002963  -8.081   0.0000000084646521 ***
+## factor(diet)C   -0.010856   0.002963  -3.664              0.00103 ** 
+## factor(litter)2  0.126011   0.004190  30.075 &lt; 0.0000000000000002 ***
+## factor(litter)3  0.061021   0.004190  14.564   0.0000000000000136 ***
+## factor(litter)4  0.147712   0.004190  35.254 &lt; 0.0000000000000002 ***
+## factor(litter)5  0.156366   0.004190  37.320 &lt; 0.0000000000000002 ***
+## factor(litter)6  0.134801   0.004190  32.173 &lt; 0.0000000000000002 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.007257 on 28 degrees of freedom
+## Multiple R-squared:  0.9874, Adjusted R-squared:  0.9843 
+## F-statistic: 314.5 on 7 and 28 DF,  p-value: &lt; 0.00000000000000022</code></pre>
+<p>We’re now estimating 8 <span class="math inline">\(\beta&#39;s\)</span> instead of 3.</p>
+<p>Each time we estimate an additional parameter, we lose a degree of freedom, making estimates and predictions less precise.</p>
+<p>We don’t care about differences between the litters, so <span class="math inline">\(\beta_3, \beta_4, \ldots, \beta_7\)</span> are not useful.</p>
+<p>Imagine if we had many more litters. Things would get really messy, and unnecessarily so.</p>
+<p>If, for some reason, we really wanted to test for differences in weight gain between these specific litters of mice, then we would treat them as fixed effects, but it’s hard to see why we would want to do that.</p>
+</div>
+</div>
+<div id="a-second-mice-experiment" class="section level2 hasAnchor" number="2.3">
+<h2><span class="header-section-number">2.3</span> A Second Mice Experiment<a href="introduction-to-correlated-data.html#a-second-mice-experiment" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="weight-gain-in-mice-experiment-2" class="section level3 hasAnchor" number="2.3.1">
+<h3><span class="header-section-number">2.3.1</span> Weight Gain in Mice: Experiment 2<a href="introduction-to-correlated-data.html#weight-gain-in-mice-experiment-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Now consider a different structure of the mouse experiment.</p>
+<p>In this version of the experiment, the three diets were randomly assigned to six pregnant mice, so that two mice were assigned to each diet. Each of the six mice (dams), gave birth to six pups, creating six litters of six, as seen before. Researchers the observed the mean weight gain of the pups over a four week period.</p>
+<p>Now, each pup in a litter has necessarily been assigned to the same diet, since diets were assigned to the dams, before the pups were born.</p>
+<p>Experimental Design 2:</p>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-57"></span>
+<img src="Mice2.png" alt="Mouse Experiment Version 2" width="75%" />
+<p class="caption">
+Figure 2.2: Mouse Experiment Version 2
+</p>
+</div>
+</div>
+<div id="mice-experiment-2-data" class="section level3 hasAnchor" number="2.3.2">
+<h3><span class="header-section-number">2.3.2</span> Mice Experiment 2 Data<a href="introduction-to-correlated-data.html#mice-experiment-2-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The first 15 rows of the dataset look like this:</p>
+<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb126-1"><a href="introduction-to-correlated-data.html#cb126-1" tabindex="-1"></a><span class="fu">head</span>(mice2,<span class="dv">15</span>)</span></code></pre></div>
+<pre><code>##    litter diet   weight_gain
+## 1       1    A -0.0352604099
+## 2       1    A -0.0474166604
+## 3       1    A -0.0545130532
+## 4       1    A -0.0517145212
+## 5       1    A -0.0481739132
+## 6       1    A -0.0505177486
+## 7       2    A  0.0758408263
+## 8       2    A  0.0701352749
+## 9       2    A  0.0885838352
+## 10      2    A  0.0727807107
+## 11      2    A  0.0826007925
+## 12      2    A  0.0785294998
+## 13      3    B  0.0002306143
+## 14      3    B -0.0163362762
+## 15      3    B -0.0146213462</code></pre>
+</div>
+<div id="a-naive-graphical-analysis-for-experiment-2" class="section level3 hasAnchor" number="2.3.3">
+<h3><span class="header-section-number">2.3.3</span> A Naive Graphical Analysis for Experiment 2<a href="introduction-to-correlated-data.html#a-naive-graphical-analysis-for-experiment-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Again, we’ll temporarily ignore the fact that mice come from the same litter and treat all observations as independent.</p>
+<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="introduction-to-correlated-data.html#cb128-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>mice2, <span class="fu">aes</span>(<span class="at">x=</span><span class="fu">factor</span>(diet), <span class="at">y=</span>weight_gain))  <span class="sc">+</span> <span class="fu">geom_point</span>()  <span class="sc">+</span> </span>
+<span id="cb128-2"><a href="introduction-to-correlated-data.html#cb128-2" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun=</span><span class="st">&quot;mean&quot;</span>, <span class="at">geom=</span><span class="st">&quot;line&quot;</span>, <span class="fu">aes</span>(<span class="at">group=</span><span class="fu">factor</span>(<span class="dv">1</span>)))<span class="sc">+</span>  </span>
+<span id="cb128-3"><a href="introduction-to-correlated-data.html#cb128-3" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun=</span><span class="st">&quot;mean&quot;</span>, <span class="at">geom=</span><span class="st">&quot;point&quot;</span>, <span class="at">color=</span><span class="st">&quot;red&quot;</span>, <span class="at">size=</span><span class="dv">2</span>)</span></code></pre></div>
+<p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-60-1.png" width="576" /></p>
+</div>
+<div id="a-more-informed-graphical-analysis-for-experiment-2" class="section level3 hasAnchor" number="2.3.4">
+<h3><span class="header-section-number">2.3.4</span> A More Informed Graphical Analysis for Experiment 2<a href="introduction-to-correlated-data.html#a-more-informed-graphical-analysis-for-experiment-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Now, we’ll account for the fact that mice in the same litter got the same diets. The plot below adds color to show litter.</p>
+<div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb129-1"><a href="introduction-to-correlated-data.html#cb129-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>mice2, <span class="fu">aes</span>(<span class="at">x=</span><span class="fu">factor</span>(diet), <span class="at">y=</span>weight_gain, <span class="at">color=</span><span class="fu">factor</span>(litter))) <span class="sc">+</span> <span class="fu">geom_point</span>() </span></code></pre></div>
+<p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-61-1.png" width="576" /></p>
+<p>Since diets were assigned to litters, not individual mice, it is the litters we should be comparing.</p>
+<p>When comparing diets, our observational units are litters, not individual mice. Since there are only 6 litters, our sample size is 6, rather than 36.</p>
+<p>Thus, the best graphical analysis would come from the following plot, which displays average weight for each litter:</p>
+<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb130-1"><a href="introduction-to-correlated-data.html#cb130-1" tabindex="-1"></a>Litters <span class="ot">&lt;-</span> mice2 <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(diet, litter)<span class="sc">%&gt;%</span> </span>
+<span id="cb130-2"><a href="introduction-to-correlated-data.html#cb130-2" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean_weight_gain=</span><span class="fu">mean</span>(weight_gain), <span class="at">N=</span><span class="fu">n</span>())</span>
+<span id="cb130-3"><a href="introduction-to-correlated-data.html#cb130-3" tabindex="-1"></a><span class="fu">head</span>(Litters)</span></code></pre></div>
+<pre><code>## # A tibble: 6 × 4
+## # Groups:   diet [3]
+##   diet  litter mean_weight_gain     N
+##   &lt;chr&gt;  &lt;int&gt;            &lt;dbl&gt; &lt;int&gt;
+## 1 A          1         -0.0479      6
+## 2 A          2          0.0781      6
+## 3 B          3         -0.00791     6
+## 4 B          4          0.0788      6
+## 5 C          5          0.0994      6
+## 6 C          6          0.0779      6</code></pre>
+<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb132-1"><a href="introduction-to-correlated-data.html#cb132-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>Litters, <span class="fu">aes</span>(<span class="at">x=</span><span class="fu">factor</span>(diet), <span class="at">y=</span>mean_weight_gain, <span class="at">color=</span><span class="fu">factor</span>(litter))) <span class="sc">+</span> <span class="fu">geom_point</span>() </span></code></pre></div>
+<p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-63-1.png" width="576" /></p>
+</div>
+<div id="table-of-mean-weight-by-diet-for-experiment-2" class="section level3 hasAnchor" number="2.3.5">
+<h3><span class="header-section-number">2.3.5</span> Table of Mean Weight By Diet for Experiment 2<a href="introduction-to-correlated-data.html#table-of-mean-weight-by-diet-for-experiment-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb133"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb133-1"><a href="introduction-to-correlated-data.html#cb133-1" tabindex="-1"></a>mouse_groups <span class="ot">&lt;-</span> mice2 <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(diet)<span class="sc">%&gt;%</span> </span>
+<span id="cb133-2"><a href="introduction-to-correlated-data.html#cb133-2" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">Mean_Weight=</span><span class="fu">mean</span>(weight_gain), <span class="at">SD_Weight =</span> <span class="fu">sd</span>(weight_gain), <span class="at">N=</span><span class="fu">n</span>())</span>
+<span id="cb133-3"><a href="introduction-to-correlated-data.html#cb133-3" tabindex="-1"></a>mouse_groups</span></code></pre></div>
+<pre><code>## # A tibble: 3 × 4
+##   diet  Mean_Weight SD_Weight     N
+##   &lt;chr&gt;       &lt;dbl&gt;     &lt;dbl&gt; &lt;int&gt;
+## 1 A          0.0151    0.0661    12
+## 2 B          0.0354    0.0457    12
+## 3 C          0.0887    0.0137    12</code></pre>
+<p>This standard deviations in this table pertain to variability between the 12 mice that got each diet (6 from one litter and 6 from another).</p>
+<p>These are not useful here, since diets were assigned to litters, not individual mice.</p>
+</div>
+<div id="table-comparing-litters-means-by-diet-for-experiment-2" class="section level3 hasAnchor" number="2.3.6">
+<h3><span class="header-section-number">2.3.6</span> Table Comparing Litters Means by Diet for Experiment 2<a href="introduction-to-correlated-data.html#table-comparing-litters-means-by-diet-for-experiment-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>We now look at means and standard deviations between litter means, using the average rate in each litter as the response variable.</p>
+<div class="sourceCode" id="cb135"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb135-1"><a href="introduction-to-correlated-data.html#cb135-1" tabindex="-1"></a>litter_groups <span class="ot">&lt;-</span> Litters <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(diet)<span class="sc">%&gt;%</span> </span>
+<span id="cb135-2"><a href="introduction-to-correlated-data.html#cb135-2" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">Mean_Weight=</span><span class="fu">mean</span>(mean_weight_gain), <span class="at">SD_Weight =</span> <span class="fu">sd</span>(mean_weight_gain), <span class="at">N=</span><span class="fu">n</span>())</span>
+<span id="cb135-3"><a href="introduction-to-correlated-data.html#cb135-3" tabindex="-1"></a>litter_groups</span></code></pre></div>
+<pre><code>## # A tibble: 3 × 4
+##   diet  Mean_Weight SD_Weight     N
+##   &lt;chr&gt;       &lt;dbl&gt;     &lt;dbl&gt; &lt;int&gt;
+## 1 A          0.0151    0.0891     2
+## 2 B          0.0354    0.0613     2
+## 3 C          0.0887    0.0152     2</code></pre>
+</div>
+<div id="an-inappropriate-model-for-the-second-design" class="section level3 hasAnchor" number="2.3.7">
+<h3><span class="header-section-number">2.3.7</span> An Inappropriate Model for the Second Design<a href="introduction-to-correlated-data.html#an-inappropriate-model-for-the-second-design" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>An ordinarly linear least squares regression model fails to account for the fact that treatments were assigned to litters, not mice. It is based on the assumption that we have 36 independent mice (which is incorret).</p>
+<p>Such a model would have the form</p>
+<p><span class="math display">\[
+Y_{ij}  = \beta_{0}+\beta_{1}\textrm{DietB}_{ij} +\beta_{2}\textrm{DietC}_{ij} + \epsilon_{ij},
+\]</span></p>
+<p>Output for such a model is shown below.</p>
+<div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb137-1"><a href="introduction-to-correlated-data.html#cb137-1" tabindex="-1"></a>M2_LLSR <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data=</span>mice2, weight_gain<span class="sc">~</span><span class="fu">factor</span>(diet))</span>
+<span id="cb137-2"><a href="introduction-to-correlated-data.html#cb137-2" tabindex="-1"></a><span class="fu">summary</span>(M2_LLSR)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = weight_gain ~ factor(diet), data = mice2)
+## 
+## Residuals:
+##       Min        1Q    Median        3Q       Max 
+## -0.069586 -0.041328 -0.005675  0.041915  0.073511 
+## 
+## Coefficients:
+##               Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)    0.01507    0.01359   1.109 0.275297    
+## factor(diet)B  0.02036    0.01922   1.060 0.297007    
+## factor(diet)C  0.07358    0.01922   3.829 0.000545 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.04707 on 33 degrees of freedom
+## Multiple R-squared:  0.3215, Adjusted R-squared:  0.2804 
+## F-statistic: 7.819 on 2 and 33 DF,  p-value: 0.001662</code></pre>
+</div>
+<div id="a-more-appropriate-model-for-experiment-2" class="section level3 hasAnchor" number="2.3.8">
+<h3><span class="header-section-number">2.3.8</span> A More Appropriate Model for Experiment 2<a href="introduction-to-correlated-data.html#a-more-appropriate-model-for-experiment-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>A linear mixed effects model with a random term for litter accounts for the fact that treatments were applied to litters, not individual mice. This model has the form:</p>
+<p><span class="math display">\[
+Y_{ij}  = \beta_{0}+\beta_{1}\textrm{DietB}_{ij} +\beta_{2}\textrm{DietC}_{ij} + l_{i} + \epsilon_{ij},
+\]</span></p>
+<p>where <span class="math inline">\(l_i\sim\mathcal{N}(0, \sigma^2_l)\)</span>, and <span class="math inline">\(\epsilon_{ij} \sim\mathcal{N}(0, \sigma^2)\)</span></p>
+<p>Output for a model that accounts for correlation between mice in the same litter is shown.</p>
+<div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb139-1"><a href="introduction-to-correlated-data.html#cb139-1" tabindex="-1"></a>M2_LME <span class="ot">&lt;-</span> <span class="fu">lmer</span>(<span class="at">data=</span>mice2, weight_gain<span class="sc">~</span><span class="fu">factor</span>(diet) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> <span class="fu">factor</span>(litter)))</span>
+<span id="cb139-2"><a href="introduction-to-correlated-data.html#cb139-2" tabindex="-1"></a><span class="fu">summary</span>(M2_LME)</span></code></pre></div>
+<pre><code>## Linear mixed model fit by REML. t-tests use Satterthwaite&#39;s method [
+## lmerModLmerTest]
+## Formula: weight_gain ~ factor(diet) + (1 | factor(litter))
+##    Data: mice2
+## 
+## REML criterion at convergence: -206.7
+## 
+## Scaled residuals: 
+##      Min       1Q   Median       3Q      Max 
+## -2.33470 -0.59248  0.03505  0.59073  1.91089 
+## 
+## Random effects:
+##  Groups         Name        Variance   Std.Dev.
+##  factor(litter) (Intercept) 0.00396804 0.062992
+##  Residual                   0.00005093 0.007136
+## Number of obs: 36, groups:  factor(litter), 6
+## 
+## Fixed effects:
+##               Estimate Std. Error      df t value Pr(&gt;|t|)
+## (Intercept)    0.01507    0.04459 3.00000   0.338    0.758
+## factor(diet)B  0.02036    0.06306 3.00000   0.323    0.768
+## factor(diet)C  0.07358    0.06306 3.00000   1.167    0.328
+## 
+## Correlation of Fixed Effects:
+##             (Intr) fct()B
+## factor(dt)B -0.707       
+## factor(dt)C -0.707  0.500</code></pre>
+<ul>
+<li><p>Estimates are the same<br />
+</p></li>
+<li><p>Standard errors are larger, due mostly to the fact that our sample size is 6, instead of 36</p></li>
+<li><p>after accounting for diet, standard deviation in weights between litters is estimated to be 0.0629 g. (estimate of <span class="math inline">\(\sigma_l\)</span>)<br />
+</p></li>
+<li><p>after accounting for diet, standard deviation in weights between mice in the same litter is estimated to be 0.0071 g. (estimate of <span class="math inline">\(\sigma\)</span>)</p></li>
+</ul>
+</div>
+<div id="model-for-litter-means" class="section level3 hasAnchor" number="2.3.9">
+<h3><span class="header-section-number">2.3.9</span> Model for Litter Means<a href="introduction-to-correlated-data.html#model-for-litter-means" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Alternatively, we could fit a model, using the 6 litters as our observations, with the mean weight in each litter as the response variable. If we now let <span class="math inline">\(Y_i\)</span> represent the mean weight in litter i, our model has the form:</p>
+<p><span class="math display">\[
+Y_{i}  = \beta_{0}+\beta_{1}\textrm{DietB}_{i} +\beta_{2}\textrm{DietC}_{i} + \epsilon_{i},
+\]</span></p>
+<p>where <span class="math inline">\(\epsilon_{i} \sim\mathcal{N}(0, \sigma^2)\)</span></p>
+<p>Since it is reasonable to assume that litters are independent, we could use an ordinary LLSR model in this context.</p>
+<div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb141-1"><a href="introduction-to-correlated-data.html#cb141-1" tabindex="-1"></a>M2_Means <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data=</span>Litters, mean_weight_gain<span class="sc">~</span><span class="fu">factor</span>(diet))</span>
+<span id="cb141-2"><a href="introduction-to-correlated-data.html#cb141-2" tabindex="-1"></a><span class="fu">summary</span>(M2_Means)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = mean_weight_gain ~ factor(diet), data = Litters)
+## 
+## Residuals:
+##        1        2        3        4        5        6 
+## -0.06301  0.06301 -0.04335  0.04335  0.01078 -0.01078 
+## 
+## Coefficients:
+##               Estimate Std. Error t value Pr(&gt;|t|)
+## (Intercept)    0.01507    0.04459   0.338    0.758
+## factor(diet)B  0.02036    0.06306   0.323    0.768
+## factor(diet)C  0.07358    0.06306   1.167    0.328
+## 
+## Residual standard error: 0.06306 on 3 degrees of freedom
+## Multiple R-squared:  0.3261, Adjusted R-squared:  -0.1231 
+## F-statistic: 0.7259 on 2 and 3 DF,  p-value: 0.5532</code></pre>
+<ul>
+<li>Estimates, standard errors, and p-values are identical to the ones seen in the mixed-effects model.</li>
+</ul>
+</div>
+<div id="fixed-effect-for-litter-in-experiment-2" class="section level3 hasAnchor" number="2.3.10">
+<h3><span class="header-section-number">2.3.10</span> Fixed Effect for Litter in Experiment 2<a href="introduction-to-correlated-data.html#fixed-effect-for-litter-in-experiment-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>If we try to treat litter as a fixed effect in Experiment 2, we would not even be able to estimate all of the parameters.</p>
+<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb143-1"><a href="introduction-to-correlated-data.html#cb143-1" tabindex="-1"></a>M2_fixed_litter <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data=</span>mice2, weight_gain<span class="sc">~</span> <span class="fu">factor</span>(diet) <span class="sc">+</span> <span class="fu">factor</span>(litter))</span>
+<span id="cb143-2"><a href="introduction-to-correlated-data.html#cb143-2" tabindex="-1"></a><span class="fu">summary</span>(M2_fixed_litter)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = weight_gain ~ factor(diet) + factor(litter), data = mice2)
+## 
+## Residuals:
+##        Min         1Q     Median         3Q        Max 
+## -0.0166840 -0.0041608  0.0003311  0.0042513  0.0136135 
+## 
+## Coefficients: (2 not defined because of singularities)
+##                  Estimate Std. Error t value             Pr(&gt;|t|)    
+## (Intercept)     -0.047933   0.002913 -16.453 &lt; 0.0000000000000002 ***
+## factor(diet)B    0.126712   0.004120  30.755 &lt; 0.0000000000000002 ***
+## factor(diet)C    0.125801   0.004120  30.533 &lt; 0.0000000000000002 ***
+## factor(litter)2  0.126011   0.004120  30.585 &lt; 0.0000000000000002 ***
+## factor(litter)3 -0.086691   0.004120 -21.041 &lt; 0.0000000000000002 ***
+## factor(litter)4        NA         NA      NA                   NA    
+## factor(litter)5  0.021565   0.004120   5.234             0.000012 ***
+## factor(litter)6        NA         NA      NA                   NA    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.007136 on 30 degrees of freedom
+## Multiple R-squared:  0.9858, Adjusted R-squared:  0.9835 
+## F-statistic: 417.2 on 5 and 30 DF,  p-value: &lt; 0.00000000000000022</code></pre>
+</div>
+</div>
+<div id="a-multilevel-experiment" class="section level2 hasAnchor" number="2.4">
+<h2><span class="header-section-number">2.4</span> A Multilevel Experiment<a href="introduction-to-correlated-data.html#a-multilevel-experiment" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="experiment-2-illustration" class="section level3 hasAnchor" number="2.4.1">
+<h3><span class="header-section-number">2.4.1</span> Experiment 2 Illustration<a href="introduction-to-correlated-data.html#experiment-2-illustration" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>In example 2, we saw that treatments (diets) were assigned to litters (dams), but measurements were taken on the individual mice (pups).</p>
+<p><img src="Multi.png" width="60%" /></p>
+</div>
+<div id="experiment-with-variables-assigned-at-different-levels" class="section level3 hasAnchor" number="2.4.2">
+<h3><span class="header-section-number">2.4.2</span> Experiment with Variables Assigned at Different Levels<a href="introduction-to-correlated-data.html#experiment-with-variables-assigned-at-different-levels" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Now imagine qn experimemt with the following setup</p>
+<ul>
+<li>diets are still assigned to dams, prior to the birth of the pups, so all mice in the same litter get the same diet<br />
+</li>
+<li>within each litter three mice are given nutritional supplements after their birth and the other three are not</li>
+</ul>
+<p>We want to study the effect of diet and supplement on weight gain.</p>
+<p><img src="Mice3.png" width="60%" /></p>
+<p>One treatment (diet) is assigned to litters, while the other (supplement) is assigned to individual mice.</p>
+<p><img src="Multi2.png" width="60%" /></p>
+<ul>
+<li>For the purpose of comparing diets, our observational units are 6 independent litters.<br />
+</li>
+<li>For the purpose of comparing supplements, our observational units are 36 individual mice (who are not independent)</li>
+</ul>
+<p>An experiment where treatments are assigned at different levels is called a <strong>multilevel experiment</strong></p>
+<ul>
+<li>level 1 observational units are mice, and level 1 treatment is supplement<br />
+</li>
+<li>level 2 observational units are litters, and level 2 treatment is diet</li>
+</ul>
+</div>
+<div id="experiment-3-data" class="section level3 hasAnchor" number="2.4.3">
+<h3><span class="header-section-number">2.4.3</span> Experiment 3 Data<a href="introduction-to-correlated-data.html#experiment-3-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb145-1"><a href="introduction-to-correlated-data.html#cb145-1" tabindex="-1"></a><span class="fu">head</span>(mice3,<span class="dv">15</span>)</span></code></pre></div>
+<pre><code>##    litter diet supplement  weight_gain
+## 1       1    A          1 -0.033260410
+## 2       1    A          0 -0.047416660
+## 3       1    A          1 -0.052513053
+## 4       1    A          0 -0.051714521
+## 5       1    A          1 -0.046173913
+## 6       1    A          0 -0.050517749
+## 7       2    A          1  0.077840826
+## 8       2    A          0  0.070135275
+## 9       2    A          1  0.090583835
+## 10      2    A          0  0.072780711
+## 11      2    A          1  0.084600792
+## 12      2    A          0  0.078529500
+## 13      3    B          1  0.002230614
+## 14      3    B          0 -0.016336276
+## 15      3    B          1 -0.012621346</code></pre>
+</div>
+<div id="graphical-analysis-for-experiment-3" class="section level3 hasAnchor" number="2.4.4">
+<h3><span class="header-section-number">2.4.4</span> Graphical Analysis for Experiment 3<a href="introduction-to-correlated-data.html#graphical-analysis-for-experiment-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>We use color to represent litter, and shape to represent supplement. We’ll use the argument <code>position=position_jitterdodge()</code> to stagger litters and supplement levels, which avoids overlap and makes the graph easier to read.</p>
+<div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb147-1"><a href="introduction-to-correlated-data.html#cb147-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>mice3, <span class="fu">aes</span>(<span class="at">x=</span><span class="fu">factor</span>(diet), <span class="at">y=</span>weight_gain, <span class="at">color=</span><span class="fu">factor</span>(litter), </span>
+<span id="cb147-2"><a href="introduction-to-correlated-data.html#cb147-2" tabindex="-1"></a>       <span class="at">shape=</span><span class="fu">factor</span>(supplement))) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="at">position=</span><span class="fu">position_jitterdodge</span>())</span></code></pre></div>
+<p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-75-1.png" width="576" /></p>
+</div>
+<div id="an-inappropriate-model-for-the-3rd-design" class="section level3 hasAnchor" number="2.4.5">
+<h3><span class="header-section-number">2.4.5</span> An Inappropriate Model for the 3rd Design<a href="introduction-to-correlated-data.html#an-inappropriate-model-for-the-3rd-design" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>An ordinarly linear least squares regression model fails to account for the fact that treatments were assigned to litters, not mice. It is based on the assumption that we have 36 independent mice (which is incorret).</p>
+<p>The model has the form</p>
+<p><span class="math display">\[
+Y_{ij}  = \beta_{0} + \alpha\textrm{Supplement}_i + \beta_{1}\textrm{DietB}_{ij} +\beta_{2}\textrm{DietC}_{ij}  + \epsilon_{ij},
+\]</span></p>
+<p>where <span class="math inline">\(\epsilon_{ij} \sim\mathcal{N}(0, \sigma^2)\)</span></p>
+<p>Output for such a model is shown below.</p>
+<div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb148-1"><a href="introduction-to-correlated-data.html#cb148-1" tabindex="-1"></a>M3_LLSR <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data=</span>mice3, weight_gain<span class="sc">~</span>supplement <span class="sc">+</span> <span class="fu">factor</span>(diet))</span>
+<span id="cb148-2"><a href="introduction-to-correlated-data.html#cb148-2" tabindex="-1"></a><span class="fu">summary</span>(M3_LLSR)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = weight_gain ~ supplement + factor(diet), data = mice3)
+## 
+## Residuals:
+##       Min        1Q    Median        3Q       Max 
+## -0.072685 -0.040982 -0.005618  0.040366  0.070412 
+## 
+## Coefficients:
+##               Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)   0.011974   0.015895   0.753 0.456766    
+## supplement    0.008198   0.015895   0.516 0.609538    
+## factor(diet)B 0.020361   0.019467   1.046 0.303431    
+## factor(diet)C 0.073578   0.019467   3.780 0.000648 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.04768 on 32 degrees of freedom
+## Multiple R-squared:  0.3263, Adjusted R-squared:  0.2632 
+## F-statistic: 5.167 on 3 and 32 DF,  p-value: 0.005021</code></pre>
+</div>
+<div id="a-more-appropriate-model-for-experiment-3" class="section level3 hasAnchor" number="2.4.6">
+<h3><span class="header-section-number">2.4.6</span> A More Appropriate Model for Experiment 3<a href="introduction-to-correlated-data.html#a-more-appropriate-model-for-experiment-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>We instead fit a linear mixed effects model.</p>
+<p>Since we want to study the effects of diet and supplement, we treat supplement and diet as fixed effects.</p>
+<p>Since we want to account for correlation due to mice being in the same litter, we treat litter as a random effect.</p>
+<p>Our model has the form</p>
+<p><span class="math display">\[
+Y_{ij}  = \beta_{0} + \alpha\textrm{Supplement}_i + \beta_{1}\textrm{DietB}_{ij} +\beta_{2}\textrm{DietC}_{ij} + l_{i} + \epsilon_{ij},
+\]</span></p>
+<p>where <span class="math inline">\(l_i\sim\mathcal{N}(0, \sigma^2_l)\)</span>, and <span class="math inline">\(\epsilon_{ij} \sim\mathcal{N}(0, \sigma^2)\)</span></p>
+<p>Output for a model that accounts for correlation between mice in the same litter is shown.</p>
+<div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb150-1"><a href="introduction-to-correlated-data.html#cb150-1" tabindex="-1"></a>M3_LME <span class="ot">&lt;-</span> <span class="fu">lmer</span>(<span class="at">data=</span>mice3, weight_gain <span class="sc">~</span> supplement <span class="sc">+</span> <span class="fu">factor</span>(diet) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> <span class="fu">factor</span>(litter)))</span>
+<span id="cb150-2"><a href="introduction-to-correlated-data.html#cb150-2" tabindex="-1"></a><span class="fu">summary</span>(M3_LME)</span></code></pre></div>
+<pre><code>## Linear mixed model fit by REML. t-tests use Satterthwaite&#39;s method [
+## lmerModLmerTest]
+## Formula: weight_gain ~ supplement + factor(diet) + (1 | factor(litter))
+##    Data: mice3
+## 
+## REML criterion at convergence: -203.9
+## 
+## Scaled residuals: 
+##      Min       1Q   Median       3Q      Max 
+## -2.12499 -0.76119  0.06055  0.60135  1.64980 
+## 
+## Random effects:
+##  Groups         Name        Variance   Std.Dev.
+##  factor(litter) (Intercept) 0.00396973 0.063006
+##  Residual                   0.00004076 0.006384
+## Number of obs: 36, groups:  factor(litter), 6
+## 
+## Fixed effects:
+##                Estimate Std. Error        df t value Pr(&gt;|t|)    
+## (Intercept)    0.011974   0.044603  3.003417   0.268 0.805735    
+## supplement     0.008198   0.002128 29.000000   3.853 0.000596 ***
+## factor(diet)B  0.020361   0.063060  3.000000   0.323 0.767980    
+## factor(diet)C  0.073578   0.063060  3.000000   1.167 0.327609    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Correlation of Fixed Effects:
+##             (Intr) spplmn fct()B
+## supplement  -0.024              
+## factor(dt)B -0.707  0.000       
+## factor(dt)C -0.707  0.000  0.500</code></pre>
+<p><strong>Interpretations</strong></p>
+<p>Interpretations for fixed effects are the same as in LLSR.</p>
+<ul>
+<li><p>We expect mice on the supplement to gain 0.008 g. more than mice not on the supplement, assuming they get the same diet.<br />
+</p></li>
+<li><p>We expect mice in diet B to gain 0.02 g. more than mice on diet A, assuming supplement is held constant.<br />
+</p></li>
+<li><p>We expect mice in diet C to gain 0.07 g. more than mice on diet A, assuming supplement is held constant</p></li>
+<li><p>After accounting for differences in diet and supplement, the standard deviation in weights between litters is estimated to be 0.063 g. (an estimate of <span class="math inline">\(\sigma_l\)</span>).</p></li>
+<li><p>After accounting for differences in diet and supplement, the standard deviation in weights between mice in the same litter is estimated to be 0.00638 g. (an estimate of <span class="math inline">\(\sigma\)</span>).</p></li>
+</ul>
+</div>
+<div id="comparison-of-llsr-and-lme-models" class="section level3 hasAnchor" number="2.4.7">
+<h3><span class="header-section-number">2.4.7</span> Comparison of LLSR and LME Models<a href="introduction-to-correlated-data.html#comparison-of-llsr-and-lme-models" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Compared to the incorrect LLSR model, when we use the linear mixed effects model:</p>
+<ul>
+<li>estimates for fixed effects supplement and diet do not change<br />
+</li>
+<li>standard error for supplement is smaller - we get a more precise comparison for supplements because the model has accounted for variability due to differences in litters<br />
+</li>
+<li>standard error for diet is larger - since diets were assigned to litters, our sample size is 6, not 36, so standard errors are higher</li>
+</ul>
+<p>The mixed effects model suggests evidence of differences due to supplement, but not evidence of differences due to diet. This is the opposite of the incorrect LLSR model.</p>
+</div>
+</div>
+<div id="practice-questions-1" class="section level2 hasAnchor" number="2.5">
+<h2><span class="header-section-number">2.5</span> Practice Questions<a href="introduction-to-correlated-data.html#practice-questions-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><strong>Refer to the following scenarios to answer the questions in this section.</strong></p>
+<p><strong>Scenario 1</strong></p>
+<p>An experiment was conducted to compare the effects of two different fertilizers on plants. Twelve plants were grown in each of eight trays, for a total of 96 plants. Fertilizers were randomly assigned to entire trays, so that all plants in a tray received the same fertilizer, and each fertilizer was used on four different trays. The amount of fertilizer applied to each plant (in ounces) also varied between trays. Two trays received 2, oz, two received, 4 oz, two received 6 oz, and two received 8 oz. Plants in the same tray received the same amount of fertilizer. (See the diagram for an illustration.) The growth of each plant (in cm.) over a two week period was recorded.</p>
+<p><strong>Scenario 1 Illustration</strong></p>
+<p>The diagram shows values of the explanatory variables, brand and amount, but not the response variable, growth.</p>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-80"></span>
+<img src="Plants1.png" alt="Plant Experiment Scenario 1" width="75%" />
+<p class="caption">
+Figure 2.3: Plant Experiment Scenario 1
+</p>
+</div>
+<p>The first few rows of the data are shown below.</p>
+<div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb152-1"><a href="introduction-to-correlated-data.html#cb152-1" tabindex="-1"></a><span class="fu">head</span>(plants)</span></code></pre></div>
+<pre><code>## # A tibble: 6 × 5
+##    ...1  tray brand amount growth
+##   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+## 1     1     1     1      2   2.82
+## 2     2     1     1      2   2.9 
+## 3     3     1     1      2   3.06
+## 4     4     1     1      2   2.87
+## 5     5     1     1      2   3.28
+## 6     6     1     1      2   2.94</code></pre>
+<p>A scatterplot showing growth by amount of fertilizer, brand, and tray is shown below.</p>
+<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb154-1"><a href="introduction-to-correlated-data.html#cb154-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>plants, <span class="fu">aes</span>(<span class="at">x=</span>amount, <span class="at">y=</span>growth, <span class="at">shape=</span><span class="fu">factor</span>(brand), <span class="at">color=</span><span class="fu">factor</span>(tray))) <span class="sc">+</span> <span class="fu">geom_point</span>() </span></code></pre></div>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-82"></span>
+<img src="Stat-455-Notes_files/figure-html/unnamed-chunk-82-1.png" alt="Scenario 1" width="576" />
+<p class="caption">
+Figure 2.4: Scenario 1
+</p>
+</div>
+<p><strong>Scenario 2</strong></p>
+<p>Now consider a different version of the experiment in Question 2. In this version, the plants are planted in separate plots, which are then placed in the 8 trays. All 12 plants in each tray still receive the same brand of fertilizer, but the amount applied is randomly assigned to pots, so that within each tray, three pots get 2 oz, three get 4 oz, three get 6 oz, and three get 8 oz. (See illustration).</p>
+<p><strong>Scenario 2 Illustration</strong></p>
+<p>The diagram shows values of the explanatory variables, brand and amount, but not the response variable, growth.</p>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-83"></span>
+<img src="Plants2.png" alt="Plant Experiment Scenario 2" width="75%" />
+<p class="caption">
+Figure 2.5: Plant Experiment Scenario 2
+</p>
+</div>
+<p>The first few rows of the data are shown below.</p>
+<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb155-1"><a href="introduction-to-correlated-data.html#cb155-1" tabindex="-1"></a><span class="fu">head</span>(plants2)</span></code></pre></div>
+<pre><code>## # A tibble: 6 × 5
+##    ...1  tray brand amount growth
+##   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+## 1     1     1     1      2   2.82
+## 2     2     1     1      2   2.9 
+## 3     3     1     1      2   3.06
+## 4     4     1     1      4   3.41
+## 5     5     1     1      4   3.82
+## 6     6     1     1      4   3.48</code></pre>
+<p>A scatterplot showing growth by amount of fertilizer, brand, and tray in Scenario 2 is shown below.</p>
+<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb157-1"><a href="introduction-to-correlated-data.html#cb157-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>plants2, <span class="fu">aes</span>(<span class="at">x=</span>amount, <span class="at">y=</span>growth, <span class="at">shape=</span><span class="fu">factor</span>(brand), <span class="at">color=</span><span class="fu">factor</span>(tray))) <span class="sc">+</span> <span class="fu">geom_point</span>() </span></code></pre></div>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-85"></span>
+<img src="Stat-455-Notes_files/figure-html/unnamed-chunk-85-1.png" alt="Scenario 2" width="576" />
+<p class="caption">
+Figure 2.6: Scenario 2
+</p>
+</div>
+<div id="identify-the-response-variable-and-fixed-and-random-effects-associated-with-a-given-set-of-data." class="section level3 unnumbered hasAnchor">
+<h3>7. Identify the response variable and fixed and random effects associated with a given set of data.<a href="introduction-to-correlated-data.html#identify-the-response-variable-and-fixed-and-random-effects-associated-with-a-given-set-of-data." class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Identify the response variable and all fixed and random effects in scenarios 1 and 2.</p>
+</div>
+<div id="interpret-variance-component-estimates-sigma-and-sigma_u-in-linear-mixed-effects-lme-models." class="section level3 unnumbered hasAnchor">
+<h3>8. Interpret variance component estimates (<span class="math inline">\(\sigma\)</span> and <span class="math inline">\(\sigma_u\)</span>) in linear mixed effects (LME) models.<a href="introduction-to-correlated-data.html#interpret-variance-component-estimates-sigma-and-sigma_u-in-linear-mixed-effects-lme-models." class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Let <span class="math inline">\(Y_{ij}\)</span> represent growth of plant <span class="math inline">\(j\)</span> in tray <span class="math inline">\(i\)</span>. We will work with a random effects model of the form:</p>
+<p><span class="math display">\[
+Y_{ij}  = \beta_{0}+\beta_1\textrm{Brand2}_{ij} + \alpha\textrm{Amount}_{ij} + t_{i} + \epsilon_{ij},
+\]</span></p>
+<p>where <span class="math inline">\(t_i\sim\mathcal{N}(0, \sigma^2_t)\)</span>, and <span class="math inline">\(\epsilon_{ij} \sim\mathcal{N}(0, \sigma^2)\)</span>.</p>
+<p><strong>a)</strong> Explain, in words what <span class="math inline">\(\sigma\)</span> and <span class="math inline">\(\sigma_t\)</span> represent in this model.</p>
+<p><strong>b)</strong></p>
+<p>R output for a linear mixed effects model for scenario 1 is shown below.</p>
+<div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb158-1"><a href="introduction-to-correlated-data.html#cb158-1" tabindex="-1"></a>M1 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(<span class="at">data=</span>plants, growth <span class="sc">~</span> <span class="fu">factor</span>(brand) <span class="sc">+</span> amount <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>tray))</span>
+<span id="cb158-2"><a href="introduction-to-correlated-data.html#cb158-2" tabindex="-1"></a><span class="fu">summary</span>(M1)</span></code></pre></div>
+<pre><code>## Linear mixed model fit by REML. t-tests use Satterthwaite&#39;s method [
+## lmerModLmerTest]
+## Formula: growth ~ factor(brand) + amount + (1 | tray)
+##    Data: plants
+## 
+## REML criterion at convergence: 29.9
+## 
+## Scaled residuals: 
+##      Min       1Q   Median       3Q      Max 
+## -2.56962 -0.63778 -0.07834  0.54127  2.67454 
+## 
+## Random effects:
+##  Groups   Name        Variance Std.Dev.
+##  tray     (Intercept) 0.24871  0.4987  
+##  Residual             0.05609  0.2368  
+## Number of obs: 96, groups:  tray, 8
+## 
+## Fixed effects:
+##                Estimate Std. Error      df t value Pr(&gt;|t|)   
+## (Intercept)     2.43906    0.47086 5.00000   5.180  0.00353 **
+## factor(brand)2  0.54312    0.35594 5.00000   1.526  0.18756   
+## amount          0.36027    0.07959 5.00000   4.527  0.00625 **
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Correlation of Fixed Effects:
+##             (Intr) fct()2
+## fctr(brnd)2 -0.378       
+## amount      -0.845  0.000</code></pre>
+<p>Give the estimates of <span class="math inline">\(\sigma\)</span> and <span class="math inline">\(\sigma_u\)</span>. Which is bigger and what does that tell us?</p>
+</div>
+<div id="determine-how-standard-errors-in-a-lme-model-would-compare-to-the-standard-errors-we-would-get-if-we-used-a-llsr-model-on-the-same-data." class="section level3 unnumbered hasAnchor">
+<h3>10. Determine how standard errors in a LME model would compare to the standard errors we would get if we used a LLSR model on the same data.<a href="introduction-to-correlated-data.html#determine-how-standard-errors-in-a-lme-model-would-compare-to-the-standard-errors-we-would-get-if-we-used-a-llsr-model-on-the-same-data." class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><strong>a)</strong></p>
+<p>In each of scenarios 1 and 2, suppose we inappropriately fit a LLSR model of the form<br />
+<span class="math display">\[
+Y_{ij}  = \beta_{0}+\beta_1\textrm{Brand2}_{ij} + \alpha\textrm{Amount}_{ij}  + \epsilon_{ij}.
+\]</span></p>
+<p>to the same data. For each scenario, state whether the standard errors associated with brand and amount would increase, decrease, or stay the same. How would this affect the p-value and the amount of evidence of effects associated with these variables?</p>
+<p><strong>b)</strong></p>
+<p>For the data in Scenario 1, we now create a dataset grouped by tray, with the average growth displayed for each tray. The data are displayed below.</p>
+<div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb160-1"><a href="introduction-to-correlated-data.html#cb160-1" tabindex="-1"></a>plants_summary <span class="ot">&lt;-</span> plants <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(tray) <span class="sc">%&gt;%</span> <span class="fu">summarize</span>(<span class="at">brand=</span><span class="fu">mean</span>(brand),</span>
+<span id="cb160-2"><a href="introduction-to-correlated-data.html#cb160-2" tabindex="-1"></a>                                                          <span class="at">amount=</span><span class="fu">mean</span>(amount),</span>
+<span id="cb160-3"><a href="introduction-to-correlated-data.html#cb160-3" tabindex="-1"></a>                                                          <span class="at">growth=</span><span class="fu">mean</span>(growth), </span>
+<span id="cb160-4"><a href="introduction-to-correlated-data.html#cb160-4" tabindex="-1"></a>                                                          <span class="at">N=</span><span class="fu">n</span>())</span>
+<span id="cb160-5"><a href="introduction-to-correlated-data.html#cb160-5" tabindex="-1"></a>plants_summary</span></code></pre></div>
+<pre><code>## # A tibble: 8 × 5
+##    tray brand amount growth     N
+##   &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;int&gt;
+## 1     1     1      2   2.97    12
+## 2     2     2      4   3.90    12
+## 3     3     1      6   4.11    12
+## 4     4     2      8   5.67    12
+## 5     5     1      8   5.45    12
+## 6     6     2      6   5.72    12
+## 7     7     1      4   4.43    12
+## 8     8     2      2   3.85    12</code></pre>
+<p>If we fit a linear least squares regression model with brand and amount as explanatory variables, how would the estimates, standard errors, and p-values compare to those obtained from the LME model for Scenario 1?</p>
+<p><strong>c)</strong></p>
+<p>Explain why it would not make sense to group the data by tray and fit a LLSR model in scenario 2?</p>
+</div>
+<div id="determine-how-changes-in-sample-size-andor-experimental-design-will-impact-standard-errors-confidence-intervals-and-p-values-in-a-lme-model." class="section level3 unnumbered hasAnchor">
+<h3>11. Determine how changes in sample size and/or experimental design will impact standard errors, confidence intervals, and p-values in a LME model.<a href="introduction-to-correlated-data.html#determine-how-changes-in-sample-size-andor-experimental-design-will-impact-standard-errors-confidence-intervals-and-p-values-in-a-lme-model." class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><strong>a)</strong></p>
+<p>In Scenario 1, explain why it is inappropriate to think of our sample size as being 96 plants in this scenario. What are the appropriate observational units, and what is the relevant sample size for determining the effects of brand and amount?</p>
+<p><strong>b)</strong></p>
+<p>In Scenario 2, what is the relevant sample size associated with brand variable? What about the amount variable?</p>
+<p><strong>c)</strong></p>
+<p>Consider the experimental designs in Questions 1 and 2. If you were designing the experiment and could choose either design, at equal cost, which would you choose? Why?</p>
+</div>
+<div id="compare-the-size-of-different-variance-component-estimates-given-a-lme-model-and-a-small-set-of-data-i.e.-say-whether-sigma_u-or-sigma-will-be-larger." class="section level3 unnumbered hasAnchor">
+<h3>9. Compare the size of different variance component estimates given a LME model and a small set of data (i.e. say whether <span class="math inline">\(\sigma_u\)</span>, or <span class="math inline">\(\sigma\)</span> will be larger).<a href="introduction-to-correlated-data.html#compare-the-size-of-different-variance-component-estimates-given-a-lme-model-and-a-small-set-of-data-i.e.-say-whether-sigma_u-or-sigma-will-be-larger." class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><strong>a)</strong></p>
+<p>Consider the simplified version of the plant experiment shown below. Here, there are no fixed effects, and we simply seek to estimate the average height of the plants and measure the amount of variability associated with plants and trays. <strong>Now note that unlike the previous diagrams, the values of the response variable, growth, are shown.</strong></p>
+<p><img src="Plantsa.png" width="75%" /></p>
+<p>Let <span class="math inline">\(Y_{ij}\)</span> represent growth of plant <span class="math inline">\(j\)</span> in tray <span class="math inline">\(i\)</span>. (i=1, , 4 and j=1, , 6). We will work with a random effects model of the form:</p>
+<p><span class="math display">\[
+Y_{ij}  = \beta_{0} + t_{i} + \epsilon_{ij},
+\]</span></p>
+<p>where <span class="math inline">\(t_i\sim\mathcal{N}(0, \sigma^2_t)\)</span>, and <span class="math inline">\(\epsilon_{ij} \sim\mathcal{N}(0, \sigma^2)\)</span>.</p>
+<p>Will <span class="math inline">\(\sigma_t\)</span> or <span class="math inline">\(\sigma\)</span> be larger? Explain your answer. (Don’t actually try to calculate these, just answer based on the information given in the diagram)</p>
+<p><strong>b)</strong></p>
+<p>Answer the same question as in (a), for the following data. In this scenario, there are only 3 trays.</p>
+<p><img src="Plantsb.png" width="75%" /></p>
+<p><strong>c)</strong></p>
+<p>Now, suppose 3 plants in each tray receive fertilizer brand A and 3 receive fertilizer brand B. The fertilizer brands are shown in the plots below.</p>
+<p>Consider Model 1 below, fit to data shown underneath it. State whether <span class="math inline">\(\sigma_t\)</span> or <span class="math inline">\(\sigma\)</span> will be larger? Explain your answer.</p>
+<p>Let <span class="math inline">\(Y_{ij}\)</span> represent growth of plant <span class="math inline">\(j\)</span> in tray <span class="math inline">\(i\)</span>.</p>
+<p><strong>Model 1:</strong></p>
+<p><span class="math display">\[
+Y_{ij}  = \beta_{0} + t_{i} + \epsilon_{ij},
+\]</span></p>
+<p>where <span class="math inline">\(t_i\sim\mathcal{N}(0, \sigma^2_t)\)</span>, and <span class="math inline">\(\epsilon_{ij} \sim\mathcal{N}(0, \sigma^2)\)</span>.</p>
+<p><img src="Plantsc.png" width="75%" /></p>
+<p><strong>b)</strong></p>
+<p>Now suppose that Model 2 is fit to the same data. State whether <span class="math inline">\(\sigma_t\)</span> or <span class="math inline">\(\sigma\)</span> will be larger? Explain your answer.</p>
+<p><strong>Model 2:</strong></p>
+<p><span class="math display">\[
+Y_{ij}  = \beta_{0} + \beta_1\text{BrandB}_{ij} + t_{i} + \epsilon_{ij},
+\]</span></p>
+<p>where <span class="math inline">\(t_i\sim\mathcal{N}(0, \sigma^2_t)\)</span>, and <span class="math inline">\(\epsilon_{ij} \sim\mathcal{N}(0, \sigma^2)\)</span>.</p>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="review-of-multiple-linear-regression.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="multilevel-models.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/STAT455-W22/stat455-w22-notes/edit/master/02-Correlated_Data.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": "https://github.com/STAT455-W22/stat455-w22-notes/blob/master/02-Correlated_Data.Rmd",
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
