@@ -434,6 +434,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.4.4" data-path="data-with-three-or-more-levels.html"><a href="data-with-three-or-more-levels.html#r---model-with-additional-random-slopes"><i class="fa fa-check"></i><b>5.4.4</b> R - Model with Additional Random Slopes</a></li>
 <li class="chapter" data-level="5.4.5" data-path="data-with-three-or-more-levels.html"><a href="data-with-three-or-more-levels.html#when-not-to-add-random-slopes"><i class="fa fa-check"></i><b>5.4.5</b> When Not to Add Random Slopes</a></li>
 </ul></li>
+<li class="chapter" data-level="5.5" data-path="data-with-three-or-more-levels.html"><a href="data-with-three-or-more-levels.html#practice-problems-1"><i class="fa fa-check"></i><b>5.5</b> Practice Problems</a>
+<ul>
+<li class="chapter" data-level="" data-path="data-with-three-or-more-levels.html"><a href="data-with-three-or-more-levels.html#identify-the-levels-of-a-three-level-experiment-and-the-observational-units-and-variables-at-each-level."><i class="fa fa-check"></i>28) Identify the levels of a three-level experiment and the observational units and variables at each level.</a></li>
+<li class="chapter" data-level="" data-path="data-with-three-or-more-levels.html"><a href="data-with-three-or-more-levels.html#interpret-fixed-and-random-effects-and-associated-parameter-estimates-in-models-with-three-or-more-levels."><i class="fa fa-check"></i>29) Interpret fixed and random effects and associated parameter estimates in models with three or more levels.</a></li>
+<li class="chapter" data-level="" data-path="data-with-three-or-more-levels.html"><a href="data-with-three-or-more-levels.html#write-equations-for-linear-mixed-effects-models-in-mathematical-notation-including-assumptions-about-distributions-of-random-effects-and-error-terms-for-models-with-three-or-more-levels."><i class="fa fa-check"></i>30) Write equations for linear mixed effects models in mathematical notation, including assumptions about distributions of random effects and error terms for models with three or more levels.</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="poisson-regression.html"><a href="poisson-regression.html"><i class="fa fa-check"></i><b>6</b> Poisson Regression</a>
 <ul>
@@ -1381,124 +1387,79 @@ Y_{ij} &amp; = [\beta_{0}+\beta_{1}\textrm{Window}_{i}+\beta_{2}\textrm{FertA}_{
 ## optimizer (nloptwrap) convergence code: 0 (OK)
 ## boundary (singular) fit: see help(&#39;isSingular&#39;)</code></pre>
 <p>In this section, we have focused on random effects, but we can, of course, explore fixed effects (such as interactions) as we’ve done before.</p>
-<!---
-
-## Practice Problems
-
-
-Researchers are interested in studying the activity levels of two different species of fish. They are also interested in assessing the effect of the size of the fish tank and water temperature on activity level. Fish in three different aquariums with different water temperatures (one cold, one medium, and one warm) were studied. In each aquarium, there were two different tanks, one large, and one small. Two fish of each species were placed in each tank. 
-
-The dataset contains the following variables.
-
-`Id` - fish ID number    
-`Aquarium` - numbered 1-3    
-`Tank` - numbered 1-6      
-`Species` - A or B    
-`SizeLarge` - was the tank large? (0=No, 1=Yes)    
-`Temp` - Temperature of the water (cold, medium, warm)     
-`Activity` - a measure of the fish's activity level     
-
-
-The numbers under each fish show that fish's activity level. Average activity levels for each tank and each aquarium are also given.    
-
-
-<div class="figure">
-<img src="Fish.png" alt="Fish in Aquarium Study" width="75%" />
-<p class="caption">(\#fig:unnamed-chunk-210)Fish in Aquarium Study</p>
 </div>
-
-The first 10 rows of the dataset are shown below. 
-
-
-```r
-Fish <- 1:24
-Tank <- c(rep(1, 4), rep(2, 4), rep(3, 4), rep(4, 4), rep(5, 4), rep(6, 4))
-Aquarium <- c(rep(1, 8), rep(2, 8), rep(3, 8))
-Species <- c("A","A","B","B","A","A","B","B","A","A","B","B","A","A","B","B","A","A","B",'B',"A","A","B","B")
-Temp <- c(rep("Cold", 8), rep("Medium", 8), rep("Warm", 8))
-Size <- c(rep(c("Large", "Large", "Small", "Small"),3)) 
-Activity <- c(55, 45, 45, 55, 40, 50, 30, 60, 80, 40, 45, 75, 50, 66, 45, 71, 75, 35, 60, 50, 40, 70, 60, 50)
-FishData <- data.frame(Fish, Tank, Aquarium, Species, Temp, Size, Activity)
-head(FishData, 10)
-```
-
-```
-##    Fish Tank Aquarium Species   Temp  Size Activity
-## 1     1    1        1       A   Cold Large       55
-## 2     2    1        1       A   Cold Large       45
-## 3     3    1        1       B   Cold Small       45
-## 4     4    1        1       B   Cold Small       55
-## 5     5    2        1       A   Cold Large       40
+</div>
+<div id="practice-problems-1" class="section level2 hasAnchor" number="5.5">
+<h2><span class="header-section-number">5.5</span> Practice Problems<a href="data-with-three-or-more-levels.html#practice-problems-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Researchers are interested in studying the activity levels of two different species of fish. They are also interested in assessing the effect of the size of the fish tank and water temperature on activity level. Fish in three different aquariums with different water temperatures (one cold, one medium, and one warm) were studied. In each aquarium, there were two different tanks, one large, and one small. Two fish of each species were placed in each tank.</p>
+<p>The dataset contains the following variables.</p>
+<p><code>Id</code> - fish ID number<br />
+<code>Aquarium</code> - numbered 1-3<br />
+<code>Tank</code> - numbered 1-6<br />
+<code>Species</code> - A or B<br />
+<code>SizeLarge</code> - was the tank large? (0=No, 1=Yes)<br />
+<code>Temp</code> - Temperature of the water (cold, medium, warm)<br />
+<code>Activity</code> - a measure of the fish’s activity level</p>
+<p>The numbers under each fish show that fish’s activity level. Average activity levels for each tank and each aquarium are also given.</p>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-210"></span>
+<img src="Fish.png" alt="Fish in Aquarium Study" width="75%" />
+<p class="caption">
+Figure 5.2: Fish in Aquarium Study
+</p>
+</div>
+<p>The first 10 rows of the dataset are shown below.</p>
+<div class="sourceCode" id="cb338"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb338-1"><a href="data-with-three-or-more-levels.html#cb338-1" tabindex="-1"></a>Fish <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">24</span></span>
+<span id="cb338-2"><a href="data-with-three-or-more-levels.html#cb338-2" tabindex="-1"></a>Tank <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="fu">rep</span>(<span class="dv">1</span>, <span class="dv">4</span>), <span class="fu">rep</span>(<span class="dv">2</span>, <span class="dv">4</span>), <span class="fu">rep</span>(<span class="dv">3</span>, <span class="dv">4</span>), <span class="fu">rep</span>(<span class="dv">4</span>, <span class="dv">4</span>), <span class="fu">rep</span>(<span class="dv">5</span>, <span class="dv">4</span>), <span class="fu">rep</span>(<span class="dv">6</span>, <span class="dv">4</span>)))</span>
+<span id="cb338-3"><a href="data-with-three-or-more-levels.html#cb338-3" tabindex="-1"></a>Aquarium <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="dv">1</span>, <span class="dv">8</span>), <span class="fu">rep</span>(<span class="dv">2</span>, <span class="dv">8</span>), <span class="fu">rep</span>(<span class="dv">3</span>, <span class="dv">8</span>))</span>
+<span id="cb338-4"><a href="data-with-three-or-more-levels.html#cb338-4" tabindex="-1"></a>Species <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;A&quot;</span>,<span class="st">&quot;A&quot;</span>,<span class="st">&quot;B&quot;</span>,<span class="st">&quot;B&quot;</span>,<span class="st">&quot;A&quot;</span>,<span class="st">&quot;A&quot;</span>,<span class="st">&quot;B&quot;</span>,<span class="st">&quot;B&quot;</span>,<span class="st">&quot;A&quot;</span>,<span class="st">&quot;A&quot;</span>,<span class="st">&quot;B&quot;</span>,<span class="st">&quot;B&quot;</span>,<span class="st">&quot;A&quot;</span>,<span class="st">&quot;A&quot;</span>,<span class="st">&quot;B&quot;</span>,<span class="st">&quot;B&quot;</span>,<span class="st">&quot;A&quot;</span>,<span class="st">&quot;A&quot;</span>,<span class="st">&quot;B&quot;</span>,<span class="st">&#39;B&#39;</span>,<span class="st">&quot;A&quot;</span>,<span class="st">&quot;A&quot;</span>,<span class="st">&quot;B&quot;</span>,<span class="st">&quot;B&quot;</span>)</span>
+<span id="cb338-5"><a href="data-with-three-or-more-levels.html#cb338-5" tabindex="-1"></a>Temp <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">&quot;Cold&quot;</span>, <span class="dv">8</span>), <span class="fu">rep</span>(<span class="st">&quot;Medium&quot;</span>, <span class="dv">8</span>), <span class="fu">rep</span>(<span class="st">&quot;Warm&quot;</span>, <span class="dv">8</span>))</span>
+<span id="cb338-6"><a href="data-with-three-or-more-levels.html#cb338-6" tabindex="-1"></a>Size <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">&quot;Large&quot;</span>, <span class="st">&quot;Large&quot;</span>, <span class="st">&quot;Small&quot;</span>, <span class="st">&quot;Small&quot;</span>),<span class="dv">3</span>)) </span>
+<span id="cb338-7"><a href="data-with-three-or-more-levels.html#cb338-7" tabindex="-1"></a>Activity <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">55</span>, <span class="dv">45</span>, <span class="dv">45</span>, <span class="dv">55</span>, <span class="dv">50</span>, <span class="dv">50</span>, <span class="dv">40</span>, <span class="dv">60</span>, <span class="dv">80</span>, <span class="dv">40</span>, <span class="dv">45</span>, <span class="dv">75</span>, <span class="dv">50</span>, <span class="dv">66</span>, <span class="dv">45</span>, <span class="dv">71</span>, <span class="dv">75</span>, <span class="dv">35</span>, <span class="dv">60</span>, <span class="dv">50</span>, <span class="dv">40</span>, <span class="dv">70</span>, <span class="dv">60</span>, <span class="dv">50</span>)</span>
+<span id="cb338-8"><a href="data-with-three-or-more-levels.html#cb338-8" tabindex="-1"></a>Activity <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">60</span>, <span class="dv">50</span>, <span class="dv">40</span>, <span class="dv">40</span>, <span class="dv">50</span>, <span class="dv">50</span>, <span class="dv">40</span>, <span class="dv">60</span>, <span class="dv">80</span>, <span class="dv">40</span>, <span class="dv">45</span>, <span class="dv">75</span>, <span class="dv">50</span>, <span class="dv">66</span>, <span class="dv">45</span>, <span class="dv">71</span>, <span class="dv">80</span>, <span class="dv">40</span>, <span class="dv">65</span>, <span class="dv">55</span>, <span class="dv">35</span>, <span class="dv">65</span>, <span class="dv">55</span>, <span class="dv">45</span>)</span>
+<span id="cb338-9"><a href="data-with-three-or-more-levels.html#cb338-9" tabindex="-1"></a>FishData <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(Fish, Tank, Aquarium, Species, Temp, Size, Activity)</span>
+<span id="cb338-10"><a href="data-with-three-or-more-levels.html#cb338-10" tabindex="-1"></a><span class="fu">head</span>(FishData, <span class="dv">10</span>)</span></code></pre></div>
+<pre><code>##    Fish Tank Aquarium Species   Temp  Size Activity
+## 1     1    1        1       A   Cold Large       60
+## 2     2    1        1       A   Cold Large       50
+## 3     3    1        1       B   Cold Small       40
+## 4     4    1        1       B   Cold Small       40
+## 5     5    2        1       A   Cold Large       50
 ## 6     6    2        1       A   Cold Large       50
-## 7     7    2        1       B   Cold Small       30
+## 7     7    2        1       B   Cold Small       40
 ## 8     8    2        1       B   Cold Small       60
 ## 9     9    3        2       A Medium Large       80
-## 10   10    3        2       A Medium Large       40
-```
-
-### 28) Identify the levels of a three-level experiment and the observational units and variables at each level.     {-}
-
-Identify the levels of the data and list the observational unit and variable(s) measured at each level of the data.    
-
-
-### 29) Interpret fixed and random effects and associated parameter estimates in models with three or more levels.    {-}  
-
-For parts (a)-(b), let $Y_{ijk}$ represent the activity level of a fish, where $i$ indexes aquarium, $j$ indexes tank, and $k$ indexes fish. Suppose we fit a model of the form.    
-
-
-$Y_{ijk}  = \beta_{0}  + a_{i}+t_{ij}+\epsilon_{ijk}$, where $a_{i}\sim N(0,\sigma^2_a)$, $t_{ij}\sim N(0,\sigma^2_t)$, and $\epsilon_{ijk}\sim N(0,\sigma^2)$.  
-
-
-a) Explain in words what $\beta_0$, $\sigma_a$, $\sigma_t$, and $\sigma$ represent in this context.   
-
-b) Based on the activity levels shown in the illustration, which of $\sigma_a$, $\sigma_t$, and $\sigma$, is the largest? Which is the smallest? Explain your answers.   
-
-
-c) Now suppose we fit a model of the form 
-
-$Y_{ijk}  = \beta_{0} +\beta_1\textrm{SpeciesB}_{ijk} + a_{i}+t_{ij}+\epsilon_{ijk}$, where $a_{i}\sim N(0,\sigma^2_a)$, $t_{ij}\sim N(0,\sigma^2_t)$, and $\epsilon_{ijk}\sim N(0,\sigma^2)$.  
-
-Explain in words what $\beta_0$, $\sigma_a$, $\sigma_t$, and $\sigma$ represent in this context. In your answers state clearly how these interpretations are different than for the model in (a).    
-
-d) Output for the linear mixed effect model in (c) is given below. Use the output to answer the following questions. 
-
-
-```r
-M <- lmer(data=FishData, Activity ~ Temp + (1|Tank) + (1|Aquarium))
-summary(M)
-```
-
-
-
-### 30) Write equations for linear mixed effects models in mathematical notation, including assumptions about distributions of random effects and error terms for models with three or more levels.     {-} 
-
-Write the mathematical notation of each of the following models, specified in R. Include appropriate subscripts and state the distributions of all random effects and error terms.    
-
-a)
-
-
-```r
-M1 <- lmer(data=Fish, activity ~ species + size + (1|tank) + (1|aquarium))
-```
-
-
-b)
-
-
-```r
-M2 <- lmer(data=Fish, activity ~ species + size + (species|tank) + (1|aquarium))
-```
-
-
-c)
-
-
-```r
-M2 <- lmer(data=Fish, activity ~ species + size + (1|tank) + (size|aquarium))
-```
-
-
---->
+## 10   10    3        2       A Medium Large       40</code></pre>
+<div id="identify-the-levels-of-a-three-level-experiment-and-the-observational-units-and-variables-at-each-level." class="section level3 unnumbered hasAnchor">
+<h3>28) Identify the levels of a three-level experiment and the observational units and variables at each level.<a href="data-with-three-or-more-levels.html#identify-the-levels-of-a-three-level-experiment-and-the-observational-units-and-variables-at-each-level." class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Identify the levels of the data and list the observational unit and variable(s) measured at each level of the data.</p>
+</div>
+<div id="interpret-fixed-and-random-effects-and-associated-parameter-estimates-in-models-with-three-or-more-levels." class="section level3 unnumbered hasAnchor">
+<h3>29) Interpret fixed and random effects and associated parameter estimates in models with three or more levels.<a href="data-with-three-or-more-levels.html#interpret-fixed-and-random-effects-and-associated-parameter-estimates-in-models-with-three-or-more-levels." class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>For parts (a)-(b), let <span class="math inline">\(Y_{ijk}\)</span> represent the activity level of a fish, where <span class="math inline">\(i\)</span> indexes aquarium, <span class="math inline">\(j\)</span> indexes tank, and <span class="math inline">\(k\)</span> indexes fish. Suppose we fit a model of the form.</p>
+<p><span class="math inline">\(Y_{ijk} = \beta_{0} + a_{i}+t_{ij}+\epsilon_{ijk}\)</span>, where <span class="math inline">\(a_{i}\sim N(0,\sigma^2_a)\)</span>, <span class="math inline">\(t_{ij}\sim N(0,\sigma^2_t)\)</span>, and <span class="math inline">\(\epsilon_{ijk}\sim N(0,\sigma^2)\)</span>.</p>
+<ol style="list-style-type: lower-alpha">
+<li><p>Explain in words what <span class="math inline">\(\beta_0\)</span>, <span class="math inline">\(\sigma_a\)</span>, <span class="math inline">\(\sigma_t\)</span>, and <span class="math inline">\(\sigma\)</span> represent in this context.</p></li>
+<li><p>Based on the activity levels shown in the illustration, which of <span class="math inline">\(\sigma_a\)</span>, <span class="math inline">\(\sigma_t\)</span>, and <span class="math inline">\(\sigma\)</span>, is the largest? Which is the smallest? Explain your answers.</p></li>
+<li><p>Now suppose we fit a model of the form</p></li>
+</ol>
+<p><span class="math inline">\(Y_{ijk} = \beta_{0} +\beta_1\textrm{SpeciesB}_{ijk} + a_{i}+t_{ij}+\epsilon_{ijk}\)</span>, where <span class="math inline">\(a_{i}\sim N(0,\sigma^2_a)\)</span>, <span class="math inline">\(t_{ij}\sim N(0,\sigma^2_t)\)</span>, and <span class="math inline">\(\epsilon_{ijk}\sim N(0,\sigma^2)\)</span>.</p>
+<p>Explain in words what <span class="math inline">\(\beta_0\)</span>, <span class="math inline">\(\sigma_a\)</span>, <span class="math inline">\(\sigma_t\)</span>, and <span class="math inline">\(\sigma\)</span> represent in this context. In your answers state clearly how these interpretations are different than for the model in (a).</p>
+</div>
+<div id="write-equations-for-linear-mixed-effects-models-in-mathematical-notation-including-assumptions-about-distributions-of-random-effects-and-error-terms-for-models-with-three-or-more-levels." class="section level3 unnumbered hasAnchor">
+<h3>30) Write equations for linear mixed effects models in mathematical notation, including assumptions about distributions of random effects and error terms for models with three or more levels.<a href="data-with-three-or-more-levels.html#write-equations-for-linear-mixed-effects-models-in-mathematical-notation-including-assumptions-about-distributions-of-random-effects-and-error-terms-for-models-with-three-or-more-levels." class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Write the mathematical notation of each of the following models, specified in R. Include appropriate subscripts and state the distributions of all random effects and error terms.</p>
+<ol style="list-style-type: lower-alpha">
+<li></li>
+</ol>
+<div class="sourceCode" id="cb340"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb340-1"><a href="data-with-three-or-more-levels.html#cb340-1" tabindex="-1"></a>M1 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(<span class="at">data=</span>Fish, activity <span class="sc">~</span> species <span class="sc">+</span> size <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>tank) <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>aquarium))</span></code></pre></div>
+<ol start="2" style="list-style-type: lower-alpha">
+<li></li>
+</ol>
+<div class="sourceCode" id="cb341"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb341-1"><a href="data-with-three-or-more-levels.html#cb341-1" tabindex="-1"></a>M2 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(<span class="at">data=</span>Fish, activity <span class="sc">~</span> species <span class="sc">+</span> size <span class="sc">+</span> (species<span class="sc">|</span>tank) <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>aquarium))</span></code></pre></div>
+<ol start="3" style="list-style-type: lower-alpha">
+<li></li>
+</ol>
+<div class="sourceCode" id="cb342"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb342-1"><a href="data-with-three-or-more-levels.html#cb342-1" tabindex="-1"></a>M2 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(<span class="at">data=</span>Fish, activity <span class="sc">~</span> species <span class="sc">+</span> size <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>tank) <span class="sc">+</span> (size<span class="sc">|</span>aquarium))</span></code></pre></div>
 
 </div>
 </div>

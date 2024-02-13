@@ -477,7 +477,7 @@ summary(M7)
 
 In this section, we have focused on random effects, but we can, of course, explore fixed effects (such as interactions) as we've done before. 
 
-<!---
+
 
 ## Practice Problems
 
@@ -506,12 +506,13 @@ The first 10 rows of the dataset are shown below.
 
 ```{r}
 Fish <- 1:24
-Tank <- c(rep(1, 4), rep(2, 4), rep(3, 4), rep(4, 4), rep(5, 4), rep(6, 4))
+Tank <- factor(c(rep(1, 4), rep(2, 4), rep(3, 4), rep(4, 4), rep(5, 4), rep(6, 4)))
 Aquarium <- c(rep(1, 8), rep(2, 8), rep(3, 8))
 Species <- c("A","A","B","B","A","A","B","B","A","A","B","B","A","A","B","B","A","A","B",'B',"A","A","B","B")
 Temp <- c(rep("Cold", 8), rep("Medium", 8), rep("Warm", 8))
 Size <- c(rep(c("Large", "Large", "Small", "Small"),3)) 
-Activity <- c(55, 45, 45, 55, 40, 50, 30, 60, 80, 40, 45, 75, 50, 66, 45, 71, 75, 35, 60, 50, 40, 70, 60, 50)
+Activity <- c(55, 45, 45, 55, 50, 50, 40, 60, 80, 40, 45, 75, 50, 66, 45, 71, 75, 35, 60, 50, 40, 70, 60, 50)
+Activity <- c(60, 50, 40, 40, 50, 50, 40, 60, 80, 40, 45, 75, 50, 66, 45, 71, 80, 40, 65, 55, 35, 65, 55, 45)
 FishData <- data.frame(Fish, Tank, Aquarium, Species, Temp, Size, Activity)
 head(FishData, 10)
 ```
@@ -540,15 +541,6 @@ $Y_{ijk}  = \beta_{0} +\beta_1\textrm{SpeciesB}_{ijk} + a_{i}+t_{ij}+\epsilon_{i
 
 Explain in words what $\beta_0$, $\sigma_a$, $\sigma_t$, and $\sigma$ represent in this context. In your answers state clearly how these interpretations are different than for the model in (a).    
 
-d) Output for the linear mixed effect model in (c) is given below. Use the output to answer the following questions. 
-
-```{r, eval=FALSE}
-M <- lmer(data=FishData, Activity ~ Temp + (1|Tank) + (1|Aquarium))
-summary(M)
-```
-
-
-
 ### 30) Write equations for linear mixed effects models in mathematical notation, including assumptions about distributions of random effects and error terms for models with three or more levels.     {-} 
 
 Write the mathematical notation of each of the following models, specified in R. Include appropriate subscripts and state the distributions of all random effects and error terms.    
@@ -572,7 +564,4 @@ c)
 ```{r, eval=FALSE}
 M2 <- lmer(data=Fish, activity ~ species + size + (1|tank) + (size|aquarium))
 ```
-
-
---->
 

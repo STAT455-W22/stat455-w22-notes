@@ -15,6 +15,7 @@ fig:unnamed-chunk-82
 fig:unnamed-chunk-83
 fig:unnamed-chunk-85
 fig:unnamed-chunk-195
+fig:unnamed-chunk-210
 fig:philippinesmap
 fig:OLSpois
 fig:totalPoisByAge
@@ -233,6 +234,7 @@ more-random-slope-terms
 additional-random-slopes
 r---model-with-additional-random-slopes
 when-not-to-add-random-slopes
+practice-problems-1
 poisson-regression
 modeling-counts
 case-study-household-size-in-the-philippines

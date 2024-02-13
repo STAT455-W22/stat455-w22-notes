@@ -526,7 +526,7 @@ For `orch=1`, the prediction equation is:
 
 * Negative affect score tends to be higher for orchestral musicians than non orchestral musicians when performing solos or in small ensembles, but that negative affect also decreases more for orchestral musicians than non-orchestral musicians, when playing in a large ensemble.   
 
-* The interaction term is not statistically significany, indicating it is plausible that the effect of playing in a large ensemble, compared to a solo or with a small ensemble is the same for orchestral and non-orchestral musicians.   
+* The interaction term is not statistically significant, indicating it is plausible that the effect of playing in a large ensemble, compared to a solo or with a small ensemble is the same for orchestral and non-orchestral musicians.   
 
 
 * After accounting for performance type and instrument type, and their interaction, the standard deviation in negative affect scores between different musicians is estimated to be  $\hat{\sigma}_u=2.265$.    
