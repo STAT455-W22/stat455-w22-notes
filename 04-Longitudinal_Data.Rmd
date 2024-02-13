@@ -1186,9 +1186,9 @@ c) $\beta_0 > 0$, $\rho_{uv}\approx 0$,  $\sigma_v$ is much greater than $\sigma
 
 ### 24. Sketch either a set of scatterplots corresponding to a given variance-covariance matrix, or estimate the values in a variance-covariance matrix, given a set of scatterplots.     {-}    
 
-Consider a longitudinal study involving four observations on the same units, taken over four consecutive weeks. Let $Y_{ij}$ represent the measurement on observational unit $i$ at time point $j$. Shown below are 3 different correlation matrices 
+Consider a longitudinal study involving four observations on the same units, taken over four consecutive weeks. Let $Y_{ij}$ represent the measurement on observational unit $i$ at time point $j$. Shown below are 4 different correlation matrices 
 
-$\text{Corr}(Y_{i0},Y_{i1},Y_{i2},Y_{i3})$ between observations in weeks 0, 1, 2, and 3. For each matrix (A)-(D), sketch graphs showing the relationship between the indicated variables, on the grids below.  (10 points)
+$\text{Corr}(Y_{i0},Y_{i1},Y_{i2},Y_{i3})$ represent correlations between observations in weeks 0, 1, 2, and 3. For each matrix (A)-(D), sketch graphs showing the relationship between the indicated variables, on the grids below.  
 
 A) $\left[
           \begin{array}{cccc}

@@ -22,7 +22,7 @@
 
 
 
-<meta name="date" content="2024-02-05" />
+<meta name="date" content="2024-02-13" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -1381,6 +1381,124 @@ Y_{ij} &amp; = [\beta_{0}+\beta_{1}\textrm{Window}_{i}+\beta_{2}\textrm{FertA}_{
 ## optimizer (nloptwrap) convergence code: 0 (OK)
 ## boundary (singular) fit: see help(&#39;isSingular&#39;)</code></pre>
 <p>In this section, we have focused on random effects, but we can, of course, explore fixed effects (such as interactions) as we’ve done before.</p>
+<!---
+
+## Practice Problems
+
+
+Researchers are interested in studying the activity levels of two different species of fish. They are also interested in assessing the effect of the size of the fish tank and water temperature on activity level. Fish in three different aquariums with different water temperatures (one cold, one medium, and one warm) were studied. In each aquarium, there were two different tanks, one large, and one small. Two fish of each species were placed in each tank. 
+
+The dataset contains the following variables.
+
+`Id` - fish ID number    
+`Aquarium` - numbered 1-3    
+`Tank` - numbered 1-6      
+`Species` - A or B    
+`SizeLarge` - was the tank large? (0=No, 1=Yes)    
+`Temp` - Temperature of the water (cold, medium, warm)     
+`Activity` - a measure of the fish's activity level     
+
+
+The numbers under each fish show that fish's activity level. Average activity levels for each tank and each aquarium are also given.    
+
+
+<div class="figure">
+<img src="Fish.png" alt="Fish in Aquarium Study" width="75%" />
+<p class="caption">(\#fig:unnamed-chunk-210)Fish in Aquarium Study</p>
+</div>
+
+The first 10 rows of the dataset are shown below. 
+
+
+```r
+Fish <- 1:24
+Tank <- c(rep(1, 4), rep(2, 4), rep(3, 4), rep(4, 4), rep(5, 4), rep(6, 4))
+Aquarium <- c(rep(1, 8), rep(2, 8), rep(3, 8))
+Species <- c("A","A","B","B","A","A","B","B","A","A","B","B","A","A","B","B","A","A","B",'B',"A","A","B","B")
+Temp <- c(rep("Cold", 8), rep("Medium", 8), rep("Warm", 8))
+Size <- c(rep(c("Large", "Large", "Small", "Small"),3)) 
+Activity <- c(55, 45, 45, 55, 40, 50, 30, 60, 80, 40, 45, 75, 50, 66, 45, 71, 75, 35, 60, 50, 40, 70, 60, 50)
+FishData <- data.frame(Fish, Tank, Aquarium, Species, Temp, Size, Activity)
+head(FishData, 10)
+```
+
+```
+##    Fish Tank Aquarium Species   Temp  Size Activity
+## 1     1    1        1       A   Cold Large       55
+## 2     2    1        1       A   Cold Large       45
+## 3     3    1        1       B   Cold Small       45
+## 4     4    1        1       B   Cold Small       55
+## 5     5    2        1       A   Cold Large       40
+## 6     6    2        1       A   Cold Large       50
+## 7     7    2        1       B   Cold Small       30
+## 8     8    2        1       B   Cold Small       60
+## 9     9    3        2       A Medium Large       80
+## 10   10    3        2       A Medium Large       40
+```
+
+### 28) Identify the levels of a three-level experiment and the observational units and variables at each level.     {-}
+
+Identify the levels of the data and list the observational unit and variable(s) measured at each level of the data.    
+
+
+### 29) Interpret fixed and random effects and associated parameter estimates in models with three or more levels.    {-}  
+
+For parts (a)-(b), let $Y_{ijk}$ represent the activity level of a fish, where $i$ indexes aquarium, $j$ indexes tank, and $k$ indexes fish. Suppose we fit a model of the form.    
+
+
+$Y_{ijk}  = \beta_{0}  + a_{i}+t_{ij}+\epsilon_{ijk}$, where $a_{i}\sim N(0,\sigma^2_a)$, $t_{ij}\sim N(0,\sigma^2_t)$, and $\epsilon_{ijk}\sim N(0,\sigma^2)$.  
+
+
+a) Explain in words what $\beta_0$, $\sigma_a$, $\sigma_t$, and $\sigma$ represent in this context.   
+
+b) Based on the activity levels shown in the illustration, which of $\sigma_a$, $\sigma_t$, and $\sigma$, is the largest? Which is the smallest? Explain your answers.   
+
+
+c) Now suppose we fit a model of the form 
+
+$Y_{ijk}  = \beta_{0} +\beta_1\textrm{SpeciesB}_{ijk} + a_{i}+t_{ij}+\epsilon_{ijk}$, where $a_{i}\sim N(0,\sigma^2_a)$, $t_{ij}\sim N(0,\sigma^2_t)$, and $\epsilon_{ijk}\sim N(0,\sigma^2)$.  
+
+Explain in words what $\beta_0$, $\sigma_a$, $\sigma_t$, and $\sigma$ represent in this context. In your answers state clearly how these interpretations are different than for the model in (a).    
+
+d) Output for the linear mixed effect model in (c) is given below. Use the output to answer the following questions. 
+
+
+```r
+M <- lmer(data=FishData, Activity ~ Temp + (1|Tank) + (1|Aquarium))
+summary(M)
+```
+
+
+
+### 30) Write equations for linear mixed effects models in mathematical notation, including assumptions about distributions of random effects and error terms for models with three or more levels.     {-} 
+
+Write the mathematical notation of each of the following models, specified in R. Include appropriate subscripts and state the distributions of all random effects and error terms.    
+
+a)
+
+
+```r
+M1 <- lmer(data=Fish, activity ~ species + size + (1|tank) + (1|aquarium))
+```
+
+
+b)
+
+
+```r
+M2 <- lmer(data=Fish, activity ~ species + size + (species|tank) + (1|aquarium))
+```
+
+
+c)
+
+
+```r
+M2 <- lmer(data=Fish, activity ~ species + size + (1|tank) + (size|aquarium))
+```
+
+
+--->
 
 </div>
 </div>
