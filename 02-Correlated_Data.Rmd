@@ -515,7 +515,7 @@ knitr::include_graphics("Multi.png")
 
 ### Experiment with Variables Assigned at Different Levels   
 
-Now imagine qn experimemt with the following setup     
+Now imagine an experiment with the following setup     
 
 * diets are still assigned to dams, prior to the birth of the pups, so all mice in the same litter get the same diet      
 * within each litter three mice are given nutritional supplements after their birth and the other three are not    
