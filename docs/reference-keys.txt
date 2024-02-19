@@ -300,8 +300,9 @@ test-for-interaction
 summaries
 llsr-vs.-poisson-regression-comparison
 poisson-vs-quasi-poisson-inference
-logistic-regression
+practice-problems-2
 binomial-logistic-regression
+binomial-logistic-regression-1
 binary-response-data
 binomial-response-data
 wisconsin-election-data

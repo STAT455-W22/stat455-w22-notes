@@ -1078,6 +1078,167 @@ if (knitr:::is_latex_output()) {
 ```
 
 
+## Practice Problems 
+
+Brockmann (1996) carried out a study of nesting female horseshoe crabs. Female horseshoe crabs often have male crabs attached to a female’s nest known as satellites. We will model the number of satellites, using width of the female carapace (in cm) and the condition of the crab's spines (horseshoe crabs have two spines) (1 = both good, 2 = one worn or broken, 3 = both worn or broken).  
+
+
+```{r}
+# read in data and select relevant variables
+crabs <- read_csv("https://raw.githubusercontent.com/proback/BeyondMLR/master/data/crab.csv")
+head(crabs, 4)
+```
+
+The table displays the number of female crabs within two cm intervals of carapace width, and the average number of satellites in each group. 
+
+```{r}
+summarize <- dplyr::summarize
+```      
+
+```{r}
+WidthGroup = cut(crabs$Width,
+           breaks=c(20,22,24,26, 28, 30, 32, 34))
+Groups <- data.frame(WidthGroup,crabs)
+Groups <- Groups %>% group_by(WidthGroup)%>%summarize(Mean_Satellite=mean(Satellite), Var_Satellite=var(Satellite), n=n()) 
+kable(Groups)
+```
+
+Summaries by spine group are shown below
+
+```{r}
+SpGroups <- crabs %>% group_by(Spine)%>%summarize(Mean_Satellite=mean(Satellite), 
+                                      Var_Satellite=var(Satellite), n=n()) 
+kable(SpGroups)
+```
+
+We fit a Poisson regression model using only carapace width as an explanatory variable. Model output is shown below.  
+
+```{r, echo=TRUE}
+M1 <- glm(data=crabs, Satellite~Width, family="poisson")
+summary(M1)
+```
+
+We also fit a model using carapace width and condition of the spine. 
+
+```{r, echo=TRUE}
+M2 <- glm(data=crabs, Satellite~Width + factor(Spine), family="poisson")
+summary(M2)
+``` 
+
+### 31. Determine whether it is appropriate to use a Poisson regression model in a given situation and justify your answer. {-}     
+
+Why is a Poisson regression model more appropriate for these data than a linear least squares regression model?         
+
+### 32. State the assumptions associated with a Poisson regression model and determine whether the assumptions are satisfied. {-}     
+
+a) The second table shows the mean and variance in number  of satellites, as well as the number of crabs in groups of carapace width 20-22 cm., 22-24 cm., etc. Based on this table should we have any concerns about assumptions related to the Poisson regression model, M1? If so, which assumption? Why should we be concerned?    
+
+b) Explain why plotting number of satellites on the y-axis and carapace width on the x-axis, and observing whether the data follow a linear trend is not a good way to assess the linearity assumption for M1. What should we do instead?   
+
+c) Explain what the linearity and mean=variance assumptions would mean in the context of model M2. Why would it be difficult to assess these assumptions using graphs and tables?    
+
+
+
+### 33. Calculate expected responses and expected changes associated with fixed effects in a Poisson regression model.  {-}    
+
+a) Using Model M1, show how to calculate the expected number of satellites for a crab with a carapace width of 25 cm.     
+
+b) Suppose that one female crab is expected to have 3 satellites, and another female crab has a carapace width 6 inches greater. Using Model M1, what is the second crab's expected number of satellites?    
+
+c) Using Model M2, show how to calculate the expected number of satellites for a crab with a  carapace width of 23 cm and one damaged skeleton (`skeleton = 2`).      
+
+d) Suppose that a female crab without both spines in good condition is expected to have 2.5 satellites. Using Model M2, how many satellites is a female crab with the same carapace size, but two damaged spines expected to have?    
+
+
+### 34. Use drop-in-deviance and goodness-of-fit tests to assess and compare models.  {-}    
+
+State what we should conclude from each of the following tests.   
+
+a) 
+
+```{r}
+anova(M1, M2, test = "Chisq")
+```
+```{r}
+gf_dist("chisq", df = 2, geom = "area", fill = ~ !(x > 1.2737)) + 
+  geom_vline(xintercept=1.2, colour="red")  + theme(legend.position="none") + ylim(c(0,1))
+```
+
+
+b)
+
+```{r}
+M1$deviance
+M1$df.residual
+1-pchisq(M1$deviance, M1$df.residual) 
+```
+
+```{r}
+gf_dist("chisq", df = 171, geom = "area", fill = "turquoise") + 
+  geom_vline(xintercept=567.8786, colour="red")  + theme(legend.position="none") + ylim(c(0,0.1))
+```
+
+
+### 35. Interpret fixed effect coefficients in a Poisson regression model.  {-}    
+
+a) Write a sentence interpreting each of the quantities of the `Estimates` column of the Coefficients table for model M1.   
+
+b) Write a sentence interpreting each of the quantities of the `Estimates` column of the Coefficients table for model M2.   
+
+### 36. Explain how to detect and control for overdispersion in a Poisson regression model. {-}     
+
+a) Based on the information given in the tables, prior to the models, is there evidence of overdispersion? Why or why not?    
+
+b) For Model M1, the dispersion parameter is $\phi=3.18$. Suppose we were to fit a quasi-Poisson model to the data. Fill in the table to show the estimates and standard errors that would result from the quasi-Poisson model.   
+
+```{r}
+knitr::include_graphics("QuasiPois.png")
+```
+
+
+d) Quasi-Poisson models, M1b and M2b are fit below. Explain why it would be inappropriate to run the tests shown below. What should we change in the tests?      
+
+```{r}
+M1b <- glm(data=crabs, Satellite~Width, family="quasipoisson")
+M2b <- glm(data=crabs, Satellite~Width, family="quasipoisson")
+```
+
+Test #1
+
+```{r}
+anova(M1b, M2b, test = "Chisq")
+```
+
+Test #2:
+
+```{r}
+M1b$deviance
+M1b$df.residual
+1-pchisq(M1b$deviance, M1b$df.residual) 
+```
+
+e) Suppose that we did change the tests in (d) to the appropriate ones. Would the resulting p-values be bigger, smaller, or the same as those shown in (d)? Justify your answer.    
+
+### 37. Explain the purpose of using an offset term in Poisson regression.  {-}     
+
+a) Would an offset term be beneficial in the case of the crab data? Why or why not?   
+
+b) Make up an example of a situation where an offset term would be helpful in a Poisson regression model. Clearly state your response variable and explanatory variable(s), and explain why the offset term would be useful.   
+
+
+### 38. Compare and contrast properties of LLSR models and Poisson regression models.   {-}   
+
+a) Explain how the linearity assumption in the Poisson regression model differs from that of the LLSR model?    
+
+b) Explain how the variance assumption in the Poisson regression model is different than that of the LLSR model.     
+
+c) What quantity in a Poisson regression model plays the role of SSR in the LLSR model?    
+
+d) In what situation would the interpretation of coefficients in an LLSR model be the same as the interpretation in a Poisson regression model? (i.e. as a multiplicative, or percentage change?).   
+
+e) What test, using in LLSR is analagous to the drop-in-deviance test used in Poisson regression?    
+
+
 
 
 

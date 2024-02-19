@@ -1,4 +1,4 @@
-# Logistic Regression    
+# Binomial Logistic Regression    
 
 **Chapter 6 Learning Outcomes**      
 
