@@ -25,6 +25,9 @@ tab:regions
 tab:table4ch4
 fig:boxtyperegion
 tab:compTable
+tab:unnamed-chunk-256
+tab:unnamed-chunk-258
+tab:unnamed-chunk-259
 fig:poisRes
 fig:gmu-histmat1
 fig:gmu-cdelogitmat1

@@ -22,7 +22,7 @@
 
 
 
-<meta name="date" content="2024-02-18" />
+<meta name="date" content="2024-02-19" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -2372,22 +2372,112 @@ Drop in deviance test
 <p>Brockmann (1996) carried out a study of nesting female horseshoe crabs. Female horseshoe crabs often have male crabs attached to a female’s nest known as satellites. We will model the number of satellites, using width of the female carapace (in cm) and the condition of the crab’s spines (horseshoe crabs have two spines) (1 = both good, 2 = one worn or broken, 3 = both worn or broken).</p>
 <div class="sourceCode" id="cb412"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb412-1"><a href="poisson-regression.html#cb412-1" tabindex="-1"></a><span class="co"># read in data and select relevant variables</span></span>
 <span id="cb412-2"><a href="poisson-regression.html#cb412-2" tabindex="-1"></a>crabs <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;https://raw.githubusercontent.com/proback/BeyondMLR/master/data/crab.csv&quot;</span>)</span>
-<span id="cb412-3"><a href="poisson-regression.html#cb412-3" tabindex="-1"></a><span class="fu">head</span>(crabs, <span class="dv">4</span>)</span></code></pre></div>
-<pre><code>## # A tibble: 4 × 5
-##   Color Spine Width Satellite Weight
-##   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;  &lt;dbl&gt;
-## 1     3     3  28.3         8   3050
-## 2     4     3  22.5         0   1550
-## 3     2     1  26           9   2300
-## 4     4     3  24.8         0   2100</code></pre>
-<p>The table displays the number of female crabs within two cm intervals of carapace width, and the average number of satellites in each group.</p>
-<div class="sourceCode" id="cb414"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb414-1"><a href="poisson-regression.html#cb414-1" tabindex="-1"></a>summarize <span class="ot">&lt;-</span> dplyr<span class="sc">::</span>summarize</span></code></pre></div>
-<div class="sourceCode" id="cb415"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb415-1"><a href="poisson-regression.html#cb415-1" tabindex="-1"></a>WidthGroup <span class="ot">=</span> <span class="fu">cut</span>(crabs<span class="sc">$</span>Width,</span>
-<span id="cb415-2"><a href="poisson-regression.html#cb415-2" tabindex="-1"></a>           <span class="at">breaks=</span><span class="fu">c</span>(<span class="dv">20</span>,<span class="dv">22</span>,<span class="dv">24</span>,<span class="dv">26</span>, <span class="dv">28</span>, <span class="dv">30</span>, <span class="dv">32</span>, <span class="dv">34</span>))</span>
-<span id="cb415-3"><a href="poisson-regression.html#cb415-3" tabindex="-1"></a>Groups <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(WidthGroup,crabs)</span>
-<span id="cb415-4"><a href="poisson-regression.html#cb415-4" tabindex="-1"></a>Groups <span class="ot">&lt;-</span> Groups <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(WidthGroup)<span class="sc">%&gt;%</span><span class="fu">summarize</span>(<span class="at">Mean_Satellite=</span><span class="fu">mean</span>(Satellite), <span class="at">Var_Satellite=</span><span class="fu">var</span>(Satellite), <span class="at">n=</span><span class="fu">n</span>()) </span>
-<span id="cb415-5"><a href="poisson-regression.html#cb415-5" tabindex="-1"></a><span class="fu">kable</span>(Groups)</span></code></pre></div>
+<span id="cb412-3"><a href="poisson-regression.html#cb412-3" tabindex="-1"></a><span class="fu">kable</span>(<span class="fu">head</span>(crabs, <span class="dv">4</span>), <span class="at">caption=</span><span class="st">&quot;First four rows of data&quot;</span>)</span></code></pre></div>
 <table>
+<caption>
+<span id="tab:unnamed-chunk-256">Table 6.5: </span>First four rows of data
+</caption>
+<thead>
+<tr>
+<th style="text-align:right;">
+Color
+</th>
+<th style="text-align:right;">
+Spine
+</th>
+<th style="text-align:right;">
+Width
+</th>
+<th style="text-align:right;">
+Satellite
+</th>
+<th style="text-align:right;">
+Weight
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+28.3
+</td>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:right;">
+3050
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+22.5
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1550
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+26.0
+</td>
+<td style="text-align:right;">
+9
+</td>
+<td style="text-align:right;">
+2300
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+24.8
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+2100
+</td>
+</tr>
+</tbody>
+</table>
+<p>The table displays the number of female crabs within two cm intervals of carapace width, and the average number of satellites in each group.</p>
+<div class="sourceCode" id="cb413"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb413-1"><a href="poisson-regression.html#cb413-1" tabindex="-1"></a>summarize <span class="ot">&lt;-</span> dplyr<span class="sc">::</span>summarize</span></code></pre></div>
+<div class="sourceCode" id="cb414"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb414-1"><a href="poisson-regression.html#cb414-1" tabindex="-1"></a>WidthGroup <span class="ot">=</span> <span class="fu">cut</span>(crabs<span class="sc">$</span>Width,</span>
+<span id="cb414-2"><a href="poisson-regression.html#cb414-2" tabindex="-1"></a>           <span class="at">breaks=</span><span class="fu">c</span>(<span class="dv">20</span>,<span class="dv">22</span>,<span class="dv">24</span>,<span class="dv">26</span>, <span class="dv">28</span>, <span class="dv">30</span>, <span class="dv">32</span>, <span class="dv">34</span>))</span>
+<span id="cb414-3"><a href="poisson-regression.html#cb414-3" tabindex="-1"></a>Groups <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(WidthGroup,crabs)</span>
+<span id="cb414-4"><a href="poisson-regression.html#cb414-4" tabindex="-1"></a>Groups <span class="ot">&lt;-</span> Groups <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(WidthGroup)<span class="sc">%&gt;%</span><span class="fu">summarize</span>(<span class="at">Mean_Satellite=</span><span class="fu">mean</span>(Satellite), <span class="at">Var_Satellite=</span><span class="fu">var</span>(Satellite), <span class="at">n=</span><span class="fu">n</span>()) </span>
+<span id="cb414-5"><a href="poisson-regression.html#cb414-5" tabindex="-1"></a><span class="fu">kable</span>(Groups, <span class="at">caption=</span><span class="st">&quot;Grouped by Carapace Width&quot;</span>)</span></code></pre></div>
+<table>
+<caption>
+<span id="tab:unnamed-chunk-258">Table 6.6: </span>Grouped by Carapace Width
+</caption>
 <thead>
 <tr>
 <th style="text-align:left;">
@@ -2506,10 +2596,13 @@ NA
 </tbody>
 </table>
 <p>Summaries by spine group are shown below</p>
-<div class="sourceCode" id="cb416"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb416-1"><a href="poisson-regression.html#cb416-1" tabindex="-1"></a>SpGroups <span class="ot">&lt;-</span> crabs <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(Spine)<span class="sc">%&gt;%</span><span class="fu">summarize</span>(<span class="at">Mean_Satellite=</span><span class="fu">mean</span>(Satellite), </span>
-<span id="cb416-2"><a href="poisson-regression.html#cb416-2" tabindex="-1"></a>                                      <span class="at">Var_Satellite=</span><span class="fu">var</span>(Satellite), <span class="at">n=</span><span class="fu">n</span>()) </span>
-<span id="cb416-3"><a href="poisson-regression.html#cb416-3" tabindex="-1"></a><span class="fu">kable</span>(SpGroups)</span></code></pre></div>
+<div class="sourceCode" id="cb415"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb415-1"><a href="poisson-regression.html#cb415-1" tabindex="-1"></a>SpGroups <span class="ot">&lt;-</span> crabs <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(Spine)<span class="sc">%&gt;%</span><span class="fu">summarize</span>(<span class="at">Mean_Satellite=</span><span class="fu">mean</span>(Satellite), </span>
+<span id="cb415-2"><a href="poisson-regression.html#cb415-2" tabindex="-1"></a>                                      <span class="at">Var_Satellite=</span><span class="fu">var</span>(Satellite), <span class="at">n=</span><span class="fu">n</span>()) </span>
+<span id="cb415-3"><a href="poisson-regression.html#cb415-3" tabindex="-1"></a><span class="fu">kable</span>(SpGroups, <span class="at">caption =</span> <span class="st">&quot;Grouped by Spine Condition&quot;</span>)</span></code></pre></div>
 <table>
+<caption>
+<span id="tab:unnamed-chunk-259">Table 6.7: </span>Grouped by Spine Condition
+</caption>
 <thead>
 <tr>
 <th style="text-align:right;">
@@ -2572,8 +2665,8 @@ n
 </tbody>
 </table>
 <p>We fit a Poisson regression model using only carapace width as an explanatory variable. Model output is shown below.</p>
-<div class="sourceCode" id="cb417"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb417-1"><a href="poisson-regression.html#cb417-1" tabindex="-1"></a>M1 <span class="ot">&lt;-</span> <span class="fu">glm</span>(<span class="at">data=</span>crabs, Satellite<span class="sc">~</span>Width, <span class="at">family=</span><span class="st">&quot;poisson&quot;</span>)</span>
-<span id="cb417-2"><a href="poisson-regression.html#cb417-2" tabindex="-1"></a><span class="fu">summary</span>(M1)</span></code></pre></div>
+<div class="sourceCode" id="cb416"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb416-1"><a href="poisson-regression.html#cb416-1" tabindex="-1"></a>M1 <span class="ot">&lt;-</span> <span class="fu">glm</span>(<span class="at">data=</span>crabs, Satellite<span class="sc">~</span>Width, <span class="at">family=</span><span class="st">&quot;poisson&quot;</span>)</span>
+<span id="cb416-2"><a href="poisson-regression.html#cb416-2" tabindex="-1"></a><span class="fu">summary</span>(M1)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## glm(formula = Satellite ~ Width, family = &quot;poisson&quot;, data = crabs)
@@ -2593,8 +2686,8 @@ n
 ## 
 ## Number of Fisher Scoring iterations: 6</code></pre>
 <p>We also fit a model using carapace width and condition of the spine.</p>
-<div class="sourceCode" id="cb419"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb419-1"><a href="poisson-regression.html#cb419-1" tabindex="-1"></a>M2 <span class="ot">&lt;-</span> <span class="fu">glm</span>(<span class="at">data=</span>crabs, Satellite<span class="sc">~</span>Width <span class="sc">+</span> <span class="fu">factor</span>(Spine), <span class="at">family=</span><span class="st">&quot;poisson&quot;</span>)</span>
-<span id="cb419-2"><a href="poisson-regression.html#cb419-2" tabindex="-1"></a><span class="fu">summary</span>(M2)</span></code></pre></div>
+<div class="sourceCode" id="cb418"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb418-1"><a href="poisson-regression.html#cb418-1" tabindex="-1"></a>M2 <span class="ot">&lt;-</span> <span class="fu">glm</span>(<span class="at">data=</span>crabs, Satellite<span class="sc">~</span>Width <span class="sc">+</span> <span class="fu">factor</span>(Spine), <span class="at">family=</span><span class="st">&quot;poisson&quot;</span>)</span>
+<span id="cb418-2"><a href="poisson-regression.html#cb418-2" tabindex="-1"></a><span class="fu">summary</span>(M2)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## glm(formula = Satellite ~ Width + factor(Spine), family = &quot;poisson&quot;, 
@@ -2643,7 +2736,7 @@ n
 <ol style="list-style-type: lower-alpha">
 <li></li>
 </ol>
-<div class="sourceCode" id="cb421"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb421-1"><a href="poisson-regression.html#cb421-1" tabindex="-1"></a><span class="fu">anova</span>(M1, M2, <span class="at">test =</span> <span class="st">&quot;Chisq&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb420"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb420-1"><a href="poisson-regression.html#cb420-1" tabindex="-1"></a><span class="fu">anova</span>(M1, M2, <span class="at">test =</span> <span class="st">&quot;Chisq&quot;</span>)</span></code></pre></div>
 <pre><code>## Analysis of Deviance Table
 ## 
 ## Model 1: Satellite ~ Width
@@ -2651,20 +2744,20 @@ n
 ##   Resid. Df Resid. Dev Df Deviance Pr(&gt;Chi)
 ## 1       171     567.88                     
 ## 2       169     566.60  2   1.2737    0.529</code></pre>
-<div class="sourceCode" id="cb423"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb423-1"><a href="poisson-regression.html#cb423-1" tabindex="-1"></a><span class="fu">gf_dist</span>(<span class="st">&quot;chisq&quot;</span>, <span class="at">df =</span> <span class="dv">2</span>, <span class="at">geom =</span> <span class="st">&quot;area&quot;</span>, <span class="at">fill =</span> <span class="sc">~</span> <span class="sc">!</span>(x <span class="sc">&gt;</span> <span class="fl">1.2737</span>)) <span class="sc">+</span> </span>
-<span id="cb423-2"><a href="poisson-regression.html#cb423-2" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept=</span><span class="fl">1.2</span>, <span class="at">colour=</span><span class="st">&quot;red&quot;</span>)  <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">legend.position=</span><span class="st">&quot;none&quot;</span>) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb422"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb422-1"><a href="poisson-regression.html#cb422-1" tabindex="-1"></a><span class="fu">gf_dist</span>(<span class="st">&quot;chisq&quot;</span>, <span class="at">df =</span> <span class="dv">2</span>, <span class="at">geom =</span> <span class="st">&quot;area&quot;</span>, <span class="at">fill =</span> <span class="sc">~</span> <span class="sc">!</span>(x <span class="sc">&gt;</span> <span class="fl">1.2737</span>)) <span class="sc">+</span> </span>
+<span id="cb422-2"><a href="poisson-regression.html#cb422-2" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept=</span><span class="fl">1.2</span>, <span class="at">colour=</span><span class="st">&quot;red&quot;</span>)  <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">legend.position=</span><span class="st">&quot;none&quot;</span>) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>))</span></code></pre></div>
 <p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-263-1.png" width="576" /></p>
 <ol start="2" style="list-style-type: lower-alpha">
 <li></li>
 </ol>
-<div class="sourceCode" id="cb424"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb424-1"><a href="poisson-regression.html#cb424-1" tabindex="-1"></a>M1<span class="sc">$</span>deviance</span></code></pre></div>
+<div class="sourceCode" id="cb423"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb423-1"><a href="poisson-regression.html#cb423-1" tabindex="-1"></a>M1<span class="sc">$</span>deviance</span></code></pre></div>
 <pre><code>## [1] 567.8786</code></pre>
-<div class="sourceCode" id="cb426"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb426-1"><a href="poisson-regression.html#cb426-1" tabindex="-1"></a>M1<span class="sc">$</span>df.residual</span></code></pre></div>
+<div class="sourceCode" id="cb425"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb425-1"><a href="poisson-regression.html#cb425-1" tabindex="-1"></a>M1<span class="sc">$</span>df.residual</span></code></pre></div>
 <pre><code>## [1] 171</code></pre>
-<div class="sourceCode" id="cb428"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb428-1"><a href="poisson-regression.html#cb428-1" tabindex="-1"></a><span class="dv">1</span><span class="sc">-</span><span class="fu">pchisq</span>(M1<span class="sc">$</span>deviance, M1<span class="sc">$</span>df.residual) </span></code></pre></div>
+<div class="sourceCode" id="cb427"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb427-1"><a href="poisson-regression.html#cb427-1" tabindex="-1"></a><span class="dv">1</span><span class="sc">-</span><span class="fu">pchisq</span>(M1<span class="sc">$</span>deviance, M1<span class="sc">$</span>df.residual) </span></code></pre></div>
 <pre><code>## [1] 0</code></pre>
-<div class="sourceCode" id="cb430"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb430-1"><a href="poisson-regression.html#cb430-1" tabindex="-1"></a><span class="fu">gf_dist</span>(<span class="st">&quot;chisq&quot;</span>, <span class="at">df =</span> <span class="dv">171</span>, <span class="at">geom =</span> <span class="st">&quot;area&quot;</span>, <span class="at">fill =</span> <span class="st">&quot;turquoise&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb430-2"><a href="poisson-regression.html#cb430-2" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept=</span><span class="fl">567.8786</span>, <span class="at">colour=</span><span class="st">&quot;red&quot;</span>)  <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">legend.position=</span><span class="st">&quot;none&quot;</span>) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="fu">c</span>(<span class="dv">0</span>,<span class="fl">0.1</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb429"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb429-1"><a href="poisson-regression.html#cb429-1" tabindex="-1"></a><span class="fu">gf_dist</span>(<span class="st">&quot;chisq&quot;</span>, <span class="at">df =</span> <span class="dv">171</span>, <span class="at">geom =</span> <span class="st">&quot;area&quot;</span>, <span class="at">fill =</span> <span class="st">&quot;turquoise&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb429-2"><a href="poisson-regression.html#cb429-2" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept=</span><span class="fl">567.8786</span>, <span class="at">colour=</span><span class="st">&quot;red&quot;</span>)  <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">legend.position=</span><span class="st">&quot;none&quot;</span>) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="fu">c</span>(<span class="dv">0</span>,<span class="fl">0.1</span>))</span></code></pre></div>
 <p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-265-1.png" width="576" /></p>
 </div>
 <div id="interpret-fixed-effect-coefficients-in-a-poisson-regression-model." class="section level3 unnumbered hasAnchor">
@@ -2680,15 +2773,15 @@ n
 <li><p>Based on the information given in the tables, prior to the models, is there evidence of overdispersion? Why or why not?</p></li>
 <li><p>For Model M1, the dispersion parameter is <span class="math inline">\(\phi=3.18\)</span>. Suppose we were to fit a quasi-Poisson model to the data. Fill in the table to show the estimates and standard errors that would result from the quasi-Poisson model.</p></li>
 </ol>
-<div class="sourceCode" id="cb431"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb431-1"><a href="poisson-regression.html#cb431-1" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">&quot;QuasiPois.png&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb430"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb430-1"><a href="poisson-regression.html#cb430-1" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">&quot;QuasiPois.png&quot;</span>)</span></code></pre></div>
 <p><img src="QuasiPois.png" /><!-- --></p>
-<ol start="4" style="list-style-type: lower-alpha">
+<ol start="3" style="list-style-type: lower-alpha">
 <li>Quasi-Poisson models, M1b and M2b are fit below. Explain why it would be inappropriate to run the tests shown below. What should we change in the tests?</li>
 </ol>
-<div class="sourceCode" id="cb432"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb432-1"><a href="poisson-regression.html#cb432-1" tabindex="-1"></a>M1b <span class="ot">&lt;-</span> <span class="fu">glm</span>(<span class="at">data=</span>crabs, Satellite<span class="sc">~</span>Width, <span class="at">family=</span><span class="st">&quot;quasipoisson&quot;</span>)</span>
-<span id="cb432-2"><a href="poisson-regression.html#cb432-2" tabindex="-1"></a>M2b <span class="ot">&lt;-</span> <span class="fu">glm</span>(<span class="at">data=</span>crabs, Satellite<span class="sc">~</span>Width, <span class="at">family=</span><span class="st">&quot;quasipoisson&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb431"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb431-1"><a href="poisson-regression.html#cb431-1" tabindex="-1"></a>M1b <span class="ot">&lt;-</span> <span class="fu">glm</span>(<span class="at">data=</span>crabs, Satellite<span class="sc">~</span>Width, <span class="at">family=</span><span class="st">&quot;quasipoisson&quot;</span>)</span>
+<span id="cb431-2"><a href="poisson-regression.html#cb431-2" tabindex="-1"></a>M2b <span class="ot">&lt;-</span> <span class="fu">glm</span>(<span class="at">data=</span>crabs, Satellite<span class="sc">~</span>Width, <span class="at">family=</span><span class="st">&quot;quasipoisson&quot;</span>)</span></code></pre></div>
 <p>Test #1</p>
-<div class="sourceCode" id="cb433"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb433-1"><a href="poisson-regression.html#cb433-1" tabindex="-1"></a><span class="fu">anova</span>(M1b, M2b, <span class="at">test =</span> <span class="st">&quot;Chisq&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb432"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb432-1"><a href="poisson-regression.html#cb432-1" tabindex="-1"></a><span class="fu">anova</span>(M1b, M2b, <span class="at">test =</span> <span class="st">&quot;Chisq&quot;</span>)</span></code></pre></div>
 <pre><code>## Analysis of Deviance Table
 ## 
 ## Model 1: Satellite ~ Width
@@ -2697,13 +2790,13 @@ n
 ## 1       171     567.88                     
 ## 2       171     567.88  0        0</code></pre>
 <p>Test #2:</p>
-<div class="sourceCode" id="cb435"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb435-1"><a href="poisson-regression.html#cb435-1" tabindex="-1"></a>M1b<span class="sc">$</span>deviance</span></code></pre></div>
+<div class="sourceCode" id="cb434"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb434-1"><a href="poisson-regression.html#cb434-1" tabindex="-1"></a>M1b<span class="sc">$</span>deviance</span></code></pre></div>
 <pre><code>## [1] 567.8786</code></pre>
-<div class="sourceCode" id="cb437"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb437-1"><a href="poisson-regression.html#cb437-1" tabindex="-1"></a>M1b<span class="sc">$</span>df.residual</span></code></pre></div>
+<div class="sourceCode" id="cb436"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb436-1"><a href="poisson-regression.html#cb436-1" tabindex="-1"></a>M1b<span class="sc">$</span>df.residual</span></code></pre></div>
 <pre><code>## [1] 171</code></pre>
-<div class="sourceCode" id="cb439"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb439-1"><a href="poisson-regression.html#cb439-1" tabindex="-1"></a><span class="dv">1</span><span class="sc">-</span><span class="fu">pchisq</span>(M1b<span class="sc">$</span>deviance, M1b<span class="sc">$</span>df.residual) </span></code></pre></div>
+<div class="sourceCode" id="cb438"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb438-1"><a href="poisson-regression.html#cb438-1" tabindex="-1"></a><span class="dv">1</span><span class="sc">-</span><span class="fu">pchisq</span>(M1b<span class="sc">$</span>deviance, M1b<span class="sc">$</span>df.residual) </span></code></pre></div>
 <pre><code>## [1] 0</code></pre>
-<ol start="5" style="list-style-type: lower-alpha">
+<ol start="4" style="list-style-type: lower-alpha">
 <li>Suppose that we did change the tests in (d) to the appropriate ones. Would the resulting p-values be bigger, smaller, or the same as those shown in (d)? Justify your answer.</li>
 </ol>
 </div>

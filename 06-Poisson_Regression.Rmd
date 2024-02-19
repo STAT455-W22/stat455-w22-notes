@@ -1086,7 +1086,7 @@ Brockmann (1996) carried out a study of nesting female horseshoe crabs. Female h
 ```{r}
 # read in data and select relevant variables
 crabs <- read_csv("https://raw.githubusercontent.com/proback/BeyondMLR/master/data/crab.csv")
-head(crabs, 4)
+kable(head(crabs, 4), caption="First four rows of data")
 ```
 
 The table displays the number of female crabs within two cm intervals of carapace width, and the average number of satellites in each group. 
@@ -1100,7 +1100,7 @@ WidthGroup = cut(crabs$Width,
            breaks=c(20,22,24,26, 28, 30, 32, 34))
 Groups <- data.frame(WidthGroup,crabs)
 Groups <- Groups %>% group_by(WidthGroup)%>%summarize(Mean_Satellite=mean(Satellite), Var_Satellite=var(Satellite), n=n()) 
-kable(Groups)
+kable(Groups, caption="Grouped by Carapace Width")
 ```
 
 Summaries by spine group are shown below
@@ -1108,7 +1108,7 @@ Summaries by spine group are shown below
 ```{r}
 SpGroups <- crabs %>% group_by(Spine)%>%summarize(Mean_Satellite=mean(Satellite), 
                                       Var_Satellite=var(Satellite), n=n()) 
-kable(SpGroups)
+kable(SpGroups, caption = "Grouped by Spine Condition")
 ```
 
 We fit a Poisson regression model using only carapace width as an explanatory variable. Model output is shown below.  
@@ -1196,7 +1196,7 @@ knitr::include_graphics("QuasiPois.png")
 ```
 
 
-d) Quasi-Poisson models, M1b and M2b are fit below. Explain why it would be inappropriate to run the tests shown below. What should we change in the tests?      
+c) Quasi-Poisson models, M1b and M2b are fit below. Explain why it would be inappropriate to run the tests shown below. What should we change in the tests?      
 
 ```{r}
 M1b <- glm(data=crabs, Satellite~Width, family="quasipoisson")
@@ -1217,7 +1217,7 @@ M1b$df.residual
 1-pchisq(M1b$deviance, M1b$df.residual) 
 ```
 
-e) Suppose that we did change the tests in (d) to the appropriate ones. Would the resulting p-values be bigger, smaller, or the same as those shown in (d)? Justify your answer.    
+d) Suppose that we did change the tests in (d) to the appropriate ones. Would the resulting p-values be bigger, smaller, or the same as those shown in (d)? Justify your answer.    
 
 ### 37. Explain the purpose of using an offset term in Poisson regression.  {-}     
 
