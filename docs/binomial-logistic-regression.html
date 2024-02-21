@@ -22,7 +22,7 @@
 
 
 
-<meta name="date" content="2024-02-19" />
+<meta name="date" content="2024-02-21" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -1610,7 +1610,7 @@ Pearson residuals:
 Count model coefficients (poisson with log link):
             Estimate Std. Error z value Pr(&gt;|z|)    
 (Intercept)   0.7543     0.1440   5.238 1.62e-07 ***
-off.campus    0.4159     0.2059   2.021   0.0433 *  
+off.campus    0.4159     0.2059   2.020   0.0433 *  
 sexm          1.0209     0.1752   5.827 5.63e-09 ***
 
 Zero-inflation model coefficients (binomial with logit link):
@@ -1620,13 +1620,13 @@ firstYearTRUE   1.1364     0.6095   1.864   0.0623 .
 ---
 Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1 
 
-Number of iterations in BFGS optimization: 11 
+Number of iterations in BFGS optimization: 8 
 Log-likelihood: -140.8 on 5 Df</code></pre>
 <div class="sourceCode" id="cb491"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb491-1"><a href="binomial-logistic-regression.html#cb491-1" tabindex="-1"></a><span class="fu">exp</span>(<span class="fu">coef</span>(zip.m))   <span class="co"># exponentiated coefficients</span></span></code></pre></div>
 <pre><code>##  count_(Intercept)   count_off.campus         count_sexm   zero_(Intercept) 
-##          2.1260689          1.5157979          2.7756924          0.5468312 
+##          2.1260699          1.5157953          2.7756910          0.5468311 
 ## zero_firstYearTRUE 
-##          3.1154949</code></pre>
+##          3.1154950</code></pre>
 <p><strong>Interpretations</strong></p>
 <ul>
 <li><p>For those who drink, the average number of drinks for males is <span class="math inline">\(e^{1.0209}\)</span> or 2.76 times the number for females (Z = 5.827, p &lt; 0.001) given that you are comparing people who live in comparable settings (on or off campus)</p></li>

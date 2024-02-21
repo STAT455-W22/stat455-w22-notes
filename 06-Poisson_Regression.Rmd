@@ -1200,7 +1200,7 @@ c) Quasi-Poisson models, M1b and M2b are fit below. Explain why it would be inap
 
 ```{r}
 M1b <- glm(data=crabs, Satellite~Width, family="quasipoisson")
-M2b <- glm(data=crabs, Satellite~Width, family="quasipoisson")
+M2b <- glm(data=crabs, Satellite~Width + + factor(Spine), family="quasipoisson")
 ```
 
 Test #1

@@ -22,7 +22,7 @@
 
 
 
-<meta name="date" content="2024-02-19" />
+<meta name="date" content="2024-02-21" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -2774,21 +2774,21 @@ n
 <li><p>For Model M1, the dispersion parameter is <span class="math inline">\(\phi=3.18\)</span>. Suppose we were to fit a quasi-Poisson model to the data. Fill in the table to show the estimates and standard errors that would result from the quasi-Poisson model.</p></li>
 </ol>
 <div class="sourceCode" id="cb430"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb430-1"><a href="poisson-regression.html#cb430-1" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">&quot;QuasiPois.png&quot;</span>)</span></code></pre></div>
-<p><img src="QuasiPois.png" /><!-- --></p>
+<p><img src="QuasiPois.png" width="487" /></p>
 <ol start="3" style="list-style-type: lower-alpha">
 <li>Quasi-Poisson models, M1b and M2b are fit below. Explain why it would be inappropriate to run the tests shown below. What should we change in the tests?</li>
 </ol>
 <div class="sourceCode" id="cb431"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb431-1"><a href="poisson-regression.html#cb431-1" tabindex="-1"></a>M1b <span class="ot">&lt;-</span> <span class="fu">glm</span>(<span class="at">data=</span>crabs, Satellite<span class="sc">~</span>Width, <span class="at">family=</span><span class="st">&quot;quasipoisson&quot;</span>)</span>
-<span id="cb431-2"><a href="poisson-regression.html#cb431-2" tabindex="-1"></a>M2b <span class="ot">&lt;-</span> <span class="fu">glm</span>(<span class="at">data=</span>crabs, Satellite<span class="sc">~</span>Width, <span class="at">family=</span><span class="st">&quot;quasipoisson&quot;</span>)</span></code></pre></div>
+<span id="cb431-2"><a href="poisson-regression.html#cb431-2" tabindex="-1"></a>M2b <span class="ot">&lt;-</span> <span class="fu">glm</span>(<span class="at">data=</span>crabs, Satellite<span class="sc">~</span>Width <span class="sc">+</span> <span class="sc">+</span> <span class="fu">factor</span>(Spine), <span class="at">family=</span><span class="st">&quot;quasipoisson&quot;</span>)</span></code></pre></div>
 <p>Test #1</p>
 <div class="sourceCode" id="cb432"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb432-1"><a href="poisson-regression.html#cb432-1" tabindex="-1"></a><span class="fu">anova</span>(M1b, M2b, <span class="at">test =</span> <span class="st">&quot;Chisq&quot;</span>)</span></code></pre></div>
 <pre><code>## Analysis of Deviance Table
 ## 
 ## Model 1: Satellite ~ Width
-## Model 2: Satellite ~ Width
+## Model 2: Satellite ~ Width + +factor(Spine)
 ##   Resid. Df Resid. Dev Df Deviance Pr(&gt;Chi)
 ## 1       171     567.88                     
-## 2       171     567.88  0        0</code></pre>
+## 2       169     566.60  2   1.2737   0.8192</code></pre>
 <p>Test #2:</p>
 <div class="sourceCode" id="cb434"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb434-1"><a href="poisson-regression.html#cb434-1" tabindex="-1"></a>M1b<span class="sc">$</span>deviance</span></code></pre></div>
 <pre><code>## [1] 567.8786</code></pre>
