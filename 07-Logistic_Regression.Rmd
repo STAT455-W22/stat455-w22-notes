@@ -1155,4 +1155,69 @@ At times, a mixture of zeros occurs naturally. It may not come about because of 
 
 Actually, applications which extend beyond ordinary Poisson regression applications---ZIPs and other Poisson modeling approaches such as hurdle models and quasi-Poisson applications---are becoming increasingly common. So it is worth taking a look at these variations of Poisson regression models. Here we have only skimmed the surface of zero-inflated models, but we want you to be aware of models of this type. ZIP models demonstrate that modeling can be flexible and creative---a theme we hope you will see throughout this book.
 
+## Practice Problems
+
+In the professional National Basketball Association (NBA), each team plays 82 games in a season. We have data on the season that ended in 2018. In basketball, teams can attempt either 2-point shots, or 3-point shots, which are taken further from the basket. We'll investigate whether taking more 3-point shots improves or hurts a team's chances of winning a game. We model the number of wins for each of the league's 30 teams, using percentage of shots taken that were 3 point shots as an explanatory variable. 
+
+```{r}
+NBA <- read.csv("https://raw.githubusercontent.com/proback/BeyondMLR/master/data/NBA1718team.csv") 
+NBA <- NBA %>% mutate(PCT3P = attempts_3P/(attempts_2P+attempts_3P)*100)
+```
+
+The first 5 rows of the data are shown below. 
+
+```{r}
+NBA %>% select(TEAM, Win, Loss, PCT3P) %>% head(5)
+```
+Output for a binomial logistic regression model is shown below. 
+
+```{r}
+M <- glm(data = NBA, cbind(Win, Loss) ~ PCT3P , family = binomial(link="logit"))
+summary(M)
+```
+
+### 40. State the assumptions associated with a binomial logistic regression model and determine whether the assumptions are satisfied.   {-}   
+
+a) Explain why a binomial logistic model is more appropriate for these data than an LLSR model or a Poisson regression model.     
+
+b) Explain how we could check the constant linearity assumption in the binomial logistic model. Write out the coordinates of at least two of the points you would plot.    
+
+c) Explain how you would check the variance assumption with the binomial logistic plot. Why might this be challenging?    
+
+
+### 41. Calculate probabilities and odds and expected changes associated with fixed effects in a binomial logistic regression model.    {-}  
+
+a) Calculate the estimated probability of a team that shoots 35 percent of its shots as 3-pointers winning a game.    
+
+b) If is estimated to have a 0.5 probability of winning, and another team's percentage of three point shots attempted is 4 percentage points higher, what is the second team's estimated probability of winning?    
+
+### 42. Interpret fixed effect coefficients in a binomial logistic regression model.    {-}  
+
+Interpret both estimates in the coefficients table.    
+
+
+### 44. Interpret fixed effect coefficients in a Zero-Inflated Poisson model.      {-}
+
+Using a sample of 5,190 people, taken by the Australian Health Service 1977-78, we model the number of times a person visited the doctor during a 2 week span. Possible explanatory variables include age, and whether or not the person had free health insurance provided through a government program for low-income residents. The variable is called `freepoor`.   
+
+```{r, echo=FALSE}
+library(AER)
+data("DoctorVisits")
+DoctorVisits <- DoctorVisits %>% mutate(age = age*100) %>% select(visits, age, freepoor)
+kable(head(DoctorVisits), caption = "First 6 rows of the data")
+```
+
+We use a zero-inflated model to model number of doctor visits, using age and `freepoor` as explanatory variables. 
+
+```{r, comment = NA}
+library(pscl)
+M_ZIP <- zeroinfl(visits ~ age + freepoor | age + freepoor, 
+                   data = DoctorVisits)
+summary(M_ZIP)
+```
+
+a) Interpret the age coefficient for both parts of the model.    
+
+b) Interpret the freepooryes coefficient for both parts of the model.    
+
 

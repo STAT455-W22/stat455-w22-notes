@@ -22,7 +22,7 @@
 
 
 
-<meta name="date" content="2024-02-21" />
+<meta name="date" content="2024-02-28" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -606,6 +606,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.5.3" data-path="binomial-logistic-regression.html"><a href="binomial-logistic-regression.html#residual-plot"><i class="fa fa-check"></i><b>7.5.3</b> Residual Plot</a></li>
 <li class="chapter" data-level="7.5.4" data-path="binomial-logistic-regression.html"><a href="binomial-logistic-regression.html#limitations"><i class="fa fa-check"></i><b>7.5.4</b> Limitations</a></li>
 <li class="chapter" data-level="7.5.5" data-path="binomial-logistic-regression.html"><a href="binomial-logistic-regression.html#final-thoughts-on-zero-inflated-models"><i class="fa fa-check"></i><b>7.5.5</b> Final Thoughts on Zero-Inflated Models</a></li>
+</ul></li>
+<li class="chapter" data-level="7.6" data-path="binomial-logistic-regression.html"><a href="binomial-logistic-regression.html#practice-problems-3"><i class="fa fa-check"></i><b>7.6</b> Practice Problems</a>
+<ul>
+<li class="chapter" data-level="" data-path="binomial-logistic-regression.html"><a href="binomial-logistic-regression.html#state-the-assumptions-associated-with-a-binomial-logistic-regression-model-and-determine-whether-the-assumptions-are-satisfied."><i class="fa fa-check"></i>40. State the assumptions associated with a binomial logistic regression model and determine whether the assumptions are satisfied.</a></li>
+<li class="chapter" data-level="" data-path="binomial-logistic-regression.html"><a href="binomial-logistic-regression.html#calculate-probabilities-and-odds-and-expected-changes-associated-with-fixed-effects-in-a-binomial-logistic-regression-model."><i class="fa fa-check"></i>41. Calculate probabilities and odds and expected changes associated with fixed effects in a binomial logistic regression model.</a></li>
+<li class="chapter" data-level="" data-path="binomial-logistic-regression.html"><a href="binomial-logistic-regression.html#interpret-fixed-effect-coefficients-in-a-binomial-logistic-regression-model."><i class="fa fa-check"></i>42. Interpret fixed effect coefficients in a binomial logistic regression model.</a></li>
+<li class="chapter" data-level="" data-path="binomial-logistic-regression.html"><a href="binomial-logistic-regression.html#interpret-fixed-effect-coefficients-in-a-zero-inflated-poisson-model."><i class="fa fa-check"></i>44. Interpret fixed effect coefficients in a Zero-Inflated Poisson model.</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="multilevel-generalized-linear-models.html"><a href="multilevel-generalized-linear-models.html"><i class="fa fa-check"></i><b>8</b> Multilevel Generalized Linear Models</a>
@@ -1610,7 +1617,7 @@ Pearson residuals:
 Count model coefficients (poisson with log link):
             Estimate Std. Error z value Pr(&gt;|z|)    
 (Intercept)   0.7543     0.1440   5.238 1.62e-07 ***
-off.campus    0.4159     0.2059   2.020   0.0433 *  
+off.campus    0.4159     0.2059   2.021   0.0433 *  
 sexm          1.0209     0.1752   5.827 5.63e-09 ***
 
 Zero-inflation model coefficients (binomial with logit link):
@@ -1620,13 +1627,13 @@ firstYearTRUE   1.1364     0.6095   1.864   0.0623 .
 ---
 Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1 
 
-Number of iterations in BFGS optimization: 8 
+Number of iterations in BFGS optimization: 11 
 Log-likelihood: -140.8 on 5 Df</code></pre>
 <div class="sourceCode" id="cb491"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb491-1"><a href="binomial-logistic-regression.html#cb491-1" tabindex="-1"></a><span class="fu">exp</span>(<span class="fu">coef</span>(zip.m))   <span class="co"># exponentiated coefficients</span></span></code></pre></div>
 <pre><code>##  count_(Intercept)   count_off.campus         count_sexm   zero_(Intercept) 
-##          2.1260699          1.5157953          2.7756910          0.5468311 
+##          2.1260689          1.5157979          2.7756924          0.5468312 
 ## zero_firstYearTRUE 
-##          3.1154950</code></pre>
+##          3.1154949</code></pre>
 <p><strong>Interpretations</strong></p>
 <ul>
 <li><p>For those who drink, the average number of drinks for males is <span class="math inline">\(e^{1.0209}\)</span> or 2.76 times the number for females (Z = 5.827, p &lt; 0.001) given that you are comparing people who live in comparable settings (on or off campus)</p></li>
@@ -1662,6 +1669,184 @@ Figure 7.1: Residuals by fitted counts for ZIP model.
 <h3><span class="header-section-number">7.5.5</span> Final Thoughts on Zero-Inflated Models<a href="binomial-logistic-regression.html#final-thoughts-on-zero-inflated-models" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>At times, a mixture of zeros occurs naturally. It may not come about because of neglecting to ask a critical question on a survey, but the information about the subpopulation may simply not be ascertainable. For example, visitors from a state park were asked as they departed how many fish they caught, but those who report 0 could be either non-fishers or fishers who had bad luck. These kinds of circumstances occur often enough that ZIP models are becoming increasingly common.</p>
 <p>Actually, applications which extend beyond ordinary Poisson regression applications—ZIPs and other Poisson modeling approaches such as hurdle models and quasi-Poisson applications—are becoming increasingly common. So it is worth taking a look at these variations of Poisson regression models. Here we have only skimmed the surface of zero-inflated models, but we want you to be aware of models of this type. ZIP models demonstrate that modeling can be flexible and creative—a theme we hope you will see throughout this book.</p>
+</div>
+</div>
+<div id="practice-problems-3" class="section level2 hasAnchor" number="7.6">
+<h2><span class="header-section-number">7.6</span> Practice Problems<a href="binomial-logistic-regression.html#practice-problems-3" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In the professional National Basketball Association (NBA), each team plays 82 games in a season. We have data on the season that ended in 2018. In basketball, teams can attempt either 2-point shots, or 3-point shots, which are taken further from the basket. We’ll investigate whether taking more 3-point shots improves or hurts a team’s chances of winning a game. We model the number of wins for each of the league’s 30 teams, using percentage of shots taken that were 3 point shots as an explanatory variable.</p>
+<div class="sourceCode" id="cb493"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb493-1"><a href="binomial-logistic-regression.html#cb493-1" tabindex="-1"></a>NBA <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;https://raw.githubusercontent.com/proback/BeyondMLR/master/data/NBA1718team.csv&quot;</span>) </span>
+<span id="cb493-2"><a href="binomial-logistic-regression.html#cb493-2" tabindex="-1"></a>NBA <span class="ot">&lt;-</span> NBA <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">PCT3P =</span> attempts_3P<span class="sc">/</span>(attempts_2P<span class="sc">+</span>attempts_3P)<span class="sc">*</span><span class="dv">100</span>)</span></code></pre></div>
+<p>The first 5 rows of the data are shown below.</p>
+<div class="sourceCode" id="cb494"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb494-1"><a href="binomial-logistic-regression.html#cb494-1" tabindex="-1"></a>NBA <span class="sc">%&gt;%</span> <span class="fu">select</span>(TEAM, Win, Loss, PCT3P) <span class="sc">%&gt;%</span> <span class="fu">head</span>(<span class="dv">5</span>)</span></code></pre></div>
+<pre><code>##   TEAM Win Loss    PCT3P
+## 1  ATL  24   58 36.26515
+## 2  BKN  28   54 41.10205
+## 3  BOS  55   27 35.72760
+## 4  CHA  36   46 31.42415
+## 5  CHI  27   55 34.98970</code></pre>
+<p>Output for a binomial logistic regression model is shown below.</p>
+<div class="sourceCode" id="cb496"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb496-1"><a href="binomial-logistic-regression.html#cb496-1" tabindex="-1"></a>M <span class="ot">&lt;-</span> <span class="fu">glm</span>(<span class="at">data =</span> NBA, <span class="fu">cbind</span>(Win, Loss) <span class="sc">~</span> PCT3P , <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link=</span><span class="st">&quot;logit&quot;</span>))</span>
+<span id="cb496-2"><a href="binomial-logistic-regression.html#cb496-2" tabindex="-1"></a><span class="fu">summary</span>(M)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## glm(formula = cbind(Win, Loss) ~ PCT3P, family = binomial(link = &quot;logit&quot;), 
+##     data = NBA)
+## 
+## Coefficients:
+##              Estimate Std. Error z value Pr(&gt;|z|)    
+## (Intercept) -1.118837   0.298581  -3.747 0.000179 ***
+## PCT3P        0.033202   0.008785   3.780 0.000157 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 217.97  on 29  degrees of freedom
+## Residual deviance: 203.42  on 28  degrees of freedom
+## AIC: 350.54
+## 
+## Number of Fisher Scoring iterations: 3</code></pre>
+<div id="state-the-assumptions-associated-with-a-binomial-logistic-regression-model-and-determine-whether-the-assumptions-are-satisfied." class="section level3 unnumbered hasAnchor">
+<h3>40. State the assumptions associated with a binomial logistic regression model and determine whether the assumptions are satisfied.<a href="binomial-logistic-regression.html#state-the-assumptions-associated-with-a-binomial-logistic-regression-model-and-determine-whether-the-assumptions-are-satisfied." class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ol style="list-style-type: lower-alpha">
+<li><p>Explain why a binomial logistic model is more appropriate for these data than an LLSR model or a Poisson regression model.</p></li>
+<li><p>Explain how we could check the constant linearity assumption in the binomial logistic model. Write out the coordinates of at least two of the points you would plot.</p></li>
+<li><p>Explain how you would check the variance assumption with the binomial logistic plot. Why might this be challenging?</p></li>
+</ol>
+</div>
+<div id="calculate-probabilities-and-odds-and-expected-changes-associated-with-fixed-effects-in-a-binomial-logistic-regression-model." class="section level3 unnumbered hasAnchor">
+<h3>41. Calculate probabilities and odds and expected changes associated with fixed effects in a binomial logistic regression model.<a href="binomial-logistic-regression.html#calculate-probabilities-and-odds-and-expected-changes-associated-with-fixed-effects-in-a-binomial-logistic-regression-model." class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ol style="list-style-type: lower-alpha">
+<li><p>Calculate the estimated probability of a team that shoots 35 percent of its shots as 3-pointers winning a game.</p></li>
+<li><p>If is estimated to have a 0.5 probability of winning, and another team’s percentage of three point shots attempted is 4 percentage points higher, what is the second team’s estimated probability of winning?</p></li>
+</ol>
+</div>
+<div id="interpret-fixed-effect-coefficients-in-a-binomial-logistic-regression-model." class="section level3 unnumbered hasAnchor">
+<h3>42. Interpret fixed effect coefficients in a binomial logistic regression model.<a href="binomial-logistic-regression.html#interpret-fixed-effect-coefficients-in-a-binomial-logistic-regression-model." class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Interpret both estimates in the coefficients table.</p>
+</div>
+<div id="interpret-fixed-effect-coefficients-in-a-zero-inflated-poisson-model." class="section level3 unnumbered hasAnchor">
+<h3>44. Interpret fixed effect coefficients in a Zero-Inflated Poisson model.<a href="binomial-logistic-regression.html#interpret-fixed-effect-coefficients-in-a-zero-inflated-poisson-model." class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Using a sample of 5,190 people, taken by the Australian Health Service 1977-78, we model the number of times a person visited the doctor during a 2 week span. Possible explanatory variables include age, and whether or not the person had free health insurance provided through a government program for low-income residents. The variable is called <code>freepoor</code>.</p>
+<table>
+<caption>
+<span id="tab:unnamed-chunk-309">Table 7.1: </span>First 6 rows of the data
+</caption>
+<thead>
+<tr>
+<th style="text-align:right;">
+visits
+</th>
+<th style="text-align:right;">
+age
+</th>
+<th style="text-align:left;">
+freepoor
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+19
+</td>
+<td style="text-align:left;">
+no
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+19
+</td>
+<td style="text-align:left;">
+no
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+19
+</td>
+<td style="text-align:left;">
+no
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+19
+</td>
+<td style="text-align:left;">
+no
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+19
+</td>
+<td style="text-align:left;">
+no
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+19
+</td>
+<td style="text-align:left;">
+no
+</td>
+</tr>
+</tbody>
+</table>
+<p>We use a zero-inflated model to model number of doctor visits, using age and <code>freepoor</code> as explanatory variables.</p>
+<div class="sourceCode" id="cb498"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb498-1"><a href="binomial-logistic-regression.html#cb498-1" tabindex="-1"></a><span class="fu">library</span>(pscl)</span>
+<span id="cb498-2"><a href="binomial-logistic-regression.html#cb498-2" tabindex="-1"></a>M_ZIP <span class="ot">&lt;-</span> <span class="fu">zeroinfl</span>(visits <span class="sc">~</span> age <span class="sc">+</span> freepoor <span class="sc">|</span> age <span class="sc">+</span> freepoor, </span>
+<span id="cb498-3"><a href="binomial-logistic-regression.html#cb498-3" tabindex="-1"></a>                   <span class="at">data =</span> DoctorVisits)</span>
+<span id="cb498-4"><a href="binomial-logistic-regression.html#cb498-4" tabindex="-1"></a><span class="fu">summary</span>(M_ZIP)</span></code></pre></div>
+<pre><code>
+Call:
+zeroinfl(formula = visits ~ age + freepoor | age + freepoor, data = DoctorVisits)
+
+Pearson residuals:
+    Min      1Q  Median      3Q     Max 
+-0.5597 -0.4803 -0.3737 -0.3640 13.6622 
+
+Count model coefficients (poisson with log link):
+             Estimate Std. Error z value Pr(&gt;|z|)   
+(Intercept) -0.320800   0.106466  -3.013  0.00259 **
+age          0.003437   0.001971   1.743  0.08127 . 
+freepooryes  0.461916   0.251486   1.837  0.06625 . 
+
+Zero-inflation model coefficients (binomial with logit link):
+             Estimate Std. Error z value Pr(&gt;|z|)    
+(Intercept)  1.357837   0.142683   9.516  &lt; 2e-16 ***
+age         -0.018595   0.002915  -6.380 1.77e-10 ***
+freepooryes  1.058315   0.294645   3.592 0.000328 ***
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1 
+
+Number of iterations in BFGS optimization: 23 
+Log-likelihood: -3646 on 6 Df</code></pre>
+<ol style="list-style-type: lower-alpha">
+<li><p>Interpret the age coefficient for both parts of the model.</p></li>
+<li><p>Interpret the freepooryes coefficient for both parts of the model.</p></li>
+</ol>
 
 </div>
 </div>

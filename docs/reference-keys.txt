@@ -29,6 +29,7 @@ tab:unnamed-chunk-256
 tab:unnamed-chunk-258
 tab:unnamed-chunk-259
 fig:poisRes
+tab:unnamed-chunk-309
 fig:gmu-histmat1
 fig:gmu-cdelogitmat1
 fig:gmu-barmat1
@@ -365,6 +366,7 @@ zip-model-in-r
 residual-plot
 limitations
 final-thoughts-on-zero-inflated-models
+practice-problems-3
 multilevel-generalized-linear-models
 basketball-referees-dataset
 data-overview
