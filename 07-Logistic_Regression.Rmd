@@ -1189,7 +1189,7 @@ c) Explain how you would check the variance assumption with the binomial logisti
 
 a) Calculate the estimated probability of a team that shoots 35 percent of its shots as 3-pointers winning a game.    
 
-b) If is estimated to have a 0.5 probability of winning, and another team's percentage of three point shots attempted is 4 percentage points higher, what is the second team's estimated probability of winning?    
+b) If one team is estimated to have a 0.5 probability of winning, and another team's percentage of three point shots attempted is 4 percentage points higher, what is the second team's estimated probability of winning?    
 
 ### 42. Interpret fixed effect coefficients in a binomial logistic regression model.    {-}  
 
