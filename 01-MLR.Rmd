@@ -758,7 +758,7 @@ A situation like this, where adding a variable (such as year) to a model results
 
 ## Practice Questions
 
-### Explain LLSR model assumptions and identify violations of these assumptions.        {-}     
+### 1. Explain LLSR model assumptions and identify violations of these assumptions.        {-}     
 
 a) All of the examples in this section have at least one violation of the LLSR assumptions for inference. Begin by identifying the response and explanatory variables. Then, identify which model assumption(s) are violated.
 
