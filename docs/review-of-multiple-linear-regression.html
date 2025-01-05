@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 1 Review of Multiple Linear Regression | Stat 455: Advanced Statistical Modeling Notes</title>
   <meta name="description" content="Chapter 1 Review of Multiple Linear Regression | Stat 455: Advanced Statistical Modeling Notes" />
-  <meta name="generator" content="bookdown 0.37 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.40 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 1 Review of Multiple Linear Regression | Stat 455: Advanced Statistical Modeling Notes" />
   <meta property="og:type" content="book" />
@@ -22,7 +22,7 @@
 
 
 
-<meta name="date" content="2024-02-29" />
+<meta name="date" content="2025-01-05" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -57,7 +57,7 @@
 
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -186,12 +186,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="1.5" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#practice-questions"><i class="fa fa-check"></i><b>1.5</b> Practice Questions</a>
 <ul>
-<li class="chapter" data-level="" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#identify-violations-of-linear-least-squares-regression-llsr-assumptions-based-on-descriptions-of-data-collection."><i class="fa fa-check"></i>1. Identify violations of linear least squares regression (LLSR) assumptions based on descriptions of data collection.</a></li>
+<li class="chapter" data-level="" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#explain-llsr-model-assumptions-and-identify-violations-of-these-assumptions."><i class="fa fa-check"></i>Explain LLSR model assumptions and identify violations of these assumptions.</a></li>
 <li class="chapter" data-level="" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#interpret-parameter-estimates-in-llsr-models-including-models-with-transformations-andor-interactions."><i class="fa fa-check"></i>2. Interpret parameter estimates in LLSR models, including models with transformations and/or interactions.</a></li>
 <li class="chapter" data-level="" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#calculate-expected-responses-and-expected-changes-associated-with-explanatory-variables-in-a-llsr-model."><i class="fa fa-check"></i>3. Calculate expected responses and expected changes associated with explanatory variables in a LLSR model.</a></li>
 <li class="chapter" data-level="" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#calculate-standard-errors-t-statistics-residual-standard-error-r2-and-f-statistics-in-a-llsr-models-r-output."><i class="fa fa-check"></i>4. Calculate standard errors, t-statistics, residual standard error, <span class="math inline">\(R^2\)</span>, and F-statistics in a LLSR model’s R output.</a></li>
 <li class="chapter" data-level="" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#interpret-standard-errors-t-statistics-residual-standard-error-r2-and-f-statistics-in-a-llsr-models-r-output."><i class="fa fa-check"></i>5. Interpret standard errors, t-statistics, residual standard error, <span class="math inline">\(R^2\)</span>, and F-statistics in a LLSR model’s R output.</a></li>
-<li class="chapter" data-level="1.5.1" data-path="review-of-multiple-linear-regression.html"><a href="review-of-multiple-linear-regression.html#practice-advanced-tasks"><i class="fa fa-check"></i><b>1.5.1</b> Practice Advanced Tasks</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html"><i class="fa fa-check"></i><b>2</b> Introduction to Correlated Data</a>
@@ -694,7 +693,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1><span class="header-section-number">Chapter 1</span> Review of Multiple Linear Regression<a href="review-of-multiple-linear-regression.html#review-of-multiple-linear-regression" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p><strong>Chapter 1 Learning Outcomes</strong></p>
 <ol style="list-style-type: decimal">
-<li><p>Identify violations of linear least squares regression (LLSR) assumptions based on descriptions of data collection.</p></li>
+<li><p>Explain LLSR model assumptions and identify violations of these assumptions.</p></li>
 <li><p>Interpret parameter estimates in LLSR models, including models with transformations and/or interactions.</p></li>
 <li><p>Calculate expected responses and expected changes associated with explanatory variables in a LLSR model.</p></li>
 <li><p>Calculate standard errors, t-statistics, residual standard error, <span class="math inline">\(R^2\)</span>, and F-statistics in a LLSR model’s R output.</p></li>
@@ -1777,35 +1776,54 @@ Figure 1.9: Relationships between pairs of variables in the Kentucky Derby data 
 </div>
 <div id="practice-questions" class="section level2 hasAnchor" number="1.5">
 <h2><span class="header-section-number">1.5</span> Practice Questions<a href="review-of-multiple-linear-regression.html#practice-questions" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="identify-violations-of-linear-least-squares-regression-llsr-assumptions-based-on-descriptions-of-data-collection." class="section level3 unnumbered hasAnchor">
-<h3>1. Identify violations of linear least squares regression (LLSR) assumptions based on descriptions of data collection.<a href="review-of-multiple-linear-regression.html#identify-violations-of-linear-least-squares-regression-llsr-assumptions-based-on-descriptions-of-data-collection." class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>All of the examples in this section have at least one violation of the LLSR assumptions for inference. Begin by identifying the response and explanatory variables. Then, identify which model assumption(s) are violated.</p>
+<div id="explain-llsr-model-assumptions-and-identify-violations-of-these-assumptions." class="section level3 unnumbered hasAnchor">
+<h3>Explain LLSR model assumptions and identify violations of these assumptions.<a href="review-of-multiple-linear-regression.html#explain-llsr-model-assumptions-and-identify-violations-of-these-assumptions." class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ol style="list-style-type: lower-alpha">
+<li>All of the examples in this section have at least one violation of the LLSR assumptions for inference. Begin by identifying the response and explanatory variables. Then, identify which model assumption(s) are violated.</li>
+</ol>
 <ul>
-<li><ol style="list-style-type: lower-alpha">
+<li><ol style="list-style-type: lower-roman">
 <li>Low Birthweights. Researchers are attempting to see if socioeconomic status and parental stability are predictive of low birthweight. They classify a child as having a low birthweight if their birthweight is less than 2,500 grams.</li>
 </ol></li>
-<li><ol start="2" style="list-style-type: lower-alpha">
+<li><ol start="2" style="list-style-type: lower-roman">
 <li>Clinical Trial I. A Phase II clinical trial is designed to compare the number of patients getting relief at different dose levels. 100 patients get dose A, 100 get dose B, and 100 get dose C.</li>
 </ol></li>
-<li><ol start="3" style="list-style-type: lower-alpha">
+<li><ol start="3" style="list-style-type: lower-roman">
 <li>Canoes and Zip Codes. For each of over 27,000 overnight permits for the Boundary Waters Canoe area, the zip code for the group leader has been translated to the distance traveled and socioeconomic data. Thus, for each zip code we can model the number of trips made as a function of distance traveled and various socioeconomic measures.</li>
 </ol></li>
-<li><ol start="4" style="list-style-type: lower-alpha">
+<li><ol start="4" style="list-style-type: lower-roman">
 <li>Clinical Trial II. A randomized clinical trial investigated postnatal depression and the use of an estrogen patch. Patients were randomly assigned to either use the patch or not. Depression scores were recorded on 6 different visits.</li>
 </ol></li>
 </ul>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>Consider a multiple regression model with response variable <span class="math inline">\(Y\)</span> and explanatory variables <span class="math inline">\(X_1\)</span> and <span class="math inline">\(X_2\)</span>. The model equation is</li>
+</ol>
+<p><span class="math display">\[\text{Y}_i = \beta_0 + \beta_1X_1+\beta_2X_2 + \epsilon_i, \text{ where } \epsilon_i\sim\mathcal{N}(0, \sigma^2)
+\]</span></p>
+<p>Histograms of the explanatory variables and their standard deviations are shown below.</p>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="review-of-multiple-linear-regression.html#cb71-1" tabindex="-1"></a>P1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data=</span>df, <span class="fu">aes</span>(<span class="at">x=</span>X1)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">fill=</span><span class="st">&quot;blue&quot;</span>) <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">&quot;Distribution of X1&quot;</span>)</span>
+<span id="cb71-2"><a href="review-of-multiple-linear-regression.html#cb71-2" tabindex="-1"></a>P2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data=</span>df, <span class="fu">aes</span>(<span class="at">x=</span>X2)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">fill=</span><span class="st">&quot;blue&quot;</span>) <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">&quot;Distribution of X2&quot;</span>)</span>
+<span id="cb71-3"><a href="review-of-multiple-linear-regression.html#cb71-3" tabindex="-1"></a>P3 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data=</span>df, <span class="fu">aes</span>(<span class="at">x=</span>Y)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">fill=</span><span class="st">&quot;blue&quot;</span>) <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">&quot;Distribution of Y&quot;</span>)</span>
+<span id="cb71-4"><a href="review-of-multiple-linear-regression.html#cb71-4" tabindex="-1"></a><span class="fu">grid.arrange</span>(P1, P2, <span class="at">ncol=</span><span class="dv">1</span>)</span></code></pre></div>
+<p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-24-1.png" width="576" /></p>
+<p>The standard deviations of the two explanatory variables are shown below.</p>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="review-of-multiple-linear-regression.html#cb72-1" tabindex="-1"></a><span class="fu">sd</span>(X1)</span></code></pre></div>
+<pre><code>## [1] 5.02108</code></pre>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="review-of-multiple-linear-regression.html#cb74-1" tabindex="-1"></a><span class="fu">sd</span>(X2)</span></code></pre></div>
+<pre><code>## [1] 15.12898</code></pre>
+<p>Notice that there is much more variability in the distribution of <span class="math inline">\(X2\)</span> than <span class="math inline">\(X1\)</span>. Explain why this is not a violation of the constant variance assumption in a LLSR model. In your answer state clearly what the constant variance assumption says and explain why it is not necessarily violated in this situation.</p>
 </div>
 <div id="interpret-parameter-estimates-in-llsr-models-including-models-with-transformations-andor-interactions." class="section level3 unnumbered hasAnchor">
 <h3>2. Interpret parameter estimates in LLSR models, including models with transformations and/or interactions.<a href="review-of-multiple-linear-regression.html#interpret-parameter-estimates-in-llsr-models-including-models-with-transformations-andor-interactions." class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>In April, 2014, website FiveThirtyEight published the article, “The Dollar-And-Cents Case Against Hollywood’s Exclusion of Women” (Hickey 2014).</p>
 <p>Using their data, we’ll analyze returns on investment for a sample of 300 films released between 1990 and 2013 based on the Bechdel test. The test, developed by cartoonist Alison Bechdel, measures gender bias in films by checking if a film meets three criteria:</p>
 <p>there are at least two named women in the picture they have a conversation with each other at some point that conversation isn’t about a male character While the test is not a perfect metric of gender bias, data from it does allow for statistical analysis. In the FiveThirtyEight article, they find that, “passing the Bechdel test had no effect on the film’s return on investment.” Their data can be found in bechdel.csv.</p>
-<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="review-of-multiple-linear-regression.html#cb71-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">01052024</span>)</span>
-<span id="cb71-2"><a href="review-of-multiple-linear-regression.html#cb71-2" tabindex="-1"></a>Bechdel <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;https://raw.githubusercontent.com/proback/BeyondMLR/master/data/bechdel.csv&quot;</span>)</span>
-<span id="cb71-3"><a href="review-of-multiple-linear-regression.html#cb71-3" tabindex="-1"></a>Bechdel <span class="ot">&lt;-</span> Bechdel <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">yearsince1990 =</span> year<span class="dv">-1990</span>)</span>
-<span id="cb71-4"><a href="review-of-multiple-linear-regression.html#cb71-4" tabindex="-1"></a>Bechdel <span class="ot">&lt;-</span> Bechdel <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(totalROI) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(yearsince1990) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(pass) )</span>
-<span id="cb71-5"><a href="review-of-multiple-linear-regression.html#cb71-5" tabindex="-1"></a>Bechdel <span class="ot">&lt;-</span> Bechdel[<span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(Bechdel), <span class="dv">300</span>), ]</span>
-<span id="cb71-6"><a href="review-of-multiple-linear-regression.html#cb71-6" tabindex="-1"></a><span class="fu">head</span>(Bechdel)</span></code></pre></div>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="review-of-multiple-linear-regression.html#cb76-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">01052024</span>)</span>
+<span id="cb76-2"><a href="review-of-multiple-linear-regression.html#cb76-2" tabindex="-1"></a>Bechdel <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;https://raw.githubusercontent.com/proback/BeyondMLR/master/data/bechdel.csv&quot;</span>)</span>
+<span id="cb76-3"><a href="review-of-multiple-linear-regression.html#cb76-3" tabindex="-1"></a>Bechdel <span class="ot">&lt;-</span> Bechdel <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">yearsince1990 =</span> year<span class="dv">-1990</span>)</span>
+<span id="cb76-4"><a href="review-of-multiple-linear-regression.html#cb76-4" tabindex="-1"></a>Bechdel <span class="ot">&lt;-</span> Bechdel <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(totalROI) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(yearsince1990) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(pass) )</span>
+<span id="cb76-5"><a href="review-of-multiple-linear-regression.html#cb76-5" tabindex="-1"></a>Bechdel <span class="ot">&lt;-</span> Bechdel[<span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(Bechdel), <span class="dv">300</span>), ]</span>
+<span id="cb76-6"><a href="review-of-multiple-linear-regression.html#cb76-6" tabindex="-1"></a><span class="fu">head</span>(Bechdel)</span></code></pre></div>
 <pre><code>## # A tibble: 6 × 11
 ##   title    year  pass budget totalGross domGross intGross totalROI domROI intROI
 ##   &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;      &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
@@ -1821,10 +1839,10 @@ Figure 1.9: Relationships between pairs of variables in the Kentucky Derby data 
 pass = 1 if the film passes the Bechdel test, 0 otherwise<br />
 totalROI = total return on investment (total gross divided by budget)</p>
 <p>We model total return on investment, using years since 1990 and whether or not the film passed the Bechdel test as explanatory variables.</p>
-<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="review-of-multiple-linear-regression.html#cb73-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>Bechdel, <span class="fu">aes</span>(<span class="at">x=</span>yearsince1990, <span class="at">y=</span>totalROI, <span class="at">color=</span><span class="fu">factor</span>(pass))) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">stat_smooth</span>(<span class="at">method=</span><span class="st">&quot;lm&quot;</span>, <span class="at">se=</span><span class="cn">FALSE</span>)</span></code></pre></div>
-<p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-24-1.png" width="576" /></p>
-<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="review-of-multiple-linear-regression.html#cb74-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>Bechdel, <span class="fu">aes</span>(<span class="at">x=</span>yearsince1990, <span class="at">y=</span><span class="fu">log</span>(domROI), <span class="at">color=</span><span class="fu">factor</span>(pass))) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">stat_smooth</span>(<span class="at">method=</span><span class="st">&quot;lm&quot;</span>, <span class="at">se=</span><span class="cn">FALSE</span>)</span></code></pre></div>
-<p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-25-1.png" width="576" /></p>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="review-of-multiple-linear-regression.html#cb78-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>Bechdel, <span class="fu">aes</span>(<span class="at">x=</span>yearsince1990, <span class="at">y=</span>totalROI, <span class="at">color=</span><span class="fu">factor</span>(pass))) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">stat_smooth</span>(<span class="at">method=</span><span class="st">&quot;lm&quot;</span>, <span class="at">se=</span><span class="cn">FALSE</span>)</span></code></pre></div>
+<p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-28-1.png" width="576" /></p>
+<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="review-of-multiple-linear-regression.html#cb79-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>Bechdel, <span class="fu">aes</span>(<span class="at">x=</span>yearsince1990, <span class="at">y=</span><span class="fu">log</span>(domROI), <span class="at">color=</span><span class="fu">factor</span>(pass))) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">stat_smooth</span>(<span class="at">method=</span><span class="st">&quot;lm&quot;</span>, <span class="at">se=</span><span class="cn">FALSE</span>)</span></code></pre></div>
+<p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-29-1.png" width="576" /></p>
 <p>We consider three different models:</p>
 <p><strong>M1:</strong></p>
 <p><span class="math display">\[
@@ -1838,8 +1856,8 @@ totalROI = total return on investment (total gross divided by budget)</p>
 <p><span class="math display">\[
 \text{log(ROI)}_{i}=\beta_{0}+\beta_{1}\textrm{YearSince1990}_{i}+\beta_{2}\textrm{Pass}_{i}+\epsilon_{i} \quad \textrm{where} \quad \epsilon_{i}\sim \textrm{N}(0,\sigma^2).
 \]</span></p>
-<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="review-of-multiple-linear-regression.html#cb75-1" tabindex="-1"></a>M1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data=</span>Bechdel, totalROI <span class="sc">~</span> yearsince1990 <span class="sc">+</span> pass)</span>
-<span id="cb75-2"><a href="review-of-multiple-linear-regression.html#cb75-2" tabindex="-1"></a><span class="fu">summary</span>(M1)</span></code></pre></div>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="review-of-multiple-linear-regression.html#cb80-1" tabindex="-1"></a>M1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data=</span>Bechdel, totalROI <span class="sc">~</span> yearsince1990 <span class="sc">+</span> pass)</span>
+<span id="cb80-2"><a href="review-of-multiple-linear-regression.html#cb80-2" tabindex="-1"></a><span class="fu">summary</span>(M1)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = totalROI ~ yearsince1990 + pass, data = Bechdel)
@@ -1859,8 +1877,8 @@ totalROI = total return on investment (total gross divided by budget)</p>
 ## Residual standard error: 9.767 on 297 degrees of freedom
 ## Multiple R-squared:  0.01615,    Adjusted R-squared:  0.009521 
 ## F-statistic: 2.437 on 2 and 297 DF,  p-value: 0.08916</code></pre>
-<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="review-of-multiple-linear-regression.html#cb77-1" tabindex="-1"></a>M2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data=</span>Bechdel, totalROI <span class="sc">~</span> yearsince1990 <span class="sc">*</span> pass)</span>
-<span id="cb77-2"><a href="review-of-multiple-linear-regression.html#cb77-2" tabindex="-1"></a><span class="fu">summary</span>(M2)</span></code></pre></div>
+<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="review-of-multiple-linear-regression.html#cb82-1" tabindex="-1"></a>M2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data=</span>Bechdel, totalROI <span class="sc">~</span> yearsince1990 <span class="sc">*</span> pass)</span>
+<span id="cb82-2"><a href="review-of-multiple-linear-regression.html#cb82-2" tabindex="-1"></a><span class="fu">summary</span>(M2)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = totalROI ~ yearsince1990 * pass, data = Bechdel)
@@ -1881,8 +1899,8 @@ totalROI = total return on investment (total gross divided by budget)</p>
 ## Residual standard error: 9.78 on 296 degrees of freedom
 ## Multiple R-squared:  0.01677,    Adjusted R-squared:  0.006806 
 ## F-statistic: 1.683 on 3 and 296 DF,  p-value: 0.1707</code></pre>
-<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="review-of-multiple-linear-regression.html#cb79-1" tabindex="-1"></a>M3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data=</span>Bechdel, <span class="fu">log</span>(totalROI) <span class="sc">~</span> yearsince1990 <span class="sc">+</span> pass)</span>
-<span id="cb79-2"><a href="review-of-multiple-linear-regression.html#cb79-2" tabindex="-1"></a><span class="fu">summary</span>(M3)</span></code></pre></div>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="review-of-multiple-linear-regression.html#cb84-1" tabindex="-1"></a>M3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data=</span>Bechdel, <span class="fu">log</span>(totalROI) <span class="sc">~</span> yearsince1990 <span class="sc">+</span> pass)</span>
+<span id="cb84-2"><a href="review-of-multiple-linear-regression.html#cb84-2" tabindex="-1"></a><span class="fu">summary</span>(M3)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = log(totalROI) ~ yearsince1990 + pass, data = Bechdel)
@@ -1902,7 +1920,7 @@ totalROI = total return on investment (total gross divided by budget)</p>
 ## Residual standard error: 1.228 on 297 degrees of freedom
 ## Multiple R-squared:  0.009579,   Adjusted R-squared:  0.002909 
 ## F-statistic: 1.436 on 2 and 297 DF,  p-value: 0.2395</code></pre>
-<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="review-of-multiple-linear-regression.html#cb81-1" tabindex="-1"></a><span class="fu">exp</span>(M3<span class="sc">$</span>coefficients)</span></code></pre></div>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="review-of-multiple-linear-regression.html#cb86-1" tabindex="-1"></a><span class="fu">exp</span>(M3<span class="sc">$</span>coefficients)</span></code></pre></div>
 <pre><code>##   (Intercept) yearsince1990          pass 
 ##     2.7471823     0.9914196     1.2380549</code></pre>
 <p><strong>For each of the three models interpret each of the following quantities in the context of the variables in the problem:</strong></p>
@@ -1948,15 +1966,15 @@ totalROI = total return on investment (total gross divided by budget)</p>
 <div id="calculate-standard-errors-t-statistics-residual-standard-error-r2-and-f-statistics-in-a-llsr-models-r-output." class="section level3 unnumbered hasAnchor">
 <h3>4. Calculate standard errors, t-statistics, residual standard error, <span class="math inline">\(R^2\)</span>, and F-statistics in a LLSR model’s R output.<a href="review-of-multiple-linear-regression.html#calculate-standard-errors-t-statistics-residual-standard-error-r2-and-f-statistics-in-a-llsr-models-r-output." class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Some relevant R output is shown below.</p>
-<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="review-of-multiple-linear-regression.html#cb83-1" tabindex="-1"></a><span class="fu">dim</span>(Bechdel)</span></code></pre></div>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="review-of-multiple-linear-regression.html#cb88-1" tabindex="-1"></a><span class="fu">dim</span>(Bechdel)</span></code></pre></div>
 <pre><code>## [1] 300  11</code></pre>
-<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="review-of-multiple-linear-regression.html#cb85-1" tabindex="-1"></a><span class="fu">sum</span>((Bechdel<span class="sc">$</span>totalROI<span class="sc">-</span><span class="fu">mean</span>(Bechdel<span class="sc">$</span>totalROI))<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="review-of-multiple-linear-regression.html#cb90-1" tabindex="-1"></a><span class="fu">sum</span>((Bechdel<span class="sc">$</span>totalROI<span class="sc">-</span><span class="fu">mean</span>(Bechdel<span class="sc">$</span>totalROI))<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div>
 <pre><code>## [1] 28795.01</code></pre>
-<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="review-of-multiple-linear-regression.html#cb87-1" tabindex="-1"></a><span class="fu">mean</span>(Bechdel<span class="sc">$</span>yearsince1990)</span></code></pre></div>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="review-of-multiple-linear-regression.html#cb92-1" tabindex="-1"></a><span class="fu">mean</span>(Bechdel<span class="sc">$</span>yearsince1990)</span></code></pre></div>
 <pre><code>## [1] 14.73667</code></pre>
-<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="review-of-multiple-linear-regression.html#cb89-1" tabindex="-1"></a><span class="fu">sum</span>((Bechdel<span class="sc">$</span>yearsince1990<span class="sc">-</span><span class="fu">mean</span>(Bechdel<span class="sc">$</span>yearsince1990))<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="review-of-multiple-linear-regression.html#cb94-1" tabindex="-1"></a><span class="fu">sum</span>((Bechdel<span class="sc">$</span>yearsince1990<span class="sc">-</span><span class="fu">mean</span>(Bechdel<span class="sc">$</span>yearsince1990))<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div>
 <pre><code>## [1] 10590.2</code></pre>
-<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="review-of-multiple-linear-regression.html#cb91-1" tabindex="-1"></a>Bechdel <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(pass) <span class="sc">%&gt;%</span> <span class="fu">summarize</span>(<span class="at">meanROI =</span> <span class="fu">mean</span>(totalROI), <span class="at">n=</span><span class="fu">n</span>())</span></code></pre></div>
+<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="review-of-multiple-linear-regression.html#cb96-1" tabindex="-1"></a>Bechdel <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(pass) <span class="sc">%&gt;%</span> <span class="fu">summarize</span>(<span class="at">meanROI =</span> <span class="fu">mean</span>(totalROI), <span class="at">n=</span><span class="fu">n</span>())</span></code></pre></div>
 <pre><code>## # A tibble: 2 × 3
 ##    pass meanROI     n
 ##   &lt;dbl&gt;   &lt;dbl&gt; &lt;int&gt;
@@ -1967,8 +1985,8 @@ totalROI = total return on investment (total gross divided by budget)</p>
 <p><span class="math display">\[
 \text{ROI}_{i}=\beta_{0}+\beta_{1}\textrm{YearSince1990}_{i} +\epsilon_{i} \quad \textrm{where} \quad \epsilon_{i}\sim \textrm{N}(0,\sigma^2).
 \]</span></p>
-<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="review-of-multiple-linear-regression.html#cb93-1" tabindex="-1"></a>M4 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data=</span>Bechdel, totalROI <span class="sc">~</span> yearsince1990)</span>
-<span id="cb93-2"><a href="review-of-multiple-linear-regression.html#cb93-2" tabindex="-1"></a><span class="fu">summary</span>(M4)</span></code></pre></div>
+<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="review-of-multiple-linear-regression.html#cb98-1" tabindex="-1"></a>M4 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data=</span>Bechdel, totalROI <span class="sc">~</span> yearsince1990)</span>
+<span id="cb98-2"><a href="review-of-multiple-linear-regression.html#cb98-2" tabindex="-1"></a><span class="fu">summary</span>(M4)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = totalROI ~ yearsince1990, data = Bechdel)
@@ -1987,14 +2005,14 @@ totalROI = total return on investment (total gross divided by budget)</p>
 ## Residual standard error: 9.804 on 298 degrees of freedom
 ## Multiple R-squared:  0.005274,   Adjusted R-squared:  0.001936 
 ## F-statistic:  1.58 on 1 and 298 DF,  p-value: 0.2097</code></pre>
-<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="review-of-multiple-linear-regression.html#cb95-1" tabindex="-1"></a><span class="fu">sum</span>(M4<span class="sc">$</span>residuals<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="review-of-multiple-linear-regression.html#cb100-1" tabindex="-1"></a><span class="fu">sum</span>(M4<span class="sc">$</span>residuals<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div>
 <pre><code>## [1] 28643.13</code></pre>
 <p><strong>M5</strong></p>
 <p><span class="math display">\[
 \text{ROI}_{i}=\beta_{0}+\beta_{1}\textrm{Pass}_{i}+\epsilon_{i} \quad \textrm{where} \quad \epsilon_{i}\sim \textrm{N}(0,\sigma^2).
 \]</span></p>
-<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="review-of-multiple-linear-regression.html#cb97-1" tabindex="-1"></a>M5 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data=</span>Bechdel, totalROI <span class="sc">~</span> pass)</span>
-<span id="cb97-2"><a href="review-of-multiple-linear-regression.html#cb97-2" tabindex="-1"></a><span class="fu">summary</span>(M5)</span></code></pre></div>
+<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="review-of-multiple-linear-regression.html#cb102-1" tabindex="-1"></a>M5 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">data=</span>Bechdel, totalROI <span class="sc">~</span> pass)</span>
+<span id="cb102-2"><a href="review-of-multiple-linear-regression.html#cb102-2" tabindex="-1"></a><span class="fu">summary</span>(M5)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = totalROI ~ pass, data = Bechdel)
@@ -2013,7 +2031,7 @@ totalROI = total return on investment (total gross divided by budget)</p>
 ## Residual standard error: 9.773 on 298 degrees of freedom
 ## Multiple R-squared:  0.01158,    Adjusted R-squared:  0.008262 
 ## F-statistic: 3.491 on 1 and 298 DF,  p-value: 0.06269</code></pre>
-<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="review-of-multiple-linear-regression.html#cb99-1" tabindex="-1"></a><span class="fu">sum</span>(M5<span class="sc">$</span>residuals<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="review-of-multiple-linear-regression.html#cb104-1" tabindex="-1"></a><span class="fu">sum</span>(M5<span class="sc">$</span>residuals<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div>
 <pre><code>## [1] 28461.6</code></pre>
 <p><strong>a) For model M4, show how to calculate each of the following quantities that appear in the model summary output, using the information given.</strong></p>
 <ul>
@@ -2057,7 +2075,7 @@ totalROI = total return on investment (total gross divided by budget)</p>
 <div id="interpret-standard-errors-t-statistics-residual-standard-error-r2-and-f-statistics-in-a-llsr-models-r-output." class="section level3 unnumbered hasAnchor">
 <h3>5. Interpret standard errors, t-statistics, residual standard error, <span class="math inline">\(R^2\)</span>, and F-statistics in a LLSR model’s R output.<a href="review-of-multiple-linear-regression.html#interpret-standard-errors-t-statistics-residual-standard-error-r2-and-f-statistics-in-a-llsr-models-r-output." class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><strong>Refer again to the output for Model M1</strong></p>
-<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="review-of-multiple-linear-regression.html#cb101-1" tabindex="-1"></a><span class="fu">summary</span>(M1)</span></code></pre></div>
+<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="review-of-multiple-linear-regression.html#cb106-1" tabindex="-1"></a><span class="fu">summary</span>(M1)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = totalROI ~ yearsince1990 + pass, data = Bechdel)
@@ -2094,28 +2112,8 @@ totalROI = total return on investment (total gross divided by budget)</p>
 <li><p>Suppose that we were to take two different samples of size 300 movies and fit model of the same form as M1. Let Q1 represent the expected Return on Investment for films that were produced in 1990 and failed the Bechdel test, using films in the first sample, and let Q2 represent the same quantity for films in the second sample. Would it be unusual for Q1 and Q2 to differ by 0.5? By 1? By 10? Explain your answer.</p></li>
 <li><p>Suppose that we were to take two different samples of size 300 movies and fit model of the same form as M1. Let R1 represent the expected yearly rate of change in Return on Investment, assuming Bechdel status is held constant, using movies in the first sample, and let R2 represent the same quantity for films in the second sample. Would it be unusual for R1 and R2 to differ by 0.5? By 1? By 10? Explain your answer.</p></li>
 <li><p>Suppose that we were to take two different films, produced in the same year, that both passed the Bechdel test. Would it be unusual for their ROI’s to differ by 0.5? By 1? By 10? Explain your answer.</p></li>
+<li><p>Assume that the estimates <span class="math inline">\(b_0\)</span>, <span class="math inline">\(b_1\)</span>, and <span class="math inline">\(b_2\)</span> in the model M1 R output were actually the true values of parameters <span class="math inline">\(\beta_1\)</span>, <span class="math inline">\(\beta_2\)</span>, and <span class="math inline">\(\beta_3\)</span>. Give an approximate 95% prediction interval for the ROI of a film made in 2000 that passes the Bechdel test. (You might also think about how the width of the interval would change if we were to remove the assumption stated in the first sentence, and instead treat these values as estimates, which they really are).</p></li>
 </ol>
-</div>
-<div id="practice-advanced-tasks" class="section level3 hasAnchor" number="1.5.1">
-<h3><span class="header-section-number">1.5.1</span> Practice Advanced Tasks<a href="review-of-multiple-linear-regression.html#practice-advanced-tasks" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<ol style="list-style-type: lower-alpha">
-<li><p>Assumption that the estimates <span class="math inline">\(b_0\)</span>, <span class="math inline">\(b_1\)</span>, and <span class="math inline">\(b_2\)</span> in the model M1 R output were actually the true values of parameters <span class="math inline">\(\beta_1\)</span>, <span class="math inline">\(\beta_2\)</span>, and <span class="math inline">\(\beta_3\)</span>. Give an approximate 95% prediction interval for the ROI of a film made in 2000 that passes the Bechdel test. (You might also think about how the width of the interval would change if we were to remove the assumption stated in the first sentence, and instead treat these values as estimates, which they really are).</p></li>
-<li><p>Consider a multiple regression model with response variable <span class="math inline">\(Y\)</span> and explanatory variables <span class="math inline">\(X_1\)</span> and <span class="math inline">\(X_2\)</span>. The model equation is</p></li>
-</ol>
-<p><span class="math display">\[\text{Y}_i = \beta_0 + \beta_1X_1+\beta_2X_2 + \epsilon_i, \text{ where } \epsilon_i\sim\mathcal{N}(0, \sigma^2)
-\]</span></p>
-<p>Histograms of the explanatory variables and their standard deviations are shown below.</p>
-<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="review-of-multiple-linear-regression.html#cb103-1" tabindex="-1"></a>P1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data=</span>df, <span class="fu">aes</span>(<span class="at">x=</span>X1)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">fill=</span><span class="st">&quot;blue&quot;</span>) <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">&quot;Distribution of X1&quot;</span>)</span>
-<span id="cb103-2"><a href="review-of-multiple-linear-regression.html#cb103-2" tabindex="-1"></a>P2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data=</span>df, <span class="fu">aes</span>(<span class="at">x=</span>X2)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">fill=</span><span class="st">&quot;blue&quot;</span>) <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">&quot;Distribution of X2&quot;</span>)</span>
-<span id="cb103-3"><a href="review-of-multiple-linear-regression.html#cb103-3" tabindex="-1"></a>P3 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data=</span>df, <span class="fu">aes</span>(<span class="at">x=</span>Y)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">fill=</span><span class="st">&quot;blue&quot;</span>) <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">&quot;Distribution of Y&quot;</span>)</span>
-<span id="cb103-4"><a href="review-of-multiple-linear-regression.html#cb103-4" tabindex="-1"></a><span class="fu">grid.arrange</span>(P1, P2, <span class="at">ncol=</span><span class="dv">1</span>)</span></code></pre></div>
-<p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-41-1.png" width="576" /></p>
-<p>The standard deviations of the two explanatory variables are shown below.</p>
-<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="review-of-multiple-linear-regression.html#cb104-1" tabindex="-1"></a><span class="fu">sd</span>(X1)</span></code></pre></div>
-<pre><code>## [1] 4.940104</code></pre>
-<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="review-of-multiple-linear-regression.html#cb106-1" tabindex="-1"></a><span class="fu">sd</span>(X2)</span></code></pre></div>
-<pre><code>## [1] 16.87209</code></pre>
-<p>Notice that there is much more variability in the distribution of <span class="math inline">\(X2\)</span> than <span class="math inline">\(X1\)</span>. Explain why this is not a violation of the constant variance assumption in a LLSR model. In your answer state clearly what the constant variance assumption says and explain why it is not necessarily violated in this situation.</p>
 
 </div>
 </div>

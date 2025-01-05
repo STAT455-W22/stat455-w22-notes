@@ -648,11 +648,11 @@ The mixed effects model suggests evidence of differences due to supplement, but 
 ## Practice Questions
 
 ```{r, echo=FALSE}
-plants <- read_csv("https://raw.githubusercontent.com/AndrewjSage/andrewjsage.github.io/master/Datasets/Plants.csv")
+plants <- read_csv("Plants.csv")
 ```
 
 ```{r, echo=FALSE}
-plants2 <- read_csv("https://raw.githubusercontent.com/AndrewjSage/andrewjsage.github.io/master/Datasets/Plants2.csv")
+plants2 <- read_csv("Plants2.csv")
 ```
 
 **Refer to the following scenarios to answer the questions in this section.**    

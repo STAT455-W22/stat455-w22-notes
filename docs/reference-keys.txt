@@ -67,7 +67,6 @@ anova-f-statistic
 final-model-residual-plots
 overall-conclusions
 practice-questions
-practice-advanced-tasks
 introduction-to-correlated-data
 introduction-to-correlated-data-1
 weight-gain-in-mice-experiment-design-1

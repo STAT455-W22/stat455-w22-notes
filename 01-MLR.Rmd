@@ -3,7 +3,7 @@
 
 **Chapter 1 Learning Outcomes**
 
-1. Identify violations of linear least squares regression (LLSR) assumptions based on descriptions of data collection.      
+1. Explain LLSR model assumptions and identify violations of these assumptions.       
 
 2. Interpret parameter estimates in LLSR models, including models with transformations and/or interactions.     
 
@@ -758,17 +758,53 @@ A situation like this, where adding a variable (such as year) to a model results
 
 ## Practice Questions
 
-### 1. Identify violations of linear least squares regression (LLSR) assumptions based on descriptions of data collection. {-}     
+### Explain LLSR model assumptions and identify violations of these assumptions.        {-}     
 
-All of the examples in this section have at least one violation of the LLSR assumptions for inference. Begin by identifying the response and explanatory variables. Then, identify which model assumption(s) are violated.
+a) All of the examples in this section have at least one violation of the LLSR assumptions for inference. Begin by identifying the response and explanatory variables. Then, identify which model assumption(s) are violated.
 
-* a) Low Birthweights. Researchers are attempting to see if socioeconomic status and parental stability are predictive of low birthweight. They classify a child as having a low birthweight if their birthweight is less than 2,500 grams.     
+* i) Low Birthweights. Researchers are attempting to see if socioeconomic status and parental stability are predictive of low birthweight. They classify a child as having a low birthweight if their birthweight is less than 2,500 grams.     
 
-* b) Clinical Trial I. A Phase II clinical trial is designed to compare the number of patients getting relief at different dose levels. 100 patients get dose A, 100 get dose B, and 100 get dose C.
+* ii) Clinical Trial I. A Phase II clinical trial is designed to compare the number of patients getting relief at different dose levels. 100 patients get dose A, 100 get dose B, and 100 get dose C.
 
-* c) Canoes and Zip Codes. For each of over 27,000 overnight permits for the Boundary Waters Canoe area, the zip code for the group leader has been translated to the distance traveled and socioeconomic data. Thus, for each zip code we can model the number of trips made as a function of distance traveled and various socioeconomic measures.     
+* iii) Canoes and Zip Codes. For each of over 27,000 overnight permits for the Boundary Waters Canoe area, the zip code for the group leader has been translated to the distance traveled and socioeconomic data. Thus, for each zip code we can model the number of trips made as a function of distance traveled and various socioeconomic measures.     
 
-* d) Clinical Trial II. A randomized clinical trial investigated postnatal depression and the use of an estrogen patch. Patients were randomly assigned to either use the patch or not. Depression scores were recorded on 6 different visits.     
+* iv) Clinical Trial II. A randomized clinical trial investigated postnatal depression and the use of an estrogen patch. Patients were randomly assigned to either use the patch or not. Depression scores were recorded on 6 different visits.     
+
+b) Consider a multiple regression model with response variable $Y$ and explanatory variables $X_1$ and $X_2$. The model equation is 
+
+\[\text{Y}_i = \beta_0 + \beta_1X_1+\beta_2X_2 + \epsilon_i, \text{ where } \epsilon_i\sim\mathcal{N}(0, \sigma^2)
+\]
+
+Histograms of the explanatory variables and their standard deviations are shown below. 
+
+```{r, echo=FALSE}
+X1 <- rnorm(100, 50, 5)
+X2 <- rnorm(100, 50, 15)
+Y <- rnorm(100, 25, 3)
+df <- data.frame(X1, X2, Y)
+```
+
+```{r}
+P1 <- ggplot(data=df, aes(x=X1)) + geom_histogram(fill="blue") + ggtitle("Distribution of X1")
+P2 <- ggplot(data=df, aes(x=X2)) + geom_histogram(fill="blue") + ggtitle("Distribution of X2")
+P3 <- ggplot(data=df, aes(x=Y)) + geom_histogram(fill="blue") + ggtitle("Distribution of Y")
+grid.arrange(P1, P2, ncol=1)
+```
+
+The standard deviations of the two explanatory variables are shown below. 
+
+```{r}
+sd(X1)
+```
+
+
+```{r}
+sd(X2)
+```
+
+Notice that there is much more variability in the distribution of $X2$ than $X1$. Explain why this is not a violation of the constant variance assumption in a LLSR model. In your answer state clearly what the constant variance assumption says and explain why it is not necessarily violated in this situation.   
+
+
 
 
 ### 2. Interpret parameter estimates in LLSR models, including models with transformations and/or interactions. {-}       
@@ -982,41 +1018,5 @@ d) Suppose that we were to take two different samples of size 300 movies and fit
 e) Suppose that we were to take two different films, produced in the same year, that both passed the Bechdel test. Would it be unusual for their ROI's to differ by 0.5? By 1? By 10? Explain your answer.     
 
 
-### Practice Advanced Tasks
-
-a) Assumption that the estimates $b_0$, $b_1$, and $b_2$ in the model M1 R output were actually the true values of parameters $\beta_1$, $\beta_2$, and $\beta_3$. Give an approximate 95% prediction interval for the ROI of a film made in 2000 that passes the Bechdel test. (You might also think about how the width of the interval would change if we were to remove the assumption stated in the first sentence, and instead treat these values as estimates, which they really are).     
-
-b) Consider a multiple regression model with response variable $Y$ and explanatory variables $X_1$ and $X_2$. The model equation is 
-
-\[\text{Y}_i = \beta_0 + \beta_1X_1+\beta_2X_2 + \epsilon_i, \text{ where } \epsilon_i\sim\mathcal{N}(0, \sigma^2)
-\]
-
-Histograms of the explanatory variables and their standard deviations are shown below. 
-
-```{r, echo=FALSE}
-X1 <- rnorm(100, 50, 5)
-X2 <- rnorm(100, 50, 15)
-Y <- rnorm(100, 25, 3)
-df <- data.frame(X1, X2, Y)
-```
-
-```{r}
-P1 <- ggplot(data=df, aes(x=X1)) + geom_histogram(fill="blue") + ggtitle("Distribution of X1")
-P2 <- ggplot(data=df, aes(x=X2)) + geom_histogram(fill="blue") + ggtitle("Distribution of X2")
-P3 <- ggplot(data=df, aes(x=Y)) + geom_histogram(fill="blue") + ggtitle("Distribution of Y")
-grid.arrange(P1, P2, ncol=1)
-```
-
-The standard deviations of the two explanatory variables are shown below. 
-
-```{r}
-sd(X1)
-```
-
-
-```{r}
-sd(X2)
-```
-
-Notice that there is much more variability in the distribution of $X2$ than $X1$. Explain why this is not a violation of the constant variance assumption in a LLSR model. In your answer state clearly what the constant variance assumption says and explain why it is not necessarily violated in this situation.   
+f) Assume that the estimates $b_0$, $b_1$, and $b_2$ in the model M1 R output were actually the true values of parameters $\beta_1$, $\beta_2$, and $\beta_3$. Give an approximate 95% prediction interval for the ROI of a film made in 2000 that passes the Bechdel test. (You might also think about how the width of the interval would change if we were to remove the assumption stated in the first sentence, and instead treat these values as estimates, which they really are).     
 
