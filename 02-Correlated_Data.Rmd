@@ -8,11 +8,11 @@
 
 8. Interpret variance component estimates ($\sigma$ and $\sigma_u$) in linear mixed effects (LME) models.          
 
-9. Compare the size of different variance component estimates given a LME model and a small set of data (i.e. say whether $\sigma_u$, or $\sigma$ will larger).        
+9. Determine how standard errors in a LME model would compare to the standard errors we would get if we used a LLSR model on the same data.      
 
-10. Determine how standard errors in a LME model would compare to the standard errors we would get if we used a LLSR model on the same data.      
+10. Determine how changes in sample size and/or experimental design will impact standard errors, confidence intervals, and p-values in a LME model.      
 
-11. Determine how changes in sample size and/or experimental design will impact standard errors, confidence intervals, and p-values in a LME model.      
+11. Compare the size of different variance component estimates given a LME model and a small set of data (i.e. say whether $\sigma_u$, or $\sigma$ will larger).        
 
 ```{r}
 library(tidyverse)
@@ -743,7 +743,7 @@ summary(M1)
 Give the estimates of $\sigma$ and $\sigma_u$. Which is bigger and what does that tell us?    
 
 
-### 10. Determine how standard errors in a LME model would compare to the standard errors we would get if we used a LLSR model on the same data.   {-} 
+### 9. Determine how standard errors in a LME model would compare to the standard errors we would get if we used a LLSR model on the same data.   {-} 
   
 
 **a)** 
@@ -775,7 +775,7 @@ If we fit a linear least squares regression model with brand and amount as expla
 Explain why it would not make sense to group the data by tray and fit a LLSR model in scenario 2?    
 
 
-### 11. Determine how changes in sample size and/or experimental design will impact standard errors, confidence intervals, and p-values in a LME model. {-}      
+### 10. Determine how changes in sample size and/or experimental design will impact standard errors, confidence intervals, and p-values in a LME model. {-}      
 
 **a)** 
 
@@ -790,7 +790,7 @@ In Scenario 2, what is the relevant sample size associated with brand variable? 
 Consider the experimental designs in Questions 1 and 2. If you were designing the experiment and could choose either design, at equal cost, which would you choose? Why?
 
 
-### 9. Compare the size of different variance component estimates given a LME model and a small set of data (i.e. say whether $\sigma_u$, or $\sigma$ will be larger).    {-}      
+### 11. Compare the size of different variance component estimates given a LME model and a small set of data (i.e. say whether $\sigma_u$, or $\sigma$ will be larger).    {-}      
 
 **a)** 
 

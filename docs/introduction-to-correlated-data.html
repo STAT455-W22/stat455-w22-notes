@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 2 Introduction to Correlated Data | Stat 455: Advanced Statistical Modeling Notes</title>
   <meta name="description" content="Chapter 2 Introduction to Correlated Data | Stat 455: Advanced Statistical Modeling Notes" />
-  <meta name="generator" content="bookdown 0.40 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.37 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 2 Introduction to Correlated Data | Stat 455: Advanced Statistical Modeling Notes" />
   <meta property="og:type" content="book" />
@@ -22,7 +22,7 @@
 
 
 
-<meta name="date" content="2025-01-05" />
+<meta name="date" content="2025-01-13" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -57,7 +57,7 @@
 
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -243,9 +243,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#identify-the-response-variable-and-fixed-and-random-effects-associated-with-a-given-set-of-data."><i class="fa fa-check"></i>7. Identify the response variable and fixed and random effects associated with a given set of data.</a></li>
 <li class="chapter" data-level="" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#interpret-variance-component-estimates-sigma-and-sigma_u-in-linear-mixed-effects-lme-models."><i class="fa fa-check"></i>8. Interpret variance component estimates (<span class="math inline">\(\sigma\)</span> and <span class="math inline">\(\sigma_u\)</span>) in linear mixed effects (LME) models.</a></li>
-<li class="chapter" data-level="" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#determine-how-standard-errors-in-a-lme-model-would-compare-to-the-standard-errors-we-would-get-if-we-used-a-llsr-model-on-the-same-data."><i class="fa fa-check"></i>10. Determine how standard errors in a LME model would compare to the standard errors we would get if we used a LLSR model on the same data.</a></li>
-<li class="chapter" data-level="" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#determine-how-changes-in-sample-size-andor-experimental-design-will-impact-standard-errors-confidence-intervals-and-p-values-in-a-lme-model."><i class="fa fa-check"></i>11. Determine how changes in sample size and/or experimental design will impact standard errors, confidence intervals, and p-values in a LME model.</a></li>
-<li class="chapter" data-level="" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#compare-the-size-of-different-variance-component-estimates-given-a-lme-model-and-a-small-set-of-data-i.e.-say-whether-sigma_u-or-sigma-will-be-larger."><i class="fa fa-check"></i>9. Compare the size of different variance component estimates given a LME model and a small set of data (i.e. say whether <span class="math inline">\(\sigma_u\)</span>, or <span class="math inline">\(\sigma\)</span> will be larger).</a></li>
+<li class="chapter" data-level="" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#determine-how-standard-errors-in-a-lme-model-would-compare-to-the-standard-errors-we-would-get-if-we-used-a-llsr-model-on-the-same-data."><i class="fa fa-check"></i>9. Determine how standard errors in a LME model would compare to the standard errors we would get if we used a LLSR model on the same data.</a></li>
+<li class="chapter" data-level="" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#determine-how-changes-in-sample-size-andor-experimental-design-will-impact-standard-errors-confidence-intervals-and-p-values-in-a-lme-model."><i class="fa fa-check"></i>10. Determine how changes in sample size and/or experimental design will impact standard errors, confidence intervals, and p-values in a LME model.</a></li>
+<li class="chapter" data-level="" data-path="introduction-to-correlated-data.html"><a href="introduction-to-correlated-data.html#compare-the-size-of-different-variance-component-estimates-given-a-lme-model-and-a-small-set-of-data-i.e.-say-whether-sigma_u-or-sigma-will-be-larger."><i class="fa fa-check"></i>11. Compare the size of different variance component estimates given a LME model and a small set of data (i.e. say whether <span class="math inline">\(\sigma_u\)</span>, or <span class="math inline">\(\sigma\)</span> will be larger).</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="multilevel-models.html"><a href="multilevel-models.html"><i class="fa fa-check"></i><b>3</b> Multilevel Models</a>
@@ -696,9 +696,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>Identify the response variable and fixed and random effects associated with a given set of data.</p></li>
 <li><p>Interpret parameter estimates, confidence intervals, and hypothesis tests associated with fixed effects in LME models.</p></li>
 <li><p>Interpret variance component estimates (<span class="math inline">\(\sigma\)</span> and <span class="math inline">\(\sigma_u\)</span>) in linear mixed effects (LME) models.</p></li>
-<li><p>Compare the size of different variance component estimates given a LME model and a small set of data (i.e. say whether <span class="math inline">\(\sigma_u\)</span>, or <span class="math inline">\(\sigma\)</span> will larger).</p></li>
 <li><p>Determine how standard errors in a LME model would compare to the standard errors we would get if we used a LLSR model on the same data.</p></li>
 <li><p>Determine how changes in sample size and/or experimental design will impact standard errors, confidence intervals, and p-values in a LME model.</p></li>
+<li><p>Compare the size of different variance component estimates given a LME model and a small set of data (i.e. say whether <span class="math inline">\(\sigma_u\)</span>, or <span class="math inline">\(\sigma\)</span> will larger).</p></li>
 </ol>
 <div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="introduction-to-correlated-data.html#cb108-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb108-2"><a href="introduction-to-correlated-data.html#cb108-2" tabindex="-1"></a><span class="fu">library</span>(lme4)</span>
@@ -1632,7 +1632,7 @@ Y_{ij}  = \beta_{0}+\beta_1\textrm{Brand2}_{ij} + \alpha\textrm{Amount}_{ij} + t
 <p>Give the estimates of <span class="math inline">\(\sigma\)</span> and <span class="math inline">\(\sigma_u\)</span>. Which is bigger and what does that tell us?</p>
 </div>
 <div id="determine-how-standard-errors-in-a-lme-model-would-compare-to-the-standard-errors-we-would-get-if-we-used-a-llsr-model-on-the-same-data." class="section level3 unnumbered hasAnchor">
-<h3>10. Determine how standard errors in a LME model would compare to the standard errors we would get if we used a LLSR model on the same data.<a href="introduction-to-correlated-data.html#determine-how-standard-errors-in-a-lme-model-would-compare-to-the-standard-errors-we-would-get-if-we-used-a-llsr-model-on-the-same-data." class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<h3>9. Determine how standard errors in a LME model would compare to the standard errors we would get if we used a LLSR model on the same data.<a href="introduction-to-correlated-data.html#determine-how-standard-errors-in-a-lme-model-would-compare-to-the-standard-errors-we-would-get-if-we-used-a-llsr-model-on-the-same-data." class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><strong>a)</strong></p>
 <p>In each of scenarios 1 and 2, suppose we inappropriately fit a LLSR model of the form<br />
 <span class="math display">\[
@@ -1662,7 +1662,7 @@ Y_{ij}  = \beta_{0}+\beta_1\textrm{Brand2}_{ij} + \alpha\textrm{Amount}_{ij}  + 
 <p>Explain why it would not make sense to group the data by tray and fit a LLSR model in scenario 2?</p>
 </div>
 <div id="determine-how-changes-in-sample-size-andor-experimental-design-will-impact-standard-errors-confidence-intervals-and-p-values-in-a-lme-model." class="section level3 unnumbered hasAnchor">
-<h3>11. Determine how changes in sample size and/or experimental design will impact standard errors, confidence intervals, and p-values in a LME model.<a href="introduction-to-correlated-data.html#determine-how-changes-in-sample-size-andor-experimental-design-will-impact-standard-errors-confidence-intervals-and-p-values-in-a-lme-model." class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<h3>10. Determine how changes in sample size and/or experimental design will impact standard errors, confidence intervals, and p-values in a LME model.<a href="introduction-to-correlated-data.html#determine-how-changes-in-sample-size-andor-experimental-design-will-impact-standard-errors-confidence-intervals-and-p-values-in-a-lme-model." class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><strong>a)</strong></p>
 <p>In Scenario 1, explain why it is inappropriate to think of our sample size as being 96 plants in this scenario. What are the appropriate observational units, and what is the relevant sample size for determining the effects of brand and amount?</p>
 <p><strong>b)</strong></p>
@@ -1671,7 +1671,7 @@ Y_{ij}  = \beta_{0}+\beta_1\textrm{Brand2}_{ij} + \alpha\textrm{Amount}_{ij}  + 
 <p>Consider the experimental designs in Questions 1 and 2. If you were designing the experiment and could choose either design, at equal cost, which would you choose? Why?</p>
 </div>
 <div id="compare-the-size-of-different-variance-component-estimates-given-a-lme-model-and-a-small-set-of-data-i.e.-say-whether-sigma_u-or-sigma-will-be-larger." class="section level3 unnumbered hasAnchor">
-<h3>9. Compare the size of different variance component estimates given a LME model and a small set of data (i.e. say whether <span class="math inline">\(\sigma_u\)</span>, or <span class="math inline">\(\sigma\)</span> will be larger).<a href="introduction-to-correlated-data.html#compare-the-size-of-different-variance-component-estimates-given-a-lme-model-and-a-small-set-of-data-i.e.-say-whether-sigma_u-or-sigma-will-be-larger." class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<h3>11. Compare the size of different variance component estimates given a LME model and a small set of data (i.e. say whether <span class="math inline">\(\sigma_u\)</span>, or <span class="math inline">\(\sigma\)</span> will be larger).<a href="introduction-to-correlated-data.html#compare-the-size-of-different-variance-component-estimates-given-a-lme-model-and-a-small-set-of-data-i.e.-say-whether-sigma_u-or-sigma-will-be-larger." class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><strong>a)</strong></p>
 <p>Consider the simplified version of the plant experiment shown below. Here, there are no fixed effects, and we simply seek to estimate the average height of the plants and measure the amount of variability associated with plants and trays. <strong>Now note that unlike the previous diagrams, the values of the response variable, growth, are shown.</strong></p>
 <p><img src="Plantsa.png" width="75%" /></p>
