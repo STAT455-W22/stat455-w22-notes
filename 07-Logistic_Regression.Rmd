@@ -37,8 +37,6 @@ library(openintro)
    
 ## Binomial Logistic Regression
 
-In Stat 255, we learned about Logistic regression models for binary response data. Please review sections 8.1-8.3 in the [Stat 255 notes](https://bookdown.org/ajsage/statistics_for_data_science_notes/) prior to proceeding. 
-
 ### Binary Response Data
 
 We can use logistic regression to model binary responses, such as whether or not a student person defaults on a credit card payment, as in the dataset below. 
@@ -109,22 +107,22 @@ For $n = 6, p=0.6$,
 \[ Pr(Y=0) = {6\choose 0}0.6^0(0.4)^{6} = 1(0.4)^6\approx(0.004)
 \]
 
-\[ Pr(Y=1) = {6\choose 1}0.6^1(0.4)^{5} = 6(.6)(0.4)^5\approx(0.006)
+\[ Pr(Y=1) = {6\choose 1}0.6^1(0.4)^{5} = 6(0.6)(0.4)^5\approx(0.006)
 \]
 
-\[ Pr(Y=2) = {6\choose 2}0.6^2(0.4)^{4} = 15(.6)^2(0.4)^4\approx(0.1382)
+\[ Pr(Y=2) = {6\choose 2}0.6^2(0.4)^{4} = 15(0.6)^2(0.4)^4\approx(0.1382)
 \]
 
-\[ Pr(Y=3) = {6\choose 3}0.6^3(0.4)^{3} = 20(.6)^3(0.4)^3\approx(0.2765)
+\[ Pr(Y=3) = {6\choose 3}0.6^3(0.4)^{3} = 20(0.6)^3(0.4)^3\approx(0.2765)
 \]
 
-\[ Pr(Y=4) = {6\choose 4}0.6^4(0.4)^{2} = 15(.6)^4(0.4)^2\approx(0.3110)
+\[ Pr(Y=4) = {6\choose 4}0.6^4(0.4)^{2} = 15(0.6)^4(0.4)^2\approx(0.3110)
 \]
 
-\[ Pr(Y=5) = {6\choose 5}0.6^5(0.4)^{1} = 6(.6)^5(0.4)^1\approx(0.1866)
+\[ Pr(Y=5) = {6\choose 5}0.6^5(0.4)^{1} = 6(0.6)^5(0.4)^1\approx(0.1866)
 \]
 
-\[ Pr(Y=5) = {6\choose 6}0.6^6(0.4)^{0} = 1(.6)^6(0.4)^0\approx(0.0467)
+\[ Pr(Y=5) = {6\choose 6}0.6^6(0.4)^{0} = 1(0.6)^6(0.4)^0\approx(0.0467)
 \]
 
 

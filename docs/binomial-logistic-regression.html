@@ -710,7 +710,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb440-10"><a href="binomial-logistic-regression.html#cb440-10" tabindex="-1"></a><span class="fu">library</span>(openintro)</span></code></pre></div>
 <div id="binomial-logistic-regression-1" class="section level2 hasAnchor" number="7.1">
 <h2><span class="header-section-number">7.1</span> Binomial Logistic Regression<a href="binomial-logistic-regression.html#binomial-logistic-regression-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>In Stat 255, we learned about Logistic regression models for binary response data. Please review sections 8.1-8.3 in the <a href="https://bookdown.org/ajsage/statistics_for_data_science_notes/">Stat 255 notes</a> prior to proceeding.</p>
 <div id="binary-response-data" class="section level3 hasAnchor" number="7.1.1">
 <h3><span class="header-section-number">7.1.1</span> Binary Response Data<a href="binomial-logistic-regression.html#binary-response-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>We can use logistic regression to model binary responses, such as whether or not a student person defaults on a credit card payment, as in the dataset below.</p>
@@ -1106,17 +1105,17 @@ undamaged
 <p>For <span class="math inline">\(n = 6, p=0.6\)</span>,</p>
 <p><span class="math display">\[ Pr(Y=0) = {6\choose 0}0.6^0(0.4)^{6} = 1(0.4)^6\approx(0.004)
 \]</span></p>
-<p><span class="math display">\[ Pr(Y=1) = {6\choose 1}0.6^1(0.4)^{5} = 6(.6)(0.4)^5\approx(0.006)
+<p><span class="math display">\[ Pr(Y=1) = {6\choose 1}0.6^1(0.4)^{5} = 6(0.6)(0.4)^5\approx(0.006)
 \]</span></p>
-<p><span class="math display">\[ Pr(Y=2) = {6\choose 2}0.6^2(0.4)^{4} = 15(.6)^2(0.4)^4\approx(0.1382)
+<p><span class="math display">\[ Pr(Y=2) = {6\choose 2}0.6^2(0.4)^{4} = 15(0.6)^2(0.4)^4\approx(0.1382)
 \]</span></p>
-<p><span class="math display">\[ Pr(Y=3) = {6\choose 3}0.6^3(0.4)^{3} = 20(.6)^3(0.4)^3\approx(0.2765)
+<p><span class="math display">\[ Pr(Y=3) = {6\choose 3}0.6^3(0.4)^{3} = 20(0.6)^3(0.4)^3\approx(0.2765)
 \]</span></p>
-<p><span class="math display">\[ Pr(Y=4) = {6\choose 4}0.6^4(0.4)^{2} = 15(.6)^4(0.4)^2\approx(0.3110)
+<p><span class="math display">\[ Pr(Y=4) = {6\choose 4}0.6^4(0.4)^{2} = 15(0.6)^4(0.4)^2\approx(0.3110)
 \]</span></p>
-<p><span class="math display">\[ Pr(Y=5) = {6\choose 5}0.6^5(0.4)^{1} = 6(.6)^5(0.4)^1\approx(0.1866)
+<p><span class="math display">\[ Pr(Y=5) = {6\choose 5}0.6^5(0.4)^{1} = 6(0.6)^5(0.4)^1\approx(0.1866)
 \]</span></p>
-<p><span class="math display">\[ Pr(Y=5) = {6\choose 6}0.6^6(0.4)^{0} = 1(.6)^6(0.4)^0\approx(0.0467)
+<p><span class="math display">\[ Pr(Y=5) = {6\choose 6}0.6^6(0.4)^{0} = 1(0.6)^6(0.4)^0\approx(0.0467)
 \]</span></p>
 <p>In a binomial distribution, the mean is <span class="math inline">\(np\)</span>,</p>
 <p>and the variance is <span class="math inline">\(np(1-p)\)</span>.</p>
