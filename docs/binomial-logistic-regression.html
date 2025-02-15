@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 7 Binomial Logistic Regression | Stat 455: Advanced Statistical Modeling Notes</title>
   <meta name="description" content="Chapter 7 Binomial Logistic Regression | Stat 455: Advanced Statistical Modeling Notes" />
-  <meta name="generator" content="bookdown 0.37 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.40 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 7 Binomial Logistic Regression | Stat 455: Advanced Statistical Modeling Notes" />
   <meta property="og:type" content="book" />
@@ -22,7 +22,7 @@
 
 
 
-<meta name="date" content="2025-01-13" />
+<meta name="date" content="2025-02-14" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -57,7 +57,7 @@
 
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -540,29 +540,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="7.1.1" data-path="binomial-logistic-regression.html"><a href="binomial-logistic-regression.html#binary-response-data"><i class="fa fa-check"></i><b>7.1.1</b> Binary Response Data</a></li>
 <li class="chapter" data-level="7.1.2" data-path="binomial-logistic-regression.html"><a href="binomial-logistic-regression.html#binomial-response-data"><i class="fa fa-check"></i><b>7.1.2</b> Binomial Response Data</a></li>
-<li class="chapter" data-level="7.1.3" data-path="binomial-logistic-regression.html"><a href="binomial-logistic-regression.html#wisconsin-election-data"><i class="fa fa-check"></i><b>7.1.3</b> 2020 Wisconsin Election Data</a></li>
-<li class="chapter" data-level="7.1.4" data-path="binomial-logistic-regression.html"><a href="binomial-logistic-regression.html#correlation-between-explanatory-variables"><i class="fa fa-check"></i><b>7.1.4</b> Correlation Between Explanatory Variables</a></li>
-<li class="chapter" data-level="7.1.5" data-path="binomial-logistic-regression.html"><a href="binomial-logistic-regression.html#modeling-number-of-votes"><i class="fa fa-check"></i><b>7.1.5</b> Modeling Number of Votes</a></li>
-<li class="chapter" data-level="7.1.6" data-path="binomial-logistic-regression.html"><a href="binomial-logistic-regression.html#the-binomial-distribution"><i class="fa fa-check"></i><b>7.1.6</b> The Binomial Distribution</a></li>
-<li class="chapter" data-level="7.1.7" data-path="binomial-logistic-regression.html"><a href="binomial-logistic-regression.html#binomial-distribution-for-n4-p0.6"><i class="fa fa-check"></i><b>7.1.7</b> Binomial Distribution for <span class="math inline">\(n=4, p=0.6\)</span></a></li>
-<li class="chapter" data-level="7.1.8" data-path="binomial-logistic-regression.html"><a href="binomial-logistic-regression.html#more-binomial-distributions"><i class="fa fa-check"></i><b>7.1.8</b> More Binomial Distributions</a></li>
-<li class="chapter" data-level="7.1.9" data-path="binomial-logistic-regression.html"><a href="binomial-logistic-regression.html#connecting-expected-response-to-explatory-variables-1"><i class="fa fa-check"></i><b>7.1.9</b> Connecting Expected Response to Explatory Variables</a></li>
-<li class="chapter" data-level="7.1.10" data-path="binomial-logistic-regression.html"><a href="binomial-logistic-regression.html#odds-and-odds-ratio"><i class="fa fa-check"></i><b>7.1.10</b> Odds and Odds Ratio</a></li>
-<li class="chapter" data-level="7.1.11" data-path="binomial-logistic-regression.html"><a href="binomial-logistic-regression.html#interpreting-regression-coefficients"><i class="fa fa-check"></i><b>7.1.11</b> Interpreting Regression Coefficients</a></li>
-<li class="chapter" data-level="7.1.12" data-path="binomial-logistic-regression.html"><a href="binomial-logistic-regression.html#binomial-logistic-regression-assumptions"><i class="fa fa-check"></i><b>7.1.12</b> Binomial Logistic Regression Assumptions</a></li>
+<li class="chapter" data-level="7.1.3" data-path="binomial-logistic-regression.html"><a href="binomial-logistic-regression.html#challenger-o-rings-data"><i class="fa fa-check"></i><b>7.1.3</b> Challenger O-Rings Data</a></li>
+<li class="chapter" data-level="7.1.4" data-path="binomial-logistic-regression.html"><a href="binomial-logistic-regression.html#modeling-number-damaged"><i class="fa fa-check"></i><b>7.1.4</b> Modeling Number Damaged</a></li>
+<li class="chapter" data-level="7.1.5" data-path="binomial-logistic-regression.html"><a href="binomial-logistic-regression.html#the-binomial-distribution"><i class="fa fa-check"></i><b>7.1.5</b> The Binomial Distribution</a></li>
+<li class="chapter" data-level="7.1.6" data-path="binomial-logistic-regression.html"><a href="binomial-logistic-regression.html#binomial-distribution-for-n6-p0.6"><i class="fa fa-check"></i><b>7.1.6</b> Binomial Distribution for <span class="math inline">\(n=6, p=0.6\)</span></a></li>
+<li class="chapter" data-level="7.1.7" data-path="binomial-logistic-regression.html"><a href="binomial-logistic-regression.html#more-binomial-distributions"><i class="fa fa-check"></i><b>7.1.7</b> More Binomial Distributions</a></li>
+<li class="chapter" data-level="7.1.8" data-path="binomial-logistic-regression.html"><a href="binomial-logistic-regression.html#connecting-expected-response-to-explatory-variables-1"><i class="fa fa-check"></i><b>7.1.8</b> Connecting Expected Response to Explatory Variables</a></li>
+<li class="chapter" data-level="7.1.9" data-path="binomial-logistic-regression.html"><a href="binomial-logistic-regression.html#odds-and-odds-ratio"><i class="fa fa-check"></i><b>7.1.9</b> Odds and Odds Ratio</a></li>
+<li class="chapter" data-level="7.1.10" data-path="binomial-logistic-regression.html"><a href="binomial-logistic-regression.html#interpreting-regression-coefficients"><i class="fa fa-check"></i><b>7.1.10</b> Interpreting Regression Coefficients</a></li>
+<li class="chapter" data-level="7.1.11" data-path="binomial-logistic-regression.html"><a href="binomial-logistic-regression.html#binomial-logistic-regression-assumptions"><i class="fa fa-check"></i><b>7.1.11</b> Binomial Logistic Regression Assumptions</a></li>
 </ul></li>
-<li class="chapter" data-level="7.2" data-path="binomial-logistic-regression.html"><a href="binomial-logistic-regression.html#model-for-wisconsin-vote"><i class="fa fa-check"></i><b>7.2</b> Model for Wisconsin Vote</a>
+<li class="chapter" data-level="7.2" data-path="binomial-logistic-regression.html"><a href="binomial-logistic-regression.html#model-for-challenger-disaster-o-rings"><i class="fa fa-check"></i><b>7.2</b> Model for Challenger Disaster O-rings</a>
 <ul>
-<li class="chapter" data-level="7.2.1" data-path="binomial-logistic-regression.html"><a href="binomial-logistic-regression.html#an-initial-model"><i class="fa fa-check"></i><b>7.2.1</b> An Initial Model</a></li>
+<li class="chapter" data-level="7.2.1" data-path="binomial-logistic-regression.html"><a href="binomial-logistic-regression.html#binomial-logistic-model-for-o-rings"><i class="fa fa-check"></i><b>7.2.1</b> Binomial Logistic Model for O-rings</a></li>
 <li class="chapter" data-level="7.2.2" data-path="binomial-logistic-regression.html"><a href="binomial-logistic-regression.html#checking-linearity-assumption"><i class="fa fa-check"></i><b>7.2.2</b> Checking Linearity Assumption</a></li>
 <li class="chapter" data-level="7.2.3" data-path="binomial-logistic-regression.html"><a href="binomial-logistic-regression.html#overdispersion-in-binomial-counts"><i class="fa fa-check"></i><b>7.2.3</b> Overdispersion in Binomial Counts</a></li>
 <li class="chapter" data-level="7.2.4" data-path="binomial-logistic-regression.html"><a href="binomial-logistic-regression.html#residuals-for-binomial-logistic-regression"><i class="fa fa-check"></i><b>7.2.4</b> Residuals for Binomial Logistic Regression</a></li>
 <li class="chapter" data-level="7.2.5" data-path="binomial-logistic-regression.html"><a href="binomial-logistic-regression.html#quasi-binomial-model"><i class="fa fa-check"></i><b>7.2.5</b> Quasi-Binomial Model</a></li>
-<li class="chapter" data-level="7.2.6" data-path="binomial-logistic-regression.html"><a href="binomial-logistic-regression.html#model-with-all-explanatory-variables"><i class="fa fa-check"></i><b>7.2.6</b> Model with All Explanatory Variables</a></li>
-<li class="chapter" data-level="7.2.7" data-path="binomial-logistic-regression.html"><a href="binomial-logistic-regression.html#tests-for-significance-of-model-coefficients"><i class="fa fa-check"></i><b>7.2.7</b> Tests for Significance of Model Coefficients</a></li>
-<li class="chapter" data-level="7.2.8" data-path="binomial-logistic-regression.html"><a href="binomial-logistic-regression.html#drop-in-deviance-test-2"><i class="fa fa-check"></i><b>7.2.8</b> Drop in Deviance Test</a></li>
-<li class="chapter" data-level="7.2.9" data-path="binomial-logistic-regression.html"><a href="binomial-logistic-regression.html#deviance-residual-plot"><i class="fa fa-check"></i><b>7.2.9</b> Deviance Residual Plot</a></li>
-<li class="chapter" data-level="7.2.10" data-path="binomial-logistic-regression.html"><a href="binomial-logistic-regression.html#llsr-vs-binomial-logistic-regression"><i class="fa fa-check"></i><b>7.2.10</b> LLSR vs Binomial Logistic Regression</a></li>
+<li class="chapter" data-level="7.2.6" data-path="binomial-logistic-regression.html"><a href="binomial-logistic-regression.html#deviance-residual-plot"><i class="fa fa-check"></i><b>7.2.6</b> Deviance Residual Plot</a></li>
+<li class="chapter" data-level="7.2.7" data-path="binomial-logistic-regression.html"><a href="binomial-logistic-regression.html#llsr-vs-binomial-logistic-regression"><i class="fa fa-check"></i><b>7.2.7</b> LLSR vs Binomial Logistic Regression</a></li>
 </ul></li>
 <li class="chapter" data-level="7.3" data-path="binomial-logistic-regression.html"><a href="binomial-logistic-regression.html#maximum-likelihood-estimation"><i class="fa fa-check"></i><b>7.3</b> Maximum Likelihood Estimation</a>
 <ul>
@@ -710,7 +706,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb440-6"><a href="binomial-logistic-regression.html#cb440-6" tabindex="-1"></a><span class="fu">library</span>(pander)</span>
 <span id="cb440-7"><a href="binomial-logistic-regression.html#cb440-7" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb440-8"><a href="binomial-logistic-regression.html#cb440-8" tabindex="-1"></a><span class="fu">library</span>(gridExtra)</span>
-<span id="cb440-9"><a href="binomial-logistic-regression.html#cb440-9" tabindex="-1"></a><span class="fu">library</span>(corrplot)</span></code></pre></div>
+<span id="cb440-9"><a href="binomial-logistic-regression.html#cb440-9" tabindex="-1"></a><span class="fu">library</span>(corrplot)</span>
+<span id="cb440-10"><a href="binomial-logistic-regression.html#cb440-10" tabindex="-1"></a><span class="fu">library</span>(openintro)</span></code></pre></div>
 <div id="binomial-logistic-regression-1" class="section level2 hasAnchor" number="7.1">
 <h2><span class="header-section-number">7.1</span> Binomial Logistic Regression<a href="binomial-logistic-regression.html#binomial-logistic-regression-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>In Stat 255, we learned about Logistic regression models for binary response data. Please review sections 8.1-8.3 in the <a href="https://bookdown.org/ajsage/statistics_for_data_science_notes/">Stat 255 notes</a> prior to proceeding.</p>
@@ -740,137 +737,424 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
 <li>Number of people who vote for a candidate in election our of total number of voters.</li>
 </ol>
-<p>We’ll refer to this kind of regression as <strong>Binomial Logistic Regression</strong>, though the term <strong>logistic regression</strong> is used somewhat abmiguously and is sometimes applied to this context as well.</p>
+<p>We’ll refer to this kind of regression as <strong>Binomial Logistic Regression</strong>, though the term <strong>logistic regression</strong> is used somewhat ambiguously and is sometimes applied to this context as well.</p>
 </div>
-<div id="wisconsin-election-data" class="section level3 hasAnchor" number="7.1.3">
-<h3><span class="header-section-number">7.1.3</span> 2020 Wisconsin Election Data<a href="binomial-logistic-regression.html#wisconsin-election-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>We’ll work with data on the 2020 presidential election in the state of Wisconsin. Each row of the dataset represents a county in Wisconsin. Variables include:</p>
-<ul>
-<li><code>County</code> - name of the county<br />
-</li>
-<li><code>Rvotes</code> - number of votes for Republican candidate (Donald Trump)<br />
-</li>
-<li><code>Dvotes</code> - number of votes for Democratic candidate (Joe Biden)<br />
-</li>
-<li><code>PctD</code> - percentage of 2-party vote that went to Biden (i.e. <code>Rvotes</code>/(<code>Rvotes</code> + <code>Dvotes</code>))<br />
-</li>
-<li><code>College</code> - percentage of residents with a college degree<br />
-</li>
-<li><code>Unemployment</code> - unemployment rate<br />
-</li>
-<li><code>WhitePct</code> - percentage of white residents<br />
-</li>
-<li><code>COVID_DeathRate</code> - number of deaths from covid-19 per 100,000 residents<br />
-</li>
-<li><code>Income</code> - median household income</li>
-</ul>
-<p>All variables were recorded at the time of the election.</p>
-<div class="sourceCode" id="cb443"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb443-1"><a href="binomial-logistic-regression.html#cb443-1" tabindex="-1"></a>Wisconsin <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;WisconsinVote.csv&quot;</span>)</span>
-<span id="cb443-2"><a href="binomial-logistic-regression.html#cb443-2" tabindex="-1"></a><span class="fu">head</span>(Wisconsin, <span class="dv">10</span>)</span></code></pre></div>
-<pre><code>## # A tibble: 10 × 10
-##     ...1 County          Rvotes Dvotes  PctD College Unemployment WhitePct
-##    &lt;dbl&gt; &lt;chr&gt;            &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;        &lt;dbl&gt;    &lt;dbl&gt;
-##  1     1 Adams County      7362   4329  37.0    12.4          5.2     93.8
-##  2     2 Ashland County    3841   4801  55.6    21.1          4.8     83.8
-##  3     3 Barron County    15803   9194  36.8    19.9          4       95.3
-##  4     4 Bayfield County   4617   6147  57.1    30.5          5.6     85.4
-##  5     5 Brown County     75871  65511  46.3    29.6          3.1     87.8
-##  6     6 Buffalo County    4834   2860  37.2    17.9          4.2     97.3
-##  7     7 Burnett County    6462   3569  35.6    20            5.3     91.5
-##  8     8 Calumet County   18156  12116  40.0    28.7          2.8     94.7
-##  9     9 Chippewa County  21317  13983  39.6    20.1          3.8     94.7
-## 10    10 Clark County     10002   4524  31.1    11.5          3.3     97.1
-## # ℹ 2 more variables: COVID_DeathRate &lt;dbl&gt;, Income &lt;dbl&gt;</code></pre>
-<div class="sourceCode" id="cb445"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb445-1"><a href="binomial-logistic-regression.html#cb445-1" tabindex="-1"></a>P1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(Wisconsin, <span class="fu">aes</span>(<span class="at">x=</span>College, <span class="at">y=</span>PctD, <span class="at">size=</span>(Rvotes<span class="sc">+</span>Dvotes))) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
-<span id="cb445-2"><a href="binomial-logistic-regression.html#cb445-2" tabindex="-1"></a> <span class="fu">geom_text</span>(<span class="at">data=</span>Wisconsin <span class="sc">%&gt;%</span> <span class="fu">filter</span>(County <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;Dane County&quot;</span>, <span class="st">&quot;Door County&quot;</span> , <span class="st">&quot;Milwaukee County&quot;</span>, <span class="st">&quot;Menominee County&quot;</span>, <span class="st">&quot;Outagamie County&quot;</span>, <span class="st">&quot;Waukesha County&quot;</span>)), <span class="fu">aes</span>(<span class="at">x=</span>College, <span class="at">y=</span>PctD, <span class="at">label=</span>County, <span class="at">vjust=</span><span class="sc">-</span><span class="dv">1</span>), <span class="at">size=</span><span class="dv">3</span>, <span class="at">color=</span><span class="st">&quot;red&quot;</span>) <span class="sc">+</span></span>
-<span id="cb445-3"><a href="binomial-logistic-regression.html#cb445-3" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Percent with  College Degree&quot;</span>) <span class="sc">+</span></span>
-<span id="cb445-4"><a href="binomial-logistic-regression.html#cb445-4" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Percent Voting for Biden&quot;</span>) <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">legend.position=</span><span class="st">&quot;none&quot;</span>)</span>
-<span id="cb445-5"><a href="binomial-logistic-regression.html#cb445-5" tabindex="-1"></a>P2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(Wisconsin, <span class="fu">aes</span>(<span class="at">x=</span>Unemployment, <span class="at">y=</span>PctD, <span class="at">size=</span>(Rvotes<span class="sc">+</span>Dvotes))) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
-<span id="cb445-6"><a href="binomial-logistic-regression.html#cb445-6" tabindex="-1"></a> <span class="fu">geom_text</span>(<span class="at">data=</span>Wisconsin <span class="sc">%&gt;%</span> <span class="fu">filter</span>(County <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;Dane County&quot;</span>, <span class="st">&quot;Door County&quot;</span> , <span class="st">&quot;Milwaukee County&quot;</span>, <span class="st">&quot;Menominee County&quot;</span>, <span class="st">&quot;Outagamie County&quot;</span>, <span class="st">&quot;Waukesha County&quot;</span>)), <span class="fu">aes</span>(<span class="at">x=</span>Unemployment, <span class="at">y=</span>PctD, <span class="at">label=</span>County, <span class="at">vjust=</span><span class="sc">-</span><span class="dv">1</span>), <span class="at">size=</span><span class="dv">3</span>, <span class="at">color=</span><span class="st">&quot;red&quot;</span>) <span class="sc">+</span></span>
-<span id="cb445-7"><a href="binomial-logistic-regression.html#cb445-7" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Unemployment Rate&quot;</span>) <span class="sc">+</span></span>
-<span id="cb445-8"><a href="binomial-logistic-regression.html#cb445-8" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Percent Voting for Biden&quot;</span>) <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">legend.position=</span><span class="st">&quot;none&quot;</span>)</span>
-<span id="cb445-9"><a href="binomial-logistic-regression.html#cb445-9" tabindex="-1"></a>P3 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(Wisconsin, <span class="fu">aes</span>(<span class="at">x=</span>WhitePct, <span class="at">y=</span>PctD, <span class="at">size=</span>(Rvotes<span class="sc">+</span>Dvotes))) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
-<span id="cb445-10"><a href="binomial-logistic-regression.html#cb445-10" tabindex="-1"></a> <span class="fu">geom_text</span>(<span class="at">data=</span>Wisconsin <span class="sc">%&gt;%</span> <span class="fu">filter</span>(County <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;Dane County&quot;</span>, <span class="st">&quot;Door County&quot;</span> , <span class="st">&quot;Milwaukee County&quot;</span>, <span class="st">&quot;Menominee County&quot;</span>, <span class="st">&quot;Outagamie County&quot;</span>, <span class="st">&quot;Waukesha County&quot;</span>)), <span class="fu">aes</span>(<span class="at">x=</span>WhitePct, <span class="at">y=</span>PctD, <span class="at">label=</span>County, <span class="at">vjust=</span><span class="sc">-</span><span class="dv">1</span>), <span class="at">size=</span><span class="dv">3</span>, <span class="at">color=</span><span class="st">&quot;red&quot;</span>) <span class="sc">+</span></span>
-<span id="cb445-11"><a href="binomial-logistic-regression.html#cb445-11" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Percent of Population White&quot;</span>) <span class="sc">+</span></span>
-<span id="cb445-12"><a href="binomial-logistic-regression.html#cb445-12" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Percent Voting for Biden&quot;</span>) <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">legend.position=</span><span class="st">&quot;none&quot;</span>)</span>
-<span id="cb445-13"><a href="binomial-logistic-regression.html#cb445-13" tabindex="-1"></a>P4 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(Wisconsin, <span class="fu">aes</span>(<span class="at">x=</span>COVID_DeathRate, <span class="at">y=</span>PctD, <span class="at">size=</span>(Rvotes<span class="sc">+</span>Dvotes))) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
-<span id="cb445-14"><a href="binomial-logistic-regression.html#cb445-14" tabindex="-1"></a> <span class="fu">geom_text</span>(<span class="at">data=</span>Wisconsin <span class="sc">%&gt;%</span> <span class="fu">filter</span>(County <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;Dane County&quot;</span>, <span class="st">&quot;Door County&quot;</span> , <span class="st">&quot;Milwaukee County&quot;</span>, <span class="st">&quot;Menominee County&quot;</span>, <span class="st">&quot;Outagamie County&quot;</span>, <span class="st">&quot;Waukesha County&quot;</span>)), <span class="fu">aes</span>(<span class="at">x=</span>COVID_DeathRate, <span class="at">y=</span>PctD, <span class="at">label=</span>County, <span class="at">vjust=</span><span class="sc">-</span><span class="dv">1</span>), <span class="at">size=</span><span class="dv">3</span>, <span class="at">color=</span><span class="st">&quot;red&quot;</span>) <span class="sc">+</span></span>
-<span id="cb445-15"><a href="binomial-logistic-regression.html#cb445-15" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Covid Deaths Per 100k&quot;</span>) <span class="sc">+</span></span>
-<span id="cb445-16"><a href="binomial-logistic-regression.html#cb445-16" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Percent Voting for Biden&quot;</span>) <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">legend.position=</span><span class="st">&quot;none&quot;</span>)</span>
-<span id="cb445-17"><a href="binomial-logistic-regression.html#cb445-17" tabindex="-1"></a>P5 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(Wisconsin, <span class="fu">aes</span>(<span class="at">x=</span>Income, <span class="at">y=</span>PctD, <span class="at">size=</span>(Rvotes<span class="sc">+</span>Dvotes))) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
-<span id="cb445-18"><a href="binomial-logistic-regression.html#cb445-18" tabindex="-1"></a> <span class="fu">geom_text</span>(<span class="at">data=</span>Wisconsin <span class="sc">%&gt;%</span> <span class="fu">filter</span>(County <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;Dane County&quot;</span>, <span class="st">&quot;Door County&quot;</span> , <span class="st">&quot;Milwaukee County&quot;</span>, <span class="st">&quot;Menominee County&quot;</span>, <span class="st">&quot;Outagamie County&quot;</span>, <span class="st">&quot;Waukesha County&quot;</span>)), <span class="fu">aes</span>(<span class="at">x=</span>Income, <span class="at">y=</span>PctD, <span class="at">label=</span>County, <span class="at">vjust=</span><span class="sc">-</span><span class="dv">1</span>), <span class="at">size=</span><span class="dv">3</span>, <span class="at">color=</span><span class="st">&quot;red&quot;</span>) <span class="sc">+</span></span>
-<span id="cb445-19"><a href="binomial-logistic-regression.html#cb445-19" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Median Income&quot;</span>) <span class="sc">+</span></span>
-<span id="cb445-20"><a href="binomial-logistic-regression.html#cb445-20" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Percent Voting for Biden&quot;</span>) <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">legend.position=</span><span class="st">&quot;none&quot;</span>)</span>
-<span id="cb445-21"><a href="binomial-logistic-regression.html#cb445-21" tabindex="-1"></a><span class="fu">grid.arrange</span>(P1, P2, P3, P4, P5, <span class="at">nrow=</span><span class="dv">3</span>) <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">legend.position=</span><span class="st">&quot;none&quot;</span>)</span></code></pre></div>
-<p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-273-1.png" width="1152" /></p>
-<pre><code>## NULL</code></pre>
+<div id="challenger-o-rings-data" class="section level3 hasAnchor" number="7.1.3">
+<h3><span class="header-section-number">7.1.3</span> Challenger O-Rings Data<a href="binomial-logistic-regression.html#challenger-o-rings-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>In 1986, the space shuttle <em>Challenger</em> exploded just 73 seconds into flight, killing all seven crew members. The disaster is believed to have been caused by damage to a seal called an O-ring that likely occurred during takeoff. Damage to O-rings is believed to be related to ambient temperature during launch.</p>
+<p>At the time of the launch, the temperature was only 31 degrees Fahrenheit, which is very cold for shuttle launches.</p>
+<p>Shown below are data for 23 other shuttle missions, including the temperature (in degrees Fahrenheit) at the time of launch and the number of damaged and undamaged O-rings, out of six total O-rings.</p>
+<div class="sourceCode" id="cb443"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb443-1"><a href="binomial-logistic-regression.html#cb443-1" tabindex="-1"></a><span class="fu">data</span>(orings)</span>
+<span id="cb443-2"><a href="binomial-logistic-regression.html#cb443-2" tabindex="-1"></a><span class="fu">kable</span>(orings)</span></code></pre></div>
+<table>
+<thead>
+<tr>
+<th style="text-align:right;">
+mission
+</th>
+<th style="text-align:right;">
+temperature
+</th>
+<th style="text-align:right;">
+damaged
+</th>
+<th style="text-align:right;">
+undamaged
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+53
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+57
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+58
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+63
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+66
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+6
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+67
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+6
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+7
+</td>
+<td style="text-align:right;">
+67
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+6
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:right;">
+67
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+6
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+9
+</td>
+<td style="text-align:right;">
+68
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+6
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+10
+</td>
+<td style="text-align:right;">
+69
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+6
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+11
+</td>
+<td style="text-align:right;">
+70
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+12
+</td>
+<td style="text-align:right;">
+70
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+6
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+13
+</td>
+<td style="text-align:right;">
+70
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+14
+</td>
+<td style="text-align:right;">
+70
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+6
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+15
+</td>
+<td style="text-align:right;">
+72
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+6
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+16
+</td>
+<td style="text-align:right;">
+73
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+6
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+17
+</td>
+<td style="text-align:right;">
+75
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+6
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+18
+</td>
+<td style="text-align:right;">
+75
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+19
+</td>
+<td style="text-align:right;">
+76
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+6
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+20
+</td>
+<td style="text-align:right;">
+76
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+6
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+21
+</td>
+<td style="text-align:right;">
+78
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+6
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+22
+</td>
+<td style="text-align:right;">
+79
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+6
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+23
+</td>
+<td style="text-align:right;">
+81
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+6
+</td>
+</tr>
+</tbody>
+</table>
+<p>We plot percentage damaged by temperature. Shown are a linear regression line, and a logistic regression curve.</p>
+<div class="sourceCode" id="cb444"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb444-1"><a href="binomial-logistic-regression.html#cb444-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>orings, <span class="fu">aes</span>(<span class="at">x=</span>temperature, <span class="at">y=</span>damaged<span class="sc">/</span>(damaged<span class="sc">+</span>undamaged))) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">&quot;lm&quot;</span>, <span class="at">se=</span><span class="cn">FALSE</span>, <span class="at">color=</span><span class="st">&quot;green&quot;</span>)  <span class="sc">+</span> </span>
+<span id="cb444-2"><a href="binomial-logistic-regression.html#cb444-2" tabindex="-1"></a>  <span class="fu">stat_smooth</span>(<span class="at">method=</span><span class="st">&quot;glm&quot;</span>, <span class="at">se=</span><span class="cn">FALSE</span>, <span class="at">method.args =</span> <span class="fu">list</span>(<span class="at">family=</span>binomial))</span></code></pre></div>
+<p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-273-1.png" width="576" /></p>
 </div>
-<div id="correlation-between-explanatory-variables" class="section level3 hasAnchor" number="7.1.4">
-<h3><span class="header-section-number">7.1.4</span> Correlation Between Explanatory Variables<a href="binomial-logistic-regression.html#correlation-between-explanatory-variables" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb447"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb447-1"><a href="binomial-logistic-regression.html#cb447-1" tabindex="-1"></a>select <span class="ot">&lt;-</span> dplyr<span class="sc">::</span>select</span>
-<span id="cb447-2"><a href="binomial-logistic-regression.html#cb447-2" tabindex="-1"></a>C <span class="ot">&lt;-</span> <span class="fu">cor</span>(Wisconsin <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="st">&quot;College&quot;</span>, <span class="st">&quot;Unemployment&quot;</span>, <span class="st">&quot;WhitePct&quot;</span>, <span class="st">&quot;COVID_DeathRate&quot;</span>, <span class="st">&quot;Income&quot;</span>))</span>
-<span id="cb447-3"><a href="binomial-logistic-regression.html#cb447-3" tabindex="-1"></a>P <span class="ot">&lt;-</span> <span class="fu">corrplot</span>(C, <span class="at">method=</span><span class="st">&quot;number&quot;</span>)</span></code></pre></div>
-<p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-274-1.png" width="960" /></p>
-<p>While there is some correlation between the explanatory variables, none of the correlations are strong enough to raise concerns about multicollinearity, so we’ll use all of them in our model.</p>
+<div id="modeling-number-damaged" class="section level3 hasAnchor" number="7.1.4">
+<h3><span class="header-section-number">7.1.4</span> Modeling Number Damaged<a href="binomial-logistic-regression.html#modeling-number-damaged" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>We know that there are a total of 6 O-rings on a shuttle. Suppose we knew the probability of an individual O-ring being damaged at a given temperature.</p>
+<p>Since the response is a count, we might think to use a Poisson distribution. However, a Poisson distribution does not place an upper bound on the number damaged O-rings. This is unrealistic since we know that in reality, we cannot have more than 6 damaged O-rings.</p>
 </div>
-<div id="modeling-number-of-votes" class="section level3 hasAnchor" number="7.1.5">
-<h3><span class="header-section-number">7.1.5</span> Modeling Number of Votes<a href="binomial-logistic-regression.html#modeling-number-of-votes" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Suppose we know the total number of votes in a county and the probability of a single voter choosing Biden.</p>
-<p>Since the response is a count, we might think to use a Poisson distribution. However, a Poisson distribution does not place an upper bound on the number of votes a candidate could receive in a county. This is unrealistic since we know that in reality, a candidate will never be able to get more votes than the total number of voters.</p>
-</div>
-<div id="the-binomial-distribution" class="section level3 hasAnchor" number="7.1.6">
-<h3><span class="header-section-number">7.1.6</span> The Binomial Distribution<a href="binomial-logistic-regression.html#the-binomial-distribution" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="the-binomial-distribution" class="section level3 hasAnchor" number="7.1.5">
+<h3><span class="header-section-number">7.1.5</span> The Binomial Distribution<a href="binomial-logistic-regression.html#the-binomial-distribution" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>A <strong>Binomial</strong> random variable is a discrete random variable that models the number of “successes” in a fixed number of independent trials. We let <span class="math inline">\(n\)</span> represent the number of trials, and <span class="math inline">\(p\)</span> represent the probability of success on any given trial.</p>
 <p><strong>Notation</strong>: <span class="math inline">\(Y\sim Binom(n,p)\)</span>, <b style="word-space:2m">  </b>
 <strong>Probability Mass Function</strong>: <span class="math inline">\(\text{P}(Y=y) = {n\choose y}p^y(1-p)^{n-y}\)</span> <b style="word-space:2m">  </b></p>
-<p>For <span class="math inline">\(n = 4, p=0.6\)</span>,</p>
-<p><span class="math display">\[ Pr(Y=0) = {4\choose 0}0.6^0(0.4)^{4} = 1(0.4)^4\approx(0.0256)
+<p>For <span class="math inline">\(n = 6, p=0.6\)</span>,</p>
+<p><span class="math display">\[ Pr(Y=0) = {6\choose 0}0.6^0(0.4)^{6} = 1(0.4)^6\approx(0.004)
 \]</span></p>
-<p><span class="math display">\[ Pr(Y=1) = {4\choose 1}0.6^1(0.4)^{3} = 4(.6)(0.4)^3\approx(0.1536)
+<p><span class="math display">\[ Pr(Y=1) = {6\choose 1}0.6^1(0.4)^{5} = 6(.6)(0.4)^5\approx(0.006)
 \]</span></p>
-<p><span class="math display">\[ Pr(Y=2) = {4\choose 2}0.6^2(0.4)^{2} = 6(.6)^2(0.4)^2\approx(0.3456)
+<p><span class="math display">\[ Pr(Y=2) = {6\choose 2}0.6^2(0.4)^{4} = 15(.6)^2(0.4)^4\approx(0.1382)
 \]</span></p>
-<p><span class="math display">\[ Pr(Y=3) = {4\choose 3}0.6^3(0.4)^{1} = 4(.6)^3(0.4)^1\approx(0.3456)
+<p><span class="math display">\[ Pr(Y=3) = {6\choose 3}0.6^3(0.4)^{3} = 20(.6)^3(0.4)^3\approx(0.2765)
 \]</span></p>
-<p><span class="math display">\[ Pr(Y=4) = {4\choose 4}0.6^4(0.4)^{0} = 1(.6)^4(0.4)\approx(0.1296)
+<p><span class="math display">\[ Pr(Y=4) = {6\choose 4}0.6^4(0.4)^{2} = 15(.6)^4(0.4)^2\approx(0.3110)
+\]</span></p>
+<p><span class="math display">\[ Pr(Y=5) = {6\choose 5}0.6^5(0.4)^{1} = 6(.6)^5(0.4)^1\approx(0.1866)
+\]</span></p>
+<p><span class="math display">\[ Pr(Y=5) = {6\choose 6}0.6^6(0.4)^{0} = 1(.6)^6(0.4)^0\approx(0.0467)
 \]</span></p>
 <p>In a binomial distribution, the mean is <span class="math inline">\(np\)</span>,</p>
 <p>and the variance is <span class="math inline">\(np(1-p)\)</span>.</p>
 <p>A binomial distribution with <span class="math inline">\(n=1\)</span> is called a <strong>Bernoulli Distribution</strong>, denoted <span class="math inline">\(Ber(p)\)</span>.</p>
 </div>
-<div id="binomial-distribution-for-n4-p0.6" class="section level3 hasAnchor" number="7.1.7">
-<h3><span class="header-section-number">7.1.7</span> Binomial Distribution for <span class="math inline">\(n=4, p=0.6\)</span><a href="binomial-logistic-regression.html#binomial-distribution-for-n4-p0.6" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb448"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb448-1"><a href="binomial-logistic-regression.html#cb448-1" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">4</span>, <span class="at">y =</span> <span class="fu">dbinom</span>(<span class="dv">0</span><span class="sc">:</span><span class="dv">4</span>, <span class="at">size =</span> <span class="dv">4</span>, <span class="at">prob=</span><span class="fl">0.6</span>))</span>
-<span id="cb448-2"><a href="binomial-logistic-regression.html#cb448-2" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y)) <span class="sc">+</span> <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">&quot;identity&quot;</span>, <span class="at">col =</span> <span class="st">&quot;white&quot;</span>, <span class="at">fill =</span> <span class="st">&quot;blue&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb448-3"><a href="binomial-logistic-regression.html#cb448-3" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">expand =</span> <span class="fu">c</span>(<span class="fl">0.01</span>, <span class="dv">0</span>)) <span class="sc">+</span> <span class="fu">scale_x_continuous</span>(<span class="at">breaks=</span>(<span class="dv">0</span><span class="sc">:</span><span class="dv">4</span>)) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">&quot;x&quot;</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="fu">expression</span>(<span class="fu">paste</span>(<span class="st">&quot;p(x|&quot;</span>, p, <span class="st">&quot;)&quot;</span>))) <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">&quot;n=4, p=0.6&quot;</span>) <span class="sc">+</span> <span class="fu">theme_bw</span>() <span class="sc">+</span> </span>
-<span id="cb448-4"><a href="binomial-logistic-regression.html#cb448-4" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="fu">rel</span>(<span class="fl">1.2</span>), <span class="at">vjust =</span> <span class="fl">1.5</span>))</span></code></pre></div>
-<p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-275-1.png" width="576" /></p>
-<p>Mean = <span class="math inline">\(0.6 \times 4=2.4\)</span></p>
-<p>Variance = <span class="math inline">\(4\times 0.6 \times 0.4=0.96\)</span></p>
+<div id="binomial-distribution-for-n6-p0.6" class="section level3 hasAnchor" number="7.1.6">
+<h3><span class="header-section-number">7.1.6</span> Binomial Distribution for <span class="math inline">\(n=6, p=0.6\)</span><a href="binomial-logistic-regression.html#binomial-distribution-for-n6-p0.6" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb445"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb445-1"><a href="binomial-logistic-regression.html#cb445-1" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">6</span>, <span class="at">y =</span> <span class="fu">dbinom</span>(<span class="dv">0</span><span class="sc">:</span><span class="dv">6</span>, <span class="at">size =</span> <span class="dv">6</span>, <span class="at">prob=</span><span class="fl">0.6</span>))</span>
+<span id="cb445-2"><a href="binomial-logistic-regression.html#cb445-2" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y)) <span class="sc">+</span> <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">&quot;identity&quot;</span>, <span class="at">col =</span> <span class="st">&quot;white&quot;</span>, <span class="at">fill =</span> <span class="st">&quot;blue&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb445-3"><a href="binomial-logistic-regression.html#cb445-3" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">expand =</span> <span class="fu">c</span>(<span class="fl">0.01</span>, <span class="dv">0</span>)) <span class="sc">+</span> <span class="fu">scale_x_continuous</span>(<span class="at">breaks=</span>(<span class="dv">0</span><span class="sc">:</span><span class="dv">6</span>)) <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">&quot;x&quot;</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="fu">expression</span>(<span class="fu">paste</span>(<span class="st">&quot;p(x|&quot;</span>, p, <span class="st">&quot;)&quot;</span>))) <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">&quot;n=6, p=0.6&quot;</span>) <span class="sc">+</span> <span class="fu">theme_bw</span>() <span class="sc">+</span> </span>
+<span id="cb445-4"><a href="binomial-logistic-regression.html#cb445-4" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="fu">rel</span>(<span class="fl">1.2</span>), <span class="at">vjust =</span> <span class="fl">1.5</span>))</span></code></pre></div>
+<p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-274-1.png" width="576" /></p>
+<p>Mean = <span class="math inline">\(0.6 \times 6=3.6\)</span></p>
+<p>Variance = <span class="math inline">\(6\times 0.6 \times 0.4=1.44\)</span></p>
 </div>
-<div id="more-binomial-distributions" class="section level3 hasAnchor" number="7.1.8">
-<h3><span class="header-section-number">7.1.8</span> More Binomial Distributions<a href="binomial-logistic-regression.html#more-binomial-distributions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="more-binomial-distributions" class="section level3 hasAnchor" number="7.1.7">
+<h3><span class="header-section-number">7.1.7</span> More Binomial Distributions<a href="binomial-logistic-regression.html#more-binomial-distributions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>We plot binomial distributions with <span class="math inline">\(n=10\)</span>, <span class="math inline">\(p=0.25, 0.6, 0.9\)</span></p>
-<p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-276-1.png" width="960" /></p>
+<p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-275-1.png" width="960" /></p>
 </div>
-<div id="connecting-expected-response-to-explatory-variables-1" class="section level3 hasAnchor" number="7.1.9">
-<h3><span class="header-section-number">7.1.9</span> Connecting Expected Response to Explatory Variables<a href="binomial-logistic-regression.html#connecting-expected-response-to-explatory-variables-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb449"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb449-1"><a href="binomial-logistic-regression.html#cb449-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">0</span>)</span>
-<span id="cb449-2"><a href="binomial-logistic-regression.html#cb449-2" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">x=</span><span class="fu">runif</span>(<span class="dv">200</span>, <span class="sc">-</span><span class="dv">5</span>, <span class="dv">10</span>),</span>
-<span id="cb449-3"><a href="binomial-logistic-regression.html#cb449-3" tabindex="-1"></a>                  <span class="at">p=</span><span class="fu">exp</span>(<span class="sc">-</span><span class="dv">2</span><span class="sc">+</span><span class="dv">1</span><span class="sc">*</span>x)<span class="sc">/</span>(<span class="dv">1</span><span class="sc">+</span><span class="fu">exp</span>(<span class="sc">-</span><span class="dv">2</span><span class="sc">+</span><span class="dv">1</span><span class="sc">*</span>x)),</span>
-<span id="cb449-4"><a href="binomial-logistic-regression.html#cb449-4" tabindex="-1"></a>                  <span class="at">y=</span><span class="fu">rbinom</span>(<span class="dv">200</span>, <span class="dv">1</span>, p),</span>
-<span id="cb449-5"><a href="binomial-logistic-regression.html#cb449-5" tabindex="-1"></a>                  <span class="at">y2=</span>.<span class="dv">3408</span><span class="fl">+.0901</span><span class="sc">*</span>x,</span>
-<span id="cb449-6"><a href="binomial-logistic-regression.html#cb449-6" tabindex="-1"></a>                  <span class="at">logit=</span><span class="fu">log</span>(p<span class="sc">/</span>(<span class="dv">1</span><span class="sc">-</span>p)))</span>
-<span id="cb449-7"><a href="binomial-logistic-regression.html#cb449-7" tabindex="-1"></a>dat2 <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">x =</span> <span class="fu">c</span>(dat<span class="sc">$</span>x, dat<span class="sc">$</span>x),</span>
-<span id="cb449-8"><a href="binomial-logistic-regression.html#cb449-8" tabindex="-1"></a>               <span class="at">y =</span> <span class="fu">c</span>(dat<span class="sc">$</span>y2, dat<span class="sc">$</span>p),</span>
-<span id="cb449-9"><a href="binomial-logistic-regression.html#cb449-9" tabindex="-1"></a>               <span class="st">`</span><span class="at">Regression model</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">&quot;linear&quot;</span>, <span class="dv">200</span>),</span>
-<span id="cb449-10"><a href="binomial-logistic-regression.html#cb449-10" tabindex="-1"></a>                                      <span class="fu">rep</span>(<span class="st">&quot;logistic&quot;</span>, <span class="dv">200</span>)))</span>
-<span id="cb449-11"><a href="binomial-logistic-regression.html#cb449-11" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> </span>
-<span id="cb449-12"><a href="binomial-logistic-regression.html#cb449-12" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> dat, <span class="fu">aes</span>(x, y)) <span class="sc">+</span></span>
-<span id="cb449-13"><a href="binomial-logistic-regression.html#cb449-13" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span> dat2, <span class="fu">aes</span>(x, y, <span class="at">linetype =</span> <span class="st">`</span><span class="at">Regression model</span><span class="st">`</span>))  <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;p&quot;</span>)</span></code></pre></div>
-<p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-277-1.png" width="576" /></p>
-<p>Let <span class="math inline">\(p_i\)</span> represent the probability that a voter in county <span class="math inline">\(i\)</span> votes for Biden.</p>
-<p>We want to connect <span class="math inline">\(p_i\)</span> to our explanatory variables.</p>
+<div id="connecting-expected-response-to-explatory-variables-1" class="section level3 hasAnchor" number="7.1.8">
+<h3><span class="header-section-number">7.1.8</span> Connecting Expected Response to Explatory Variables<a href="binomial-logistic-regression.html#connecting-expected-response-to-explatory-variables-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb446"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb446-1"><a href="binomial-logistic-regression.html#cb446-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">0</span>)</span>
+<span id="cb446-2"><a href="binomial-logistic-regression.html#cb446-2" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">x=</span><span class="fu">runif</span>(<span class="dv">200</span>, <span class="sc">-</span><span class="dv">5</span>, <span class="dv">10</span>),</span>
+<span id="cb446-3"><a href="binomial-logistic-regression.html#cb446-3" tabindex="-1"></a>                  <span class="at">p=</span><span class="fu">exp</span>(<span class="sc">-</span><span class="dv">2</span><span class="sc">+</span><span class="dv">1</span><span class="sc">*</span>x)<span class="sc">/</span>(<span class="dv">1</span><span class="sc">+</span><span class="fu">exp</span>(<span class="sc">-</span><span class="dv">2</span><span class="sc">+</span><span class="dv">1</span><span class="sc">*</span>x)),</span>
+<span id="cb446-4"><a href="binomial-logistic-regression.html#cb446-4" tabindex="-1"></a>                  <span class="at">y=</span><span class="fu">rbinom</span>(<span class="dv">200</span>, <span class="dv">1</span>, p),</span>
+<span id="cb446-5"><a href="binomial-logistic-regression.html#cb446-5" tabindex="-1"></a>                  <span class="at">y2=</span>.<span class="dv">3408</span><span class="fl">+.0901</span><span class="sc">*</span>x,</span>
+<span id="cb446-6"><a href="binomial-logistic-regression.html#cb446-6" tabindex="-1"></a>                  <span class="at">logit=</span><span class="fu">log</span>(p<span class="sc">/</span>(<span class="dv">1</span><span class="sc">-</span>p)))</span>
+<span id="cb446-7"><a href="binomial-logistic-regression.html#cb446-7" tabindex="-1"></a>dat2 <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">x =</span> <span class="fu">c</span>(dat<span class="sc">$</span>x, dat<span class="sc">$</span>x),</span>
+<span id="cb446-8"><a href="binomial-logistic-regression.html#cb446-8" tabindex="-1"></a>               <span class="at">y =</span> <span class="fu">c</span>(dat<span class="sc">$</span>y2, dat<span class="sc">$</span>p),</span>
+<span id="cb446-9"><a href="binomial-logistic-regression.html#cb446-9" tabindex="-1"></a>               <span class="st">`</span><span class="at">Regression model</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">&quot;linear&quot;</span>, <span class="dv">200</span>),</span>
+<span id="cb446-10"><a href="binomial-logistic-regression.html#cb446-10" tabindex="-1"></a>                                      <span class="fu">rep</span>(<span class="st">&quot;logistic&quot;</span>, <span class="dv">200</span>)))</span>
+<span id="cb446-11"><a href="binomial-logistic-regression.html#cb446-11" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span> </span>
+<span id="cb446-12"><a href="binomial-logistic-regression.html#cb446-12" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> dat, <span class="fu">aes</span>(x, y)) <span class="sc">+</span></span>
+<span id="cb446-13"><a href="binomial-logistic-regression.html#cb446-13" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span> dat2, <span class="fu">aes</span>(x, y, <span class="at">linetype =</span> <span class="st">`</span><span class="at">Regression model</span><span class="st">`</span>))  <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;p&quot;</span>)</span></code></pre></div>
+<p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-276-1.png" width="576" /></p>
+<p>Let <span class="math inline">\(p_i\)</span> represent the probability that an individual O-ring on mission i was damaged.</p>
+<p>We want to connect <span class="math inline">\(p_i\)</span> to our explanatory variable, temperature.</p>
 <p>Assuming</p>
 <p><span class="math display">\[p_i =  \beta_0+\beta_1X_{1} + \ldots + \beta_pX_p\]</span></p>
 <p>is a bad idea since <span class="math inline">\(p_1\)</span> must stay between -1 and 1.</p>
@@ -883,13 +1167,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>The function <span class="math inline">\(f(p) = \text{logit}(p) = log\left(\frac{p}{1-p}\right)\)</span> is the link function.</p>
 <p>Note: we could use different functions that map the real numbers into the interval (0,1), but the logit function works well and is frequently used.</p>
 </div>
-<div id="odds-and-odds-ratio" class="section level3 hasAnchor" number="7.1.10">
-<h3><span class="header-section-number">7.1.10</span> Odds and Odds Ratio<a href="binomial-logistic-regression.html#odds-and-odds-ratio" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="odds-and-odds-ratio" class="section level3 hasAnchor" number="7.1.9">
+<h3><span class="header-section-number">7.1.9</span> Odds and Odds Ratio<a href="binomial-logistic-regression.html#odds-and-odds-ratio" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>For an event with probability <span class="math inline">\(p\)</span>, the odds of the event occuring are <span class="math inline">\(\frac{p}{1-p}\)</span></p>
 <p>For two events <span class="math inline">\(p_1\)</span> and <span class="math inline">\(p_2\)</span> the odds ratio is defined as <span class="math inline">\(\frac{\text{Odds of Event 1}}{\text{Odds of Event 1}} = \frac{\frac{p_1}{1-p_1}}{\frac{p_2}{1-p_2}}\)</span></p>
 </div>
-<div id="interpreting-regression-coefficients" class="section level3 hasAnchor" number="7.1.11">
-<h3><span class="header-section-number">7.1.11</span> Interpreting Regression Coefficients<a href="binomial-logistic-regression.html#interpreting-regression-coefficients" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="interpreting-regression-coefficients" class="section level3 hasAnchor" number="7.1.10">
+<h3><span class="header-section-number">7.1.10</span> Interpreting Regression Coefficients<a href="binomial-logistic-regression.html#interpreting-regression-coefficients" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Let’s suppose we have one explanatory variable <span class="math inline">\(x\)</span>, so</p>
 <p><span class="math display">\[\text{logit}(p_i) =  \frac{e^{\beta_0+\beta_1X_{1}}}{1+e^{\beta_0+\beta_1X_{1}}}, \]</span></p>
 <p>Consider the odds ratio for a case <span class="math inline">\(j\)</span> with explanatory variable <span class="math inline">\(x + 1\)</span>, compared to case <span class="math inline">\(i\)</span> with explanatory variable <span class="math inline">\(x\)</span>.</p>
@@ -900,8 +1184,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>For each 1-unit increase in <span class="math inline">\(x\)</span> the odds ratio of success to failure is expected to multiply by a factor of <span class="math inline">\(e^{\beta_1}\)</span>.</p>
 <p>For a categorical variable <span class="math inline">\(x_j\)</span> the odds success to failure in category <span class="math inline">\(j\)</span>, are expected to be <span class="math inline">\(e^{\beta_1}\)</span> times higher in category <span class="math inline">\(j\)</span> than in the baseline category.</p>
 </div>
-<div id="binomial-logistic-regression-assumptions" class="section level3 hasAnchor" number="7.1.12">
-<h3><span class="header-section-number">7.1.12</span> Binomial Logistic Regression Assumptions<a href="binomial-logistic-regression.html#binomial-logistic-regression-assumptions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="binomial-logistic-regression-assumptions" class="section level3 hasAnchor" number="7.1.11">
+<h3><span class="header-section-number">7.1.11</span> Binomial Logistic Regression Assumptions<a href="binomial-logistic-regression.html#binomial-logistic-regression-assumptions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>A logistic regression model relies on the following assumptions:</p>
 <ol style="list-style-type: decimal">
 <li><strong>Binary Response</strong> The response variable is dichotomous (two possible responses) or the sum of dichotomous responses.</li>
@@ -911,88 +1195,83 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ol>
 </div>
 </div>
-<div id="model-for-wisconsin-vote" class="section level2 hasAnchor" number="7.2">
-<h2><span class="header-section-number">7.2</span> Model for Wisconsin Vote<a href="binomial-logistic-regression.html#model-for-wisconsin-vote" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="an-initial-model" class="section level3 hasAnchor" number="7.2.1">
-<h3><span class="header-section-number">7.2.1</span> An Initial Model<a href="binomial-logistic-regression.html#an-initial-model" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>We’ll start by trying to model the relationship between number of votes for Biden and percentage of voters with a college degree.</p>
-<div class="sourceCode" id="cb450"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb450-1"><a href="binomial-logistic-regression.html#cb450-1" tabindex="-1"></a>M1 <span class="ot">&lt;-</span> <span class="fu">glm</span>(<span class="fu">cbind</span>(Dvotes, Rvotes) <span class="sc">~</span> College , <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link=</span><span class="st">&quot;logit&quot;</span>), <span class="at">data =</span> Wisconsin)</span>
-<span id="cb450-2"><a href="binomial-logistic-regression.html#cb450-2" tabindex="-1"></a><span class="fu">summary</span>(M1)</span></code></pre></div>
+<div id="model-for-challenger-disaster-o-rings" class="section level2 hasAnchor" number="7.2">
+<h2><span class="header-section-number">7.2</span> Model for Challenger Disaster O-rings<a href="binomial-logistic-regression.html#model-for-challenger-disaster-o-rings" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="binomial-logistic-model-for-o-rings" class="section level3 hasAnchor" number="7.2.1">
+<h3><span class="header-section-number">7.2.1</span> Binomial Logistic Model for O-rings<a href="binomial-logistic-regression.html#binomial-logistic-model-for-o-rings" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb447"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb447-1"><a href="binomial-logistic-regression.html#cb447-1" tabindex="-1"></a>M1 <span class="ot">&lt;-</span> <span class="fu">glm</span>(<span class="fu">cbind</span>(damaged, undamaged) <span class="sc">~</span> temperature , <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link=</span><span class="st">&quot;logit&quot;</span>), <span class="at">data =</span> orings)</span>
+<span id="cb447-2"><a href="binomial-logistic-regression.html#cb447-2" tabindex="-1"></a><span class="fu">summary</span>(M1)</span></code></pre></div>
 <pre><code>## 
 ## Call:
-## glm(formula = cbind(Dvotes, Rvotes) ~ College, family = binomial(link = &quot;logit&quot;), 
-##     data = Wisconsin)
+## glm(formula = cbind(damaged, undamaged) ~ temperature, family = binomial(link = &quot;logit&quot;), 
+##     data = orings)
 ## 
 ## Coefficients:
-##               Estimate Std. Error z value            Pr(&gt;|z|)    
-## (Intercept) -0.9521859  0.0035941  -264.9 &lt;0.0000000000000002 ***
-## College      0.0319564  0.0001136   281.4 &lt;0.0000000000000002 ***
+##             Estimate Std. Error z value  Pr(&gt;|z|)    
+## (Intercept) 11.66299    3.29626   3.538  0.000403 ***
+## temperature -0.21623    0.05318  -4.066 0.0000478 ***
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
 ## (Dispersion parameter for binomial family taken to be 1)
 ## 
-##     Null deviance: 277052  on 71  degrees of freedom
-## Residual deviance: 194994  on 70  degrees of freedom
-## AIC: 195751
+##     Null deviance: 38.898  on 22  degrees of freedom
+## Residual deviance: 16.912  on 21  degrees of freedom
+## AIC: 33.675
 ## 
-## Number of Fisher Scoring iterations: 4</code></pre>
-<p>For each one percent increase in college education, the odds of voting for Biden are expected to multiply by a factor of <span class="math inline">\(e^{0.0320}=1.0325\)</span> (a 3% increase).</p>
-<p>In a county where 25% of the population has a college degree, the probability of an individual voter voting for Biden is
-<span class="math display">\[\frac{e^{-0.9521859 + 0.0319564\times25}}{1+ e^{ (-0.9521859 + 0.0319564\times25)}}=0.4618\]</span></p>
-<p>In a county where 35% of the population has a college degree, the probability of an individual voter voting for Biden is</p>
-<p><span class="math display">\[\frac{e^{-0.9521859 + 0.0319564\times35}}{1 + e^{ (-0.9521859 + 0.0319564\times35)}}=0.5415\]</span></p>
+## Number of Fisher Scoring iterations: 6</code></pre>
+<p>For each one degree increase in temperature, the odds of damage to the O-ring are expected to multiply by a factor of <span class="math inline">\(exp{-0.216}\approx0.80555\)</span>. That is, for each one-degree increase in temperature, odds of damage are expected to decrease by 20%.</p>
+<p>If the temperature is 55 degrees, the probability of an individual O-ring being damaged is:</p>
+<p><span class="math display">\[\frac{e^{11.66 - 0.216\times 55}}{1+ e^{11.66 - 0.216\times 55}}=0.445\]</span></p>
+<p>If the temperature is 75 degrees, the probability of an individual O-ring being damaged is:</p>
+<p><span class="math display">\[\frac{e^{11.66 - 0.216\times 75}}{1+ e^{11.66 - 0.216\times 75}}=0.01\]</span></p>
+<p>If the temperature is 31 degrees, the probability of an individual O-ring being damaged is:</p>
+<p><span class="math display">\[\frac{e^{11.66 - 0.216\times 31}}{1+ e^{11.66 - 0.216\times 31}}=0.99\]</span></p>
+<p>This is an extrapolation, but should be enough to raise serious concern.</p>
 </div>
 <div id="checking-linearity-assumption" class="section level3 hasAnchor" number="7.2.2">
 <h3><span class="header-section-number">7.2.2</span> Checking Linearity Assumption<a href="binomial-logistic-regression.html#checking-linearity-assumption" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>The model assumes that <span class="math inline">\(\text{log}\left(\frac{p}{1-p}\right) = \text{logit}(p)\)</span> is a linear function of <span class="math inline">\(x\)</span>. To check this, we calculate <span class="math inline">\(\hat{p}_i\)</span> for each county and plot <span class="math inline">\(\text{log}\left(\frac{\hat{p}_i}{1-\hat{p_i}}\right)\)</span> against percentage of college graduates.</p>
-<div class="sourceCode" id="cb452"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb452-1"><a href="binomial-logistic-regression.html#cb452-1" tabindex="-1"></a>phat <span class="ot">&lt;-</span> <span class="fu">with</span>(Wisconsin, (Dvotes)<span class="sc">/</span>(Dvotes<span class="sc">+</span>Rvotes))</span>
-<span id="cb452-2"><a href="binomial-logistic-regression.html#cb452-2" tabindex="-1"></a>Wisconsin<span class="sc">$</span>elogit <span class="ot">&lt;-</span> <span class="fu">log</span>(phat<span class="sc">/</span>(<span class="dv">1</span><span class="sc">-</span>phat))</span>
-<span id="cb452-3"><a href="binomial-logistic-regression.html#cb452-3" tabindex="-1"></a><span class="do">## Plots</span></span>
-<span id="cb452-4"><a href="binomial-logistic-regression.html#cb452-4" tabindex="-1"></a><span class="fu">ggplot</span>(Wisconsin, <span class="fu">aes</span>(<span class="at">x=</span>College, <span class="at">y=</span>elogit))<span class="sc">+</span></span>
-<span id="cb452-5"><a href="binomial-logistic-regression.html#cb452-5" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">shape=</span><span class="dv">1</span>) <span class="sc">+</span>    <span class="co"># Use hollow circles</span></span>
-<span id="cb452-6"><a href="binomial-logistic-regression.html#cb452-6" tabindex="-1"></a>    <span class="fu">geom_smooth</span>(<span class="at">method=</span>lm,   <span class="co"># Add linear regression line</span></span>
-<span id="cb452-7"><a href="binomial-logistic-regression.html#cb452-7" tabindex="-1"></a>                <span class="at">se=</span><span class="cn">FALSE</span>) <span class="sc">+</span> <span class="co"># Don&#39;t add shaded confidence region</span></span>
-<span id="cb452-8"><a href="binomial-logistic-regression.html#cb452-8" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;College&quot;</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;empirical logits&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb452-9"><a href="binomial-logistic-regression.html#cb452-9" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">&quot;Wisconsin Vote Empirical logits by College Pct.&quot;</span>)</span></code></pre></div>
-<p><img src="Stat-455-Notes_files/figure-html/emplogits-1.png" width="60%" style="display: block; margin: auto;" /></p>
+<p>The model assumes that <span class="math inline">\(\text{log}\left(\frac{p}{1-p}\right) = \text{logit}(p)\)</span> is a linear function of <span class="math inline">\(x\)</span>. To check this, we calculate <span class="math inline">\(\hat{p}_i\)</span>, the proportion of damaged o-rings for each mission and plot <span class="math inline">\(\text{log}\left(\frac{\hat{p}_i}{1-\hat{p_i}}\right)\)</span> (this quantity is called the <em>empirical logit</em>) against temperature.</p>
+<p>When there are counts with 0’s (presenting problems when taking log), it is common to add 1 “success” and 1 “failure” before calculating the empirical logit.</p>
+<div class="sourceCode" id="cb449"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb449-1"><a href="binomial-logistic-regression.html#cb449-1" tabindex="-1"></a>phat <span class="ot">&lt;-</span> <span class="fu">with</span>(orings, (<span class="dv">1</span> <span class="sc">+</span> damaged)<span class="sc">/</span>( <span class="dv">2</span> <span class="sc">+</span> damaged<span class="sc">+</span>undamaged))</span>
+<span id="cb449-2"><a href="binomial-logistic-regression.html#cb449-2" tabindex="-1"></a>orings<span class="sc">$</span>elogit <span class="ot">&lt;-</span> <span class="fu">log</span>(phat<span class="sc">/</span>(<span class="dv">1</span><span class="sc">-</span>phat))</span>
+<span id="cb449-3"><a href="binomial-logistic-regression.html#cb449-3" tabindex="-1"></a><span class="do">## Plots</span></span>
+<span id="cb449-4"><a href="binomial-logistic-regression.html#cb449-4" tabindex="-1"></a><span class="fu">ggplot</span>(orings, <span class="fu">aes</span>(<span class="at">x=</span>temperature, <span class="at">y=</span>elogit))<span class="sc">+</span></span>
+<span id="cb449-5"><a href="binomial-logistic-regression.html#cb449-5" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="at">shape=</span><span class="dv">1</span>) <span class="sc">+</span>    <span class="co"># Use hollow circles</span></span>
+<span id="cb449-6"><a href="binomial-logistic-regression.html#cb449-6" tabindex="-1"></a>    <span class="fu">geom_smooth</span>(<span class="at">method=</span>lm,   <span class="co"># Add linear regression line</span></span>
+<span id="cb449-7"><a href="binomial-logistic-regression.html#cb449-7" tabindex="-1"></a>                <span class="at">se=</span><span class="cn">FALSE</span>) <span class="sc">+</span> <span class="co"># Don&#39;t add shaded confidence region</span></span>
+<span id="cb449-8"><a href="binomial-logistic-regression.html#cb449-8" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Temperature&quot;</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;empirical logits&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb449-9"><a href="binomial-logistic-regression.html#cb449-9" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">&quot;O-Rings Empirical logits by Temperature&quot;</span>)</span></code></pre></div>
+<p><img src="Stat-455-Notes_files/figure-html/emplogits-1.png" width="60%" style="display: block; margin: auto;" />
+Ideally, this plot would look linear. It doesn’t look great here, so we might consider using a nonlinear function of temperature inside the binomial logit model. Then again, there aren’t that many points, and a more complicated model would be harder to interpret, so let’s stick with the linear function of temperature inside the binomial logit model.</p>
 </div>
 <div id="overdispersion-in-binomial-counts" class="section level3 hasAnchor" number="7.2.3">
 <h3><span class="header-section-number">7.2.3</span> Overdispersion in Binomial Counts<a href="binomial-logistic-regression.html#overdispersion-in-binomial-counts" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>The binomial model assumes that the variance is equal to <span class="math inline">\(np(1-p)\)</span>. Checking this using graphs or tables is challenging, since it involves both <span class="math inline">\(n\)</span> and <span class="math inline">\(p\)</span>, but we can group together counties with similar <span class="math inline">\(n\)</span> and similar percentages of college graduates (hence similar <span class="math inline">\(p\)</span>), and calculate variance in each group.</p>
-<div class="sourceCode" id="cb453"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb453-1"><a href="binomial-logistic-regression.html#cb453-1" tabindex="-1"></a>summarize <span class="ot">&lt;-</span> dplyr<span class="sc">::</span>summarize</span>
-<span id="cb453-2"><a href="binomial-logistic-regression.html#cb453-2" tabindex="-1"></a>Wisconsin <span class="ot">&lt;-</span> Wisconsin <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">TotalVotes =</span> Dvotes<span class="sc">+</span>Rvotes)</span>
-<span id="cb453-3"><a href="binomial-logistic-regression.html#cb453-3" tabindex="-1"></a>                                </span>
-<span id="cb453-4"><a href="binomial-logistic-regression.html#cb453-4" tabindex="-1"></a>EdCuts <span class="ot">=</span> <span class="fu">cut</span>(Wisconsin<span class="sc">$</span>College,</span>
-<span id="cb453-5"><a href="binomial-logistic-regression.html#cb453-5" tabindex="-1"></a>           <span class="at">breaks=</span><span class="fu">c</span>(<span class="dv">10</span>,<span class="dv">20</span>,<span class="dv">30</span>,<span class="dv">40</span>,<span class="dv">50</span>,<span class="dv">60</span>))</span>
-<span id="cb453-6"><a href="binomial-logistic-regression.html#cb453-6" tabindex="-1"></a>PopCuts <span class="ot">=</span> <span class="fu">cut</span>(Wisconsin<span class="sc">$</span>TotalVotes,</span>
-<span id="cb453-7"><a href="binomial-logistic-regression.html#cb453-7" tabindex="-1"></a>           <span class="at">breaks=</span><span class="fu">c</span>(<span class="fu">seq</span>(<span class="at">from=</span><span class="dv">0</span>, <span class="at">to =</span><span class="dv">100000</span>, <span class="at">by=</span><span class="dv">10000</span>), <span class="dv">500000</span>))</span>
-<span id="cb453-8"><a href="binomial-logistic-regression.html#cb453-8" tabindex="-1"></a>WisconsinCuts <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(EdCuts, PopCuts, Wisconsin) </span>
-<span id="cb453-9"><a href="binomial-logistic-regression.html#cb453-9" tabindex="-1"></a>WisconsinGrps <span class="ot">&lt;-</span> WisconsinCuts <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(EdCuts, PopCuts) <span class="sc">%&gt;%</span> </span>
-<span id="cb453-10"><a href="binomial-logistic-regression.html#cb453-10" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">NCounties =</span> <span class="fu">n</span>(),</span>
-<span id="cb453-11"><a href="binomial-logistic-regression.html#cb453-11" tabindex="-1"></a>            <span class="at">phat =</span> <span class="fu">sum</span>(Dvotes)<span class="sc">/</span><span class="fu">sum</span>(TotalVotes),</span>
-<span id="cb453-12"><a href="binomial-logistic-regression.html#cb453-12" tabindex="-1"></a>            <span class="at">mean_n =</span> <span class="fu">mean</span>(TotalVotes),</span>
-<span id="cb453-13"><a href="binomial-logistic-regression.html#cb453-13" tabindex="-1"></a>            <span class="at">Theoretical_Variance =</span> mean_n<span class="sc">*</span>phat<span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span>phat),</span>
-<span id="cb453-14"><a href="binomial-logistic-regression.html#cb453-14" tabindex="-1"></a>            <span class="at">Obs_Var =</span> <span class="fu">var</span>(Dvotes)) <span class="sc">%&gt;%</span></span>
-<span id="cb453-15"><a href="binomial-logistic-regression.html#cb453-15" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(NCounties))</span>
-<span id="cb453-16"><a href="binomial-logistic-regression.html#cb453-16" tabindex="-1"></a>WisconsinGrps                                                                 </span></code></pre></div>
-<pre><code>## # A tibble: 24 × 7
-## # Groups:   EdCuts [5]
-##    EdCuts  PopCuts       NCounties  phat  mean_n Theoretical_Variance   Obs_Var
-##    &lt;fct&gt;   &lt;fct&gt;             &lt;int&gt; &lt;dbl&gt;   &lt;dbl&gt;                &lt;dbl&gt;     &lt;dbl&gt;
-##  1 (10,20] (0,1e+04]            12 0.394   6359.                1518.  1233845.
-##  2 (10,20] (1e+04,2e+04]        12 0.351  12366.                2817.  1137954.
-##  3 (20,30] (2e+04,3e+04]         7 0.448  23677                 5855.  1662284 
-##  4 (10,20] (2e+04,3e+04]         6 0.338  23962.                5359.  1454543.
-##  5 (20,30] (1e+04,2e+04]         5 0.453  13037.                3231.  3059893.
-##  6 (20,30] (3e+04,4e+04]         4 0.451  33628.                8325.  6968112.
-##  7 (20,30] (1e+05,5e+05]         3 0.464 117357.               29187. 93383717.
-##  8 (10,20] (4e+04,5e+04]         2 0.362  45874.               10589.   106722 
-##  9 (20,30] (4e+04,5e+04]         2 0.413  43892.               10642.  6262260.
-## 10 (20,30] (5e+04,6e+04]         2 0.384  56491                13362.  2422200.
-## # ℹ 14 more rows</code></pre>
-<p>In the groups where there are enough counties to compare, the observed variance in counts appears to be much higher than the binomial model assumes.</p>
-<p>The data are heavily overdispersed.</p>
+<p>The binomial model assumes that the variance is equal to <span class="math inline">\(np(1-p)\)</span>. Checking this using graphs or tables is often challenging. Here, we would need to group together missions with similar temperatures and calculate the variance in number of damaged O-rings between groups, and see how this compares to the expected variance <span class="math inline">\(n\hat{p}(1-\hat{p})\)</span>.</p>
+<p>We’ll group by 5-degree temperature intervals.</p>
+<div class="sourceCode" id="cb450"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb450-1"><a href="binomial-logistic-regression.html#cb450-1" tabindex="-1"></a>summarize <span class="ot">&lt;-</span> dplyr<span class="sc">::</span>summarize</span>
+<span id="cb450-2"><a href="binomial-logistic-regression.html#cb450-2" tabindex="-1"></a></span>
+<span id="cb450-3"><a href="binomial-logistic-regression.html#cb450-3" tabindex="-1"></a>orings <span class="ot">&lt;-</span> orings <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">Cuts =</span> <span class="fu">cut</span>(orings<span class="sc">$</span>temperature,</span>
+<span id="cb450-4"><a href="binomial-logistic-regression.html#cb450-4" tabindex="-1"></a>           <span class="at">breaks=</span><span class="fu">c</span>(<span class="dv">50</span>, <span class="dv">55</span>, <span class="dv">60</span>, <span class="dv">65</span>, <span class="dv">70</span>, <span class="dv">75</span>, <span class="dv">80</span>, <span class="dv">85</span>)))  <span class="co"># break points for temperature groups</span></span>
+<span id="cb450-5"><a href="binomial-logistic-regression.html#cb450-5" tabindex="-1"></a> </span>
+<span id="cb450-6"><a href="binomial-logistic-regression.html#cb450-6" tabindex="-1"></a>oringsGrps <span class="ot">&lt;-</span> orings <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(Cuts) <span class="sc">%&gt;%</span> </span>
+<span id="cb450-7"><a href="binomial-logistic-regression.html#cb450-7" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">Nmissions =</span> <span class="fu">n</span>(),</span>
+<span id="cb450-8"><a href="binomial-logistic-regression.html#cb450-8" tabindex="-1"></a>            <span class="at">phat =</span> <span class="fu">sum</span>(damaged)<span class="sc">/</span><span class="fu">sum</span>(damaged <span class="sc">+</span> undamaged),</span>
+<span id="cb450-9"><a href="binomial-logistic-regression.html#cb450-9" tabindex="-1"></a>            <span class="at">Obs_Var =</span> <span class="fu">var</span>(damaged), </span>
+<span id="cb450-10"><a href="binomial-logistic-regression.html#cb450-10" tabindex="-1"></a>            <span class="at">Theoretical_Variance =</span> <span class="dv">6</span><span class="sc">*</span>phat<span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span>phat))</span>
+<span id="cb450-11"><a href="binomial-logistic-regression.html#cb450-11" tabindex="-1"></a>oringsGrps                                                                 </span></code></pre></div>
+<pre><code>## # A tibble: 7 × 5
+##   Cuts    Nmissions   phat Obs_Var Theoretical_Variance
+##   &lt;fct&gt;       &lt;int&gt;  &lt;dbl&gt;   &lt;dbl&gt;                &lt;dbl&gt;
+## 1 (50,55]         1 0.833   NA                    0.833
+## 2 (55,60]         2 0.167    0                    0.833
+## 3 (60,65]         1 0.167   NA                    0.833
+## 4 (65,70]        10 0.0333   0.178                0.193
+## 5 (70,75]         4 0.0417   0.25                 0.240
+## 6 (75,80]         4 0        0                    0    
+## 7 (80,85]         1 0       NA                    0</code></pre>
+<p>In groups with 4 or more missions, the observed variance seems pretty close to the theoretical variance. Then again, there are only 3 such groups, so it’s hard to tell.</p>
+<p>We can further test for overdispersion using Pearson residuals, as we did in Poisson regression.</p>
 </div>
 <div id="residuals-for-binomial-logistic-regression" class="section level3 hasAnchor" number="7.2.4">
 <h3><span class="header-section-number">7.2.4</span> Residuals for Binomial Logistic Regression<a href="binomial-logistic-regression.html#residuals-for-binomial-logistic-regression" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -1018,104 +1297,39 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="quasi-binomial-model" class="section level3 hasAnchor" number="7.2.5">
 <h3><span class="header-section-number">7.2.5</span> Quasi-Binomial Model<a href="binomial-logistic-regression.html#quasi-binomial-model" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Like in Poisson regression, we can address overdispersion by fitting quasi-binomial model that estimates a dispersion parameter <span class="math inline">\(\hat{\phi}=\frac{\sum(\textrm{Pearson residuals})^2}{n-p}\)</span> and multiplies standard error by <span class="math inline">\(\sqrt{\phi}\)</span>.</p>
-<div class="sourceCode" id="cb455"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb455-1"><a href="binomial-logistic-regression.html#cb455-1" tabindex="-1"></a>M1b <span class="ot">&lt;-</span> <span class="fu">glm</span>(<span class="fu">cbind</span>(Dvotes, Rvotes) <span class="sc">~</span> College , <span class="at">family =</span> <span class="fu">quasibinomial</span>(<span class="at">link=</span><span class="st">&quot;logit&quot;</span>), <span class="at">data =</span> Wisconsin)</span>
-<span id="cb455-2"><a href="binomial-logistic-regression.html#cb455-2" tabindex="-1"></a><span class="fu">summary</span>(M1b)</span></code></pre></div>
+<div class="sourceCode" id="cb452"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb452-1"><a href="binomial-logistic-regression.html#cb452-1" tabindex="-1"></a>M1b <span class="ot">&lt;-</span> <span class="fu">glm</span>(<span class="fu">cbind</span>(damaged, undamaged) <span class="sc">~</span> temperature , <span class="at">family =</span> <span class="fu">quasibinomial</span>(<span class="at">link=</span><span class="st">&quot;logit&quot;</span>), <span class="at">data =</span> orings)</span>
+<span id="cb452-2"><a href="binomial-logistic-regression.html#cb452-2" tabindex="-1"></a><span class="fu">summary</span>(M1b)</span></code></pre></div>
 <pre><code>## 
 ## Call:
-## glm(formula = cbind(Dvotes, Rvotes) ~ College, family = quasibinomial(link = &quot;logit&quot;), 
-##     data = Wisconsin)
+## glm(formula = cbind(damaged, undamaged) ~ temperature, family = quasibinomial(link = &quot;logit&quot;), 
+##     data = orings)
 ## 
 ## Coefficients:
-##              Estimate Std. Error t value   Pr(&gt;|t|)    
-## (Intercept) -0.952186   0.188929  -5.040 0.00000350 ***
-## College      0.031956   0.005969   5.353 0.00000104 ***
+##             Estimate Std. Error t value Pr(&gt;|t|)   
+## (Intercept) 11.66299    3.81077   3.061  0.00594 **
+## temperature -0.21623    0.06148  -3.517  0.00205 **
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
-## (Dispersion parameter for quasibinomial family taken to be 2763.213)
+## (Dispersion parameter for quasibinomial family taken to be 1.336542)
 ## 
-##     Null deviance: 277052  on 71  degrees of freedom
-## Residual deviance: 194994  on 70  degrees of freedom
+##     Null deviance: 38.898  on 22  degrees of freedom
+## Residual deviance: 16.912  on 21  degrees of freedom
 ## AIC: NA
 ## 
-## Number of Fisher Scoring iterations: 4</code></pre>
-<p>The estimate of the dispersion parameter <span class="math inline">\(\hat{\phi} = 2763\)</span> is large.</p>
-<ul>
-<li>Standard errors increase considerably.<br />
-</li>
-<li>The t-statistics associated with the quasi-binomial model are much smaller the z-statistics associated with the binomial model.<br />
-</li>
-<li>The p-values are bigger, but still small enough to provide evidence of a relationship between college education and voting for Biden.</li>
-</ul>
+## Number of Fisher Scoring iterations: 6</code></pre>
+<p>The estimate of the dispersion parameter <span class="math inline">\(\hat{\phi} = 1.336\)</span> is not too large, confirming that overdispersion is not too much of a concern here.</p>
+<p>Notice that standard errors, z-scores, and p-values for the quasi-binomial model were similar to those we saw in the binomial model.</p>
+<p>Wald test statistics and p-values for all variables provide evidence of a relationship between temperature and probability of damage to an o-ring.</p>
 </div>
-<div id="model-with-all-explanatory-variables" class="section level3 hasAnchor" number="7.2.6">
-<h3><span class="header-section-number">7.2.6</span> Model with All Explanatory Variables<a href="binomial-logistic-regression.html#model-with-all-explanatory-variables" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb457"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb457-1"><a href="binomial-logistic-regression.html#cb457-1" tabindex="-1"></a>M2 <span class="ot">&lt;-</span> <span class="fu">glm</span>(<span class="fu">cbind</span>(Dvotes, Rvotes) <span class="sc">~</span> College <span class="sc">+</span> Unemployment <span class="sc">+</span> WhitePct <span class="sc">+</span> COVID_DeathRate <span class="sc">+</span> Income , <span class="at">family =</span> <span class="fu">quasibinomial</span>(<span class="at">link=</span><span class="st">&quot;logit&quot;</span>), <span class="at">data =</span> Wisconsin)</span>
-<span id="cb457-2"><a href="binomial-logistic-regression.html#cb457-2" tabindex="-1"></a><span class="fu">summary</span>(M2)</span></code></pre></div>
-<pre><code>## 
-## Call:
-## glm(formula = cbind(Dvotes, Rvotes) ~ College + Unemployment + 
-##     WhitePct + COVID_DeathRate + Income, family = quasibinomial(link = &quot;logit&quot;), 
-##     data = Wisconsin)
-## 
-## Coefficients:
-##                     Estimate   Std. Error t value        Pr(&gt;|t|)    
-## (Intercept)      4.009188399  0.580255296   6.909 0.0000000023471 ***
-## College          0.046311576  0.005900290   7.849 0.0000000000493 ***
-## Unemployment    -0.110233627  0.060376843  -1.826          0.0724 .  
-## WhitePct        -0.029353000  0.004832728  -6.074 0.0000000690197 ***
-## COVID_DeathRate -0.006583959  0.001535600  -4.288 0.0000601756542 ***
-## Income          -0.000033277  0.000004613  -7.214 0.0000000006729 ***
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-## 
-## (Dispersion parameter for quasibinomial family taken to be 527.7059)
-## 
-##     Null deviance: 277052  on 71  degrees of freedom
-## Residual deviance:  34757  on 66  degrees of freedom
-## AIC: NA
-## 
-## Number of Fisher Scoring iterations: 3</code></pre>
-<ul>
-<li><p>For each one percentage point increase in college education odds of voting for Biden are estimated to multiply by <span class="math inline">\(e^{0.0463} = 1.047\)</span> ( a 5% increase), assuming all other variables are held constant.</p></li>
-<li><p>For each one percentage point increase in unemployment rate, odds of voting for Biden is estimated to multiply by <span class="math inline">\(e^{-0.1102} = 0.8957\)</span> (a 10% decrease), assuming all other variables are held constant.</p></li>
-<li><p>For each one percentage point increase in white residents, odds of voting for Biden is estimated to multiply by <span class="math inline">\(e^{-0.02935} = 0.97\)</span> (a 3% decrease), assuming all other variables are held constant.</p></li>
-<li><p>For each one death increase per 100k residents, odds of voting for Biden is estimated to multiply by <span class="math inline">\(e^{-0.006584} = 0.993\)</span> (a 0.7% decrease), assuming all other variables are held constant.</p></li>
-<li><p>For each 1000 dollar increase in median income, odds of voting for Biden is estimated to multiply by <span class="math inline">\(e^{-0.0000328\times1000} = 0.968\)</span> (a 3% decrease), assuming all other variables are held constant.</p></li>
-</ul>
-</div>
-<div id="tests-for-significance-of-model-coefficients" class="section level3 hasAnchor" number="7.2.7">
-<h3><span class="header-section-number">7.2.7</span> Tests for Significance of Model Coefficients<a href="binomial-logistic-regression.html#tests-for-significance-of-model-coefficients" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Wald test statistics and p-values for all variables provide evidence of relationships between these variables and percentage voting for Biden.</p>
-<p>This is not surprising since the sample size is very large. In fact, confidence intervals and hypothesis tests don’t really make sense to talk about here, because we have the whole population of Wisconsin voters in 2020. We’re not trying to generalize from a sample to a population.</p>
-<p>The model estimates still make sense, and are informative, so we should base our conclusions on percentage change estimates given on the previous slide.</p>
-</div>
-<div id="drop-in-deviance-test-2" class="section level3 hasAnchor" number="7.2.8">
-<h3><span class="header-section-number">7.2.8</span> Drop in Deviance Test<a href="binomial-logistic-regression.html#drop-in-deviance-test-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>We could perform a drop-in-deviance test to compare our two models so far.</p>
-<div class="sourceCode" id="cb459"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb459-1"><a href="binomial-logistic-regression.html#cb459-1" tabindex="-1"></a>drop_in_dev <span class="ot">&lt;-</span> <span class="fu">anova</span>(M1b, M2, <span class="at">test =</span> <span class="st">&quot;F&quot;</span>)</span>
-<span id="cb459-2"><a href="binomial-logistic-regression.html#cb459-2" tabindex="-1"></a>drop_in_dev</span></code></pre></div>
-<pre><code>Analysis of Deviance Table
-
-Model 1: cbind(Dvotes, Rvotes) ~ College
-Model 2: cbind(Dvotes, Rvotes) ~ College + Unemployment + WhitePct + COVID_DeathRate + 
-    Income
-  Resid. Df Resid. Dev Df Deviance      F                Pr(&gt;F)    
-1        70     194994                                             
-2        66      34757  4   160237 75.912 &lt; 0.00000000000000022 ***
----
-Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
-<p>We see a large drop in residual deviance, providing strong evidence that the larger model is prefered. In this case, that makes sense, since it contains variables we expect to be helpful.</p>
-<p>When we have very large sample sizes we’ll get small p-values even when the new variables don’t make a practical difference. So we should not base model choices on p-values alone, but should look at confidence intervals and measures of the size of the effect associated with each variable.</p>
-</div>
-<div id="deviance-residual-plot" class="section level3 hasAnchor" number="7.2.9">
-<h3><span class="header-section-number">7.2.9</span> Deviance Residual Plot<a href="binomial-logistic-regression.html#deviance-residual-plot" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="deviance-residual-plot" class="section level3 hasAnchor" number="7.2.6">
+<h3><span class="header-section-number">7.2.6</span> Deviance Residual Plot<a href="binomial-logistic-regression.html#deviance-residual-plot" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>We plot deviance residuals against the predicted values and against our explanatory variables to test for lack of fit.</p>
-<p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-283-1.png" width="60%" style="display: block; margin: auto;" /></p>
-<p><img src="Stat-455-Notes_files/figure-html/resid-1.png" width="960" style="display: block; margin: auto;" /></p>
+<p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-280-1.png" width="60%" style="display: block; margin: auto;" /></p>
+<p>Again, we see some concerns about the linearity assumption, but we’ll stick with this model for the reasons discussed previously.</p>
 </div>
-<div id="llsr-vs-binomial-logistic-regression" class="section level3 hasAnchor" number="7.2.10">
-<h3><span class="header-section-number">7.2.10</span> LLSR vs Binomial Logistic Regression<a href="binomial-logistic-regression.html#llsr-vs-binomial-logistic-regression" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="llsr-vs-binomial-logistic-regression" class="section level3 hasAnchor" number="7.2.7">
+<h3><span class="header-section-number">7.2.7</span> LLSR vs Binomial Logistic Regression<a href="binomial-logistic-regression.html#llsr-vs-binomial-logistic-regression" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><span class="math display">\[\begin{gather*}
 \underline{\textrm{Response}} \\
 \mathbf{LLSR:}\textrm{ normal} \\
@@ -1175,28 +1389,28 @@ Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&
 </div>
 <div id="plotting-likelihood-function" class="section level3 hasAnchor" number="7.3.5">
 <h3><span class="header-section-number">7.3.5</span> Plotting Likelihood Function<a href="binomial-logistic-regression.html#plotting-likelihood-function" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb461"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb461-1"><a href="binomial-logistic-regression.html#cb461-1" tabindex="-1"></a><span class="fu">options</span>( <span class="at">scipen =</span> <span class="dv">0</span> )</span>
-<span id="cb461-2"><a href="binomial-logistic-regression.html#cb461-2" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb461-3"><a href="binomial-logistic-regression.html#cb461-3" tabindex="-1"></a>p<span class="ot">=</span><span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="at">length=</span><span class="dv">1001</span>)</span>
-<span id="cb461-4"><a href="binomial-logistic-regression.html#cb461-4" tabindex="-1"></a>lik<span class="ot">=</span>p<span class="sc">^</span><span class="dv">251</span> <span class="sc">*</span> (<span class="dv">1</span><span class="sc">-</span>p)<span class="sc">^</span>(<span class="dv">663-251</span>)      <span class="co"># likelihood of getting observed data</span></span>
-<span id="cb461-5"><a href="binomial-logistic-regression.html#cb461-5" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(p,lik)</span>
-<span id="cb461-6"><a href="binomial-logistic-regression.html#cb461-6" tabindex="-1"></a>plot<span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data=</span>df,<span class="fu">aes</span>(<span class="at">x=</span>p, <span class="at">y=</span>lik)) <span class="sc">+</span> </span>
-<span id="cb461-7"><a href="binomial-logistic-regression.html#cb461-7" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">color=</span><span class="st">&quot;blue&quot;</span>, <span class="at">size=</span><span class="dv">2</span>) <span class="sc">+</span> </span>
-<span id="cb461-8"><a href="binomial-logistic-regression.html#cb461-8" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;possible values of p&quot;</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;Likelihood&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb461-9"><a href="binomial-logistic-regression.html#cb461-9" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">&quot;Likelihood function for Curry&#39;s shots&quot;</span>) </span>
-<span id="cb461-10"><a href="binomial-logistic-regression.html#cb461-10" tabindex="-1"></a>plot <span class="sc">+</span> <span class="fu">xlim</span>(<span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))</span></code></pre></div>
-<p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-284-1.png" width="576" /></p>
+<div class="sourceCode" id="cb454"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb454-1"><a href="binomial-logistic-regression.html#cb454-1" tabindex="-1"></a><span class="fu">options</span>( <span class="at">scipen =</span> <span class="dv">0</span> )</span>
+<span id="cb454-2"><a href="binomial-logistic-regression.html#cb454-2" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb454-3"><a href="binomial-logistic-regression.html#cb454-3" tabindex="-1"></a>p<span class="ot">=</span><span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="at">length=</span><span class="dv">1001</span>)</span>
+<span id="cb454-4"><a href="binomial-logistic-regression.html#cb454-4" tabindex="-1"></a>lik<span class="ot">=</span>p<span class="sc">^</span><span class="dv">251</span> <span class="sc">*</span> (<span class="dv">1</span><span class="sc">-</span>p)<span class="sc">^</span>(<span class="dv">663-251</span>)      <span class="co"># likelihood of getting observed data</span></span>
+<span id="cb454-5"><a href="binomial-logistic-regression.html#cb454-5" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(p,lik)</span>
+<span id="cb454-6"><a href="binomial-logistic-regression.html#cb454-6" tabindex="-1"></a>plot<span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data=</span>df,<span class="fu">aes</span>(<span class="at">x=</span>p, <span class="at">y=</span>lik)) <span class="sc">+</span> </span>
+<span id="cb454-7"><a href="binomial-logistic-regression.html#cb454-7" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">color=</span><span class="st">&quot;blue&quot;</span>, <span class="at">size=</span><span class="dv">2</span>) <span class="sc">+</span> </span>
+<span id="cb454-8"><a href="binomial-logistic-regression.html#cb454-8" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;possible values of p&quot;</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;Likelihood&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb454-9"><a href="binomial-logistic-regression.html#cb454-9" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">&quot;Likelihood function for Curry&#39;s shots&quot;</span>) </span>
+<span id="cb454-10"><a href="binomial-logistic-regression.html#cb454-10" tabindex="-1"></a>plot <span class="sc">+</span> <span class="fu">xlim</span>(<span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))</span></code></pre></div>
+<p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-281-1.png" width="576" /></p>
 <p>It looks like the most likely value of <span class="math inline">\(p\)</span> is around 0.4.</p>
 <p>We’ll write a function in R to calculate the value of <span class="math inline">\(p\)</span> that maximizes the function.</p>
 </div>
 <div id="numerical-maximization" class="section level3 hasAnchor" number="7.3.6">
 <h3><span class="header-section-number">7.3.6</span> Numerical Maximization<a href="binomial-logistic-regression.html#numerical-maximization" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb462"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb462-1"><a href="binomial-logistic-regression.html#cb462-1" tabindex="-1"></a>Lik.f <span class="ot">&lt;-</span> <span class="cf">function</span>(nbasket,nmissed,nGrid){</span>
-<span id="cb462-2"><a href="binomial-logistic-regression.html#cb462-2" tabindex="-1"></a>    p <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="at">length =</span> nGrid)   <span class="co"># create nGrid values of p between 0 and 1</span></span>
-<span id="cb462-3"><a href="binomial-logistic-regression.html#cb462-3" tabindex="-1"></a>    lik <span class="ot">&lt;-</span> p<span class="sc">^</span>{nbasket} <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">-</span> p)<span class="sc">^</span>{nmissed} <span class="co"># calculate value of lik at each p</span></span>
-<span id="cb462-4"><a href="binomial-logistic-regression.html#cb462-4" tabindex="-1"></a>    <span class="fu">return</span>(p[lik<span class="sc">==</span><span class="fu">max</span>(lik)])             <span class="co"># find and return the value of p that maximizes the likelihood function    </span></span>
-<span id="cb462-5"><a href="binomial-logistic-regression.html#cb462-5" tabindex="-1"></a>}</span></code></pre></div>
-<div class="sourceCode" id="cb463"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb463-1"><a href="binomial-logistic-regression.html#cb463-1" tabindex="-1"></a><span class="fu">Lik.f</span>(<span class="at">nbasket =</span> <span class="dv">251</span>, <span class="at">nmissed =</span>  <span class="dv">663-251</span>, <span class="at">nGrid =</span> <span class="dv">10000</span>) </span></code></pre></div>
+<div class="sourceCode" id="cb455"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb455-1"><a href="binomial-logistic-regression.html#cb455-1" tabindex="-1"></a>Lik.f <span class="ot">&lt;-</span> <span class="cf">function</span>(nbasket,nmissed,nGrid){</span>
+<span id="cb455-2"><a href="binomial-logistic-regression.html#cb455-2" tabindex="-1"></a>    p <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="at">length =</span> nGrid)   <span class="co"># create nGrid values of p between 0 and 1</span></span>
+<span id="cb455-3"><a href="binomial-logistic-regression.html#cb455-3" tabindex="-1"></a>    lik <span class="ot">&lt;-</span> p<span class="sc">^</span>{nbasket} <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">-</span> p)<span class="sc">^</span>{nmissed} <span class="co"># calculate value of lik at each p</span></span>
+<span id="cb455-4"><a href="binomial-logistic-regression.html#cb455-4" tabindex="-1"></a>    <span class="fu">return</span>(p[lik<span class="sc">==</span><span class="fu">max</span>(lik)])             <span class="co"># find and return the value of p that maximizes the likelihood function    </span></span>
+<span id="cb455-5"><a href="binomial-logistic-regression.html#cb455-5" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb456"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb456-1"><a href="binomial-logistic-regression.html#cb456-1" tabindex="-1"></a><span class="fu">Lik.f</span>(<span class="at">nbasket =</span> <span class="dv">251</span>, <span class="at">nmissed =</span>  <span class="dv">663-251</span>, <span class="at">nGrid =</span> <span class="dv">10000</span>) </span></code></pre></div>
 <pre><code>## [1] 0.3785379</code></pre>
 <p>The maximum likelihood estimate is <span class="math inline">\(\hat{p} = 0.3785\)</span>.</p>
 <p>In fact, this is equal to 251/663. In this case, the MLE is consistent with our intuition.</p>
@@ -1235,41 +1449,41 @@ Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&
 </div>
 <div id="plot-of-likelihood-function" class="section level3 hasAnchor" number="7.3.9">
 <h3><span class="header-section-number">7.3.9</span> Plot of Likelihood Function<a href="binomial-logistic-regression.html#plot-of-likelihood-function" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb465"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb465-1"><a href="binomial-logistic-regression.html#cb465-1" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb465-2"><a href="binomial-logistic-regression.html#cb465-2" tabindex="-1"></a>b<span class="ot">=</span><span class="fu">seq</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">1</span>,<span class="at">length=</span><span class="dv">1001</span>)</span>
-<span id="cb465-3"><a href="binomial-logistic-regression.html#cb465-3" tabindex="-1"></a>lik<span class="ot">=</span> (<span class="fu">exp</span>(b)<span class="sc">/</span>(<span class="dv">1</span><span class="sc">+</span><span class="fu">exp</span>(b)))<span class="sc">^</span><span class="dv">251</span><span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span>(<span class="fu">exp</span>(b)<span class="sc">/</span>(<span class="dv">1</span><span class="sc">+</span><span class="fu">exp</span>(b))))<span class="sc">^</span>(<span class="dv">412</span>)       <span class="co"># likelihood of getting observed data</span></span>
-<span id="cb465-4"><a href="binomial-logistic-regression.html#cb465-4" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(b,lik)</span>
-<span id="cb465-5"><a href="binomial-logistic-regression.html#cb465-5" tabindex="-1"></a>plot<span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data=</span>df,<span class="fu">aes</span>(<span class="at">x=</span>b, <span class="at">y=</span>lik)) <span class="sc">+</span> </span>
-<span id="cb465-6"><a href="binomial-logistic-regression.html#cb465-6" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">color=</span><span class="st">&quot;blue&quot;</span>, <span class="at">size=</span><span class="dv">2</span>) <span class="sc">+</span> </span>
-<span id="cb465-7"><a href="binomial-logistic-regression.html#cb465-7" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;possible values of beta_0&quot;</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;Likelihood&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb465-8"><a href="binomial-logistic-regression.html#cb465-8" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">&quot;Likelihood function for Curry&#39;s shots&quot;</span>) </span>
-<span id="cb465-9"><a href="binomial-logistic-regression.html#cb465-9" tabindex="-1"></a>plot <span class="sc">+</span> <span class="fu">xlim</span>(<span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>))</span></code></pre></div>
-<p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-287-1.png" width="576" /></p>
+<div class="sourceCode" id="cb458"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb458-1"><a href="binomial-logistic-regression.html#cb458-1" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb458-2"><a href="binomial-logistic-regression.html#cb458-2" tabindex="-1"></a>b<span class="ot">=</span><span class="fu">seq</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">1</span>,<span class="at">length=</span><span class="dv">1001</span>)</span>
+<span id="cb458-3"><a href="binomial-logistic-regression.html#cb458-3" tabindex="-1"></a>lik<span class="ot">=</span> (<span class="fu">exp</span>(b)<span class="sc">/</span>(<span class="dv">1</span><span class="sc">+</span><span class="fu">exp</span>(b)))<span class="sc">^</span><span class="dv">251</span><span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span>(<span class="fu">exp</span>(b)<span class="sc">/</span>(<span class="dv">1</span><span class="sc">+</span><span class="fu">exp</span>(b))))<span class="sc">^</span>(<span class="dv">412</span>)       <span class="co"># likelihood of getting observed data</span></span>
+<span id="cb458-4"><a href="binomial-logistic-regression.html#cb458-4" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(b,lik)</span>
+<span id="cb458-5"><a href="binomial-logistic-regression.html#cb458-5" tabindex="-1"></a>plot<span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data=</span>df,<span class="fu">aes</span>(<span class="at">x=</span>b, <span class="at">y=</span>lik)) <span class="sc">+</span> </span>
+<span id="cb458-6"><a href="binomial-logistic-regression.html#cb458-6" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">color=</span><span class="st">&quot;blue&quot;</span>, <span class="at">size=</span><span class="dv">2</span>) <span class="sc">+</span> </span>
+<span id="cb458-7"><a href="binomial-logistic-regression.html#cb458-7" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;possible values of beta_0&quot;</span>) <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&quot;Likelihood&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb458-8"><a href="binomial-logistic-regression.html#cb458-8" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">&quot;Likelihood function for Curry&#39;s shots&quot;</span>) </span>
+<span id="cb458-9"><a href="binomial-logistic-regression.html#cb458-9" tabindex="-1"></a>plot <span class="sc">+</span> <span class="fu">xlim</span>(<span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>))</span></code></pre></div>
+<p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-284-1.png" width="576" /></p>
 </div>
 <div id="numerical-maximization-1" class="section level3 hasAnchor" number="7.3.10">
 <h3><span class="header-section-number">7.3.10</span> Numerical Maximization<a href="binomial-logistic-regression.html#numerical-maximization-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb466"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb466-1"><a href="binomial-logistic-regression.html#cb466-1" tabindex="-1"></a>Lik.f_logistic <span class="ot">&lt;-</span> <span class="cf">function</span>(nbasket,nmissed,nGrid){</span>
-<span id="cb466-2"><a href="binomial-logistic-regression.html#cb466-2" tabindex="-1"></a>    b <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>, <span class="at">length =</span> nGrid)   <span class="co"># create values between -1 and 1 at which to evaluate the function</span></span>
-<span id="cb466-3"><a href="binomial-logistic-regression.html#cb466-3" tabindex="-1"></a>    lik <span class="ot">&lt;-</span> (<span class="fu">exp</span>(b)<span class="sc">/</span>(<span class="dv">1</span><span class="sc">+</span><span class="fu">exp</span>(b)))<span class="sc">^</span>nbasket<span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span>(<span class="fu">exp</span>(b)<span class="sc">/</span>(<span class="dv">1</span><span class="sc">+</span><span class="fu">exp</span>(b))))<span class="sc">^</span>nmissed  <span class="co"># calculate values at each b</span></span>
-<span id="cb466-4"><a href="binomial-logistic-regression.html#cb466-4" tabindex="-1"></a>    <span class="fu">return</span>(b[lik<span class="sc">==</span><span class="fu">max</span>(lik)])    <span class="co"># find and return value of b that maximizes the function</span></span>
-<span id="cb466-5"><a href="binomial-logistic-regression.html#cb466-5" tabindex="-1"></a>}</span></code></pre></div>
-<div class="sourceCode" id="cb467"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb467-1"><a href="binomial-logistic-regression.html#cb467-1" tabindex="-1"></a><span class="fu">Lik.f_logistic</span>(<span class="at">nbasket =</span> <span class="dv">251</span>, <span class="at">nmissed =</span> <span class="dv">412</span>, <span class="at">nGrid =</span> <span class="dv">10000</span>) </span></code></pre></div>
+<div class="sourceCode" id="cb459"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb459-1"><a href="binomial-logistic-regression.html#cb459-1" tabindex="-1"></a>Lik.f_logistic <span class="ot">&lt;-</span> <span class="cf">function</span>(nbasket,nmissed,nGrid){</span>
+<span id="cb459-2"><a href="binomial-logistic-regression.html#cb459-2" tabindex="-1"></a>    b <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>, <span class="at">length =</span> nGrid)   <span class="co"># create values between -1 and 1 at which to evaluate the function</span></span>
+<span id="cb459-3"><a href="binomial-logistic-regression.html#cb459-3" tabindex="-1"></a>    lik <span class="ot">&lt;-</span> (<span class="fu">exp</span>(b)<span class="sc">/</span>(<span class="dv">1</span><span class="sc">+</span><span class="fu">exp</span>(b)))<span class="sc">^</span>nbasket<span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span>(<span class="fu">exp</span>(b)<span class="sc">/</span>(<span class="dv">1</span><span class="sc">+</span><span class="fu">exp</span>(b))))<span class="sc">^</span>nmissed  <span class="co"># calculate values at each b</span></span>
+<span id="cb459-4"><a href="binomial-logistic-regression.html#cb459-4" tabindex="-1"></a>    <span class="fu">return</span>(b[lik<span class="sc">==</span><span class="fu">max</span>(lik)])    <span class="co"># find and return value of b that maximizes the function</span></span>
+<span id="cb459-5"><a href="binomial-logistic-regression.html#cb459-5" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb460"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb460-1"><a href="binomial-logistic-regression.html#cb460-1" tabindex="-1"></a><span class="fu">Lik.f_logistic</span>(<span class="at">nbasket =</span> <span class="dv">251</span>, <span class="at">nmissed =</span> <span class="dv">412</span>, <span class="at">nGrid =</span> <span class="dv">10000</span>) </span></code></pre></div>
 <pre><code>## [1] -0.4955496</code></pre>
 <p>Our estimate is <span class="math inline">\(b_0 = -0.4955\)</span>.</p>
 <p>From this we can calculate <span class="math display">\[\hat{p} =  \frac{e^{-0.4955}}{1+e^{-0.4955}}\approx0.3785\]</span></p>
 </div>
 <div id="comparison-to-r-output" class="section level3 hasAnchor" number="7.3.11">
 <h3><span class="header-section-number">7.3.11</span> Comparison to R Output<a href="binomial-logistic-regression.html#comparison-to-r-output" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb469"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb469-1"><a href="binomial-logistic-regression.html#cb469-1" tabindex="-1"></a>Location <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Home&quot;</span>, <span class="st">&quot;Away&quot;</span>)</span>
-<span id="cb469-2"><a href="binomial-logistic-regression.html#cb469-2" tabindex="-1"></a>Makes <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">150</span>, <span class="dv">101</span>)</span>
-<span id="cb469-3"><a href="binomial-logistic-regression.html#cb469-3" tabindex="-1"></a>Misses <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">247</span>, <span class="dv">165</span>)</span>
-<span id="cb469-4"><a href="binomial-logistic-regression.html#cb469-4" tabindex="-1"></a>Curry <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(Location, Makes, Misses)</span>
-<span id="cb469-5"><a href="binomial-logistic-regression.html#cb469-5" tabindex="-1"></a><span class="fu">head</span>(Curry)</span></code></pre></div>
+<div class="sourceCode" id="cb462"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb462-1"><a href="binomial-logistic-regression.html#cb462-1" tabindex="-1"></a>Location <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Home&quot;</span>, <span class="st">&quot;Away&quot;</span>)</span>
+<span id="cb462-2"><a href="binomial-logistic-regression.html#cb462-2" tabindex="-1"></a>Makes <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">150</span>, <span class="dv">101</span>)</span>
+<span id="cb462-3"><a href="binomial-logistic-regression.html#cb462-3" tabindex="-1"></a>Misses <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">247</span>, <span class="dv">165</span>)</span>
+<span id="cb462-4"><a href="binomial-logistic-regression.html#cb462-4" tabindex="-1"></a>Curry <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(Location, Makes, Misses)</span>
+<span id="cb462-5"><a href="binomial-logistic-regression.html#cb462-5" tabindex="-1"></a><span class="fu">head</span>(Curry)</span></code></pre></div>
 <pre><code>##   Location Makes Misses
 ## 1     Home   150    247
 ## 2     Away   101    165</code></pre>
-<div class="sourceCode" id="cb471"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb471-1"><a href="binomial-logistic-regression.html#cb471-1" tabindex="-1"></a>M <span class="ot">&lt;-</span> <span class="fu">glm</span>(<span class="at">data =</span> Curry, <span class="fu">cbind</span>(Makes, Misses) <span class="sc">~</span> <span class="dv">1</span> , <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link=</span><span class="st">&quot;logit&quot;</span>))</span>
-<span id="cb471-2"><a href="binomial-logistic-regression.html#cb471-2" tabindex="-1"></a><span class="fu">summary</span>(M)</span></code></pre></div>
+<div class="sourceCode" id="cb464"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb464-1"><a href="binomial-logistic-regression.html#cb464-1" tabindex="-1"></a>M <span class="ot">&lt;-</span> <span class="fu">glm</span>(<span class="at">data =</span> Curry, <span class="fu">cbind</span>(Makes, Misses) <span class="sc">~</span> <span class="dv">1</span> , <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link=</span><span class="st">&quot;logit&quot;</span>))</span>
+<span id="cb464-2"><a href="binomial-logistic-regression.html#cb464-2" tabindex="-1"></a><span class="fu">summary</span>(M)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## glm(formula = cbind(Makes, Misses) ~ 1, family = binomial(link = &quot;logit&quot;), 
@@ -1314,24 +1528,24 @@ p_A^{101}(1-p_A)^{165}\]</span></p>
 </div>
 <div id="numerical-optimization" class="section level3 hasAnchor" number="7.3.13">
 <h3><span class="header-section-number">7.3.13</span> Numerical Optimization<a href="binomial-logistic-regression.html#numerical-optimization" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb473"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb473-1"><a href="binomial-logistic-regression.html#cb473-1" tabindex="-1"></a>Lik.f_logistic2 <span class="ot">&lt;-</span> <span class="cf">function</span>(nbasketH,nmissedH,nbasketA,nmissedA,nGrid){</span>
-<span id="cb473-2"><a href="binomial-logistic-regression.html#cb473-2" tabindex="-1"></a>    b0 <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>, <span class="at">length =</span> nGrid)  <span class="co"># values of b0 </span></span>
-<span id="cb473-3"><a href="binomial-logistic-regression.html#cb473-3" tabindex="-1"></a>    b1 <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>, <span class="at">length=</span>nGrid)  <span class="co"># values of b1</span></span>
-<span id="cb473-4"><a href="binomial-logistic-regression.html#cb473-4" tabindex="-1"></a>    B <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(b0, b1)  <span class="co"># create all combinations of b0 and b1</span></span>
-<span id="cb473-5"><a href="binomial-logistic-regression.html#cb473-5" tabindex="-1"></a>    <span class="fu">names</span>(B) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;b0&quot;</span>, <span class="st">&quot;b1&quot;</span>)  <span class="co"># give B the right names</span></span>
-<span id="cb473-6"><a href="binomial-logistic-regression.html#cb473-6" tabindex="-1"></a>    B <span class="ot">&lt;-</span> B <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">Lik =</span> (<span class="fu">exp</span>(b0<span class="sc">+</span>b1)<span class="sc">/</span>(<span class="dv">1</span><span class="sc">+</span><span class="fu">exp</span>(b0<span class="sc">+</span>b1)))<span class="sc">^</span>nbasketH<span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span>(<span class="fu">exp</span>(b0<span class="sc">+</span>b1)<span class="sc">/</span>(<span class="dv">1</span><span class="sc">+</span><span class="fu">exp</span>(b0<span class="sc">+</span>b1))))<span class="sc">^</span>nmissedH<span class="sc">*</span></span>
-<span id="cb473-7"><a href="binomial-logistic-regression.html#cb473-7" tabindex="-1"></a>                        (<span class="fu">exp</span>(b0)<span class="sc">/</span>(<span class="dv">1</span><span class="sc">+</span><span class="fu">exp</span>(b0)))<span class="sc">^</span>nbasketA<span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span>(<span class="fu">exp</span>(b0)<span class="sc">/</span>(<span class="dv">1</span><span class="sc">+</span><span class="fu">exp</span>(b0))))<span class="sc">^</span>nmissedA) <span class="co">#evaluate function</span></span>
-<span id="cb473-8"><a href="binomial-logistic-regression.html#cb473-8" tabindex="-1"></a>    <span class="fu">return</span>(B[B<span class="sc">$</span>Lik<span class="sc">==</span><span class="fu">max</span>(B<span class="sc">$</span>Lik),]) <span class="co"># find and return combination of b0 and b1 that maximize B.     </span></span>
-<span id="cb473-9"><a href="binomial-logistic-regression.html#cb473-9" tabindex="-1"></a>}</span></code></pre></div>
-<div class="sourceCode" id="cb474"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb474-1"><a href="binomial-logistic-regression.html#cb474-1" tabindex="-1"></a><span class="fu">Lik.f_logistic2</span>(<span class="at">nbasketH =</span> <span class="dv">150</span>, <span class="at">nmissedH =</span> <span class="dv">247</span>, <span class="at">nbasketA =</span> <span class="dv">101</span>, <span class="at">nmissedA =</span> <span class="dv">165</span>, <span class="at">nGrid =</span> <span class="dv">1000</span>) </span></code></pre></div>
+<div class="sourceCode" id="cb466"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb466-1"><a href="binomial-logistic-regression.html#cb466-1" tabindex="-1"></a>Lik.f_logistic2 <span class="ot">&lt;-</span> <span class="cf">function</span>(nbasketH,nmissedH,nbasketA,nmissedA,nGrid){</span>
+<span id="cb466-2"><a href="binomial-logistic-regression.html#cb466-2" tabindex="-1"></a>    b0 <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>, <span class="at">length =</span> nGrid)  <span class="co"># values of b0 </span></span>
+<span id="cb466-3"><a href="binomial-logistic-regression.html#cb466-3" tabindex="-1"></a>    b1 <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>, <span class="at">length=</span>nGrid)  <span class="co"># values of b1</span></span>
+<span id="cb466-4"><a href="binomial-logistic-regression.html#cb466-4" tabindex="-1"></a>    B <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(b0, b1)  <span class="co"># create all combinations of b0 and b1</span></span>
+<span id="cb466-5"><a href="binomial-logistic-regression.html#cb466-5" tabindex="-1"></a>    <span class="fu">names</span>(B) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;b0&quot;</span>, <span class="st">&quot;b1&quot;</span>)  <span class="co"># give B the right names</span></span>
+<span id="cb466-6"><a href="binomial-logistic-regression.html#cb466-6" tabindex="-1"></a>    B <span class="ot">&lt;-</span> B <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">Lik =</span> (<span class="fu">exp</span>(b0<span class="sc">+</span>b1)<span class="sc">/</span>(<span class="dv">1</span><span class="sc">+</span><span class="fu">exp</span>(b0<span class="sc">+</span>b1)))<span class="sc">^</span>nbasketH<span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span>(<span class="fu">exp</span>(b0<span class="sc">+</span>b1)<span class="sc">/</span>(<span class="dv">1</span><span class="sc">+</span><span class="fu">exp</span>(b0<span class="sc">+</span>b1))))<span class="sc">^</span>nmissedH<span class="sc">*</span></span>
+<span id="cb466-7"><a href="binomial-logistic-regression.html#cb466-7" tabindex="-1"></a>                        (<span class="fu">exp</span>(b0)<span class="sc">/</span>(<span class="dv">1</span><span class="sc">+</span><span class="fu">exp</span>(b0)))<span class="sc">^</span>nbasketA<span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span>(<span class="fu">exp</span>(b0)<span class="sc">/</span>(<span class="dv">1</span><span class="sc">+</span><span class="fu">exp</span>(b0))))<span class="sc">^</span>nmissedA) <span class="co">#evaluate function</span></span>
+<span id="cb466-8"><a href="binomial-logistic-regression.html#cb466-8" tabindex="-1"></a>    <span class="fu">return</span>(B[B<span class="sc">$</span>Lik<span class="sc">==</span><span class="fu">max</span>(B<span class="sc">$</span>Lik),]) <span class="co"># find and return combination of b0 and b1 that maximize B.     </span></span>
+<span id="cb466-9"><a href="binomial-logistic-regression.html#cb466-9" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb467"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb467-1"><a href="binomial-logistic-regression.html#cb467-1" tabindex="-1"></a><span class="fu">Lik.f_logistic2</span>(<span class="at">nbasketH =</span> <span class="dv">150</span>, <span class="at">nmissedH =</span> <span class="dv">247</span>, <span class="at">nbasketA =</span> <span class="dv">101</span>, <span class="at">nmissedA =</span> <span class="dv">165</span>, <span class="at">nGrid =</span> <span class="dv">1000</span>) </span></code></pre></div>
 <pre><code>##                b0           b1           Lik
 ## 496255 -0.4914915 -0.007007007 9.835399e-192</code></pre>
 <p>Although we have worked with the likelihood function here, it is more common to work with the log of the likelihood function. Notice that the maximized log likelihood is very small, which can create numerical instability, though it doesn’t here.</p>
 </div>
 <div id="comparison-to-r-output-1" class="section level3 hasAnchor" number="7.3.14">
 <h3><span class="header-section-number">7.3.14</span> Comparison to R Output<a href="binomial-logistic-regression.html#comparison-to-r-output-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb476"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb476-1"><a href="binomial-logistic-regression.html#cb476-1" tabindex="-1"></a>M <span class="ot">&lt;-</span> <span class="fu">glm</span>(<span class="at">data =</span> Curry, <span class="fu">cbind</span>(Makes, Misses) <span class="sc">~</span> Location , <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link=</span><span class="st">&quot;logit&quot;</span>))</span>
-<span id="cb476-2"><a href="binomial-logistic-regression.html#cb476-2" tabindex="-1"></a><span class="fu">summary</span>(M)</span></code></pre></div>
+<div class="sourceCode" id="cb469"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb469-1"><a href="binomial-logistic-regression.html#cb469-1" tabindex="-1"></a>M <span class="ot">&lt;-</span> <span class="fu">glm</span>(<span class="at">data =</span> Curry, <span class="fu">cbind</span>(Makes, Misses) <span class="sc">~</span> Location , <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link=</span><span class="st">&quot;logit&quot;</span>))</span>
+<span id="cb469-2"><a href="binomial-logistic-regression.html#cb469-2" tabindex="-1"></a><span class="fu">summary</span>(M)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## glm(formula = cbind(Makes, Misses) ~ Location, family = binomial(link = &quot;logit&quot;), 
@@ -1394,13 +1608,13 @@ p_A^{101}(1-p_A)^{165}\]</span></p>
 <p>Students in an introductory statistics class at a large university were asked:</p>
 <p>“How many alcoholic drinks did you consume last weekend?”.</p>
 <p>This survey was conducted on a dry campus where no alcohol is officially allowed, even among students of drinking age, so we expect that some portion of the respondents never drink. The purpose of this survey is to explore factors related to drinking behavior on a dry campus.</p>
-<div class="sourceCode" id="cb478"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb478-1"><a href="binomial-logistic-regression.html#cb478-1" tabindex="-1"></a><span class="co">#Getting started-weekenddrinks</span></span>
-<span id="cb478-2"><a href="binomial-logistic-regression.html#cb478-2" tabindex="-1"></a><span class="co"># File: weekendDrinks</span></span>
-<span id="cb478-3"><a href="binomial-logistic-regression.html#cb478-3" tabindex="-1"></a>drinks <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;https://raw.githubusercontent.com/proback/BeyondMLR/master/data/weekendDrinks.csv&quot;</span>) </span>
-<span id="cb478-4"><a href="binomial-logistic-regression.html#cb478-4" tabindex="-1"></a>drinks <span class="ot">&lt;-</span> drinks <span class="sc">%&gt;%</span> </span>
-<span id="cb478-5"><a href="binomial-logistic-regression.html#cb478-5" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">off.campus=</span><span class="fu">ifelse</span>(dorm<span class="sc">==</span><span class="st">&quot;off campus&quot;</span>,<span class="dv">1</span>,<span class="dv">0</span>), </span>
-<span id="cb478-6"><a href="binomial-logistic-regression.html#cb478-6" tabindex="-1"></a>         <span class="at">firstYear=</span>dorm<span class="sc">%in%</span><span class="fu">c</span>(<span class="st">&quot;kildahl&quot;</span>,<span class="st">&quot;mohn&quot;</span>,<span class="st">&quot;kittlesby&quot;</span>)) <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span><span class="fu">c</span>(dorm))</span>
-<span id="cb478-7"><a href="binomial-logistic-regression.html#cb478-7" tabindex="-1"></a><span class="fu">head</span>(drinks)</span></code></pre></div>
+<div class="sourceCode" id="cb471"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb471-1"><a href="binomial-logistic-regression.html#cb471-1" tabindex="-1"></a><span class="co">#Getting started-weekenddrinks</span></span>
+<span id="cb471-2"><a href="binomial-logistic-regression.html#cb471-2" tabindex="-1"></a><span class="co"># File: weekendDrinks</span></span>
+<span id="cb471-3"><a href="binomial-logistic-regression.html#cb471-3" tabindex="-1"></a>drinks <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;https://raw.githubusercontent.com/proback/BeyondMLR/master/data/weekendDrinks.csv&quot;</span>) </span>
+<span id="cb471-4"><a href="binomial-logistic-regression.html#cb471-4" tabindex="-1"></a>drinks <span class="ot">&lt;-</span> drinks <span class="sc">%&gt;%</span> </span>
+<span id="cb471-5"><a href="binomial-logistic-regression.html#cb471-5" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">off.campus=</span><span class="fu">ifelse</span>(dorm<span class="sc">==</span><span class="st">&quot;off campus&quot;</span>,<span class="dv">1</span>,<span class="dv">0</span>), </span>
+<span id="cb471-6"><a href="binomial-logistic-regression.html#cb471-6" tabindex="-1"></a>         <span class="at">firstYear=</span>dorm<span class="sc">%in%</span><span class="fu">c</span>(<span class="st">&quot;kildahl&quot;</span>,<span class="st">&quot;mohn&quot;</span>,<span class="st">&quot;kittlesby&quot;</span>)) <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span><span class="fu">c</span>(dorm))</span>
+<span id="cb471-7"><a href="binomial-logistic-regression.html#cb471-7" tabindex="-1"></a><span class="fu">head</span>(drinks)</span></code></pre></div>
 <pre><code>##   drinks sex off.campus firstYear
 ## 1      0   f          0      TRUE
 ## 2      5   f          0     FALSE
@@ -1425,11 +1639,11 @@ p_A^{101}(1-p_A)^{165}\]</span></p>
 </div>
 <div id="distribution-of-number-of-drinks" class="section level3 hasAnchor" number="7.4.3">
 <h3><span class="header-section-number">7.4.3</span> Distribution of Number of Drinks<a href="binomial-logistic-regression.html#distribution-of-number-of-drinks" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb480"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb480-1"><a href="binomial-logistic-regression.html#cb480-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>drinks, <span class="fu">aes</span>(<span class="at">x=</span>drinks)) <span class="sc">+</span> <span class="fu">geom_histogram</span>() <span class="sc">+</span> <span class="fu">facet_wrap</span>(<span class="sc">~</span>firstYear)</span></code></pre></div>
-<p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-296-1.png" width="576" /></p>
-<div class="sourceCode" id="cb481"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb481-1"><a href="binomial-logistic-regression.html#cb481-1" tabindex="-1"></a>drinks <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(firstYear) <span class="sc">%&gt;%</span> <span class="fu">summarize</span>(<span class="at">mean_drinks=</span><span class="fu">mean</span>(drinks), </span>
-<span id="cb481-2"><a href="binomial-logistic-regression.html#cb481-2" tabindex="-1"></a>                                             <span class="at">prop_zero =</span> <span class="fu">mean</span>(drinks<span class="sc">==</span><span class="dv">0</span>), </span>
-<span id="cb481-3"><a href="binomial-logistic-regression.html#cb481-3" tabindex="-1"></a>                                             <span class="at">n=</span><span class="fu">n</span>())</span></code></pre></div>
+<div class="sourceCode" id="cb473"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb473-1"><a href="binomial-logistic-regression.html#cb473-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>drinks, <span class="fu">aes</span>(<span class="at">x=</span>drinks)) <span class="sc">+</span> <span class="fu">geom_histogram</span>() <span class="sc">+</span> <span class="fu">facet_wrap</span>(<span class="sc">~</span>firstYear)</span></code></pre></div>
+<p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-293-1.png" width="576" /></p>
+<div class="sourceCode" id="cb474"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb474-1"><a href="binomial-logistic-regression.html#cb474-1" tabindex="-1"></a>drinks <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(firstYear) <span class="sc">%&gt;%</span> <span class="fu">summarize</span>(<span class="at">mean_drinks=</span><span class="fu">mean</span>(drinks), </span>
+<span id="cb474-2"><a href="binomial-logistic-regression.html#cb474-2" tabindex="-1"></a>                                             <span class="at">prop_zero =</span> <span class="fu">mean</span>(drinks<span class="sc">==</span><span class="dv">0</span>), </span>
+<span id="cb474-3"><a href="binomial-logistic-regression.html#cb474-3" tabindex="-1"></a>                                             <span class="at">n=</span><span class="fu">n</span>())</span></code></pre></div>
 <pre><code>## # A tibble: 2 × 4
 ##   firstYear mean_drinks prop_zero     n
 ##   &lt;lgl&gt;           &lt;dbl&gt;     &lt;dbl&gt; &lt;int&gt;
@@ -1438,42 +1652,42 @@ p_A^{101}(1-p_A)^{165}\]</span></p>
 </div>
 <div id="number-of-drinks-comparisons" class="section level3 hasAnchor" number="7.4.4">
 <h3><span class="header-section-number">7.4.4</span> Number of Drinks Comparisons<a href="binomial-logistic-regression.html#number-of-drinks-comparisons" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb483"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb483-1"><a href="binomial-logistic-regression.html#cb483-1" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> drinks) <span class="sc">+</span> </span>
-<span id="cb483-2"><a href="binomial-logistic-regression.html#cb483-2" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> drinks)) <span class="sc">+</span> <span class="fu">facet_wrap</span>(<span class="sc">~</span>firstYear, <span class="at">nrow=</span><span class="dv">2</span>) <span class="sc">+</span></span>
-<span id="cb483-3"><a href="binomial-logistic-regression.html#cb483-3" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Drinking by First Year Status&quot;</span>) </span>
-<span id="cb483-4"><a href="binomial-logistic-regression.html#cb483-4" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> drinks) <span class="sc">+</span> </span>
-<span id="cb483-5"><a href="binomial-logistic-regression.html#cb483-5" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> drinks)) <span class="sc">+</span> <span class="fu">facet_wrap</span>(<span class="sc">~</span>sex, <span class="at">nrow=</span><span class="dv">2</span>) <span class="sc">+</span></span>
-<span id="cb483-6"><a href="binomial-logistic-regression.html#cb483-6" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Drinks by Sex&quot;</span>) </span>
-<span id="cb483-7"><a href="binomial-logistic-regression.html#cb483-7" tabindex="-1"></a>p3 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> drinks) <span class="sc">+</span> </span>
-<span id="cb483-8"><a href="binomial-logistic-regression.html#cb483-8" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> drinks)) <span class="sc">+</span> <span class="fu">facet_wrap</span>(<span class="sc">~</span>off.campus, <span class="at">nrow=</span><span class="dv">2</span>) <span class="sc">+</span></span>
-<span id="cb483-9"><a href="binomial-logistic-regression.html#cb483-9" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Drinking by On/Off Campus&quot;</span>) </span>
-<span id="cb483-10"><a href="binomial-logistic-regression.html#cb483-10" tabindex="-1"></a><span class="fu">grid.arrange</span>(p1, p2, p3, <span class="at">nrow=</span><span class="dv">1</span>)</span></code></pre></div>
-<p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-298-1.png" width="960" /></p>
+<div class="sourceCode" id="cb476"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb476-1"><a href="binomial-logistic-regression.html#cb476-1" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> drinks) <span class="sc">+</span> </span>
+<span id="cb476-2"><a href="binomial-logistic-regression.html#cb476-2" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> drinks)) <span class="sc">+</span> <span class="fu">facet_wrap</span>(<span class="sc">~</span>firstYear, <span class="at">nrow=</span><span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb476-3"><a href="binomial-logistic-regression.html#cb476-3" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Drinking by First Year Status&quot;</span>) </span>
+<span id="cb476-4"><a href="binomial-logistic-regression.html#cb476-4" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> drinks) <span class="sc">+</span> </span>
+<span id="cb476-5"><a href="binomial-logistic-regression.html#cb476-5" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> drinks)) <span class="sc">+</span> <span class="fu">facet_wrap</span>(<span class="sc">~</span>sex, <span class="at">nrow=</span><span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb476-6"><a href="binomial-logistic-regression.html#cb476-6" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Drinks by Sex&quot;</span>) </span>
+<span id="cb476-7"><a href="binomial-logistic-regression.html#cb476-7" tabindex="-1"></a>p3 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> drinks) <span class="sc">+</span> </span>
+<span id="cb476-8"><a href="binomial-logistic-regression.html#cb476-8" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> drinks)) <span class="sc">+</span> <span class="fu">facet_wrap</span>(<span class="sc">~</span>off.campus, <span class="at">nrow=</span><span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb476-9"><a href="binomial-logistic-regression.html#cb476-9" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Drinking by On/Off Campus&quot;</span>) </span>
+<span id="cb476-10"><a href="binomial-logistic-regression.html#cb476-10" tabindex="-1"></a><span class="fu">grid.arrange</span>(p1, p2, p3, <span class="at">nrow=</span><span class="dv">1</span>)</span></code></pre></div>
+<p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-295-1.png" width="960" /></p>
 </div>
 <div id="proportion-of-drinkers" class="section level3 hasAnchor" number="7.4.5">
 <h3><span class="header-section-number">7.4.5</span> Proportion of Drinkers<a href="binomial-logistic-regression.html#proportion-of-drinkers" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Now, we compare proportions of students who reported drinking any drinks.</p>
 <p>Drinks by First-Year Status:</p>
-<div class="sourceCode" id="cb484"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb484-1"><a href="binomial-logistic-regression.html#cb484-1" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> drinks) <span class="sc">+</span> </span>
-<span id="cb484-2"><a href="binomial-logistic-regression.html#cb484-2" tabindex="-1"></a>  <span class="fu">stat_count</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> firstYear, <span class="at">fill=</span>drinks<span class="sc">&gt;</span><span class="dv">0</span>), <span class="at">position=</span><span class="st">&quot;fill&quot;</span> ) <span class="sc">+</span> </span>
-<span id="cb484-3"><a href="binomial-logistic-regression.html#cb484-3" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Drinking by First Year Status&quot;</span>) </span>
-<span id="cb484-4"><a href="binomial-logistic-regression.html#cb484-4" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> drinks) <span class="sc">+</span> </span>
-<span id="cb484-5"><a href="binomial-logistic-regression.html#cb484-5" tabindex="-1"></a>  <span class="fu">stat_count</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> sex, <span class="at">fill=</span>drinks<span class="sc">&gt;</span><span class="dv">0</span>), <span class="at">position=</span><span class="st">&quot;fill&quot;</span> ) <span class="sc">+</span> </span>
-<span id="cb484-6"><a href="binomial-logistic-regression.html#cb484-6" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Drinking by Sex&quot;</span>) </span>
-<span id="cb484-7"><a href="binomial-logistic-regression.html#cb484-7" tabindex="-1"></a>p3 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> drinks) <span class="sc">+</span> </span>
-<span id="cb484-8"><a href="binomial-logistic-regression.html#cb484-8" tabindex="-1"></a>  <span class="fu">stat_count</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> off.campus, <span class="at">fill=</span>drinks<span class="sc">&gt;</span><span class="dv">0</span>), <span class="at">position=</span><span class="st">&quot;fill&quot;</span> ) <span class="sc">+</span> </span>
-<span id="cb484-9"><a href="binomial-logistic-regression.html#cb484-9" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Drinking by On/Off Campus&quot;</span>) </span>
-<span id="cb484-10"><a href="binomial-logistic-regression.html#cb484-10" tabindex="-1"></a><span class="fu">grid.arrange</span>(p1, p2, p3, <span class="at">nrow=</span><span class="dv">3</span>)</span></code></pre></div>
-<p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-299-1.png" width="960" /></p>
+<div class="sourceCode" id="cb477"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb477-1"><a href="binomial-logistic-regression.html#cb477-1" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> drinks) <span class="sc">+</span> </span>
+<span id="cb477-2"><a href="binomial-logistic-regression.html#cb477-2" tabindex="-1"></a>  <span class="fu">stat_count</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> firstYear, <span class="at">fill=</span>drinks<span class="sc">&gt;</span><span class="dv">0</span>), <span class="at">position=</span><span class="st">&quot;fill&quot;</span> ) <span class="sc">+</span> </span>
+<span id="cb477-3"><a href="binomial-logistic-regression.html#cb477-3" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Drinking by First Year Status&quot;</span>) </span>
+<span id="cb477-4"><a href="binomial-logistic-regression.html#cb477-4" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> drinks) <span class="sc">+</span> </span>
+<span id="cb477-5"><a href="binomial-logistic-regression.html#cb477-5" tabindex="-1"></a>  <span class="fu">stat_count</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> sex, <span class="at">fill=</span>drinks<span class="sc">&gt;</span><span class="dv">0</span>), <span class="at">position=</span><span class="st">&quot;fill&quot;</span> ) <span class="sc">+</span> </span>
+<span id="cb477-6"><a href="binomial-logistic-regression.html#cb477-6" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Drinking by Sex&quot;</span>) </span>
+<span id="cb477-7"><a href="binomial-logistic-regression.html#cb477-7" tabindex="-1"></a>p3 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> drinks) <span class="sc">+</span> </span>
+<span id="cb477-8"><a href="binomial-logistic-regression.html#cb477-8" tabindex="-1"></a>  <span class="fu">stat_count</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> off.campus, <span class="at">fill=</span>drinks<span class="sc">&gt;</span><span class="dv">0</span>), <span class="at">position=</span><span class="st">&quot;fill&quot;</span> ) <span class="sc">+</span> </span>
+<span id="cb477-9"><a href="binomial-logistic-regression.html#cb477-9" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Drinking by On/Off Campus&quot;</span>) </span>
+<span id="cb477-10"><a href="binomial-logistic-regression.html#cb477-10" tabindex="-1"></a><span class="fu">grid.arrange</span>(p1, p2, p3, <span class="at">nrow=</span><span class="dv">3</span>)</span></code></pre></div>
+<p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-296-1.png" width="960" /></p>
 </div>
 <div id="modeling-drinks" class="section level3 hasAnchor" number="7.4.6">
 <h3><span class="header-section-number">7.4.6</span> Modeling Drinks<a href="binomial-logistic-regression.html#modeling-drinks" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>A Poisson distribution seems like a good choice for modeling drinks, since they are a count, and there is no fixed number of “attempts”, as in a binomial distribution.</p>
-<p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-300-1.png" width="960" /></p>
+<p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-297-1.png" width="960" /></p>
 <p>Expected Proportion of Zeros:</p>
-<div class="sourceCode" id="cb485"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb485-1"><a href="binomial-logistic-regression.html#cb485-1" tabindex="-1"></a><span class="fu">dpois</span>(<span class="dv">0</span>, <span class="fl">2.41</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb478"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb478-1"><a href="binomial-logistic-regression.html#cb478-1" tabindex="-1"></a><span class="fu">dpois</span>(<span class="dv">0</span>, <span class="fl">2.41</span>)</span></code></pre></div>
 <pre><code>## [1] 0.08981529</code></pre>
-<div class="sourceCode" id="cb487"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb487-1"><a href="binomial-logistic-regression.html#cb487-1" tabindex="-1"></a><span class="fu">dpois</span>(<span class="dv">0</span>, <span class="fl">0.72</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb480"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb480-1"><a href="binomial-logistic-regression.html#cb480-1" tabindex="-1"></a><span class="fu">dpois</span>(<span class="dv">0</span>, <span class="fl">0.72</span>)</span></code></pre></div>
 <pre><code>## [1] 0.4867523</code></pre>
 <p>The proportion of zeros in our data is much higher than expected under a Poisson model with means equal to those observed in the data. (0.41 compared to 0.09 for upperclass students and 0.67, compared to 0.49 for first-years).</p>
 </div>
@@ -1553,7 +1767,7 @@ P(Y=y) &amp;= P(\text{Person drinks and drinks y drinks in a weekend})\\
 </div>
 <div id="examples-of-zip-pmfs" class="section level3 hasAnchor" number="7.4.11">
 <h3><span class="header-section-number">7.4.11</span> Examples of ZIP PMF’s<a href="binomial-logistic-regression.html#examples-of-zip-pmfs" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-303-1.png" width="960" /></p>
+<p><img src="Stat-455-Notes_files/figure-html/unnamed-chunk-300-1.png" width="960" /></p>
 <p>Mean: (<span class="math inline">\((1-p)\lambda\)</span>)</p>
 <p>Variance: (<span class="math inline">\((1-p)\lambda(1+p\lambda)\)</span>)</p>
 </div>
@@ -1602,9 +1816,9 @@ where <span class="math inline">\(\alpha\)</span> is the probability of being in
 <h3><span class="header-section-number">7.5.2</span> ZIP Model in R<a href="binomial-logistic-regression.html#zip-model-in-r" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>We will use the R function <code>zeroinfl</code> from the package <code>pscl</code> to fit a ZIP model. The terms before the <code>|</code> are used to model expected number of drinks, assuming the person really does drink at all.</p>
 <p>The terms after the <code>|</code> are used to estimate the probability that the person drinks at all.</p>
-<div class="sourceCode" id="cb489"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb489-1"><a href="binomial-logistic-regression.html#cb489-1" tabindex="-1"></a>zip.m <span class="ot">&lt;-</span> <span class="fu">zeroinfl</span>(drinks <span class="sc">~</span> off.campus <span class="sc">+</span> sex <span class="sc">|</span> firstYear, </span>
-<span id="cb489-2"><a href="binomial-logistic-regression.html#cb489-2" tabindex="-1"></a>                   <span class="at">data =</span> drinks)</span>
-<span id="cb489-3"><a href="binomial-logistic-regression.html#cb489-3" tabindex="-1"></a><span class="fu">summary</span>(zip.m)</span></code></pre></div>
+<div class="sourceCode" id="cb482"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb482-1"><a href="binomial-logistic-regression.html#cb482-1" tabindex="-1"></a>zip.m <span class="ot">&lt;-</span> <span class="fu">zeroinfl</span>(drinks <span class="sc">~</span> off.campus <span class="sc">+</span> sex <span class="sc">|</span> firstYear, </span>
+<span id="cb482-2"><a href="binomial-logistic-regression.html#cb482-2" tabindex="-1"></a>                   <span class="at">data =</span> drinks)</span>
+<span id="cb482-3"><a href="binomial-logistic-regression.html#cb482-3" tabindex="-1"></a><span class="fu">summary</span>(zip.m)</span></code></pre></div>
 <pre><code>
 Call:
 zeroinfl(formula = drinks ~ off.campus + sex | firstYear, data = drinks)
@@ -1616,7 +1830,7 @@ Pearson residuals:
 Count model coefficients (poisson with log link):
             Estimate Std. Error z value Pr(&gt;|z|)    
 (Intercept)   0.7543     0.1440   5.238 1.62e-07 ***
-off.campus    0.4159     0.2059   2.020   0.0433 *  
+off.campus    0.4159     0.2059   2.021   0.0433 *  
 sexm          1.0209     0.1752   5.827 5.63e-09 ***
 
 Zero-inflation model coefficients (binomial with logit link):
@@ -1626,13 +1840,13 @@ firstYearTRUE   1.1364     0.6095   1.864   0.0623 .
 ---
 Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1 
 
-Number of iterations in BFGS optimization: 8 
+Number of iterations in BFGS optimization: 11 
 Log-likelihood: -140.8 on 5 Df</code></pre>
-<div class="sourceCode" id="cb491"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb491-1"><a href="binomial-logistic-regression.html#cb491-1" tabindex="-1"></a><span class="fu">exp</span>(<span class="fu">coef</span>(zip.m))   <span class="co"># exponentiated coefficients</span></span></code></pre></div>
+<div class="sourceCode" id="cb484"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb484-1"><a href="binomial-logistic-regression.html#cb484-1" tabindex="-1"></a><span class="fu">exp</span>(<span class="fu">coef</span>(zip.m))   <span class="co"># exponentiated coefficients</span></span></code></pre></div>
 <pre><code>##  count_(Intercept)   count_off.campus         count_sexm   zero_(Intercept) 
-##          2.1260699          1.5157953          2.7756910          0.5468311 
+##          2.1260689          1.5157979          2.7756924          0.5468312 
 ## zero_firstYearTRUE 
-##          3.1154950</code></pre>
+##          3.1154949</code></pre>
 <p><strong>Interpretations</strong></p>
 <ul>
 <li><p>For those who drink, the average number of drinks for males is <span class="math inline">\(e^{1.0209}\)</span> or 2.76 times the number for females (Z = 5.827, p &lt; 0.001) given that you are comparing people who live in comparable settings (on or off campus)</p></li>
@@ -1673,10 +1887,10 @@ Figure 7.1: Residuals by fitted counts for ZIP model.
 <div id="practice-problems-3" class="section level2 hasAnchor" number="7.6">
 <h2><span class="header-section-number">7.6</span> Practice Problems<a href="binomial-logistic-regression.html#practice-problems-3" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>In the professional National Basketball Association (NBA), each team plays 82 games in a season. We have data on the season that ended in 2018. In basketball, teams can attempt either 2-point shots, or 3-point shots, which are taken further from the basket. We’ll investigate whether taking more 3-point shots improves or hurts a team’s chances of winning a game. We model the number of wins for each of the league’s 30 teams, using percentage of shots taken that were 3 point shots as an explanatory variable.</p>
-<div class="sourceCode" id="cb493"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb493-1"><a href="binomial-logistic-regression.html#cb493-1" tabindex="-1"></a>NBA <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;https://raw.githubusercontent.com/proback/BeyondMLR/master/data/NBA1718team.csv&quot;</span>) </span>
-<span id="cb493-2"><a href="binomial-logistic-regression.html#cb493-2" tabindex="-1"></a>NBA <span class="ot">&lt;-</span> NBA <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">PCT3P =</span> attempts_3P<span class="sc">/</span>(attempts_2P<span class="sc">+</span>attempts_3P)<span class="sc">*</span><span class="dv">100</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb486"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb486-1"><a href="binomial-logistic-regression.html#cb486-1" tabindex="-1"></a>NBA <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;https://raw.githubusercontent.com/proback/BeyondMLR/master/data/NBA1718team.csv&quot;</span>) </span>
+<span id="cb486-2"><a href="binomial-logistic-regression.html#cb486-2" tabindex="-1"></a>NBA <span class="ot">&lt;-</span> NBA <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">PCT3P =</span> attempts_3P<span class="sc">/</span>(attempts_2P<span class="sc">+</span>attempts_3P)<span class="sc">*</span><span class="dv">100</span>)</span></code></pre></div>
 <p>The first 5 rows of the data are shown below.</p>
-<div class="sourceCode" id="cb494"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb494-1"><a href="binomial-logistic-regression.html#cb494-1" tabindex="-1"></a>NBA <span class="sc">%&gt;%</span> <span class="fu">select</span>(TEAM, Win, Loss, PCT3P) <span class="sc">%&gt;%</span> <span class="fu">head</span>(<span class="dv">5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb487"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb487-1"><a href="binomial-logistic-regression.html#cb487-1" tabindex="-1"></a>NBA <span class="sc">%&gt;%</span> <span class="fu">select</span>(TEAM, Win, Loss, PCT3P) <span class="sc">%&gt;%</span> <span class="fu">head</span>(<span class="dv">5</span>)</span></code></pre></div>
 <pre><code>##   TEAM Win Loss    PCT3P
 ## 1  ATL  24   58 36.26515
 ## 2  BKN  28   54 41.10205
@@ -1684,8 +1898,8 @@ Figure 7.1: Residuals by fitted counts for ZIP model.
 ## 4  CHA  36   46 31.42415
 ## 5  CHI  27   55 34.98970</code></pre>
 <p>Output for a binomial logistic regression model is shown below.</p>
-<div class="sourceCode" id="cb496"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb496-1"><a href="binomial-logistic-regression.html#cb496-1" tabindex="-1"></a>M <span class="ot">&lt;-</span> <span class="fu">glm</span>(<span class="at">data =</span> NBA, <span class="fu">cbind</span>(Win, Loss) <span class="sc">~</span> PCT3P , <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link=</span><span class="st">&quot;logit&quot;</span>))</span>
-<span id="cb496-2"><a href="binomial-logistic-regression.html#cb496-2" tabindex="-1"></a><span class="fu">summary</span>(M)</span></code></pre></div>
+<div class="sourceCode" id="cb489"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb489-1"><a href="binomial-logistic-regression.html#cb489-1" tabindex="-1"></a>M <span class="ot">&lt;-</span> <span class="fu">glm</span>(<span class="at">data =</span> NBA, <span class="fu">cbind</span>(Win, Loss) <span class="sc">~</span> PCT3P , <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link=</span><span class="st">&quot;logit&quot;</span>))</span>
+<span id="cb489-2"><a href="binomial-logistic-regression.html#cb489-2" tabindex="-1"></a><span class="fu">summary</span>(M)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## glm(formula = cbind(Win, Loss) ~ PCT3P, family = binomial(link = &quot;logit&quot;), 
@@ -1729,7 +1943,7 @@ Figure 7.1: Residuals by fitted counts for ZIP model.
 <p>Using a sample of 5,190 people, taken by the Australian Health Service 1977-78, we model the number of times a person visited the doctor during a 2 week span. Possible explanatory variables include age, and whether or not the person had free health insurance provided through a government program for low-income residents. The variable is called <code>freepoor</code>.</p>
 <table>
 <caption>
-<span id="tab:unnamed-chunk-309">Table 7.1: </span>First 6 rows of the data
+<span id="tab:unnamed-chunk-306">Table 7.1: </span>First 6 rows of the data
 </caption>
 <thead>
 <tr>
@@ -1814,33 +2028,33 @@ no
 </tbody>
 </table>
 <p>We use a zero-inflated model to model number of doctor visits, using age and <code>freepoor</code> as explanatory variables.</p>
-<div class="sourceCode" id="cb498"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb498-1"><a href="binomial-logistic-regression.html#cb498-1" tabindex="-1"></a><span class="fu">library</span>(pscl)</span>
-<span id="cb498-2"><a href="binomial-logistic-regression.html#cb498-2" tabindex="-1"></a>M_ZIP <span class="ot">&lt;-</span> <span class="fu">zeroinfl</span>(visits <span class="sc">~</span> age <span class="sc">+</span> freepoor <span class="sc">|</span> age <span class="sc">+</span> freepoor, </span>
-<span id="cb498-3"><a href="binomial-logistic-regression.html#cb498-3" tabindex="-1"></a>                   <span class="at">data =</span> DoctorVisits)</span>
-<span id="cb498-4"><a href="binomial-logistic-regression.html#cb498-4" tabindex="-1"></a><span class="fu">summary</span>(M_ZIP)</span></code></pre></div>
+<div class="sourceCode" id="cb491"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb491-1"><a href="binomial-logistic-regression.html#cb491-1" tabindex="-1"></a><span class="fu">library</span>(pscl)</span>
+<span id="cb491-2"><a href="binomial-logistic-regression.html#cb491-2" tabindex="-1"></a>M_ZIP <span class="ot">&lt;-</span> <span class="fu">zeroinfl</span>(visits <span class="sc">~</span> age <span class="sc">+</span> freepoor <span class="sc">|</span> age <span class="sc">+</span> freepoor, </span>
+<span id="cb491-3"><a href="binomial-logistic-regression.html#cb491-3" tabindex="-1"></a>                   <span class="at">data =</span> DoctorVisits)</span>
+<span id="cb491-4"><a href="binomial-logistic-regression.html#cb491-4" tabindex="-1"></a><span class="fu">summary</span>(M_ZIP)</span></code></pre></div>
 <pre><code>
 Call:
 zeroinfl(formula = visits ~ age + freepoor | age + freepoor, data = DoctorVisits)
 
 Pearson residuals:
     Min      1Q  Median      3Q     Max 
--0.5597 -0.4803 -0.3737 -0.3640 13.6623 
+-0.5597 -0.4803 -0.3737 -0.3640 13.6622 
 
 Count model coefficients (poisson with log link):
              Estimate Std. Error z value Pr(&gt;|z|)   
-(Intercept) -0.320817   0.106466  -3.013  0.00258 **
-age          0.003437   0.001971   1.744  0.08124 . 
-freepooryes  0.461781   0.251507   1.836  0.06635 . 
+(Intercept) -0.320800   0.106466  -3.013  0.00259 **
+age          0.003437   0.001971   1.743  0.08127 . 
+freepooryes  0.461916   0.251486   1.837  0.06625 . 
 
 Zero-inflation model coefficients (binomial with logit link):
              Estimate Std. Error z value Pr(&gt;|z|)    
-(Intercept)  1.357795   0.142682   9.516  &lt; 2e-16 ***
-age         -0.018593   0.002914  -6.379 1.78e-10 ***
-freepooryes  1.058227   0.294661   3.591 0.000329 ***
+(Intercept)  1.357837   0.142683   9.516  &lt; 2e-16 ***
+age         -0.018595   0.002915  -6.380 1.77e-10 ***
+freepooryes  1.058315   0.294645   3.592 0.000328 ***
 ---
 Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1 
 
-Number of iterations in BFGS optimization: 14 
+Number of iterations in BFGS optimization: 23 
 Log-likelihood: -3646 on 6 Df</code></pre>
 <ol style="list-style-type: lower-alpha">
 <li><p>Interpret the age coefficient for both parts of the model.</p></li>

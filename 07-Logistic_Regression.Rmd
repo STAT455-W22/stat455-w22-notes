@@ -32,6 +32,7 @@ library(pander)
 library(tidyverse)
 library(gridExtra)
 library(corrplot)
+library(openintro)
 ```
    
 ## Binomial Logistic Regression
@@ -61,73 +62,39 @@ For example:
 2. Number of people who survive for at least 10 years after being diagnosed with a disease.    
 3. Number of people who vote for a candidate in election our of total number of voters.    
 
-We'll refer to this kind of regression as **Binomial Logistic Regression**, though the term **logistic regression** is used somewhat abmiguously and is sometimes applied to this context as well.  
+We'll refer to this kind of regression as **Binomial Logistic Regression**, though the term **logistic regression** is used somewhat ambiguously and is sometimes applied to this context as well.  
 
 
 
-### 2020 Wisconsin Election Data 
+### Challenger O-Rings Data 
 
-We'll work with data on the 2020 presidential election in the state of Wisconsin. Each row of the dataset represents a county in Wisconsin. Variables include:
+In 1986, the space shuttle *Challenger* exploded just 73 seconds into flight, killing all seven crew members. The disaster is believed to have been caused by damage to a seal called an O-ring that likely occurred during takeoff. Damage to O-rings is believed to be related to ambient temperature during launch. 
 
-* `County` - name of the county     
-* `Rvotes` - number of votes for Republican candidate (Donald Trump)      
-* `Dvotes` - number of votes for Democratic candidate (Joe Biden)      
-* `PctD` - percentage of 2-party  vote that went to Biden (i.e. `Rvotes`/(`Rvotes` + `Dvotes`))     
-* `College` - percentage of residents with a college degree      
-* `Unemployment` - unemployment rate   
-* `WhitePct` - percentage of white residents    
-* `COVID_DeathRate` - number of deaths from covid-19 per 100,000 residents     
-* `Income` - median household income
+At the time of the launch, the temperature was only 31 degrees Fahrenheit, which is very cold for shuttle launches. 
 
-All variables were recorded at the time of the election.   
+Shown below are data for 23 other shuttle missions, including the temperature (in degrees Fahrenheit) at the time of launch and the number of damaged and undamaged O-rings, out of six total O-rings. 
+
 
 ```{r}
-Wisconsin <- read_csv("WisconsinVote.csv")
-head(Wisconsin, 10)
+data(orings)
+kable(orings)
 ```
 
 
-```{r, fig.width=12, fig.height=12}
-P1 <- ggplot(Wisconsin, aes(x=College, y=PctD, size=(Rvotes+Dvotes))) + geom_point() + 
- geom_text(data=Wisconsin %>% filter(County %in% c("Dane County", "Door County" , "Milwaukee County", "Menominee County", "Outagamie County", "Waukesha County")), aes(x=College, y=PctD, label=County, vjust=-1), size=3, color="red") +
-  xlab("Percent with  College Degree") +
-  ylab("Percent Voting for Biden") + theme(legend.position="none")
-P2 <- ggplot(Wisconsin, aes(x=Unemployment, y=PctD, size=(Rvotes+Dvotes))) + geom_point() + 
- geom_text(data=Wisconsin %>% filter(County %in% c("Dane County", "Door County" , "Milwaukee County", "Menominee County", "Outagamie County", "Waukesha County")), aes(x=Unemployment, y=PctD, label=County, vjust=-1), size=3, color="red") +
-  xlab("Unemployment Rate") +
-  ylab("Percent Voting for Biden") + theme(legend.position="none")
-P3 <- ggplot(Wisconsin, aes(x=WhitePct, y=PctD, size=(Rvotes+Dvotes))) + geom_point() + 
- geom_text(data=Wisconsin %>% filter(County %in% c("Dane County", "Door County" , "Milwaukee County", "Menominee County", "Outagamie County", "Waukesha County")), aes(x=WhitePct, y=PctD, label=County, vjust=-1), size=3, color="red") +
-  xlab("Percent of Population White") +
-  ylab("Percent Voting for Biden") + theme(legend.position="none")
-P4 <- ggplot(Wisconsin, aes(x=COVID_DeathRate, y=PctD, size=(Rvotes+Dvotes))) + geom_point() + 
- geom_text(data=Wisconsin %>% filter(County %in% c("Dane County", "Door County" , "Milwaukee County", "Menominee County", "Outagamie County", "Waukesha County")), aes(x=COVID_DeathRate, y=PctD, label=County, vjust=-1), size=3, color="red") +
-  xlab("Covid Deaths Per 100k") +
-  ylab("Percent Voting for Biden") + theme(legend.position="none")
-P5 <- ggplot(Wisconsin, aes(x=Income, y=PctD, size=(Rvotes+Dvotes))) + geom_point() + 
- geom_text(data=Wisconsin %>% filter(County %in% c("Dane County", "Door County" , "Milwaukee County", "Menominee County", "Outagamie County", "Waukesha County")), aes(x=Income, y=PctD, label=County, vjust=-1), size=3, color="red") +
-  xlab("Median Income") +
-  ylab("Percent Voting for Biden") + theme(legend.position="none")
-grid.arrange(P1, P2, P3, P4, P5, nrow=3) + theme(legend.position="none")
+We plot percentage damaged  by temperature. Shown are a linear regression line, and a logistic regression curve. 
+
+```{r}
+ggplot(data=orings, aes(x=temperature, y=damaged/(damaged+undamaged))) + geom_point() + geom_smooth(method="lm", se=FALSE, color="green")  + 
+  stat_smooth(method="glm", se=FALSE, method.args = list(family=binomial))
 ```
 
 
-### Correlation Between Explanatory Variables
+### Modeling Number Damaged      
 
-```{r, fig.width=10, fig.height=10}
-select <- dplyr::select
-C <- cor(Wisconsin %>% select("College", "Unemployment", "WhitePct", "COVID_DeathRate", "Income"))
-P <- corrplot(C, method="number")
-```
-
-While there is some correlation between the explanatory variables, none of the correlations are strong enough to raise concerns about multicollinearity, so we'll use all of them in our model.  
+We know that there are a total of 6 O-rings on a shuttle. Suppose we knew the probability of an individual O-ring being damaged at a given temperature. 
 
 
-### Modeling Number of Votes      
-
-Suppose we know the total number of votes in a county and the probability of a single voter choosing Biden. 
-
-Since the response is a count, we might think to use a Poisson distribution. However, a Poisson distribution does not place an upper bound on the number of votes a candidate could receive in a county. This is unrealistic since we know that in reality, a candidate will never be able to get more votes than the total number of voters. 
+Since the response is a count, we might think to use a Poisson distribution. However, a Poisson distribution does not place an upper bound on the number damaged O-rings. This is unrealistic since we know that in reality, we cannot have more than 6 damaged O-rings. 
 
 
 ### The Binomial Distribution
@@ -137,22 +104,29 @@ A **Binomial** random variable is a discrete random variable that models the num
 **Notation**: $Y\sim Binom(n,p)$,    <b style="word-space:2m">&nbsp;&nbsp;</b> 
 **Probability Mass Function**: $\text{P}(Y=y) = {n\choose y}p^y(1-p)^{n-y}$ <b style="word-space:2m">&nbsp;&nbsp;</b>
 
-For $n = 4, p=0.6$, 
+For $n = 6, p=0.6$, 
 
-\[ Pr(Y=0) = {4\choose 0}0.6^0(0.4)^{4} = 1(0.4)^4\approx(0.0256)
+\[ Pr(Y=0) = {6\choose 0}0.6^0(0.4)^{6} = 1(0.4)^6\approx(0.004)
 \]
 
-\[ Pr(Y=1) = {4\choose 1}0.6^1(0.4)^{3} = 4(.6)(0.4)^3\approx(0.1536)
+\[ Pr(Y=1) = {6\choose 1}0.6^1(0.4)^{5} = 6(.6)(0.4)^5\approx(0.006)
 \]
 
-\[ Pr(Y=2) = {4\choose 2}0.6^2(0.4)^{2} = 6(.6)^2(0.4)^2\approx(0.3456)
+\[ Pr(Y=2) = {6\choose 2}0.6^2(0.4)^{4} = 15(.6)^2(0.4)^4\approx(0.1382)
 \]
 
-\[ Pr(Y=3) = {4\choose 3}0.6^3(0.4)^{1} = 4(.6)^3(0.4)^1\approx(0.3456)
+\[ Pr(Y=3) = {6\choose 3}0.6^3(0.4)^{3} = 20(.6)^3(0.4)^3\approx(0.2765)
 \]
 
-\[ Pr(Y=4) = {4\choose 4}0.6^4(0.4)^{0} = 1(.6)^4(0.4)\approx(0.1296)
+\[ Pr(Y=4) = {6\choose 4}0.6^4(0.4)^{2} = 15(.6)^4(0.4)^2\approx(0.3110)
 \]
+
+\[ Pr(Y=5) = {6\choose 5}0.6^5(0.4)^{1} = 6(.6)^5(0.4)^1\approx(0.1866)
+\]
+
+\[ Pr(Y=5) = {6\choose 6}0.6^6(0.4)^{0} = 1(.6)^6(0.4)^0\approx(0.0467)
+\]
+
 
 In a binomial distribution, the mean is $np$,    
 
@@ -161,18 +135,18 @@ and the variance is $np(1-p)$.
 A binomial distribution with $n=1$ is called a **Bernoulli Distribution**, denoted $Ber(p)$.    
 
 
-### Binomial Distribution for $n=4, p=0.6$
+### Binomial Distribution for $n=6, p=0.6$
 
 ```{r, fig.height=3, fig.width=6}
-df <- data.frame(x = 0:4, y = dbinom(0:4, size = 4, prob=0.6))
+df <- data.frame(x = 0:6, y = dbinom(0:6, size = 6, prob=0.6))
 ggplot(df, aes(x = x, y = y)) + geom_bar(stat = "identity", col = "white", fill = "blue") + 
-  scale_y_continuous(expand = c(0.01, 0)) + scale_x_continuous(breaks=(0:4)) + xlab("x") + ylab(expression(paste("p(x|", p, ")"))) + ggtitle("n=4, p=0.6") + theme_bw() + 
+  scale_y_continuous(expand = c(0.01, 0)) + scale_x_continuous(breaks=(0:6)) + xlab("x") + ylab(expression(paste("p(x|", p, ")"))) + ggtitle("n=6, p=0.6") + theme_bw() + 
   theme(plot.title = element_text(size = rel(1.2), vjust = 1.5))
 ```
 
-Mean = $0.6 \times 4=2.4$    
+Mean = $0.6 \times 6=3.6$    
 
-Variance = $4\times 0.6 \times 0.4=0.96$ 
+Variance = $6\times 0.6 \times 0.4=1.44$ 
 
 
 ### More Binomial Distributions
@@ -219,9 +193,9 @@ ggplot() +
   geom_line(data = dat2, aes(x, y, linetype = `Regression model`))  + ylab("p")
 ```
 
-Let $p_i$ represent the probability that a voter in county $i$ votes for Biden.  
+Let $p_i$ represent the probability that an individual O-ring on mission i was damaged.  
 
-We want to connect $p_i$ to our explanatory variables.   
+We want to connect $p_i$ to our explanatory variable, temperature.   
 
 Assuming
 
@@ -284,72 +258,77 @@ A logistic regression model relies on the following assumptions:
 3. __Variance Structure__ By definition, the variance of a binomial random variable is $np(1-p)$, so that variability is highest when $p=.5$.
 4. __Linearity__ The log of the odds ratio, $\text{log}(\frac{p}{1-p}) = \text{logit}(p)$, must be a linear function of $x$. 
 
-## Model for Wisconsin Vote
+## Model for Challenger Disaster O-rings
 
-### An Initial Model
-
-We'll start by trying to model the relationship between number of votes for Biden and percentage of voters with a college degree. 
+### Binomial Logistic Model for O-rings
 
 
 ```{r}
-M1 <- glm(cbind(Dvotes, Rvotes) ~ College , family = binomial(link="logit"), data = Wisconsin)
+M1 <- glm(cbind(damaged, undamaged) ~ temperature , family = binomial(link="logit"), data = orings)
 summary(M1)
 ```
 
-For each one percent increase in college education, the odds of voting for Biden are expected to multiply by a factor of $e^{0.0320}=1.0325$ (a 3% increase).    
+For each one degree increase in temperature, the odds of damage to the O-ring are expected to multiply by a factor of $exp{-0.216}\approx0.80555$. That is, for each one-degree increase in temperature, odds of damage are expected to decrease by 20%.  
 
-In a county where 25% of the population has a college degree, the probability of an individual  voter voting for Biden is 
-\[\frac{e^{-0.9521859 + 0.0319564\times25}}{1+ e^{ (-0.9521859 + 0.0319564\times25)}}=0.4618\]
+If the temperature is 55 degrees, the probability of an individual O-ring being damaged is:   
 
-In a county where 35% of the population has a college degree, the probability of an individual  voter voting for Biden is 
+\[\frac{e^{11.66 - 0.216\times 55}}{1+ e^{11.66 - 0.216\times 55}}=0.445\]
 
-\[\frac{e^{-0.9521859 + 0.0319564\times35}}{1 + e^{ (-0.9521859 + 0.0319564\times35)}}=0.5415\]
+If the temperature is 75 degrees, the probability of an individual O-ring being damaged is:   
+
+\[\frac{e^{11.66 - 0.216\times 75}}{1+ e^{11.66 - 0.216\times 75}}=0.01\]
+
+
+If the temperature is 31 degrees, the probability of an individual O-ring being damaged is:   
+
+\[\frac{e^{11.66 - 0.216\times 31}}{1+ e^{11.66 - 0.216\times 31}}=0.99\]
+
+This is an extrapolation, but should be enough to raise serious concern.   
 
 
 ### Checking Linearity Assumption
 
-The model assumes that $\text{log}\left(\frac{p}{1-p}\right) = \text{logit}(p)$ is a linear function of $x$. To check this, we calculate $\hat{p}_i$ for each county and plot $\text{log}\left(\frac{\hat{p}_i}{1-\hat{p_i}}\right)$ against percentage of college graduates. 
+The model assumes that $\text{log}\left(\frac{p}{1-p}\right) = \text{logit}(p)$ is a linear function of $x$. To check this, we calculate $\hat{p}_i$, the proportion of damaged o-rings for each mission and plot $\text{log}\left(\frac{\hat{p}_i}{1-\hat{p_i}}\right)$ (this quantity is called the *empirical logit*) against temperature. 
+
+When there are counts with 0's (presenting problems when taking log), it is common to add 1 "success" and 1 "failure" before calculating the empirical logit. 
 
 
 ```{r,emplogits, fig.align="center",out.width="60%", warning=FALSE, message=FALSE}
-phat <- with(Wisconsin, (Dvotes)/(Dvotes+Rvotes))
-Wisconsin$elogit <- log(phat/(1-phat))
+phat <- with(orings, (1 + damaged)/( 2 + damaged+undamaged))
+orings$elogit <- log(phat/(1-phat))
 ## Plots
-ggplot(Wisconsin, aes(x=College, y=elogit))+
+ggplot(orings, aes(x=temperature, y=elogit))+
     geom_point(shape=1) +    # Use hollow circles
     geom_smooth(method=lm,   # Add linear regression line
                 se=FALSE) + # Don't add shaded confidence region
-  xlab("College") + ylab("empirical logits") + 
-  labs(title="Wisconsin Vote Empirical logits by College Pct.")
+  xlab("Temperature") + ylab("empirical logits") + 
+  labs(title="O-Rings Empirical logits by Temperature")
 ```
-
+Ideally, this plot would look linear. It doesn't look great here, so we might consider using a nonlinear function of temperature inside the binomial logit model. Then again, there aren't that many points, and a more complicated model would be harder to interpret, so let's stick with the linear function of temperature inside the binomial logit model. 
 
 ### Overdispersion in Binomial Counts
 
-The binomial model assumes that the variance is equal to $np(1-p)$.  Checking this using graphs or tables is challenging, since it involves both $n$ and $p$, but we can group together counties with similar $n$ and similar percentages of college graduates (hence similar $p$), and calculate variance in each group. 
+The binomial model assumes that the variance is equal to $np(1-p)$.  Checking this using graphs or tables is often challenging. Here, we would need to group together missions with similar temperatures and calculate the variance in number of damaged O-rings between groups, and see how this compares to the expected variance $n\hat{p}(1-\hat{p})$. 
+
+We'll group by 5-degree temperature intervals. 
 
 ```{r, warning = FALSE}
 summarize <- dplyr::summarize
-Wisconsin <- Wisconsin %>% mutate(TotalVotes = Dvotes+Rvotes)
-                                
-EdCuts = cut(Wisconsin$College,
-           breaks=c(10,20,30,40,50,60))
-PopCuts = cut(Wisconsin$TotalVotes,
-           breaks=c(seq(from=0, to =100000, by=10000), 500000))
-WisconsinCuts <- data.frame(EdCuts, PopCuts, Wisconsin) 
-WisconsinGrps <- WisconsinCuts %>% group_by(EdCuts, PopCuts) %>% 
-  summarize(NCounties = n(),
-            phat = sum(Dvotes)/sum(TotalVotes),
-            mean_n = mean(TotalVotes),
-            Theoretical_Variance = mean_n*phat*(1-phat),
-            Obs_Var = var(Dvotes)) %>%
-  arrange(desc(NCounties))
-WisconsinGrps                                                                 
+
+orings <- orings |> mutate(Cuts = cut(orings$temperature,
+           breaks=c(50, 55, 60, 65, 70, 75, 80, 85)))  # break points for temperature groups
+ 
+oringsGrps <- orings %>% group_by(Cuts) %>% 
+  summarize(Nmissions = n(),
+            phat = sum(damaged)/sum(damaged + undamaged),
+            Obs_Var = var(damaged), 
+            Theoretical_Variance = 6*phat*(1-phat))
+oringsGrps                                                                 
 ```
 
-In the groups where there are enough counties to compare, the observed variance in counts appears to be much higher than the binomial model assumes.   
+In groups with 4 or more missions, the observed variance seems pretty close to the theoretical variance. Then again, there are only 3 such groups, so it's hard to tell. 
 
-The data are heavily overdispersed. 
+We can further test for overdispersion using Pearson residuals, as we did in Poisson regression. 
 
 ### Residuals for Binomial Logistic Regression
 
@@ -385,56 +364,16 @@ Like in Poisson regression, we can address overdispersion by fitting quasi-binom
 
 
 ```{r}
-M1b <- glm(cbind(Dvotes, Rvotes) ~ College , family = quasibinomial(link="logit"), data = Wisconsin)
+M1b <- glm(cbind(damaged, undamaged) ~ temperature , family = quasibinomial(link="logit"), data = orings)
 summary(M1b)
 ```
 
-The estimate of the dispersion parameter $\hat{\phi} = 2763$ is large.   
+The estimate of the dispersion parameter $\hat{\phi} = 1.336$ is not too large, confirming that overdispersion is not too much of a concern here. 
 
-* Standard errors increase considerably.    
-* The t-statistics associated with the quasi-binomial model are much smaller the z-statistics associated with the binomial model.    
-* The p-values are bigger, but still small enough to provide evidence of a relationship between college education and voting for Biden.  
+Notice that standard errors, z-scores, and p-values for the quasi-binomial model were similar to those we saw in the binomial model.  
 
 
-### Model with All Explanatory Variables
-
-```{r}
-M2 <- glm(cbind(Dvotes, Rvotes) ~ College + Unemployment + WhitePct + COVID_DeathRate + Income , family = quasibinomial(link="logit"), data = Wisconsin)
-summary(M2)
-```
-
-
-* For each one percentage point increase in college education odds of voting for Biden are estimated to multiply by $e^{0.0463} = 1.047$ ( a 5% increase), assuming all other variables are held constant.   
-
-* For each one percentage point increase in unemployment rate, odds of voting for Biden is estimated to multiply by $e^{-0.1102} = 0.8957$ (a 10% decrease), assuming all other variables are held constant.
-
-* For each one percentage point increase in white residents, odds of voting for Biden is estimated to multiply by $e^{-0.02935} = 0.97$ (a 3% decrease), assuming all other variables are held constant.
-
-* For each one death increase per 100k residents, odds of voting for Biden is estimated to multiply by $e^{-0.006584} = 0.993$ (a 0.7% decrease), assuming all other variables are held constant.
-
-* For each 1000 dollar increase in median income, odds of voting for Biden is estimated to multiply by $e^{-0.0000328\times1000} = 0.968$ (a 3% decrease), assuming all other variables are held constant.
-
-
-### Tests for Significance of Model Coefficients 
-
-Wald test statistics and p-values for all variables provide evidence of relationships between these variables and percentage voting for Biden.  
-
-This is not surprising since the sample size is very large. In fact, confidence intervals and hypothesis tests don't really make sense to talk about here, because we have the whole population of Wisconsin voters in 2020. We're not trying to generalize from a sample to a population.   
-
-The model estimates still make sense, and are informative, so we should base our conclusions on percentage change estimates given on the previous slide. 
-
-### Drop in Deviance Test
-
-We could perform a drop-in-deviance test to compare our two models so far. 
-
-```{r comment=NA, message=FALSE}
-drop_in_dev <- anova(M1b, M2, test = "F")
-drop_in_dev
-```
-
-We see a large drop in residual deviance, providing strong evidence that the larger model is prefered. In this case, that makes sense, since it contains variables we expect to be helpful. 
-
-When we have very large sample sizes we'll get small p-values even when the new variables don't make a practical difference. So we should not base model choices on p-values alone, but should look at confidence intervals and measures of the size of the effect associated with each variable.   
+Wald test statistics and p-values for all variables provide evidence of a relationship between temperature and probability of damage to an o-ring.   
 
 
 ### Deviance Residual Plot
@@ -442,34 +381,16 @@ When we have very large sample sizes we'll get small p-values even when the new 
 We plot deviance residuals against the predicted values and against our explanatory variables to test for lack of fit. 
 
 ```{r,fig.align="center",out.width="60%",echo=FALSE, warning=FALSE, comment=NA}
-Wisconsinresid <- Wisconsin %>%
-  mutate(Resid = residuals(M2), 
-         Predicted = fitted.values(M2))
-ggplot(Wisconsinresid, aes(x = Predicted, y = Resid)) +
+oring_resid <- orings %>%
+  mutate(Resid = residuals(M1), 
+         Predicted = fitted.values(M1))
+ggplot(oring_resid, aes(x = Predicted, y = Resid)) +
   geom_point() + 
   xlab("Predicted Values") +
   ylab("Deviance Residuals")
 ```
 
-```{r, resid,fig.align="center", fig.width=10, fig.height=10, echo=FALSE, warning=FALSE, comment=NA}
-p1 <- ggplot(Wisconsinresid, aes(x = College, y = Resid)) +
-  geom_point() +
-  xlab("Percent College Graduates") + ylab("Deviance Residuals")
-p2 <- ggplot(Wisconsinresid, aes(x = Unemployment, y = Resid)) +
-  geom_point() +
-  xlab("Unemployment Rate") + ylab("Deviance Residuals")
-p3 <- ggplot(Wisconsinresid, aes(x = WhitePct, y = Resid)) +
-  geom_point() +
-  xlab("Percentage of White Residents") + ylab("Deviance Residuals")
-p4 <- ggplot(Wisconsinresid, aes(x = COVID_DeathRate, y = Resid)) +
-  geom_point() +
-  xlab("Covid Deaths per 100K") + ylab("Deviance Residuals")
-p5 <- ggplot(Wisconsinresid, aes(x = Income, y = Resid)) +
-  geom_point() +
-  xlab("Median Income") + ylab("Deviance Residuals")
-grid.arrange(p1, p2, p3, p4, p5)
-```
-
+Again, we see some concerns about the linearity assumption, but we'll stick with this model for the reasons discussed previously. 
 
 ### LLSR vs Binomial Logistic Regression 
 
