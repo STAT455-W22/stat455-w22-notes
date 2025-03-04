@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 5 Data with Three or More Levels | Stat 455: Advanced Statistical Modeling Notes</title>
   <meta name="description" content="Chapter 5 Data with Three or More Levels | Stat 455: Advanced Statistical Modeling Notes" />
-  <meta name="generator" content="bookdown 0.40 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.37 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 5 Data with Three or More Levels | Stat 455: Advanced Statistical Modeling Notes" />
   <meta property="og:type" content="book" />
@@ -22,7 +22,7 @@
 
 
 
-<meta name="date" content="2025-02-14" />
+<meta name="date" content="2025-03-04" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -57,7 +57,7 @@
 
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -783,7 +783,7 @@ Y_{ijk} &amp; = [\alpha_{0}+\alpha_{1}\textrm{Window}_{i}+\beta_{0}\textrm{FertA
 ## 
 ## Scaled residuals: 
 ##      Min       1Q   Median       3Q      Max 
-## -2.35859 -0.61695 -0.06345  0.56341  2.27448 
+## -2.35859 -0.61695 -0.06346  0.56342  2.27449 
 ## 
 ## Random effects:
 ##  Groups   Name        Variance Std.Dev.
@@ -794,7 +794,7 @@ Y_{ijk} &amp; = [\alpha_{0}+\alpha_{1}\textrm{Window}_{i}+\beta_{0}\textrm{FertA
 ## 
 ## Fixed effects:
 ##             Estimate Std. Error      df t value Pr(&gt;|t|)  
-## (Intercept)   2.1178     0.4731  3.8401   4.476   0.0121 *
+## (Intercept)   2.1178     0.4731  3.8400   4.476   0.0121 *
 ## window        1.1416     0.5662  2.0000   2.016   0.1813  
 ## fertA         0.7528     0.4324 11.0000   1.741   0.1095  
 ## phenoA        0.5997     0.2595 47.0000   2.311   0.0253 *
@@ -1051,23 +1051,23 @@ Y_{ijkl} &amp; = [\alpha_{0}+\alpha_{1}\textrm{Window}_{i}+\beta_{0}\textrm{Fert
 ## 
 ## Scaled residuals: 
 ##      Min       1Q   Median       3Q      Max 
-## -2.81419 -0.56459 -0.00598  0.56245  2.67727 
+## -2.81419 -0.56459 -0.00598  0.56245  2.67726 
 ## 
 ## Random effects:
 ##  Groups   Name        Variance Std.Dev.
-##  plantid  (Intercept) 1.10407  1.0507  
-##  pot      (Intercept) 0.77698  0.8815  
-##  tray     (Intercept) 0.07319  0.2705  
+##  plantid  (Intercept) 1.10406  1.0507  
+##  pot      (Intercept) 0.77702  0.8815  
+##  tray     (Intercept) 0.07314  0.2705  
 ##  Residual             0.08029  0.2834  
 ## Number of obs: 256, groups:  plantid, 64; pot, 16; tray, 4
 ## 
 ## Fixed effects:
 ##              Estimate Std. Error        df t value            Pr(&gt;|t|)    
-## (Intercept)   1.21075    0.50409   4.40491   2.402              0.0683 .  
-## window        1.47080    0.58111   2.00007   2.531              0.1270    
-## fertA         0.90342    0.51430  11.00100   1.757              0.1067    
-## phenoA        0.58651    0.26506  46.99932   2.213              0.0318 *  
-## time          0.66370    0.01584 191.00013  41.899 &lt;0.0000000000000002 ***
+## (Intercept)   1.21075    0.50407   4.40523   2.402              0.0683 .  
+## window        1.47080    0.58108   2.00001   2.531              0.1270    
+## fertA         0.90342    0.51431  11.00003   1.757              0.1068    
+## phenoA        0.58651    0.26506  47.00038   2.213              0.0318 *  
+## time          0.66370    0.01584 190.99990  41.899 &lt;0.0000000000000002 ***
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
@@ -1119,24 +1119,24 @@ Y_{ijkl} &amp; = [\alpha_{0}+\alpha_{1}\textrm{Window}_{i}+\beta_{0}\textrm{Fert
 ## 
 ## Scaled residuals: 
 ##      Min       1Q   Median       3Q      Max 
-## -2.10149 -0.52521 -0.00405  0.46057  2.19929 
+## -2.10148 -0.52521 -0.00405  0.46057  2.19928 
 ## 
 ## Random effects:
 ##  Groups   Name        Variance Std.Dev. Corr
-##  plantid  (Intercept) 1.15699  1.0756       
+##  plantid  (Intercept) 1.15701  1.0756       
 ##           time        0.03871  0.1967   0.22
-##  pot      (Intercept) 0.17880  0.4228       
-##  tray     (Intercept) 0.20603  0.4539       
+##  pot      (Intercept) 0.17876  0.4228       
+##  tray     (Intercept) 0.20608  0.4540       
 ##  Residual             0.01646  0.1283       
 ## Number of obs: 256, groups:  plantid, 64; pot, 16; tray, 4
 ## 
 ## Fixed effects:
 ##             Estimate Std. Error       df t value            Pr(&gt;|t|)    
-## (Intercept)  1.81812    0.45691  3.32595   3.979              0.0234 *  
-## window       0.73081    0.56782  1.99956   1.287              0.3270    
-## fertA        0.47512    0.34116  7.96863   1.393              0.2013    
-## phenoA       0.54007    0.26775 43.09586   2.017              0.0499 *  
-## time         0.66370    0.02562 62.99889  25.908 &lt;0.0000000000000002 ***
+## (Intercept)  1.81814    0.45694  3.32508   3.979              0.0234 *  
+## window       0.73079    0.56786  1.99920   1.287              0.3270    
+## fertA        0.47511    0.34115  7.96885   1.393              0.2013    
+## phenoA       0.54007    0.26775 43.09443   2.017              0.0499 *  
+## time         0.66370    0.02562 63.00065  25.909 &lt;0.0000000000000002 ***
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
@@ -1212,37 +1212,35 @@ Y_{ijk} &amp; = [\beta_{0}+\beta_{1}\textrm{Window}_{i}+\beta_{2}\textrm{FertA}_
 ## 
 ## Scaled residuals: 
 ##      Min       1Q   Median       3Q      Max 
-## -2.09909 -0.51812  0.00303  0.44903  2.19800 
+## -2.09915 -0.51800  0.00304  0.44894  2.19798 
 ## 
 ## Random effects:
 ##  Groups   Name        Variance Std.Dev. Corr 
-##  plantid  (Intercept) 0.96958  0.9847        
-##           time        0.03870  0.1967   0.22 
-##  pot      (Intercept) 0.37346  0.6111        
-##           phenoA      0.55467  0.7448   -0.70
-##  tray     (Intercept) 0.35067  0.5922        
-##           fertA       0.14244  0.3774   -0.67
+##  plantid  (Intercept) 0.96878  0.9843        
+##           time        0.03871  0.1967   0.22 
+##  pot      (Intercept) 0.37653  0.6136        
+##           phenoA      0.55487  0.7449   -0.70
+##  tray     (Intercept) 0.35597  0.5966        
+##           fertA       0.13997  0.3741   -0.69
 ##  Residual             0.01646  0.1283        
 ## Number of obs: 256, groups:  plantid, 64; pot, 16; tray, 4
 ## 
 ## Fixed effects:
 ##             Estimate Std. Error       df t value            Pr(&gt;|t|)    
-## (Intercept)  1.72064    0.50187  1.48485   3.428               0.113    
-## window       0.89494    0.57698  1.87824   1.551               0.269    
-## fertA        0.50490    0.37908  2.71109   1.332               0.284    
-## phenoA       0.54113    0.30822 14.52699   1.756               0.100    
-## time         0.66370    0.02562 63.01070  25.910 &lt;0.0000000000000002 ***
+## (Intercept)  1.71536    0.50375  1.46343   3.405               0.116    
+## window       0.90369    0.57817  1.87488   1.563               0.266    
+## fertA        0.50662    0.37849  2.69858   1.339               0.282    
+## phenoA       0.54121    0.30820 14.50247   1.756               0.100    
+## time         0.66370    0.02562 63.00080  25.909 &lt;0.0000000000000002 ***
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
 ## Correlation of Fixed Effects:
 ##        (Intr) window fertA  phenoA
-## window -0.575                     
-## fertA  -0.482  0.000              
+## window -0.574                     
+## fertA  -0.484  0.000              
 ## phenoA -0.324  0.000  0.000       
-## time    0.042  0.000  0.000  0.000
-## optimizer (nloptwrap) convergence code: 0 (OK)
-## Model failed to converge with max|grad| = 0.00265147 (tol = 0.002, component 1)</code></pre>
+## time    0.042  0.000  0.000  0.000</code></pre>
 <p>After accounting for window, fertilizer, phenotype, and time,</p>
 <ul>
 <li><p>plants that are taller initially tend to grow faster than those that are shorter initially (<span class="math inline">\(\hat{\rho}_{fg} =0.22\)</span>)<br />
@@ -1319,35 +1317,35 @@ Y_{ij} &amp; = [\beta_{0}+\beta_{1}\textrm{Window}_{i}+\beta_{2}\textrm{FertA}_{
 ## REML criterion at convergence: 172.5
 ## 
 ## Scaled residuals: 
-##     Min      1Q  Median      3Q     Max 
-## -2.0913 -0.5258  0.0310  0.4759  2.2062 
+##      Min       1Q   Median       3Q      Max 
+## -2.09118 -0.52573  0.03103  0.47582  2.20602 
 ## 
 ## Random effects:
 ##  Groups   Name        Variance Std.Dev. Corr 
-##  plantid  (Intercept) 0.84595  0.9198        
-##           time        0.01242  0.1115   -0.03
-##  pot      (Intercept) 0.61416  0.7837        
-##           time        0.02760  0.1661   1.00 
-##  pot.1    (Intercept) 0.17400  0.4171        
-##           phenoA      0.58667  0.7659   -1.00
-##  tray     (Intercept) 0.05375  0.2318        
-##           fertA       0.29545  0.5436   1.00 
+##  plantid  (Intercept) 0.84573  0.9196        
+##           time        0.01243  0.1115   -0.03
+##  pot      (Intercept) 0.61375  0.7834        
+##           time        0.02758  0.1661   1.00 
+##  pot.1    (Intercept) 0.17401  0.4171        
+##           phenoA      0.58649  0.7658   -1.00
+##  tray     (Intercept) 0.05352  0.2313        
+##           fertA       0.29478  0.5429   1.00 
 ##  Residual             0.01646  0.1283        
 ## Number of obs: 256, groups:  plantid, 64; pot, 16; tray, 4
 ## 
 ## Fixed effects:
 ##             Estimate Std. Error       df t value       Pr(&gt;|t|)    
-## (Intercept)  2.51521    0.40278  6.83525   6.245       0.000469 ***
-## window      -0.30247    0.45883  3.01201  -0.659       0.556665    
-## fertA        0.09247    0.39130  3.17295   0.236       0.827624    
-## phenoA       0.56183    0.30102 14.99152   1.866       0.081671 .  
-## time         0.66370    0.04439 15.03356  14.951 0.000000000197 ***
+## (Intercept)  2.51486    0.40257  6.85950   6.247       0.000461 ***
+## window      -0.30184    0.45850  3.01923  -0.658       0.557062    
+## fertA        0.09256    0.39106  3.17981   0.237       0.827342    
+## phenoA       0.56182    0.30098 14.99441   1.867       0.081635 .  
+## time         0.66370    0.04438 15.04525  14.955 0.000000000194 ***
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
 ## Correlation of Fixed Effects:
 ##        (Intr) window fertA  phenoA
-## window -0.570                     
+## window -0.569                     
 ## fertA  -0.052  0.000              
 ## phenoA -0.387  0.000  0.000       
 ## time    0.446  0.000  0.000  0.000
@@ -1374,22 +1372,22 @@ Y_{ij} &amp; = [\beta_{0}+\beta_{1}\textrm{Window}_{i}+\beta_{2}\textrm{FertA}_{
 ## -2.79058 -0.55734 -0.00857  0.57002  2.67329 
 ## 
 ## Random effects:
-##  Groups   Name        Variance        Std.Dev.   Corr
-##  plantid  (Intercept) 1.0714990241697 1.03513237     
-##  pot      (Intercept) 0.0000000004543 0.00002131     
-##  pot.1    (Intercept) 0.0000000005121 0.00002263     
-##           fertA       1.5297685116561 1.23683811 0.44
-##  tray     (Intercept) 0.6373404355514 0.79833604     
-##  Residual             0.0802940948686 0.28336213     
+##  Groups   Name        Variance       Std.Dev.   Corr
+##  plantid  (Intercept) 1.071505907081 1.03513570     
+##  pot      (Intercept) 0.000000001668 0.00004084     
+##  pot.1    (Intercept) 0.000000000000 0.00000000     
+##           fertA       1.529967713440 1.23691864  NaN
+##  tray     (Intercept) 0.637103820226 0.79818784     
+##  Residual             0.080293948587 0.28336187     
 ## Number of obs: 256, groups:  plantid, 64; pot, 16; tray, 4
 ## 
 ## Fixed effects:
 ##              Estimate Std. Error        df t value            Pr(&gt;|t|)    
-## (Intercept)   1.43323    0.63327   2.21747   2.263              0.1394    
-## window        1.02585    0.86939   1.96427   1.180              0.3612    
-## fertA         0.90342    0.50936   8.28739   1.774              0.1127    
-## phenoA        0.58651    0.26120  50.12948   2.245              0.0292 *  
-## time          0.66370    0.01584 190.95562  41.899 &lt;0.0000000000000002 ***
+## (Intercept)   1.43324    0.63318   2.21882   2.264              0.1393    
+## window        1.02583    0.86926   1.96543   1.180              0.3611    
+## fertA         0.90342    0.50938   8.36789   1.774              0.1124    
+## phenoA        0.58651    0.26120  50.13334   2.245              0.0292 *  
+## time          0.66370    0.01584 191.00029  41.899 &lt;0.0000000000000002 ***
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
@@ -1451,13 +1449,13 @@ Figure 5.2: Fish in Aquarium Study
 <div id="interpret-fixed-and-random-effects-and-associated-parameter-estimates-in-models-with-three-or-more-levels." class="section level3 unnumbered hasAnchor">
 <h3>29) Interpret fixed and random effects and associated parameter estimates in models with three or more levels.<a href="data-with-three-or-more-levels.html#interpret-fixed-and-random-effects-and-associated-parameter-estimates-in-models-with-three-or-more-levels." class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>For parts (a)-(b), let <span class="math inline">\(Y_{ijk}\)</span> represent the activity level of a fish, where <span class="math inline">\(i\)</span> indexes aquarium, <span class="math inline">\(j\)</span> indexes tank, and <span class="math inline">\(k\)</span> indexes fish. Suppose we fit a model of the form.</p>
-<p><span class="math inline">\(Y_{ijk}  = \beta_{0}  + a_{i}+t_{ij}+\epsilon_{ijk}\)</span>, where <span class="math inline">\(a_{i}\sim N(0,\sigma^2_a)\)</span>, <span class="math inline">\(t_{ij}\sim N(0,\sigma^2_t)\)</span>, and <span class="math inline">\(\epsilon_{ijk}\sim N(0,\sigma^2)\)</span>.</p>
+<p><span class="math inline">\(Y_{ijk} = \beta_{0} + a_{i}+t_{ij}+\epsilon_{ijk}\)</span>, where <span class="math inline">\(a_{i}\sim N(0,\sigma^2_a)\)</span>, <span class="math inline">\(t_{ij}\sim N(0,\sigma^2_t)\)</span>, and <span class="math inline">\(\epsilon_{ijk}\sim N(0,\sigma^2)\)</span>.</p>
 <ol style="list-style-type: lower-alpha">
 <li><p>Explain in words what <span class="math inline">\(\beta_0\)</span>, <span class="math inline">\(\sigma_a\)</span>, <span class="math inline">\(\sigma_t\)</span>, and <span class="math inline">\(\sigma\)</span> represent in this context.</p></li>
 <li><p>Based on the activity levels shown in the illustration, which of <span class="math inline">\(\sigma_a\)</span>, <span class="math inline">\(\sigma_t\)</span>, and <span class="math inline">\(\sigma\)</span>, is the largest? Which is the smallest? Explain your answers.</p></li>
 <li><p>Now suppose we fit a model of the form</p></li>
 </ol>
-<p><span class="math inline">\(Y_{ijk}  = \beta_{0} +\beta_1\textrm{SpeciesB}_{ijk} + a_{i}+t_{ij}+\epsilon_{ijk}\)</span>, where <span class="math inline">\(a_{i}\sim N(0,\sigma^2_a)\)</span>, <span class="math inline">\(t_{ij}\sim N(0,\sigma^2_t)\)</span>, and <span class="math inline">\(\epsilon_{ijk}\sim N(0,\sigma^2)\)</span>.</p>
+<p><span class="math inline">\(Y_{ijk} = \beta_{0} +\beta_1\textrm{SpeciesB}_{ijk} + a_{i}+t_{ij}+\epsilon_{ijk}\)</span>, where <span class="math inline">\(a_{i}\sim N(0,\sigma^2_a)\)</span>, <span class="math inline">\(t_{ij}\sim N(0,\sigma^2_t)\)</span>, and <span class="math inline">\(\epsilon_{ijk}\sim N(0,\sigma^2)\)</span>.</p>
 <p>Explain in words what <span class="math inline">\(\beta_0\)</span>, <span class="math inline">\(\sigma_a\)</span>, <span class="math inline">\(\sigma_t\)</span>, and <span class="math inline">\(\sigma\)</span> represent in this context. In your answers state clearly how these interpretations are different than for the model in (a).</p>
 </div>
 <div id="write-equations-for-linear-mixed-effects-models-in-mathematical-notation-including-assumptions-about-distributions-of-random-effects-and-error-terms-for-models-with-three-or-more-levels." class="section level3 unnumbered hasAnchor">

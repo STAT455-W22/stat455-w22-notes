@@ -229,7 +229,7 @@ For two events $p_1$ and $p_2$ the odds ratio is defined as $\frac{\text{Odds of
 
 Let's suppose we have one explanatory variable $x$, so 
 
-\[\text{logit}(p_i) =  \frac{e^{\beta_0+\beta_1X_{1}}}{1+e^{\beta_0+\beta_1X_{1}}}, \] 
+\[p_i =  \frac{e^{\beta_0+\beta_1X_{1}}}{1+e^{\beta_0+\beta_1X_{1}}}, \] 
 
 
 Consider the odds ratio for a case $j$ with explanatory variable $x + 1$, compared to case $i$ with explanatory variable $x$. 

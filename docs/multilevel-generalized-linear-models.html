@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 8 Multilevel Generalized Linear Models | Stat 455: Advanced Statistical Modeling Notes</title>
   <meta name="description" content="Chapter 8 Multilevel Generalized Linear Models | Stat 455: Advanced Statistical Modeling Notes" />
-  <meta name="generator" content="bookdown 0.40 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.37 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 8 Multilevel Generalized Linear Models | Stat 455: Advanced Statistical Modeling Notes" />
   <meta property="og:type" content="book" />
@@ -22,7 +22,7 @@
 
 
 
-<meta name="date" content="2025-02-14" />
+<meta name="date" content="2025-03-04" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -57,7 +57,7 @@
 
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -1211,7 +1211,7 @@ Y_{ij}\sim\text{Ber}(p_{ij})
 ## Fixed effects:
 ##             Estimate Std. Error z value Pr(&gt;|z|)    
 ## (Intercept) -0.18886    0.04434  -4.259 2.05e-05 ***
-## foul.diff   -0.26821    0.03895  -6.887 5.72e-12 ***
+## foul.diff   -0.26821    0.03895  -6.887 5.71e-12 ***
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
@@ -1266,7 +1266,7 @@ Y_{ij}\sim\text{Ber}(p_{ij})
 ## 
 ## Random effects:
 ##  Groups Name        Variance Std.Dev. Corr 
-##  game   (Intercept) 0.294142 0.54235       
+##  game   (Intercept) 0.294144 0.54235       
 ##         foul.diff   0.001235 0.03514  -1.00
 ## Number of obs: 4972, groups:  game, 340
 ## 
@@ -1374,7 +1374,7 @@ Y_{i[vh]j}\sim\text{Ber}(p_{i[vh]j})
 ## 
 ## Random effects:
 ##  Groups   Name        Variance Std.Dev.
-##  game     (Intercept) 0.17164  0.4143  
+##  game     (Intercept) 0.17165  0.4143  
 ##  hometeam (Intercept) 0.06809  0.2609  
 ##  visitor  (Intercept) 0.02323  0.1524  
 ## Number of obs: 4972, groups:  game, 340; hometeam, 39; visitor, 39

@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 7 Binomial Logistic Regression | Stat 455: Advanced Statistical Modeling Notes</title>
   <meta name="description" content="Chapter 7 Binomial Logistic Regression | Stat 455: Advanced Statistical Modeling Notes" />
-  <meta name="generator" content="bookdown 0.40 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.37 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 7 Binomial Logistic Regression | Stat 455: Advanced Statistical Modeling Notes" />
   <meta property="og:type" content="book" />
@@ -22,7 +22,7 @@
 
 
 
-<meta name="date" content="2025-02-14" />
+<meta name="date" content="2025-03-04" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -57,7 +57,7 @@
 
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -1174,7 +1174,7 @@ undamaged
 <div id="interpreting-regression-coefficients" class="section level3 hasAnchor" number="7.1.10">
 <h3><span class="header-section-number">7.1.10</span> Interpreting Regression Coefficients<a href="binomial-logistic-regression.html#interpreting-regression-coefficients" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Let’s suppose we have one explanatory variable <span class="math inline">\(x\)</span>, so</p>
-<p><span class="math display">\[\text{logit}(p_i) =  \frac{e^{\beta_0+\beta_1X_{1}}}{1+e^{\beta_0+\beta_1X_{1}}}, \]</span></p>
+<p><span class="math display">\[p_i =  \frac{e^{\beta_0+\beta_1X_{1}}}{1+e^{\beta_0+\beta_1X_{1}}}, \]</span></p>
 <p>Consider the odds ratio for a case <span class="math inline">\(j\)</span> with explanatory variable <span class="math inline">\(x + 1\)</span>, compared to case <span class="math inline">\(i\)</span> with explanatory variable <span class="math inline">\(x\)</span>.</p>
 <p>That is <span class="math inline">\(\text{log}\left(\frac{p_i}{1-p_i}\right) = \beta_0+\beta_1x\)</span>, and
 <span class="math inline">\(\text{log}\left(\frac{p_j}{1-p_j}\right) = \beta_0+\beta_1(x+1)\)</span>.</p>
@@ -1829,7 +1829,7 @@ Pearson residuals:
 Count model coefficients (poisson with log link):
             Estimate Std. Error z value Pr(&gt;|z|)    
 (Intercept)   0.7543     0.1440   5.238 1.62e-07 ***
-off.campus    0.4159     0.2059   2.021   0.0433 *  
+off.campus    0.4159     0.2059   2.020   0.0433 *  
 sexm          1.0209     0.1752   5.827 5.63e-09 ***
 
 Zero-inflation model coefficients (binomial with logit link):
@@ -1839,13 +1839,13 @@ firstYearTRUE   1.1364     0.6095   1.864   0.0623 .
 ---
 Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1 
 
-Number of iterations in BFGS optimization: 11 
+Number of iterations in BFGS optimization: 8 
 Log-likelihood: -140.8 on 5 Df</code></pre>
 <div class="sourceCode" id="cb484"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb484-1"><a href="binomial-logistic-regression.html#cb484-1" tabindex="-1"></a><span class="fu">exp</span>(<span class="fu">coef</span>(zip.m))   <span class="co"># exponentiated coefficients</span></span></code></pre></div>
 <pre><code>##  count_(Intercept)   count_off.campus         count_sexm   zero_(Intercept) 
-##          2.1260689          1.5157979          2.7756924          0.5468312 
+##          2.1260699          1.5157953          2.7756910          0.5468311 
 ## zero_firstYearTRUE 
-##          3.1154949</code></pre>
+##          3.1154950</code></pre>
 <p><strong>Interpretations</strong></p>
 <ul>
 <li><p>For those who drink, the average number of drinks for males is <span class="math inline">\(e^{1.0209}\)</span> or 2.76 times the number for females (Z = 5.827, p &lt; 0.001) given that you are comparing people who live in comparable settings (on or off campus)</p></li>
@@ -2037,23 +2037,23 @@ zeroinfl(formula = visits ~ age + freepoor | age + freepoor, data = DoctorVisits
 
 Pearson residuals:
     Min      1Q  Median      3Q     Max 
--0.5597 -0.4803 -0.3737 -0.3640 13.6622 
+-0.5597 -0.4803 -0.3737 -0.3640 13.6623 
 
 Count model coefficients (poisson with log link):
              Estimate Std. Error z value Pr(&gt;|z|)   
-(Intercept) -0.320800   0.106466  -3.013  0.00259 **
-age          0.003437   0.001971   1.743  0.08127 . 
-freepooryes  0.461916   0.251486   1.837  0.06625 . 
+(Intercept) -0.320817   0.106466  -3.013  0.00258 **
+age          0.003437   0.001971   1.744  0.08124 . 
+freepooryes  0.461781   0.251507   1.836  0.06635 . 
 
 Zero-inflation model coefficients (binomial with logit link):
              Estimate Std. Error z value Pr(&gt;|z|)    
-(Intercept)  1.357837   0.142683   9.516  &lt; 2e-16 ***
-age         -0.018595   0.002915  -6.380 1.77e-10 ***
-freepooryes  1.058315   0.294645   3.592 0.000328 ***
+(Intercept)  1.357795   0.142682   9.516  &lt; 2e-16 ***
+age         -0.018593   0.002914  -6.379 1.78e-10 ***
+freepooryes  1.058227   0.294661   3.591 0.000329 ***
 ---
 Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1 
 
-Number of iterations in BFGS optimization: 23 
+Number of iterations in BFGS optimization: 14 
 Log-likelihood: -3646 on 6 Df</code></pre>
 <ol style="list-style-type: lower-alpha">
 <li><p>Interpret the age coefficient for both parts of the model.</p></li>

@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 3 Multilevel Models | Stat 455: Advanced Statistical Modeling Notes</title>
   <meta name="description" content="Chapter 3 Multilevel Models | Stat 455: Advanced Statistical Modeling Notes" />
-  <meta name="generator" content="bookdown 0.40 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.37 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 3 Multilevel Models | Stat 455: Advanced Statistical Modeling Notes" />
   <meta property="og:type" content="book" />
@@ -22,7 +22,7 @@
 
 
 
-<meta name="date" content="2025-02-14" />
+<meta name="date" content="2025-03-04" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -57,7 +57,7 @@
 
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -1253,7 +1253,7 @@ orch:large  0.218 -0.308 -0.773</code></pre>
 \hat{Y}_{ij} = (\alpha_{0}+\alpha_{1})+(\beta_{0} + \beta_1)\textrm{LargeEns}_{ij}
 \]</span></p>
 <ul>
-<li><p>we estimate that the average negative affect score for performers with orchestral instruments when performing in solos or small ensembles is <span class="math inline">\(\hat{\alpha}_0 + \hat{\alpha}_0  = 17.3\)</span>.</p></li>
+<li><p>we estimate that the average negative affect score for performers with orchestral instruments when performing in solos or small ensembles is <span class="math inline">\(\hat{\alpha}_0 + \hat{\alpha}_0 = 17.3\)</span>.</p></li>
 <li><p>We estimate that for orchestral musicians, average negative affect is <span class="math inline">\(\hat{\beta}_0 + \hat{\beta}_1 = -0.89 - 1.46 = -2.35\)</span> (i.e. 2.35 points lower) when performing in a large ensemble, compared with playing in a small ensemble or a solo.</p></li>
 <li><p>Negative affect score tends to be higher for orchestral musicians than non orchestral musicians when performing solos or in small ensembles, but that negative affect also decreases more for orchestral musicians than non-orchestral musicians, when playing in a large ensemble.</p></li>
 <li><p>The interaction term is not statistically significant, indicating it is plausible that the effect of playing in a large ensemble, compared to a solo or with a small ensemble is the same for orchestral and non-orchestral musicians.</p></li>
@@ -1841,46 +1841,46 @@ REML criterion at convergence: 2882.3
 
 Scaled residuals: 
     Min      1Q  Median      3Q     Max 
--2.1924 -0.6062 -0.1116  0.5346  3.9995 
+-2.1919 -0.6058 -0.1118  0.5345  3.9995 
 
 Random effects:
  Groups   Name        Variance Std.Dev. Corr                         
- id       (Intercept) 14.45638 3.8022                                
-          previous     0.07079 0.2661   -0.65                        
-          students     8.19942 2.8635   -0.63  0.00                  
-          juried      18.30156 4.2780   -0.64 -0.12  0.84            
-          public      12.79033 3.5764   -0.83  0.33  0.66  0.58      
-          solo         0.76492 0.8746   -0.67  0.47  0.49  0.21  0.90
- Residual             15.28517 3.9096                                
+ id       (Intercept) 14.4566  3.8022                                
+          previous     0.0707  0.2659   -0.65                        
+          students     8.2131  2.8659   -0.63  0.00                  
+          juried      18.3331  4.2817   -0.64 -0.12  0.83            
+          public      12.7857  3.5757   -0.83  0.33  0.66  0.57      
+          solo         0.7663  0.8754   -0.67  0.47  0.49  0.20  0.90
+ Residual             15.2843  3.9095                                
 Number of obs: 497, groups:  id, 37
 
 Fixed effects:
              Estimate Std. Error        df t value  Pr(&gt;|t|)    
-(Intercept)   8.36915    1.91387  63.76780   4.373 0.0000462 ***
-previous     -0.14303    0.06249  37.24977  -2.289  0.027840 *  
-students      3.61152    0.76765  32.24767   4.705 0.0000461 ***
-juried        4.07355    1.03107  36.44281   3.951  0.000343 ***
-public        3.06474    0.89239  36.49343   3.434  0.001496 ** 
-solo          0.51414    1.39637 262.80563   0.368  0.713020    
-mpqpem       -0.08310    0.02408  38.71284  -3.451  0.001364 ** 
-mpqab         0.20382    0.04741  35.94214   4.299  0.000125 ***
-orch          1.53020    0.58398  42.82552   2.620  0.012107 *  
-mpqnem        0.11459    0.03591  43.04988   3.191  0.002649 ** 
-solo:mpqnem   0.08303    0.04158 171.29418   1.997  0.047433 *  
+(Intercept)   8.37271    1.91346  63.87462   4.376 0.0000457 ***
+previous     -0.14303    0.06247  37.27430  -2.290  0.027794 *  
+students      3.61094    0.76792  32.20414   4.702 0.0000465 ***
+juried        4.07294    1.03152  36.39148   3.948  0.000346 ***
+public        3.06498    0.89233  36.54339   3.435  0.001492 ** 
+solo          0.51323    1.39646 262.84884   0.368  0.713527    
+mpqpem       -0.08315    0.02407  38.74755  -3.454  0.001352 ** 
+mpqab         0.20382    0.04740  35.95499   4.300  0.000125 ***
+orch          1.53123    0.58387  42.87273   2.623  0.012034 *  
+mpqnem        0.11453    0.03590  43.18022   3.190  0.002650 ** 
+solo:mpqnem   0.08308    0.04158 171.42767   1.998  0.047323 *  
 ---
 Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 
 Correlation of Fixed Effects:
             (Intr) previs stdnts juried public solo   mpqpem mpqab  orch  
 previous    -0.230                                                        
-students    -0.261 -0.028                                                 
-juried      -0.252 -0.085  0.543                                          
-public      -0.350  0.156  0.583  0.435                                   
+students    -0.261 -0.027                                                 
+juried      -0.252 -0.084  0.543                                          
+public      -0.350  0.156  0.583  0.434                                   
 solo        -0.449 -0.014  0.084 -0.003  0.220                            
 mpqpem      -0.392  0.010  0.002  0.026 -0.003 -0.068                     
 mpqab       -0.397 -0.017 -0.010 -0.034 -0.061 -0.030 -0.259              
-orch         0.089 -0.036  0.000  0.026  0.035  0.111 -0.244 -0.065       
-mpqnem      -0.557 -0.024 -0.017  0.053 -0.038  0.635 -0.061  0.065 -0.131
+orch         0.088 -0.036  0.000  0.026  0.035  0.111 -0.244 -0.065       
+mpqnem      -0.556 -0.024 -0.017  0.053 -0.038  0.635 -0.061  0.065 -0.131
 solo:mpqnem  0.345  0.052  0.034  0.033  0.045 -0.906  0.067  0.019 -0.056
             mpqnem
 previous          
@@ -1894,7 +1894,7 @@ orch
 mpqnem            
 solo:mpqnem -0.698
 optimizer (nloptwrap) convergence code: 0 (OK)
-boundary (singular) fit: see help(&#39;isSingular&#39;)</code></pre>
+Model failed to converge with max|grad| = 0.0157114 (tol = 0.002, component 1)</code></pre>
 </div>
 <div id="a-model-without-random-slopes" class="section level3 hasAnchor" number="3.5.5">
 <h3><span class="header-section-number">3.5.5</span> A Model Without Random Slopes<a href="multilevel-models.html#a-model-without-random-slopes" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -2021,7 +2021,7 @@ public        3.211002   0.667621 487.490870   4.810 0.000002018574 ***
 solo         -0.222631   1.429140 484.511985  -0.156        0.87627    
 mpqpem       -0.006105   0.029535  34.036100  -0.207        0.83748    
 mpqnem        0.104837   0.041660  68.959080   2.517        0.01418 *  
-solo:mpqnem   0.103699   0.042476 466.126986   2.441        0.01500 *  
+solo:mpqnem   0.103699   0.042476 466.126985   2.441        0.01500 *  
 ---
 Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 
@@ -2202,9 +2202,9 @@ Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&
 ##              Estimate Std. Error       df t value    Pr(&gt;|t|)    
 ## (Intercept)   8.13810    0.94794 15.21527   8.585 0.000000321 ***
 ## Age18         0.01268    0.04795 13.00001   0.265     0.79551    
-## Program       1.28162    0.59028 12.51272   2.171     0.04980 *  
-## Week          0.17262    0.15706 14.00008   1.099     0.29025    
-## Program:Week -0.78712    0.22211 14.00008  -3.544     0.00324 ** 
+## Program       1.28163    0.59028 12.51272   2.171     0.04980 *  
+## Week          0.17263    0.15706 14.00008   1.099     0.29025    
+## Program:Week -0.78713    0.22211 14.00008  -3.544     0.00324 ** 
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
@@ -2268,7 +2268,7 @@ Y_{ij} &amp; = [\alpha_{0}+\alpha_{1}\textrm{Years_Study}_{i}+\beta_{0}\textrm{J
 ## (Intercept)        15.51321    0.99765 35.89127  15.550 &lt;0.0000000000000002 ***
 ## years_study         0.05505    0.10990 34.88732   0.501               0.620    
 ## juried              4.16156    1.81640 24.07290   2.291               0.031 *  
-## years_study:juried -0.18238    0.21396 23.93771  -0.852               0.402    
+## years_study:juried -0.18238    0.21396 23.93772  -0.852               0.402    
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
